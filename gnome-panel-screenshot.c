@@ -1123,6 +1123,26 @@ release_lock (void)
 	gdk_flush ();
 }
 
+static char *
+escape_underscores (const char *name)
+{
+	GString *escaped;
+	int      i;
+
+	g_return_val_if_fail (name != NULL, NULL);
+
+	escaped = g_string_new (name);
+
+	for (i = 0; escaped->str [i]; i++) {
+		if (escaped->str [i] != '_')
+			continue;
+
+		escaped = g_string_insert_c (escaped, ++i, '_');
+	}
+
+	return g_string_free (escaped, FALSE);
+}
+
 /* main */
 int
 main (int argc, char *argv[])
@@ -1259,15 +1279,18 @@ main (int argc, char *argv[])
 
 	if (!stat (web_dir, &s) && S_ISDIR (s.st_mode)) {
 		GtkWidget *cbutton;
-		char      *str = NULL;		
+		char      *str;
+                char      *escaped;
 
 		cbutton = glade_xml_get_widget (xml, "web_rbutton");
 		gtk_widget_show (cbutton);
 
-		str = g_strdup_printf ("Save screenshot to _web page (save in %s)",
-				       web_dir);
+                escaped = escape_underscores (web_dir);
+		str = g_strdup_printf (_("Save screenshot to _web page (save in %s)"),
+				       escaped);
 		gtk_button_set_label (GTK_BUTTON (cbutton), str);
 		g_free (str);
+		g_free (escaped);
 	}
 
 	/* setup dnd */
