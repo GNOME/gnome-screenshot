@@ -79,6 +79,9 @@ void on_ok_button_clicked (GtkWidget *widget, gpointer data);
 void on_cancel_button_clicked (GtkWidget *widget, gpointer data);
 int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
 
+/* some local prototypes */
+static gchar * add_file_to_path (const gchar *path);
+
 
 /* helper functions */
 /* This code is copied from gdk-pixbuf-HEAD.  It does no memory management and
@@ -238,22 +241,45 @@ save_to_file (FILE *fp, const gchar *file, gboolean gui_errors)
 static void
 start_temporary (void)
 {
+	char *dir;
 	char *file = NULL;
-	int fd = 0;
 
-	if (temporary_file != NULL)
-		return;
+	if (temporary_file != NULL) {
+		if (access (temporary_file, F_OK) == 0)
+			return;
 
+		/* Note: nautilus is a wanker and will happily do a move when
+		 * we explicitly told him that we just support copy, so in case
+		 * this file is missing, we let nautilus have it and hope
+		 * he chokes on it */
+
+		dir = g_dirname (temporary_file);
+		rmdir (dir);
+		g_free (dir);
+
+		g_free (temporary_file = NULL);
+		temporary_file = NULL;
+
+		/* just paranoia */
+		if (temporary_pid > 0)
+			kill (temporary_pid, SIGKILL);
+	}
+
+	/* make a temporary dirname */
+	dir = NULL;
 	do {
-		g_free (file);
-		file = g_strdup_printf ("/tmp/screenshot-%d.png", rand ()>>3);
-		fd = open (file, O_CREAT|O_EXCL|O_WRONLY, 0644);
-	} while (fd < 0);
+		if (dir != NULL) free (dir);
+		dir = tempnam (NULL, "scr");
+	} while (mkdir (dir, 0755) < 0);
+
+	file = add_file_to_path (dir);
+
+	free (dir);
 
 	temporary_pid = fork ();
 
 	if (temporary_pid == 0) {
-		FILE *fp = fdopen (fd, "w");
+		FILE *fp = fopen (file, "w");
 		if (fp == NULL ||
 		    ! save_to_file (fp, file, FALSE)) {
 			_exit (1);
@@ -262,13 +288,9 @@ start_temporary (void)
 		}
 	}
 
-	/* close the temp file in the parent */
-	if (temporary_pid > 0)
-		close (fd);
-
 	/* can't fork? don't dispair, do synchroniously */
 	if (temporary_pid < 0) {
-		FILE *fp = fdopen (fd, "w");
+		FILE *fp = fopen (file, "w");
 		if (fp == NULL ||
 		    ! save_to_file (fp, file, TRUE)) {
 			g_free (file);
@@ -324,9 +346,16 @@ cleanup_temporary (void)
 		if (kill (pid, SIGTERM) == 0)
 			waitpid (pid, NULL, 0);
 	}
+	
+	if (file != NULL) {
+		char *dir;
 
-	if (file != NULL)
 		unlink (file);
+
+		dir = g_dirname (file);
+		rmdir (dir);
+		g_free (dir);
+	}
 
 	g_free (file);
 }
@@ -490,7 +519,7 @@ print_pixbuf (void)
 #endif
 
 static gchar *
-add_file_to_path (gchar *path)
+add_file_to_path (const gchar *path)
 {
 	gchar *retval;
 	gint i = 1;
@@ -827,21 +856,6 @@ drag_data_get (GtkWidget          *widget,
 }
 
 static void
-drag_end (GtkWidget          *widget,
-	  GdkDragContext     *context,
-	  gpointer            data)
-{
-	/* Note: nautilus is a wanker and will happily do a move when
-	 * we explicitly told him that we just support copy, so in case
-	 * this IS a move, we relinquish the file to nautilus and hope
-	 * he chokes on it */
-	if (context->action == GDK_ACTION_MOVE) {
-		g_free (temporary_file);
-		temporary_file = NULL;
-	}
-}
-
-static void
 got_signal (int sig)
 {
 	cleanup_temporary ();
@@ -955,8 +969,6 @@ main (int argc, char *argv[])
 			    GTK_SIGNAL_FUNC (start_temporary), NULL);
 	gtk_signal_connect (GTK_OBJECT (preview), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
-	gtk_signal_connect (GTK_OBJECT (preview), "drag_end",
-			    GTK_SIGNAL_FUNC (drag_end), NULL);
 	gtk_drag_source_set (preview,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drag_types, 2,
