@@ -266,6 +266,7 @@
 			      <property name="max_saved">10</property>
 			      <property name="directory_entry">False</property>
 			      <property name="modal">False</property>
+				<property name="use_filechooser">True</property>
 
 			      <child internal-child="entry">
 				<widget class="GtkEntry" id="save_entry">
