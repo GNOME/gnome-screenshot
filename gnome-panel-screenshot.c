@@ -86,6 +86,7 @@ int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
 
 /* some local prototypes */
 static gchar * add_file_to_path (const gchar *path);
+static void    display_help (void);
 
 /* helper functions */
 /* This code is copied from gdk-pixbuf-HEAD.  It does no memory management and
@@ -460,6 +461,35 @@ add_file_to_path (const gchar *path)
 	} while (TRUE);
 }
 
+static void
+display_help (void)
+{
+	GError *error = NULL;
+
+        gnome_help_display_desktop (NULL, "user-guide", 
+				    "user-guide.xml", "goseditmainmenu-53", 
+				    &error);
+	
+	if (error) {
+		GtkWidget *dialog;
+
+                dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+                        GTK_DIALOG_DESTROY_WITH_PARENT,
+                        GTK_MESSAGE_ERROR,
+                        GTK_BUTTONS_OK,
+                        _("There was an error displaying help: \n%s"),
+                        error->message);
+
+                g_signal_connect (G_OBJECT (dialog),
+                        "response",
+                        G_CALLBACK (gtk_widget_destroy), NULL);
+                gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+                gtk_widget_show (dialog);
+                g_error_free (error);
+
+        }
+}
+
 /* Callbacks */
 void
 on_save_rbutton_toggled (GtkWidget *toggle, gpointer data)
@@ -691,32 +721,7 @@ on_cancel_button_clicked (GtkWidget *widget, gpointer data)
 void
 on_help_button_clicked (GtkWidget *widget, gpointer data) 
 {
-	
-	GError *error = NULL;
-
-        gnome_help_display_desktop (NULL, "user-guide", 
-				    "user-guide.xml", "goseditmainmenu-53", 
-				    &error);
-	
-	if (error) {
-		GtkWidget *dialog;
-
-                dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-                        GTK_DIALOG_DESTROY_WITH_PARENT,
-                        GTK_MESSAGE_ERROR,
-                        GTK_BUTTONS_OK,
-                        _("There was an error displaying help: \n%s"),
-                        error->message);
-
-                g_signal_connect (G_OBJECT (dialog),
-                        "response",
-                        G_CALLBACK (gtk_widget_destroy), NULL);
-                gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-                gtk_widget_show (dialog);
-                g_error_free (error);
-
-        }
-
+	display_help ();
 }
 
 int
@@ -733,8 +738,12 @@ int
 on_toplevel_key_press_event (GtkWidget *widget,
 			     GdkEventKey *key)
 {
-	if (key->keyval != GDK_Escape)
+	if (key->keyval != GDK_Escape) {
+		if (key->keyval == GDK_F1)
+			display_help ();
+
 		return FALSE;
+	}
 
 	gtk_main_quit ();
 	return TRUE;

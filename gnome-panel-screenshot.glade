@@ -14,6 +14,7 @@
   <property name="destroy_with_parent">False</property>
   <property name="has_separator">False</property>
   <signal name="delete_event" handler="gtk_main_quit" last_modification_time="Sat, 10 Aug 2002 00:42:49 GMT"/>
+  <signal name="key_press_event" handler="on_toplevel_key_press_event" last_modification_time="Thu, 21 Oct 2004 13:29:25 GMT"/>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
