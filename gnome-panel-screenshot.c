@@ -221,7 +221,7 @@ nibble_on_file (const char *file)
 			 _("Unable to create the file:\n"
 			   "\"%s\"\n"
 			   "Please check your permissions of "
-			   "the parent directory"), file);
+			   "the parent directory"), file ? file : "(null)");
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
@@ -236,14 +236,14 @@ static gboolean
 save_to_file (FILE *fp, const gchar *file, gboolean gui_errors)
 {
 	GtkWidget *dialog;
-	char *error;
+	char *error = NULL;
 
 	if (fp == NULL) {
 		fp = nibble_on_file (file);
 	}
 
 	if ( ! save_to_file_internal (fp, file, &error)) {
-		if (gui_errors) {
+		if (gui_errors && error) {
 			dialog = gtk_message_dialog_new
 				(GTK_WINDOW (toplevel),
 				 0 /* flags */,
@@ -727,7 +727,7 @@ gimme_file (const char *filename)
 				 _("Unable to create the file:\n"
 				   "\"%s\"\n"
 				   "Please check your permissions of "
-				   "the parent directory"), filename);
+				   "the parent directory"), filename ? filename : "(null)");
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			close (infd);
@@ -746,7 +746,7 @@ gimme_file (const char *filename)
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
 					 _("Not enough room to write file %s"),
-					 filename);
+					 filename ? filename : "(null)");
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				return FALSE;
