@@ -265,7 +265,7 @@ start_temporary (void)
 		 * this file is missing, we let nautilus have it and hope
 		 * he chokes on it */
 
-		dir = g_dirname (temporary_file);
+		dir = g_path_get_dirname (temporary_file);
 		rmdir (dir);
 		g_free (dir);
 
@@ -365,7 +365,7 @@ cleanup_temporary (void)
 
 		unlink (file);
 
-		dir = g_dirname (file);
+		dir = g_path_get_dirname (file);
 		rmdir (dir);
 		g_free (dir);
 	}
