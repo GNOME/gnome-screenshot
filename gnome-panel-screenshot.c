@@ -24,7 +24,7 @@
 /* IF YOU WANT YOUR OWN FEATURE -- WRITE THE DAMN THING YOURSELF (-:*/
 
 #include <config.h>
-#include <gnome.h>
+#include <libgnomeui.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkx.h>
