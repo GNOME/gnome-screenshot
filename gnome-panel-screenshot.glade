@@ -1,255 +1,234 @@
-<?xml version="1.0"?>
-<GTK-Interface>
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd" >
 
-<project>
-  <name>gnome-panel-screenshot</name>
-  <program_name>gnome-panel-screenshot</program_name>
-  <directory></directory>
-  <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
-  <language>C</language>
-  <gnome_support>True</gnome_support>
-  <gettext_support>True</gettext_support>
-  <output_translatable_strings>True</output_translatable_strings>
-  <translatable_strings_file>gnome-panel-screenshot.glade.h</translatable_strings_file>
-</project>
+<glade-interface>
+  <requires lib="gnome" />
 
-<widget>
-  <class>GtkWindow</class>
-  <name>toplevel</name>
-  <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>gtk_main_quit</handler>
-    <last_modification_time>Wed, 23 May 2001 12:57:39 GMT</last_modification_time>
-  </signal>
-  <signal>
-    <name>key_press_event</name>
-    <handler>on_toplevel_key_press_event</handler>
-    <last_modification_time>Wed, 23 May 2001 13:01:47 GMT</last_modification_time>
-  </signal>
-  <title>Screenshot</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
+  <widget class="GtkWindow" id="toplevel">
+    <property name="visible">no</property>
+    <property name="title" translatable="yes">Screenshot</property>
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="allow_shrink">no</property>
+    <property name="allow_grow">yes</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
 
-  <widget>
-    <class>GtkVBox</class>
-    <name>vbox1</name>
-    <border_width>8</border_width>
-    <homogeneous>False</homogeneous>
-    <spacing>8</spacing>
+    <signal name="delete_event" handler="gtk_main_quit" />
+    <signal name="key_press_event" handler="on_toplevel_key_press_event" />
 
-    <widget>
-      <class>GtkFrame</class>
-      <name>frame3</name>
-      <label>Preview</label>
-      <label_xalign>0</label_xalign>
-      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-      <child>
-	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
+    <child>
+      <widget class="GtkVBox" id="vbox1">
+        <property name="border_width">8</property>
+        <property name="homogeneous">no</property>
+        <property name="spacing">8</property>
+        <property name="visible">yes</property>
 
-      <widget>
-	<class>GtkAspectFrame</class>
-	<name>aspect_frame</name>
-	<border_width>8</border_width>
-	<label_xalign>0</label_xalign>
-	<shadow_type>GTK_SHADOW_IN</shadow_type>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<ratio>1</ratio>
-	<obey_child>True</obey_child>
+        <child>
+          <widget class="GtkFrame" id="frame3">
+            <property name="label" translatable="yes">Preview</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+            <property name="visible">yes</property>
 
-	<widget>
-	  <class>GtkDrawingArea</class>
-	  <name>preview</name>
-	  <signal>
-	    <name>expose_event</name>
-	    <handler>on_preview_expose_event</handler>
-	    <last_modification_time>Wed, 23 May 2001 13:13:29 GMT</last_modification_time>
-	  </signal>
-	  <signal>
-	    <name>configure_event</name>
-	    <handler>on_preview_configure_event</handler>
-	    <last_modification_time>Sat, 26 May 2001 06:53:16 GMT</last_modification_time>
-	  </signal>
-	</widget>
+            <child>
+              <widget class="GtkAspectFrame" id="aspect_frame">
+                <property name="border_width">8</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">GTK_SHADOW_IN</property>
+                <property name="xalign">0.5</property>
+                <property name="yalign">0.5</property>
+                <property name="ratio">1</property>
+                <property name="obey_child">yes</property>
+                <property name="visible">yes</property>
+
+                <child>
+                  <widget class="GtkDrawingArea" id="preview">
+                    <property name="visible">yes</property>
+
+                    <signal name="expose_event" handler="on_preview_expose_event" />
+                    <signal name="configure_event" handler="on_preview_configure_event" />
+                  </widget>
+                </child>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">yes</property>
+            <property name="fill">yes</property>
+          </packing>
+        </child>
+
+        <child>
+          <widget class="GtkFrame" id="options_frame">
+            <property name="label" translatable="yes">Options</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+            <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkVBox" id="vbox2">
+                <property name="border_width">8</property>
+                <property name="homogeneous">no</property>
+                <property name="spacing">4</property>
+                <property name="visible">yes</property>
+
+                <child>
+                  <widget class="GtkHBox" id="hbox1">
+                    <property name="homogeneous">no</property>
+                    <property name="spacing">4</property>
+                    <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GtkRadioButton" id="save_rbutton">
+                        <property name="can_focus">yes</property>
+                        <property name="label" translatable="yes">_Save screenshot to file:</property>
+                        <property name="active">no</property>
+                        <property name="draw_indicator">yes</property>
+                        <property name="visible">yes</property>
+                        <property name="use_underline">yes</property>
+
+                        <signal name="toggled" handler="on_save_rbutton_toggled" />
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <widget class="GnomeFileEntry" id="save_fileentry">
+                        <property name="modal">no</property>
+                        <property name="directory_entry">yes</property>
+                        <property name="visible">yes</property>
+
+                        <child internal-child="entry">
+                          <widget class="GtkEntry" id="save_entry">
+                            <property name="can_focus">yes</property>
+                            <property name="editable">yes</property>
+                            <property name="text" translatable="yes"></property>
+                            <property name="max-length">0</property>
+                            <property name="visibility">yes</property>
+                            <property name="visible">yes</property>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">yes</property>
+                        <property name="fill">yes</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="desktop_rbutton">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Save screenshot to _desktop</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="group">save_rbutton</property>
+                    <property name="use_underline">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="web_rbutton">
+                    <property name="visible">no</property>
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Save screenshot to _web page (save in ~/public__html)</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="group">save_rbutton</property>
+                    <property name="use_underline">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="print_rbutton">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">_Print screenshot...</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="group">save_rbutton</property>
+                    <property name="use_underline">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">no</property>
+          </packing>
+        </child>
+
+        <child>
+          <widget class="GtkHButtonBox" id="hbuttonbox1">
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <property name="spacing">25</property>
+            <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkButton" id="cancel_button">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="relief">GTK_RELIEF_NORMAL</property>
+                <property name="visible">yes</property>
+                <property name="label">gtk-cancel</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+
+                <signal name="clicked" handler="on_cancel_button_clicked" />
+              </widget>
+            </child>
+
+            <child>
+              <widget class="GtkButton" id="ok_button">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="relief">GTK_RELIEF_NORMAL</property>
+                <property name="visible">yes</property>
+                <property name="label">gtk-ok</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+
+                <signal name="clicked" handler="on_ok_button_clicked" />
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">no</property>
+          </packing>
+        </child>
       </widget>
-    </widget>
-
-    <widget>
-      <class>GtkFrame</class>
-      <name>options_frame</name>
-      <label>Options</label>
-      <label_xalign>0</label_xalign>
-      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-
-      <widget>
-	<class>GtkVBox</class>
-	<name>vbox2</name>
-	<border_width>8</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>4</spacing>
-
-	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox1</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>4</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkRadioButton</class>
-	    <name>save_rbutton</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_save_rbutton_toggled</handler>
-	      <last_modification_time>Wed, 23 May 2001 15:33:59 GMT</last_modification_time>
-	    </signal>
-	    <label>_Save screenshot to file:</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
-	    <group>group</group>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GnomeFileEntry</class>
-	    <name>save_fileentry</name>
-	    <max_saved>10</max_saved>
-	    <directory>True</directory>
-	    <modal>False</modal>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkEntry</class>
-	      <child_name>GnomeEntry:entry</child_name>
-	      <name>save_entry</name>
-	      <can_focus>True</can_focus>
-	      <editable>True</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>desktop_rbutton</name>
-	  <can_focus>True</can_focus>
-	  <label>Save screenshot to _desktop</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>web_rbutton</name>
-	  <visible>False</visible>
-	  <can_focus>True</can_focus>
-	  <label>Save screenshot to _web page (save in ~/public__html)</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>print_rbutton</name>
-	  <can_focus>True</can_focus>
-	  <label>_Print screenshot...</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkHButtonBox</class>
-      <name>hbuttonbox1</name>
-      <layout_style>GTK_BUTTONBOX_END</layout_style>
-      <spacing>25</spacing>
-      <child_min_width>85</child_min_width>
-      <child_min_height>27</child_min_height>
-      <child_ipad_x>7</child_ipad_x>
-      <child_ipad_y>0</child_ipad_y>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>cancel_button</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_cancel_button_clicked</handler>
-	  <last_modification_time>Wed, 23 May 2001 12:58:52 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
-	<relief>GTK_RELIEF_NORMAL</relief>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>ok_button</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_ok_button_clicked</handler>
-	  <last_modification_time>Wed, 23 May 2001 12:58:52 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
-	<relief>GTK_RELIEF_NORMAL</relief>
-      </widget>
-    </widget>
+    </child>
   </widget>
-</widget>
-
-</GTK-Interface>
+</glade-interface>
