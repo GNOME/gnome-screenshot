@@ -5,7 +5,6 @@
 <requires lib="gnome"/>
 
 <widget class="GtkDialog" id="toplevel">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Screenshot</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -179,7 +178,7 @@
 			<widget class="GnomeFileEntry" id="save_fileentry">
 			  <property name="visible">True</property>
 			  <property name="max_saved">10</property>
-			  <property name="directory_entry">True</property>
+			  <property name="directory_entry">False</property>
 			  <property name="modal">False</property>
 
 			  <child internal-child="entry">
