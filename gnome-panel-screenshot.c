@@ -39,6 +39,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <locale.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 #ifdef HAVE_GNOME_PRINT
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
@@ -711,7 +712,7 @@ setup_busy (gboolean busy)
 }
 
 static gboolean
-gimme_file (const char *filename)
+gimme_file (char *filename)
 {
 	FILE *fp;
 	char *expanded_filename;
