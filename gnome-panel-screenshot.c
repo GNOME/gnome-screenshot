@@ -543,48 +543,6 @@ drag_begin (GtkWidget *widget, GdkDragContext *context)
 }
 
 static void
-update_window_icon (GtkWindow    *window,
-		    GtkIconTheme *theme,
-		    const char   *icon_name)
-{
-	GtkIconInfo *icon;
-	const char  *filename;
-
-	icon = gtk_icon_theme_lookup_icon (theme, icon_name, 48, 0);
-	if (!icon)
-		return;
-
-	if ((filename = gtk_icon_info_get_filename (icon)))
-		gtk_window_set_icon_from_file (window, filename, NULL);
-
-	gtk_icon_info_free (icon);
-}
-
-static void
-icon_theme_changed (GtkWindow    *window,
-		    GtkIconTheme *theme)
-{
-	update_window_icon (window, theme, "gnome-screenshot");
-}
-
-static void
-set_window_icon (GtkWindow *window)
-{
-	GdkScreen    *screen;
-	GtkIconTheme *theme;
-
-	screen = gtk_window_get_screen (window);
-	theme  = gtk_icon_theme_get_for_screen (screen);
-
-	g_signal_connect_object (theme, "changed",
-				 G_CALLBACK (icon_theme_changed),
-				 window,
-				 G_CONNECT_SWAPPED);
-
-	update_window_icon (window, theme, "gnome-screenshot");
-}
-
-static void
 save_done_notification (void)
 {
   temporary_file = g_strdup (screenshot_save_get_filename ());
@@ -698,8 +656,6 @@ do_screenshot (gboolean window)
   frame = glade_xml_get_widget (xml, "aspect_frame");
   preview = glade_xml_get_widget (xml, "preview");
   save_entry = glade_xml_get_widget (xml, "save_entry");
-
-  set_window_icon (GTK_WINDOW (toplevel));
 
   gtk_window_set_default_size (GTK_WINDOW (toplevel), width * 2, -1);
   gtk_widget_set_size_request (preview, width, height);
@@ -833,7 +789,7 @@ main (int argc, char *argv[])
 		
 	g_object_unref (gconf_client);
 
-
+	gtk_window_set_default_icon_name ("applets-screenshooter");
 
 	if (delay > 0) {
 		g_timeout_add (delay * 1000, 
