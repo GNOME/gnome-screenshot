@@ -68,7 +68,7 @@ static GdkPixbuf *screenshot = NULL;
 static GdkPixbuf *preview_image = NULL;
 static char *web_dir;
 static char *desktop_dir;
-static char *home_dir;
+static const char *home_dir;
 static char *class_name = NULL;
 static pid_t temporary_pid = 0;
 static char *temporary_file = NULL;
@@ -1029,11 +1029,11 @@ main (int argc, char *argv[])
 		take_screen_shot ();
 
 	if (g_file_exists ("gnome-panel-screenshot.glade")) {
-		xml = glade_xml_new ("gnome-panel-screenshot.glade", NULL);
+		xml = glade_xml_new ("gnome-panel-screenshot.glade", NULL, NULL);
 	}
 	if (xml == NULL) {
 		xml = glade_xml_new (GLADEDIR "/gnome-panel-screenshot.glade",
-				     NULL);
+				     NULL, NULL);
 	}
 	if (xml == NULL) {
 		GtkWidget *dialog = gnome_error_dialog
