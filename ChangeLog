@@ -1,3 +1,12 @@
+2004-12-21  Dennis Cranston <dennis_cranston@yahoo.com>
+
+	* gnome-screenshot.glade:  Use proper HIG spacing in table1,
+	replace file_chooser_frame with file_chooser_box to remove
+	extra padding from around the file-chooser-button.
+	 
+	* screenshot-dialog.c: (screenshot_dialog_new):  Replace
+	file_chooser_frame with file_chooser_box.
+	 
 2004-12-16  Vincent Noel  <vnoel@cox.net>
 
 	* screenshot-dialog.c (screenshot_dialog_new): Use new

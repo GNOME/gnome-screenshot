@@ -165,7 +165,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   GtkWidget *toplevel;
   GtkWidget *preview_darea;
   GtkWidget *aspect_frame;
-  GtkWidget *file_chooser_frame;
+  GtkWidget *file_chooser_box;
   gint width, height;
   char *current_folder;
   char *current_name;
@@ -208,7 +208,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   aspect_frame = glade_xml_get_widget (dialog->xml, "aspect_frame");
   preview_darea = glade_xml_get_widget (dialog->xml, "preview_darea");
   dialog->filename_entry = glade_xml_get_widget (dialog->xml, "filename_entry");
-  file_chooser_frame = glade_xml_get_widget (dialog->xml, "file_chooser_frame");
+  file_chooser_box = glade_xml_get_widget (dialog->xml, "file_chooser_box");
 
   dialog->save_widget = gtk_file_chooser_button_new ("Select a directory", GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog->save_widget), FALSE);
@@ -217,7 +217,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
   gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
 
-  gtk_container_add (GTK_CONTAINER (file_chooser_frame), dialog->save_widget);
+  gtk_box_pack_start (GTK_BOX (file_chooser_box), dialog->save_widget, TRUE, TRUE, 0);
   g_free (current_folder);
   g_free (current_name);
 
