@@ -212,6 +212,8 @@ nibble_on_file (const char *file)
 	mode_t old_mask;
 
 	if (access (file, F_OK) == 0) {
+		int response;
+
 		dialog = gtk_message_dialog_new
 			(GTK_WINDOW (toplevel),
 			 0 /* flags */,
@@ -219,10 +221,12 @@ nibble_on_file (const char *file)
 			 GTK_BUTTONS_YES_NO,
 			 _("File %s already exists. Overwrite?"),
 			 file);
-		if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_YES) {
-			gtk_widget_destroy (dialog);
+
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		if (response != GTK_RESPONSE_YES)
 			return NULL;
-		}
 	}
 
 	old_mask = umask(022);
