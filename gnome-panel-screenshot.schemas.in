@@ -10,7 +10,7 @@
       <type>string</type>
       <default></default>
       <locale name="C">
-        <short>Web directory.</short>
+        <short>Web directory</short>
         <long>The user's directory in which screenshots should be
               saved so as to appear on the web.</long>
       </locale>
