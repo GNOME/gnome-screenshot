@@ -868,7 +868,7 @@ on_help_button_clicked (GtkWidget *widget, gpointer data)
                 dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
                         GTK_DIALOG_DESTROY_WITH_PARENT,
                         GTK_MESSAGE_ERROR,
-                        GTK_BUTTONS_CLOSE,
+                        GTK_BUTTONS_OK,
                         _("There was an error displaying help: \n%s"),
                         error->message);
 
