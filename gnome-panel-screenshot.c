@@ -1028,7 +1028,7 @@ main (int argc, char *argv[])
 	else
 		take_screen_shot ();
 
-	if (g_file_exists ("gnome-panel-screenshot.glade")) {
+	if (g_file_test ("gnome-panel-screenshot.glade", G_FILE_TEST_EXISTS)) {
 		xml = glade_xml_new ("gnome-panel-screenshot.glade", NULL, NULL);
 	}
 	if (xml == NULL) {
