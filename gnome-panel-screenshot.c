@@ -190,33 +190,32 @@ save_to_file_internal (FILE *fp, const char *file, char **error)
 static FILE *
 nibble_on_file (const char *file)
 {
-	char *error;
 	GtkWidget *dialog;
 	FILE *fp;
 
 	if (access (file, F_OK) == 0) {
-		error = g_strdup_printf
-			(_("File %s already exists. Overwrite?"),
+		dialog = gtk_message_dialog_new
+			(GTK_WINDOW (toplevel),
+			 0 /* flags */,
+			 GTK_MESSAGE_QUESTION,
+			 GTK_BUTTONS_YES_NO,
+			 _("File %s already exists. Overwrite?"),
 			 file);
-		dialog = gnome_message_box_new
-			(error, GNOME_MESSAGE_BOX_QUESTION,
-			 GNOME_STOCK_BUTTON_YES, 
-			 GNOME_STOCK_BUTTON_NO, NULL);
-		gnome_dialog_set_parent (GNOME_DIALOG (dialog),
-					 GTK_WINDOW (toplevel));
-		g_free (error);
-		if (gnome_dialog_run (GNOME_DIALOG (dialog)) != 0)
+		if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_YES)
 			return NULL;
 	}
 	fp = fopen (file, "w");
 	if (fp == NULL) {
-		error = g_strdup_printf (_("Unable to create the file:\n"
-					   "\"%s\"\n"
-					   "Please check your permissions of "
-					   "the parent directory"), file);
-		dialog = gnome_error_dialog_parented (error,
-						      GTK_WINDOW (toplevel));
-		gnome_dialog_run (GNOME_DIALOG (dialog));
+		dialog = gtk_message_dialog_new
+			(GTK_WINDOW (toplevel),
+			 0 /* flags */,
+			 GTK_MESSAGE_ERROR,
+			 GTK_BUTTONS_OK,
+			 _("Unable to create the file:\n"
+			   "\"%s\"\n"
+			   "Please check your permissions of "
+			   "the parent directory"), file);
+		gtk_dialog_run (GTK_DIALOG (dialog));
 		return NULL;
 	}
 	return fp;
@@ -234,9 +233,13 @@ save_to_file (FILE *fp, const gchar *file, gboolean gui_errors)
 
 	if ( ! save_to_file_internal (fp, file, &error)) {
 		if (gui_errors) {
-			dialog = gnome_error_dialog_parented
-				(error, GTK_WINDOW (toplevel));
-			gnome_dialog_run (GNOME_DIALOG (dialog));
+			dialog = gtk_message_dialog_new
+				(GTK_WINDOW (toplevel),
+				 0 /* flags */,
+				 GTK_MESSAGE_ERROR,
+				 GTK_BUTTONS_OK,
+				 "%s", error);
+			gtk_dialog_run (GTK_DIALOG (dialog));
 		}
 		fclose (fp);
 		unlink (file);
@@ -687,34 +690,35 @@ gimme_file (const char *filename)
 
 		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
 		if (outfd < 0) {
-			char *error;
 			GtkWidget *dialog;
-			error = g_strdup_printf
-				(_("Unable to create the file:\n"
+			dialog = gtk_message_dialog_new
+				(GTK_WINDOW (toplevel),
+				 0 /* flags */,
+				 GTK_MESSAGE_ERROR,
+				 GTK_BUTTONS_OK,
+				 _("Unable to create the file:\n"
 				   "\"%s\"\n"
 				   "Please check your permissions of "
 				   "the parent directory"), filename);
-			dialog = gnome_error_dialog_parented
-				(error, GTK_WINDOW (toplevel));
-			g_free (error);
+			gtk_dialog_run (GTK_DIALOG (dialog));
 			close (infd);
 			return FALSE;
 		}
 
 		while ((bytes = read (infd, buf, sizeof (buf))) > 0) {
 			if (write (outfd, buf, bytes) != bytes) {
-				char *error;
 				GtkWidget *dialog;
 				close (infd);
 				close (outfd);
 				unlink (filename);
-				error = g_strdup_printf
-					(_("Not enough room to write file %s"),
+				dialog = gtk_message_dialog_new
+					(GTK_WINDOW (toplevel),
+					 0 /* flags */,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_OK,
+					 _("Not enough room to write file %s"),
 					 filename);
-				dialog = gnome_error_dialog_parented
-					(error, GTK_WINDOW (toplevel));
-				g_free (error);
-				gnome_dialog_run (GNOME_DIALOG (dialog));
+				gtk_dialog_run (GTK_DIALOG (dialog));
 				return FALSE;
 			}
 		}
@@ -1036,10 +1040,15 @@ main (int argc, char *argv[])
 				     NULL, NULL);
 	}
 	if (xml == NULL) {
-		GtkWidget *dialog = gnome_error_dialog
-			(_("Glade file for the screenshot program is missing.\n"
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new
+			(NULL /* parent */
+			 0 /* flags */,
+			 GTK_MESSAGE_ERROR,
+			 GTK_BUTTONS_OK,
+			 _("Glade file for the screenshot program is missing.\n"
 			   "Please check your installation of gnome-core"));
-		gnome_dialog_run (GNOME_DIALOG (dialog));
+		gtk_dialog_run (GTK_DIALOG (dialog));
 		exit (1);
 	}
 	glade_xml_signal_autoconnect (xml);
@@ -1053,10 +1062,15 @@ main (int argc, char *argv[])
 #endif
 
 	if (screenshot == NULL) {
-		GtkWidget *dialog = gnome_error_dialog
-			(_("Unable to take a screenshot of "
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new
+			(NULL /* parent */
+			 0 /* flags */,
+			 GTK_MESSAGE_ERROR,
+			 GTK_BUTTONS_OK,
+			_("Unable to take a screenshot of "
 			   "the current desktop."));
-		gnome_dialog_run (GNOME_DIALOG (dialog));
+		gtk_dialog_run (GTK_DIALOG (dialog));
 		exit (1);
 	}
 
