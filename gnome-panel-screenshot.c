@@ -201,8 +201,10 @@ nibble_on_file (const char *file)
 			 GTK_BUTTONS_YES_NO,
 			 _("File %s already exists. Overwrite?"),
 			 file);
-		if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_YES)
+		if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_YES) {
+			gtk_widget_destroy (dialog);
 			return NULL;
+		}
 	}
 	fp = fopen (file, "w");
 	if (fp == NULL) {
@@ -216,6 +218,7 @@ nibble_on_file (const char *file)
 			   "Please check your permissions of "
 			   "the parent directory"), file);
 		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 		return NULL;
 	}
 	return fp;
@@ -240,6 +243,7 @@ save_to_file (FILE *fp, const gchar *file, gboolean gui_errors)
 				 GTK_BUTTONS_OK,
 				 "%s", error);
 			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 		}
 		fclose (fp);
 		unlink (file);
@@ -704,6 +708,7 @@ gimme_file (const char *filename)
 				   "Please check your permissions of "
 				   "the parent directory"), filename);
 			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			close (infd);
 			return FALSE;
 		}
@@ -722,6 +727,7 @@ gimme_file (const char *filename)
 					 _("Not enough room to write file %s"),
 					 filename);
 				gtk_dialog_run (GTK_DIALOG (dialog));
+				gtk_widget_destroy (dialog);
 				return FALSE;
 			}
 		}
@@ -1012,7 +1018,7 @@ main (int argc, char *argv[])
 	GConfClient *gconf_client;
 	GnomeClient *client;
 	struct stat s;
-	gchar *file;
+	gchar *file, *window_icon;
 	gboolean window = FALSE;
 	gint width, height; 
 	guint delay = 0;
@@ -1064,6 +1070,7 @@ main (int argc, char *argv[])
 			 _("Glade file for the screenshot program is missing.\n"
 			   "Please check your installation of gnome-panel"));
 		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 		exit (1);
 	}
 	glade_xml_signal_autoconnect (xml);
@@ -1086,6 +1093,7 @@ main (int argc, char *argv[])
 			_("Unable to take a screenshot of "
 			   "the current desktop."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 		exit (1);
 	}
 
@@ -1100,6 +1108,14 @@ main (int argc, char *argv[])
 	preview = glade_xml_get_widget (xml, "preview");
 	save_entry = glade_xml_get_widget (xml, "save_entry");
 
+	window_icon = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, 
+						 "gnome-screenshot.png", TRUE, NULL);
+	if (window_icon) {
+		gnome_window_icon_set_from_file (GTK_WINDOW (toplevel), window_icon);
+		g_free (window_icon);
+	}
+
+	
 	gtk_window_set_default_size (GTK_WINDOW (toplevel), width * 2, -1);
 	gtk_widget_set_size_request (preview, width, height);
 	gtk_aspect_frame_set (GTK_ASPECT_FRAME (frame), 0.5, 0.5,
