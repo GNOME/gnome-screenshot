@@ -1347,7 +1347,7 @@ main (int argc, char *argv[])
 		desktop_dir = g_strdup (home_dir);
 	else
 		desktop_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
-					   ".gnome-desktop", NULL);
+					   "Desktop", NULL);
 	g_object_unref (gconf_client);
 	
 	file = add_file_to_path (home_dir);
