@@ -193,6 +193,7 @@ nibble_on_file (const char *file)
 {
 	GtkWidget *dialog;
 	FILE *fp;
+	mode_t old_mask;
 
 	if (access (file, F_OK) == 0) {
 		dialog = gtk_message_dialog_new
@@ -207,6 +208,9 @@ nibble_on_file (const char *file)
 			return NULL;
 		}
 	}
+
+	old_mask = umask(077);
+
 	fp = fopen (file, "w");
 	if (fp == NULL) {
 		dialog = gtk_message_dialog_new
@@ -220,8 +224,11 @@ nibble_on_file (const char *file)
 			   "the parent directory"), file);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
+
+		umask(old_mask);
 		return NULL;
 	}
+	umask(old_mask);
 	return fp;
 }
 
@@ -260,6 +267,7 @@ start_temporary (void)
 {
 	char *dir;
 	char *file = NULL;
+	mode_t old_mask;
 
 	if (temporary_file != NULL) {
 		if (access (temporary_file, F_OK) == 0)
@@ -289,11 +297,13 @@ start_temporary (void)
 			g_free (dir);
 		dir = g_strdup_printf ("/tmp/gnome-panel-screenshot-%d",
 				       rand ());
-	} while (mkdir (dir, 0755) < 0);
+	} while (mkdir (dir, 0700) < 0);
 
 	file = add_file_to_path (dir);
 
 	g_free (dir);
+
+	old_mask = umask(077);
 
 	temporary_pid = fork ();
 
@@ -314,11 +324,14 @@ start_temporary (void)
 		    ! save_to_file (fp, file, TRUE)) {
 			g_free (file);
 			temporary_pid = 0;
+
+			umask(old_mask);
 			return;
 		}
 		temporary_pid = 0;
 	}
 
+	umask(old_mask);
 	temporary_file = file;
 }
 
@@ -695,8 +708,6 @@ gimme_file (const char *filename)
 		fclose (fp);
 
 		if (rename (temporary_file, filename) == 0) {
-			g_free (temporary_file);
-			temporary_file = NULL;
 			return TRUE;
 		}
 		infd = open (temporary_file, O_RDONLY);
@@ -705,7 +716,7 @@ gimme_file (const char *filename)
 			return FALSE;
 		}
 
-		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
+		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0600);
 		if (outfd < 0) {
 			GtkWidget *dialog;
 			dialog = gtk_message_dialog_new
