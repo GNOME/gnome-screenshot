@@ -1300,7 +1300,7 @@ main (int argc, char *argv[])
 	
 	gtk_window_set_default_size (GTK_WINDOW (toplevel), width * 2, -1);
 	gtk_widget_set_size_request (preview, width, height);
-	gtk_aspect_frame_set (GTK_ASPECT_FRAME (frame), 0.5, 0.5,
+	gtk_aspect_frame_set (GTK_ASPECT_FRAME (frame), 0.0, 0.5,
 			      gdk_pixbuf_get_width (screenshot)/
 			      (gfloat) gdk_pixbuf_get_height (screenshot),
 			      FALSE);
