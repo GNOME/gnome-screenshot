@@ -1,3 +1,8 @@
+2004-11-06  Fernando Herrera  <fherrera@onirica.com>
+
+	* screenshot-dialog.c: (screenshot_dialog_new): use the new
+	 glade filename.
+
 Wed Nov  3 11:53:02 2004  Jonathan Blandford  <jrb@redhat.com>
 
 	* screenshot-xfer.[ch]: remove bogus old dialog stuff.

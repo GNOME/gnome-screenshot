@@ -127,7 +127,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 
   dialog = g_new0 (ScreenshotDialog, 1);
 
-  dialog->xml = glade_xml_new (GLADEDIR "/gnome-panel-screenshot.glade", NULL, NULL);
+  dialog->xml = glade_xml_new (GLADEDIR "/gnome-screenshot.glade", NULL, NULL);
   dialog->screenshot = screenshot;
 
   if (dialog->xml == NULL)
