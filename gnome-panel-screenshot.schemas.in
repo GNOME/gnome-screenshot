@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<gconfschemafile>
+  <schemalist>    
+
+    <schema>
+      <key>/schemas/apps/gnome_panel_screenshot/web_dir</key>
+      <applyto>/apps/gnome_panel_screenshot/web_dir</applyto>
+      <owner>gnome_panel_screenshot</owner>
+      <type>string</type>
+      <default></default>
+      <locale name="C">
+        <short>Web directory.</short>
+        <long>The user's directory in which screenshots should be
+              saved so as to appear on the web.</long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>

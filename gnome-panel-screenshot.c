@@ -1193,7 +1193,6 @@ main (int argc, char *argv[])
 	gint width, height; 
 	guint delay = 0;
 	gboolean normal_web_dir = TRUE;
-	GError *error;
 	
 	struct poptOption opts[] = {
 		{"window", '\0', POPT_ARG_NONE, &window, 0, N_("Grab a window instead of the entire screen"), NULL},
@@ -1311,11 +1310,11 @@ main (int argc, char *argv[])
 	gconf_client = gconf_client_get_default ();
 
 	home_dir = g_get_home_dir ();	
-	web_dir = gconf_client_get_string (gconf_client, "/apps/gnome-panel-screenshot/web_dir", &error);
-	if (!web_dir)
-		web_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
-				       "public_html", NULL);
-	else
+	web_dir = gconf_client_get_string (gconf_client, "/apps/gnome_panel_screenshot/web_dir", NULL);
+	if (!web_dir || !web_dir[0]) {
+		g_free (web_dir);
+		web_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S, "public_html", NULL);
+	} else
 		normal_web_dir = FALSE;
 
 	if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL))
@@ -1329,12 +1328,11 @@ main (int argc, char *argv[])
 	gtk_entry_set_text (GTK_ENTRY (save_entry), file);
 	g_free (file);
 
-	if (! stat (web_dir, &s) &&
-	    S_ISDIR (s.st_mode)) {
+	if (!stat (web_dir, &s) && S_ISDIR (s.st_mode)) {
 		GtkWidget *cbutton;
-		char *str;		
-		cbutton = glade_xml_get_widget (xml, "web_rbutton");
+		char      *str = NULL;		
 
+		cbutton = glade_xml_get_widget (xml, "web_rbutton");
 		gtk_widget_show (cbutton);
 
 		if (!normal_web_dir)
