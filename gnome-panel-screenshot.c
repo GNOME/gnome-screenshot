@@ -17,9 +17,6 @@
  * USA
  */
 
-/* FIXME: currently undone things */
-#undef HAVE_PAPER_WIDTH
-
 /* THERE ARE NO FEATURE REQUESTS ALLOWED */
 /* IF YOU WANT YOUR OWN FEATURE -- WRITE THE DAMN THING YOURSELF (-:*/
 
@@ -40,13 +37,6 @@
 #include <errno.h>
 #include <locale.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
-#ifdef HAVE_GNOME_PRINT
-#include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-print-master.h>
-#include <libgnomeprint/gnome-print-preview.h>
-#include <libgnomeprint/gnome-print-dialog.h>
-#include <libgnomeprint/gnome-print-master-preview.h>
-#endif
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
 #include <X11/Xmu/WinUtil.h>
@@ -417,173 +407,6 @@ cleanup_temporary (void)
 	g_free (file);
 }
 
-#ifdef HAVE_GNOME_PRINT
-static GdkPixbuf *
-rotate_image (GdkPixbuf *image)
-{
-	GdkPixbuf *retval;
-	double affine[6];
-	gint width, height;
-
-	width = gdk_pixbuf_get_width (image);
-	height = gdk_pixbuf_get_height (image);
-
-	retval = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, height, width);
-	affine[0] = 0.0;    /* = cos(90) */
-	affine[2] = 1.0;    /* = sin(90) */
-	affine[3] = 0.0;    /* = cos(90) */
-	affine[1] = -1.0;   /* = -sin(90) */
-	affine[4] = 0;      /* x translation */
-	affine[5] = width;  /* y translation */
-
-	art_rgb_affine (gdk_pixbuf_get_pixels (retval),
-			0, 0,
-			height, width,
-			gdk_pixbuf_get_rowstride (retval),
-			gdk_pixbuf_get_pixels (image),
-			width, height,
-			gdk_pixbuf_get_rowstride (image),
-			affine,
-			ART_FILTER_NEAREST,
-			NULL);
-
-	return retval;
-}
-#endif
-
-#ifdef HAVE_GNOME_PRINT
-static void
-print_page (GnomePrintContext *context, const GnomePaper *paper)
-{
-	GdkPixbuf *printed_image;
-	gint real_width = gnome_paper_pswidth (paper);
-	gint real_height = gnome_paper_psheight (paper);
-	gint pix_width;
-	gint pix_height;
-	gint width, height;
-
-	/* always make sure that it is taller then wide, under the potentially
-	 * mistaken assumption that all paper is this way too. */
-	if (gdk_pixbuf_get_width (screenshot) > gdk_pixbuf_get_height (screenshot)) {
-		printed_image = rotate_image (screenshot);
-	} else {
-		gdk_pixbuf_ref (screenshot);
-		printed_image = screenshot;
-	}
-
-	pix_width = gdk_pixbuf_get_width (printed_image);
-	pix_height = gdk_pixbuf_get_height (printed_image);
-
-	width = real_width - 2 * gnome_paper_tmargin (paper);
-	height = real_height - 2 * gnome_paper_rmargin (paper);
-
-	if (((gdouble) pix_height/pix_width) >
-	    ((gdouble)width/height)) {
-		/* We scale to the top */
-		width = height * (gdouble)pix_width/pix_height;
-	} else {
-		/* We scale to the sides of the page */
-		height = width * (gdouble)pix_height/pix_width;
-	}
-
-	gnome_print_beginpage (context, "1");
-
-	gnome_print_gsave (context);
-	gnome_print_translate (context, (real_width-width)/2.0, (real_height - height)/2.0);
-	gnome_print_scale (context, width, height);
-	gnome_print_pixbuf (context, printed_image);
-	gnome_print_grestore (context);
-  
-	gnome_print_showpage (context);
-	gnome_print_context_close (context);
-	g_object_unref (G_OBJECT (printed_image));
-}
-#endif
-
-#ifdef HAVE_GNOME_PRINT
-static gboolean
-print_pixbuf (void)
-{
-	GnomePrintDialog *print_dialog;
-	GnomePrintContext *context;
-	GnomePrintMaster *gpm = NULL;
-	GnomePrintMasterPreview *gpmp;
-	const GnomePaper *paper;
-	gint do_preview = FALSE;
-	gint copies, collate;
-	gint result;
-	GdkCursor *cursor;
-#ifdef HAVE_PAPER_WIDTH
-	GnomeUnit *unit;
-	guint width, height;
-#endif
-
-	print_dialog = GNOME_PRINT_DIALOG (gnome_print_dialog_new (_("Print Screenshot"), GNOME_PRINT_DIALOG_COPIES));
-	gnome_dialog_set_parent (GNOME_DIALOG (print_dialog), GTK_WINDOW (toplevel));
-	do {
-		result = gnome_dialog_run (GNOME_DIALOG (print_dialog)); 
-		switch (result) {
-		case GNOME_PRINT_CANCEL:
-			gnome_dialog_close (GNOME_DIALOG (print_dialog));
-		case -1:
-			return FALSE;
-		case GNOME_PRINT_PREVIEW:
-			do_preview = TRUE;
-			break;
-		default:
-			do_preview = FALSE;
-			break;
-		}
-
-		/* set up the gnome_print_master */
-		gpm = gnome_print_master_new ();
-		gnome_print_dialog_get_copies (print_dialog, &copies, &collate);
-		gnome_print_master_set_copies (gpm, copies, collate);
-		gnome_print_master_set_printer (gpm, gnome_print_dialog_get_printer (print_dialog));
-
-#ifdef HAVE_PAPER_WIDTH
-		unit = gnome_unit_with_name ("Millimeter");
-
-		width = (unsigned int)(size_t)nl_langinfo (_NL_PAPER_WIDTH);
-		height = (unsigned int)(size_t)nl_langinfo (_NL_PAPER_HEIGHT);
-
-		g_print ("%f %f\n", gnome_paper_convert_to_points (width, unit),
-			 gnome_paper_convert_to_points (height, unit));
-		paper = gnome_paper_with_size (gnome_paper_convert_to_points (width, unit),
-					       gnome_paper_convert_to_points (height, unit));
-#else
-		paper = gnome_paper_with_name (gnome_paper_name_default ());
-#endif
-
-		gnome_print_master_set_paper (gpm, paper);
-		context = gnome_print_master_get_context (gpm);
-
-		print_page (context, paper);
-
-		if (do_preview == FALSE) {
-			gnome_dialog_close (GNOME_DIALOG (print_dialog));
-			gnome_print_master_print (gpm);
-			gnome_print_master_close (gpm);
-			return TRUE;
-		}
-		gpmp = gnome_print_master_preview_new (gpm, _("Screenshot Print Preview"));
-		g_signal_connect (G_OBJECT (gpmp), "destroy", 
-				  G_CALLBACK (gtk_main_quit), NULL);
-		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), FALSE);
-		cursor = gdk_cursor_new (GDK_WATCH);
-		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, cursor);
-		gdk_cursor_unref (cursor);
-
-		gtk_widget_show (GTK_WIDGET (gpmp));
-		gtk_window_set_modal (GTK_WINDOW (gpmp), TRUE);
-		gtk_window_set_transient_for (GTK_WINDOW (gpmp), GTK_WINDOW (print_dialog));
-		gtk_main ();
-		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), TRUE);
-		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, NULL);
-	} while (TRUE);
-}
-#endif
-
 static gchar *
 add_file_to_path (const gchar *path)
 {
@@ -847,16 +670,6 @@ on_ok_button_clicked (GtkWidget *widget,
 		setup_busy (FALSE);
 		return;
 	}
-#ifdef HAVE_GNOME_PRINT
-	button = glade_xml_get_widget (xml, "print_rbutton");
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
-		if (print_pixbuf ()) {
-			gtk_main_quit ();
-		}
-		setup_busy (FALSE);
-		return;
-	}
-#endif
 
 	file = add_file_to_path (web_dir);
 	if ( ! gimme_file (file)) {
@@ -1345,14 +1158,6 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 	glade_xml_signal_autoconnect (xml);
-
-#ifndef HAVE_GNOME_PRINT
-	{
-		GtkWidget *button = glade_xml_get_widget (xml, "print_rbutton");
-		if (button != NULL)
-			gtk_widget_hide (button);
-	}
-#endif
 
 	if (screenshot == NULL) {
 		GtkWidget *dialog;
