@@ -4,27 +4,40 @@
   <schemalist>    
 
     <schema>
-      <key>/schemas/apps/gnome_panel_screenshot/web_dir</key>
-      <applyto>/apps/gnome_panel_screenshot/web_dir</applyto>
+      <key>/schemas/apps/gnome_panel_screenshot/last_save_directory</key>
+      <applyto>/apps/gnome_panel_screenshot/last_save_directory</applyto>
       <owner>gnome_panel_screenshot</owner>
       <type>string</type>
       <default></default>
       <locale name="C">
         <short>Web directory</short>
-        <long>The user's directory in which screenshots should be
-              saved so as to appear on the web.</long>
+        <long>Directory that the screenshooter last used to save in</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gnome_panel_screenshot/drop_shadow_window</key>
-      <applyto>/apps/gnome_panel_screenshot/drop_shadow_window</applyto>
+      <key>/schemas/apps/gnome_panel_screenshot/include_border</key>
+      <applyto>/apps/gnome_panel_screenshot/include_border</applyto>
       <owner>gnome_panel_screenshot</owner>
       <type>boolean</type>
-      <default>false</default>
+      <default>true</default>
       <locale name="C">
-        <short>Drop Shadow Window</short>
-        <long>Add a drop shadow to screen shots of individual windows</long>
+        <short>Include Border</short>
+        <long>Include the window manager border along with the screenshot</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gnome_panel_screenshot/border_effect</key>
+      <applyto>/apps/gnome_panel_screenshot/border_effect</applyto>
+      <owner>gnome_panel_screenshot</owner>
+      <type>string</type>
+      <default>none</default>
+      <locale name="C">
+        <short>Border Effect</short>
+        <long>Effect to add to the outside of a border.  Possible values
+      are "shadow", "none", and "black-line".
+      </long>
       </locale>
     </schema>
 

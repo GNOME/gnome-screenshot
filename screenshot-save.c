@@ -9,7 +9,12 @@
 static char *parent_dir = NULL;
 static char *tmp_filename = NULL;
 
+static SaveFunction save_callback = NULL;
+static gpointer save_user_data = NULL;
+
 extern int errno;
+
+
 
 /* Strategy for saving:
  *
@@ -84,8 +89,6 @@ read_pipe_from_child (GIOChannel   *source,
 		      GIOCondition  condition,
 		      gpointer      data)
 {
-  SaveNotifyFunc func = data;
-
   if (condition & G_IO_IN)
     {
       gchar *message = NULL;
@@ -103,7 +106,7 @@ read_pipe_from_child (GIOChannel   *source,
       exit (1);
     }
 
-  (*func) ();
+  (*save_callback) (save_user_data);
 
   return FALSE;
 }
@@ -141,8 +144,9 @@ signal_handler (int sig)
 }
 
 void
-screenshot_save_start (GdkPixbuf      *pixbuf,
-		       SaveNotifyFunc  func)
+screenshot_save_start (GdkPixbuf    *pixbuf,
+		       SaveFunction  callback,
+		       gpointer      user_data)
 {
   GPid pid;
   int parent_exit_notification[2];
@@ -156,6 +160,8 @@ screenshot_save_start (GdkPixbuf      *pixbuf,
     return;
 
   tmp_filename = g_strdup_printf ("%s/screenshot.png", parent_dir);
+  save_callback = callback;
+  save_user_data = user_data;
 
   pid = fork ();
   if (pid == 0)
@@ -203,7 +209,7 @@ screenshot_save_start (GdkPixbuf      *pixbuf,
       g_io_add_watch (channel,
 		      G_IO_IN | G_IO_ERR | G_IO_HUP | G_IO_NVAL,
 		      read_pipe_from_child,
-		      func);
+		      NULL);
       g_io_channel_unref (channel);
       g_child_watch_add (pid, child_done_notification, NULL);
     }
