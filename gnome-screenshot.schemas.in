@@ -4,9 +4,9 @@
   <schemalist>    
 
     <schema>
-      <key>/schemas/apps/gnome_panel_screenshot/last_save_directory</key>
-      <applyto>/apps/gnome_panel_screenshot/last_save_directory</applyto>
-      <owner>gnome_panel_screenshot</owner>
+      <key>/schemas/apps/gnome_screenshot/last_save_directory</key>
+      <applyto>/apps/gnome_screenshot/last_save_directory</applyto>
+      <owner>gnome_screenshot</owner>
       <type>string</type>
       <default></default>
       <locale name="C">
@@ -16,9 +16,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gnome_panel_screenshot/include_border</key>
-      <applyto>/apps/gnome_panel_screenshot/include_border</applyto>
-      <owner>gnome_panel_screenshot</owner>
+      <key>/schemas/apps/gnome_screenshot/include_border</key>
+      <applyto>/apps/gnome_screenshot/include_border</applyto>
+      <owner>gnome_screenshot</owner>
       <type>boolean</type>
       <default>true</default>
       <locale name="C">
@@ -28,9 +28,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gnome_panel_screenshot/border_effect</key>
-      <applyto>/apps/gnome_panel_screenshot/border_effect</applyto>
-      <owner>gnome_panel_screenshot</owner>
+      <key>/schemas/apps/gnome_screenshot/border_effect</key>
+      <applyto>/apps/gnome_screenshot/border_effect</applyto>
+      <owner>gnome_screenshot</owner>
       <type>string</type>
       <default>none</default>
       <locale name="C">
