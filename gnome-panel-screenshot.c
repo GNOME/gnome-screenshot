@@ -1107,6 +1107,61 @@ drag_begin (GtkWidget *widget, GdkDragContext *context)
 	start_temporary ();
 }
 
+/* To make sure there is only one screenshot taken at a time,
+ * (Imagine key repeat for the print screen key) we hold a selection
+ * until we are done taking the screenshot
+ */
+static GtkWidget *selection_window;
+
+#define SELECTION_NAME "_GNOME_PANEL_SCREENSHOT"
+
+static gboolean
+get_lock (void)
+{
+        Atom selection_atom = gdk_x11_get_xatom_by_name (SELECTION_NAME);
+	GdkCursor *cursor;
+	gboolean result = FALSE;
+
+	XGrabServer (GDK_DISPLAY ());
+        if (XGetSelectionOwner (GDK_DISPLAY(), selection_atom) != None)
+                goto out;
+
+	selection_window = gtk_invisible_new ();
+	gtk_widget_show (selection_window);
+
+	if (!gtk_selection_owner_set (selection_window,
+				      gdk_atom_intern (SELECTION_NAME, FALSE),
+				      GDK_CURRENT_TIME)) {
+		gtk_widget_destroy (selection_window);
+		selection_window = NULL;
+		goto out;
+	}
+
+	cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_pointer_grab (selection_window->window, FALSE, 0, NULL,
+			  cursor, GDK_CURRENT_TIME);
+	gdk_cursor_unref (cursor);
+
+	result = TRUE;
+
+ out:
+	XUngrabServer (GDK_DISPLAY ());
+	gdk_flush ();
+
+        return result;
+}
+
+static void
+release_lock (void)
+{
+	if (selection_window) {
+		gtk_widget_destroy (selection_window);
+		selection_window = NULL;
+	}
+
+	gdk_flush ();
+}
+
 /* main */
 int
 main (int argc, char *argv[])
@@ -1145,6 +1200,11 @@ main (int argc, char *argv[])
 	if (delay > 0) {
 		sleep (delay);	
 	}
+
+	if (!get_lock ()) {
+		g_printerr ("gnome-panel-screenshot is already running\n");
+		exit (1);
+	}
 	
 	if (window)
 		take_window_shot ();
@@ -1160,6 +1220,7 @@ main (int argc, char *argv[])
 	}
 	if (xml == NULL) {
 		GtkWidget *dialog;
+		release_lock ();
 		dialog = gtk_message_dialog_new
 			(NULL /* parent */,
 			 0 /* flags */,
@@ -1183,6 +1244,7 @@ main (int argc, char *argv[])
 
 	if (screenshot == NULL) {
 		GtkWidget *dialog;
+		release_lock ();
 		dialog = gtk_message_dialog_new
 			(NULL /* parent */,
 			 0 /* flags */,
@@ -1264,6 +1326,7 @@ main (int argc, char *argv[])
 			  NULL);
 
 	gtk_widget_show_now (toplevel);
+	release_lock ();
 
 	/*
 	 * Start working on the temporary file in a fork, now this is
