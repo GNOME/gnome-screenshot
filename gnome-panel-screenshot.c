@@ -225,7 +225,7 @@ nibble_on_file (const char *file)
 		}
 	}
 
-	old_mask = umask(077);
+	old_mask = umask(022);
 
 	fp = fopen (file, "w");
 	if (fp == NULL) {
