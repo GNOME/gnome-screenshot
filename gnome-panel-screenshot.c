@@ -52,7 +52,8 @@
 #endif
 
 static GladeXML *xml = NULL;
-static GtkWidget *toplevel;
+static GtkWidget *toplevel = NULL;
+static GtkWidget *preview = NULL;
 static GdkPixbuf *screenshot = NULL;
 static GdkPixbuf *preview_image = NULL;
 static gchar *web_dir;
@@ -409,53 +410,76 @@ on_preview_configure_event (GtkWidget         *drawing_area,
 						 GDK_INTERP_BILINEAR);
 }
 
+static void
+setup_busy (gboolean busy)
+{
+	GdkCursor *cursor;
+
+	if (busy) {
+		/* Change cursor to busy */
+		cursor = gdk_cursor_new (GDK_WATCH);
+		gdk_window_set_cursor (toplevel->window, cursor);
+		gdk_cursor_destroy (cursor);
+	} else {
+		gdk_window_set_cursor (toplevel->window, NULL);
+	}
+
+	/* block expose on the, since we don't want to redraw the preview
+	 * in the draw. It'd make no sense and would just generate X traffic */
+	gtk_signal_handler_block_by_func
+		(GTK_OBJECT (preview),
+		 GTK_SIGNAL_FUNC (on_preview_expose_event),
+		 NULL);
+
+	gtk_widget_set_sensitive (toplevel, ! busy);
+	gtk_widget_draw (toplevel, NULL);
+
+	gtk_signal_handler_unblock_by_func
+		(GTK_OBJECT (preview),
+		 GTK_SIGNAL_FUNC (on_preview_expose_event),
+		 NULL);
+
+	gdk_flush ();
+
+}
+
 void
 on_ok_button_clicked (GtkWidget *widget,
 		      gpointer   data)
 {
 	GtkWidget *button;
 	gchar *file;
-	GdkCursor *cursor;
 
-	/* Change cursor to busy */
-	cursor = gdk_cursor_new (GDK_WATCH);
-	gdk_window_set_cursor (toplevel->window, cursor);
-	gdk_cursor_destroy (cursor);
-
-	gdk_flush ();
+	setup_busy (TRUE);
 
 	button = glade_xml_get_widget (xml, "save_rbutton");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		GtkWidget *entry;
 		entry = glade_xml_get_widget (xml, "save_entry");
-		if (save_to_file (gtk_entry_get_text (GTK_ENTRY (entry))) == FALSE) {
-			gdk_window_set_cursor (toplevel->window, NULL);
-			return;
+		if (save_to_file (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+			gtk_main_quit ();
 		}
-		gtk_main_quit ();
+		setup_busy (FALSE);
 		return;
 	}
 
 	button = glade_xml_get_widget (xml, "desktop_rbutton");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		file = add_file_to_path (desktop_dir);
-		if (save_to_file (file) == FALSE) {
-			g_free (file);
-			gdk_window_set_cursor (toplevel->window, NULL);
-			return;
+		if (save_to_file (file)) {
+			gtk_main_quit ();
 		}
 		g_free (file);
-		gtk_main_quit ();
+		setup_busy (FALSE);
 		return;
 	}
 #ifdef HAVE_GNOME_PRINT
 	button = glade_xml_get_widget (xml, "print_rbutton");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
-		if (print_pixbuf () == FALSE) {
-			gdk_window_set_cursor (toplevel->window, NULL);
-			return;
+		if (print_pixbuf ()) {
+			gtk_main_quit ();
 		}
-		gtk_main_quit ();
+		setup_busy (FALSE);
 		return;
 	}
 #endif
@@ -463,14 +487,14 @@ on_ok_button_clicked (GtkWidget *widget,
 	file = add_file_to_path (web_dir);
 	if (save_to_file (file) == FALSE) {
 		g_free (file);
-		gdk_window_set_cursor (toplevel->window, NULL);
+		setup_busy (FALSE);
 		return;
 	}
 
-	gdk_window_set_cursor (toplevel->window, NULL);
 	g_free (file);
 	gtk_main_quit ();
-	return;
+
+	setup_busy (FALSE);
 }
 
 void
@@ -561,7 +585,6 @@ take_screen_shot (void)
 int
 main (int argc, char *argv[])
 {
-	GtkWidget *preview;
 	GtkWidget *save_entry;
 	GtkWidget *frame;
 	GnomeClient *client;
@@ -655,6 +678,12 @@ main (int argc, char *argv[])
 		cbutton = glade_xml_get_widget (xml, "web_rbutton");
 		gtk_widget_show (cbutton);
 	}
+
+	gtk_widget_grab_focus (save_entry);
+	gtk_editable_select_region (GTK_EDITABLE (save_entry), 0, -1);
+	gtk_signal_connect (GTK_OBJECT (save_entry), "activate",
+			    GTK_SIGNAL_FUNC (on_ok_button_clicked),
+			    NULL);
 
 	gtk_widget_show (toplevel);
 
