@@ -1036,10 +1036,8 @@ update_window_icon (GtkWindow    *window,
 	if (!icon)
 		return;
 
-	filename = gtk_icon_info_get_filename (icon);
-	g_assert (filename != NULL);
-
-	gtk_window_set_icon_from_file (window, filename, NULL);
+	if ((filename = gtk_icon_info_get_filename (icon)))
+		gtk_window_set_icon_from_file (window, filename, NULL);
 
 	gtk_icon_info_free (icon);
 }
