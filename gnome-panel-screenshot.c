@@ -452,7 +452,7 @@ print_page (GnomePrintContext *context, const GnomePaper *paper)
   
 	gnome_print_showpage (context);
 	gnome_print_context_close (context);
-	gdk_pixbuf_unref (printed_image);
+	g_object_unref (G_OBJECT (printed_image));
 }
 #endif
 
@@ -528,7 +528,7 @@ print_pixbuf (void)
 		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), FALSE);
 		cursor = gdk_cursor_new (GDK_WATCH);
 		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, cursor);
-		gdk_cursor_destroy (cursor);
+		g_object_unref (G_OBJECT (cursor));
 
 		gtk_widget_show (GTK_WIDGET (gpmp));
 		gtk_window_set_modal (GTK_WINDOW (gpmp), TRUE);
@@ -616,7 +616,7 @@ on_preview_configure_event (GtkWidget         *drawing_area,
 			    gpointer           data)
 {
 	if (preview_image)
-		gdk_pixbuf_unref (preview_image);
+		g_object_unref (G_OBJECT (preview_image));
 
 	preview_image = gdk_pixbuf_scale_simple (screenshot,
 						 event->width,
@@ -633,7 +633,7 @@ setup_busy (gboolean busy)
 		/* Change cursor to busy */
 		cursor = gdk_cursor_new (GDK_WATCH);
 		gdk_window_set_cursor (toplevel->window, cursor);
-		gdk_cursor_destroy (cursor);
+		g_object_unref (G_OBJECT (cursor));
 	} else {
 		gdk_window_set_cursor (toplevel->window, NULL);
 	}
@@ -895,9 +895,9 @@ take_window_shot (void)
 		       &unused,
 		       &mask);
 
-	if (child == None)
-                window = GDK_ROOT_PARENT ();
-	else {
+	if (child == None) {
+                window = gdk_get_default_root_window ();
+	} else {
 
                 window = gdk_window_foreign_new (child);
 
@@ -914,7 +914,7 @@ take_window_shot (void)
 		}
 	}
 
-	gdk_window_get_size (window, &width, &height);
+	gdk_drawable_get_size (window, &width, &height);
 	gdk_window_get_origin (window, &x_orig, &y_orig);
 
 	
@@ -950,7 +950,7 @@ take_screen_shot (void)
 	width = gdk_screen_width ();
 	height = gdk_screen_height ();
 
-	screenshot = gdk_pixbuf_get_from_drawable (NULL, GDK_ROOT_PARENT (),
+	screenshot = gdk_pixbuf_get_from_drawable (NULL, gdk_get_default_root_window (),
 						   NULL, 0, 0, 0, 0,
 						   width, height);
 }
@@ -998,7 +998,7 @@ drag_begin (GtkWidget *widget, GdkDragContext *context)
 		 128);
 	
 	gtk_drag_set_icon_pixmap
-		(context, gdk_rgb_get_cmap (), pixmap, mask, 0, 0);
+		(context, gdk_rgb_get_colormap (), pixmap, mask, 0, 0);
 	
 	start_temporary ();
 }
