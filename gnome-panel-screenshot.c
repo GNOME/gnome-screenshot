@@ -971,7 +971,7 @@ find_toplevel_window (int depth, Window xid, gboolean *keep_going)
 static gboolean
 take_window_shot (void)
 {
-	GdkWindow *window;
+	GdkWindow *window, *toplevel_window;
 	Display *disp;
 	Window w, root, child, toplevel;
 	int unused;
@@ -1019,6 +1019,10 @@ take_window_shot (void)
 
 			XFree (class_hint.res_name);
 		}
+
+		/* Force window to be shown */
+		toplevel_window	 = gdk_window_foreign_new (toplevel);
+		gdk_window_show (toplevel_window);
 	}
 
 	gdk_drawable_get_size (window, &width, &height);
