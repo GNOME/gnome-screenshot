@@ -211,8 +211,12 @@ nibble_on_file (const char *file)
 	FILE *fp;
 	mode_t old_mask;
 
+	if (file == NULL)
+		return NULL;
+
 	if (access (file, F_OK) == 0) {
 		int response;
+		char *utf8_name = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
 
 		dialog = gtk_message_dialog_new
 			(GTK_WINDOW (toplevel),
@@ -220,7 +224,8 @@ nibble_on_file (const char *file)
 			 GTK_MESSAGE_QUESTION,
 			 GTK_BUTTONS_YES_NO,
 			 _("File %s already exists. Overwrite?"),
-			 file);
+			 utf8_name);
+		g_free (utf8_name);
 
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
@@ -233,6 +238,7 @@ nibble_on_file (const char *file)
 
 	fp = fopen (file, "w");
 	if (fp == NULL) {
+		char *utf8_name = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
 		dialog = gtk_message_dialog_new
 			(GTK_WINDOW (toplevel),
 			 0 /* flags */,
@@ -241,7 +247,8 @@ nibble_on_file (const char *file)
 			 _("Unable to create the file:\n"
 			   "\"%s\"\n"
 			   "Please check your permissions of "
-			   "the parent directory"), file ? file : "(null)");
+			   "the parent directory"), utf8_name);
+		g_free (utf8_name);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
@@ -739,6 +746,7 @@ gimme_file (const char *filename)
 		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
 		if (outfd < 0) {
 			GtkWidget *dialog;
+			char *utf8_name = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
 			dialog = gtk_message_dialog_new
 				(GTK_WINDOW (toplevel),
 				 0 /* flags */,
@@ -747,7 +755,8 @@ gimme_file (const char *filename)
 				 _("Unable to create the file:\n"
 				   "\"%s\"\n"
 				   "Please check your permissions of "
-				   "the parent directory"), filename ? filename : "(null)");
+				   "the parent directory"), utf8_name);
+			g_free (utf8_name);
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			close (infd);
@@ -757,6 +766,7 @@ gimme_file (const char *filename)
 		while ((bytes = read (infd, buf, sizeof (buf))) > 0) {
 			if (write (outfd, buf, bytes) != bytes) {
 				GtkWidget *dialog;
+				char *utf8_name = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
 				close (infd);
 				close (outfd);
 				unlink (filename);
@@ -766,7 +776,8 @@ gimme_file (const char *filename)
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
 					 _("Not enough room to write file %s"),
-					 filename ? filename : "(null)");
+					 utf8_name);
+				g_free (utf8_name);
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				return FALSE;
