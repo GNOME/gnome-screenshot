@@ -49,6 +49,7 @@
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
 #include <X11/Xmu/WinUtil.h>
+#include <X11/extensions/shape.h>
 #include <libart_lgpl/art_rgb_affine.h>
 
 #ifdef HAVE_PAPER_WIDTH
@@ -148,9 +149,10 @@ save_to_file_internal (FILE *fp, const char *file, char **error)
 	png_init_io (png_ptr, fp);
 
 	png_set_IHDR (png_ptr, info_ptr, w, h, bpc,
-		      PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
+		      PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
 		      PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
-	data = malloc (w * 3 * sizeof (char));
+	
+	data = malloc (w * 4 * sizeof (char));
 
 	if (data == NULL) {
 		*error = _("Insufficient memory to save the screenshot.\n"
@@ -166,11 +168,11 @@ save_to_file_internal (FILE *fp, const char *file, char **error)
 	png_write_info (png_ptr, info_ptr);
 	png_set_shift (png_ptr, &sig_bit);
 	png_set_packing (png_ptr);
-
+	
 	ptr = pixels;
 	for (y = 0; y < h; y++) {
 		for (j = 0, x = 0; x < w; x++)
-			memcpy (&(data[x*3]), &(ptr[x*3]), 3);
+			memcpy (&(data[x*4]), &(ptr[x*4]), 4);
 
 		row_ptr = (png_bytep)data;
 		png_write_rows (png_ptr, &row_ptr, 1);
@@ -625,16 +627,17 @@ on_preview_expose_event (GtkWidget      *drawing_area,
 			 GdkEventExpose *event,
 			 gpointer        data)
 {
-	gdk_draw_rgb_image (drawing_area->window,
-			    drawing_area->style->white_gc,
-			    event->area.x, event->area.y,
-			    event->area.width,
-			    event->area.height,
-			    GDK_RGB_DITHER_NORMAL,
-			    gdk_pixbuf_get_pixels (preview_image)
-			    + (event->area.y * gdk_pixbuf_get_rowstride (preview_image))
-			    + (event->area.x * gdk_pixbuf_get_n_channels (preview_image)),
-			    gdk_pixbuf_get_rowstride (preview_image));
+	gdk_pixbuf_render_to_drawable (preview_image,
+				       drawing_area->window,
+				       drawing_area->style->white_gc,
+				       event->area.x,
+				       event->area.y,
+				       event->area.x,
+				       event->area.y,
+				       event->area.width,
+				       event->area.height,
+				       GDK_RGB_DITHER_NORMAL,
+				       0, 0);
 }
 
 void
@@ -942,10 +945,16 @@ take_window_shot (void)
 	XClassHint class_hint;
 	gchar *result = NULL;
 	gboolean keep_going;
+	int i;
+	guchar *src_pixels, *dest_pixels;
+	GdkPixbuf *tmp;
+	XRectangle *rectangles;
+	int rectangle_count, rectangle_order;
 	
 	disp = GDK_DISPLAY ();
 	w = GDK_ROOT_WINDOW ();
-
+	
+	
 	XQueryPointer (disp, w, &root, &child,
 		       &unused,
 		       &unused,
@@ -991,12 +1000,35 @@ take_window_shot (void)
 		width = gdk_screen_width () - x_orig;
 	if (y_orig + height > gdk_screen_height ())
 		height = gdk_screen_height () - y_orig;
-			
-	screenshot = gdk_pixbuf_get_from_drawable (NULL, window,
+
+
+	tmp = gdk_pixbuf_get_from_drawable (NULL, window,
 						   NULL,
 						   x, y, 0, 0,
 						   width, height);
+	screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
+	gdk_pixbuf_fill (screenshot, 0);
+	rectangles = XShapeGetRectangles (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (window),
+					  ShapeBounding, &rectangle_count, &rectangle_order);
 
+	for (i = 0; i < rectangle_count; i++) {
+		for (y = rectangles[i].y; y < rectangles[i].y + rectangles[i].height; y++) {
+			src_pixels = gdk_pixbuf_get_pixels (tmp) +
+				y * gdk_pixbuf_get_rowstride(tmp) +
+				rectangles[i].x * (gdk_pixbuf_get_has_alpha (tmp) ? 4 : 3);
+			dest_pixels = gdk_pixbuf_get_pixels (screenshot) +
+				y * gdk_pixbuf_get_rowstride (screenshot) +
+				rectangles[i].x * 4;
+			
+			for (x = rectangles[i].x; x < rectangles[i].x + rectangles[i].width; x++) {
+				*dest_pixels++ = *src_pixels ++;
+				*dest_pixels++ = *src_pixels ++;
+				*dest_pixels++ = *src_pixels ++;
+				*dest_pixels++ = 255;
+			}
+		}
+	}
+	g_object_unref (tmp);
 	class_name = result;
 }
 
