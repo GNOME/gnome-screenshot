@@ -405,48 +405,56 @@ cleanup_temporary (void)
 static gchar *
 add_file_to_path (const gchar *path)
 {
+	char *expanded_path;
 	char *retval;
 	char *tmp;
+	char *file_name;
 	int   i = 1;
 
+	expanded_path = gnome_vfs_expand_initial_tilde (path);
+	g_strstrip (expanded_path);
+
 	if (class_name) {
-		/* translators: this is the file that gets made up with the screenshot if a specific window is taken */
-		tmp = g_strdup_printf (_("%s%cScreenshot-%s.png"), path,
-				       G_DIR_SEPARATOR, class_name);
-		retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
-		g_free (tmp);
+		/* translators: this is the name of the file that gets made up
+		 * with the screenshot if a specific window is taken */
+		file_name = g_strdup_printf (_("Screenshot-%s.png"), class_name);
+	} else {
+		/* translators: this is the name of the file that gets made up
+		 * with the screenshot if the entire screen is taken */
+		file_name = g_strdup (_("Screenshot.png"));
 	}
-	else {
-		/* translators: this is the file that gets made up with the screenshot if the entire screen is taken */
-		tmp = g_strdup_printf (_("%s%cScreenshot.png"), path,
-				       G_DIR_SEPARATOR);
-		retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
-		g_free (tmp);
-	}
+	tmp = g_strdup_printf ("%s%c%s", expanded_path, G_DIR_SEPARATOR, file_name);
+	retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+	g_free (file_name);
+	g_free (tmp);
 	
 	do {
 		struct stat s;
 
-		if (stat (retval, &s) &&
-		    errno == ENOENT)
+		if (stat (retval, &s) && errno == ENOENT) {
+			g_free (expanded_path);
 			return retval;
+		}
 
 		g_free (retval);
 
 		if (class_name) {
-			/* translators: this is the file that gets made up with the screenshot if a specific window is taken */
-			tmp = g_strdup_printf (_("%s%cScreenshot-%s-%d.png"), path,
-					       G_DIR_SEPARATOR, class_name, i);
-			retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
-			g_free (tmp);
+			/* translators: this is the name of the file that gets
+			 * made up with the screenshot if a specific window is
+			 * taken */
+			file_name = g_strdup_printf (_("Screenshot-%s-%d.png"),
+						     class_name, i);
 		}
 		else {
-			/* translators: this is the file that gets made up with the screenshot if the entire screen is taken */
-			tmp = g_strdup_printf (_("%s%cScreenshot-%d.png"), path,
-					       G_DIR_SEPARATOR, i);
-			retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
-			g_free (tmp);
+			/* translators: this is the name of the file that gets
+			 * made up with the screenshot if the entire screen is
+			 * taken */
+			file_name = g_strdup_printf (_("Screenshot-%d.png"), i);
 		}
+		tmp = g_strdup_printf ("%s%c%s", expanded_path, G_DIR_SEPARATOR, file_name);
+		retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+		g_free (file_name);
+		g_free (tmp);
 		
 		i++;
 	} while (TRUE);
@@ -533,14 +541,10 @@ static gboolean
 gimme_file (char *filename)
 {
 	FILE *fp;
-	char *expanded_filename;
 
 	g_strstrip (filename);
-	expanded_filename = gnome_vfs_expand_initial_tilde (filename);
-
-	fp = nibble_on_file (expanded_filename);
+	fp = nibble_on_file (filename);
 	if (fp == NULL) {
-		g_free (expanded_filename);
 		return FALSE;
 	}
 
@@ -558,22 +562,20 @@ gimme_file (char *filename)
 		/* we'll we're gonna reopen this sucker */
 		fclose (fp);
 
-		if (rename (temporary_file, expanded_filename) == 0) {
-			chmod (expanded_filename, 0644);
-			g_free (expanded_filename);
+		if (rename (temporary_file, filename) == 0) {
+			chmod (filename, 0644);
 			return TRUE;
 		}
 		infd = open (temporary_file, O_RDONLY);
 		if (infd < 0) {
 			/* Eeeeek! this can never happen, but we're paranoid */
-			g_free (expanded_filename);
 			return FALSE;
 		}
 
-		outfd = open (expanded_filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
+		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
 		if (outfd < 0) {
 			GtkWidget *dialog;
-			char *utf8_name = g_filename_to_utf8 (expanded_filename, -1, NULL, NULL, NULL);
+			char *utf8_name = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
 			dialog = gtk_message_dialog_new
 				(GTK_WINDOW (toplevel),
 				 0 /* flags */,
@@ -584,7 +586,6 @@ gimme_file (char *filename)
 				   "Please check your permissions of "
 				   "the parent directory"), utf8_name);
 			g_free (utf8_name);
-			g_free (expanded_filename);
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			close (infd);
@@ -594,10 +595,10 @@ gimme_file (char *filename)
 		while ((bytes = read (infd, buf, sizeof (buf))) > 0) {
 			if (write (outfd, buf, bytes) != bytes) {
 				GtkWidget *dialog;
-				char *utf8_name = g_filename_to_utf8 (expanded_filename, -1, NULL, NULL, NULL);
+				char *utf8_name = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
 				close (infd);
 				close (outfd);
-				unlink (expanded_filename);
+				unlink (filename);
 				dialog = gtk_message_dialog_new
 					(GTK_WINDOW (toplevel),
 					 0 /* flags */,
@@ -606,7 +607,6 @@ gimme_file (char *filename)
 					 _("Not enough room to write file %s"),
 					 utf8_name);
 				g_free (utf8_name);
-				g_free (expanded_filename);
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				return FALSE;
@@ -616,12 +616,9 @@ gimme_file (char *filename)
 		close (infd);
 		close (outfd);
 
-		g_free (expanded_filename);
 		return TRUE;
 	} else {
-		gboolean result = save_to_file (fp, expanded_filename, TRUE);
-		g_free (expanded_filename);
-		return result;
+		return save_to_file (fp, filename, TRUE);
 	}
 }
 
@@ -639,17 +636,23 @@ on_ok_button_clicked (GtkWidget *widget,
 		GtkWidget  *entry;
 		GtkWidget  *fileentry;
 		const char *tmp;
+		char       *expanded_filename;
 
 		entry = glade_xml_get_widget (xml, "save_entry");
 		fileentry = glade_xml_get_widget (xml, "save_fileentry");
  		tmp = gtk_entry_get_text (GTK_ENTRY (entry));
  		file = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
- 		if (gimme_file (file)) {
+		g_strstrip (file);
+		expanded_filename = gnome_vfs_expand_initial_tilde (file);
+		g_free (file);
+
+ 		if (gimme_file (expanded_filename)) {
 			gnome_entry_prepend_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (fileentry))),
 						     TRUE, gtk_entry_get_text (GTK_ENTRY (entry)));
+
 			gtk_main_quit ();
 		}
-		g_free (file);
+		g_free (expanded_filename);
 		setup_busy (FALSE);
 
 		return;
@@ -1089,7 +1092,6 @@ main (int argc, char *argv[])
 	gboolean window = FALSE;
 	gint width, height; 
 	guint delay = 0;
-	gboolean normal_web_dir = TRUE;
 	gchar *utf8_name;
 	
 	struct poptOption opts[] = {
@@ -1204,8 +1206,7 @@ main (int argc, char *argv[])
 	if (!web_dir || !web_dir[0]) {
 		g_free (web_dir);
 		web_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S, "public_html", NULL);
-	} else
-		normal_web_dir = FALSE;
+	}
 
 	if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL))
 		desktop_dir = g_strdup (home_dir);
@@ -1213,7 +1214,7 @@ main (int argc, char *argv[])
 		desktop_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
 					   "Desktop", NULL);
 	g_object_unref (gconf_client);
-	
+
 	file = add_file_to_path (home_dir);
 	utf8_name = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
 	gtk_entry_set_text (GTK_ENTRY (save_entry), utf8_name);
@@ -1227,9 +1228,8 @@ main (int argc, char *argv[])
 		cbutton = glade_xml_get_widget (xml, "web_rbutton");
 		gtk_widget_show (cbutton);
 
-		if (!normal_web_dir)
-			str = g_strdup_printf ("Save screenshot to _web page (save in %s)",
-					       web_dir);
+		str = g_strdup_printf ("Save screenshot to _web page (save in %s)",
+				       web_dir);
 		gtk_button_set_label (GTK_BUTTON (cbutton), str);
 		g_free (str);
 	}
