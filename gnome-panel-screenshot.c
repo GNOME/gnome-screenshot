@@ -836,7 +836,7 @@ on_help_button_clicked (GtkWidget *widget, gpointer data)
 	GError *error = NULL;
 
         gnome_help_display_desktop (NULL, "user-guide", 
-				    "wgoeditmainmenu.xml", "goseditmainmenu-51", 
+				    "wgoseditmainmenu.xml", "goseditmainmenu-53", 
 				    &error);
 	
 	if (error) {
