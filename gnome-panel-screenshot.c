@@ -47,12 +47,6 @@
 #include "screenshot-dialog.h"
 #include "screenshot-xfer.h"
 
-/* How far down the window tree will we search when looking for top-level
- * windows? Some window managers doubly-reparent the client, so account
- * for that, and add some slop.
- */
-#define MAXIMUM_WM_REPARENTING_DEPTH 4
-
 static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
@@ -76,10 +70,10 @@ display_help (ScreenshotDialog *dialog)
 {
   GError *error = NULL;
 
-  gnome_help_display_desktop (NULL, "user-guide", 
-			      "user-guide.xml", "goseditmainmenu-53", 
+  gnome_help_display_desktop (NULL, "user-guide",
+			      "user-guide.xml", "goseditmainmenu-53",
 			      &error);
-	
+
   if (error)
     {
       GtkWidget *msg_dialog;
@@ -127,7 +121,7 @@ generate_filename_for_uri (const char *uri)
   retval = g_build_filename (uri, tmp, NULL);
   g_free (file_name);
   g_free (tmp);
-	
+
   do
     {
       GnomeVFSFileInfo *info;
@@ -179,10 +173,28 @@ generate_filename_for_uri (const char *uri)
   while (TRUE);
 }
 
+static void
+save_folder_to_gconf (ScreenshotDialog *dialog)
+{
+  GConfClient *gconf_client;
+  char *folder;
+
+  gconf_client = gconf_client_get_default ();
+
+  folder = screenshot_dialog_get_folder (dialog);
+  /* Error is NULL, as there's nothing we can do */
+  gconf_client_set_string (gconf_client,
+			   "/apps/gnome_screenshot/last_save_directory",
+			   folder, NULL);
+
+  g_object_unref (gconf_client);
+}
+
 static gboolean
 try_to_save (ScreenshotDialog *dialog,
 	     const char       *target)
 {
+  GnomeVFSResult result;
   GnomeVFSURI *source_uri;
   GnomeVFSURI *target_uri;
 
@@ -193,16 +205,22 @@ try_to_save (ScreenshotDialog *dialog,
   source_uri = gnome_vfs_uri_new (temporary_file);
   target_uri = gnome_vfs_uri_new (target);
 
-  screenshot_xfer_uri (source_uri,
-		       target_uri,
-		       screenshot_dialog_get_toplevel (dialog));
+  result = screenshot_xfer_uri (source_uri,
+				target_uri,
+				screenshot_dialog_get_toplevel (dialog));
 
   gnome_vfs_uri_unref (source_uri);
   gnome_vfs_uri_unref (target_uri);
 
   screenshot_dialog_set_busy (dialog, FALSE);
 
-  return TRUE;
+  if (result == GNOME_VFS_OK)
+    {
+      save_folder_to_gconf (dialog);
+      return TRUE;
+    }
+
+  return FALSE;
 }
 
 static void
@@ -303,7 +321,7 @@ prepare_screenshot (void)
   if (take_window_shot && drop_shadow)
     {
       GdkPixbuf *old = screenshot;
-    
+
       screenshot = screenshot_add_shadow (screenshot);
       g_object_unref (old);
     }
@@ -323,7 +341,7 @@ prepare_screenshot (void)
       exit (1);
     }
 
-  
+
   /* If uri isn't local, we should do this async before taking the sshot */
   initial_uri = generate_filename_for_uri (last_save_dir);
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
@@ -385,7 +403,7 @@ main (int argc, char *argv[])
   gboolean include_border_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
-  
+
   struct poptOption opts[] =
     {
       {"window", '\0', POPT_ARG_NONE, NULL, 0, N_("Grab a window instead of the entire screen"), NULL},
@@ -418,7 +436,7 @@ main (int argc, char *argv[])
   /* allow the command line to override options */
   if (window_arg)
     take_window_shot = TRUE;
-  
+
   if (include_border_arg)
     include_border = TRUE;
   if (border_effect_arg)
@@ -429,7 +447,7 @@ main (int argc, char *argv[])
 
   if (delay_arg > 0)
     {
-      g_timeout_add (delay_arg * 1000, 
+      g_timeout_add (delay_arg * 1000,
 		     prepare_screenshot_timeout,
 		     NULL);
     }
@@ -440,151 +458,3 @@ main (int argc, char *argv[])
 
   return 0;
 }
-
-
-
-#if 0
-/* nibble on the file a bit and return the file pointer
- * if it tastes good */
-static FILE *
-nibble_on_file (const char *file)
-{
-	GtkWidget *dialog;
-	FILE *fp;
-	mode_t old_mask;
-
-	if (file == NULL)
-		return NULL;
-
-	if (access (file, F_OK) == 0) {
-		int response;
-		char *utf8_name = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
-
-		dialog = gtk_message_dialog_new
-			(GTK_WINDOW (toplevel),
-			 0 /* flags */,
-			 GTK_MESSAGE_QUESTION,
-			 GTK_BUTTONS_YES_NO,
-			 _("File %s already exists. Overwrite?"),
-			 utf8_name);
-		g_free (utf8_name);
-
-		response = gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-
-		if (response != GTK_RESPONSE_YES)
-			return NULL;
-	}
-
-	old_mask = umask(022);
-
-	fp = fopen (file, "w");
-	if (fp == NULL) {
-		char *utf8_name = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
-		dialog = gtk_message_dialog_new
-			(GTK_WINDOW (toplevel),
-			 0 /* flags */,
-			 GTK_MESSAGE_ERROR,
-			 GTK_BUTTONS_OK,
-			 _("Unable to create the file:\n"
-			   "\"%s\"\n"
-			   "Please check your permissions of "
-			   "the parent directory"), utf8_name);
-		g_free (utf8_name);
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-
-		umask(old_mask);
-		return NULL;
-	}
-	umask(old_mask);
-	return fp;
-}
-
-static gboolean
-gimme_file (char *filename)
-{
-	FILE *fp;
-
-	g_strstrip (filename);
-	fp = nibble_on_file (filename);
-	if (fp == NULL) {
-		return FALSE;
-	}
-
-	/* if there is a temporary in the works
-	 * gimme it */
-	if (temporary_file != NULL)
-		;//ensure_temporary ();FIXME
-
-	/* if we actually got a temporary, move or copy it */
-	if (temporary_file != NULL) {
-		char buf[4096];
-		int bytes;
-		int infd, outfd;
-
-		/* we'll we're gonna reopen this sucker */
-		fclose (fp);
-
-		if (rename (temporary_file, filename) == 0) {
-			chmod (filename, 0644);
-			return TRUE;
-		}
-		infd = open (temporary_file, O_RDONLY);
-		if (infd < 0) {
-			/* Eeeeek! this can never happen, but we're paranoid */
-			return FALSE;
-		}
-
-		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
-		if (outfd < 0) {
-			GtkWidget *dialog;
-			char *utf8_name = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
-			dialog = gtk_message_dialog_new
-				(GTK_WINDOW (toplevel),
-				 0 /* flags */,
-				 GTK_MESSAGE_ERROR,
-				 GTK_BUTTONS_OK,
-				 _("Unable to create the file:\n"
-				   "\"%s\"\n"
-				   "Please check your permissions of "
-				   "the parent directory"), utf8_name);
-			g_free (utf8_name);
-			gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);
-			close (infd);
-			return FALSE;
-		}
-
-		while ((bytes = read (infd, buf, sizeof (buf))) > 0) {
-			if (write (outfd, buf, bytes) != bytes) {
-				GtkWidget *dialog;
-				char *utf8_name = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
-				close (infd);
-				close (outfd);
-				unlink (filename);
-				dialog = gtk_message_dialog_new
-					(GTK_WINDOW (toplevel),
-					 0 /* flags */,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_OK,
-					 _("Not enough room to write file %s"),
-					 utf8_name);
-				g_free (utf8_name);
-				gtk_dialog_run (GTK_DIALOG (dialog));
-				gtk_widget_destroy (dialog);
-				return FALSE;
-			}
-		}
-
-		close (infd);
-		close (outfd);
-
-		return TRUE;
-	} else {
-		//FIXME: return save_to_file (fp, filename, TRUE);
-	}
-	return FALSE;
-}
-#endif
-

@@ -8,11 +8,16 @@
 typedef struct
 {
   GnomeVFSAsyncHandle *handle;
-  gboolean canceled;
+  const char *operation_title;	/* "Copying files" */
+  const char *action_label;	/* "Files copied:" */
+  const char *progress_verb;	/* "Copying" */
+  const char *preparation_name;	/* "Preparing To Copy..." */
+  const char *cleanup_name;	/* "Finishing Move..." */
   GtkWidget *parent_dialog;
   GtkWidget *progress_dialog;
   gboolean delete_target;
   guint timeout_id;
+  gboolean canceled;
 } TransferInfo;
 
 static gboolean show_dialog_timeout (TransferInfo *transfer_info);
@@ -92,11 +97,19 @@ handle_transfer_ok (const GnomeVFSXferProgressInfo *progress_info,
     case GNOME_VFS_XFER_PHASE_INITIAL:
       /* Checking if destination can handle move/copy */
       return 1;
-    case GNOME_VFS_XFER_CHECKING_DESTINATION:
     case GNOME_VFS_XFER_PHASE_COLLECTING:
-    case GNOME_VFS_XFER_PHASE_READYTOGO:
+    case GNOME_VFS_XFER_CHECKING_DESTINATION:
       gnome_egg_xfer_dialog_set_operation_string (GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
 						  _("Preparing to copy"));
+      return 1;
+    case GNOME_VFS_XFER_PHASE_READYTOGO:
+      gnome_egg_xfer_dialog_set_operation_string
+	(transfer_info->progress_dialog,
+	 transfer_info->action_label);
+      gnome_egg_xfer_dialog_set_total
+	(transfer_info->progress_dialog,
+	 progress_info->files_total,
+	 progress_info->bytes_total);
       return 1;
     case GNOME_VFS_XFER_PHASE_OPENSOURCE:
     case GNOME_VFS_XFER_PHASE_OPENTARGET:
@@ -231,7 +244,7 @@ show_dialog_timeout (TransferInfo *transfer_info)
   return FALSE;
 }
 
-gboolean
+GnomeVFSResult
 screenshot_xfer_uri (GnomeVFSURI *source_uri,
 		     GnomeVFSURI *target_uri,
 		     GtkWidget   *parent)
@@ -247,6 +260,7 @@ screenshot_xfer_uri (GnomeVFSURI *source_uri,
   transfer_info = g_new0 (TransferInfo, 1);
   transfer_info->parent_dialog = parent;
   add_timeout (transfer_info);
+
   result = gnome_vfs_async_xfer (&transfer_info->handle,
 				 source_uri_list, target_uri_list,
 				 GNOME_VFS_XFER_DEFAULT,
@@ -262,6 +276,7 @@ screenshot_xfer_uri (GnomeVFSURI *source_uri,
 
   if (transfer_info->delete_target)
     ;/* try to delete the target, iff it started writing */
-  return TRUE;
+
+  return GNOME_VFS_OK;
 }
 

@@ -1,3 +1,16 @@
+Wed Nov 10 01:15:02 2004  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-panel-screenshot.c: Save the last directory visited to
+	gconf.  Remove dead code.  M-x clean-line-ends
+
+	* gnome-screenshot.glade: resizable->False; has_default->True;
+	redo layout.
+
+	* screenshot-dialog.c: Fixes to DnD.  Render insensitive when
+	saving.  Redo layout to use a GtkFileChooserButton.
+
+	* screenshot-xfer.c: Minor changes in prep for upcoming big merge.
+
 2004-11-06  Fernando Herrera  <fherrera@onirica.com>
 
 	* screenshot-dialog.c: (screenshot_dialog_new): use the new

@@ -4,7 +4,6 @@
 #include <gnome.h>
 
 
-
 static GtkTargetEntry drag_types[] =
 {
   { "image/png", 0, 0 },
@@ -18,6 +17,9 @@ struct ScreenshotDialog
   GdkPixbuf *screenshot;
   GdkPixbuf *preview_image;
   GtkWidget *save_widget;
+  GtkWidget *filename_entry;
+  gint drag_x;
+  gint drag_y;
 };
 
 static gboolean
@@ -39,11 +41,39 @@ on_preview_expose_event (GtkWidget      *drawing_area,
 			 gpointer        data)
 {
   ScreenshotDialog *dialog = data;
+  GdkPixbuf *pixbuf = NULL;
+  gboolean free_pixbuf = FALSE;
 
+  /* Stolen from GtkImage.  I really should just make the drawing area an
+   * image some day */
+  if (GTK_WIDGET_STATE (drawing_area) != GTK_STATE_NORMAL)
+    {
+      GtkIconSource *source;
+
+      source = gtk_icon_source_new ();
+      gtk_icon_source_set_pixbuf (source, dialog->preview_image);
+      gtk_icon_source_set_size (source, GTK_ICON_SIZE_SMALL_TOOLBAR);
+      gtk_icon_source_set_size_wildcarded (source, FALSE);
+                  
+      pixbuf = gtk_style_render_icon (drawing_area->style,
+				      source,
+				      gtk_widget_get_direction (drawing_area),
+				      GTK_WIDGET_STATE (drawing_area),
+				      (GtkIconSize) -1,
+				      drawing_area,
+				      "gtk-image");
+      free_pixbuf = TRUE;
+      gtk_icon_source_free (source);
+    }
+  else
+    {
+      pixbuf = g_object_ref (dialog->preview_image);
+    }
+  
   /* FIXME: Draw it insensitive in that case */
   gdk_draw_pixbuf (drawing_area->window,
 		   drawing_area->style->white_gc,
-		   dialog->preview_image,
+		   pixbuf,
 		   event->area.x,
 		   event->area.y,
 		   event->area.x,
@@ -52,6 +82,34 @@ on_preview_expose_event (GtkWidget      *drawing_area,
 		   event->area.height,
 		   GDK_RGB_DITHER_NORMAL,
 		   0, 0);
+
+  g_object_unref (pixbuf);
+}
+
+static gboolean
+on_preview_button_press_event (GtkWidget      *drawing_area,
+			       GdkEventButton *event,
+			       gpointer        data)
+{
+  ScreenshotDialog *dialog = data;
+
+  dialog->drag_x = (int) event->x;
+  dialog->drag_y = (int) event->y;
+
+  return FALSE;
+}
+
+static gboolean
+on_preview_button_release_event (GtkWidget      *drawing_area,
+				 GdkEventButton *event,
+				 gpointer        data)
+{
+  ScreenshotDialog *dialog = data;
+
+  dialog->drag_x = 0;
+  dialog->drag_y = 0;
+
+  return FALSE;
 }
 
 static void
@@ -93,11 +151,8 @@ drag_begin (GtkWidget        *widget,
 	    GdkDragContext   *context,
 	    ScreenshotDialog *dialog)
 {
-  static GdkPixmap *pixmap;
-  GdkBitmap *mask;
-
-  gdk_pixbuf_render_pixmap_and_mask (dialog->preview_image, &pixmap, &mask, 128);
-  gtk_drag_set_icon_pixmap (context, gdk_rgb_get_colormap (), pixmap, mask, 0, 0);
+  gtk_drag_set_icon_pixbuf (context, dialog->preview_image,
+			    dialog->drag_x, dialog->drag_y);
 }
 
 
@@ -152,17 +207,20 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   toplevel = glade_xml_get_widget (dialog->xml, "toplevel");
   aspect_frame = glade_xml_get_widget (dialog->xml, "aspect_frame");
   preview_darea = glade_xml_get_widget (dialog->xml, "preview_darea");
+  dialog->filename_entry = glade_xml_get_widget (dialog->xml, "filename_entry");
   file_chooser_frame = glade_xml_get_widget (dialog->xml, "file_chooser_frame");
 
-  dialog->save_widget = gtk_file_chooser_widget_new (GTK_FILE_CHOOSER_ACTION_SAVE);
+  dialog->save_widget = gtk_file_chooser_button_new ("Select a directory");
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog->save_widget), FALSE);
+  gtk_file_chooser_set_action (GTK_FILE_CHOOSER (dialog->save_widget),
+			       GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
-  gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog->save_widget), current_name);
+  gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
+
+  gtk_container_add (GTK_CONTAINER (file_chooser_frame), dialog->save_widget);
   g_free (current_folder);
   g_free (current_name);
-  gtk_container_add (GTK_CONTAINER (file_chooser_frame), dialog->save_widget);
 
-  gtk_window_set_default_size (GTK_WINDOW (toplevel), width * 2, -1);
   gtk_widget_set_size_request (preview_darea, width, height);
   gtk_aspect_frame_set (GTK_ASPECT_FRAME (aspect_frame), 0.0, 0.5,
 			gdk_pixbuf_get_width (screenshot)/
@@ -170,6 +228,8 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 			FALSE);
   g_signal_connect (toplevel, "key_press_event", G_CALLBACK (on_toplevel_key_press_event), dialog);
   g_signal_connect (preview_darea, "expose_event", G_CALLBACK (on_preview_expose_event), dialog);
+  g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
+  g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
   g_signal_connect (preview_darea, "configure_event", G_CALLBACK (on_preview_configure_event), dialog);
 
   if (take_window_shot)
@@ -211,9 +271,24 @@ screenshot_dialog_get_toplevel (ScreenshotDialog *dialog)
 char *
 screenshot_dialog_get_uri (ScreenshotDialog *dialog)
 {
-  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  gchar *folder;
+  const gchar *file_name;
+  gchar *uri;
+
+  folder = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
+
+  uri = g_build_filename (folder, file_name, NULL);
+  g_free (folder);
+
+  return uri;
 }
 
+char *
+screenshot_dialog_get_folder (ScreenshotDialog *dialog)
+{
+  return gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+}
 void
 screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 			    gboolean          busy)
