@@ -644,7 +644,7 @@ setup_busy (gboolean busy)
 		 NULL);
 
 	gtk_widget_set_sensitive (toplevel, ! busy);
-	gtk_widget_draw (toplevel, NULL);
+	gtk_widget_queue_draw (toplevel, NULL);
 
 	g_signal_handlers_unblock_by_func
 		(G_OBJECT (preview),
@@ -1023,8 +1023,12 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_init_with_popt_table ("gnome-panel-screenshot", VERSION,
-				    argc, argv, opts, 0, NULL);
+	gnome_program_init ("gnome-panel-screenshot", VERSION,
+			    LIBGNOMEUI_MODULE,
+			    argc, argv,
+			    GNOME_PARAM_POPT_TABLE, opts,
+			    GNOME_PROGRAM_STANDARD_PROPERTIES,
+			    NULL);
 	glade_gnome_init();
 	client = gnome_master_client ();
 	gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
@@ -1088,7 +1092,7 @@ main (int argc, char *argv[])
 	save_entry = glade_xml_get_widget (xml, "save_entry");
 
 	gtk_window_set_default_size (GTK_WINDOW (toplevel), width * 2, -1);
-	gtk_widget_set_usize (preview, width, height);
+	gtk_widget_set_size_request (preview, width, height);
 	gtk_aspect_frame_set (GTK_ASPECT_FRAME (frame), 0.5, 0.5,
 			      gdk_pixbuf_get_width (screenshot)/
 			      (gfloat) gdk_pixbuf_get_height (screenshot),
