@@ -19,7 +19,6 @@
 
 /* FIXME: currently undone things */
 #undef HAVE_PAPER_WIDTH
-#undef HAVE_GNOME_PRINT
 
 /* THERE ARE NO FEATURE REQUESTS ALLOWED */
 /* IF YOU WANT YOUR OWN FEATURE -- WRITE THE DAMN THING YOURSELF (-:*/
@@ -64,7 +63,9 @@ static char *home_dir;
 static pid_t temporary_pid = 0;
 static char *temporary_file = NULL;
 
-static GtkTargetEntry drag_types[] = { { "text/uri-list", 0, 0 } };
+static GtkTargetEntry drag_types[] =
+	{ { "x-special/gnome-icon-list", 0, 0 },
+	  { "text/uri-list", 0, 0 } };
 
 /* some prototypes for the glade autoconnecting sutff */
 void on_save_rbutton_toggled (GtkWidget *toggle, gpointer data);
@@ -825,6 +826,30 @@ drag_data_get (GtkWidget          *widget,
 	g_free (string);
 }
 
+static void
+drag_end (GtkWidget          *widget,
+	  GdkDragContext     *context,
+	  gpointer            data)
+{
+	/* Note: nautilus is a wanker and will happily do a move when
+	 * we explicitly told him that we just support copy, so in case
+	 * this IS a move, we relinquish the file to nautilus and hope
+	 * he chokes on it */
+	if (context->action == GDK_ACTION_MOVE) {
+		g_free (temporary_file);
+		temporary_file = NULL;
+	}
+}
+
+static void
+got_signal (int sig)
+{
+	cleanup_temporary ();
+	
+	/* whack thyself */
+	signal (sig, SIG_DFL);
+	kill (getpid (), sig);
+}
 
 /* main */
 int
@@ -925,11 +950,16 @@ main (int argc, char *argv[])
 	}
 
 	/* setup dnd */
+	/* just in case some wanker like nautilus took our image */
+	gtk_signal_connect (GTK_OBJECT (preview), "drag_begin",
+			    GTK_SIGNAL_FUNC (start_temporary), NULL);
 	gtk_signal_connect (GTK_OBJECT (preview), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
+	gtk_signal_connect (GTK_OBJECT (preview), "drag_end",
+			    GTK_SIGNAL_FUNC (drag_end), NULL);
 	gtk_drag_source_set (preview,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			     drag_types, 1,
+			     drag_types, 2,
 			     GDK_ACTION_COPY);
 
 	gtk_widget_grab_focus (save_entry);
@@ -940,7 +970,17 @@ main (int argc, char *argv[])
 
 	gtk_widget_show_now (toplevel);
 
+	/*
+	 * Start working on the temporary file in a fork, now this is
+	 * a little evil since we might save a file the user might cancel
+	 * and we'll jsut end up deleting it and/or killing the forked
+	 * process.  But it makes it snappy and makes dnd not hang.  Go
+	 * figure.
+	 */
 	start_temporary ();
+
+	signal (SIGINT, got_signal);
+	signal (SIGTERM, got_signal);
 
 	gtk_main ();
 
