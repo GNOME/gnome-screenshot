@@ -16,5 +16,17 @@
       </locale>
     </schema>
 
+    <schema>
+      <key>/schemas/apps/gnome_panel_screenshot/drop_shadow_window</key>
+      <applyto>/apps/gnome_panel_screenshot/drop_shadow_window</applyto>
+      <owner>gnome_panel_screenshot</owner>
+      <type>boolean</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Drop Shadow Window</short>
+        <long>Add a drop shadow to screen shots of individual windows</long>
+      </locale>
+    </schema>
+
   </schemalist>
 </gconfschemafile>
