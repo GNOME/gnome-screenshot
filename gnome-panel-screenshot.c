@@ -644,7 +644,7 @@ setup_busy (gboolean busy)
 		 NULL);
 
 	gtk_widget_set_sensitive (toplevel, ! busy);
-	gtk_widget_queue_draw (toplevel, NULL);
+	gtk_widget_queue_draw (toplevel);
 
 	g_signal_handlers_unblock_by_func
 		(G_OBJECT (preview),
