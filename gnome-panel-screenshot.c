@@ -37,6 +37,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <locale.h>
 #ifdef HAVE_GNOME_PRINT
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
@@ -51,7 +52,6 @@
 
 #ifdef HAVE_PAPER_WIDTH
 #include <stdio.h>
-#include <locale.h>
 #include <langinfo.h>
 #endif
 
