@@ -1071,7 +1071,10 @@ take_window_shot (void)
 	rectangles = XShapeGetRectangles (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (window),
 					  ShapeBounding, &rectangle_count, &rectangle_order);
 	if (rectangle_count > 0) {
-		screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
+		gboolean has_alpha = gdk_pixbuf_get_has_alpha (tmp);
+
+		screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
+					     width, height);
 		gdk_pixbuf_fill (screenshot, 0);
 	
 		for (i = 0; i < rectangle_count; i++) {
@@ -1101,7 +1104,6 @@ take_window_shot (void)
 
 			for (y = rec_y; y < rec_y + rec_height; y++) {
 				guchar *src_pixels, *dest_pixels;
-				gboolean has_alpha = gdk_pixbuf_get_has_alpha (tmp);
 				
 				src_pixels = gdk_pixbuf_get_pixels (tmp) +
 					y * gdk_pixbuf_get_rowstride(tmp) +
