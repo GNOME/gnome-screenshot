@@ -547,18 +547,23 @@ print_pixbuf (void)
 static gchar *
 add_file_to_path (const gchar *path)
 {
-	gchar *retval;
-	gint i = 1;
+	char *retval;
+	char *tmp;
+	int   i = 1;
 
 	if (class_name) {
 		/* translators: this is the file that gets made up with the screenshot if a specific window is taken */
-		retval = g_strdup_printf (_("%s%cScreenshot-%s.png"), path,
-					  G_DIR_SEPARATOR, class_name);
+		tmp = g_strdup_printf (_("%s%cScreenshot-%s.png"), path,
+				       G_DIR_SEPARATOR, class_name);
+		retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+		g_free (tmp);
 	}
 	else {
 		/* translators: this is the file that gets made up with the screenshot if the entire screen is taken */
-		retval = g_strdup_printf (_("%s%cScreenshot.png"), path,
-					  G_DIR_SEPARATOR);
+		tmp = g_strdup_printf (_("%s%cScreenshot.png"), path,
+				       G_DIR_SEPARATOR);
+		retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+		g_free (tmp);
 	}
 	
 	do {
@@ -572,13 +577,17 @@ add_file_to_path (const gchar *path)
 
 		if (class_name) {
 			/* translators: this is the file that gets made up with the screenshot if a specific window is taken */
-			retval = g_strdup_printf (_("%s%cScreenshot-%s-%d.png"), path,
-						  G_DIR_SEPARATOR, class_name, i);
+			tmp = g_strdup_printf (_("%s%cScreenshot-%s-%d.png"), path,
+					       G_DIR_SEPARATOR, class_name, i);
+			retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+			g_free (tmp);
 		}
 		else {
 			/* translators: this is the file that gets made up with the screenshot if the entire screen is taken */
-			retval = g_strdup_printf (_("%s%cScreenshot-%d.png"), path,
-						  G_DIR_SEPARATOR, i);
+			tmp = g_strdup_printf (_("%s%cScreenshot-%d.png"), path,
+					       G_DIR_SEPARATOR, i);
+			retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+			g_free (tmp);
 		}
 		
 		i++;
