@@ -34,6 +34,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
 #ifdef HAVE_GNOME_PRINT
@@ -43,7 +44,9 @@
 #include <libgnomeprint/gnome-print-dialog.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
 #endif
+#include <X11/Xutil.h>
 #include <X11/cursorfont.h>
+#include <X11/Xmu/WinUtil.h>
 #include <libart_lgpl/art_rgb_affine.h>
 
 #ifdef HAVE_PAPER_WIDTH
@@ -51,6 +54,12 @@
 #include <locale.h>
 #include <langinfo.h>
 #endif
+
+/* How far down the window tree will we search when looking for top-level
+ * windows? Some window managers doubly-reparent the client, so account
+ * for that, and add some slop.
+ */
+#define MAXIMUM_WM_REPARENTING_DEPTH 4
 
 static GladeXML *xml = NULL;
 static GtkWidget *toplevel = NULL;
@@ -60,6 +69,7 @@ static GdkPixbuf *preview_image = NULL;
 static char *web_dir;
 static char *desktop_dir;
 static char *home_dir;
+static char *class_name = NULL;
 static pid_t temporary_pid = 0;
 static char *temporary_file = NULL;
 
@@ -86,7 +96,6 @@ static gchar * add_file_to_path (const gchar *path);
 /* helper functions */
 /* This code is copied from gdk-pixbuf-HEAD.  It does no memory management and
  * is very hard-coded.  Please do not use it anywhere else. */
-
 static gboolean
 save_to_file_internal (FILE *fp, const char *file, char **error)
 {
@@ -302,7 +311,6 @@ start_temporary (void)
 
 	temporary_file = file;
 }
-
 
 static gboolean
 ensure_temporary (void)
@@ -532,9 +540,17 @@ add_file_to_path (const gchar *path)
 	gchar *retval;
 	gint i = 1;
 
-	/* translators: this the file that gets made up with the screenshot */
-	retval = g_strdup_printf (_("%s%cScreenshot.png"), path,
-				  G_DIR_SEPARATOR);
+	if (class_name) {
+		/* translators: this is the file that gets made up with the screenshot if a specific window is taken */
+		retval = g_strdup_printf (_("%s%cScreenshot-%s.png"), path,
+					  G_DIR_SEPARATOR, class_name);
+	}
+	else {
+		/* translators: this is the file that gets made up with the screenshot if the entire screen is taken */
+		retval = g_strdup_printf (_("%s%cScreenshot.png"), path,
+					  G_DIR_SEPARATOR);
+	}
+	
 	do {
 		struct stat s;
 
@@ -543,10 +559,18 @@ add_file_to_path (const gchar *path)
 			return retval;
 
 		g_free (retval);
-		/* translators: this the file that gets made up with the
-		 * screenshot */
-		retval = g_strdup_printf (_("%s%cScreenshot-%d.png"), path,
-					  G_DIR_SEPARATOR, i);
+
+		if (class_name) {
+			/* translators: this is the file that gets made up with the screenshot if a specific window is taken */
+			retval = g_strdup_printf (_("%s%cScreenshot-%s-%d.png"), path,
+						  G_DIR_SEPARATOR, class_name, i);
+		}
+		else {
+			/* translators: this is the file that gets made up with the screenshot if the entire screen is taken */
+			retval = g_strdup_printf (_("%s%cScreenshot-%d.png"), path,
+						  G_DIR_SEPARATOR, i);
+		}
+		
 		i++;
 	} while (TRUE);
 }
@@ -775,18 +799,85 @@ on_toplevel_key_press_event (GtkWidget *widget,
 	return TRUE;
 }
 
+/* This function is partly stolen from eel, it was written by John Harper */
+static Window
+find_toplevel_window (int depth, Window xid, gboolean *keep_going)
+{
+	static Atom wm_state = 0;
+
+	Atom actual_type;
+	int actual_format;
+	gulong nitems, bytes_after;
+	gulong *prop;
+
+	Window root, parent, *children, window;
+	int nchildren, i;
+
+	if (wm_state == 0) {
+		wm_state = XInternAtom (GDK_DISPLAY (), "WM_STATE", False);
+	}
+
+	/* Check if the window is a top-level client window.
+	 * Windows will have a WM_STATE property iff they're top-level.
+	 */
+	if (XGetWindowProperty (GDK_DISPLAY (), xid, wm_state, 0, 1,
+				False, AnyPropertyType, &actual_type,
+				&actual_format, &nitems, &bytes_after,
+				(guchar **) &prop) == Success
+	    && prop != NULL && actual_format == 32 && prop[0] == NormalState)
+	{
+		/* Found a top-level window */
+
+		if (prop != NULL) {
+			XFree (prop);
+		}
+
+		*keep_going = FALSE;
+
+		return xid;
+	}
+
+	/* Not found a top-level window yet, so keep recursing. */
+	if (depth < MAXIMUM_WM_REPARENTING_DEPTH) {
+		if (XQueryTree (GDK_DISPLAY (), xid, &root,
+				&parent, &children, &nchildren) != 0)
+		{
+			window = 0;
+
+			for (i = 0; *keep_going && i < nchildren; i++) {
+				window = find_toplevel_window (depth + 1,
+							       children[i],
+							       keep_going);
+			}
+
+			if (children != NULL) {
+				XFree (children);
+			}
+
+			if (! *keep_going) {
+				return window;
+			}
+		}
+	}
+
+	return 0;
+}
+
 static void
 take_window_shot (void)
 {
 	GdkWindow *window;
 	Display *disp;
-	Window w, root, child;
+	Window w, root, child, toplevel;
 	int unused;
 	guint mask;
 	gint x_orig, y_orig;
 	gint x = 0, y = 0;
 	gint width, height;
-
+	XClassHint class_hint;
+	gchar *result = NULL;
+	gboolean keep_going;
+	
 	disp = GDK_DISPLAY ();
 	w = GDK_ROOT_WINDOW ();
 
@@ -799,13 +890,27 @@ take_window_shot (void)
 
 	if (child == None)
                 window = GDK_ROOT_PARENT ();
-	else
+	else {
+
                 window = gdk_window_foreign_new (child);
+
+		keep_going = TRUE;
+
+		toplevel = find_toplevel_window (0, child, &keep_going);
+
+		/* Get the Class Hint */
+		if (toplevel && (XGetClassHint (GDK_DISPLAY (), toplevel, &class_hint) != 0)) {
+			if (class_hint.res_class)
+				result = class_hint.res_class;
+
+			XFree (class_hint.res_name);
+		}
+	}
 
 	gdk_window_get_size (window, &width, &height);
 	gdk_window_get_origin (window, &x_orig, &y_orig);
 
-
+	
 	if (x_orig < 0) {
 		x = - x_orig;
 		width = width + x_orig;
@@ -826,6 +931,8 @@ take_window_shot (void)
 						   NULL,
 						   x, y, 0, 0,
 						   width, height);
+
+	class_name = result;
 }
 
 static void
@@ -872,6 +979,23 @@ got_signal (int sig)
 	signal (sig, SIG_DFL);
 	kill (getpid (), sig);
 }
+
+static void
+drag_begin (GtkWidget *widget, GdkDragContext *context)
+{
+	static GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	gdk_pixbuf_render_pixmap_and_mask
+		(preview_image, &pixmap, &mask,
+		 128);
+	
+	gtk_drag_set_icon_pixmap
+		(context, gdk_rgb_get_cmap (), pixmap, mask, 0, 0);
+	
+	start_temporary ();
+}
+
 
 /* main */
 int
@@ -974,7 +1098,7 @@ main (int argc, char *argv[])
 	/* setup dnd */
 	/* just in case some wanker like nautilus took our image */
 	gtk_signal_connect (GTK_OBJECT (preview), "drag_begin",
-			    GTK_SIGNAL_FUNC (start_temporary), NULL);
+			    GTK_SIGNAL_FUNC (drag_begin), NULL);
 	gtk_signal_connect (GTK_OBJECT (preview), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
 	gtk_drag_source_set (preview,
