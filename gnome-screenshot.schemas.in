@@ -19,7 +19,7 @@
       <key>/schemas/apps/gnome-screenshot/include_border</key>
       <applyto>/apps/gnome-screenshot/include_border</applyto>
       <owner>gnome-screenshot</owner>
-      <type>boolean</type>
+      <type>bool</type>
       <default>true</default>
       <locale name="C">
         <short>Include Border</short>
