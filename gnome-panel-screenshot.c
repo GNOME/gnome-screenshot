@@ -1018,8 +1018,8 @@ main (int argc, char *argv[])
 	};
 
 	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-	textdomain (PACKAGE);
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	textdomain (GETTEXT_PACKAGE);
 
 	gnome_init_with_popt_table ("gnome-panel-screenshot", VERSION,
 				    argc, argv, opts, 0, NULL);
