@@ -528,7 +528,7 @@ print_pixbuf (void)
 		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), FALSE);
 		cursor = gdk_cursor_new (GDK_WATCH);
 		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, cursor);
-		g_object_unref (G_OBJECT (cursor));
+		gdk_cursor_unref (cursor);
 
 		gtk_widget_show (GTK_WIDGET (gpmp));
 		gtk_window_set_modal (GTK_WINDOW (gpmp), TRUE);
@@ -633,7 +633,7 @@ setup_busy (gboolean busy)
 		/* Change cursor to busy */
 		cursor = gdk_cursor_new (GDK_WATCH);
 		gdk_window_set_cursor (toplevel->window, cursor);
-		g_object_unref (G_OBJECT (cursor));
+		gdk_cursor_unref (cursor);
 	} else {
 		gdk_window_set_cursor (toplevel->window, NULL);
 	}
