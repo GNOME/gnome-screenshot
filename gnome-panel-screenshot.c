@@ -24,7 +24,7 @@
 /* IF YOU WANT YOUR OWN FEATURE -- WRITE THE DAMN THING YOURSELF (-:*/
 
 #include <config.h>
-#include <libgnomeui/libgnomeui.h>
+#include <gnome.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkx.h>
@@ -1034,17 +1034,17 @@ main (int argc, char *argv[])
 	else
 		take_screen_shot ();
 
-	if (g_file_test ("gnome-panel-screenshot.glade", G_FILE_TEST_EXISTS)) {
-		xml = glade_xml_new ("gnome-panel-screenshot.glade", NULL, NULL);
+	if (g_file_test ("gnome-panel-screenshot.glade2", G_FILE_TEST_EXISTS)) {
+		xml = glade_xml_new ("gnome-panel-screenshot.glade2", NULL, NULL);
 	}
 	if (xml == NULL) {
-		xml = glade_xml_new (GLADEDIR "/gnome-panel-screenshot.glade",
+		xml = glade_xml_new (GLADEDIR "/gnome-panel-screenshot.glade2",
 				     NULL, NULL);
 	}
 	if (xml == NULL) {
 		GtkWidget *dialog;
 		dialog = gtk_message_dialog_new
-			(NULL /* parent */
+			(NULL /* parent */,
 			 0 /* flags */,
 			 GTK_MESSAGE_ERROR,
 			 GTK_BUTTONS_OK,
@@ -1066,7 +1066,7 @@ main (int argc, char *argv[])
 	if (screenshot == NULL) {
 		GtkWidget *dialog;
 		dialog = gtk_message_dialog_new
-			(NULL /* parent */
+			(NULL /* parent */,
 			 0 /* flags */,
 			 GTK_MESSAGE_ERROR,
 			 GTK_BUTTONS_OK,
