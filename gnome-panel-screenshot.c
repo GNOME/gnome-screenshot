@@ -49,7 +49,11 @@
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
 #include <X11/Xmu/WinUtil.h>
+
+#ifdef HAVE_X11_EXTENSIONS_SHAPE_H
 #include <X11/extensions/shape.h>
+#endif
+
 #include <libart_lgpl/art_rgb_affine.h>
 
 #ifdef HAVE_PAPER_WIDTH
@@ -945,15 +949,16 @@ take_window_shot (void)
 	XClassHint class_hint;
 	gchar *result = NULL;
 	gboolean keep_going;
-	int i;
-	guchar *src_pixels, *dest_pixels;
-	GdkPixbuf *tmp;
+
+#ifdef HAVE_X11_EXTENSIONS_SHAPE_H
 	XRectangle *rectangles;
-	int rectangle_count, rectangle_order;
+	GdkPixbuf *tmp;
+	int rectangle_count, rectangle_order, i;
+#endif
+
 	
 	disp = GDK_DISPLAY ();
 	w = GDK_ROOT_WINDOW ();
-	
 	
 	XQueryPointer (disp, w, &root, &child,
 		       &unused,
@@ -1002,10 +1007,11 @@ take_window_shot (void)
 		height = gdk_screen_height () - y_orig;
 
 
-	tmp = gdk_pixbuf_get_from_drawable (NULL, window,
-						   NULL,
-						   x, y, 0, 0,
-						   width, height);
+#ifdef HAVE_X11_EXTENSIONS_SHAPE_H
+	tmp = gdk_pixbuf_get_from_drawable (NULL, window, NULL,
+					    x, y, 0, 0,
+					    width, height);
+
 	screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
 	gdk_pixbuf_fill (screenshot, 0);
 	rectangles = XShapeGetRectangles (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (window),
@@ -1013,6 +1019,8 @@ take_window_shot (void)
 
 	for (i = 0; i < rectangle_count; i++) {
 		for (y = rectangles[i].y; y < rectangles[i].y + rectangles[i].height; y++) {
+			guchar *src_pixels, *dest_pixels;
+
 			src_pixels = gdk_pixbuf_get_pixels (tmp) +
 				y * gdk_pixbuf_get_rowstride(tmp) +
 				rectangles[i].x * (gdk_pixbuf_get_has_alpha (tmp) ? 4 : 3);
@@ -1029,6 +1037,12 @@ take_window_shot (void)
 		}
 	}
 	g_object_unref (tmp);
+#else /* HAVE_X11_EXTENSIONS_SHAPE_H */
+	screenshot = gdk_pixbuf_get_from_drawable (NULL, window, NULL,
+						   x, y, 0, 0,
+						   width, height);
+#endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
+
 	class_name = result;
 }
 
