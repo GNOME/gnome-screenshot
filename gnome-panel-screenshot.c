@@ -789,9 +789,10 @@ on_ok_button_clicked (GtkWidget *widget,
 
 	button = glade_xml_get_widget (xml, "save_rbutton");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
-		GtkWidget *entry;
-		GtkWidget *fileentry;
-		gchar *tmp;
+		GtkWidget  *entry;
+		GtkWidget  *fileentry;
+		const char *tmp;
+
 		entry = glade_xml_get_widget (xml, "save_entry");
 		fileentry = glade_xml_get_widget (xml, "save_fileentry");
  		tmp = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -803,6 +804,7 @@ on_ok_button_clicked (GtkWidget *widget,
 		}
 		g_free (file);
 		setup_busy (FALSE);
+
 		return;
 	}
 
