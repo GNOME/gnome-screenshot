@@ -385,7 +385,7 @@ main (int argc, char *argv[])
   gboolean include_border_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
-	
+  
   struct poptOption opts[] =
     {
       {"window", '\0', POPT_ARG_NONE, NULL, 0, N_("Grab a window instead of the entire screen"), NULL},

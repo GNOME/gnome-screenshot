@@ -1,3 +1,7 @@
+Wed Nov  3 11:53:02 2004  Jonathan Blandford  <jrb@redhat.com>
+
+	* screenshot-xfer.[ch]: remove bogus old dialog stuff.
+
 Wed Nov  3 11:29:28 2004  Jonathan Blandford  <jrb@redhat.com>
 
 	* New ChangeLog to go along with module move.

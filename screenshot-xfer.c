@@ -1,6 +1,9 @@
 #include "screenshot-xfer.h"
+#include "gnome-egg-xfer-dialog.h"
+
 #include <gnome.h>
 #include <time.h>
+
 
 typedef struct
 {
@@ -11,170 +14,6 @@ typedef struct
   gboolean delete_target;
   guint timeout_id;
 } TransferInfo;
-
-G_DEFINE_TYPE (EggVfsXferDialog, egg_vfs_xfer_dialog, GTK_TYPE_DIALOG);
-
-static void
-egg_vfs_xfer_dialog_init (EggVfsXferDialog *xfer_dialog)
-{
-  GtkWidget *vbox;
-  GtkWidget *button;
-  GtkWidget *table;
-  GtkWidget *align;
-  GtkWidget *progress_vbox;
-  gchar *title;
-  gchar *message;
-
-  /* Set up the initial dialog */
-  gtk_container_set_border_width (GTK_CONTAINER (xfer_dialog), 6);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (xfer_dialog)->vbox), 24);
-  vbox = gtk_vbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (xfer_dialog)->vbox), vbox, TRUE, TRUE, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
-  gtk_dialog_set_has_separator (GTK_DIALOG (xfer_dialog), FALSE);
-
-  /* Set up the title */
-  gtk_window_set_title (GTK_WINDOW (xfer_dialog), _("Saving screenshot"));
-  title = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", _("Saving screenshot"));
-  xfer_dialog->title_label = gtk_label_new (title);
-  gtk_label_set_use_markup (GTK_LABEL (xfer_dialog->title_label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (xfer_dialog->title_label), 0.0, 0.5);
-  gtk_box_pack_start (GTK_BOX (vbox), xfer_dialog->title_label, FALSE, FALSE, 0);
-
-  /* Set up the From: and To: labels */
-  align = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
-  table = gtk_table_new (2, 2, FALSE);
-  gtk_table_set_row_spacings (GTK_TABLE (table), 3);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 3);
-  gtk_container_add (GTK_CONTAINER (align), table);
-  gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
-
-  message = g_strdup_printf ("<b>%s</b>", _("From:"));
-  xfer_dialog->from_label = gtk_label_new (message);
-  gtk_misc_set_alignment (GTK_MISC (xfer_dialog->from_label), 0.0, 0.5);
-  gtk_label_set_use_markup (GTK_LABEL (xfer_dialog->from_label), TRUE);
-  gtk_table_attach (GTK_TABLE (table), xfer_dialog->from_label,
-		    0, 1, 0, 1,
-		    GTK_FILL,
-		    GTK_FILL,
-		    0, 0);
-
-  xfer_dialog->source_label = gtk_label_new (NULL);
-  gtk_misc_set_alignment (GTK_MISC (xfer_dialog->source_label), 0.0, 0.0);
-  gtk_label_set_ellipsize (GTK_LABEL (xfer_dialog->source_label), PANGO_ELLIPSIZE_START);
-  gtk_table_attach (GTK_TABLE (table), xfer_dialog->source_label,
-		    1, 2, 0, 1,
-		    GTK_EXPAND | GTK_FILL,
-		    GTK_EXPAND | GTK_FILL,
-		    0, 0);
-  
-  message = g_strdup_printf ("<b>%s</b>", _("To:"));
-  xfer_dialog->to_label = gtk_label_new (message);
-  gtk_misc_set_alignment (GTK_MISC (xfer_dialog->to_label), 0.0, 0.5);
-  gtk_label_set_use_markup (GTK_LABEL (xfer_dialog->to_label), TRUE);
-  gtk_table_attach (GTK_TABLE (table), xfer_dialog->to_label,
-		    0, 1, 1, 2,
-		    GTK_FILL,
-		    GTK_FILL,
-		    0, 0);
-
-  xfer_dialog->target_label = gtk_label_new (NULL);
-  gtk_misc_set_alignment (GTK_MISC (xfer_dialog->target_label), 0.0, 0.5);
-  gtk_label_set_ellipsize (GTK_LABEL (xfer_dialog->target_label), PANGO_ELLIPSIZE_START);
-  gtk_table_attach (GTK_TABLE (table), xfer_dialog->target_label,
-		    1, 2, 1, 2,
-		    GTK_EXPAND | GTK_FILL,
-		    GTK_EXPAND | GTK_FILL,
-		    0, 0);
-
-  /* Progress Bar */
-  progress_vbox = gtk_vbox_new (FALSE, 3);
-  xfer_dialog->progress_bar = gtk_progress_bar_new ();
-  gtk_widget_set_size_request (xfer_dialog->progress_bar, 350, -1);
-  xfer_dialog->status_label = gtk_label_new (" ");
-  gtk_box_pack_start (GTK_BOX (progress_vbox), xfer_dialog->progress_bar,
-		      FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (progress_vbox), xfer_dialog->status_label,
-		      FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), progress_vbox,
-		      FALSE, FALSE, 0);
-  button = gtk_dialog_add_button (GTK_DIALOG (xfer_dialog),
-				  GTK_STOCK_CANCEL,
-				  GTK_RESPONSE_CANCEL);
-  button = gtk_dialog_add_button (GTK_DIALOG (xfer_dialog),
-				  _("_Pause"),
-				  GTK_RESPONSE_OK);
-
-  gtk_widget_show_all (vbox);
-}
-
-
-void
-egg_vfs_xfer_dialog_set_title_string (EggVfsXferDialog *xfer_dialog,
-				      const char       *title)
-{
-  gchar *markup_text = NULL;
-
-  g_return_if_fail (EGG_IS_VFS_XFER_DIALOG (xfer_dialog));
-
-  if (title)
-    markup_text = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>",
-				   title);
-  gtk_label_set_markup (GTK_LABEL (xfer_dialog->title_label),
-			markup_text);
-  g_free (markup_text);
-}
-
-void
-egg_vfs_xfer_dialog_set_status_string (EggVfsXferDialog *xfer_dialog,
-				       const char       *status)
-{
-  gchar *markup_text = NULL;
-
-  g_return_if_fail (EGG_IS_VFS_XFER_DIALOG (xfer_dialog));
-
-  if (status)
-    markup_text = g_strdup_printf ("<span style=\"italic\">%s</span>",
-				   status);
-  gtk_label_set_markup (GTK_LABEL (xfer_dialog->status_label),
-			markup_text);
-  g_free (markup_text);
-}
-
-static void
-egg_vfs_xfer_dialog_class_init (EggVfsXferDialogClass *klass)
-{
-}
-
-GtkWidget *
-egg_vfs_xfer_dialog_new (const char       *title,
-			 const char       *operation_string,
-			 const char       *from_prefix,
-			 const char       *to_prefix,
-			 gulong            files_total,
-			 GnomeVFSFileSize  bytes_total,
-			 gboolean          use_timeout)
-{
-  GtkWidget *dialog;
-
-  dialog = g_object_new (EGG_TYPE_VFS_XFER_DIALOG,
-			 "title", title,
-			 NULL);
-
-  return dialog;
-}
-
-void
-egg_vfs_xfer_dialog_update_sizes      (EggVfsXferDialog *dialog,
-				       GnomeVFSFileSize  bytes_done_in_file,
-				       GnomeVFSFileSize  bytes_done)
-{
-  g_return_if_fail (EGG_IS_VFS_XFER_DIALOG (dialog));
-
-}
-
-/* VFS code below here.  I'm planning to split these two sections into seperate
- * files at some point. */
 
 static gboolean show_dialog_timeout (TransferInfo *transfer_info);
 
@@ -256,8 +95,8 @@ handle_transfer_ok (const GnomeVFSXferProgressInfo *progress_info,
     case GNOME_VFS_XFER_CHECKING_DESTINATION:
     case GNOME_VFS_XFER_PHASE_COLLECTING:
     case GNOME_VFS_XFER_PHASE_READYTOGO:
-      egg_vfs_xfer_dialog_set_status_string (EGG_VFS_XFER_DIALOG (transfer_info->progress_dialog),
-					     _("Preparing to copy"));
+      gnome_egg_xfer_dialog_set_operation_string (GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
+						  _("Preparing to copy"));
       return 1;
     case GNOME_VFS_XFER_PHASE_OPENSOURCE:
     case GNOME_VFS_XFER_PHASE_OPENTARGET:
@@ -269,8 +108,8 @@ handle_transfer_ok (const GnomeVFSXferProgressInfo *progress_info,
 	}
       else
 	{
-	  egg_vfs_xfer_dialog_update_sizes
-	    (EGG_VFS_XFER_DIALOG (transfer_info->progress_dialog),
+	  gnome_egg_xfer_dialog_update_sizes
+	    (GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
 	     MIN (progress_info->bytes_copied, 
 		  progress_info->bytes_total),
 	     MIN (progress_info->total_bytes_copied,
@@ -279,8 +118,6 @@ handle_transfer_ok (const GnomeVFSXferProgressInfo *progress_info,
       return 1;
     case GNOME_VFS_XFER_PHASE_FILECOMPLETED:
     case GNOME_VFS_XFER_PHASE_CLEANUP:
-      egg_vfs_xfer_dialog_set_status_string (EGG_VFS_XFER_DIALOG (transfer_info->progress_dialog),
-					     _("Done copying file"));
       return 1;
       /* Phases we don't expect to see */
     case GNOME_VFS_XFER_PHASE_COMPLETED:
@@ -387,7 +224,7 @@ static gboolean
 show_dialog_timeout (TransferInfo *transfer_info)
 {
   transfer_info->progress_dialog =
-    egg_vfs_xfer_dialog_new (NULL, NULL, NULL, NULL, 0, 0, FALSE);
+	  gnome_egg_xfer_dialog_new (NULL, NULL, NULL, NULL, 0, 0, FALSE);
   gtk_widget_show (transfer_info->progress_dialog);
   transfer_info->timeout_id = 0;
 
