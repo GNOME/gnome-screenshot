@@ -1057,7 +1057,7 @@ main (int argc, char *argv[])
 			 GTK_MESSAGE_ERROR,
 			 GTK_BUTTONS_OK,
 			 _("Glade file for the screenshot program is missing.\n"
-			   "Please check your installation of gnome-core"));
+			   "Please check your installation of gnome-panel"));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		exit (1);
 	}
