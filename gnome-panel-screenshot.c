@@ -92,8 +92,6 @@ int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
 
 /* some local prototypes */
 static gchar * add_file_to_path (const gchar *path);
-gint shot_delay_callback (gpointer data);
-
 
 /* helper functions */
 /* This code is copied from gdk-pixbuf-HEAD.  It does no memory management and
@@ -1005,17 +1003,6 @@ drag_begin (GtkWidget *widget, GdkDragContext *context)
 	start_temporary ();
 }
 
-gint
-shot_delay_callback (gpointer data)
-{
-	gint *seconds_left = (gint *) data;
-
-	(*seconds_left)--;
-	if (!*seconds_left)
-		gtk_main_quit ();
-	return *seconds_left;
-}
-
 /* main */
 int
 main (int argc, char *argv[])
@@ -1052,8 +1039,7 @@ main (int argc, char *argv[])
 	gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
 	
 	if (delay > 0) {
-		gtk_timeout_add (1000, shot_delay_callback, &delay);
-		gtk_main ();
+		sleep (delay);	
 	}
 	
 	if (window)
