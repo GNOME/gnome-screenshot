@@ -32,6 +32,8 @@
 #include <png.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
+#include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -56,9 +58,13 @@ static GtkWidget *toplevel = NULL;
 static GtkWidget *preview = NULL;
 static GdkPixbuf *screenshot = NULL;
 static GdkPixbuf *preview_image = NULL;
-static gchar *web_dir;
-static gchar *desktop_dir;
-static gchar *home_dir;
+static char *web_dir;
+static char *desktop_dir;
+static char *home_dir;
+static pid_t temporary_pid = 0;
+static char *temporary_file = NULL;
+
+static GtkTargetEntry drag_types[] = { { "text/uri-list", 0, 0 } };
 
 /* some prototypes for the glade autoconnecting sutff */
 void on_save_rbutton_toggled (GtkWidget *toggle, gpointer data);
@@ -78,9 +84,8 @@ int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
  * is very hard-coded.  Please do not use it anywhere else. */
 
 static gboolean
-save_to_file (gchar *file)
+save_to_file_internal (FILE *fp, const char *file, char **error)
 {
-	FILE *f = NULL;
 	png_structp png_ptr;
 	png_infop info_ptr;
 	guchar *ptr;
@@ -91,17 +96,8 @@ save_to_file (gchar *file)
 	int w, h, rowstride;
 	int has_alpha;
 	int bpc;
-	gchar *error = NULL;
-	GtkWidget *dialog;
 
-	f = fopen (file, "w");
-	if (f == NULL) {
-		error = g_strdup_printf (_("Unable to create the file:\n"
-					   "\"%s\"\n"
-					   "Please check your permissions of "
-					   "the parent directory"), file);
-		goto handle_error;
-	}
+	*error = NULL;
 
 	bpc = gdk_pixbuf_get_bits_per_sample (screenshot);
 	w = gdk_pixbuf_get_width (screenshot);
@@ -114,28 +110,28 @@ save_to_file (gchar *file)
 					   NULL, NULL, NULL);
 
 	if (png_ptr == NULL) {
-		error = _("Unable to initialize png structure.\n"
-			  "You probably have a bad version of libpng "
-			  "on your system");
-		goto handle_error;
+		*error = _("Unable to initialize png structure.\n"
+			   "You probably have a bad version of libpng "
+			   "on your system");
+		return FALSE;
 	}
 
 	info_ptr = png_create_info_struct (png_ptr);
 	if (info_ptr == NULL) {
-		error = _("Unable to create png info.\n"
-			  "You probably have a bad version of libpng "
-			  "on your system");
-		goto handle_error;
+		*error = _("Unable to create png info.\n"
+			   "You probably have a bad version of libpng "
+			   "on your system");
+		return FALSE;
 	}
 
 	if (setjmp (png_ptr->jmpbuf)) {
-		error = _("Unable to set png info.\n"
-			  "You probably have a bad version of libpng "
-			  "on your system");
-		goto handle_error;
+		*error = _("Unable to set png info.\n"
+			   "You probably have a bad version of libpng "
+			   "on your system");
+		return FALSE;
 	}
 
-	png_init_io (png_ptr, f);
+	png_init_io (png_ptr, fp);
 
 	png_set_IHDR (png_ptr, info_ptr, w, h, bpc,
 		      PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
@@ -143,11 +139,9 @@ save_to_file (gchar *file)
 	data = malloc (w * 3 * sizeof (char));
 
 	if (data == NULL) {
-		fclose (f);
-		unlink (file);
-		error = _("Insufficient memory to save the screenshot.\n"
-			  "Please free up some resources and try again.");
-		goto handle_error;
+		*error = _("Insufficient memory to save the screenshot.\n"
+			   "Please free up some resources and try again.");
+		return FALSE;
 	}
 
 	sig_bit.red = bpc;
@@ -175,13 +169,165 @@ save_to_file (gchar *file)
        png_write_end (png_ptr, info_ptr);
        png_destroy_write_struct (&png_ptr, (png_infopp) NULL);
 
-       fclose (f);
        return TRUE;
+}
 
- handle_error:
-       dialog = gnome_error_dialog_parented (error, GTK_WINDOW (toplevel));
-       gnome_dialog_run (GNOME_DIALOG (dialog));
-       return FALSE;
+/* nibble on the file a bit and return the file pointer
+ * if it tastes good */
+static FILE *
+nibble_on_file (const char *file)
+{
+	char *error;
+	GtkWidget *dialog;
+	FILE *fp;
+
+	if (access (file, F_OK) == 0) {
+		error = g_strdup_printf
+			(_("File %s already exists. Overwrite?"),
+			 file);
+		dialog = gnome_message_box_new
+			(error, GNOME_MESSAGE_BOX_QUESTION,
+			 GNOME_STOCK_BUTTON_YES, 
+			 GNOME_STOCK_BUTTON_NO, NULL);
+		gnome_dialog_set_parent (GNOME_DIALOG (dialog),
+					 GTK_WINDOW (toplevel));
+		g_free (error);
+		if (gnome_dialog_run (GNOME_DIALOG (dialog)) != 0)
+			return NULL;
+	}
+	fp = fopen (file, "w");
+	if (fp == NULL) {
+		error = g_strdup_printf (_("Unable to create the file:\n"
+					   "\"%s\"\n"
+					   "Please check your permissions of "
+					   "the parent directory"), file);
+		dialog = gnome_error_dialog_parented (error,
+						      GTK_WINDOW (toplevel));
+		gnome_dialog_run (GNOME_DIALOG (dialog));
+		return NULL;
+	}
+	return fp;
+}
+
+static gboolean
+save_to_file (FILE *fp, const gchar *file, gboolean gui_errors)
+{
+	GtkWidget *dialog;
+	char *error;
+
+	if (fp == NULL) {
+		fp = nibble_on_file (file);
+	}
+
+	if ( ! save_to_file_internal (fp, file, &error)) {
+		if (gui_errors) {
+			dialog = gnome_error_dialog_parented
+				(error, GTK_WINDOW (toplevel));
+			gnome_dialog_run (GNOME_DIALOG (dialog));
+		}
+		fclose (fp);
+		unlink (file);
+		return FALSE;
+	} else {
+		fclose (fp);
+		return TRUE;
+	}
+}
+
+static void
+start_temporary (void)
+{
+	char *file = NULL;
+	int fd = 0;
+
+	if (temporary_file != NULL)
+		return;
+
+	do {
+		g_free (file);
+		file = g_strdup_printf ("/tmp/screenshot-%d.png", rand ()>>3);
+		fd = open (file, O_CREAT|O_EXCL|O_WRONLY, 0644);
+	} while (fd < 0);
+
+	temporary_pid = fork ();
+
+	if (temporary_pid == 0) {
+		FILE *fp = fdopen (fd, "w");
+		if (fp == NULL ||
+		    ! save_to_file (fp, file, FALSE)) {
+			_exit (1);
+		} else {
+			_exit (0);
+		}
+	}
+
+	/* close the temp file in the parent */
+	if (temporary_pid > 0)
+		close (fd);
+
+	/* can't fork? don't dispair, do synchroniously */
+	if (temporary_pid < 0) {
+		FILE *fp = fdopen (fd, "w");
+		if (fp == NULL ||
+		    ! save_to_file (fp, file, TRUE)) {
+			g_free (file);
+			temporary_pid = 0;
+			return;
+		}
+		temporary_pid = 0;
+	}
+
+	temporary_file = file;
+}
+
+
+static gboolean
+ensure_temporary (void)
+{
+	int status;
+
+	start_temporary ();
+
+	if (temporary_file == NULL)
+		return FALSE;
+
+	if (temporary_pid == 0)
+		return TRUE;
+
+	/* ok, gotta wait */
+	waitpid (temporary_pid, &status, 0);
+
+	temporary_pid = 0;
+
+	if (WIFEXITED (status) &&
+	    WEXITSTATUS (status) == 0) {
+		return TRUE;
+	} else {
+		g_free (temporary_file);
+		temporary_file = NULL;
+		temporary_pid = 0;
+		return FALSE;
+	}
+}
+
+static void
+cleanup_temporary (void)
+{
+	char *file = temporary_file;
+	pid_t pid = temporary_pid;
+
+	temporary_file = NULL;
+	temporary_pid = 0;
+
+	if (pid > 0) {
+		if (kill (pid, SIGTERM) == 0)
+			waitpid (pid, NULL, 0);
+	}
+
+	if (file != NULL)
+		unlink (file);
+
+	g_free (file);
 }
 
 #ifdef HAVE_GNOME_PRINT
@@ -443,6 +589,83 @@ setup_busy (gboolean busy)
 
 }
 
+static gboolean
+gimme_file (const char *filename)
+{
+	FILE *fp;
+
+	fp = nibble_on_file (filename);
+	if (fp == NULL)
+		return FALSE;
+
+	/* if there is a temporary in the works
+	 * gimme it */
+	if (temporary_file != NULL)
+		ensure_temporary ();
+
+	/* if we actually got a temporary, move or copy it */
+	if (temporary_file != NULL) {
+		char buf[4096];
+		int bytes;
+		int infd, outfd;
+
+		/* we'll we're gonna reopen this sucker */
+		fclose (fp);
+
+		if (rename (temporary_file, filename) == 0) {
+			g_free (temporary_file);
+			temporary_file = NULL;
+			return TRUE;
+		}
+		infd = open (temporary_file, O_RDONLY);
+		if (infd < 0) {
+			/* Eeeeek! this can never happen, but we're paranoid */
+			return FALSE;
+		}
+
+		outfd = open (filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
+		if (outfd < 0) {
+			char *error;
+			GtkWidget *dialog;
+			error = g_strdup_printf
+				(_("Unable to create the file:\n"
+				   "\"%s\"\n"
+				   "Please check your permissions of "
+				   "the parent directory"), filename);
+			dialog = gnome_error_dialog_parented
+				(error, GTK_WINDOW (toplevel));
+			g_free (error);
+			close (infd);
+			return FALSE;
+		}
+
+		while ((bytes = read (infd, buf, sizeof (buf))) > 0) {
+			if (write (outfd, buf, bytes) != bytes) {
+				char *error;
+				GtkWidget *dialog;
+				close (infd);
+				close (outfd);
+				unlink (filename);
+				error = g_strdup_printf
+					(_("Not enough room to write file %s"),
+					 filename);
+				dialog = gnome_error_dialog_parented
+					(error, GTK_WINDOW (toplevel));
+				g_free (error);
+				gnome_dialog_run (GNOME_DIALOG (dialog));
+				return FALSE;
+			}
+		}
+
+		close (infd);
+		close (outfd);
+
+		return TRUE;
+	} else {
+		return save_to_file (fp, filename, TRUE);
+	}
+}
+
 void
 on_ok_button_clicked (GtkWidget *widget,
 		      gpointer   data)
@@ -456,7 +679,7 @@ on_ok_button_clicked (GtkWidget *widget,
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		GtkWidget *entry;
 		entry = glade_xml_get_widget (xml, "save_entry");
-		if (save_to_file (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+		if (gimme_file (gtk_entry_get_text (GTK_ENTRY (entry)))) {
 			gtk_main_quit ();
 		}
 		setup_busy (FALSE);
@@ -466,7 +689,7 @@ on_ok_button_clicked (GtkWidget *widget,
 	button = glade_xml_get_widget (xml, "desktop_rbutton");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		file = add_file_to_path (desktop_dir);
-		if (save_to_file (file)) {
+		if (gimme_file (file)) {
 			gtk_main_quit ();
 		}
 		g_free (file);
@@ -485,7 +708,7 @@ on_ok_button_clicked (GtkWidget *widget,
 #endif
 
 	file = add_file_to_path (web_dir);
-	if (save_to_file (file) == FALSE) {
+	if ( ! gimme_file (file)) {
 		g_free (file);
 		setup_busy (FALSE);
 		return;
@@ -578,6 +801,28 @@ take_screen_shot (void)
 	screenshot = gdk_pixbuf_get_from_drawable (NULL, GDK_ROOT_PARENT (),
 						   NULL, 0, 0, 0, 0,
 						   width, height);
+}
+
+static void
+drag_data_get (GtkWidget          *widget,
+	       GdkDragContext     *context,
+	       GtkSelectionData   *selection_data,
+	       guint               info,
+	       guint               time,
+	       gpointer            data)
+{
+	char *string;
+
+	if ( ! ensure_temporary ()) {
+		/*FIXME: cancel the drag*/
+		return;
+	}
+
+	string = g_strdup_printf ("file:%s\r\n", temporary_file);
+	gtk_selection_data_set (selection_data,
+				selection_data->target,
+				8, string, strlen (string)+1);
+	g_free (string);
 }
 
 
@@ -679,15 +924,27 @@ main (int argc, char *argv[])
 		gtk_widget_show (cbutton);
 	}
 
+	/* setup dnd */
+	gtk_signal_connect (GTK_OBJECT (preview), "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
+	gtk_drag_source_set (preview,
+			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			     drag_types, 1,
+			     GDK_ACTION_COPY);
+
 	gtk_widget_grab_focus (save_entry);
 	gtk_editable_select_region (GTK_EDITABLE (save_entry), 0, -1);
 	gtk_signal_connect (GTK_OBJECT (save_entry), "activate",
 			    GTK_SIGNAL_FUNC (on_ok_button_clicked),
 			    NULL);
 
-	gtk_widget_show (toplevel);
+	gtk_widget_show_now (toplevel);
+
+	start_temporary ();
 
 	gtk_main ();
+
+	cleanup_temporary ();
 
 	return 0;
 }
