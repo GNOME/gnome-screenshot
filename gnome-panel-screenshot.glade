@@ -11,7 +11,7 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
-  <property name="has_separator">True</property>
+  <property name="has_separator">False</property>
   <signal name="delete_event" handler="gtk_main_quit" last_modification_time="Sat, 10 Aug 2002 00:42:49 GMT"/>
 
   <child internal-child="vbox">
