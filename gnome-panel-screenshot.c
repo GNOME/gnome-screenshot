@@ -939,7 +939,7 @@ find_toplevel_window (int depth, Window xid, gboolean *keep_going)
 	if (XGetWindowProperty (GDK_DISPLAY (), xid, wm_state, 0, 1,
 				False, AnyPropertyType, &actual_type,
 				&actual_format, &nitems, &bytes_after,
-				(guchar **) &prop) == Success
+				(gpointer) &prop) == Success
 	    && prop != NULL && actual_format == 32 && prop[0] == NormalState)
 	{
 		/* Found a top-level window */
