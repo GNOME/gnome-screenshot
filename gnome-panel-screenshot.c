@@ -512,7 +512,11 @@ take_window_shot (void)
 		       &unused,
 		       &mask);
 
-	window = gdk_window_foreign_new (child);
+	if (child == None)
+                window = GDK_ROOT_PARENT ();
+	else
+                window = gdk_window_foreign_new (child);
+
 	gdk_window_get_size (window, &width, &height);
 	gdk_window_get_origin (window, &x_orig, &y_orig);
 
