@@ -1103,17 +1103,17 @@ main (int argc, char *argv[])
 			      FALSE);
 	if (window)
 		gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+
 	home_dir = g_get_home_dir ();
 	web_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
 			       "public_html", NULL);
 
 	gconf_client = gconf_client_get_default ();
-	if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL)) {
-		desktop_dir = home_dir;
-	} else {
+	if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL))
+		desktop_dir = g_strdup (home_dir);
+	else
 		desktop_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
 					   ".gnome-desktop", NULL);
-	}
 	g_object_unref (gconf_client);
 	
 	file = add_file_to_path (home_dir);
