@@ -88,6 +88,7 @@ void on_preview_configure_event (GtkWidget *drawing_area,
 				 gpointer data);
 void on_ok_button_clicked (GtkWidget *widget, gpointer data);
 void on_cancel_button_clicked (GtkWidget *widget, gpointer data);
+void on_help_button_clicked (GtkWidget *widget, gpointer data);
 int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
 
 /* some local prototypes */
@@ -808,6 +809,37 @@ void
 on_cancel_button_clicked (GtkWidget *widget, gpointer data)
 {
 	gtk_main_quit ();
+}
+
+void
+on_help_button_clicked (GtkWidget *widget, gpointer data) 
+{
+	
+	GError *error = NULL;
+
+        gnome_help_display_desktop (NULL, "user-guide", 
+				    "wgoeditmainmenu.xml", "goseditmainmenu-51", 
+				    &error);
+	
+	if (error) {
+		GtkWidget *dialog;
+
+                dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+                        GTK_DIALOG_DESTROY_WITH_PARENT,
+                        GTK_MESSAGE_ERROR,
+                        GTK_BUTTONS_CLOSE,
+                        _("There was an error displaying help: \n%s"),
+                        error->message);
+
+                g_signal_connect (G_OBJECT (dialog),
+                        "response",
+                        G_CALLBACK (gtk_widget_destroy), NULL);
+                gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+                gtk_widget_show (dialog);
+                g_error_free (error);
+
+        }
+
 }
 
 int
