@@ -819,6 +819,7 @@ take_window_shot (void)
 	gint width, height;
 	XClassHint class_hint;
 	gchar *result = NULL;
+	gchar *name   = NULL;
 	gboolean keep_going;
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
@@ -850,14 +851,23 @@ take_window_shot (void)
 
 		toplevel = find_toplevel_window (0, child, &keep_going);
 
-		/* Get the Class Hint */
-		if (toplevel && (XGetClassHint (GDK_DISPLAY (), toplevel, &class_hint) != 0)) {
-			if (class_hint.res_class)
-				result = class_hint.res_class;
-
-			XFree (class_hint.res_name);
+		/* Get the Window Name (WM_NAME) */
+		if (toplevel && (XFetchName (GDK_DISPLAY (), toplevel, &name))) {
+			if (name) {
+				result = g_strdup (name);
+				XFree (name);
+			}	
+			else { 
+				/* Get the Class Hint, note res_name is not == WM_NAME */
+				if (toplevel && (XGetClassHint (GDK_DISPLAY (), toplevel, &class_hint) != 0)) {
+					if (class_hint.res_class) {
+						result = g_strdup (class_hint.res_class);
+						XFree (class_hint.res_class);
+						XFree (class_hint.res_name);
+					}
+				}
+			}
 		}
-
 		/* Force window to be shown */
 		toplevel_window	 = gdk_window_foreign_new (toplevel);
 		gdk_window_show (toplevel_window);
