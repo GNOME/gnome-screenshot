@@ -643,17 +643,17 @@ on_preview_expose_event (GtkWidget      *drawing_area,
 			 GdkEventExpose *event,
 			 gpointer        data)
 {
-	gdk_pixbuf_render_to_drawable (preview_image,
-				       drawing_area->window,
-				       drawing_area->style->white_gc,
-				       event->area.x,
-				       event->area.y,
-				       event->area.x,
-				       event->area.y,
-				       event->area.width,
-				       event->area.height,
-				       GDK_RGB_DITHER_NORMAL,
-				       0, 0);
+	gdk_draw_pixbuf (drawing_area->window,
+			 drawing_area->style->white_gc,
+			 preview_image,
+			 event->area.x,
+			 event->area.y,
+			 event->area.x,
+			 event->area.y,
+			 event->area.width,
+			 event->area.height,
+			 GDK_RGB_DITHER_NORMAL,
+			 0, 0);
 }
 
 void
