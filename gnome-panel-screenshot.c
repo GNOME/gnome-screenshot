@@ -626,11 +626,20 @@ do_screenshot (gboolean window)
 
   if (window)
     {
-      win = screenshot_find_pointer_window (TRUE);
+      win = screenshot_find_current_window (FALSE);
       if (win == None)
 	{
 	  window = FALSE;
 	  win = GDK_ROOT_WINDOW ();
+	}
+      else
+	{
+	  gchar *tmp;
+
+	  window_title = screenshot_get_window_title (win);
+	  tmp = screenshot_sanitize_filename (window_title);
+	  g_free (window_title);
+	  window_title = tmp;
 	}
     }
   else
