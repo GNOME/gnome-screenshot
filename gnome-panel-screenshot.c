@@ -25,6 +25,7 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkx.h>
@@ -1010,6 +1011,7 @@ main (int argc, char *argv[])
 {
 	GtkWidget *save_entry;
 	GtkWidget *frame;
+	GConfClient *gconf_client;
 	GnomeClient *client;
 	struct stat s;
 	gchar *file;
@@ -1104,8 +1106,16 @@ main (int argc, char *argv[])
 	home_dir = g_get_home_dir ();
 	web_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
 			       "public_html", NULL);
-	desktop_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
-				   ".gnome-desktop", NULL);
+
+	gconf_client = gconf_client_get_default ();
+	if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL)) {
+		desktop_dir = home_dir;
+	} else {
+		desktop_dir = g_strconcat (home_dir, G_DIR_SEPARATOR_S,
+					   ".gnome-desktop", NULL);
+	}
+	g_object_unref (gconf_client);
+	
 	file = add_file_to_path (home_dir);
 	gtk_entry_set_text (GTK_ENTRY (save_entry), file);
 	g_free (file);
