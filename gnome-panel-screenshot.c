@@ -935,7 +935,7 @@ find_toplevel_window (int depth, Window xid, gboolean *keep_going)
 	return 0;
 }
 
-static void
+static gboolean
 take_window_shot (void)
 {
 	GdkWindow *window;
@@ -972,6 +972,8 @@ take_window_shot (void)
 	} else {
 
                 window = gdk_window_foreign_new (child);
+		if (window == NULL)
+			return FALSE;
 
 		keep_going = TRUE;
 
@@ -1044,6 +1046,8 @@ take_window_shot (void)
 #endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
 
 	class_name = result;
+
+	return TRUE;
 }
 
 static void
@@ -1206,10 +1210,14 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 	
-	if (window)
-		take_window_shot ();
-	else
+	if (window) {
+		if ( ! take_window_shot ()) {
+			release_lock ();
+			exit (1);
+		}
+	} else {
 		take_screen_shot ();
+	}
 
 	if (g_file_test ("gnome-panel-screenshot.glade", G_FILE_TEST_EXISTS)) {
 		xml = glade_xml_new ("gnome-panel-screenshot.glade", NULL, NULL);
