@@ -791,13 +791,17 @@ on_ok_button_clicked (GtkWidget *widget,
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		GtkWidget *entry;
 		GtkWidget *fileentry;
+		gchar *tmp;
 		entry = glade_xml_get_widget (xml, "save_entry");
 		fileentry = glade_xml_get_widget (xml, "save_fileentry");
-		if (gimme_file (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+ 		tmp = gtk_entry_get_text (GTK_ENTRY (entry));
+ 		file = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+ 		if (gimme_file (file)) {
 			gnome_entry_prepend_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (fileentry))),
 						     TRUE, gtk_entry_get_text (GTK_ENTRY (entry)));
 			gtk_main_quit ();
 		}
+		g_free (file);
 		setup_busy (FALSE);
 		return;
 	}
