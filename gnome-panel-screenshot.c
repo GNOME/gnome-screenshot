@@ -92,6 +92,7 @@ int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
 
 /* some local prototypes */
 static gchar * add_file_to_path (const gchar *path);
+gint shot_delay_callback (gpointer data);
 
 
 /* helper functions */
@@ -984,8 +985,8 @@ got_signal (int sig)
 	cleanup_temporary ();
 	
 	/* whack thyself */
-	signal (sig, SIG_DFL);
-	kill (getpid (), sig);
+	signal (sig, SIG_DFL); 
+	kill (getpid (), sig); 
 }
 
 static void
@@ -1004,6 +1005,16 @@ drag_begin (GtkWidget *widget, GdkDragContext *context)
 	start_temporary ();
 }
 
+gint
+shot_delay_callback (gpointer data)
+{
+	gint *seconds_left = (gint *) data;
+
+	(*seconds_left)--;
+	if (!*seconds_left)
+		gtk_main_quit ();
+	return *seconds_left;
+}
 
 /* main */
 int
@@ -1016,9 +1027,12 @@ main (int argc, char *argv[])
 	struct stat s;
 	gchar *file;
 	gboolean window = FALSE;
-	gint width, height;
+	gint width, height; 
+	guint delay = 0;
+
 	struct poptOption opts[] = {
 		{"window", '\0', POPT_ARG_NONE, &window, 0, N_("Grab a window instead of the entire screen"), NULL},
+		{"delay", '\0', POPT_ARG_INT, &delay, 0, N_("Take screenshot after specified delay [in seconds]"), NULL},
 		{NULL, '\0', 0, NULL, 0, NULL, NULL}
 	};
 
@@ -1036,7 +1050,12 @@ main (int argc, char *argv[])
 	glade_gnome_init();
 	client = gnome_master_client ();
 	gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
-
+	
+	if (delay > 0) {
+		gtk_timeout_add (1000, shot_delay_callback, &delay);
+		gtk_main ();
+	}
+	
 	if (window)
 		take_window_shot ();
 	else
