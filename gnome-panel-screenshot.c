@@ -356,6 +356,7 @@ prepare_screenshot (void)
 static gboolean
 prepare_screenshot_timeout (gpointer data)
 {
+  gtk_main_quit ();
   prepare_screenshot ();
 
   return FALSE;
@@ -446,10 +447,11 @@ main (int argc, char *argv[])
     }
 
   if (delay_arg > 0)
-    {
+    {      
       g_timeout_add (delay_arg * 1000,
 		     prepare_screenshot_timeout,
 		     NULL);
+      gtk_main ();
     }
   else
     {

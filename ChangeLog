@@ -1,3 +1,9 @@
+2004-12-22  Vincent Noel  <vnoel@cox.net>
+
+	* gnome-panel-screenshot.c (main, prepare_screenshot_timeout):
+	When called with --delay, call gtk_main() otherwise the g_timeout
+	is never called. Fixes bug #161461.
+
 2004-12-21  Dennis Cranston <dennis_cranston@yahoo.com>
 
 	* gnome-screenshot.glade:  Use proper HIG spacing in table1,
