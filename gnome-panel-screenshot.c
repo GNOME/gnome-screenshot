@@ -61,10 +61,11 @@ static GdkPixbuf *preview_image = NULL;
 static char *web_dir;
 static char *desktop_dir;
 static const char *home_dir;
-static char *class_name = NULL;
+static char *window_title = NULL;
 static pid_t temporary_pid = 0;
 static char *temporary_file = NULL;
 static int  status;
+static Atom utf8_string;
 
 static GtkTargetEntry drag_types[] =
 	{ { "x-special/gnome-icon-list", 0, 0 },
@@ -415,17 +416,17 @@ add_file_to_path (const gchar *path)
 	expanded_path = gnome_vfs_expand_initial_tilde (path);
 	g_strstrip (expanded_path);
 
-	if (class_name) {
+	if (window_title) {
 		/* translators: this is the name of the file that gets made up
 		 * with the screenshot if a specific window is taken */
-		file_name = g_strdup_printf (_("Screenshot-%s.png"), class_name);
+		file_name = g_strdup_printf (_("Screenshot-%s.png"), window_title);
 	} else {
 		/* translators: this is the name of the file that gets made up
 		 * with the screenshot if the entire screen is taken */
 		file_name = g_strdup (_("Screenshot.png"));
 	}
-	tmp = g_strdup_printf ("%s%c%s", expanded_path, G_DIR_SEPARATOR, file_name);
-	retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+	tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
+	retval = g_build_filename (expanded_path, tmp, NULL);
 	g_free (file_name);
 	g_free (tmp);
 	
@@ -436,15 +437,16 @@ add_file_to_path (const gchar *path)
 			g_free (expanded_path);
 			return retval;
 		}
-
+		g_print ("%s, errno: %s\n", retval, g_strerror (errno));
+		
 		g_free (retval);
 
-		if (class_name) {
+		if (window_title) {
 			/* translators: this is the name of the file that gets
 			 * made up with the screenshot if a specific window is
 			 * taken */
 			file_name = g_strdup_printf (_("Screenshot-%s-%d.png"),
-						     class_name, i);
+						     window_title, i);
 		}
 		else {
 			/* translators: this is the name of the file that gets
@@ -452,8 +454,9 @@ add_file_to_path (const gchar *path)
 			 * taken */
 			file_name = g_strdup_printf (_("Screenshot-%d.png"), i);
 		}
-		tmp = g_strdup_printf ("%s%c%s", expanded_path, G_DIR_SEPARATOR, file_name);
-		retval = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+
+		tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
+		retval = g_build_filename (expanded_path, tmp, NULL);
 		g_free (file_name);
 		g_free (tmp);
 		
@@ -813,6 +816,138 @@ find_toplevel_window (int depth, Window xid, gboolean *keep_going)
 	return 0;
 }
 
+
+static char*
+text_property_to_utf8 (const XTextProperty *prop)
+{
+  char **list;
+  int count;
+  char *retval;
+  
+  list = NULL;
+
+  count = gdk_text_property_to_utf8_list (gdk_x11_xatom_to_atom (prop->encoding),
+                                          prop->format,
+                                          prop->value,
+                                          prop->nitems,
+                                          &list);
+
+  if (count == 0)
+    return NULL;
+
+  retval = list[0];
+  list[0] = g_strdup (""); /* something to free */
+  
+  g_strfreev (list);
+
+  return retval;
+}
+
+static char*
+get_text_property (Window  xwindow,
+		   Atom    atom)
+{
+  XTextProperty text;
+  char *retval;
+  
+  gdk_error_trap_push ();
+
+  text.nitems = 0;
+  if (XGetTextProperty (gdk_display,
+                        xwindow,
+                        &text,
+                        atom))
+    {
+      retval = text_property_to_utf8 (&text);
+
+      if (text.nitems > 0)
+        XFree (text.value);
+    }
+  else
+    {
+      retval = NULL;
+    }
+  
+  gdk_error_trap_pop ();
+
+  return retval;
+}
+
+static char *
+get_utf8_property (Window  xwindow,
+		   Atom    atom)
+{
+  Atom type;
+  int format;
+  gulong nitems;
+  gulong bytes_after;
+  guchar *val;
+  int err, result;
+  char *retval;
+  
+  gdk_error_trap_push ();
+  type = None;
+  val = NULL;
+  result = XGetWindowProperty (gdk_display,
+			       xwindow,
+			       atom,
+			       0, G_MAXLONG,
+			       False, utf8_string,
+			       &type, &format, &nitems,
+			       &bytes_after, (guchar **)&val);  
+  err = gdk_error_trap_pop ();
+
+  if (err != Success ||
+      result != Success)
+    return NULL;
+  
+  if (type != utf8_string ||
+      format != 8 ||
+      nitems == 0)
+    {
+      if (val)
+        XFree (val);
+      return NULL;
+    }
+
+  if (!g_utf8_validate (val, nitems, NULL))
+    {
+      g_warning ("Property %s contained invalid UTF-8\n",
+		 gdk_x11_get_xatom_name (atom));
+      XFree (val);
+      return NULL;
+    }
+  
+  retval = g_strndup (val, nitems);
+  
+  XFree (val);
+  
+  return retval;
+}
+
+static gchar *
+get_window_title (Window w)
+{
+  gchar *name;
+
+  name = get_utf8_property (w, gdk_x11_get_xatom_by_name ("_NET_WM_NAME"));
+
+  if (name)
+    return name;
+
+  name = get_text_property (w, gdk_x11_get_xatom_by_name ("WM_NAME"));
+
+  if (name)
+    return name;
+  
+  name = get_text_property (w, gdk_x11_get_xatom_by_name ("WM_CLASS"));
+
+  if (name)
+    return name;
+
+  return g_strdup (_("???"));
+}
+
 static gboolean
 take_window_shot (void)
 {
@@ -827,7 +962,6 @@ take_window_shot (void)
 	gint real_width, real_height;
 	gint width, height;
 	XClassHint class_hint;
-	gchar *result = NULL;
 	gchar *name   = NULL;
 	gboolean keep_going;
 
@@ -860,23 +994,8 @@ take_window_shot (void)
 
 		toplevel = find_toplevel_window (0, child, &keep_going);
 
-		/* Get the Window Name (WM_NAME) */
-		if (toplevel && (XFetchName (GDK_DISPLAY (), toplevel, &name))) {
-			if (name) {
-				result = g_strdup (name);
-				XFree (name);
-			}	
-			else { 
-				/* Get the Class Hint, note res_name is not == WM_NAME */
-				if (toplevel && (XGetClassHint (GDK_DISPLAY (), toplevel, &class_hint) != 0)) {
-					if (class_hint.res_class) {
-						result = g_strdup (class_hint.res_class);
-						XFree (class_hint.res_class);
-						XFree (class_hint.res_name);
-					}
-				}
-			}
-		}
+		window_title = get_window_title (toplevel);
+		
 		/* Force window to be shown */
 		toplevel_window	 = gdk_window_foreign_new (toplevel);
 		gdk_window_show (toplevel_window);
@@ -976,8 +1095,6 @@ take_window_shot (void)
 						   x, y, 0, 0,
 						   width, height);
 #endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
-
-	class_name = result;
 
 	return TRUE;
 }
@@ -1349,6 +1466,8 @@ main (int argc, char *argv[])
 	glade_gnome_init();
 	client = gnome_master_client ();
 	gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
+	
+ 	utf8_string = gdk_x11_get_xatom_by_name ("UTF8_STRING");
 	
 	if (delay > 0) {
 		g_timeout_add (delay * 1000, 
