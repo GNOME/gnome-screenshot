@@ -1141,48 +1141,16 @@ escape_underscores (const char *name)
 	return g_string_free (escaped, FALSE);
 }
 
-/* main */
-int
-main (int argc, char *argv[])
+static void
+do_screenshot (gboolean window)
 {
 	GtkWidget *save_entry;
 	GtkWidget *frame;
 	GConfClient *gconf_client;
-	GnomeClient *client;
 	struct stat s;
 	gchar *file;
-	gboolean window = FALSE;
 	gint width, height; 
-	guint delay = 0;
 	gchar *utf8_name;
-	
-	struct poptOption opts[] = {
-		{"window", '\0', POPT_ARG_NONE, NULL, 0, N_("Grab a window instead of the entire screen"), NULL},
-		{"delay", '\0', POPT_ARG_INT, NULL, 0, N_("Take screenshot after specified delay [in seconds]"), NULL},
-		{NULL, '\0', 0, NULL, 0, NULL, NULL}
-	};
-
-	opts[0].arg = &window;
-	opts[1].arg = &delay;
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
-	gnome_program_init ("gnome-panel-screenshot", VERSION,
-			    LIBGNOMEUI_MODULE,
-			    argc, argv,
-			    GNOME_PARAM_POPT_TABLE, opts,
-			    GNOME_PROGRAM_STANDARD_PROPERTIES,
-			    NULL);
-	glade_gnome_init();
-	client = gnome_master_client ();
-	gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
-	
-	if (delay > 0) {
-		sleep (delay);	
-	}
 
 	if (!get_lock ()) {
 		g_printerr ("gnome-panel-screenshot is already running\n");
@@ -1314,11 +1282,62 @@ main (int argc, char *argv[])
 	/*
 	 * Start working on the temporary file in a fork, now this is
 	 * a little evil since we might save a file the user might cancel
-	 * and we'll jsut end up deleting it and/or killing the forked
+	 * and we'll just end up deleting it and/or killing the forked
 	 * process.  But it makes it snappy and makes dnd not hang.  Go
 	 * figure.
 	 */
 	start_temporary ();
+}
+
+static gboolean
+do_screenshot_timeout (gpointer data)
+{
+	gboolean window = GPOINTER_TO_INT (data);
+
+	do_screenshot (window);
+
+	return FALSE;
+}
+
+/* main */
+int
+main (int argc, char *argv[])
+{
+	GnomeClient *client;
+	gboolean window = FALSE;
+	guint delay = 0;
+	
+	struct poptOption opts[] = {
+		{"window", '\0', POPT_ARG_NONE, NULL, 0, N_("Grab a window instead of the entire screen"), NULL},
+		{"delay", '\0', POPT_ARG_INT, NULL, 0, N_("Take screenshot after specified delay [in seconds]"), NULL},
+		{NULL, '\0', 0, NULL, 0, NULL, NULL}
+	};
+
+	opts[0].arg = &window;
+	opts[1].arg = &delay;
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
+	gnome_program_init ("gnome-panel-screenshot", VERSION,
+			    LIBGNOMEUI_MODULE,
+			    argc, argv,
+			    GNOME_PARAM_POPT_TABLE, opts,
+			    GNOME_PROGRAM_STANDARD_PROPERTIES,
+			    NULL);
+	glade_gnome_init();
+	client = gnome_master_client ();
+	gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
+	
+	if (delay > 0) {
+		g_timeout_add (delay * 1000, 
+			       do_screenshot_timeout,
+			       GINT_TO_POINTER (window));
+	} else {
+		do_screenshot (window);
+	}
 
 	signal (SIGINT, got_signal);
 	signal (SIGTERM, got_signal);
