@@ -1180,13 +1180,8 @@ main (int argc, char *argv[])
 		take_screen_shot ();
 	}
 
-	if (g_file_test ("gnome-panel-screenshot.glade", G_FILE_TEST_EXISTS)) {
-		xml = glade_xml_new ("gnome-panel-screenshot.glade", NULL, NULL);
-	}
-	if (xml == NULL) {
-		xml = glade_xml_new (GLADEDIR "/gnome-panel-screenshot.glade",
-				     NULL, NULL);
-	}
+	xml = glade_xml_new (GLADEDIR "/gnome-panel-screenshot.glade",
+			     NULL, NULL);
 	if (xml == NULL) {
 		GtkWidget *dialog;
 		release_lock ();
