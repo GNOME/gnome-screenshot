@@ -1,3 +1,8 @@
+2004-12-16  Vincent Noel  <vnoel@cox.net>
+
+	* screenshot-dialog.c (screenshot_dialog_new): Use new
+	GtkFileChooserButton API.
+
 2004-11-10  Dennis Cranston <dennis_cranston@yahoo.com>
 
 	* gnome-screenshot.schemas.in, gnome-panel-screenshot.c: 
