@@ -1,3 +1,8 @@
+2005-01-22  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* screenshot-dialog.c: mark a string for translation, remove an
+	unnecessary function call
+
 2004-12-22  Vincent Noel  <vnoel@cox.net>
 
 	* gnome-panel-screenshot.c (main, prepare_screenshot_timeout):
