@@ -280,13 +280,15 @@ start_temporary (void)
 	/* make a temporary dirname */
 	dir = NULL;
 	do {
-		if (dir != NULL) free (dir);
-		dir = tempnam (NULL, "scr");
+		if (dir != NULL)
+			g_free (dir);
+		dir = g_strdup_printf ("/tmp/gnome-panel-screenshot-%d",
+				       rand ());
 	} while (mkdir (dir, 0755) < 0);
 
 	file = add_file_to_path (dir);
 
-	free (dir);
+	g_free (dir);
 
 	temporary_pid = fork ();
 
