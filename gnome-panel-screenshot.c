@@ -47,11 +47,6 @@
 
 #include <libart_lgpl/art_rgb_affine.h>
 
-#ifdef HAVE_PAPER_WIDTH
-#include <stdio.h>
-#include <langinfo.h>
-#endif
-
 /* How far down the window tree will we search when looking for top-level
  * windows? Some window managers doubly-reparent the client, so account
  * for that, and add some slop.
