@@ -455,6 +455,7 @@ print_pixbuf (void)
 	gint do_preview = FALSE;
 	gint copies, collate;
 	gint result;
+	GdkCursor *cursor;
 #ifdef HAVE_PAPER_WIDTH
 	GnomeUnit *unit;
 	guint width, height;
@@ -510,10 +511,17 @@ print_pixbuf (void)
 		}
 		gpmp = gnome_print_master_preview_new (gpm, _("Screenshot Print Preview"));
 		gtk_signal_connect (GTK_OBJECT (gpmp), "destroy", gtk_main_quit, NULL);
+		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), FALSE);
+		cursor = gdk_cursor_new (GDK_WATCH);
+		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, cursor);
+		gdk_cursor_destroy (cursor);
+
 		gtk_widget_show (GTK_WIDGET (gpmp));
 		gtk_window_set_modal (GTK_WINDOW (gpmp), TRUE);
 		gtk_window_set_transient_for (GTK_WINDOW (gpmp), GTK_WINDOW (print_dialog));
 		gtk_main ();
+		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), TRUE);
+		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, NULL);
 	} while (TRUE);
 }
 #endif
