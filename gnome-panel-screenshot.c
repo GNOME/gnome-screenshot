@@ -1218,6 +1218,7 @@ main (int argc, char *argv[])
 	gint width, height; 
 	guint delay = 0;
 	gboolean normal_web_dir = TRUE;
+	gchar *utf8_name;
 	
 	struct poptOption opts[] = {
 		{"window", '\0', POPT_ARG_NONE, &window, 0, N_("Grab a window instead of the entire screen"), NULL},
@@ -1350,8 +1351,10 @@ main (int argc, char *argv[])
 	g_object_unref (gconf_client);
 	
 	file = add_file_to_path (home_dir);
-	gtk_entry_set_text (GTK_ENTRY (save_entry), file);
+	utf8_name = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
+	gtk_entry_set_text (GTK_ENTRY (save_entry), utf8_name);
 	g_free (file);
+	g_free (utf8_name);
 
 	if (!stat (web_dir, &s) && S_ISDIR (s.st_mode)) {
 		GtkWidget *cbutton;
