@@ -178,6 +178,7 @@
 		      <child>
 			<widget class="GnomeFileEntry" id="save_fileentry">
 			  <property name="visible">True</property>
+			  <property name="history_id">gnome-panel-screenshot-file-entry</property>
 			  <property name="max_saved">10</property>
 			  <property name="directory_entry">False</property>
 			  <property name="modal">False</property>

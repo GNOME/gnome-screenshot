@@ -95,6 +95,7 @@ void on_preview_configure_event (GtkWidget *drawing_area,
 void on_ok_button_clicked (GtkWidget *widget, gpointer data);
 void on_cancel_button_clicked (GtkWidget *widget, gpointer data);
 void on_help_button_clicked (GtkWidget *widget, gpointer data);
+int on_save_entry_key_press_event (GtkWidget *widget, GdkEventKey *key);
 int on_toplevel_key_press_event (GtkWidget *widget, GdkEventKey *key);
 
 /* some local prototypes */
@@ -789,8 +790,12 @@ on_ok_button_clicked (GtkWidget *widget,
 	button = glade_xml_get_widget (xml, "save_rbutton");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		GtkWidget *entry;
+		GtkWidget *fileentry;
 		entry = glade_xml_get_widget (xml, "save_entry");
+		fileentry = glade_xml_get_widget (xml, "save_fileentry");
 		if (gimme_file (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+			gnome_entry_prepend_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (fileentry))),
+						     TRUE, gtk_entry_get_text (GTK_ENTRY (entry)));
 			gtk_main_quit ();
 		}
 		setup_busy (FALSE);
@@ -866,6 +871,16 @@ on_help_button_clicked (GtkWidget *widget, gpointer data)
 
         }
 
+}
+
+int
+on_save_entry_key_press_event (GtkWidget    	*widget, 
+			       GdkEventKey	*key)
+{
+	if (key->keyval == GDK_Return)
+		on_ok_button_clicked (widget, NULL);
+	
+	return FALSE;
 }
 
 int
@@ -1355,8 +1370,8 @@ main (int argc, char *argv[])
 
 	gtk_widget_grab_focus (save_entry);
 	gtk_editable_select_region (GTK_EDITABLE (save_entry), 0, -1);
-	g_signal_connect (G_OBJECT (save_entry), "activate",
-			  G_CALLBACK (on_ok_button_clicked),
+	g_signal_connect (G_OBJECT (save_entry), "key_press_event",
+			  G_CALLBACK (on_save_entry_key_press_event),
 			  NULL);
 
 	gtk_widget_show_now (toplevel);
