@@ -521,7 +521,8 @@ print_pixbuf (void)
 			return TRUE;
 		}
 		gpmp = gnome_print_master_preview_new (gpm, _("Screenshot Print Preview"));
-		gtk_signal_connect (GTK_OBJECT (gpmp), "destroy", gtk_main_quit, NULL);
+		g_signal_connect (G_OBJECT (gpmp), "destroy", 
+				  G_CALLBACK (gtk_main_quit), NULL);
 		gtk_widget_set_sensitive (GTK_WIDGET (print_dialog), FALSE);
 		cursor = gdk_cursor_new (GDK_WATCH);
 		gdk_window_set_cursor (GTK_WIDGET (print_dialog)->window, cursor);
@@ -1111,10 +1112,10 @@ main (int argc, char *argv[])
 
 	/* setup dnd */
 	/* just in case some wanker like nautilus took our image */
-	gtk_signal_connect (GTK_OBJECT (preview), "drag_begin",
-			    GTK_SIGNAL_FUNC (drag_begin), NULL);
-	gtk_signal_connect (GTK_OBJECT (preview), "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
+	g_signal_connect (G_OBJECT (preview), "drag_begin",
+			  G_CALLBACK (drag_begin), NULL);
+	g_signal_connect (G_OBJECT (preview), "drag_data_get",
+			  G_CALLBACK (drag_data_get), NULL);
 	gtk_drag_source_set (preview,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drag_types, 2,
@@ -1122,9 +1123,9 @@ main (int argc, char *argv[])
 
 	gtk_widget_grab_focus (save_entry);
 	gtk_editable_select_region (GTK_EDITABLE (save_entry), 0, -1);
-	gtk_signal_connect (GTK_OBJECT (save_entry), "activate",
-			    GTK_SIGNAL_FUNC (on_ok_button_clicked),
-			    NULL);
+	g_signal_connect (G_OBJECT (save_entry), "activate",
+			  G_CALLBACK (on_ok_button_clicked),
+			  NULL);
 
 	gtk_widget_show_now (toplevel);
 
