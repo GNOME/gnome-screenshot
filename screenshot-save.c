@@ -2,6 +2,7 @@
 #include <gnome.h>
 #include <errno.h>
 #include <signal.h>
+#include <string.h>
 
 #include "screenshot-save.h"
 
