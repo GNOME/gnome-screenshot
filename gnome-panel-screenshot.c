@@ -338,7 +338,7 @@ start_temporary (void)
 		temporary_pid = 0;
 
 	} else if ( temporary_pid > 0)
-		waitpid (temporary_pid, &status, 0);
+		while ((waitpid (temporary_pid, &status, 0) == -1) && errno == EINTR);
 
 	umask(old_mask);
 	temporary_file = file;
