@@ -1095,10 +1095,13 @@ main (int argc, char *argv[])
 	gchar *utf8_name;
 	
 	struct poptOption opts[] = {
-		{"window", '\0', POPT_ARG_NONE, &window, 0, N_("Grab a window instead of the entire screen"), NULL},
-		{"delay", '\0', POPT_ARG_INT, &delay, 0, N_("Take screenshot after specified delay [in seconds]"), NULL},
+		{"window", '\0', POPT_ARG_NONE, NULL, 0, N_("Grab a window instead of the entire screen"), NULL},
+		{"delay", '\0', POPT_ARG_INT, NULL, 0, N_("Take screenshot after specified delay [in seconds]"), NULL},
 		{NULL, '\0', 0, NULL, 0, NULL, NULL}
 	};
+
+	opts[0].arg = &window;
+	opts[1].arg = &delay;
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
