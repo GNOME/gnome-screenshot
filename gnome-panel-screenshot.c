@@ -987,8 +987,10 @@ take_window_shot (void)
 	Window w, root, child, toplevel;
 	int unused;
 	guint mask;
+	gint x_real_orig, y_real_orig;
 	gint x_orig, y_orig;
 	gint x = 0, y = 0;
+	gint real_width, real_height;
 	gint width, height;
 	XClassHint class_hint;
 	gchar *result = NULL;
@@ -1036,9 +1038,13 @@ take_window_shot (void)
 		gdk_window_show (toplevel_window);
 	}
 
-	gdk_drawable_get_size (window, &width, &height);
-	gdk_window_get_origin (window, &x_orig, &y_orig);
+	gdk_drawable_get_size (window, &real_width, &real_height);
+	gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
 
+	x_orig = x_real_orig;
+	y_orig = y_real_orig;
+	width = real_width;
+	height = real_height;
 	
 	if (x_orig < 0) {
 		x = - x_orig;
@@ -1069,21 +1075,48 @@ take_window_shot (void)
 		gdk_pixbuf_fill (screenshot, 0);
 	
 		for (i = 0; i < rectangle_count; i++) {
-			for (y = rectangles[i].y; y < rectangles[i].y + rectangles[i].height; y++) {
+			gint rec_x, rec_y;
+			gint rec_width, rec_height;
+
+			rec_x = rectangles[i].x;
+			rec_y = rectangles[i].y;
+			rec_width = rectangles[i].width;
+			rec_height = rectangles[i].height;
+
+			if (x_real_orig < 0) {
+				rec_x += x_real_orig;
+				rec_x = MAX(rec_x, 0);
+				rec_width += x_real_orig;
+			}
+			if (y_real_orig < 0) {
+				rec_y += y_real_orig;
+				rec_y = MAX(rec_y, 0);
+				rec_height += y_real_orig;
+			}
+
+			if (x_orig + rec_x + rec_width > gdk_screen_width ())
+				rec_width = gdk_screen_width () - x_orig - rec_x;
+			if (y_orig + rec_y + rec_height > gdk_screen_height ())
+				rec_height = gdk_screen_height () - y_orig - rec_y;
+
+			for (y = rec_y; y < rec_y + rec_height; y++) {
 				guchar *src_pixels, *dest_pixels;
+				gboolean has_alpha = gdk_pixbuf_get_has_alpha (tmp);
 				
 				src_pixels = gdk_pixbuf_get_pixels (tmp) +
 					y * gdk_pixbuf_get_rowstride(tmp) +
-					rectangles[i].x * (gdk_pixbuf_get_has_alpha (tmp) ? 4 : 3);
+					rec_x * (has_alpha ? 4 : 3);
 				dest_pixels = gdk_pixbuf_get_pixels (screenshot) +
 					y * gdk_pixbuf_get_rowstride (screenshot) +
-					rectangles[i].x * 4;
+					rec_x * 4;
 				
-				for (x = rectangles[i].x; x < rectangles[i].x + rectangles[i].width; x++) {
+				for (x = 0; x < rec_width; x++) {
 					*dest_pixels++ = *src_pixels ++;
 					*dest_pixels++ = *src_pixels ++;
 					*dest_pixels++ = *src_pixels ++;
 					*dest_pixels++ = 255;
+					if (has_alpha)
+						src_pixels++;
 				}
 			}
 		}
