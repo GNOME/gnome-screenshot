@@ -1024,6 +1024,50 @@ drag_begin (GtkWidget *widget, GdkDragContext *context)
 	start_temporary ();
 }
 
+static void
+update_window_icon (GtkWindow    *window,
+		    GtkIconTheme *theme,
+		    const char   *icon_name)
+{
+	GtkIconInfo *icon;
+	const char  *filename;
+
+	icon = gtk_icon_theme_lookup_icon (theme, icon_name, 48, 0);
+	if (!icon)
+		return;
+
+	filename = gtk_icon_info_get_filename (icon);
+	g_assert (filename != NULL);
+
+	gtk_window_set_icon_from_file (window, filename, NULL);
+
+	gtk_icon_info_free (icon);
+}
+
+static void
+icon_theme_changed (GtkWindow    *window,
+		    GtkIconTheme *theme)
+{
+	update_window_icon (window, theme, "gnome-screenshot");
+}
+
+static void
+set_window_icon (GtkWindow *window)
+{
+	GdkScreen    *screen;
+	GtkIconTheme *theme;
+
+	screen = gtk_window_get_screen (window);
+	theme  = gtk_icon_theme_get_for_screen (screen);
+
+	g_signal_connect_object (theme, "changed",
+				 G_CALLBACK (icon_theme_changed),
+				 window,
+				 G_CONNECT_SWAPPED);
+
+	update_window_icon (window, theme, "gnome-screenshot");
+}
+
 /* To make sure there is only one screenshot taken at a time,
  * (Imagine key repeat for the print screen key) we hold a selection
  * until we are done taking the screenshot
@@ -1088,7 +1132,7 @@ main (int argc, char *argv[])
 	GConfClient *gconf_client;
 	GnomeClient *client;
 	struct stat s;
-	gchar *file, *window_icon;
+	gchar *file;
 	gboolean window = FALSE;
 	gint width, height; 
 	guint delay = 0;
@@ -1185,14 +1229,8 @@ main (int argc, char *argv[])
 	preview = glade_xml_get_widget (xml, "preview");
 	save_entry = glade_xml_get_widget (xml, "save_entry");
 
-	window_icon = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, 
-						 "gnome-screenshot.png", TRUE, NULL);
-	if (window_icon) {
-		gnome_window_icon_set_from_file (GTK_WINDOW (toplevel), window_icon);
-		g_free (window_icon);
-	}
+	set_window_icon (GTK_WINDOW (toplevel));
 
-	
 	gtk_window_set_default_size (GTK_WINDOW (toplevel), width * 2, -1);
 	gtk_widget_set_size_request (preview, width, height);
 	gtk_aspect_frame_set (GTK_ASPECT_FRAME (frame), 0.0, 0.5,
