@@ -374,7 +374,7 @@ load_options (void)
   gconf_client = gconf_client_get_default ();
 
   /* Find various dirs */
-  last_save_dir = gconf_client_get_string (gconf_client, "/apps/gnome_screenshot/last_save_directory", NULL);
+  last_save_dir = gconf_client_get_string (gconf_client, "/apps/gnome-screenshot/last_save_directory", NULL);
   if (!last_save_dir || !last_save_dir[0])
     {
       if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL))
@@ -389,8 +389,8 @@ load_options (void)
       last_save_dir = tmp;
     }
 
-  include_border = gconf_client_get_bool (gconf_client, "/apps/gnome_screenshot/include_border", NULL);
-  border_effect = gconf_client_get_string (gconf_client, "/apps/gnome_screenshot/border_effect", NULL);
+  include_border = gconf_client_get_bool (gconf_client, "/apps/gnome-screenshot/include_border", NULL);
+  border_effect = gconf_client_get_string (gconf_client, "/apps/gnome-screenshot/border_effect", NULL);
 
   g_object_unref (gconf_client);
 }

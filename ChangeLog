@@ -1,3 +1,8 @@
+2004-11-10  Dennis Cranston <dennis_cranston@yahoo.com>
+
+	* gnome-screenshot.schemas.in, gnome-panel-screenshot.c: 
+	Follow gconf naming standard.
+	 
 Wed Nov 10 01:15:02 2004  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-panel-screenshot.c: Save the last directory visited to
