@@ -638,17 +638,17 @@ setup_busy (gboolean busy)
 
 	/* block expose on the, since we don't want to redraw the preview
 	 * in the draw. It'd make no sense and would just generate X traffic */
-	gtk_signal_handler_block_by_func
-		(GTK_OBJECT (preview),
-		 GTK_SIGNAL_FUNC (on_preview_expose_event),
+	g_signal_handlers_block_by_func
+		(G_OBJECT (preview),
+		 G_CALLBACK (on_preview_expose_event),
 		 NULL);
 
 	gtk_widget_set_sensitive (toplevel, ! busy);
 	gtk_widget_draw (toplevel, NULL);
 
-	gtk_signal_handler_unblock_by_func
-		(GTK_OBJECT (preview),
-		 GTK_SIGNAL_FUNC (on_preview_expose_event),
+	g_signal_handlers_unblock_by_func
+		(G_OBJECT (preview),
+		 G_CALLBACK (on_preview_expose_event),
 		 NULL);
 
 	gdk_flush ();
