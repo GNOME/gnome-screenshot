@@ -184,7 +184,7 @@ save_folder_to_gconf (ScreenshotDialog *dialog)
   folder = screenshot_dialog_get_folder (dialog);
   /* Error is NULL, as there's nothing we can do */
   gconf_client_set_string (gconf_client,
-			   "/apps/gnome_screenshot/last_save_directory",
+			   "/apps/gnome-screenshot/last_save_directory",
 			   folder, NULL);
 
   g_object_unref (gconf_client);

@@ -1,3 +1,9 @@
+2005-05-16  Olav Vitters <olav@bkor.dhs.org>
+
+	* gnome-panel-screenshot.c: Fix typo in gconf key (gnome_screenshot
+	instead of gnome-screenshot). Fixes bug #303891. Patch by Trent
+	"Lathiat" Lloyd.
+
 2005-01-22  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* screenshot-dialog.c: mark a string for translation, remove an
