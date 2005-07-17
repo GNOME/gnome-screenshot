@@ -3,6 +3,7 @@
 
 #include <gtk/gtk.h>
 
-GdkPixbuf *screenshot_add_shadow (GdkPixbuf *src);
+void screenshot_add_shadow (GdkPixbuf **src);
+void screenshot_add_border (GdkPixbuf **src);
 
 #endif /* __SCREENSHOT_SHADOW_H__ */

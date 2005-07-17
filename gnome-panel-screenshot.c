@@ -53,7 +53,6 @@ static GdkPixbuf *screenshot = NULL;
 static char *last_save_dir = NULL;
 static char *window_title = NULL;
 static char *temporary_file = NULL;
-static gboolean drop_shadow = TRUE;
 static gboolean save_immediately = FALSE;
 
 /* Options */
@@ -318,13 +317,17 @@ prepare_screenshot (void)
 
   screenshot = screenshot_get_pixbuf (win);
 
-  if (take_window_shot && drop_shadow)
-    {
-      GdkPixbuf *old = screenshot;
-
-      screenshot = screenshot_add_shadow (screenshot);
-      g_object_unref (old);
-    }
+  if (take_window_shot) {
+    if (g_str_equal (border_effect, "shadow"))
+      {
+        screenshot_add_shadow (&screenshot);
+      }
+    else 
+      if (g_str_equal (border_effect, "border"))
+        {
+          screenshot_add_border (&screenshot);
+        }
+  }
 
   screenshot_release_lock ();
 
@@ -392,6 +395,7 @@ load_options (void)
 
   include_border = gconf_client_get_bool (gconf_client, "/apps/gnome-screenshot/include_border", NULL);
   border_effect = gconf_client_get_string (gconf_client, "/apps/gnome-screenshot/border_effect", NULL);
+  g_print ("border_effect: %s\n", border_effect);
 
   g_object_unref (gconf_client);
 }

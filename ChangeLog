@@ -1,3 +1,12 @@
+Sun Jul 17 15:04:13 2005  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-panel-screenshot.c: (prepare_screenshot), (load_options):
+	* screenshot-shadow.c: (create_outline_filter), (create_effect),
+	(screenshot_add_shadow), (screenshot_add_border): *
+	screenshot-shadow.h: Patch from Emmanuel Pacaud
+	<emmanuel.pacaud@univ-poitiers.fr> to clean up the shadow drawing
+	code, #169248.
+
 2005-05-16  Olav Vitters <olav@bkor.dhs.org>
 
 	* gnome-panel-screenshot.c: Fix typo in gconf key (gnome_screenshot
