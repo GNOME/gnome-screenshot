@@ -1,3 +1,8 @@
+2005-08-21  Gustavo Noronha Silva  <kov@debian.org>
+
+	* gnome-panel-screenshot.c:
+	- fix typo in variable name "filename" -> "file_name"
+
 2005-08-21  Kang Jeong-Hee <Keizi@mail.co.kr>
 
 	* gnome-panel-screenshot.c, screenshot-dialog.c: Fix wrong order

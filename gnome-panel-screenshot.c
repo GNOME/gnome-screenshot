@@ -115,7 +115,7 @@ generate_filename_for_uri (const char *uri)
       file_name = g_strdup (_("Screenshot.png"));
     }
 
-  retval = g_build_filename (uri, filename, NULL);
+  retval = g_build_filename (uri, file_name, NULL);
   g_free (file_name);
 
   do
