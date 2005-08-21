@@ -99,7 +99,6 @@ static char *
 generate_filename_for_uri (const char *uri)
 {
   char *retval;
-  char *tmp;
   char *file_name;
   int i = 1;
 
@@ -116,10 +115,8 @@ generate_filename_for_uri (const char *uri)
       file_name = g_strdup (_("Screenshot.png"));
     }
 
-  tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
-  retval = g_build_filename (uri, tmp, NULL);
+  retval = g_build_filename (uri, filename, NULL);
   g_free (file_name);
-  g_free (tmp);
 
   do
     {
@@ -162,10 +159,8 @@ generate_filename_for_uri (const char *uri)
 	  file_name = g_strdup_printf (_("Screenshot-%d.png"), i);
 	}
 
-      tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
-      retval = g_build_filename (uri, tmp, NULL);
+      retval = g_build_filename (uri, file_name, NULL);
       g_free (file_name);
-      g_free (tmp);
 
       i++;
     }

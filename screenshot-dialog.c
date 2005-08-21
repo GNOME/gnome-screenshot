@@ -271,13 +271,15 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
 {
   gchar *folder;
   const gchar *file_name;
-  gchar *uri;
+  gchar *uri, *tmp;
 
   folder = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
 
-  uri = g_build_filename (folder, file_name, NULL);
+  tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
+  uri = g_build_filename (folder, tmp, NULL);
   g_free (folder);
+  g_free (tmp);
 
   return uri;
 }
