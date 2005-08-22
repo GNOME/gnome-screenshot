@@ -23,6 +23,7 @@ bin_PROGRAMS = \
 
 gnome_screenshot_SOURCES = \
 	gnome-panel-screenshot.c	\
+	gnome-panel-screenshot.glade    \
 	screenshot-dialog.c		\
 	screenshot-dialog.h		\
 	screenshot-shadow.c		\
