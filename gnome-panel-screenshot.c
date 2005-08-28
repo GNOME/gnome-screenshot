@@ -63,6 +63,7 @@ static char *border_effect = NULL;
 /* some local prototypes */
 static void display_help           (ScreenshotDialog *dialog);
 static void save_done_notification (gpointer          data);
+static char *get_desktop_dir (void);
 
 static void
 display_help (ScreenshotDialog *dialog)
@@ -127,6 +128,7 @@ generate_filename_for_uri (const char *uri)
       result = gnome_vfs_get_file_info (retval, info, GNOME_VFS_FILE_INFO_DEFAULT | GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
       gnome_vfs_file_info_unref (info);
 
+      g_print ("resutlt: %d\n", result);
       switch (result)
 	{
 	case GNOME_VFS_ERROR_NOT_FOUND:
@@ -342,6 +344,21 @@ prepare_screenshot (void)
 
   /* If uri isn't local, we should do this async before taking the sshot */
   initial_uri = generate_filename_for_uri (last_save_dir);
+  if (initial_uri == NULL)
+    {
+      gchar *desktop_dir;
+      /* We failed to make a new name for the last save dir.  We try again
+       * with our home dir as a fallback.  If that fails, we don't have a
+       * place to put it. */
+      desktop_dir = get_desktop_dir ();
+      initial_uri = generate_filename_for_uri (desktop_dir);
+      g_free (desktop_dir);
+
+      if (initial_uri == NULL)
+	{
+	  initial_uri = g_strdup ("file:///");
+	}
+  }
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
   g_free (initial_uri);
 
@@ -360,6 +377,23 @@ prepare_screenshot_timeout (gpointer data)
   return FALSE;
 }
 
+
+static char *
+get_desktop_dir (void)
+{
+  GConfClient *gconf_client;
+  char *desktop_dir;
+
+  gconf_client = gconf_client_get_default ();
+
+  if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL))
+    desktop_dir = g_strconcat (g_get_home_dir (), NULL);
+  else
+    desktop_dir = g_strconcat (g_get_home_dir (), G_DIR_SEPARATOR_S, "Desktop", NULL);
+
+  return desktop_dir;
+}
+
 /* Load options */
 static void
 load_options (void)
@@ -376,10 +410,7 @@ load_options (void)
   last_save_dir = gconf_client_get_string (gconf_client, "/apps/gnome-screenshot/last_save_directory", NULL);
   if (!last_save_dir || !last_save_dir[0])
     {
-      if (gconf_client_get_bool (gconf_client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL))
-	last_save_dir = g_strconcat (g_get_home_dir (), NULL);
-      else
-	last_save_dir = g_strconcat (g_get_home_dir (), G_DIR_SEPARATOR_S, "Desktop", NULL);
+      last_save_dir = get_desktop_dir ();
     }
   else if (last_save_dir[0] == '~')
     {
@@ -390,7 +421,6 @@ load_options (void)
 
   include_border = gconf_client_get_bool (gconf_client, "/apps/gnome-screenshot/include_border", NULL);
   border_effect = gconf_client_get_string (gconf_client, "/apps/gnome-screenshot/border_effect", NULL);
-  g_print ("border_effect: %s\n", border_effect);
 
   g_object_unref (gconf_client);
 }
