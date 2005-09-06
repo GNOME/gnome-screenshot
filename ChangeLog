@@ -1,3 +1,5 @@
+==================== 2.12.0 ====================
+
 Sun Aug 28 01:09:42 2005  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-panel-screenshot.c: (generate_filename_for_uri),
