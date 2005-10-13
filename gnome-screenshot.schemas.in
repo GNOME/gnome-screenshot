@@ -10,8 +10,8 @@
       <type>string</type>
       <default></default>
       <locale name="C">
-        <short>Web directory</short>
-        <long>Directory that the screenshooter last used to save in</long>
+        <short>Screenshot directory</short>
+        <long>The directory the last screenshot was saved in.</long>
       </locale>
     </schema>
 
