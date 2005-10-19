@@ -192,7 +192,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 				       GTK_MESSAGE_ERROR,
 				       GTK_BUTTONS_OK,
 				       _("Glade file for the screenshot program is missing.\n"
-					 "Please check your installation of gnome-panel"));
+					 "Please check your installation of gnome-utils"));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       exit (1);

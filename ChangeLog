@@ -1,5 +1,10 @@
 2005-10-19  Sebastien Bacher  <seb128@debian.org>
 
+	* screenshot-dialog.c: (screenshot_dialog_new):
+	mention gnome-utils instead of gnome-panel (Closes: #167158).
+
+2005-10-19  Sebastien Bacher  <seb128@debian.org>
+
 	* gnome-panel-screenshot.c: (generate_filename_for_uri):
 	clean an useless g_print statement (Closes: #319191).
 
