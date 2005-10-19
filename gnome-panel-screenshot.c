@@ -128,7 +128,6 @@ generate_filename_for_uri (const char *uri)
       result = gnome_vfs_get_file_info (retval, info, GNOME_VFS_FILE_INFO_DEFAULT | GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
       gnome_vfs_file_info_unref (info);
 
-      g_print ("resutlt: %d\n", result);
       switch (result)
 	{
 	case GNOME_VFS_ERROR_NOT_FOUND:
