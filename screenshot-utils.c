@@ -514,7 +514,7 @@ screenshot_get_pixbuf (Window w)
     {
       gboolean has_alpha = gdk_pixbuf_get_has_alpha (tmp);
 
-      screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
+      screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, has_alpha, 8,
 				   width, height);
       gdk_pixbuf_fill (screenshot, 0);
 	
@@ -555,16 +555,15 @@ screenshot_get_pixbuf (Window w)
 		rec_x * (has_alpha ? 4 : 3);
 	      dest_pixels = gdk_pixbuf_get_pixels (screenshot) +
 		y * gdk_pixbuf_get_rowstride (screenshot) +
-		rec_x * 4;
+		rec_x * (has_alpha ? 4 : 3);
 				
 	      for (x = 0; x < rec_width; x++)
 		{
 		  *dest_pixels++ = *src_pixels ++;
 		  *dest_pixels++ = *src_pixels ++;
 		  *dest_pixels++ = *src_pixels ++;
-		  *dest_pixels++ = 255;
 		  if (has_alpha)
-		    src_pixels++;
+		    *dest_pixels++ = *src_pixels++;
 		}
 	    }
 	}
