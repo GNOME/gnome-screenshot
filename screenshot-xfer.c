@@ -104,10 +104,10 @@ handle_transfer_ok (const GnomeVFSXferProgressInfo *progress_info,
       return 1;
     case GNOME_VFS_XFER_PHASE_READYTOGO:
       gnome_egg_xfer_dialog_set_operation_string
-	(transfer_info->progress_dialog,
+	(GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
 	 transfer_info->action_label);
       gnome_egg_xfer_dialog_set_total
-	(transfer_info->progress_dialog,
+	(GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
 	 progress_info->files_total,
 	 progress_info->bytes_total);
       return 1;

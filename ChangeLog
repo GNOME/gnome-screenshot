@@ -1,3 +1,8 @@
+2005-12-21  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-xfer.c (handle_transfer_ok): fix compiler warnings (patch
+	by Kjartan Maraas, closes bug #324552).
+
 2005-10-19  Sebastien Bacher  <seb128@debian.org>
 
 	* screenshot-dialog.c: (screenshot_dialog_new):
