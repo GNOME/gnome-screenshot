@@ -1,3 +1,9 @@
+2005-12-23  Dennis Cranston  <dennis_cranston@yahoo.com>
+
+	* screenshot-dialog.c: (screenshot_dialog_get_uri):
+	* screenshot-save.c: (screenshot_sanitize_filename): Escape the
+	path strings.  Fixes crash reported in bug #319188.
+
 2005-12-21  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-xfer.c (handle_transfer_ok): fix compiler warnings (patch

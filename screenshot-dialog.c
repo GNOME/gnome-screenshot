@@ -277,9 +277,11 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
 
   tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
-  uri = g_build_filename (folder, tmp, NULL);
+  file_name = gnome_vfs_escape_host_and_path_string (tmp);
+  uri = g_build_filename (folder, file_name, NULL);
   g_free (folder);
   g_free (tmp);
+  g_free (file_name);
 
   return uri;
 }
