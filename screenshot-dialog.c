@@ -2,6 +2,7 @@
 #include "screenshot-dialog.h"
 #include "screenshot-save.h"
 #include <gnome.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 
 static GtkTargetEntry drag_types[] =
@@ -271,17 +272,17 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
 {
   gchar *folder;
   const gchar *file_name;
-  gchar *uri, *tmp;
+  gchar *uri, *file, *tmp;
 
   folder = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
 
   tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
-  file_name = gnome_vfs_escape_host_and_path_string (tmp);
-  uri = g_build_filename (folder, file_name, NULL);
+  file = gnome_vfs_escape_host_and_path_string (tmp);
+  uri = g_build_filename (folder, file, NULL);
   g_free (folder);
   g_free (tmp);
-  g_free (file_name);
+  g_free (file);
 
   return uri;
 }
