@@ -46,17 +46,21 @@ gnome_screenshot_LDADD =		\
 	$(SCREENSHOT_LIBS)		\
 	$(NULL)
 
+gnome_screenshotdir  = $(datadir)/applications
+gnome_screenshot_in_files = gnome-screenshot.desktop.in
+gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
 gladedir = $(datadir)/gnome-screenshot/glade
 
 glade_DATA =					\
 	gnome-screenshot.glade			\
 	$(NULL)
 
-@INTLTOOL_DESKTOP_RULE@
-
 EXTRA_DIST =					\
 	$(glade_DATA)				\
 	$(schemas_in_files)			\
+	$(gnome_screenshot_in_files)		\
 	$(NULL)
 
 schemasdir       = $(GCONF_SCHEMA_FILE_DIR)
@@ -81,6 +85,7 @@ endif
 CLEANFILES = \
 	$(BUILT_SOURCES)			 \
 	$(schemas_in_files:.schemas.in=.schemas) \
+	$(gnome_screenshot_DATA)		 \
 	$(sys_DATA)
 
 dist-hook:
