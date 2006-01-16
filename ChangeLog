@@ -1,3 +1,12 @@
+2006-01-15  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	A gnome-screenshot.desktop.in
+
+	* gnome-screenshot.desktop.in: provide a .desktop file launcher for
+	GNOME Screenshot.
+
+	* Makefile.am: include gnome-screenshot.desktop.in to the build.
+
 2005-12-23  Dennis Cranston  <dennis_cranston@yahoo.com>
 
 	* screenshot-dialog.c: (screenshot_dialog_get_uri):
