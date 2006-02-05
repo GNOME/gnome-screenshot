@@ -1,3 +1,9 @@
+2006-02-05  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-save.c (screenshot_save_start): mark the name of the
+	temporary file as translatable, in order to have the localized file
+	name when saving by drag and drop (closes bug #170171).
+
 2006-01-15  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	A gnome-screenshot.desktop.in

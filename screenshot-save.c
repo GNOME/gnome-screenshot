@@ -160,7 +160,9 @@ screenshot_save_start (GdkPixbuf    *pixbuf,
   if (parent_dir == NULL)
     return;
 
-  tmp_filename = g_strdup_printf ("%s/screenshot.png", parent_dir);
+  tmp_filename = g_build_filename (parent_dir,
+		  		   _("Screenshot.png"),
+				   NULL);
   save_callback = callback;
   save_user_data = user_data;
 
