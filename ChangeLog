@@ -1,3 +1,9 @@
+2006-02-07  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* gnome-panel-screenshot.c (main): switch to GOption for parsing the
+	command line switches.  Display a warning if the option is not
+	recognized (closes bug #329296).
+
 2006-02-05  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-save.c (screenshot_save_start): mark the name of the

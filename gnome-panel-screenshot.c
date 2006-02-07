@@ -428,34 +428,41 @@ load_options (void)
 int
 main (int argc, char *argv[])
 {
+  GOptionContext *context;
+  GOptionGroup *group;
   gboolean window_arg = FALSE;
   gboolean include_border_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
 
-  struct poptOption opts[] =
-    {
-      {"window", '\0', POPT_ARG_NONE, NULL, 0, N_("Grab a window instead of the entire screen"), NULL},
-      {"include-border", '\0', POPT_ARG_NONE, NULL, 0, N_("Include the window border with the screenshot"), NULL},
-      {"delay", '\0', POPT_ARG_INT, NULL, 0, N_("Take screenshot after specified delay [in seconds]"), NULL},
-      {"border-effect", '\0', POPT_ARG_STRING, NULL, 0, N_("Effect to add to the window border"), NULL},
-      {NULL, '\0', 0, NULL, 0, NULL, NULL}
-    };
-
-  opts[0].arg = &window_arg;
-  opts[1].arg = &include_border_arg;
-  opts[2].arg = &delay_arg;
-  opts[3].arg = &border_effect_arg;
+  const GOptionEntry entries[] = {
+    { "window", 0, 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
+    { "include-border", 0, 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
+    { "delay", 0, 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
+    { "border-effect", 0, 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border"), N_("effect") },
+    { NULL },
+  };
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  group = g_option_group_new ("gnome-screenshot",
+		  	      _("Options for Screenshot"),
+			      _("Show Screenshot options"),
+			      NULL, NULL);
+  g_option_group_add_entries (group, entries);
+
+  context = g_option_context_new (_("Take a picture of the screen"));
+  g_option_context_add_group (context, group);
+  g_option_context_set_ignore_unknown_options (context, FALSE);
+  g_option_context_set_help_enabled (context, TRUE);
+
   gnome_program_init ("gnome-panel-screenshot", VERSION,
 		      LIBGNOMEUI_MODULE,
 		      argc, argv,
-		      GNOME_PARAM_POPT_TABLE, opts,
+		      GNOME_PARAM_GOPTION_CONTEXT, context,
 		      GNOME_PROGRAM_STANDARD_PROPERTIES,
 		      NULL);
   glade_gnome_init();
@@ -485,6 +492,8 @@ main (int argc, char *argv[])
     {
       prepare_screenshot ();
     }
+
+  g_option_context_free (context);
 
   return 0;
 }
