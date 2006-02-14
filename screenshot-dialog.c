@@ -170,6 +170,8 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   gint width, height;
   char *current_folder;
   char *current_name;
+  char *ext;
+  gint pos;
   GnomeVFSURI *tmp_uri;
   GnomeVFSURI *parent_uri;
 
@@ -218,7 +220,6 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 
   gtk_box_pack_start (GTK_BOX (file_chooser_box), dialog->save_widget, TRUE, TRUE, 0);
   g_free (current_folder);
-  g_free (current_name);
 
   gtk_widget_set_size_request (preview_darea, width, height);
   gtk_aspect_frame_set (GTK_ASPECT_FRAME (aspect_frame), 0.0, 0.5,
@@ -243,6 +244,21 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 		    G_CALLBACK (drag_data_get), dialog);
 
   gtk_widget_show_all (toplevel);
+
+  /* select the name of the file but leave out the extension if there's any;
+   * the dialog must be realized for select_region to work
+   */
+  ext = g_utf8_strchr (current_name, -1, '.');
+  if (ext && ext != current_name)
+    pos = ext - current_name;
+  else
+    pos = -1;
+
+  gtk_editable_select_region (GTK_EDITABLE (dialog->filename_entry),
+			      0,
+			      pos);
+  
+  g_free (current_name);
 
   return dialog;
 }

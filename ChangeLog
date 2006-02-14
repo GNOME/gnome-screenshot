@@ -1,3 +1,8 @@
+2006-02-14  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-dialog.c (screenshot_dialog_new): select just the name
+	of the file but not its extension (closes bug #312346).
+
 2006-02-07  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* gnome-panel-screenshot.c (main): switch to GOption for parsing the
