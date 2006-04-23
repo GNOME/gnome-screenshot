@@ -1,5 +1,10 @@
 2006-04-23  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
+	* screenshot-utils.c (screenshot_get_pixbuf): Fix transparency
+	for shaped windows (closes bug #332017)
+
+2006-04-23  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
 	* gnome-panel-screenshot.c (main): Show the application's
 	options using the --help command switch (closes bug #338330)
 
