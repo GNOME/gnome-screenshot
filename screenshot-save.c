@@ -38,7 +38,7 @@ clean_up_temporary_dir (gboolean gui_on_error)
 
   if (error_occurred)
     {
-      message = g_strdup_printf (_("Unable to clear the temporary directory:\n%s"),
+      message = g_strdup_printf (_("Unable to clear the temporary folder:\n%s"),
 				 tmp_filename);
       if (gui_on_error)
 	{

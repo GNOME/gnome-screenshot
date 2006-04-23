@@ -213,7 +213,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   dialog->filename_entry = glade_xml_get_widget (dialog->xml, "filename_entry");
   file_chooser_box = glade_xml_get_widget (dialog->xml, "file_chooser_box");
 
-  dialog->save_widget = gtk_file_chooser_button_new (_("Select a directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+  dialog->save_widget = gtk_file_chooser_button_new (_("Select a folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog->save_widget), FALSE);
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
   gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
