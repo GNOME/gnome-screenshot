@@ -1,5 +1,18 @@
 2006-04-23  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
+	* screenshot-utils.c (screenshot_get_pixbuf): Compose with the
+	root window in order to avoid showing garbage for half-visible
+	windows and for menus (Björn Lindqvist, fixes bug #121492
+	and #165949)
+
+2006-04-23  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-dialog.c:
+	* screenshot-save.c: Use 'Folder' in place of 'Directory'
+	for consistency with the naming policy (closes bug #100052)
+
+2006-04-23  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
 	* screenshot-utils.c (screenshot_get_pixbuf): Fix transparency
 	for shaped windows (closes bug #332017)
 

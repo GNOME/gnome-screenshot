@@ -457,11 +457,10 @@ screenshot_find_current_window (gboolean include_decoration)
 GdkPixbuf *
 screenshot_get_pixbuf (Window w)
 {
-  GdkWindow *window;
+  GdkWindow *window, *root;
   GdkPixbuf *screenshot;
   gint x_real_orig, y_real_orig;
   gint x_orig, y_orig;
-  gint x = 0, y = 0;
   gint real_width, real_height;
   gint width, height;
 
@@ -475,7 +474,8 @@ screenshot_get_pixbuf (Window w)
   window = gdk_window_foreign_new (w);
   if (window == NULL)
     return NULL;
-
+  
+  root = gdk_window_foreign_new (GDK_ROOT_WINDOW ());
   gdk_drawable_get_size (window, &real_width, &real_height);
   gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
 
@@ -483,16 +483,14 @@ screenshot_get_pixbuf (Window w)
   y_orig = y_real_orig;
   width = real_width;
   height = real_height;
-	
+
   if (x_orig < 0)
     {
-      x = - x_orig;
       width = width + x_orig;
       x_orig = 0;
     }
   if (y_orig < 0)
     {
-      y = - y_orig;
       height = height + y_orig;
       y_orig = 0;
     }
@@ -504,8 +502,8 @@ screenshot_get_pixbuf (Window w)
 
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
-  tmp = gdk_pixbuf_get_from_drawable (NULL, window, NULL,
-				      x, y, 0, 0,
+  tmp = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
+				      x_orig, y_orig, 0, 0,
 				      width, height);
 
   rectangles = XShapeGetRectangles (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (window),
@@ -522,6 +520,7 @@ screenshot_get_pixbuf (Window w)
 	{
 	  gint rec_x, rec_y;
 	  gint rec_width, rec_height;
+          gint y;
 
 	  rec_x = rectangles[i].x;
 	  rec_y = rectangles[i].y;
@@ -548,7 +547,8 @@ screenshot_get_pixbuf (Window w)
 
 	  for (y = rec_y; y < rec_y + rec_height; y++)
 	    {
-	      guchar *src_pixels, *dest_pixels;
+              guchar *src_pixels, *dest_pixels;
+              gint x;
 	      
 	      src_pixels = gdk_pixbuf_get_pixels (tmp) +
 		y * gdk_pixbuf_get_rowstride(tmp) +
@@ -576,8 +576,8 @@ screenshot_get_pixbuf (Window w)
       screenshot = tmp;
     }
 #else /* HAVE_X11_EXTENSIONS_SHAPE_H */
-  screenshot = gdk_pixbuf_get_from_drawable (NULL, window, NULL,
-					     x, y, 0, 0,
+  screenshot = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
+					     x_orig, y_orig, 0, 0,
 					     width, height);
 #endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
 
