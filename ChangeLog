@@ -1,3 +1,8 @@
+2006-04-23  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* gnome-panel-screenshot.c (main): Show the application's
+	options using the --help command switch (closes bug #338330)
+
 2006-02-14  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-dialog.c (screenshot_dialog_new): select just the name

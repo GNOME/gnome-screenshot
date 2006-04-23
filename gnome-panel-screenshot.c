@@ -455,9 +455,9 @@ main (int argc, char *argv[])
   g_option_group_add_entries (group, entries);
 
   context = g_option_context_new (_("Take a picture of the screen"));
-  g_option_context_add_group (context, group);
   g_option_context_set_ignore_unknown_options (context, FALSE);
   g_option_context_set_help_enabled (context, TRUE);
+  g_option_context_set_main_group (context, group);
 
   gnome_program_init ("gnome-panel-screenshot", VERSION,
 		      LIBGNOMEUI_MODULE,
