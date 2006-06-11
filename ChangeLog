@@ -5,7 +5,7 @@
 	* screenshot-save:
 	* screenshot-utils.c:
 	* screenshot-xfer.c: Fix includes, and drop deprecated I18N
-	header gnome-i18n.h.
+	header gnome-i18n.h (Kristof Vansant, #167098).
 
 	* screenshot-utils.c (get_utf8_property), (find_toplevel_window),
 	(look_for_hint_helper): Fix signedness warnings.
