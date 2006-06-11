@@ -1,8 +1,10 @@
-#include <config.h>
+#include "config.h"
 #include "screenshot-utils.h"
+
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
-#include <gnome.h>
+#include <glib.h>
+#include <glib/gi18n.h>
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
 #include <X11/extensions/shape.h>
@@ -161,7 +163,7 @@ get_utf8_property (Window  xwindow,
       return NULL;
     }
 
-  if (!g_utf8_validate (val, nitems, NULL))
+  if (!g_utf8_validate ((gchar *)val, nitems, NULL))
     {
       g_warning ("Property %s contained invalid UTF-8\n",
 		 gdk_x11_get_xatom_name (atom));
@@ -169,7 +171,7 @@ get_utf8_property (Window  xwindow,
       return NULL;
     }
   
-  retval = g_strndup (val, nitems);
+  retval = g_strndup ((gchar *)val, nitems);
   
   XFree (val);
   
@@ -274,7 +276,7 @@ static Window
 find_toplevel_window (Window xid)
 {
   Window root, parent, *children;
-  int nchildren;
+  unsigned int nchildren;
 
   do
     {
@@ -365,7 +367,7 @@ look_for_hint_helper (Window    xid,
   gulong nitems, bytes_after;
   gulong *prop;
   Window root, parent, *children, window;
-  int nchildren, i;
+  unsigned int nchildren, i;
 
   if (XGetWindowProperty (GDK_DISPLAY (), xid, property, 0, 1,
 			  False, AnyPropertyType, &actual_type,

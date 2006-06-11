@@ -38,7 +38,7 @@
 #include <gtk/gtkstock.h>
 #include <gtk/gtktable.h>
 #include <gtk/gtkvbox.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 /* The default width of the progress dialog. It will be wider

@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "screenshot-save.h"

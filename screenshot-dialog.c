@@ -1,7 +1,10 @@
 #include <config.h>
 #include "screenshot-dialog.h"
 #include "screenshot-save.h"
-#include <gnome.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include <gdk/gdkkeysyms.h>
+#include <glib/gi18n.h>
+#include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 

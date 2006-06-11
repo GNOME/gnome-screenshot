@@ -1,9 +1,10 @@
+#include "config.h"
+
 #include "screenshot-xfer.h"
 #include "gnome-egg-xfer-dialog.h"
 
-#include <gnome.h>
 #include <time.h>
-
+#include <glib/gi18n.h>
 
 typedef struct
 {
