@@ -1,4 +1,7 @@
 #include <config.h>
+#include <string.h>
+#include <stdlib.h>
+
 #include "screenshot-dialog.h"
 #include "screenshot-save.h"
 #include <libgnomevfs/gnome-vfs.h>
