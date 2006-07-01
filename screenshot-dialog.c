@@ -254,8 +254,8 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   /* select the name of the file but leave out the extension if there's any;
    * the dialog must be realized for select_region to work
    */
-  ext = g_utf8_strchr (current_name, -1, '.');
-  if (ext && ext != current_name)
+  ext = g_utf8_strrchr (current_name, -1, '.');
+  if (ext)
     pos = ext - current_name;
   else
     pos = -1;

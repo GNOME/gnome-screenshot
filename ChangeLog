@@ -1,3 +1,9 @@
+2006-07-01  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-dialog.c (screenshot_dialog_new): Use
+	g_utf8_strrchr() to find the last mark before the
+	extension.
+
 2006-06-14  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-dialog.c: Fix includes.
