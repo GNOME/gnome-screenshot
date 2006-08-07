@@ -62,7 +62,7 @@ get_window_property (Window  xwindow,
   int format;
   gulong nitems;
   gulong bytes_after;
-  Window *w;
+  unsigned char *w;
   int err, result;
   Window retval;
 
@@ -74,7 +74,7 @@ get_window_property (Window  xwindow,
 			       atom,
 			       0, G_MAXLONG,
 			       False, XA_WINDOW, &type, &format, &nitems,
-			       &bytes_after, (guchar **)&w);  
+			       &bytes_after, &w);  
   err = gdk_error_trap_pop ();
 
   if (err != Success ||
@@ -187,7 +187,7 @@ get_atom_property (Window  xwindow,
   int format;
   gulong nitems;
   gulong bytes_after;
-  Atom *a;
+  unsigned char *a;
   int err, result;
 
   *val = 0;
@@ -199,7 +199,7 @@ get_atom_property (Window  xwindow,
 			       atom,
 			       0, G_MAXLONG,
 			       False, XA_ATOM, &type, &format, &nitems,
-			       &bytes_after, (guchar **)&a);  
+			       &bytes_after, &a);  
   err = gdk_error_trap_pop ();
   if (err != Success ||
       result != Success)
