@@ -62,7 +62,7 @@ get_window_property (Window  xwindow,
   int format;
   gulong nitems;
   gulong bytes_after;
-  unsigned char *w;
+  Window *w;
   int err, result;
   Window retval;
 
@@ -74,7 +74,7 @@ get_window_property (Window  xwindow,
 			       atom,
 			       0, G_MAXLONG,
 			       False, XA_WINDOW, &type, &format, &nitems,
-			       &bytes_after, &w);  
+			       &bytes_after, (unsigned char **) &w);  
   err = gdk_error_trap_pop ();
 
   if (err != Success ||

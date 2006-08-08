@@ -1,3 +1,9 @@
+2006-08-08  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-utils.c (get_window_property): Fix the
+	call to XGetWindowProperty that got mangled by the
+	compiler fixes patch of bug #318095. (#350447)
+
 2006-07-01  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-dialog.c (screenshot_dialog_new): Use
