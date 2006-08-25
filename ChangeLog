@@ -1,3 +1,9 @@
+2006-08-25  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-dialog.c (screenshot_dialog_new): Use the
+	UTF-8 functions to select just the file name and not the
+	extension. (#348896, Kouhei Sutou)
+
 2006-08-08  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-utils.c (get_window_property): Fix the

@@ -256,7 +256,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
    */
   ext = g_utf8_strrchr (current_name, -1, '.');
   if (ext)
-    pos = ext - current_name;
+    pos = g_utf8_strlen (current_name, -1) - g_utf8_strlen (ext, -1);
   else
     pos = -1;
 
