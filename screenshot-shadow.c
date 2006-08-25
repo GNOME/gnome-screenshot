@@ -7,7 +7,7 @@
 #define SHADOW_OFFSET  (BLUR_RADIUS * 4 / 5)
 #define SHADOW_OPACITY 0.5
 
-#define OUTLINE_RADIUS  1.1
+#define OUTLINE_RADIUS  1
 #define OUTLINE_OFFSET  0
 #define OUTLINE_OPACITY 1.0
 
@@ -64,20 +64,16 @@ static ConvFilter *
 create_outline_filter (int radius)
 {
   ConvFilter *filter;
-  int x, y;
+  double *iter;
   
   filter = g_new0 (ConvFilter, 1);
   filter->size = radius * 2 + 1;
   filter->data = g_new (double, filter->size * filter->size);
 
-  for (y = 0; y < filter->size; y++)
-  {
-    for (x = 0 ; x < filter->size; x++) 
+  for (iter = filter->data; iter < filter->data + (filter->size * filter->size); iter++)
     {
-      filter->data [y * filter->size + x] = (dist (x, y, radius, radius) < radius + 0.2) ?
-	      1.0 : 0.0;
+      *iter = 1.0;
     }
-  }
 
   return filter;
 }
