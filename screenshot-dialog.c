@@ -10,12 +10,16 @@
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
+enum {
+  TYPE_IMAGE,
+  TYPE_URI,
+};
 
 static GtkTargetEntry drag_types[] =
 {
-  { "image/png", 0, 0 },
-  { "x-special/gnome-icon-list", 0, 0 },
-  { "text/uri-list", 0, 0 }
+  { "image/png", 0, TYPE_IMAGE },
+  { "x-special/gnome-icon-list", 0, TYPE_URI },
+  { "text/uri-list", 0, TYPE_URI }
 };
 
 struct ScreenshotDialog
@@ -141,8 +145,9 @@ drag_data_get (GtkWidget          *widget,
 	       GtkSelectionData   *selection_data,
 	       guint               info,
 	       guint               time,
-	       gpointer            data)
+	       ScreenshotDialog *dialog)
 {
+  if (info == TYPE_URI) {
 	char *string;
 
 	string = g_strdup_printf ("file:%s\r\n",
@@ -151,6 +156,11 @@ drag_data_get (GtkWidget          *widget,
 				selection_data->target,
 				8, string, strlen (string)+1);
 	g_free (string);
+  } else if (info == TYPE_IMAGE) {
+	gtk_selection_data_set_pixbuf (selection_data, dialog->screenshot);
+  } else {
+	g_warning ("Unknown type %d", info);
+  }
 }
 
 static void

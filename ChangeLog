@@ -1,3 +1,8 @@
+2006-09-07  Ross Burton  <ross@burtonini.com>
+
+	* screenshot-dialog.c:
+	Implement the advertised dragging of image data (#354685).
+
 2006-08-25  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* screenshot-shadow.c (create_outline_filter): outline
