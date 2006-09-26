@@ -11,3 +11,4 @@ Categories=GTK;GNOME;Application;Utility;
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-utils
 X-GNOME-Bugzilla-Component=screenshot
+X-GNOME-Bugzilla-OtherBinaries=gnome-panel-screenshot
