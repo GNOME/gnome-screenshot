@@ -1,3 +1,15 @@
+2006-10-18  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-dialog.c: Remove the useless target
+	"x-special/gnome-icon-list", as we already support
+	text/uri-list and we don't pass any of the icon
+	data with DnD.
+	
+	(drag_data_get): Fix the URI passed via DnD using the
+	gtk_selection_data_set_uris() API function instead of
+	manually building the URI list. (closes #361016, reported
+	by Stephan Delcroix)
+
 2006-09-26  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* gnome-screenshot.desktop.in: Add the OtherBinaries key

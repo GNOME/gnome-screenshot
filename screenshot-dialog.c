@@ -11,15 +11,16 @@
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 enum {
-  TYPE_IMAGE,
-  TYPE_URI,
+  TYPE_IMAGE_PNG,
+  TYPE_TEXT_URI_LIST,
+  
+  LAST_TYPE
 };
 
 static GtkTargetEntry drag_types[] =
 {
-  { "image/png", 0, TYPE_IMAGE },
-  { "x-special/gnome-icon-list", 0, TYPE_URI },
-  { "text/uri-list", 0, TYPE_URI }
+  { "image/png", 0, TYPE_IMAGE_PNG },
+  { "text/uri-list", 0, TYPE_TEXT_URI_LIST },
 };
 
 struct ScreenshotDialog
@@ -145,22 +146,28 @@ drag_data_get (GtkWidget          *widget,
 	       GtkSelectionData   *selection_data,
 	       guint               info,
 	       guint               time,
-	       ScreenshotDialog *dialog)
+	       ScreenshotDialog   *dialog)
 {
-  if (info == TYPE_URI) {
-	char *string;
+  if (info == TYPE_TEXT_URI_LIST)
+    {
+      gchar **uris;
 
-	string = g_strdup_printf ("file:%s\r\n",
-				  screenshot_save_get_filename ());
-	gtk_selection_data_set (selection_data,
-				selection_data->target,
-				8, string, strlen (string)+1);
-	g_free (string);
-  } else if (info == TYPE_IMAGE) {
-	gtk_selection_data_set_pixbuf (selection_data, dialog->screenshot);
-  } else {
-	g_warning ("Unknown type %d", info);
-  }
+      uris = g_new (gchar *, 2);
+      uris[0] = g_strconcat ("file://",
+                             screenshot_save_get_filename (),
+                             NULL);
+      uris[1] = NULL;
+      
+      gtk_selection_data_set_uris (selection_data, uris);
+    }
+  else if (info == TYPE_IMAGE_PNG)
+    {
+      gtk_selection_data_set_pixbuf (selection_data, dialog->screenshot);
+    }
+  else
+    {
+      g_warning ("Unknown type %d", info);
+    }
 }
 
 static void
@@ -288,7 +295,7 @@ screenshot_dialog_enable_dnd (ScreenshotDialog *dialog)
 
   preview_darea = glade_xml_get_widget (dialog->xml, "preview_darea");
   gtk_drag_source_set (preview_darea,
-		       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
 		       drag_types, G_N_ELEMENTS (drag_types),
 		       GDK_ACTION_COPY);
 }
