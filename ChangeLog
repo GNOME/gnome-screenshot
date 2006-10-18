@@ -1,5 +1,10 @@
 2006-10-18  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
+	* gnome-panel-screenshot.c: Remove the unneeded headers
+	Xmu/WinUtil.h and cursorfont.h. (closes #167089)
+
+2006-10-18  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
 	* screenshot-dialog.c: Remove the useless target
 	"x-special/gnome-icon-list", as we already support
 	text/uri-list and we don't pass any of the icon

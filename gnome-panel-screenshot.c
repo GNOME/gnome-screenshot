@@ -38,8 +38,6 @@
 #include <libgnomevfs/gnome-vfs-async-ops.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <X11/Xutil.h>
-#include <X11/cursorfont.h>
-#include <X11/Xmu/WinUtil.h>
 
 #include "screenshot-shadow.h"
 #include "screenshot-utils.h"
