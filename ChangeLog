@@ -1,3 +1,10 @@
+2006-12-22  Emmanuele Bassi  <ebassi@cvs.gnome.org>
+
+	* screenshot-save.c: Apply long-forgotten patch: if we can
+	successfully read something from the child pipe, then it's
+	surely an error; seems to fix gnome-screenshot on *BSD
+	boxes. (hopefully closes #161525)
+
 2006-10-18  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* gnome-panel-screenshot.c: Remove the unneeded headers
