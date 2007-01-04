@@ -457,6 +457,8 @@ main (int argc, char *argv[])
   g_option_context_set_help_enabled (context, TRUE);
   g_option_context_set_main_group (context, group);
 
+  gnome_authentication_manager_init ();
+
   gnome_program_init ("gnome-panel-screenshot", VERSION,
 		      LIBGNOMEUI_MODULE,
 		      argc, argv,
