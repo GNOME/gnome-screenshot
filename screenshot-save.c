@@ -14,10 +14,6 @@ static char *tmp_filename = NULL;
 static SaveFunction save_callback = NULL;
 static gpointer save_user_data = NULL;
 
-extern int errno;
-
-
-
 /* Strategy for saving:
  *
  * We keep another process around to handle saving the image.  This is
@@ -121,22 +117,34 @@ read_pipe_from_child (GIOChannel   *source,
 static char *
 make_temp_directory (void)
 {
-  gint result;
-  char *dir_name;
-
+  gint result, i;
+  gchar *dir_name;
+  
+  i = 0;
   do
     {
-      /* FIXME: honor $TMPDIR */
-      dir_name = g_strdup_printf ("/tmp/gnome-panel-screenshot-%d", rand ());
-      result = mkdir (dir_name, 0700);
+      gchar *tmp_dir = g_strdup_printf ("%u-%d",
+                                        (unsigned int) getpid (),
+                                        i++);
+      
+      dir_name = g_build_filename (g_get_tmp_dir (),
+                                   "gnome-screenshot",
+                                   tmp_dir,
+                                   NULL);
+      g_free (tmp_dir);
 
-      if (result == 0)
-	return dir_name;
-      g_free (dir_name);
+      result = g_mkdir_with_parents (dir_name, 0700);
+      if (result < 0)
+        {
+          g_free (dir_name);
 
-      /* If a dir of that name already exists, we try again.  Otherwise, we give up.  */
-      if (errno != EEXIST)
-	return NULL;
+          if (errno != EEXIST)
+            return NULL;
+          else
+            continue;
+        }
+      else
+        return dir_name;
     }
   while (TRUE);
 }

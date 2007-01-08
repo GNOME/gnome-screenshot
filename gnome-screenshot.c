@@ -1,5 +1,7 @@
-/* simple-screenshot.c */
-/* Copyright (C) 2001 Jonathan Blandford <jrb@alum.mit.edu>
+/* gnome-screenshot.c - Take a screenshot of the desktop
+ *
+ * Copyright (C) 2001 Jonathan Blandford <jrb@alum.mit.edu>
+ * Copyright (C) 2006 Emmanuele Bassi <ebassi@gnome.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -57,6 +59,7 @@ static gboolean save_immediately = FALSE;
 static gboolean take_window_shot = FALSE;
 static gboolean include_border = FALSE;
 static char *border_effect = NULL;
+static guint delay = 0;
 
 /* some local prototypes */
 static void display_help           (ScreenshotDialog *dialog);
@@ -74,22 +77,171 @@ display_help (ScreenshotDialog *dialog)
 
   if (error)
     {
-      GtkWidget *msg_dialog;
+      GtkWindow *parent;
 
-      msg_dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (screenshot_dialog_get_toplevel (dialog)),
-						       GTK_DIALOG_DESTROY_WITH_PARENT,
-						       GTK_MESSAGE_ERROR,
-						       GTK_BUTTONS_OK,
-						       "<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s\n%s",
-						       _("Error loading help"),
-						       _("There was an error displaying the help pages for this dialog:"),
-						       error->message);
+      if (dialog)
+        parent = GTK_WINDOW (screenshot_dialog_get_toplevel (dialog));
+      else
+        parent = NULL;
 
-      gtk_widget_show (msg_dialog);
-      gtk_dialog_run (GTK_DIALOG (msg_dialog));
-      gtk_widget_destroy (msg_dialog);
-      g_error_free (error);
+      screenshot_show_gerror_dialog (parent,
+                                     _("Error loading the help page"),
+                                     error);
     }
+}
+
+static void
+interactive_dialog_response_cb (GtkDialog *dialog,
+                                gint       response,
+                                gpointer   user_data)
+{
+  switch (response)
+    {
+    case GTK_RESPONSE_HELP:
+      g_signal_stop_emission_by_name (dialog, "response");
+      display_help (NULL);
+      break;
+    default:
+      break;
+    }
+}
+
+static void
+target_toggled_cb (GtkWidget *widget,
+                   gpointer   data)
+{
+  GtkToggleButton *button = GTK_TOGGLE_BUTTON (widget);
+  gboolean window_selected = GPOINTER_TO_INT (data);
+
+  if (gtk_toggle_button_get_active (button))
+    take_window_shot = window_selected;
+}
+
+static void
+delay_spin_value_changed_cb (GtkSpinButton *button)
+{
+  gint value = gtk_spin_button_get_value_as_int (button);
+
+  delay = value;
+}
+
+static GtkWidget *
+create_interactive_dialog (void)
+{
+  GtkWidget *retval;
+  GtkWidget *vbox, *hbox;
+  GtkWidget *align;
+  GtkWidget *radio;
+  GtkWidget *image;
+  GtkWidget *spin;
+  GtkWidget *label;
+  GtkAdjustment *adjust;
+  GSList *group;
+  gchar *title;
+
+  retval = gtk_dialog_new ();
+
+  /* main container */
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (retval)->vbox), vbox,
+                      TRUE, TRUE, 0);
+  gtk_widget_show (vbox);
+
+  title = g_strconcat ("<b>", _("Take Screenshot"), "</b>", NULL);
+  label = gtk_label_new (title);
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+  gtk_widget_show (label);
+  g_free (title);
+
+  hbox = gtk_hbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+  gtk_widget_show (hbox);
+
+  align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
+  gtk_widget_set_size_request (align, 48, -1);
+  gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
+  gtk_widget_show (align);
+
+  image = gtk_image_new_from_stock ("applets-screenshooter",
+                                    GTK_ICON_SIZE_DIALOG);
+  gtk_container_add (GTK_CONTAINER (align), image);
+  gtk_widget_show (image);
+
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+  gtk_widget_show (vbox);
+
+  group = NULL;
+  radio = gtk_radio_button_new_with_mnemonic (group,
+                                              _("Grab the whole _desktop"));
+  if (take_window_shot)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), FALSE);
+  g_signal_connect (radio, "toggled",
+                    G_CALLBACK (target_toggled_cb),
+                    GINT_TO_POINTER (FALSE));
+  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
+  gtk_widget_show (radio);
+
+  radio = gtk_radio_button_new_with_mnemonic (group,
+                                              _("Grab the current _window"));
+  if (take_window_shot)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+  g_signal_connect (radio, "toggled",
+                    G_CALLBACK (target_toggled_cb),
+                    GINT_TO_POINTER (TRUE));
+  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+  gtk_widget_show (radio);
+
+  hbox = gtk_hbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+  gtk_widget_show (hbox);
+
+  /* translators: this is the first part of the "grab after a
+   * delay of <spin button> seconds".
+   */
+  label = gtk_label_new (_("Grab after a delay of"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_widget_show (label);
+
+  adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) delay,
+                                               0.0, 99.0,
+                                               1.0,  1.0,
+                                               1.0));
+  spin = gtk_spin_button_new (adjust, 1.0, 0);
+  g_signal_connect (spin, "value-changed",
+                    G_CALLBACK (delay_spin_value_changed_cb),
+                    NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+  gtk_widget_show (spin);
+
+  /* translators: this is the last part of the "grab after a
+   * delay of <spin button> seconds".
+   */
+  label = gtk_label_new (_("seconds"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_box_pack_end (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_widget_show (label);
+
+  gtk_dialog_set_has_separator (GTK_DIALOG (retval), FALSE);
+  gtk_dialog_add_buttons (GTK_DIALOG (retval),
+                          GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                          _("Take _Screenshot"), GTK_RESPONSE_OK,
+                          NULL);
+
+  /* we need to block on "response" and keep showing the interactive
+   * dialog in case the user did choose "help"
+   */
+  g_signal_connect (retval, "response",
+                    G_CALLBACK (interactive_dialog_response_cb),
+                    NULL);
+
+  return retval;
 }
 
 /* We assume that uri is valid and has been tested elsewhere
@@ -123,7 +275,9 @@ generate_filename_for_uri (const char *uri)
       GnomeVFSResult result;
 
       info = gnome_vfs_file_info_new ();
-      result = gnome_vfs_get_file_info (retval, info, GNOME_VFS_FILE_INFO_DEFAULT | GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+      result = gnome_vfs_get_file_info (retval, info,
+                                        GNOME_VFS_FILE_INFO_DEFAULT |
+                                        GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
       gnome_vfs_file_info_unref (info);
 
       switch (result)
@@ -136,7 +290,9 @@ generate_filename_for_uri (const char *uri)
 	case GNOME_VFS_ERROR_PROTOCOL_ERROR:
 	  /* try again?  I'm getting these errors sporadically */
 	default:
-	  g_warning ("ERR:%s:%s\n", retval, gnome_vfs_result_to_string (result));
+	  g_warning ("ERROR: %s:%s\n",
+                     retval,
+                     gnome_vfs_result_to_string (result));
 	  g_free (retval);
 	  return NULL;
 	}
@@ -327,14 +483,9 @@ prepare_screenshot (void)
 
   if (screenshot == NULL)
     {
-      GtkWidget *dialog;
-      dialog = gtk_message_dialog_new (NULL, /* parent */
-				       0, /* flags */
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK,
-				       _("Unable to take a screenshot of the current desktop."));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      screenshot_show_error_dialog (NULL,
+                                    _("Unable to take a screenshot of the current window"),
+                                    NULL);
       exit (1);
     }
 
@@ -430,14 +581,16 @@ main (int argc, char *argv[])
   GOptionGroup *group;
   gboolean window_arg = FALSE;
   gboolean include_border_arg = FALSE;
+  gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
 
   const GOptionEntry entries[] = {
-    { "window", 0, 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
-    { "include-border", 0, 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
-    { "delay", 0, 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-    { "border-effect", 0, 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border"), N_("effect") },
+    { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
+    { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
+    { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
+    { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border"), N_("effect") },
+    { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
     { NULL },
   };
 
@@ -459,7 +612,7 @@ main (int argc, char *argv[])
 
   gnome_authentication_manager_init ();
 
-  gnome_program_init ("gnome-panel-screenshot", VERSION,
+  gnome_program_init ("gnome-screenshot", VERSION,
 		      LIBGNOMEUI_MODULE,
 		      argc, argv,
 		      GNOME_PARAM_GOPTION_CONTEXT, context,
@@ -475,6 +628,7 @@ main (int argc, char *argv[])
 
   if (include_border_arg)
     include_border = TRUE;
+
   if (border_effect_arg)
     {
       g_free (border_effect);
@@ -482,8 +636,36 @@ main (int argc, char *argv[])
     }
 
   if (delay_arg > 0)
+    delay = delay_arg;
+
+  /* interactive mode overrides everything */
+  if (interactive_arg)
+    {
+      GtkWidget *dialog;
+      gint response;
+
+      dialog = create_interactive_dialog ();
+      response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+      switch (response)
+        {
+        case GTK_RESPONSE_DELETE_EVENT:
+        case GTK_RESPONSE_CANCEL:
+          g_option_context_free (context);
+          return EXIT_SUCCESS;
+        case GTK_RESPONSE_OK:
+          break;
+        default:
+          g_assert_not_reached ();
+          break;
+        }
+
+      gtk_widget_destroy (dialog);
+    }
+
+  if (delay > 0)
     {      
-      g_timeout_add (delay_arg * 1000,
+      g_timeout_add (delay * 1000,
 		     prepare_screenshot_timeout,
 		     NULL);
       gtk_main ();
@@ -495,5 +677,5 @@ main (int argc, char *argv[])
 
   g_option_context_free (context);
 
-  return 0;
+  return EXIT_SUCCESS;
 }

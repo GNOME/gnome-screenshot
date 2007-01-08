@@ -1,3 +1,26 @@
+2007-01-07  Emmanuele Bassi  <ebassi@gnome.org>
+
+	A gnome-screenshot.c
+	D gnome-panel-screenshot.c
+	D gnome-panel-screenshot.glade
+
+	* Makefile.am:
+	* gnome-screenshot.c: Remove mention of gnome-panel-screenshot
+	from the build and code: this is not a panel applet anymore;
+	implement the interactive dialog for controlling the settings
+	of the screenshot without using the command line switching.
+
+	* screenshot-save.c: Honour TMPDIR using g_get_tmp_dir() and
+	use a nicer layout for creating a unique directory for the
+	temporary screenshot file: now use a <pid>-<try-n> directory
+	under the ${TMPDIR}/gnome-screenshot root.
+
+	* screenshot-utils.[ch]: Add utility functions for showing a
+	dialog in case of error.
+
+	* gnome-screenshot.desktop.in: Use the interactive mode when
+	launching gnome-screenshot from the menu.
+
 2007-01-04  Emmanuele Bassi  <ebassi@gnome.org>
 
 	* gnome-panel-screenshot.c: Add a call to initialise the

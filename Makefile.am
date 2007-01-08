@@ -22,8 +22,7 @@ bin_PROGRAMS = \
 	$(NULL)
 
 gnome_screenshot_SOURCES = \
-	gnome-panel-screenshot.c	\
-	gnome-panel-screenshot.glade    \
+	gnome-screenshot.c		\
 	screenshot-dialog.c		\
 	screenshot-dialog.h		\
 	screenshot-shadow.c		\
@@ -52,7 +51,6 @@ gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 gladedir = $(datadir)/gnome-screenshot/glade
-
 glade_DATA =					\
 	gnome-screenshot.glade			\
 	$(NULL)

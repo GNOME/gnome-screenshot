@@ -2,7 +2,7 @@
 Encoding=UTF-8
 _Name=Take Screenshot
 _Comment=Save images of your desktop or individual windows
-Exec=gnome-screenshot
+Exec=gnome-screenshot --interactive
 Terminal=false
 Type=Application
 Icon=applets-screenshooter
