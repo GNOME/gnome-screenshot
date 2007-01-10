@@ -47,6 +47,8 @@
 #include "screenshot-dialog.h"
 #include "screenshot-xfer.h"
 
+#define SCREENSHOOTER_ICON "applets-screenshooter"
+
 static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
@@ -140,6 +142,10 @@ create_interactive_dialog (void)
   gchar *title;
 
   retval = gtk_dialog_new ();
+  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (retval), TRUE);
+  gtk_container_set_border_width (GTK_CONTAINER (retval), 5);
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (retval)->vbox), 2);
+  gtk_window_set_title (GTK_WINDOW (retval), "");
 
   /* main container */
   vbox = gtk_vbox_new (FALSE, 6);
@@ -156,7 +162,7 @@ create_interactive_dialog (void)
   gtk_widget_show (label);
   g_free (title);
 
-  hbox = gtk_hbox_new (FALSE, 0);
+  hbox = gtk_hbox_new (FALSE, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show (hbox);
 
@@ -165,7 +171,7 @@ create_interactive_dialog (void)
   gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
   gtk_widget_show (align);
 
-  image = gtk_image_new_from_stock ("applets-screenshooter",
+  image = gtk_image_new_from_stock (SCREENSHOOTER_ICON,
                                     GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (align), image);
   gtk_widget_show (image);
@@ -573,6 +579,39 @@ load_options (void)
   g_object_unref (gconf_client);
 }
 
+static void
+register_screenshooter_icon (GtkIconFactory * factory)
+{
+	GtkIconSource * source;
+	GtkIconSet * icon_set;
+
+	source = gtk_icon_source_new ();
+	gtk_icon_source_set_icon_name (source, SCREENSHOOTER_ICON);
+
+	icon_set = gtk_icon_set_new ();
+	gtk_icon_set_add_source (icon_set, source);
+
+	gtk_icon_factory_add (factory, SCREENSHOOTER_ICON, icon_set);
+	gtk_icon_set_unref (icon_set);
+	gtk_icon_source_free (source);
+}
+
+static void
+screenshooter_init_stock_icons (void)
+{
+	GtkIconFactory * factory;
+	GtkIconSize screenshooter_icon_size;
+
+	screenshooter_icon_size = gtk_icon_size_register ("panel-menu", 
+	                                                  GTK_ICON_SIZE_DIALOG,
+	                                                  GTK_ICON_SIZE_DIALOG);
+	factory = gtk_icon_factory_new ();
+	gtk_icon_factory_add_default (factory);
+
+	register_screenshooter_icon (factory);
+	g_object_unref (factory);
+}
+
 /* main */
 int
 main (int argc, char *argv[])
@@ -619,7 +658,8 @@ main (int argc, char *argv[])
 		      GNOME_PROGRAM_STANDARD_PROPERTIES,
 		      NULL);
   glade_gnome_init();
-  gtk_window_set_default_icon_name ("applets-screenshooter");
+  gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
+  screenshooter_init_stock_icons ();
 
   load_options ();
   /* allow the command line to override options */
