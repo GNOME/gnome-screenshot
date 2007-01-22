@@ -1,6 +1,14 @@
-2007-01-09  Dennis Cranston <dennis_cranston@yahoo.com>
+2007-01-22  Emmanuele Bassi  <ebassi@gnome.org>
 
-	* gnome-screenshoot.c:  Register "applets-screenshooter" in
+	* gnome-screenshot.c: Use symbolic names for the GConf keys;
+	move the frame creation of the interactive dialog into its
+	own function; add an "effects" frame containing a check button
+	for the "include window border" option and a combo box for
+	the effects on the screenshot.
+
+2007-01-09  Dennis Cranston  <dennis_cranston@yahoo.com>
+
+	* gnome-screenshot.c:  Register "applets-screenshooter" in
 	the icon factory so gtk_image_new_from_stock() works.  HIG
 	fixes for interactive dialog. (#394941)
 
