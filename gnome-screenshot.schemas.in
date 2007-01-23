@@ -35,8 +35,7 @@
       <default>none</default>
       <locale name="C">
         <short>Border Effect</short>
-        <long>Effect to add to the outside of a border.  Possible values
-      are "shadow", "none", and "black-line".
+        <long>Effect to add to the outside of a border.  Possible values are "shadow", "none", and "border".
       </long>
       </locale>
     </schema>

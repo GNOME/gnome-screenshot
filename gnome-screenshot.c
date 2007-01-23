@@ -64,6 +64,7 @@ enum
 };
 
 typedef enum {
+  SCREENSHOT_EFFECT_NONE,
   SCREENSHOT_EFFECT_SHADOW,
   SCREENSHOT_EFFECT_BORDER
 } ScreenshotEffectType;
@@ -186,12 +187,21 @@ create_effects_combo (void)
                               G_TYPE_STRING,
                               G_TYPE_STRING,
                               G_TYPE_UINT);
-  gtk_list_store_insert_with_values (model, &iter, -1,
+
+  gtk_list_store_insert_with_values (model, &iter,
+                                     SCREENSHOT_EFFECT_NONE,
+                                     COLUMN_NAME, _("None"),
+                                     COLUMN_NICK, "none",
+                                     COLUMN_ID, SCREENSHOT_EFFECT_NONE,
+                                     -1);
+  gtk_list_store_insert_with_values (model, &iter,
+                                     SCREENSHOT_EFFECT_SHADOW,
                                      COLUMN_NAME, _("Drop shadow"),
                                      COLUMN_NICK, "shadow",
                                      COLUMN_ID, SCREENSHOT_EFFECT_SHADOW,
                                      -1);
-  gtk_list_store_insert_with_values (model, &iter, -1,
+  gtk_list_store_insert_with_values (model, &iter,
+                                     SCREENSHOT_EFFECT_BORDER,
                                      COLUMN_NAME, _("Border"),
                                      COLUMN_NICK, "border",
                                      COLUMN_ID, SCREENSHOT_EFFECT_BORDER,
@@ -205,13 +215,18 @@ create_effects_combo (void)
   switch (border_effect[0])
     {
     case 's': /* shadow */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval), 0);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
+                                SCREENSHOT_EFFECT_SHADOW);
       break;
     case 'b': /* border */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval), 1);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
+                                SCREENSHOT_EFFECT_BORDER);
+      break;
+    case 'n': /* none */
+      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
+                                SCREENSHOT_EFFECT_NONE);
       break;
     default:
-      g_assert_not_reached ();
       break;
     }
 
@@ -664,8 +679,8 @@ prepare_screenshot (void)
       case 'b': /* border */
         screenshot_add_border (&screenshot);
         break;
+      case 'n': /* none */
       default:
-        g_assert_not_reached ();
         break;
       }
   }
@@ -767,10 +782,13 @@ load_options (void)
 
   include_border = gconf_client_get_bool (gconf_client,
                                           INCLUDE_BORDER_KEY,
-                                          NULL); 
+                                          NULL);
+
   border_effect = gconf_client_get_string (gconf_client,
                                            BORDER_EFFECT_KEY,
                                            NULL);
+  if (!border_effect)
+    border_effect = g_strdup ("none");
 
   g_object_unref (gconf_client);
 }
@@ -824,7 +842,7 @@ main (int argc, char *argv[])
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
     { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-    { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border"), N_("effect") },
+    { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
     { NULL },
   };
