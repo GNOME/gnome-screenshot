@@ -830,6 +830,7 @@ screenshooter_init_stock_icons (void)
 int
 main (int argc, char *argv[])
 {
+  GnomeProgram *program;
   GOptionContext *context;
   GOptionGroup *group;
   gboolean window_arg = FALSE;
@@ -865,12 +866,12 @@ main (int argc, char *argv[])
 
   gnome_authentication_manager_init ();
 
-  gnome_program_init ("gnome-screenshot", VERSION,
-		      LIBGNOMEUI_MODULE,
-		      argc, argv,
-		      GNOME_PARAM_GOPTION_CONTEXT, context,
-		      GNOME_PROGRAM_STANDARD_PROPERTIES,
-		      NULL);
+  program = gnome_program_init ("gnome-screenshot", VERSION,
+				LIBGNOMEUI_MODULE,
+				argc, argv,
+				GNOME_PARAM_GOPTION_CONTEXT, context,
+				GNOME_PROGRAM_STANDARD_PROPERTIES,
+				NULL);
   glade_gnome_init();
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
@@ -929,7 +930,7 @@ main (int argc, char *argv[])
       prepare_screenshot ();
     }
 
-  g_option_context_free (context);
+  g_object_unref (program);
 
   return EXIT_SUCCESS;
 }
