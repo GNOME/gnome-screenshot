@@ -251,15 +251,19 @@ create_effects_combo (void)
 }
 
 static void
-create_effects_frame (GtkWidget   *main_vbox,
+create_effects_frame (GtkWidget   *outer_vbox,
                       const gchar *frame_title)
 {
-  GtkWidget *vbox, *hbox;
+  GtkWidget *main_vbox, *vbox, *hbox;
   GtkWidget *align;
   GtkWidget *label;
   GtkWidget *check;
   GtkWidget *combo;
   gchar *title;
+
+  main_vbox = gtk_vbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
+  gtk_widget_show (main_vbox);
 
   title = g_strconcat ("<b>", frame_title, "</b>", NULL);
   label = gtk_label_new (title);
@@ -270,7 +274,7 @@ create_effects_frame (GtkWidget   *main_vbox,
   g_free (title);
 
   hbox = gtk_hbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
   align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
@@ -290,7 +294,7 @@ create_effects_frame (GtkWidget   *main_vbox,
   gtk_widget_show (vbox);
 
   /** Include window border **/
-  check = gtk_check_button_new_with_mnemonic (_("_Include the window border"));
+  check = gtk_check_button_new_with_mnemonic (_("Include the window _border"));
   gtk_widget_set_sensitive (check, take_window_shot);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), include_border);
   g_signal_connect (check, "toggled",
@@ -301,11 +305,11 @@ create_effects_frame (GtkWidget   *main_vbox,
   border_check = check;
 
   /** Effects **/
-  hbox = gtk_hbox_new (FALSE, 6);
+  hbox = gtk_hbox_new (FALSE, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
-  label = gtk_label_new (_("Apply effect:"));
+  label = gtk_label_new_with_mnemonic (_("Apply _effect:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
@@ -313,15 +317,16 @@ create_effects_frame (GtkWidget   *main_vbox,
   combo = create_effects_combo ();
   gtk_widget_set_sensitive (combo, take_window_shot);
   gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
   gtk_widget_show (combo);
   effect_combo = combo;
 }
 
 static void
-create_screenshot_frame (GtkWidget   *main_vbox,
+create_screenshot_frame (GtkWidget   *outer_vbox,
                          const gchar *frame_title)
 {
-  GtkWidget *vbox, *hbox;
+  GtkWidget *main_vbox, *vbox, *hbox;
   GtkWidget *align;
   GtkWidget *radio;
   GtkWidget *image;
@@ -330,6 +335,10 @@ create_screenshot_frame (GtkWidget   *main_vbox,
   GtkAdjustment *adjust;
   GSList *group;
   gchar *title;
+
+  main_vbox = gtk_vbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
+  gtk_widget_show (main_vbox);
 
   title = g_strconcat ("<b>", frame_title, "</b>", NULL);
   label = gtk_label_new (title);
@@ -340,7 +349,7 @@ create_screenshot_frame (GtkWidget   *main_vbox,
   g_free (title);
 
   hbox = gtk_hbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
   align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
@@ -389,7 +398,7 @@ create_screenshot_frame (GtkWidget   *main_vbox,
   /* translators: this is the first part of the "grab after a
    * delay of <spin button> seconds".
    */
-  label = gtk_label_new (_("Grab after a delay of"));
+  label = gtk_label_new_with_mnemonic (_("Grab _after a delay of"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
@@ -403,6 +412,7 @@ create_screenshot_frame (GtkWidget   *main_vbox,
                     G_CALLBACK (delay_spin_value_changed_cb),
                     NULL);
   gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
   gtk_widget_show (spin);
 
   /* translators: this is the last part of the "grab after a
@@ -421,13 +431,14 @@ create_interactive_dialog (void)
   GtkWidget *main_vbox;
 
   retval = gtk_dialog_new ();
+  gtk_window_set_resizable (GTK_WINDOW (retval), FALSE);
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (retval), TRUE);
   gtk_container_set_border_width (GTK_CONTAINER (retval), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (retval)->vbox), 2);
   gtk_window_set_title (GTK_WINDOW (retval), "");
 
   /* main container */
-  main_vbox = gtk_vbox_new (FALSE, 6);
+  main_vbox = gtk_vbox_new (FALSE, 18);
   gtk_container_set_border_width (GTK_CONTAINER (main_vbox), 5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (retval)->vbox),
                       main_vbox,

@@ -1,5 +1,11 @@
 2007-01-25  Emmanuele Bassi  <ebassi@gnome.org>
 
+	* gnome-screenshot.c: Another set of HIG fixes for the
+	interactive dialog: make the dialog not resizable; add more
+	spacing; add/update the mnemonics. (#400203, Christian Persch)
+
+2007-01-25  Emmanuele Bassi  <ebassi@gnome.org>
+
 	* gnome-screenshot.c: Use an array of structures to hold the
 	border effects informations (id, nick, label) and iterate on
 	the array to fill up the model fed to the effects combo.
