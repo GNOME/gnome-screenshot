@@ -122,6 +122,7 @@ interactive_dialog_response_cb (GtkDialog *dialog,
       display_help (GTK_WINDOW (dialog));
       break;
     default:
+      gtk_widget_hide (GTK_WIDGET (dialog));
       break;
     }
 }
@@ -901,12 +902,13 @@ main (int argc, char *argv[])
 
       dialog = create_interactive_dialog ();
       response = gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
 
       switch (response)
         {
         case GTK_RESPONSE_DELETE_EVENT:
         case GTK_RESPONSE_CANCEL:
-          g_option_context_free (context);
+          g_object_unref (program);
           return EXIT_SUCCESS;
         case GTK_RESPONSE_OK:
           break;
@@ -914,8 +916,6 @@ main (int argc, char *argv[])
           g_assert_not_reached ();
           break;
         }
-
-      gtk_widget_destroy (dialog);
     }
 
   if (delay > 0)
