@@ -6,6 +6,10 @@
 	running, so that the screenshot functions can grab the desired
 	window instead of the (non-existing) interactive dialog.
 
+	* screenshot-save.[ch]:
+	* screenshot-utils.[ch]: Add license and copyright notice on
+	these files.
+
 2007-01-24  Emmanuele Bassi  <ebassi@gnome.org>
 
 	* gnome-screenshot.c: Do not leak GnomeProgram instance
