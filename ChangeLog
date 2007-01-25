@@ -1,5 +1,11 @@
 2007-01-25  Emmanuele Bassi  <ebassi@gnome.org>
 
+	* gnome-screenshot.c: Use an array of structures to hold the
+	border effects informations (id, nick, label) and iterate on
+	the array to fill up the model fed to the effects combo.
+
+2007-01-25  Emmanuele Bassi  <ebassi@gnome.org>
+
 	* gnome-screenshot.c: Unref the GnomeProgram instance if you
 	cancel the screenshot in interactive mode; hide the dialog
 	inside the response callback, while the main loop is still

@@ -57,7 +57,7 @@
 enum
 {
   COLUMN_NICK,
-  COLUMN_NAME,
+  COLUMN_LABEL,
   COLUMN_ID,
 
   N_COLUMNS
@@ -176,37 +176,43 @@ effect_combo_changed_cb (GtkComboBox *combo,
     }
 }
 
+typedef struct {
+  ScreenshotEffectType id;
+  const gchar *label;
+  const gchar *nick;
+} ScreenshotEffect;
+
+static const ScreenshotEffect effects[] = {
+  { SCREENSHOT_EFFECT_NONE, N_("None"), "none" },
+  { SCREENSHOT_EFFECT_SHADOW, N_("Drop shadow"), "shadow" },
+  { SCREENSHOT_EFFECT_BORDER, N_("Border"), "border" }
+};
+
+static guint n_effects = G_N_ELEMENTS (effects);
+
 static GtkWidget *
 create_effects_combo (void)
 {
   GtkWidget *retval;
   GtkListStore *model;
-  GtkTreeIter iter;
   GtkCellRenderer *renderer;
+  gint i;
 
   model = gtk_list_store_new (N_COLUMNS,
                               G_TYPE_STRING,
                               G_TYPE_STRING,
                               G_TYPE_UINT);
+  
+  for (i = 0; i < n_effects; i++)
+    {
+      GtkTreeIter iter;
 
-  gtk_list_store_insert_with_values (model, &iter,
-                                     SCREENSHOT_EFFECT_NONE,
-                                     COLUMN_NAME, _("None"),
-                                     COLUMN_NICK, "none",
-                                     COLUMN_ID, SCREENSHOT_EFFECT_NONE,
-                                     -1);
-  gtk_list_store_insert_with_values (model, &iter,
-                                     SCREENSHOT_EFFECT_SHADOW,
-                                     COLUMN_NAME, _("Drop shadow"),
-                                     COLUMN_NICK, "shadow",
-                                     COLUMN_ID, SCREENSHOT_EFFECT_SHADOW,
-                                     -1);
-  gtk_list_store_insert_with_values (model, &iter,
-                                     SCREENSHOT_EFFECT_BORDER,
-                                     COLUMN_NAME, _("Border"),
-                                     COLUMN_NICK, "border",
-                                     COLUMN_ID, SCREENSHOT_EFFECT_BORDER,
-                                     -1);
+      gtk_list_store_insert_with_values (model, &iter, i,
+                                         COLUMN_ID, effects[i].id,
+                                         COLUMN_LABEL, effects[i].label,
+                                         COLUMN_NICK, effects[i].nick,
+                                         -1);
+    }
 
   retval = gtk_combo_box_new ();
   gtk_combo_box_set_model (GTK_COMBO_BOX (retval),
@@ -230,11 +236,11 @@ create_effects_combo (void)
     default:
       break;
     }
-
+  
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (retval), renderer, TRUE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (retval), renderer,
-                                  "text", COLUMN_NAME,
+                                  "text", COLUMN_LABEL,
                                   NULL);
 
   g_signal_connect (retval, "changed",
