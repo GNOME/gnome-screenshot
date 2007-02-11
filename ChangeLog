@@ -1,3 +1,9 @@
+2007-02-11  Emmanuele Bassi  <ebassi@gnome.org>
+
+	* screenshot-shadow.c: Clean up some of the indentation;
+	use BILINEAR instead of NEAREST as the interpolation
+	algorithm, for better results.
+
 2007-01-25  Emmanuele Bassi  <ebassi@gnome.org>
 
 	* gnome-screenshot.c: Another set of HIG fixes for the

@@ -70,7 +70,9 @@ create_outline_filter (int radius)
   filter->size = radius * 2 + 1;
   filter->data = g_new (double, filter->size * filter->size);
 
-  for (iter = filter->data; iter < filter->data + (filter->size * filter->size); iter++)
+  for (iter = filter->data;
+       iter < filter->data + (filter->size * filter->size);
+       iter++)
     {
       *iter = 1.0;
     }
@@ -79,7 +81,11 @@ create_outline_filter (int radius)
 }
 
 static GdkPixbuf *
-create_effect (GdkPixbuf *src, ConvFilter const *filter, int radius, int offset, double opacity)
+create_effect (GdkPixbuf *src,
+               ConvFilter const *filter,
+               int radius,
+               int offset,
+               double opacity)
 {
   GdkPixbuf *dest;
   int x, y, i, j;
@@ -163,7 +169,8 @@ screenshot_add_shadow (GdkPixbuf **src)
     filter = create_blur_filter (BLUR_RADIUS);
   
   dest = create_effect (*src, filter, 
-			BLUR_RADIUS, SHADOW_OFFSET, SHADOW_OPACITY);
+			BLUR_RADIUS,
+                        SHADOW_OFFSET, SHADOW_OPACITY);
 
   if (dest == NULL)
 	  return;
@@ -173,7 +180,7 @@ screenshot_add_shadow (GdkPixbuf **src)
 			gdk_pixbuf_get_width (*src),
 			gdk_pixbuf_get_height (*src),
 			BLUR_RADIUS, BLUR_RADIUS, 1.0, 1.0,
-			GDK_INTERP_NEAREST, 255);
+			GDK_INTERP_BILINEAR, 255);
   g_object_unref (*src);
   *src = dest;
 }
@@ -188,7 +195,8 @@ screenshot_add_border (GdkPixbuf **src)
     filter = create_outline_filter (OUTLINE_RADIUS);
   
   dest = create_effect (*src, filter, 
-			OUTLINE_RADIUS, OUTLINE_OFFSET, OUTLINE_OPACITY);
+			OUTLINE_RADIUS,
+                        OUTLINE_OFFSET, OUTLINE_OPACITY);
 
   if (dest == NULL)
 	  return;
@@ -198,7 +206,7 @@ screenshot_add_border (GdkPixbuf **src)
 			gdk_pixbuf_get_width (*src),
 			gdk_pixbuf_get_height (*src),
 			OUTLINE_RADIUS, OUTLINE_RADIUS, 1.0, 1.0,
-			GDK_INTERP_NEAREST, 255);
+			GDK_INTERP_BILINEAR, 255);
   g_object_unref (*src);
   *src = dest;
 }
