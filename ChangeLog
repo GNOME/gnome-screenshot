@@ -1,3 +1,9 @@
+2007-03-04  Emmanuele Bassi  <ebassi@gnome.org>
+	
+	* gnome-screenshot.c: Add call to gettext() in order to
+	translate the user visible name of the effect. (#413019,
+	reported by Funda Wang, based on a patch by Gabor Kelemen).
+
 2007-02-11  Emmanuele Bassi  <ebassi@gnome.org>
 
 	* screenshot-shadow.c: Clean up some of the indentation;

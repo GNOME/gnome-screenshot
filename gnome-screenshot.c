@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <locale.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
@@ -182,6 +183,11 @@ typedef struct {
   const gchar *nick;
 } ScreenshotEffect;
 
+/* Translators:
+ * these are the names of the effects available which will be
+ * displayed inside a combo box in interactive mode for the user
+ * to chooser.
+ */
 static const ScreenshotEffect effects[] = {
   { SCREENSHOT_EFFECT_NONE, N_("None"), "none" },
   { SCREENSHOT_EFFECT_SHADOW, N_("Drop shadow"), "shadow" },
@@ -207,11 +213,12 @@ create_effects_combo (void)
     {
       GtkTreeIter iter;
 
-      gtk_list_store_insert_with_values (model, &iter, i,
-                                         COLUMN_ID, effects[i].id,
-                                         COLUMN_LABEL, effects[i].label,
-                                         COLUMN_NICK, effects[i].nick,
-                                         -1);
+      gtk_list_store_insert (model, &iter, i);
+      gtk_list_store_set (model, &iter,
+                          COLUMN_ID, effects[i].id,
+                          COLUMN_LABEL, gettext (effects[i].label),
+                          COLUMN_NICK, effects[i].nick,
+                          -1);
     }
 
   retval = gtk_combo_box_new ();
