@@ -1,3 +1,11 @@
+2007-03-10  Emmanuele Bassi  <ebassi@gnome.org>
+
+	* screenshot-dialog.c: Warn (in console) if g_filename_from_utf8()
+	fails to convert the screenshot file name in case we are not in
+	a utf8 locale, and fall back to the default screenshot file name,
+	to avoid eating the user's folders. (#411050, thanks to
+	Pascal Terjan for his detective work)
+
 2007-03-04  Emmanuele Bassi  <ebassi@gnome.org>
 	
 	* gnome-screenshot.c: Add call to gettext() in order to

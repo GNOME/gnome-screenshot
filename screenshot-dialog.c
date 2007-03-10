@@ -312,13 +312,26 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
   gchar *folder;
   const gchar *file_name;
   gchar *uri, *file, *tmp;
+  GError *error;
 
   folder = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
 
-  tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, NULL);
+  error = NULL;
+  tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, &error);
+  if (error)
+    {
+      g_warning ("Unable to convert `%s' to valid UTF-8: %s\n"
+                 "Falling back to default file.",
+                 file_name,
+                 error->message);
+      g_error_free (error);
+      tmp = g_strdup (_("Screenshot.png"));
+    }
+
   file = gnome_vfs_escape_host_and_path_string (tmp);
   uri = g_build_filename (folder, file, NULL);
+
   g_free (folder);
   g_free (tmp);
   g_free (file);
