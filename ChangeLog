@@ -1,3 +1,8 @@
+2007-08-04  Emmanuele Bassi  <ebassi@gnome.org>
+
+	* screenshot-save.c: Make the temporary directory work on
+	multi-user setups by using a unique name. (#427870)
+
 2007-03-10  Emmanuele Bassi  <ebassi@gnome.org>
 
 	* screenshot-dialog.c: Warn (in console) if g_filename_from_utf8()

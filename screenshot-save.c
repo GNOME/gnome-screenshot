@@ -142,17 +142,16 @@ make_temp_directory (void)
   i = 0;
   do
     {
-      gchar *tmp_dir = g_strdup_printf ("%u-%d",
+      gchar *tmp_dir = g_strdup_printf ("gnome-screenshot.%u.%d",
                                         (unsigned int) getpid (),
                                         i++);
       
       dir_name = g_build_filename (g_get_tmp_dir (),
-                                   "gnome-screenshot",
                                    tmp_dir,
                                    NULL);
       g_free (tmp_dir);
 
-      result = g_mkdir_with_parents (dir_name, 0700);
+      result = g_mkdir_with_parents (dir_name, 0777);
       if (result < 0)
         {
           g_free (dir_name);
