@@ -726,18 +726,22 @@ prepare_screenshot (void)
   if (initial_uri == NULL)
     {
       gchar *desktop_dir;
-      /* We failed to make a new name for the last save dir.  We try again
-       * with our home dir as a fallback.  If that fails, we don't have a
-       * place to put it. */
+
+      /* We failed to make a new name for the last save dir. We try again
+       * with our Desktop directory.
+       */
       desktop_dir = get_desktop_dir ();
       initial_uri = generate_filename_for_uri (desktop_dir);
       g_free (desktop_dir);
+    }
 
-      if (initial_uri == NULL)
-	{
-	  initial_uri = g_strdup ("file:///");
-	}
-  }
+  /* desperate fallback: /tmp */
+  if (initial_uri == NULL)
+    {
+      const gchar *tmp_dir = g_get_tmp_dir ();
+      initial_uri = generate_filename_for_uri (tmp_dir);
+    }
+
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
   g_free (initial_uri);
 
@@ -771,7 +775,7 @@ get_desktop_dir (void)
   if (desktop_is_home_dir)
     desktop_dir = g_build_filename (g_get_home_dir (), NULL);
   else
-    desktop_dir = g_build_filename (g_get_home_dir (), "Desktop", NULL);
+    desktop_dir = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP));
 
   g_object_unref (gconf_client);
 
