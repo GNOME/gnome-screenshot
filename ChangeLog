@@ -3,7 +3,7 @@
 	* gnome-screenshot.c: Use g_get_user_special_dir() to find
 	out the Desktop directory. Use the temp directory as a final
 	fallback, instead of / (which won't be writable in most cases
-	and will utterly fail). (#455204, Luca Cavalli, Frederic Crozat)
+	and will utterly fail). (#455204, Luca Ferretti, Frederic Crozat)
 
 2007-08-04  Emmanuele Bassi  <ebassi@gnome.org>
 
