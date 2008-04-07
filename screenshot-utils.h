@@ -29,7 +29,8 @@ gboolean   screenshot_grab_lock           (void);
 void       screenshot_release_lock        (void);
 gchar     *screenshot_get_window_title    (Window   w);
 Window     screenshot_find_current_window (gboolean include_decoration);
-GdkPixbuf *screenshot_get_pixbuf          (Window   w);
+GdkPixbuf *screenshot_get_pixbuf          (Window   w,
+                                           gboolean include_pointer);
 
 void       screenshot_show_error_dialog   (GtkWindow   *parent,
                                            const gchar *message,

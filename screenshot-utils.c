@@ -29,6 +29,8 @@
 #include <X11/extensions/shape.h>
 #endif
 
+#include <X11/extensions/Xfixes.h>
+
 static GtkWidget *selection_window;
 
 #define SELECTION_NAME "_GNOME_PANEL_SCREENSHOT"
@@ -265,11 +267,6 @@ screenshot_grab_lock (void)
       goto out;
     }
 
-  cursor = gdk_cursor_new (GDK_WATCH);
-  gdk_pointer_grab (selection_window->window, FALSE, 0, NULL,
-		    cursor, GDK_CURRENT_TIME);
-  gdk_cursor_unref (cursor);
-
   result = TRUE;
 
  out:
@@ -476,7 +473,7 @@ screenshot_find_current_window (gboolean include_decoration)
 }
 
 GdkPixbuf *
-screenshot_get_pixbuf (Window w)
+screenshot_get_pixbuf (Window w, gboolean include_pointer)
 {
   GdkWindow *window, *root;
   GdkPixbuf *screenshot;
@@ -601,6 +598,85 @@ screenshot_get_pixbuf (Window w)
 					     x_orig, y_orig, 0, 0,
 					     width, height);
 #endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
+
+  if (include_pointer) 
+    {
+      XFixesCursorImage *cursor_image;
+
+      cursor_image = XFixesGetCursorImage (GDK_DISPLAY ());
+      
+      if (cursor_image != NULL) 
+        {
+          GdkRectangle r1, r2;
+          int cx, cy, i, j, k;
+          int r, g, b, a;
+          guchar *pixels, *p;
+          int rowstride;
+          unsigned long pixel;
+
+          cx = cursor_image->x - cursor_image->xhot;
+          cy = cursor_image->y - cursor_image->yhot;
+
+          r1.x = x_real_orig;
+          r1.y = y_real_orig;
+          r1.width = real_width;
+          r1.height = real_height;
+          r2.x = cx;
+          r2.y = cy;
+          r2.width = cursor_image->width;
+          r2.height = cursor_image->height;
+          if (gdk_rectangle_intersect (&r1, &r2, &r2)) 
+            {
+              GdkPixbuf *cursor_pixbuf;
+
+              cursor_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
+                                              TRUE, 8, 
+                                              cursor_image->width,
+                                               cursor_image->height);
+              pixels = gdk_pixbuf_get_pixels (cursor_pixbuf);
+              rowstride = gdk_pixbuf_get_rowstride (cursor_pixbuf);
+              for (i = 0, k = 0; i < cursor_image->height; i++) 
+                {
+                  p = pixels + i * rowstride;
+                  for (j = 0; j < cursor_image->width; j++, k++)
+                    {
+                      pixel = cursor_image->pixels[k];
+                    
+                      b = pixel & 0xff;
+                      g = (pixel >> 8) & 0xff;
+                      r = (pixel >> 16) & 0xff;
+                      a = (pixel >> 24) & 0xff;
+
+                      if (a != 0) 
+                        {
+                          p[0] = r * 255 / a;
+                          p[1] = g * 255 / a;
+                          p[2] = b * 255 / a;
+                          p[3] = a;
+                        }
+                      else 
+                        {
+                          p[0] = p[1] = p[2] = p[3] = 0;
+                        }
+
+                      p += 4;
+                    }
+               }
+ 
+              gdk_pixbuf_composite (cursor_pixbuf, screenshot,
+                                    r2.x - x_real_orig, r2.y - y_real_orig, 
+                                    r2.width, r2.height,
+                                    cx - x_real_orig, cy - y_real_orig, 
+                                    1.0, 1.0, 
+                                    GDK_INTERP_BILINEAR,
+                                    255);
+
+              g_object_unref (cursor_pixbuf);
+            }
+
+          XFree (cursor_image);
+        }
+    }
 
   return screenshot;
 }

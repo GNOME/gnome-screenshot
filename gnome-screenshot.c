@@ -52,6 +52,7 @@
 
 #define GNOME_SCREENSHOT_GCONF  "/apps/gnome-screenshot"
 #define INCLUDE_BORDER_KEY      GNOME_SCREENSHOT_GCONF "/include_border"
+#define INCLUDE_POINTER_KEY     GNOME_SCREENSHOT_GCONF "/include_pointer"
 #define LAST_SAVE_DIRECTORY_KEY GNOME_SCREENSHOT_GCONF "/last_save_directory"
 #define BORDER_EFFECT_KEY       GNOME_SCREENSHOT_GCONF "/border_effect"
 
@@ -81,6 +82,7 @@ static gboolean save_immediately = FALSE;
 /* Options */
 static gboolean take_window_shot = FALSE;
 static gboolean include_border = FALSE;
+static gboolean include_pointer = TRUE;
 static char *border_effect = NULL;
 static guint delay = 0;
 
@@ -154,6 +156,13 @@ include_border_toggled_cb (GtkToggleButton *button,
                            gpointer         data)
 {
   include_border = gtk_toggle_button_get_active (button);
+}
+
+static void
+include_pointer_toggled_cb (GtkToggleButton *button,
+                            gpointer         data)
+{
+  include_pointer = gtk_toggle_button_get_active (button);
 }
 
 static void
@@ -299,6 +308,15 @@ create_effects_frame (GtkWidget   *outer_vbox,
   vbox = gtk_vbox_new (FALSE, 6);
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
   gtk_widget_show (vbox);
+
+  /** Include pointer **/
+  check = gtk_check_button_new_with_mnemonic (_("Include _pointer"));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), include_pointer);
+  g_signal_connect (check, "toggled",
+                    G_CALLBACK (include_pointer_toggled_cb),
+                    NULL);
+  gtk_box_pack_start (GTK_BOX (vbox), check, FALSE, FALSE, 0);
+  gtk_widget_show (check);
 
   /** Include window border **/
   check = gtk_check_button_new_with_mnemonic (_("Include the window _border"));
@@ -693,7 +711,7 @@ prepare_screenshot (void)
       win = GDK_ROOT_WINDOW ();
     }
 
-  screenshot = screenshot_get_pixbuf (win);
+  screenshot = screenshot_get_pixbuf (win, include_pointer);
 
   if (take_window_shot) {
     switch (border_effect[0])
@@ -811,6 +829,10 @@ load_options (void)
 
   include_border = gconf_client_get_bool (gconf_client,
                                           INCLUDE_BORDER_KEY,
+                                          NULL);
+
+  include_pointer = gconf_client_get_bool (gconf_client,
+                                          INCLUDE_POINTER_KEY,
                                           NULL);
 
   border_effect = gconf_client_get_string (gconf_client,

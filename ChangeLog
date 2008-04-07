@@ -1,3 +1,16 @@
+2008-04-07  Matthias Clasen  <mclasen@redhat.com>
+
+	Bug 171151 – showing the cursor in the screenshot
+
+	* screenshot-utils.h:
+	* screenshot-utils.c (screenshot_get_pixbuf): Optionally
+	include the cursor in the image.
+	(screenshot_grab_lock): Don't grab the pointer while taking
+	the screenshot.
+
+	* gnome-screenshot.schemas.in:
+	* gnome-screenshot.c: Add an 'include pointer' option.
+
 2007-10-23  Stéphane Loeuillet  <sloeuille@svn.gnome.org>
 
 	* gnome-screenshot.desktop.in: Trivial fix to .desktop file

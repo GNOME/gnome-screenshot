@@ -28,6 +28,18 @@
     </schema>
 
     <schema>
+      <key>/schemas/apps/gnome-screenshot/include_pointer</key>
+      <applyto>/apps/gnome-screenshot/include_pointer</applyto>
+      <owner>gnome-screenshot</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Include Pointer</short>
+        <long>Include the pointer in the screenshot</long>
+      </locale>
+    </schema>
+
+    <schema>
       <key>/schemas/apps/gnome-screenshot/border_effect</key>
       <applyto>/apps/gnome-screenshot/border_effect</applyto>
       <owner>gnome-screenshot</owner>
