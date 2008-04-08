@@ -480,6 +480,8 @@ create_interactive_dialog (void)
                           _("Take _Screenshot"), GTK_RESPONSE_OK,
                           NULL);
 
+  gtk_dialog_set_default_response (GTK_DIALOG (retval), GTK_RESPONSE_OK);
+
   /* we need to block on "response" and keep showing the interactive
    * dialog in case the user did choose "help"
    */

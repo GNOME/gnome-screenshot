@@ -1,3 +1,8 @@
+2008-04-08  Sebastien Bacher  <seb128@ubuntu.com>
+
+	* gnome-screenshot.c: (create_interactive_dialog):
+	set the default response to the ok action (#487134)
+
 2008-04-07  Matthias Clasen  <mclasen@redhat.com>
 
 	Bug 171151 – showing the cursor in the screenshot
