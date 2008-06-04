@@ -1,3 +1,8 @@
+2008-06-04  Christian Persch  <chpe@gnome.org>
+
+	* gnome-screenshot.c: (create_interactive_dialog): Don't skip the
+	screenshot window in the taskbar. Bug #400203.
+
 2008-04-08  Sebastien Bacher  <seb128@ubuntu.com>
 
 	* gnome-screenshot.c: (create_interactive_dialog):

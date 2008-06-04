@@ -457,7 +457,6 @@ create_interactive_dialog (void)
 
   retval = gtk_dialog_new ();
   gtk_window_set_resizable (GTK_WINDOW (retval), FALSE);
-  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (retval), TRUE);
   gtk_container_set_border_width (GTK_CONTAINER (retval), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (retval)->vbox), 2);
   gtk_window_set_title (GTK_WINDOW (retval), "");
