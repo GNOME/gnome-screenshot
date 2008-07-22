@@ -1,3 +1,28 @@
+2008-07-22  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* Makefile.am:
+	* gnome-screenshot.c: (error_dialog_response_cb), (save_callback),
+	(try_to_save), (screenshot_dialog_response_cb), (run_dialog),
+	(finish_prepare_screenshot), (check_file_done), (build_uri),
+	(try_check_file), (prepare_screenshot),
+	(prepare_screenshot_timeout), (expand_initial_tilde),
+	(load_options), (screenshooter_init_stock_icons), (main):
+	* screenshot-dialog.c: (screenshot_dialog_new),
+	(screenshot_dialog_focus_entry), (screenshot_dialog_get_uri):
+	* screenshot-dialog.h:
+	* screenshot-save.c: (screenshot_sanitize_filename):
+	* screenshot-shadow.c:
+	* screenshot-shadow.h:
+	* screenshot-xfer.c: (do_run_overwrite_confirm_dialog),
+	(transfer_dialog_response_cb), (transfer_progress_dialog_new),
+	(transfer_progress_dialog_start), (run_overwrite_confirm_dialog),
+	(transfer_progress_dialog_update), (transfer_job_done),
+	(transfer_progress_cb), (get_file_size), (transfer_file),
+	(screenshot_xfer_uri):
+	* screenshot-xfer.h:
+	Port gnome-screenshot to GIO, clean up some code and add licence
+	headers (#526834).
+
 2008-06-04  Christian Persch  <chpe@gnome.org>
 
 	* gnome-screenshot.c: (create_interactive_dialog): Don't skip the

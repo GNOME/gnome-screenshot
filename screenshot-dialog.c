@@ -1,14 +1,32 @@
+/* screenshot-dialog.c - main GNOME Screenshot dialog
+ *
+ * Copyright (C) 2001-2006  Jonathan Blandford <jrb@alum.mit.edu>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ */
+
 #include <config.h>
 #include <string.h>
 #include <stdlib.h>
 
 #include "screenshot-dialog.h"
 #include "screenshot-save.h"
-#include <libgnomevfs/gnome-vfs.h>
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 #include <glade/glade.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
+#include <gio/gio.h>
 
 enum {
   TYPE_IMAGE_PNG,
@@ -195,16 +213,16 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   char *current_name;
   char *ext;
   gint pos;
-  GnomeVFSURI *tmp_uri;
-  GnomeVFSURI *parent_uri;
+  GFile *tmp_file;
+  GFile *parent_file;
 
-  tmp_uri = gnome_vfs_uri_new (initial_uri);
-  parent_uri = gnome_vfs_uri_get_parent (tmp_uri);
+  tmp_file = g_file_new_for_uri (initial_uri);
+  parent_file = g_file_get_parent (tmp_file);
 
-  current_name = gnome_vfs_uri_extract_short_name (tmp_uri);
-  current_folder = gnome_vfs_uri_to_string (parent_uri, GNOME_VFS_URI_HIDE_NONE);
-  gnome_vfs_uri_unref (tmp_uri);
-  gnome_vfs_uri_unref (parent_uri);
+  current_name = g_file_get_basename (tmp_file);
+  current_folder = g_file_get_uri (parent_file);
+  g_object_unref (tmp_file);
+  g_object_unref (parent_file);
 
   dialog = g_new0 (ScreenshotDialog, 1);
 
@@ -287,6 +305,12 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 }
 
 void
+screenshot_dialog_focus_entry (ScreenshotDialog *dialog)
+{
+  gtk_widget_grab_focus (dialog->filename_entry);
+}
+
+void
 screenshot_dialog_enable_dnd (ScreenshotDialog *dialog)
 {
   GtkWidget *preview_darea;
@@ -329,7 +353,7 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
       tmp = g_strdup (_("Screenshot.png"));
     }
 
-  file = gnome_vfs_escape_host_and_path_string (tmp);
+  file = g_uri_escape_string (tmp, NULL, FALSE);
   uri = g_build_filename (folder, file, NULL);
 
   g_free (folder);

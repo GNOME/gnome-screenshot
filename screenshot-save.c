@@ -18,12 +18,12 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "screenshot-save.h"
 
@@ -271,7 +271,9 @@ screenshot_sanitize_filename (const char *filename)
   g_assert (filename);
   g_assert (g_utf8_validate (filename, -1, NULL));
 
-  retval = gnome_vfs_escape_host_and_path_string (filename);
+  retval = g_uri_escape_string (filename,
+                                NULL,
+                                TRUE);
 
   for (p = retval; *p != '\000'; p = g_utf8_next_char (p))
     {

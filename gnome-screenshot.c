@@ -2,6 +2,7 @@
  *
  * Copyright (C) 2001 Jonathan Blandford <jrb@alum.mit.edu>
  * Copyright (C) 2006 Emmanuele Bassi <ebassi@gnome.org>
+ * Copyright (C) 2008 Cosimo Cecchi <cosimoc@gnome.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -37,9 +38,8 @@
 #include <errno.h>
 #include <locale.h>
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
-#include <libgnomevfs/gnome-vfs-async-ops.h>
-#include <libgnomevfs/gnome-vfs-ops.h>
+#include <gio/gio.h>
+#include <pwd.h>
 #include <X11/Xutil.h>
 
 #include "screenshot-shadow.h"
@@ -70,6 +70,21 @@ typedef enum {
   SCREENSHOT_EFFECT_SHADOW,
   SCREENSHOT_EFFECT_BORDER
 } ScreenshotEffectType;
+
+typedef enum
+{
+  TEST_LAST_DIR = 0,
+  TEST_DESKTOP = 1,
+  TEST_TMP = 2,
+} TestType;
+
+typedef struct 
+{
+  char *base_uris[3];
+  char *retval;
+  int iteration;
+  TestType type;
+} AsyncExistenceJob;
 
 static GdkPixbuf *screenshot = NULL;
 
@@ -491,84 +506,6 @@ create_interactive_dialog (void)
   return retval;
 }
 
-/* We assume that uri is valid and has been tested elsewhere
- */
-static char *
-generate_filename_for_uri (const char *uri)
-{
-  char *retval;
-  char *file_name;
-  int i = 1;
-
-  if (window_title)
-    {
-      /* translators: this is the name of the file that gets made up
-       * with the screenshot if a specific window is taken */
-      file_name = g_strdup_printf (_("Screenshot-%s.png"), window_title);
-    }
-  else
-    {
-      /* translators: this is the name of the file that gets made up
-       * with the screenshot if the entire screen is taken */
-      file_name = g_strdup (_("Screenshot.png"));
-    }
-
-  retval = g_build_filename (uri, file_name, NULL);
-  g_free (file_name);
-
-  do
-    {
-      GnomeVFSFileInfo *info;
-      GnomeVFSResult result;
-
-      info = gnome_vfs_file_info_new ();
-      result = gnome_vfs_get_file_info (retval, info,
-                                        GNOME_VFS_FILE_INFO_DEFAULT |
-                                        GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-      gnome_vfs_file_info_unref (info);
-
-      switch (result)
-	{
-	case GNOME_VFS_ERROR_NOT_FOUND:
-	  return retval;
-	case GNOME_VFS_OK:
-	  g_free (retval);
-	  break;
-	case GNOME_VFS_ERROR_PROTOCOL_ERROR:
-	  /* try again?  I'm getting these errors sporadically */
-	default:
-	  g_warning ("ERROR: %s:%s\n",
-                     retval,
-                     gnome_vfs_result_to_string (result));
-	  g_free (retval);
-	  return NULL;
-	}
-
-      /* We had a hit.  We need to make a new file */
-      if (window_title)
-	{
-	  /* translators: this is the name of the file that gets
-	   * made up with the screenshot if a specific window is
-	   * taken */
-	  file_name = g_strdup_printf (_("Screenshot-%s-%d.png"),
-				       window_title, i);
-	}
-      else
-	{
-	  /* translators: this is the name of the file that gets
-	   * made up with the screenshot if the entire screen is
-	   * taken */
-	  file_name = g_strdup_printf (_("Screenshot-%d.png"), i);
-	}
-
-      retval = g_build_filename (uri, file_name, NULL);
-      g_free (file_name);
-
-      i++;
-    }
-  while (TRUE);
-}
-
 static void
 save_folder_to_gconf (ScreenshotDialog *dialog)
 {
@@ -586,37 +523,95 @@ save_folder_to_gconf (ScreenshotDialog *dialog)
   g_object_unref (gconf_client);
 }
 
-static gboolean
+static void
+error_dialog_response_cb (GtkDialog *d,
+                          gint response,
+                          ScreenshotDialog *dialog)
+{
+  gtk_widget_destroy (GTK_WIDGET (d));
+  
+  screenshot_dialog_focus_entry (dialog);
+}
+
+static void
+save_callback (TransferResult result,
+               char *error_message,
+               gpointer data)
+{
+  ScreenshotDialog *dialog = data;
+  GtkWidget *toplevel;
+  
+  toplevel = screenshot_dialog_get_toplevel (dialog);
+  screenshot_dialog_set_busy (dialog, FALSE);
+
+  if (result == TRANSFER_OK)
+    {
+      save_folder_to_gconf (dialog);
+      gtk_widget_destroy (toplevel);
+      
+      /* we're done, stop the mainloop now */
+      gtk_main_quit ();
+    }
+  else if (result == TRANSFER_OVERWRITE ||
+           result == TRANSFER_CANCELLED)
+    {
+      /* user has canceled the overwrite dialog or the transfer itself, let him
+       * choose another name.
+       */
+      screenshot_dialog_focus_entry (dialog);
+    }
+  else /* result == TRANSFER_ERROR */
+    {
+      /* we had an error, display a dialog to the user and let him choose
+       * another name/location to save the screenshot.
+       */
+      GtkWidget *error_dialog;
+      char *uri;
+      
+      uri = screenshot_dialog_get_uri (dialog);
+      error_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_ERROR,
+                                       GTK_BUTTONS_OK,
+                                       _("Error while saving screenshot"),
+                                       NULL);
+      /* translators: first %s is the file path, second %s is the VFS error */
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
+                                                _("Impossible to save the screenshot "
+                                                  "to %s.\n Error was %s\n. Please choose another "
+                                                  "location and retry."), uri, error_message);
+      gtk_widget_show (error_dialog);
+      g_signal_connect (error_dialog,
+                        "response",
+                        G_CALLBACK (error_dialog_response_cb),
+                        dialog);
+
+      g_free (uri);
+    }
+      
+}
+
+static void
 try_to_save (ScreenshotDialog *dialog,
 	     const char       *target)
 {
-  GnomeVFSResult result;
-  GnomeVFSURI *source_uri;
-  GnomeVFSURI *target_uri;
+  GFile *source_file, *target_file;
 
   g_assert (temporary_file);
 
   screenshot_dialog_set_busy (dialog, TRUE);
 
-  source_uri = gnome_vfs_uri_new (temporary_file);
-  target_uri = gnome_vfs_uri_new (target);
-
-  result = screenshot_xfer_uri (source_uri,
-				target_uri,
-				screenshot_dialog_get_toplevel (dialog));
-
-  gnome_vfs_uri_unref (source_uri);
-  gnome_vfs_uri_unref (target_uri);
-
-  screenshot_dialog_set_busy (dialog, FALSE);
-
-  if (result == GNOME_VFS_OK)
-    {
-      save_folder_to_gconf (dialog);
-      return TRUE;
-    }
-
-  return FALSE;
+  source_file = g_file_new_for_path (temporary_file);
+  target_file = g_file_new_for_uri (target);
+  
+  screenshot_xfer_uri (source_file,
+                       target_file,
+                       screenshot_dialog_get_toplevel (dialog),
+                       save_callback, dialog);
+  
+  /* screenshot_xfer_uri () holds a ref, so we can unref now */
+  g_object_unref (source_file);
+  g_object_unref (target_file);
 }
 
 static void
@@ -637,54 +632,61 @@ save_done_notification (gpointer data)
 }
 
 static void
+screenshot_dialog_response_cb (GtkDialog *d,
+                               gint response_id,
+                               ScreenshotDialog *dialog)
+{
+  char *uri;
+
+  if (response_id == GTK_RESPONSE_HELP)
+    {
+      display_help (GTK_WINDOW (d));
+    }
+  else if (response_id == GTK_RESPONSE_OK)
+    {
+      uri = screenshot_dialog_get_uri (dialog);
+      if (temporary_file == NULL)
+        {
+          save_immediately = TRUE;
+          screenshot_dialog_set_busy (dialog, TRUE);
+        }
+      else
+        {
+          /* we've saved the temporary file, lets try to copy it to the
+           * correct location.
+           */
+          try_to_save (dialog, uri);
+        }
+      g_free (uri);
+    }
+  else /* dialog was canceled */
+    {
+      gtk_widget_destroy (GTK_WIDGET (d));
+      gtk_main_quit ();
+    }
+}
+                               
+
+static void
 run_dialog (ScreenshotDialog *dialog)
 {
   GtkWidget *toplevel;
-  int result;
-  int keep_going;
-  char *uri;
 
   toplevel = screenshot_dialog_get_toplevel (dialog);
-
-  do
-    {
-      keep_going = FALSE;
-      result = gtk_dialog_run (GTK_DIALOG (toplevel));
-      switch (result)
-	{
-	case GTK_RESPONSE_HELP:
-	  display_help (GTK_WINDOW (toplevel));
-	  keep_going = TRUE;
-	  break;
-	case GTK_RESPONSE_OK:
-	  uri = screenshot_dialog_get_uri (dialog);
-	  if (temporary_file == NULL)
-	    {
-	      save_immediately = TRUE;
-	      screenshot_dialog_set_busy (dialog, TRUE);
-	      keep_going = TRUE;
-	    }
-	  else
-	    {
-	      /* We've saved the temporary file.  Lets try to copy it to the
-	       * correct location */
-	      if (! try_to_save (dialog, uri))
-		keep_going = TRUE;
-	    }
-	  break;
-	default:
-	  break;
-	}
-    }
-  while (keep_going);
+  
+  gtk_widget_show (toplevel);
+  
+  g_signal_connect (toplevel,
+                    "response",
+                    G_CALLBACK (screenshot_dialog_response_cb),
+                    dialog);
 }
 
 static void
-prepare_screenshot (void)
-{
+finish_prepare_screenshot (char *initial_uri)
+{  
   ScreenshotDialog *dialog;
   Window win;
-  char *initial_uri;
 
   if (!screenshot_grab_lock ())
     exit (0);
@@ -739,41 +741,168 @@ prepare_screenshot (void)
       exit (1);
     }
 
-
-  /* If uri isn't local, we should do this async before taking the sshot */
-  initial_uri = generate_filename_for_uri (last_save_dir);
-  if (initial_uri == NULL)
-    {
-      gchar *desktop_dir;
-
-      /* We failed to make a new name for the last save dir. We try again
-       * with our Desktop directory.
-       */
-      desktop_dir = get_desktop_dir ();
-      initial_uri = generate_filename_for_uri (desktop_dir);
-      g_free (desktop_dir);
-    }
-
-  /* desperate fallback: /tmp */
-  if (initial_uri == NULL)
-    {
-      const gchar *tmp_dir = g_get_tmp_dir ();
-      initial_uri = generate_filename_for_uri (tmp_dir);
-    }
-
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
   g_free (initial_uri);
 
   screenshot_save_start (screenshot, save_done_notification, dialog);
 
   run_dialog (dialog);
+}
 
+static gboolean
+check_file_done (gpointer user_data)
+{
+  char *retval;
+  AsyncExistenceJob *job = user_data;
+
+  retval = job->retval;
+  g_free (job->base_uris[1]);
+  g_slice_free (AsyncExistenceJob, job);
+  
+  finish_prepare_screenshot (retval);
+  
+  return FALSE;
+}
+
+static char *
+build_uri (AsyncExistenceJob *job)
+{
+  char *retval, *file_name;
+
+  if (window_title)
+    {
+      /* translators: this is the name of the file that gets made up
+       * with the screenshot if a specific window is taken */
+      if (job->iteration == 0)
+        {
+          file_name = g_strdup_printf (_("Screenshot-%s.png"), window_title);
+        }
+      else
+        {
+          /* translators: this is the name of the file that gets
+           * made up with the screenshot if a specific window is
+           * taken */
+          file_name = g_strdup_printf (_("Screenshot-%s-%d.png"),
+                                       window_title, job->iteration);
+        }
+    }
+  else
+    {
+      if (job->iteration == 0)
+        {
+          /* translators: this is the name of the file that gets made up
+           * with the screenshot if the entire screen is taken */
+          file_name = g_strdup (_("Screenshot.png"));
+        }
+      else
+        {
+          /* translators: this is the name of the file that gets
+           * made up with the screenshot if the entire screen is
+           * taken */
+          file_name = g_strdup_printf (_("Screenshot-%d.png"), job->iteration);
+        }
+    }
+
+  retval = g_build_filename (job->base_uris[job->type], file_name, NULL);
+  g_free (file_name);
+  
+  return retval;
+}
+
+static gboolean
+try_check_file (GIOSchedulerJob *io_job,
+                GCancellable *cancellable,
+                gpointer data)
+{
+  AsyncExistenceJob *job = data;
+  GFile *file;
+  GFileInfo *info;
+  GError *error;
+  char *uri;
+
+retry:
+  error = NULL;
+  uri = build_uri (job);
+  file = g_file_new_for_uri (uri);
+  
+  info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
+			    G_FILE_QUERY_INFO_NONE, cancellable, &error);
+  if (info != NULL)
+    {
+      /* file already exists, iterate again */
+      g_object_unref (info);
+      g_object_unref (file);
+      (job->iteration)++;
+
+      goto retry;
+    }
+  else
+    {
+      /* see the error to check whether the location is not accessible
+       * or the file does not exist.
+       */
+      if (error->code == G_IO_ERROR_NOT_FOUND)
+        {
+          job->retval = uri;
+          goto out;
+        }
+      else
+        {
+          /* another kind of error, assume this location is not
+           * accessible.
+           */
+          g_free (uri);
+          if (job->type == TEST_TMP)
+            {
+              job->retval = NULL;
+              goto out;
+            }
+          else
+            {
+              (job->type)++;
+              job->iteration = 0;
+
+              g_error_free (error);
+              g_object_unref (file);
+              goto retry;
+            }
+        }
+    }
+
+out:
+  g_error_free (error);
+  g_object_unref (file);
+    
+  g_io_scheduler_job_send_to_mainloop_async (io_job,
+                                             check_file_done,
+                                             job,
+                                             NULL);
+  return FALSE;
+}
+
+static void
+prepare_screenshot (void)
+{
+  AsyncExistenceJob *job;
+  
+  job = g_slice_new0 (AsyncExistenceJob);
+  job->base_uris[0] = last_save_dir;
+  /* we'll have to free this */
+  job->base_uris[1] = get_desktop_dir ();
+  job->base_uris[2] = (char *) g_get_tmp_dir ();
+  job->iteration = 0;
+  job->type = TEST_LAST_DIR;
+
+  g_io_scheduler_push_job (try_check_file,
+                           job,
+                           NULL,
+                           0, NULL);
+                           
 }
 
 static gboolean
 prepare_screenshot_timeout (gpointer data)
 {
-  gtk_main_quit ();
   prepare_screenshot ();
 
   return FALSE;
@@ -801,6 +930,36 @@ get_desktop_dir (void)
   return desktop_dir;
 }
 
+/* Taken from gnome-vfs-utils.c */
+static char *
+expand_initial_tilde (const char *path)
+{
+  char *slash_after_user_name, *user_name;
+  struct passwd *passwd_file_entry;
+
+  if (path[1] == '/' || path[1] == '\0') {
+    return g_strconcat (g_get_home_dir (), &path[1], NULL);
+  }
+  
+  slash_after_user_name = strchr (&path[1], '/');
+  if (slash_after_user_name == NULL) {
+    user_name = g_strdup (&path[1]);
+  } else {
+    user_name = g_strndup (&path[1],
+                           slash_after_user_name - &path[1]);
+  }
+  passwd_file_entry = getpwnam (user_name);
+  g_free (user_name);
+  
+  if (passwd_file_entry == NULL || passwd_file_entry->pw_dir == NULL) {
+    return g_strdup (path);
+  }
+  
+  return g_strconcat (passwd_file_entry->pw_dir,
+                      slash_after_user_name,
+                      NULL);
+}
+
 /* Load options */
 static void
 load_options (void)
@@ -823,7 +982,7 @@ load_options (void)
     }
   else if (last_save_dir[0] == '~')
     {
-      char *tmp = gnome_vfs_expand_initial_tilde (last_save_dir);
+      char *tmp = expand_initial_tilde (last_save_dir);
       g_free (last_save_dir);
       last_save_dir = tmp;
     }
@@ -865,12 +1024,8 @@ register_screenshooter_icon (GtkIconFactory * factory)
 static void
 screenshooter_init_stock_icons (void)
 {
-  GtkIconFactory * factory;
-  GtkIconSize screenshooter_icon_size;
+  GtkIconFactory *factory;
 
-  screenshooter_icon_size = gtk_icon_size_register ("panel-menu", 
-	                                            GTK_ICON_SIZE_DIALOG,
-	                                            GTK_ICON_SIZE_DIALOG);
   factory = gtk_icon_factory_new ();
   gtk_icon_factory_add_default (factory);
 
@@ -915,8 +1070,6 @@ main (int argc, char *argv[])
   g_option_context_set_ignore_unknown_options (context, FALSE);
   g_option_context_set_help_enabled (context, TRUE);
   g_option_context_set_main_group (context, group);
-
-  gnome_authentication_manager_init ();
 
   program = gnome_program_init ("gnome-screenshot", VERSION,
 				LIBGNOMEUI_MODULE,
@@ -974,12 +1127,14 @@ main (int argc, char *argv[])
       g_timeout_add (delay * 1000,
 		     prepare_screenshot_timeout,
 		     NULL);
-      gtk_main ();
     }
   else
     {
-      prepare_screenshot ();
+      /* start this in an idle anyway and fire up the mainloop */
+      g_idle_add (prepare_screenshot_timeout, NULL);
     }
+
+  gtk_main ();
 
   g_object_unref (program);
 

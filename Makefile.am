@@ -29,9 +29,6 @@ gnome_screenshot_SOURCES = \
 	screenshot-shadow.h		\
 	screenshot-utils.c		\
 	screenshot-utils.h		\
-	gnome-egg-xfer-dialog.c		\
-	gnome-egg-xfer-dialog.h		\
-	gnome-egg-xfer-dialog-icons.h	\
 	screenshot-save.c		\
 	screenshot-save.h		\
 	screenshot-xfer.c		\

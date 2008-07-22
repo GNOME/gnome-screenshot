@@ -1,189 +1,82 @@
+/* screenshot-xfer.c - file transfer functions for GNOME Screenshot
+ *
+ * Copyright (C) 2001-2006  Jonathan Blandford <jrb@alum.mit.edu>
+ * Copyright (C) 2008  Cosimo Cecchi <cosimoc@gnome.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ */
+
 #include "config.h"
 
 #include "screenshot-xfer.h"
-#include "gnome-egg-xfer-dialog.h"
 
 #include <time.h>
 #include <glib/gi18n.h>
 
 typedef struct
 {
-  GnomeVFSAsyncHandle *handle;
-  const char *operation_title;	/* "Copying files" */
-  const char *action_label;	/* "Files copied:" */
-  const char *progress_verb;	/* "Copying" */
-  const char *preparation_name;	/* "Preparing To Copy..." */
-  const char *cleanup_name;	/* "Finishing Move..." */
-  GtkWidget *parent_dialog;
-  GtkWidget *progress_dialog;
-  gboolean delete_target;
-  guint timeout_id;
-  gboolean canceled;
-} TransferInfo;
+  GtkWidget *dialog;
+  GtkWidget *progress_bar;
+  GCancellable *cancellable;
+} TransferDialog;
 
-static gboolean show_dialog_timeout (TransferInfo *transfer_info);
-
-static void
-remove_timeout (TransferInfo *transfer_info)
+typedef struct
 {
-  g_assert (transfer_info);
+  GFile *source;
+  GFile *dest;
+  GFileCopyFlags flags;
+  TransferCallback callback;
+  gpointer callback_data;
+  GCancellable *cancellable;
+  GtkWidget *parent;
+  TransferDialog *dialog;
+  TransferResult result;
+  GIOSchedulerJob *io_job;
+  char *error;
+  gint dialog_timeout_id;
+  goffset total_bytes;
+  goffset current_bytes;
+} TransferJob;
 
-  if (transfer_info->timeout_id)
-    {
-      g_source_remove (transfer_info->timeout_id);
-      transfer_info->timeout_id = 0;
-    }
-}
-
-static void
-add_timeout (TransferInfo *transfer_info)
+typedef struct
 {
-  if (transfer_info->timeout_id == 0)
-    transfer_info->timeout_id = g_timeout_add (1000, (GSourceFunc) show_dialog_timeout, transfer_info);
-}
+  int resp;
+  GtkWidget *parent;
+  char *basename;
+} ErrorDialogData;
 
-static GtkWidget *
-transfer_info_get_parent (TransferInfo *transfer_info)
+static goffset total_size = 0;
+
+static gboolean
+do_run_overwrite_confirm_dialog (gpointer _data)
 {
-  g_assert (transfer_info);
-
-  if (transfer_info->progress_dialog)
-    return transfer_info->progress_dialog;
-  if (transfer_info->parent_dialog)
-    return transfer_info->parent_dialog;
-  return NULL;
-}
-
-static int
-handle_transfer_ok (const GnomeVFSXferProgressInfo *progress_info,
-		    TransferInfo                   *transfer_info)
-{
-  if (transfer_info->canceled
-      && progress_info->phase != GNOME_VFS_XFER_PHASE_COMPLETED)
-    {
-      /* If cancelled, delete any partially copied files that are laying
-       * around and return. Don't delete the source though..
-       */
-      if (progress_info->target_name != NULL
-	  && progress_info->source_name != NULL
-	  && strcmp (progress_info->source_name, progress_info->target_name) != 0
-	  && progress_info->bytes_total != progress_info->bytes_copied)
-	{
-	  transfer_info->delete_target = TRUE;
-	}
-
-      gtk_main_quit ();
-      return 0;
-    }
-
-  if (progress_info->phase == GNOME_VFS_XFER_PHASE_COMPLETED)
-    {
-      remove_timeout (transfer_info);
-      if (transfer_info->progress_dialog)
-	{
-	  gtk_widget_destroy (transfer_info->progress_dialog);
-	  transfer_info->progress_dialog = NULL;
-	}
-      gtk_main_quit ();
-      return 0;
-    }
-
-  /* Update the dialog, if need be */
-  if (transfer_info->progress_dialog == NULL)
-    return 1;
-
-  switch (progress_info->phase)
-    {
-      /* Initial phase */
-    case GNOME_VFS_XFER_PHASE_INITIAL:
-      /* Checking if destination can handle move/copy */
-      return 1;
-    case GNOME_VFS_XFER_PHASE_COLLECTING:
-    case GNOME_VFS_XFER_CHECKING_DESTINATION:
-      gnome_egg_xfer_dialog_set_operation_string (GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
-						  _("Preparing to copy"));
-      return 1;
-    case GNOME_VFS_XFER_PHASE_READYTOGO:
-      gnome_egg_xfer_dialog_set_operation_string
-	(GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
-	 transfer_info->action_label);
-      gnome_egg_xfer_dialog_set_total
-	(GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
-	 progress_info->files_total,
-	 progress_info->bytes_total);
-      return 1;
-    case GNOME_VFS_XFER_PHASE_OPENSOURCE:
-    case GNOME_VFS_XFER_PHASE_OPENTARGET:
-    case GNOME_VFS_XFER_PHASE_COPYING:
-    case GNOME_VFS_XFER_PHASE_WRITETARGET:
-    case GNOME_VFS_XFER_PHASE_CLOSETARGET:
-      if (progress_info->bytes_copied == 0)
-	{
-	}
-      else
-	{
-	  gnome_egg_xfer_dialog_update_sizes
-	    (GNOME_EGG_XFER_DIALOG (transfer_info->progress_dialog),
-	     MIN (progress_info->bytes_copied, 
-		  progress_info->bytes_total),
-	     MIN (progress_info->total_bytes_copied,
-		  progress_info->bytes_total));
-	}
-      return 1;
-    case GNOME_VFS_XFER_PHASE_FILECOMPLETED:
-    case GNOME_VFS_XFER_PHASE_CLEANUP:
-      return 1;
-      /* Phases we don't expect to see */
-    case GNOME_VFS_XFER_PHASE_COMPLETED:
-    case GNOME_VFS_XFER_PHASE_SETATTRIBUTES:
-    case GNOME_VFS_XFER_PHASE_CLOSESOURCE:
-    case GNOME_VFS_XFER_PHASE_MOVING:
-    case GNOME_VFS_XFER_PHASE_DELETESOURCE:
-    case GNOME_VFS_XFER_PHASE_READSOURCE:
-    default:
-      g_print ("Unexpected phase (%d) hit\n", progress_info->phase);
-      g_assert_not_reached ();
-      return 0;
-    }
-  return 1;
-}
-
-static gint
-handle_transfer_vfs_error (GnomeVFSXferProgressInfo *progress_info,
-			   TransferInfo             *transfer_info)
-{
-  g_print ("handle_transfer_vfs_error!\n");
-  remove_timeout (transfer_info);
-  if (transfer_info->progress_dialog)
-    {
-      gtk_widget_destroy (transfer_info->progress_dialog);
-      transfer_info->progress_dialog = NULL;
-    }
-  gtk_main_quit ();
-  return 1;
-}
-
-static int
-handle_transfer_overwrite (const GnomeVFSXferProgressInfo *progress_info,
-			   TransferInfo                   *transfer_info)
-{
+  ErrorDialogData *data = _data;
   GtkWidget *dialog;
   gint response;
-  gint need_timeout;
 
-  need_timeout = (transfer_info->timeout_id > 0);
-  remove_timeout (transfer_info);
-
-  /* We need to ask the user if they want to overrwrite this file */
-  dialog = gtk_message_dialog_new (GTK_WINDOW (transfer_info_get_parent (transfer_info)),
-				   GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+  /* we need to ask the user if they want to overwrite this file */
+  dialog = gtk_message_dialog_new (GTK_WINDOW (data->parent),
+				   GTK_DIALOG_DESTROY_WITH_PARENT,
 				   GTK_MESSAGE_QUESTION,
 				   GTK_BUTTONS_NONE,
 				   _("File already exists"));
 
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-					    _("The file \"%s\" already exists.  Would you like to replace it?"), 
-					    progress_info->target_name);
+					    _("The file \"%s\" already exists. "
+                                              "Would you like to replace it?"), 
+					    data->basename);
   gtk_dialog_add_button (GTK_DIALOG (dialog),
 			 GTK_STOCK_CANCEL,
 			 GTK_RESPONSE_CANCEL);
@@ -193,91 +86,312 @@ handle_transfer_overwrite (const GnomeVFSXferProgressInfo *progress_info,
 
   response = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
-  if (response == GTK_RESPONSE_OK)
-    return GNOME_VFS_XFER_OVERWRITE_ACTION_REPLACE;
-  else
-    return GNOME_VFS_XFER_OVERWRITE_ACTION_SKIP;
 
-  if (need_timeout)
-    add_timeout (transfer_info);
+  data->resp = response;
+  
+  return FALSE;
 }
 
-static gint
-handle_transfer_duplicate (GnomeVFSXferProgressInfo *progress_info,
-			   TransferInfo             *transfer_info)
+static void
+transfer_dialog_response_cb (GtkDialog *d,
+                             gint response,
+                             GCancellable *cancellable)
 {
-  g_print ("handle_transfer_duplicate!\n");
-  return 1;
-}
-
-static gint
-screenshot_async_xfer_progress (GnomeVFSAsyncHandle      *handle,
-				GnomeVFSXferProgressInfo *progress_info,
-				gpointer                  data)
-{
-  TransferInfo *transfer_info = data;
-
-  switch (progress_info->status)
+  if (response == GTK_RESPONSE_CANCEL)
     {
-    case GNOME_VFS_XFER_PROGRESS_STATUS_OK:
-      return handle_transfer_ok (progress_info, transfer_info);
-    case GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR:
-      return handle_transfer_vfs_error (progress_info, transfer_info);
-    case GNOME_VFS_XFER_PROGRESS_STATUS_OVERWRITE:
-      return handle_transfer_overwrite (progress_info, transfer_info);
-    case GNOME_VFS_XFER_PROGRESS_STATUS_DUPLICATE:
-      return handle_transfer_duplicate (progress_info, transfer_info);
-    default:
-      g_warning (_("Unknown GnomeVFSXferProgressStatus %d"),
-		 progress_info->status);
-      return 0;
+      if (!g_cancellable_is_cancelled (cancellable))
+        {
+          g_cancellable_cancel (cancellable);
+        }
     }
 }
 
 static gboolean
-show_dialog_timeout (TransferInfo *transfer_info)
+transfer_progress_dialog_new (TransferJob *job)
 {
-  transfer_info->progress_dialog =
-	  gnome_egg_xfer_dialog_new (NULL, NULL, NULL, NULL, 0, 0, FALSE);
-  gtk_widget_show (transfer_info->progress_dialog);
-  transfer_info->timeout_id = 0;
+  TransferDialog *dialog;
+  GtkWidget *gdialog;
+  GtkWidget *widget;
+  
+  dialog = g_new0 (TransferDialog, 1);
+  
+  gdialog = gtk_message_dialog_new (GTK_WINDOW (job->parent),
+                                    GTK_DIALOG_DESTROY_WITH_PARENT,
+                                    GTK_MESSAGE_OTHER,
+                                    GTK_BUTTONS_CANCEL,
+                                    _("Saving file..."),
+                                    NULL);
+  widget = gtk_progress_bar_new ();
+  gtk_box_pack_start (GTK_BOX (GTK_MESSAGE_DIALOG (gdialog)->label->parent),
+                      widget, FALSE, 0, 0);
+  gtk_widget_show (widget);
+  dialog->progress_bar = widget;
+  dialog->dialog = gdialog;
+  
+  g_signal_connect (gdialog,
+                    "response",
+                    G_CALLBACK (transfer_dialog_response_cb),
+                    job->cancellable);
 
+  job->dialog = dialog;
+  gtk_widget_show (gdialog);
+  
   return FALSE;
 }
 
-GnomeVFSResult
-screenshot_xfer_uri (GnomeVFSURI *source_uri,
-		     GnomeVFSURI *target_uri,
-		     GtkWidget   *parent)
+static void
+transfer_progress_dialog_start (TransferJob *job)
 {
-  GnomeVFSResult result;
-  GList *source_uri_list = NULL;
-  GList *target_uri_list = NULL;
-  TransferInfo *transfer_info;
+  /* sends to the mainloop and schedules show */
+  if (job->dialog_timeout_id == 0)
+    job->dialog_timeout_id = g_timeout_add_seconds (1,
+                                                    (GSourceFunc) transfer_progress_dialog_new,
+                                                    job);
+}
 
-  source_uri_list = g_list_prepend (source_uri_list, source_uri);
-  target_uri_list = g_list_prepend (target_uri_list, target_uri);
+static int
+run_overwrite_confirm_dialog (TransferJob *job)
+{
+  ErrorDialogData *data;
+  gboolean need_timeout;
+  int response;
+  char *basename;
 
-  transfer_info = g_new0 (TransferInfo, 1);
-  transfer_info->parent_dialog = parent;
-  add_timeout (transfer_info);
+  basename = g_file_get_basename (job->dest);
 
-  result = gnome_vfs_async_xfer (&transfer_info->handle,
-				 source_uri_list, target_uri_list,
-				 GNOME_VFS_XFER_DEFAULT,
-				 GNOME_VFS_XFER_ERROR_MODE_QUERY,
-				 GNOME_VFS_XFER_OVERWRITE_MODE_QUERY,
-				 GNOME_VFS_PRIORITY_DEFAULT,
-				 screenshot_async_xfer_progress, transfer_info,
-				 NULL, NULL);
-  gtk_main ();
-  remove_timeout (transfer_info);
-  g_list_free (source_uri_list);
-  g_list_free (target_uri_list);
+  data = g_slice_new0 (ErrorDialogData);
+  data->parent = job->parent;
+  data->basename = basename;
 
-  if (transfer_info->delete_target)
-    ;/* try to delete the target, iff it started writing */
+  need_timeout = (job->dialog_timeout_id > 0);
+  
+  if (need_timeout)
+    {
+      g_source_remove (job->dialog_timeout_id);
+      job->dialog_timeout_id = 0;
+    } 
 
-  return GNOME_VFS_OK;
+  g_io_scheduler_job_send_to_mainloop (job->io_job,
+                                       do_run_overwrite_confirm_dialog,
+                                       data,
+                                       NULL);
+  response = data->resp;
+
+  if (need_timeout)
+    transfer_progress_dialog_start (job);
+  
+  g_free (basename);
+  g_slice_free (ErrorDialogData, data);
+
+  return response;                                       
+}
+
+static gboolean
+transfer_progress_dialog_update (TransferJob *job)
+{
+  TransferDialog *dialog = job->dialog;
+  double fraction;
+  
+  fraction = ((double) job->current_bytes) / ((double) job->total_bytes);
+
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (dialog->progress_bar),
+                                 fraction);
+  
+  return FALSE;
+}
+
+static gboolean
+transfer_job_done (gpointer user_data)
+{
+  TransferJob *job = user_data;
+  TransferDialog *dialog;
+  
+  dialog = job->dialog;
+  
+  if (job->dialog_timeout_id)
+    {
+      g_source_remove (job->dialog_timeout_id);
+      job->dialog_timeout_id = 0;
+    }
+  if (dialog)
+      gtk_widget_destroy (dialog->dialog);
+  
+  if (job->callback)
+    {
+      (job->callback) (job->result,
+                       job->error,
+                       job->callback_data);
+    }
+  
+  g_object_unref (job->source);
+  g_object_unref (job->dest);
+  g_object_unref (job->cancellable);
+
+  g_free (dialog);
+  g_free (job->error);
+  g_slice_free (TransferJob, job);
+  
+  return FALSE;
+}
+
+static void
+transfer_progress_cb (goffset current_num_bytes,
+                      goffset total_num_bytes,
+                      TransferJob *job)
+{  
+  job->current_bytes = current_num_bytes;
+
+  if (!job->dialog)
+    return;
+   
+  g_io_scheduler_job_send_to_mainloop_async (job->io_job,
+                                             (GSourceFunc) transfer_progress_dialog_update,
+                                             job,
+                                             NULL);
+}
+
+static goffset
+get_file_size (GFile *file)
+{
+  GFileInfo *file_info;
+  goffset size;
+  
+  file_info = g_file_query_info (file,
+                                 G_FILE_ATTRIBUTE_STANDARD_SIZE,
+                                 0, NULL, NULL);
+  if (file_info != NULL)
+    {
+      size = g_file_info_get_size (file_info);
+      g_object_unref (file_info);
+    }
+  else
+    {
+      /* this should never fail as the source file is always local and in /tmp,
+       * but you never know.
+       */
+      size = -1;
+    }
+  
+  return size;
+}
+
+static gboolean
+transfer_file (GIOSchedulerJob *io_job,
+               GCancellable *cancellable,
+               gpointer user_data)
+{
+  TransferJob *job = user_data;
+  GError *error;
+  gboolean result;
+  
+  job->io_job = io_job;
+  job->total_bytes = get_file_size (job->source);
+  if (job->total_bytes == -1)
+    {
+      /* we can't access the source file, abort early */
+      error = NULL;
+      job->result = TRANSFER_ERROR;
+      job->error = g_strdup (_("Can't access source file"));
+      
+      goto out;
+    }
+
+  transfer_progress_dialog_start (job);
+
+retry:
+  error = NULL;
+  if (!g_file_copy (job->source,
+                    job->dest,
+                    job->flags,
+                    job->cancellable,
+                    (GFileProgressCallback) transfer_progress_cb,
+                    job,
+                    &error))
+    {
+      if (error->code == G_IO_ERROR_EXISTS)
+        {
+          int response;
+          /* ask the user if he wants to overwrite, otherwise
+           * return and report what happened.
+           */
+          response = run_overwrite_confirm_dialog (job);
+          if (response == GTK_RESPONSE_OK)
+            {
+              job->flags |= G_FILE_COPY_OVERWRITE;
+              g_error_free (error);
+
+              goto retry;
+            }
+          else
+            {
+              g_cancellable_cancel (job->cancellable);
+              job->result = TRANSFER_OVERWRITE;
+              goto out;
+            }
+        }
+      else if (error->code == G_IO_ERROR_CANCELLED)
+        {
+          job->result = TRANSFER_CANCELLED;
+
+          goto out;
+        }
+      else
+        {
+          /* other vfs error, abort the transfer and report
+           * the error.
+           */
+          g_cancellable_cancel (job->cancellable);
+          job->result = TRANSFER_ERROR;
+          job->error = g_strdup (error->message);
+          
+          goto out;
+        }
+    }
+  else
+    {
+      /* success */
+      job->result = TRANSFER_OK;
+      
+      goto out;
+    }
+
+out:
+  if (error)
+      g_error_free (error);
+    
+  g_io_scheduler_job_send_to_mainloop_async (io_job,
+                                             transfer_job_done,
+                                             job,
+                                             NULL);  
+  return FALSE;
+}
+
+void
+screenshot_xfer_uri (GFile *source_file,
+                     GFile *target_file,
+		     GtkWidget *parent,
+                     TransferCallback done_callback,
+                     gpointer done_callback_data)
+{
+  TransferJob *job;
+  GCancellable *cancellable;
+
+  cancellable = g_cancellable_new ();
+
+  job = g_slice_new0 (TransferJob);
+  job->parent = parent;
+  job->source = g_object_ref (source_file);
+  job->dest = g_object_ref (target_file);
+  job->flags = 0;
+  job->error = NULL;
+  job->dialog = NULL;
+  job->callback = done_callback;
+  job->callback_data = done_callback_data;
+  job->cancellable = cancellable;
+
+  g_io_scheduler_push_job (transfer_file,
+                           job,
+                           NULL, 0,
+                           job->cancellable);
 }
 
