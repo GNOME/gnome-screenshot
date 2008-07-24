@@ -1,3 +1,10 @@
+2008-07-25  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* gnome-egg-xfer-dialog-icons.h:
+	* gnome-egg-xfer-dialog.c:
+	* gnome-egg-xfer-dialog.h:
+	Remove these files, which aren't used anymore after the port to GIO.
+
 2008-07-22  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* Makefile.am:
