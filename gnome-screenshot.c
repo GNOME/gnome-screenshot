@@ -108,6 +108,7 @@ static char *get_desktop_dir (void);
 
 static GtkWidget *border_check = NULL;
 static GtkWidget *effect_combo = NULL;
+static GtkWidget *effect_label = NULL;
 
 static void
 display_help (GtkWindow *parent)
@@ -157,6 +158,7 @@ target_toggled_cb (GtkToggleButton *button,
       
       gtk_widget_set_sensitive (border_check, take_window_shot);
       gtk_widget_set_sensitive (effect_combo, take_window_shot);
+      gtk_widget_set_sensitive (effect_label, take_window_shot);
     }
 }
 
@@ -309,19 +311,12 @@ create_effects_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (hbox);
 
   align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
-  gtk_widget_set_size_request (align, 48, -1);
+  gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, 12, 0);
   gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
   gtk_widget_show (align);
 
-#if 0
-  image = gtk_image_new_from_stock (SCREENSHOOTER_ICON,
-                                    GTK_ICON_SIZE_DIALOG);
-  gtk_container_add (GTK_CONTAINER (align), image);
-  gtk_widget_show (image);
-#endif
-
   vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (align), vbox);
   gtk_widget_show (vbox);
 
   /** Include pointer **/
@@ -350,9 +345,11 @@ create_effects_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (hbox);
 
   label = gtk_label_new_with_mnemonic (_("Apply _effect:"));
+  gtk_widget_set_sensitive (label, take_window_shot);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
+  effect_label = label;
 
   combo = create_effects_combo ();
   gtk_widget_set_sensitive (combo, take_window_shot);

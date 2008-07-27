@@ -1,3 +1,10 @@
+2008-07-27  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-screenshot.c: (target_toggled_cb), (create_effects_frame):
+	Use HIG frame spacing and toggle label sensitivity too.
+	Patch by Dennis Cranston <dennis_cranston@yahoo.com>
+	Fix bug #403462.
+
 2008-07-25  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-egg-xfer-dialog-icons.h:
