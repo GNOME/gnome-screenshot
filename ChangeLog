@@ -1,5 +1,13 @@
 2008-08-10  Emmanuele Bassi  <ebassi@gnome.org>
 
+	Bug 434580 – gnome-screenshot does not remember user settings
+
+	* gnome-screenshot.c:
+	* gnome-screenshot.schemas.in: Save the user settings after
+	the screenshot has been taken. (Elliott Hughes)
+
+2008-08-10  Emmanuele Bassi  <ebassi@gnome.org>
+
 	Bug 454689 – Messages in the gnome-screenshot --help output
 	are not all translated
 

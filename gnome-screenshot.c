@@ -55,6 +55,9 @@
 #define INCLUDE_POINTER_KEY     GNOME_SCREENSHOT_GCONF "/include_pointer"
 #define LAST_SAVE_DIRECTORY_KEY GNOME_SCREENSHOT_GCONF "/last_save_directory"
 #define BORDER_EFFECT_KEY       GNOME_SCREENSHOT_GCONF "/border_effect"
+#define DELAY_KEY               GNOME_SCREENSHOT_GCONF "/delay"
+#define TAKE_WINDOW_SHOT_KEY    GNOME_SCREENSHOT_GCONF "/take_window_shot"
+
 
 enum
 {
@@ -102,9 +105,10 @@ static char *border_effect = NULL;
 static guint delay = 0;
 
 /* some local prototypes */
-static void display_help           (GtkWindow *parent);
-static void save_done_notification (gpointer   data);
-static char *get_desktop_dir (void);
+static void  display_help           (GtkWindow *parent);
+static void  save_done_notification (gpointer   data);
+static char *get_desktop_dir        (void);
+static void  save_options           (void);
 
 static GtkWidget *border_check = NULL;
 static GtkWidget *effect_combo = NULL;
@@ -917,6 +921,7 @@ static gboolean
 prepare_screenshot_timeout (gpointer data)
 {
   prepare_screenshot ();
+  save_options ();
 
   return FALSE;
 }
@@ -1014,14 +1019,44 @@ load_options (void)
   if (!border_effect)
     border_effect = g_strdup ("none");
 
+  take_window_shot = gconf_client_get_bool (gconf_client,
+                                            TAKE_WINDOW_SHOT_KEY,
+                                            NULL);
+
+  delay = gconf_client_get_int (gconf_client, DELAY_KEY, NULL);
+
   g_object_unref (gconf_client);
 }
 
 static void
+save_options (void)
+{
+  GConfClient *gconf_client;
+
+  gconf_client = gconf_client_get_default ();
+
+  /* Error is NULL, as there's nothing we can do */
+  gconf_client_set_bool (gconf_client,
+                         TAKE_WINDOW_SHOT_KEY,
+                         take_window_shot,
+                         NULL);
+  gconf_client_set_int (gconf_client, DELAY_KEY, delay, NULL);
+  gconf_client_set_bool (gconf_client,
+                         INCLUDE_BORDER_KEY, include_border,
+                         NULL);
+  gconf_client_set_string (gconf_client,
+                           BORDER_EFFECT_KEY, border_effect,
+                           NULL);
+ 
+  g_object_unref (gconf_client);
+}
+
+
+static void
 register_screenshooter_icon (GtkIconFactory * factory)
 {
-  GtkIconSource * source;
-  GtkIconSet * icon_set;
+  GtkIconSource *source;
+  GtkIconSet *icon_set;
 
   source = gtk_icon_source_new ();
   gtk_icon_source_set_icon_name (source, SCREENSHOOTER_ICON);
