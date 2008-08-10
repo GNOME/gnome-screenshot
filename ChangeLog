@@ -1,5 +1,14 @@
 2008-08-10  Emmanuele Bassi  <ebassi@gnome.org>
 
+	Bug 454689 – Messages in the gnome-screenshot --help output
+	are not all translated
+
+	* gnome-screenshot.c (main): Remove the useless option group
+	and allow the translation of the application options. (Gabor
+	Kelemen)
+
+2008-08-10  Emmanuele Bassi  <ebassi@gnome.org>
+
 	Bug 521799 – Use PNG standard keyword
 
 	* screenshot-save.c (screenshot_save_start): Use the standard
