@@ -212,7 +212,7 @@ screenshot_save_start (GdkPixbuf    *pixbuf,
 
       if (! gdk_pixbuf_save (pixbuf, tmp_filename,
 			     "png", &error,
-			     "tEXt::CREATOR", "gnome-panel-screenshot",
+			     "tEXt::Software", "gnome-screenshot",
 			     NULL))
 	{
 	  if (error && error->message)

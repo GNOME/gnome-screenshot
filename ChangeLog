@@ -1,5 +1,13 @@
 2008-08-10  Emmanuele Bassi  <ebassi@gnome.org>
 
+	Bug 521799 – Use PNG standard keyword
+
+	* screenshot-save.c (screenshot_save_start): Use the standard
+	"Software" keyword and update the name of the program. (Felix
+	Riemann)
+
+2008-08-10  Emmanuele Bassi  <ebassi@gnome.org>
+
 	Bug 515179 – F1 does not display help in interactive dialogue
 
 	* gnome-screenshot.c:
