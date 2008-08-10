@@ -203,6 +203,18 @@ effect_combo_changed_cb (GtkComboBox *combo,
     }
 }
 
+static gint 
+key_press_cb (GtkWidget* widget, GdkEventKey* event, gpointer data)
+{
+  if (event->keyval == GDK_F1)
+    {
+      display_help (GTK_WINDOW (widget));
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 typedef struct {
   ScreenshotEffectType id;
   const gchar *label;
@@ -498,6 +510,10 @@ create_interactive_dialog (void)
    */
   g_signal_connect (retval, "response",
                     G_CALLBACK (interactive_dialog_response_cb),
+                    NULL);
+
+  g_signal_connect (G_OBJECT (retval), "key-press-event",
+                    G_CALLBACK(key_press_cb), 
                     NULL);
 
   return retval;
