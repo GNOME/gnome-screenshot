@@ -703,24 +703,24 @@ static void
 finish_prepare_screenshot (char *initial_uri)
 {  
   ScreenshotDialog *dialog;
-  Window win;
+  GdkWindow *window;
 
   if (!screenshot_grab_lock ())
     exit (0);
 
   if (take_window_shot)
     {
-      win = screenshot_find_current_window (include_border);
-      if (win == None)
+      window = screenshot_find_current_window ();
+      if (!window)
 	{
 	  take_window_shot = FALSE;
-	  win = GDK_ROOT_WINDOW ();
+	  window = gdk_get_default_root_window ();
 	}
       else
 	{
 	  gchar *tmp;
 
-	  window_title = screenshot_get_window_title (win);
+	  window_title = screenshot_get_window_title (window);
 	  tmp = screenshot_sanitize_filename (window_title);
 	  g_free (window_title);
 	  window_title = tmp;
@@ -728,10 +728,10 @@ finish_prepare_screenshot (char *initial_uri)
     }
   else
     {
-      win = GDK_ROOT_WINDOW ();
+      window = gdk_get_default_root_window ();
     }
 
-  screenshot = screenshot_get_pixbuf (win, include_pointer);
+  screenshot = screenshot_get_pixbuf (window, include_pointer, include_border);
 
   if (take_window_shot) {
     switch (border_effect[0])

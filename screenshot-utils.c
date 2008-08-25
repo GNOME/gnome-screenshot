@@ -1,6 +1,7 @@
 /* screenshot-utils.c - common functions for GNOME Screenshot
  *
  * Copyright (C) 2001-2006  Jonathan Blandford <jrb@alum.mit.edu>
+ * Copyright (C) 2008 Cosimo Cecchi <cosimoc@gnome.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -20,8 +21,8 @@
 #include "config.h"
 #include "screenshot-utils.h"
 
-#include <X11/Xatom.h>
 #include <gdk/gdkx.h>
+#include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 
@@ -29,214 +30,57 @@
 #include <X11/extensions/shape.h>
 #endif
 
-#include <X11/extensions/Xfixes.h>
-
 static GtkWidget *selection_window;
 
 #define SELECTION_NAME "_GNOME_PANEL_SCREENSHOT"
 
-
-/* Functions to deal with properties from libwnck */
-static char    * text_property_to_utf8 (const XTextProperty *prop);
-static Window    get_window_property   (Window               xwindow,
-					Atom                 atom);
-static char     *get_text_property     (Window               xwindow,
-					Atom                 atom);
-static char     *get_utf8_property     (Window               xwindow,
-					Atom                 atom);
-static gboolean  get_atom_property     (Window               xwindow,
-					Atom                 atom,
-					Atom                *val);
-
 static char *
-text_property_to_utf8 (const XTextProperty *prop)
+get_utf8_property (GdkWindow *window,
+		   GdkAtom    atom)
 {
-  char **list;
-  int count;
+  gboolean res;
+  GdkAtom utf8_string;
+  GdkAtom type;
+  int actual_format, actual_length;
+  guchar *data;
   char *retval;
   
-  list = NULL;
-
-  count = gdk_text_property_to_utf8_list (gdk_x11_xatom_to_atom (prop->encoding),
-                                          prop->format,
-                                          prop->value,
-                                          prop->nitems,
-                                          &list);
-
-  if (count == 0)
+  utf8_string = gdk_x11_xatom_to_atom (gdk_x11_get_xatom_by_name ("UTF8_STRING"));
+  res = gdk_property_get (window, atom, utf8_string,
+                          0, G_MAXLONG, FALSE,
+                          &type,
+                          &actual_format, &actual_length,
+                          &data);
+  if (!res)
     return NULL;
 
-  retval = list[0];
-  list[0] = g_strdup (""); /* something to free */
-  
-  g_strfreev (list);
-
-  return retval;
-}
-
-/* Borrowed from libwnck */
-static Window
-get_window_property (Window  xwindow,
-		     Atom    atom)
-{
-  Atom type;
-  int format;
-  gulong nitems;
-  gulong bytes_after;
-  Window *w;
-  int err, result;
-  Window retval;
-
-  gdk_error_trap_push ();
-
-  type = None;
-  result = XGetWindowProperty (gdk_display,
-			       xwindow,
-			       atom,
-			       0, G_MAXLONG,
-			       False, XA_WINDOW, &type, &format, &nitems,
-			       &bytes_after, (unsigned char **) &w);  
-  err = gdk_error_trap_pop ();
-
-  if (err != Success ||
-      result != Success)
-    return None;
-  
-  if (type != XA_WINDOW)
+  if (type != utf8_string || actual_format != 8 || actual_length == 0)
     {
-      XFree (w);
-      return None;
-    }
-
-  retval = *w;
-  XFree (w);
-  
-  return retval;
-}
-
-static char*
-get_text_property (Window  xwindow,
-		   Atom    atom)
-{
-  XTextProperty text;
-  char *retval;
-  
-  gdk_error_trap_push ();
-
-  text.nitems = 0;
-  if (XGetTextProperty (gdk_display,
-                        xwindow,
-                        &text,
-                        atom))
-    {
-      retval = text_property_to_utf8 (&text);
-
-      if (text.nitems > 0)
-        XFree (text.value);
-    }
-  else
-    {
-      retval = NULL;
-    }
-  
-  gdk_error_trap_pop ();
-
-  return retval;
-}
-
-static char *
-get_utf8_property (Window  xwindow,
-		   Atom    atom)
-{
-  Atom type;
-  int format;
-  gulong nitems;
-  gulong bytes_after;
-  guchar *val;
-  int err, result;
-  char *retval;
-  Atom utf8_string;
-
-  utf8_string = gdk_x11_get_xatom_by_name ("UTF8_STRING");
-
-  gdk_error_trap_push ();
-  type = None;
-  val = NULL;
-  result = XGetWindowProperty (gdk_display,
-			       xwindow,
-			       atom,
-			       0, G_MAXLONG,
-			       False, utf8_string,
-			       &type, &format, &nitems,
-			       &bytes_after, (guchar **)&val);  
-  err = gdk_error_trap_pop ();
-
-  if (err != Success ||
-      result != Success)
-    return NULL;
-  
-  if (type != utf8_string ||
-      format != 8 ||
-      nitems == 0)
-    {
-      if (val)
-        XFree (val);
+      g_free (data);
       return NULL;
     }
 
-  if (!g_utf8_validate ((gchar *)val, nitems, NULL))
+  if (!g_utf8_validate ((gchar *) data, actual_length, NULL))
     {
-      g_warning ("Property %s contained invalid UTF-8\n",
-		 gdk_x11_get_xatom_name (atom));
-      XFree (val);
+      char *atom_name = gdk_atom_name (atom);
+
+      g_warning ("Property `%s' (format: %d, length: %d) contained "
+                 "invalid UTF-8",
+                 atom_name,
+                 actual_format,
+                 actual_length);
+
+      g_free (atom_name);
+      g_free (data);
+
       return NULL;
     }
   
-  retval = g_strndup ((gchar *)val, nitems);
-  
-  XFree (val);
+  retval = g_strndup ((gchar *) data, actual_length);
+
+  g_free (data);
   
   return retval;
-}
-
-static gboolean
-get_atom_property (Window  xwindow,
-		   Atom    atom,
-		   Atom   *val)
-{
-  Atom type;
-  int format;
-  gulong nitems;
-  gulong bytes_after;
-  unsigned char *a;
-  int err, result;
-
-  *val = 0;
-  
-  gdk_error_trap_push ();
-  type = None;
-  result = XGetWindowProperty (gdk_display,
-			       xwindow,
-			       atom,
-			       0, G_MAXLONG,
-			       False, XA_ATOM, &type, &format, &nitems,
-			       &bytes_after, &a);  
-  err = gdk_error_trap_pop ();
-  if (err != Success ||
-      result != Success)
-    return FALSE;
-  
-  if (type != XA_ATOM)
-    {
-      XFree (a);
-      return FALSE;
-    }
-
-  *val = *a;
-  
-  XFree (a);
-
-  return TRUE;
 }
 
 /* To make sure there is only one screenshot taken at a time,
@@ -246,13 +90,14 @@ get_atom_property (Window  xwindow,
 gboolean
 screenshot_grab_lock (void)
 {
-  Atom selection_atom;
+  GdkAtom selection_atom;
   GdkCursor *cursor;
   gboolean result = FALSE;
 
-  selection_atom = gdk_x11_get_xatom_by_name (SELECTION_NAME);
-  XGrabServer (GDK_DISPLAY ());
-  if (XGetSelectionOwner (GDK_DISPLAY(), selection_atom) != None)
+  selection_atom = gdk_atom_intern (SELECTION_NAME, FALSE);
+  gdk_x11_grab_server ();
+
+  if (gdk_selection_owner_get (selection_atom) != NULL)
     goto out;
 
   selection_window = gtk_invisible_new ();
@@ -270,7 +115,7 @@ screenshot_grab_lock (void)
   result = TRUE;
 
  out:
-  XUngrabServer (GDK_DISPLAY ());
+  gdk_x11_ungrab_server ();
   gdk_flush ();
 
   return result;
@@ -284,12 +129,132 @@ screenshot_release_lock (void)
       gtk_widget_destroy (selection_window);
       selection_window = NULL;
     }
+
   gdk_flush ();
 }
 
+static GdkWindow *
+screenshot_find_active_window (void)
+{
+  GdkWindow *window;
+  GdkScreen *default_screen;
+
+  default_screen = gdk_screen_get_default ();
+  window = gdk_screen_get_active_window (default_screen);
+
+  return window;
+}
+
+static gboolean
+screenshot_window_is_desktop (GdkWindow *window)
+{
+  GdkWindow *root_window = gdk_get_default_root_window ();
+  GdkWindowTypeHint window_type_hint;
+
+  if (window == root_window)
+    return TRUE;
+
+  window_type_hint = gdk_window_get_type_hint (window);
+  if (window_type_hint == GDK_WINDOW_TYPE_HINT_DESKTOP)
+    return TRUE;
+
+  return FALSE;
+      
+}
+
+#define MAXIMUM_WM_REPARENTING_DEPTH 4
+
+static GdkWindow *
+look_for_hint_helper (GdkWindow *window,
+		      GdkAtom    property,
+		      int       depth)
+{
+  gboolean res;
+  GdkAtom actual_type;
+  int actual_format, actual_length;
+  guchar *data;
+  
+  res = gdk_property_get (window, property, GDK_NONE,
+                          0, 1, FALSE,
+                          &actual_type,
+                          &actual_format, &actual_length,
+                          &data);
+
+  if (res == TRUE &&
+      data != NULL &&
+      actual_format == 32 &&
+      data[0] == 1)
+    {
+      g_free (data);
+
+      return window;
+    }
+
+  if (depth < MAXIMUM_WM_REPARENTING_DEPTH)
+    {
+      GList *children, *l;
+
+      children = gdk_window_get_children (window);
+      if (children != NULL)
+        {
+          for (l = children; l; l = l->next)
+            {
+              window = look_for_hint_helper (l->data, property, depth + 1);
+              if (window)
+                break;
+            }
+
+          g_list_free (children);
+
+          if (window)
+            return window;
+        }
+    }
+
+  return NULL;
+}
+
+static GdkWindow *
+look_for_hint (GdkWindow *window,
+	       GdkAtom property)
+{
+  GdkWindow *retval;
+
+  retval = look_for_hint_helper (window, property, 0);
+
+  return retval;
+}
+
+GdkWindow *
+screenshot_find_current_window ()
+{
+  GdkWindow *current_window;
+
+  current_window = screenshot_find_active_window ();
+  
+  /* If there's no active window, we fall back to returning the
+   * window that the cursor is in.
+   */
+  if (!current_window)
+    current_window = gdk_window_at_pointer (NULL, NULL);
+
+  if (current_window)
+    {
+      if (screenshot_window_is_desktop (current_window))
+	/* if the current window is the desktop (e.g. nautilus), we
+	 * return NULL, as getting the whole screen makes more sense.
+         */
+        return NULL;
+
+      /* Once we have a window, we take the toplevel ancestor. */
+      current_window = gdk_window_get_toplevel (current_window);
+    }
+
+  return current_window;
+}
 
 static Window
-find_toplevel_window (Window xid)
+find_wm_window (Window xid)
 {
   Window root, parent, *children;
   unsigned int nchildren;
@@ -311,195 +276,40 @@ find_toplevel_window (Window xid)
   while (TRUE);
 }
 
-static Window
-screenshot_find_active_window (void)
-{
-  Window retval = None;
-  Window root_window;
-
-  root_window = GDK_ROOT_WINDOW ();
-
-  if (gdk_net_wm_supports (gdk_atom_intern ("_NET_ACTIVE_WINDOW", FALSE)))
-    {
-      retval = get_window_property (root_window,
-				    gdk_x11_get_xatom_by_name ("_NET_ACTIVE_WINDOW"));
-    }
-
-  return retval;  
-}
-  
-static gboolean
-screenshot_window_is_desktop (Window xid)
-{
-  Window root_window = GDK_ROOT_WINDOW ();
-
-  if (xid == root_window)
-    return TRUE;
-
-  if (gdk_net_wm_supports (gdk_atom_intern ("_NET_WM_WINDOW_TYPE", FALSE)))
-    {
-      gboolean retval;
-      Atom property;
-
-      retval = get_atom_property (xid,
-				  gdk_x11_get_xatom_by_name ("_NET_WM_WINDOW_TYPE"),
-				  &property);
-      if (retval &&
-	  property == gdk_x11_get_xatom_by_name ("_NET_WM_WINDOW_TYPE_DESKTOP"))
-	return TRUE;
-    }
-  return FALSE;
-}
-
-/* We don't actually honor include_decoration here.  We need to search
- * for WM_STATE;
- */
-static Window
-screenshot_find_pointer_window (void)
-{
-  Window root_window, root_return, child;
-  int unused;
-  guint mask;
-
-  root_window = GDK_ROOT_WINDOW ();
-
-  XQueryPointer (GDK_DISPLAY (), root_window,
-		 &root_return, &child, &unused,
-		 &unused, &unused, &unused, &mask);
-
-  return child;
-}
-
-#define MAXIMUM_WM_REPARENTING_DEPTH 4
-
-/* adopted from eel code */
-static Window
-look_for_hint_helper (Window    xid,
-		      Atom      property,
-		      int       depth)
-{
-  Atom actual_type;
-  int actual_format;
-  gulong nitems, bytes_after;
-  gulong *prop;
-  Window root, parent, *children, window;
-  unsigned int nchildren, i;
-
-  if (XGetWindowProperty (GDK_DISPLAY (), xid, property, 0, 1,
-			  False, AnyPropertyType, &actual_type,
-			  &actual_format, &nitems, &bytes_after,
-			  (gpointer) &prop) == Success
-      && prop != NULL && actual_format == 32 && prop[0] == NormalState)
-    {
-      if (prop != NULL)
-	{
-	  XFree (prop);
-	}
-
-      return xid;
-    }
-
-  if (depth < MAXIMUM_WM_REPARENTING_DEPTH)
-    {
-      if (XQueryTree (GDK_DISPLAY (), xid, &root,
-		      &parent, &children, &nchildren) != 0)
-	{
-	  window = None;
-
-	  for (i = 0; i < nchildren; i++)
-	    {
-	      window = look_for_hint_helper (children[i],
-					     property,
-					     depth + 1);
-	      if (window != None)
-		break;
-	    }
-
-	  if (children != NULL)
-	    XFree (children);
-
-	  if (window)
-	    return window;
-	}
-    }
-
-  return None;
-}
-
-static Window
-look_for_hint (Window xid,
-	       Atom property)
-{
-  Window retval;
-
-  retval = look_for_hint_helper (xid, property, 0);
-
-  return retval;
-}
-
-
-Window
-screenshot_find_current_window (gboolean include_decoration)
-{
-  Window current_window;
-
-  /* First, search for _NET_ACTIVE_WINDOW */
-  current_window = screenshot_find_active_window ();
-
-  /* IF there's no _NET_ACTIVE_WINDOW, we fall back to returning the
-   * Window that the cursor is in.*/
-  if (current_window == None)
-    current_window = screenshot_find_pointer_window ();
-
-  if (current_window)
-    {
-      if (screenshot_window_is_desktop (current_window))
-	/* if the current window is the desktop (eg. nautilus), we
-	 * return None, as getting the whole screen makes more sense. */
-	return None;
-
-      /* Once we have a window, we walk the widget tree looking for
-       * the appropriate window. */
-      current_window = find_toplevel_window (current_window);
-      if (! include_decoration)
-	{
-	  Window new_window;
-	  new_window = look_for_hint (current_window, gdk_x11_get_xatom_by_name ("WM_STATE"));
-	  if (new_window)
-	    current_window = new_window;
-	}
-    }
-  return current_window;
-}
 
 GdkPixbuf *
-screenshot_get_pixbuf (Window w, gboolean include_pointer)
+screenshot_get_pixbuf (GdkWindow *window,
+                       gboolean   include_pointer,
+                       gboolean   include_border)
 {
-  GdkWindow *window, *root;
+  GdkWindow *root;
   GdkPixbuf *screenshot;
-  gint x_real_orig, y_real_orig;
-  gint x_orig, y_orig;
-  gint real_width, real_height;
-  gint width, height;
+  gint x_real_orig, y_real_orig, x_orig, y_orig;
+  gint width, real_width, height, real_height;
 
-#ifdef HAVE_X11_EXTENSIONS_SHAPE_H
-  XRectangle *rectangles;
-  GdkPixbuf *tmp;
-  int rectangle_count, rectangle_order, i;
-#endif
+  /* If the screenshot should include the border, we look for the WM window. */
 
+  if (include_border)
+    {
+      Window xid, wm;
 
-  window = gdk_window_foreign_new (w);
-  if (window == NULL)
-    return NULL;
-  
-  root = gdk_window_foreign_new (GDK_ROOT_WINDOW ());
-  gdk_drawable_get_size (window, &real_width, &real_height);
+      xid = GDK_WINDOW_XWINDOW (window);
+      wm = find_wm_window (xid);
+
+      if (wm != None)
+        window = gdk_window_foreign_new (wm);
+
+      /* fallback to no border if we can't find the WM window. */
+    }
+
+  root = gdk_get_default_root_window ();
+
+  gdk_drawable_get_size (window, &real_width, &real_height);      
   gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
 
   x_orig = x_real_orig;
   y_orig = y_real_orig;
-  width = real_width;
+  width  = real_width;
   height = real_height;
 
   if (x_orig < 0)
@@ -507,6 +317,7 @@ screenshot_get_pixbuf (Window w, gboolean include_pointer)
       width = width + x_orig;
       x_orig = 0;
     }
+
   if (y_orig < 0)
     {
       height = height + y_orig;
@@ -515,154 +326,127 @@ screenshot_get_pixbuf (Window w, gboolean include_pointer)
 
   if (x_orig + width > gdk_screen_width ())
     width = gdk_screen_width () - x_orig;
+
   if (y_orig + height > gdk_screen_height ())
     height = gdk_screen_height () - y_orig;
-
+  
+  screenshot = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
+                                             x_orig, y_orig, 0, 0,
+                                             width, height);
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
-  tmp = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
-				      x_orig, y_orig, 0, 0,
-				      width, height);
-
-  rectangles = XShapeGetRectangles (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (window),
-				    ShapeBounding, &rectangle_count, &rectangle_order);
-  if (rectangle_count > 0)
+  if (include_border)
     {
-      gboolean has_alpha = gdk_pixbuf_get_has_alpha (tmp);
+      XRectangle *rectangles;
+      GdkPixbuf *tmp;
+      int rectangle_count, rectangle_order, i;
 
-      screenshot = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
-				   width, height);
-      gdk_pixbuf_fill (screenshot, 0);
-	
-      for (i = 0; i < rectangle_count; i++)
-	{
-	  gint rec_x, rec_y;
-	  gint rec_width, rec_height;
-          gint y;
+      /* we must use XShape to avoid showing what's under the rounder corners
+       * of the WM decoration.
+       */
 
-	  rec_x = rectangles[i].x;
-	  rec_y = rectangles[i].y;
-	  rec_width = rectangles[i].width;
-	  rec_height = rectangles[i].height;
+      rectangles = XShapeGetRectangles (GDK_DISPLAY (),
+                                        GDK_WINDOW_XWINDOW (window),
+                                        ShapeBounding,
+                                        &rectangle_count,
+                                        &rectangle_order);
+      if (rectangle_count > 0)
+        {
+          gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
+          
+          tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
+          gdk_pixbuf_fill (tmp, 0);
+          
+          for (i = 0; i < rectangle_count; i++)
+            {
+              gint rec_x, rec_y;
+              gint rec_width, rec_height;
+              gint y;
 
-	  if (x_real_orig < 0)
-	    {
-	      rec_x += x_real_orig;
-	      rec_x = MAX(rec_x, 0);
-	      rec_width += x_real_orig;
-	    }
-	  if (y_real_orig < 0)
-	    {
-	      rec_y += y_real_orig;
-	      rec_y = MAX(rec_y, 0);
-	      rec_height += y_real_orig;
-	    }
+              rec_x = rectangles[i].x;
+              rec_y = rectangles[i].y;
+              rec_width = rectangles[i].width;
+              rec_height = rectangles[i].height;
 
-	  if (x_orig + rec_x + rec_width > gdk_screen_width ())
-	    rec_width = gdk_screen_width () - x_orig - rec_x;
-	  if (y_orig + rec_y + rec_height > gdk_screen_height ())
-	    rec_height = gdk_screen_height () - y_orig - rec_y;
+              if (x_real_orig < 0)
+                {
+                  rec_x += x_real_orig;
+                  rec_x = MAX(rec_x, 0);
+                  rec_width += x_real_orig;
+                }
 
-	  for (y = rec_y; y < rec_y + rec_height; y++)
-	    {
-              guchar *src_pixels, *dest_pixels;
-              gint x;
-	      
-	      src_pixels = gdk_pixbuf_get_pixels (tmp) +
-		y * gdk_pixbuf_get_rowstride(tmp) +
-		rec_x * (has_alpha ? 4 : 3);
-	      dest_pixels = gdk_pixbuf_get_pixels (screenshot) +
-		y * gdk_pixbuf_get_rowstride (screenshot) +
-		rec_x * 4;
-				
-	      for (x = 0; x < rec_width; x++)
-		{
-		  *dest_pixels++ = *src_pixels ++;
-		  *dest_pixels++ = *src_pixels ++;
-		  *dest_pixels++ = *src_pixels ++;
-		  if (has_alpha)
-		    *dest_pixels++ = *src_pixels++;
-		  else
-		    *dest_pixels++ = 255;
-		}
-	    }
-	}
-      g_object_unref (tmp);
+              if (y_real_orig < 0)
+                {
+                  rec_y += y_real_orig;
+                  rec_y = MAX(rec_y, 0);
+                  rec_height += y_real_orig;
+                }
+
+              if (x_orig + rec_x + rec_width > gdk_screen_width ())
+                rec_width = gdk_screen_width () - x_orig - rec_x;
+
+              if (y_orig + rec_y + rec_height > gdk_screen_height ())
+                rec_height = gdk_screen_height () - y_orig - rec_y;
+
+              for (y = rec_y; y < rec_y + rec_height; y++)
+                {
+                  guchar *src_pixels, *dest_pixels;
+                  gint x;
+
+                  src_pixels = gdk_pixbuf_get_pixels (screenshot)
+                             + y * gdk_pixbuf_get_rowstride(screenshot)
+                             + rec_x * (has_alpha ? 4 : 3);
+                  dest_pixels = gdk_pixbuf_get_pixels (tmp)
+                              + y * gdk_pixbuf_get_rowstride (tmp)
+                              + rec_x * 4;
+
+                  for (x = 0; x < rec_width; x++)
+                    {
+                      *dest_pixels++ = *src_pixels++;
+                      *dest_pixels++ = *src_pixels++;
+                      *dest_pixels++ = *src_pixels++;
+
+                      if (has_alpha)
+                        *dest_pixels++ = *src_pixels++;
+                      else
+                        *dest_pixels++ = 255;
+                    }
+                }
+            }
+
+          g_object_unref (screenshot);
+          screenshot = tmp;
+        }
     }
-  else
-    {
-      screenshot = tmp;
-    }
-#else /* HAVE_X11_EXTENSIONS_SHAPE_H */
-  screenshot = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
-					     x_orig, y_orig, 0, 0,
-					     width, height);
 #endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
 
   if (include_pointer) 
     {
-      XFixesCursorImage *cursor_image;
+      GdkCursor *cursor;
+      GdkPixbuf *cursor_pixbuf;
 
-      cursor_image = XFixesGetCursorImage (GDK_DISPLAY ());
-      
-      if (cursor_image != NULL) 
+      cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_LEFT_PTR);
+      cursor_pixbuf = gdk_cursor_get_image (cursor);
+
+      if (cursor_pixbuf != NULL) 
         {
           GdkRectangle r1, r2;
-          int cx, cy, i, j, k;
-          int r, g, b, a;
-          guchar *pixels, *p;
-          int rowstride;
-          unsigned long pixel;
+          gint cx, cy;
 
-          cx = cursor_image->x - cursor_image->xhot;
-          cy = cursor_image->y - cursor_image->yhot;
+          gdk_window_get_pointer (window, &cx, &cy, NULL);
 
           r1.x = x_real_orig;
           r1.y = y_real_orig;
           r1.width = real_width;
           r1.height = real_height;
+
           r2.x = cx;
           r2.y = cy;
-          r2.width = cursor_image->width;
-          r2.height = cursor_image->height;
+          r2.width = gdk_pixbuf_get_width (cursor_pixbuf);
+          r2.height = gdk_pixbuf_get_height (cursor_pixbuf);
+
           if (gdk_rectangle_intersect (&r1, &r2, &r2)) 
-            {
-              GdkPixbuf *cursor_pixbuf;
-
-              cursor_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
-                                              TRUE, 8, 
-                                              cursor_image->width,
-                                               cursor_image->height);
-              pixels = gdk_pixbuf_get_pixels (cursor_pixbuf);
-              rowstride = gdk_pixbuf_get_rowstride (cursor_pixbuf);
-              for (i = 0, k = 0; i < cursor_image->height; i++) 
-                {
-                  p = pixels + i * rowstride;
-                  for (j = 0; j < cursor_image->width; j++, k++)
-                    {
-                      pixel = cursor_image->pixels[k];
-                    
-                      b = pixel & 0xff;
-                      g = (pixel >> 8) & 0xff;
-                      r = (pixel >> 16) & 0xff;
-                      a = (pixel >> 24) & 0xff;
-
-                      if (a != 0) 
-                        {
-                          p[0] = r * 255 / a;
-                          p[1] = g * 255 / a;
-                          p[2] = b * 255 / a;
-                          p[3] = a;
-                        }
-                      else 
-                        {
-                          p[0] = p[1] = p[2] = p[3] = 0;
-                        }
-
-                      p += 4;
-                    }
-               }
- 
+            { 
               gdk_pixbuf_composite (cursor_pixbuf, screenshot,
                                     r2.x - x_real_orig, r2.y - y_real_orig, 
                                     r2.width, r2.height,
@@ -670,11 +454,10 @@ screenshot_get_pixbuf (Window w, gboolean include_pointer)
                                     1.0, 1.0, 
                                     GDK_INTERP_BILINEAR,
                                     255);
-
-              g_object_unref (cursor_pixbuf);
             }
 
-          XFree (cursor_image);
+          g_object_unref (cursor_pixbuf);
+          gdk_cursor_unref (cursor);
         }
     }
 
@@ -682,29 +465,18 @@ screenshot_get_pixbuf (Window w, gboolean include_pointer)
 }
 
 gchar *
-screenshot_get_window_title (Window w)
+screenshot_get_window_title (GdkWindow *win)
 {
   gchar *name;
 
-  w = find_toplevel_window (w);
-  w = look_for_hint (w, gdk_x11_get_xatom_by_name ("WM_STATE"));
+  win = gdk_window_get_toplevel (win);
+  win = look_for_hint (win, gdk_x11_xatom_to_atom (gdk_x11_get_xatom_by_name ("WM_STATE")));
 
-  if (w)
-    {
-      name = get_utf8_property (w, gdk_x11_get_xatom_by_name ("_NET_WM_NAME"));
-      if (name)
-	return name;
+  name = get_utf8_property (win, gdk_x11_xatom_to_atom (gdk_x11_get_xatom_by_name ("_NET_WM_NAME")));
+  if (name)
+    return name;
 
-      name = get_text_property (w, gdk_x11_get_xatom_by_name ("WM_NAME"));
-
-      if (name)
-	return name;
-  
-      name = get_text_property (w, gdk_x11_get_xatom_by_name ("WM_CLASS"));
-
-      if (name)
-	return name;
-    }
+  /* TODO: maybe we should also look at WM_NAME and WM_CLASS? */
 
   return g_strdup (_("Untitled Window"));
 }
@@ -736,7 +508,6 @@ screenshot_show_error_dialog (GtkWindow   *parent,
   gtk_dialog_run (GTK_DIALOG (dialog));
   
   gtk_widget_destroy (dialog);
-
 }
 
 void
