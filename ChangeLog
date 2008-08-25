@@ -1,5 +1,10 @@
 2008-08-25  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* Makefile.am: Leftover from the Gdk port: remove $(XFIXES_LIBS)
+	from LDADD.
+
+2008-08-25  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* screenshot-save.c: (clean_up_temporary_dir),
 	(read_pipe_from_child):	Fix some warnings due to missing string
 	format placeholders. 

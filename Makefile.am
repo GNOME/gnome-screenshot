@@ -39,7 +39,6 @@ gnome_screenshot_LDFLAGS = -export-dynamic
 
 gnome_screenshot_LDADD =		\
 	$(XSHAPE_LIBS)			\
-	$(XFIXES_LIBS)			\
 	$(SCREENSHOT_LIBS)		\
 	$(NULL)
 
