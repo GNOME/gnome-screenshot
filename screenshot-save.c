@@ -63,13 +63,13 @@ clean_up_temporary_dir (gboolean gui_on_error)
 	  dialog = gtk_message_dialog_new (NULL, 0,
 					   GTK_MESSAGE_ERROR,
 					   GTK_BUTTONS_OK,
-					   message);
+					   "%s", message);
 	  gtk_dialog_run (GTK_DIALOG (dialog));
 	  gtk_widget_destroy (dialog);
 	}
       else
 	{
-	  g_warning (message);
+	  g_warning ("%s", message);
 	}
       g_free (message);
     }
@@ -121,7 +121,7 @@ read_pipe_from_child (GIOChannel   *source,
 	  dialog = gtk_message_dialog_new (NULL, 0,
 					   GTK_MESSAGE_ERROR,
 					   GTK_BUTTONS_OK,
-					   message);
+					   "%s", message);
 	  gtk_dialog_run (GTK_DIALOG (dialog));
 	  gtk_widget_destroy (dialog);
 	  exit (1);
