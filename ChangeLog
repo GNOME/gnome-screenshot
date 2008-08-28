@@ -1,3 +1,14 @@
+2008-08-28  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* Makefile.am:
+	* gnome-screenshot.c: (main):
+	* gnome-screenshot.glade:
+	* gnome-screenshot.ui:
+	* screenshot-dialog.c: (screenshot_dialog_new),
+	(screenshot_dialog_enable_dnd), (screenshot_dialog_get_toplevel):
+	* screenshot-dialog.h:
+	Drop libglade dependency. Use GtkBuilder instead (#549700).
+
 2008-08-28  Emmanuele Bassi  <ebassi@gnome.org>
 
 	Bug 549667 – crash in shape code

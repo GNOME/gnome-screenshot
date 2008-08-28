@@ -13,7 +13,7 @@ INCLUDES =							\
 	-I$(srcdir)						\
 	$(STANDARD_PROPERTIES_CFLAGS)				\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGLADEDIR=\""$(gladedir)"\"				\
+	-DUIDIR=\""$(uidir)"\"				\
 	$(SCREENSHOT_CFLAGS)					\
 	$(NULL)
 
@@ -47,15 +47,15 @@ gnome_screenshot_in_files = gnome-screenshot.desktop.in
 gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir = $(datadir)/gnome-screenshot/glade
-glade_DATA =					\
-	gnome-screenshot.glade			\
+uidir = $(datadir)/gnome-screenshot
+ui_DATA =					\
+	gnome-screenshot.ui			\
 	$(NULL)
 
 EXTRA_DIST =					\
-	$(glade_DATA)				\
 	$(schemas_in_files)			\
 	$(gnome_screenshot_in_files)		\
+	$(ui_DATA)				\
 	$(NULL)
 
 schemasdir       = $(GCONF_SCHEMA_FILE_DIR)

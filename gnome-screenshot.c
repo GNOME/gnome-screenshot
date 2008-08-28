@@ -27,7 +27,6 @@
 #include <config.h>
 #include <gnome.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <gdk/gdkx.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -1119,7 +1118,6 @@ main (int argc, char *argv[])
 				GNOME_PARAM_GOPTION_CONTEXT, context,
 				GNOME_PROGRAM_STANDARD_PROPERTIES,
 				NULL);
-  glade_gnome_init();
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
 

@@ -21,7 +21,6 @@
 #define __SCREENSHOT_DIALOG_H__
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
 typedef struct ScreenshotDialog ScreenshotDialog;
 
