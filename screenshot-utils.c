@@ -350,7 +350,7 @@ screenshot_get_pixbuf (GdkWindow *window,
                                         ShapeBounding,
                                         &rectangle_count,
                                         &rectangle_order);
-      if (rectangle_count > 0)
+      if (rectangles && rectangle_count > 0)
         {
           gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
           

@@ -1,3 +1,10 @@
+2008-08-28  Emmanuele Bassi  <ebassi@gnome.org>
+
+	Bug 549667 – crash in shape code
+
+	* screenshot-utils.c (screenshot_get_pixbuf): Check the returned
+	value for XShapeGetRectangles(). (Matthias Clasen)
+
 2008-08-25  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* Makefile.am: Leftover from the Gdk port: remove $(XFIXES_LIBS)
