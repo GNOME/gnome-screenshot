@@ -1,5 +1,14 @@
 2008-08-28  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* gnome-screenshot.c: (finish_prepare_screenshot),
+	(check_file_done), (try_check_file), (find_current_window),
+	(prepare_screenshot):
+	* screenshot-save.c: (screenshot_sanitize_filename):
+	Make guessing screenshot filename from window title work again
+	(#549736).
+
+2008-08-28  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* Makefile.am:
 	* gnome-screenshot.c: (main):
 	* gnome-screenshot.glade:

@@ -86,6 +86,7 @@ typedef struct
   char *retval;
   int iteration;
   TestType type;
+  GdkWindow *window;
 } AsyncExistenceJob;
 
 static GdkPixbuf *screenshot = NULL;
@@ -699,36 +700,9 @@ run_dialog (ScreenshotDialog *dialog)
 }
 
 static void
-finish_prepare_screenshot (char *initial_uri)
+finish_prepare_screenshot (char *initial_uri, GdkWindow *window)
 {  
   ScreenshotDialog *dialog;
-  GdkWindow *window;
-
-  if (!screenshot_grab_lock ())
-    exit (0);
-
-  if (take_window_shot)
-    {
-      window = screenshot_find_current_window ();
-      if (!window)
-	{
-	  take_window_shot = FALSE;
-	  window = gdk_get_default_root_window ();
-	}
-      else
-	{
-	  gchar *tmp;
-
-	  window_title = screenshot_get_window_title (window);
-	  tmp = screenshot_sanitize_filename (window_title);
-	  g_free (window_title);
-	  window_title = tmp;
-	}
-    }
-  else
-    {
-      window = gdk_get_default_root_window ();
-    }
 
   screenshot = screenshot_get_pixbuf (window, include_pointer, include_border);
 
@@ -747,6 +721,7 @@ finish_prepare_screenshot (char *initial_uri)
       }
   }
 
+  /* release now the lock, it was acquired when we were finding the window */
   screenshot_release_lock ();
 
   if (screenshot == NULL)
@@ -769,13 +744,15 @@ static gboolean
 check_file_done (gpointer user_data)
 {
   char *retval;
+  GdkWindow *window;
   AsyncExistenceJob *job = user_data;
 
+  window = job->window;
   retval = job->retval;
   g_free (job->base_uris[1]);
   g_slice_free (AsyncExistenceJob, job);
   
-  finish_prepare_screenshot (retval);
+  finish_prepare_screenshot (retval, window);
   
   return FALSE;
 }
@@ -840,7 +817,7 @@ retry:
   error = NULL;
   uri = build_uri (job);
   file = g_file_new_for_uri (uri);
-  
+
   info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
 			    G_FILE_QUERY_INFO_NONE, cancellable, &error);
   if (info != NULL)
@@ -848,6 +825,8 @@ retry:
       /* file already exists, iterate again */
       g_object_unref (info);
       g_object_unref (file);
+      g_error_free (error);
+
       (job->iteration)++;
 
       goto retry;
@@ -888,12 +867,46 @@ retry:
 out:
   g_error_free (error);
   g_object_unref (file);
-    
+
   g_io_scheduler_job_send_to_mainloop_async (io_job,
                                              check_file_done,
                                              job,
                                              NULL);
   return FALSE;
+}
+
+static GdkWindow *
+find_current_window (char **window_title)
+{
+  GdkWindow *window;
+
+  if (!screenshot_grab_lock ())
+    exit (0);
+
+  if (take_window_shot)
+    {
+      window = screenshot_find_current_window ();
+      if (!window)
+	{
+	  take_window_shot = FALSE;
+	  window = gdk_get_default_root_window ();
+	}
+      else
+	{
+	  gchar *tmp, *sanitized;
+
+	  tmp = screenshot_get_window_title (window);
+	  sanitized = screenshot_sanitize_filename (tmp);
+	  g_free (tmp);
+	  *window_title = sanitized;
+	}
+    }
+  else
+    {
+      window = gdk_get_default_root_window ();
+    }
+
+  return window;
 }
 
 static void
@@ -908,6 +921,7 @@ prepare_screenshot (void)
   job->base_uris[2] = (char *) g_get_tmp_dir ();
   job->iteration = 0;
   job->type = TEST_LAST_DIR;
+  job->window = find_current_window (&window_title);
 
   g_io_scheduler_push_job (try_check_file,
                            job,

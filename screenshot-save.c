@@ -272,7 +272,7 @@ screenshot_sanitize_filename (const char *filename)
   g_assert (g_utf8_validate (filename, -1, NULL));
 
   retval = g_uri_escape_string (filename,
-                                NULL,
+                                "/",
                                 TRUE);
 
   for (p = retval; *p != '\000'; p = g_utf8_next_char (p))
