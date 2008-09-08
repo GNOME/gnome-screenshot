@@ -371,6 +371,13 @@ screenshot_dialog_get_folder (ScreenshotDialog *dialog)
 {
   return gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
 }
+
+GdkPixbuf *
+screenshot_dialog_get_screenshot (ScreenshotDialog *dialog)
+{
+  return dialog->screenshot;
+}
+
 void
 screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 			    gboolean          busy)

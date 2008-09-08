@@ -676,6 +676,16 @@ screenshot_dialog_response_cb (GtkDialog *d,
         }
       g_free (uri);
     }
+  else if (response_id == SCREENSHOT_RESPONSE_COPY)
+    {
+      GtkClipboard *clipboard;
+      GdkPixbuf    *screenshot;
+
+      clipboard = gtk_clipboard_get_for_display (gtk_widget_get_display (GTK_WIDGET (d)),
+                                                 GDK_SELECTION_CLIPBOARD);
+      screenshot = screenshot_dialog_get_screenshot (dialog);
+      gtk_clipboard_set_image (clipboard, screenshot);
+    }
   else /* dialog was canceled */
     {
       gtk_widget_destroy (GTK_WIDGET (d));

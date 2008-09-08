@@ -24,6 +24,9 @@
 
 typedef struct ScreenshotDialog ScreenshotDialog;
 
+/* Keep in sync with the value defined in the UI file */
+#define SCREENSHOT_RESPONSE_COPY 1
+
 ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf        *screenshot,
 						  char             *initial_uri,
 						  gboolean          take_window_shot);
@@ -31,7 +34,9 @@ void              screenshot_dialog_enable_dnd   (ScreenshotDialog *dialog);
 GtkWidget        *screenshot_dialog_get_toplevel (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
+GdkPixbuf        *screenshot_dialog_get_screenshot (ScreenshotDialog *dialog);
 void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
 						  gboolean          busy);
 void              screenshot_dialog_focus_entry  (ScreenshotDialog *dialog);
+
 #endif /* __SCREENSHOT_DIALOG_H__ */

@@ -1,3 +1,16 @@
+2008-09-08  Emmanuele Bassi  <ebassi@gnome.org>
+
+	Bug 99897 – Screen Shot to clip board
+
+	* gnome-screenshot.c:
+	(screenshot_dialog_response_cb): Allow copying the screenshot
+	image to the clipboard. Based on a patch by Vincent Untz.
+
+	* gnome-screenshot.ui: Add the 'Copy to Clipboard' button.
+
+	* screenshot-dialog.[ch]: Allow retrieving the GdkPixbuf
+	of the screenshot from the dialog.
+
 2008-08-28  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c: (finish_prepare_screenshot),
