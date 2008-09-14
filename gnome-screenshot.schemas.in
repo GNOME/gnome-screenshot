@@ -8,7 +8,7 @@
       <applyto>/apps/gnome-screenshot/take_window_shot</applyto>
       <owner>gnome-screenshot</owner>
       <type>bool</type>
-      <default></default>
+      <default>false</default>
       <locale name="C">
         <short>Window-specific screenshot</short>
         <long>Grab just the current window, rather than the whole desktop.</long>
@@ -20,7 +20,7 @@
       <applyto>/apps/gnome-screenshot/delay</applyto>
       <owner>gnome-screenshot</owner>
       <type>int</type>
-      <default></default>
+      <default>0</default>
       <locale name="C">
         <short>Screenshot delay</short>
         <long>The number of seconds to wait before taking the screenshot.</long>

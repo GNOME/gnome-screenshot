@@ -1,3 +1,10 @@
+2008-09-14  Emmanuele Bassi  <ebassi@gnome.org>
+
+	Bug 552175 – invalid schemas file
+
+	* gnome-screenshot.schemas.in: Provide default values for
+	the take_window_show and delay keys. (Christian Persch)
+
 2008-09-08  Emmanuele Bassi  <ebassi@gnome.org>
 
 	Bug 99897 – Screen Shot to clip board
