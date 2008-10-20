@@ -55,7 +55,6 @@
 #define LAST_SAVE_DIRECTORY_KEY GNOME_SCREENSHOT_GCONF "/last_save_directory"
 #define BORDER_EFFECT_KEY       GNOME_SCREENSHOT_GCONF "/border_effect"
 #define DELAY_KEY               GNOME_SCREENSHOT_GCONF "/delay"
-#define TAKE_WINDOW_SHOT_KEY    GNOME_SCREENSHOT_GCONF "/take_window_shot"
 
 
 enum
@@ -1042,12 +1041,6 @@ load_options (void)
   if (!border_effect)
     border_effect = g_strdup ("none");
 
-#if 0
-  take_window_shot = gconf_client_get_bool (gconf_client,
-                                            TAKE_WINDOW_SHOT_KEY,
-                                            NULL);
-#endif
-
   delay = gconf_client_get_int (gconf_client, DELAY_KEY, NULL);
 
   g_object_unref (gconf_client);
@@ -1061,16 +1054,6 @@ save_options (void)
   gconf_client = gconf_client_get_default ();
 
   /* Error is NULL, as there's nothing we can do */
-
-#if 0
-  /* Disable saving the window key as it breaks command line
-   * and global key binding
-   */
-  gconf_client_set_bool (gconf_client,
-                         TAKE_WINDOW_SHOT_KEY,
-                         take_window_shot,
-                         NULL);
-#endif
 
   gconf_client_set_bool (gconf_client,
                          INCLUDE_BORDER_KEY, include_border,
@@ -1130,7 +1113,7 @@ main (int argc, char *argv[])
   const GOptionEntry entries[] = {
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
     { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
-    { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, "Remove the window border from the screenshot", NULL },
+    { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, N_("Remove the window border from the screenshot"), NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
     { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },

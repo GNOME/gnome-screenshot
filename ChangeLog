@@ -1,5 +1,15 @@
 2008-10-20  Emmanuele Bassi  <ebassi@gnome.org>
 
+	* gnome-screenshot.c:
+	(load_options), (save_options): Remove the code that loads/saves
+	the take_window_shot GConf key.
+	
+	(main): Mark the -B switch description as translatable.
+
+	* gnome-screenshot.schemas.in: Deprecate the take_window_shot key.
+
+2008-10-20  Emmanuele Bassi  <ebassi@gnome.org>
+
 	Bug 553085 – After doing gnome-screenshot -w (grab a window), "grab the entire
 	screen" works to grab a window.
 

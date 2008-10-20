@@ -10,8 +10,9 @@
       <type>bool</type>
       <default>false</default>
       <locale name="C">
-        <short>Window-specific screenshot</short>
-        <long>Grab just the current window, rather than the whole desktop.</long>
+        <short>Window-specific screenshot (deprecated)</short>
+        <long>Grab just the current window, rather than the whole desktop.
+        This key has been deprecated and it is no longer in use.</long>
       </locale>
     </schema>
 
