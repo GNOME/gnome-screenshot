@@ -1042,9 +1042,11 @@ load_options (void)
   if (!border_effect)
     border_effect = g_strdup ("none");
 
+#if 0
   take_window_shot = gconf_client_get_bool (gconf_client,
                                             TAKE_WINDOW_SHOT_KEY,
                                             NULL);
+#endif
 
   delay = gconf_client_get_int (gconf_client, DELAY_KEY, NULL);
 
@@ -1059,14 +1061,21 @@ save_options (void)
   gconf_client = gconf_client_get_default ();
 
   /* Error is NULL, as there's nothing we can do */
+
+#if 0
+  /* Disable saving the window key as it breaks command line
+   * and global key binding
+   */
   gconf_client_set_bool (gconf_client,
                          TAKE_WINDOW_SHOT_KEY,
                          take_window_shot,
                          NULL);
-  gconf_client_set_int (gconf_client, DELAY_KEY, delay, NULL);
+#endif
+
   gconf_client_set_bool (gconf_client,
                          INCLUDE_BORDER_KEY, include_border,
                          NULL);
+  gconf_client_set_int (gconf_client, DELAY_KEY, delay, NULL);
   gconf_client_set_string (gconf_client,
                            BORDER_EFFECT_KEY, border_effect,
                            NULL);
@@ -1113,6 +1122,7 @@ main (int argc, char *argv[])
   GOptionGroup *group;
   gboolean window_arg = FALSE;
   gboolean include_border_arg = FALSE;
+  gboolean disable_border_arg = FALSE;
   gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
@@ -1120,6 +1130,7 @@ main (int argc, char *argv[])
   const GOptionEntry entries[] = {
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
     { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
+    { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, "Remove the window border from the screenshot", NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
     { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
@@ -1152,6 +1163,9 @@ main (int argc, char *argv[])
 
   if (include_border_arg)
     include_border = TRUE;
+
+  if (disable_border_arg)
+    include_border = FALSE;
 
   if (border_effect_arg)
     {

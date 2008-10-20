@@ -1,3 +1,15 @@
+2008-10-20  Emmanuele Bassi  <ebassi@gnome.org>
+
+	Bug 553085 – After doing gnome-screenshot -w (grab a window), "grab the entire
+	screen" works to grab a window.
+
+	* gnome-screenshot.c:
+	(load_options), (save_options): Ignore the take_window_shot GConf key
+	when loading and saving the options.
+	
+	(main): Include a -B|--remove-border command line switch to disable the
+	window border.
+
 2008-09-14  Emmanuele Bassi  <ebassi@gnome.org>
 
 	Bug 552175 – invalid schemas file
