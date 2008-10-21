@@ -25,9 +25,9 @@
 /* MAYBE I LIED... -jrb */
 
 #include <config.h>
-#include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <gdk/gdkx.h>
+#include <gdk/gdkkeysyms.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -118,17 +118,16 @@ display_help (GtkWindow *parent)
 {
   GError *error = NULL;
 
-  gnome_help_display_desktop (NULL,
-                              "user-guide",
-			      "user-guide.xml",
-                              "goseditmainmenu-53",
-			      &error);
+  gtk_show_uri (gtk_window_get_screen (parent),
+		"ghelp:user-guide#goseditmainmenu-53",
+		gtk_get_current_event_time (), &error);
 
   if (error)
     {
       screenshot_show_gerror_dialog (parent,
                                      _("Error loading the help page"),
                                      error);
+      g_error_free (error);
     }
 }
 
@@ -458,7 +457,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) delay,
                                                0.0, 99.0,
                                                1.0,  1.0,
-                                               1.0));
+                                               0.0));
   spin = gtk_spin_button_new (adjust, 1.0, 0);
   g_signal_connect (spin, "value-changed",
                     G_CALLBACK (delay_spin_value_changed_cb),
@@ -1004,11 +1003,7 @@ expand_initial_tilde (const char *path)
 static void
 load_options (void)
 {
-  GnomeClient *client;
   GConfClient *gconf_client;
-
-  client = gnome_master_client ();
-  gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
 
   gconf_client = gconf_client_get_default ();
 
@@ -1100,7 +1095,6 @@ screenshooter_init_stock_icons (void)
 int
 main (int argc, char *argv[])
 {
-  GnomeProgram *program;
   GOptionContext *context;
   GOptionGroup *group;
   gboolean window_arg = FALSE;
@@ -1109,6 +1103,7 @@ main (int argc, char *argv[])
   gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
+  GError *error = NULL;
 
   const GOptionEntry entries[] = {
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
@@ -1129,13 +1124,19 @@ main (int argc, char *argv[])
   g_option_context_set_ignore_unknown_options (context, FALSE);
   g_option_context_set_help_enabled (context, TRUE);
   g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
+  g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
-  program = gnome_program_init ("gnome-screenshot", VERSION,
-				LIBGNOMEUI_MODULE,
-				argc, argv,
-				GNOME_PARAM_GOPTION_CONTEXT, context,
-				GNOME_PROGRAM_STANDARD_PROPERTIES,
-				NULL);
+  g_option_context_parse (context, &argc, &argv, &error);
+
+  if (error) {
+    g_critical ("Unable to parse arguments: %s", error->message);
+    g_error_free (error);
+    g_option_context_free (context);
+    exit (1);
+  }
+
+  g_option_context_free (context);
+
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
 
@@ -1173,7 +1174,6 @@ main (int argc, char *argv[])
         {
         case GTK_RESPONSE_DELETE_EVENT:
         case GTK_RESPONSE_CANCEL:
-          g_object_unref (program);
           return EXIT_SUCCESS;
         case GTK_RESPONSE_OK:
           break;
@@ -1196,8 +1196,6 @@ main (int argc, char *argv[])
     }
 
   gtk_main ();
-
-  g_object_unref (program);
 
   return EXIT_SUCCESS;
 }

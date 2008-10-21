@@ -1,17 +1,8 @@
 NULL =
 
-# Used by the GNOME_PROGRAM_STANDARD_PROPERTIES macros
-STANDARD_PROPERTIES_CFLAGS = 					\
-	-DPREFIX=\""$(prefix)"\"				\
-	-DSYSCONFDIR=\""$(sysconfdir)"\"			\
-	-DLIBDIR=\""$(libdir)"\"				\
-	-DDATADIR=\""$(datadir)"\"				\
-	$(NULL)
-
 INCLUDES =							\
 	-I.							\
 	-I$(srcdir)						\
-	$(STANDARD_PROPERTIES_CFLAGS)				\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DUIDIR=\""$(uidir)"\"				\
 	$(SCREENSHOT_CFLAGS)					\
