@@ -5,7 +5,7 @@ INCLUDES =							\
 	-I$(srcdir)						\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DUIDIR=\""$(uidir)"\"				\
-	$(SCREENSHOT_CFLAGS)					\
+	$(GNOME_UTILS_CFLAGS)					\
 	$(NULL)
 
 bin_PROGRAMS = \
@@ -30,7 +30,7 @@ gnome_screenshot_LDFLAGS = -export-dynamic
 
 gnome_screenshot_LDADD =		\
 	$(XSHAPE_LIBS)			\
-	$(SCREENSHOT_LIBS)		\
+	$(GNOME_UTILS_LIBS)		\
 	$(NULL)
 
 gnome_screenshotdir  = $(datadir)/applications
