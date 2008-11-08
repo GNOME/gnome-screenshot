@@ -1,5 +1,10 @@
 2008-11-08  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* gnome-screenshot.c: (try_check_file):
+	Don't free NULL errors, as it makes a warning.
+
+2008-11-08  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* gnome-screenshot.c: (finish_prepare_screenshot):
 	Simplify the code a bit. Thanks to Paolo Borelli.
 

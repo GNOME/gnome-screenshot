@@ -837,7 +837,6 @@ retry:
       /* file already exists, iterate again */
       g_object_unref (info);
       g_object_unref (file);
-      g_error_free (error);
 
       (job->iteration)++;
 
