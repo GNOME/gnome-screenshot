@@ -593,7 +593,7 @@ save_callback (TransferResult result,
       /* translators: first %s is the file path, second %s is the VFS error */
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
                                                 _("Impossible to save the screenshot "
-                                                  "to %s.\n Error was %s\n. Please choose another "
+                                                  "to %s.\n Error was %s.\n Please choose another "
                                                   "location and retry."), uri, error_message);
       gtk_widget_show (error_dialog);
       g_signal_connect (error_dialog,
