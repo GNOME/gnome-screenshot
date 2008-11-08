@@ -1186,7 +1186,7 @@ main (int argc, char *argv[])
         }
     }
 
-  if (delay > 0)
+  if (delay > 0 && interactive_arg)
     {      
       g_timeout_add (delay * 1000,
 		     prepare_screenshot_timeout,

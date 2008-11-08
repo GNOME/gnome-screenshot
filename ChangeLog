@@ -1,5 +1,10 @@
 2008-11-08  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* gnome-screenshot.c: (main):
+	Only delay the screenshot when in interactive mode (#554114).
+
+2008-11-08  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* gnome-screenshot.c: (save_callback):
 	Fixed a typo in a string (#551440).
 
