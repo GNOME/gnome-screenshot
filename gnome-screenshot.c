@@ -716,22 +716,22 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window)
   if (!take_window_shot)
     screenshot = screenshot_get_pixbuf (window, include_pointer, FALSE);
   else
-    screenshot = screenshot_get_pixbuf (window, include_pointer, include_border);
+    {
+      screenshot = screenshot_get_pixbuf (window, include_pointer, include_border);
 
-  if (take_window_shot) {
-    switch (border_effect[0])
-      {
-      case 's': /* shadow */
-        screenshot_add_shadow (&screenshot);
-        break;
-      case 'b': /* border */
-        screenshot_add_border (&screenshot);
-        break;
-      case 'n': /* none */
-      default:
-        break;
-      }
-  }
+      switch (border_effect[0])
+        {
+        case 's': /* shadow */
+          screenshot_add_shadow (&screenshot);
+          break;
+        case 'b': /* border */
+          screenshot_add_border (&screenshot);
+          break;
+        case 'n': /* none */
+        default:
+          break;
+        }
+    }
 
   /* release now the lock, it was acquired when we were finding the window */
   screenshot_release_lock ();
