@@ -1,5 +1,10 @@
 2008-11-09  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* gnome-screenshot.c: (main): always use the delay command line
+	argument if present (follow-up to #554114).
+
+2008-11-09  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* gnome-screenshot.ui: move the "Copy to Clipboard" button on
 	the left of the "Cancel" one, as for HIG (#554805).
 
