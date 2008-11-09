@@ -1,3 +1,11 @@
+2008-11-09  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* gnome-screenshot.c: (check_file_done), (try_check_file),
+	(prepare_screenshot), (get_desktop_dir):
+	Always use URIs to build the GFile when checking for existance.
+	Don't show an error message when the file-chooser can't find the
+	parent directory of the last saved position. (#321944).
+
 2008-11-08  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c: (main):

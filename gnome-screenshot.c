@@ -762,6 +762,7 @@ check_file_done (gpointer user_data)
   window = job->window;
   retval = job->retval;
   g_free (job->base_uris[1]);
+  g_free (job->base_uris[2]);
   g_slice_free (AsyncExistenceJob, job);
   
   finish_prepare_screenshot (retval, window);
@@ -810,7 +811,7 @@ build_uri (AsyncExistenceJob *job)
 
   retval = g_build_filename (job->base_uris[job->type], file_name, NULL);
   g_free (file_name);
-  
+
   return retval;
 }
 
@@ -849,8 +850,28 @@ retry:
        */
       if (error->code == G_IO_ERROR_NOT_FOUND)
         {
-          job->retval = uri;
-          goto out;
+          GFile *parent;
+
+          /* if the parent directory doesn't exist as well, forget the saved
+           * directory and treat this as a generic error.
+           */
+
+          parent = g_file_get_parent (file);
+
+          if (!g_file_query_exists (parent, NULL))
+            {
+              (job->type)++;
+              job->iteration = 0;
+
+              g_object_unref (file);
+              g_object_unref (parent);
+              goto retry;
+            }
+          else
+            {
+              job->retval = uri;
+              goto out;
+            }
         }
       else
         {
@@ -927,9 +948,9 @@ prepare_screenshot (void)
   
   job = g_slice_new0 (AsyncExistenceJob);
   job->base_uris[0] = last_save_dir;
-  /* we'll have to free this */
+  /* we'll have to free these two */
   job->base_uris[1] = get_desktop_dir ();
-  job->base_uris[2] = (char *) g_get_tmp_dir ();
+  job->base_uris[2] = g_strconcat ("file://", g_get_tmp_dir (), NULL);
   job->iteration = 0;
   job->type = TEST_LAST_DIR;
   job->window = find_current_window (&window_title);
@@ -963,9 +984,9 @@ get_desktop_dir (void)
                                                "/apps/nautilus/preferences/desktop_is_home_dir",
                                                NULL);
   if (desktop_is_home_dir)
-    desktop_dir = g_build_filename (g_get_home_dir (), NULL);
+    desktop_dir = g_strconcat ("file://", g_get_home_dir (), NULL);
   else
-    desktop_dir = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP));
+    desktop_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP), NULL);
 
   g_object_unref (gconf_client);
 
