@@ -485,7 +485,7 @@ create_interactive_dialog (void)
   gtk_window_set_resizable (GTK_WINDOW (retval), FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (retval), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (retval)->vbox), 2);
-  gtk_window_set_title (GTK_WINDOW (retval), "");
+  gtk_window_set_title (GTK_WINDOW (retval), _("Take Screenshot"));
 
   /* main container */
   main_vbox = gtk_vbox_new (FALSE, 18);

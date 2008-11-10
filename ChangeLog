@@ -1,5 +1,10 @@
 2008-11-10  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* gnome-screenshot.c: (create_interactive_dialog): set a meaningful
+	title for the interactive dialog (#434581).
+
+2008-11-10  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* screenshot-utils.c: (screenshot_get_pixbuf): fix the mouse
 	cursor overlay position when not in fullscreen mode (#559594).
 
