@@ -431,26 +431,31 @@ screenshot_get_pixbuf (GdkWindow *window,
       if (cursor_pixbuf != NULL) 
         {
           GdkRectangle r1, r2;
-          gint cx, cy;
+          gint cx, cy, xhot, yhot;
 
           gdk_window_get_pointer (window, &cx, &cy, NULL);
+          sscanf (gdk_pixbuf_get_option (cursor_pixbuf, "x_hot"), "%d", &xhot);
+          sscanf (gdk_pixbuf_get_option (cursor_pixbuf, "y_hot"), "%d", &yhot);
 
+          /* in r1 we have the window coordinates */
           r1.x = x_real_orig;
           r1.y = y_real_orig;
           r1.width = real_width;
           r1.height = real_height;
 
-          r2.x = cx;
-          r2.y = cy;
+          /* in r2 we have the cursor window coordinates */
+          r2.x = cx + x_real_orig;
+          r2.y = cy + y_real_orig;
           r2.width = gdk_pixbuf_get_width (cursor_pixbuf);
           r2.height = gdk_pixbuf_get_height (cursor_pixbuf);
 
+          /* see if the pointer is inside the window */
           if (gdk_rectangle_intersect (&r1, &r2, &r2)) 
-            { 
+            {
               gdk_pixbuf_composite (cursor_pixbuf, screenshot,
-                                    r2.x - x_real_orig, r2.y - y_real_orig, 
+                                    cx - xhot, cy - yhot,
                                     r2.width, r2.height,
-                                    cx - x_real_orig, cy - y_real_orig, 
+                                    cx - xhot, cy - yhot,
                                     1.0, 1.0, 
                                     GDK_INTERP_BILINEAR,
                                     255);

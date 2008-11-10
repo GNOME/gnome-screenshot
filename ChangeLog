@@ -1,3 +1,8 @@
+2008-11-10  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* screenshot-utils.c: (screenshot_get_pixbuf): fix the mouse
+	cursor overlay position when not in fullscreen mode (#559594).
+
 2008-11-09  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c: (main): always use the delay command line
