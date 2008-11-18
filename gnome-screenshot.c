@@ -535,6 +535,7 @@ save_folder_to_gconf (ScreenshotDialog *dialog)
 			   LAST_SAVE_DIRECTORY_KEY, folder,
                            NULL);
 
+  g_free (folder);
   g_object_unref (gconf_client);
 }
 
