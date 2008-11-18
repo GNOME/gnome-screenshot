@@ -1,5 +1,10 @@
 2008-11-18  Cosimo Cecchi  <cosimoc@gnome.org>
 
+	* gnome-screenshot.c: (try_check_file):
+	Plug some other memory leaks.
+
+2008-11-18  Cosimo Cecchi  <cosimoc@gnome.org>
+
 	* gnome-screenshot.c: (save_folder_to_gconf):
 	Plug a memory leak.
 

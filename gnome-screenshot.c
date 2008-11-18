@@ -839,6 +839,7 @@ retry:
       /* file already exists, iterate again */
       g_object_unref (info);
       g_object_unref (file);
+      g_free (uri);
 
       (job->iteration)++;
 
@@ -871,6 +872,8 @@ retry:
           else
             {
               job->retval = uri;
+
+              g_object_unref (parent);
               goto out;
             }
         }
