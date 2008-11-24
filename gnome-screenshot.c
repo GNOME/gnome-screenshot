@@ -1081,6 +1081,9 @@ save_options (void)
   gconf_client_set_bool (gconf_client,
                          INCLUDE_BORDER_KEY, include_border,
                          NULL);
+  gconf_client_set_bool (gconf_client,
+                         INCLUDE_POINTER_KEY, include_pointer,
+                         NULL);
   gconf_client_set_int (gconf_client, DELAY_KEY, delay, NULL);
   gconf_client_set_string (gconf_client,
                            BORDER_EFFECT_KEY, border_effect,

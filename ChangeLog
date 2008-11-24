@@ -1,3 +1,8 @@
+2008-11-24  Emmanuele Bassi  <ebassi@gnome.org>
+
+	* gnome-screenshot.c: (save_options): Save the include-pointer
+	setting to GConf.
+
 2008-11-18  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c: (try_check_file):
