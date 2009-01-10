@@ -1,3 +1,8 @@
+2009-01-10  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* gnome-screenshot.c (set_recent_entry), (save_callback):
+	Add newly saved files to GtkRecentManager (#567205).
+
 2008-11-24  Emmanuele Bassi  <ebassi@gnome.org>
 
 	* gnome-screenshot.c: (save_options): Save the include-pointer

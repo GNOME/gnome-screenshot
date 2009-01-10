@@ -540,6 +540,44 @@ save_folder_to_gconf (ScreenshotDialog *dialog)
 }
 
 static void
+set_recent_entry (ScreenshotDialog *dialog)
+{
+  char *uri, *app_exec = NULL;
+  GtkRecentManager *recent;
+  GtkRecentData recent_data;
+  GAppInfo *app;
+  const char *exec_name = NULL;
+  static char * groups[2] = { "Graphics", NULL };
+
+  app = g_app_info_get_default_for_type ("image/png", TRUE);
+
+  if (!app) {
+    /* return early, as this would be an useless recent entry anyway. */
+    return;
+  }
+
+  uri = screenshot_dialog_get_uri (dialog);
+  recent = gtk_recent_manager_get_default ();
+  
+  exec_name = g_app_info_get_executable (app);
+  app_exec = g_strjoin (" ", exec_name, "%u", NULL);
+
+  recent_data.display_name = NULL;
+  recent_data.description = NULL;
+  recent_data.mime_type = "image/png";
+  recent_data.app_name = "GNOME Screenshot";
+  recent_data.app_exec = app_exec;
+  recent_data.groups = groups;
+  recent_data.is_private = FALSE;
+
+  gtk_recent_manager_add_full (recent, uri, &recent_data);
+
+  g_object_unref (app);
+  g_free (app_exec);
+  g_free (uri);
+}
+
+static void
 error_dialog_response_cb (GtkDialog *d,
                           gint response,
                           ScreenshotDialog *dialog)
@@ -563,6 +601,7 @@ save_callback (TransferResult result,
   if (result == TRANSFER_OK)
     {
       save_folder_to_gconf (dialog);
+      set_recent_entry (dialog);
       gtk_widget_destroy (toplevel);
       
       /* we're done, stop the mainloop now */
