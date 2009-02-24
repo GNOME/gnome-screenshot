@@ -276,6 +276,129 @@ find_wm_window (Window xid)
   while (TRUE);
 }
 
+static GdkRegion *
+make_region_with_monitors (GdkScreen *screen)
+{
+  GdkRegion *region;
+  int num_monitors;
+  int i;
+
+  num_monitors = gdk_screen_get_n_monitors (screen);
+
+  region = gdk_region_new ();
+
+  for (i = 0; i < num_monitors; i++)
+    {
+      GdkRectangle rect;
+
+      gdk_screen_get_monitor_geometry (screen, i, &rect);
+      gdk_region_union_with_rect (region, &rect);
+    }
+
+  return region;
+}
+
+static void
+blank_rectangle_in_pixbuf (GdkPixbuf *pixbuf, GdkRectangle *rect)
+{
+  int x, y;
+  int x2, y2;
+  guchar *pixels;
+  int rowstride;
+  int n_channels;
+  guchar *row;
+  gboolean has_alpha;
+
+  g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
+  
+  x2 = rect->x + rect->width;
+  y2 = rect->y + rect->height;
+
+  pixels = gdk_pixbuf_get_pixels (pixbuf);
+  rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+  has_alpha = gdk_pixbuf_get_has_alpha (pixbuf);
+  n_channels = gdk_pixbuf_get_n_channels (pixbuf);
+
+  for (y = rect->y; y < y2; y++)
+    {
+      guchar *p;
+
+      row = pixels + y * rowstride;
+      p = row + rect->x * n_channels;
+
+      for (x = rect->x; x < x2; x++)
+	{
+	  *p++ = 0;
+	  *p++ = 0;
+	  *p++ = 0;
+
+	  if (has_alpha)
+	    *p++ = 255; /* opaque black */
+	}
+    }
+}
+
+static void
+blank_region_in_pixbuf (GdkPixbuf *pixbuf, GdkRegion *region)
+{
+  GdkRectangle *rects;
+  int n_rects;
+  int i;
+  int width, height;
+  GdkRectangle pixbuf_rect;
+
+  gdk_region_get_rectangles (region, &rects, &n_rects);
+
+  width = gdk_pixbuf_get_width (pixbuf);
+  height = gdk_pixbuf_get_height (pixbuf);
+
+  pixbuf_rect.x	     = 0;
+  pixbuf_rect.y	     = 0;
+  pixbuf_rect.width  = width;
+  pixbuf_rect.height = height;
+
+  for (i = 0; i < n_rects; i++)
+    {
+      GdkRectangle dest;
+
+      if (gdk_rectangle_intersect (rects + i, &pixbuf_rect, &dest))
+	blank_rectangle_in_pixbuf (pixbuf, &dest);
+    }
+
+  g_free (rects);
+}
+
+/* When there are multiple monitors with different resolutions, the visible area
+ * within the root window may not be rectangular (it may have an L-shape, for
+ * example).  In that case, mask out the areas of the root window which would
+ * not be visible in the monitors, so that screenshot do not end up with content
+ * that the user won't ever see.
+ */
+static void
+mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
+{
+  GdkScreen *screen;
+  GdkRegion *region_with_monitors;
+  GdkRegion *invisible_region;
+  GdkRectangle rect;
+
+  screen = gdk_drawable_get_screen (GDK_DRAWABLE (root_window));
+
+  region_with_monitors = make_region_with_monitors (screen);
+
+  rect.x = 0;
+  rect.y = 0;
+  rect.width = gdk_screen_get_width (screen);
+  rect.height = gdk_screen_get_height (screen);
+
+  invisible_region = gdk_region_rectangle (&rect);
+  gdk_region_subtract (invisible_region, region_with_monitors);
+
+  blank_region_in_pixbuf (pixbuf, invisible_region);
+
+  gdk_region_destroy (region_with_monitors);
+  gdk_region_destroy (invisible_region);
+}
 
 GdkPixbuf *
 screenshot_get_pixbuf (GdkWindow *window,
@@ -333,6 +456,8 @@ screenshot_get_pixbuf (GdkWindow *window,
   screenshot = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
                                              x_orig, y_orig, 0, 0,
                                              width, height);
+
+  mask_monitors (screenshot, root);
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
   if (include_border)

@@ -1,3 +1,16 @@
+2009-02-24  Federico Mena Quintero  <federico@novell.com>
+
+	https://bugzilla.novell.com/show_bug.cgi?id=381135
+	http://bugzilla.gnome.org/show_bug.cgi?id=166485
+
+	* screenshot-utils.c (screenshot_get_pixbuf): If we are in a
+	multi-monitor setup that is not rectangular (for example, if it is
+	L-shaped due to monitors of different resolutions), we need to
+	blank out the "invisible" areas from the rectangular root window.
+	Otherwise, the screenshot will contain content that the user
+	cannot actually see.  Call a helper function to blank out these areas.
+	(mask_monitors): New helper function.
+
 2009-02-24  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* Makefile.am: add gthread CFLAGS and LIBS.
