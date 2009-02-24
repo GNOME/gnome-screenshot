@@ -1190,6 +1190,8 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  g_thread_init (NULL);
+
   context = g_option_context_new (_("Take a picture of the screen"));
   g_option_context_set_ignore_unknown_options (context, FALSE);
   g_option_context_set_help_enabled (context, TRUE);

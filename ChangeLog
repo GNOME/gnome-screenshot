@@ -1,3 +1,10 @@
+2009-02-24  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* Makefile.am: add gthread CFLAGS and LIBS.
+	* gnome-screenshot.c (main): initialize threads at startup,
+	so that we can be sure to use them and not the idle fallback when
+	doing async transfers.
+
 2009-01-10  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c (set_recent_entry), (save_callback):
