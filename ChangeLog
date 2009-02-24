@@ -11,6 +11,9 @@
 	cannot actually see.  Call a helper function to blank out these areas.
 	(mask_monitors): New helper function.
 
+	* screenshot-utils.c (screenshot_get_pixbuf): Don't try to shape
+	the root window.  Patch by Hal Ashburner <hal@ashburner.info>
+
 2009-02-24  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* Makefile.am: add gthread CFLAGS and LIBS.
