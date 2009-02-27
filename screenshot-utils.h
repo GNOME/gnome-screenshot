@@ -29,7 +29,12 @@ gboolean   screenshot_grab_lock           (void);
 void       screenshot_release_lock        (void);
 gchar     *screenshot_get_window_title    (GdkWindow *win);
 GdkWindow *screenshot_find_current_window (void);
+gboolean   screenshot_select_area         (int *px,
+                                           int *py,
+                                           int *pwidth,
+                                           int *pheight);
 GdkPixbuf *screenshot_get_pixbuf          (GdkWindow *win,
+                                           GdkRectangle *rectangle,
                                            gboolean include_pointer,
                                            gboolean include_border);
 

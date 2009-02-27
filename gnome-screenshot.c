@@ -86,6 +86,7 @@ typedef struct
   int iteration;
   TestType type;
   GdkWindow *window;
+  GdkRectangle *rectangle;
 } AsyncExistenceJob;
 
 static GdkPixbuf *screenshot = NULL;
@@ -98,6 +99,7 @@ static gboolean save_immediately = FALSE;
 
 /* Options */
 static gboolean take_window_shot = FALSE;
+static gboolean take_area_shot = FALSE;
 static gboolean include_border = FALSE;
 static gboolean include_pointer = TRUE;
 static char *border_effect = NULL;
@@ -148,15 +150,20 @@ interactive_dialog_response_cb (GtkDialog *dialog,
     }
 }
 
+#define TARGET_TOGGLE_DESKTOP 0
+#define TARGET_TOGGLE_WINDOW  1
+#define TARGET_TOGGLE_AREA    2
+
 static void
 target_toggled_cb (GtkToggleButton *button,
                    gpointer         data)
 {
-  gboolean window_selected = (GPOINTER_TO_INT (data) == TRUE ? TRUE : FALSE);
+  int target_toggle = GPOINTER_TO_INT (data);
 
   if (gtk_toggle_button_get_active (button))
     {
-      take_window_shot = window_selected;
+      take_window_shot = (target_toggle == TARGET_TOGGLE_WINDOW);
+      take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
       
       gtk_widget_set_sensitive (border_check, take_window_shot);
       gtk_widget_set_sensitive (effect_combo, take_window_shot);
@@ -421,11 +428,11 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   group = NULL;
   radio = gtk_radio_button_new_with_mnemonic (group,
                                               _("Grab the whole _desktop"));
-  if (take_window_shot)
+  if (take_window_shot || take_area_shot)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), FALSE);
   g_signal_connect (radio, "toggled",
                     G_CALLBACK (target_toggled_cb),
-                    GINT_TO_POINTER (FALSE));
+                    GINT_TO_POINTER (TARGET_TOGGLE_DESKTOP));
   gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
   group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
   gtk_widget_show (radio);
@@ -437,7 +444,19 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
   g_signal_connect (radio, "toggled",
                     G_CALLBACK (target_toggled_cb),
-                    GINT_TO_POINTER (TRUE));
+                    GINT_TO_POINTER (TARGET_TOGGLE_WINDOW));
+  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
+  gtk_widget_show (radio);
+
+  /** Grab area of the desktop **/
+  radio = gtk_radio_button_new_with_mnemonic (group,
+                                              _("Grab a selected _area"));
+  if (take_area_shot)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+  g_signal_connect (radio, "toggled",
+                    G_CALLBACK (target_toggled_cb),
+                    GINT_TO_POINTER (TARGET_TOGGLE_AREA));
   gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
   gtk_widget_show (radio);
 
@@ -748,16 +767,16 @@ run_dialog (ScreenshotDialog *dialog)
 }
 
 static void
-finish_prepare_screenshot (char *initial_uri, GdkWindow *window)
+finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *rectangle)
 {  
   ScreenshotDialog *dialog;
 
-  /* always disable window border for full-desktop screenshots */
+  /* always disable window border for full-desktop or selected-area screenshots */
   if (!take_window_shot)
-    screenshot = screenshot_get_pixbuf (window, include_pointer, FALSE);
+    screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, FALSE);
   else
     {
-      screenshot = screenshot_get_pixbuf (window, include_pointer, include_border);
+      screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, include_border);
 
       switch (border_effect[0])
         {
@@ -792,20 +811,26 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window)
   run_dialog (dialog);
 }
 
+static void
+async_existence_job_free (AsyncExistenceJob *job)
+{
+  if (!job)
+    return;
+
+  g_free (job->base_uris[1]);
+  g_free (job->base_uris[2]);
+  g_free (job->rectangle);
+  g_slice_free (AsyncExistenceJob, job);
+}
+
 static gboolean
 check_file_done (gpointer user_data)
 {
-  char *retval;
-  GdkWindow *window;
   AsyncExistenceJob *job = user_data;
 
-  window = job->window;
-  retval = job->retval;
-  g_free (job->base_uris[1]);
-  g_free (job->base_uris[2]);
-  g_slice_free (AsyncExistenceJob, job);
-  
-  finish_prepare_screenshot (retval, window);
+  finish_prepare_screenshot (job->retval, job->window, job->rectangle);
+
+  async_existence_job_free (job);
   
   return FALSE;
 }
@@ -984,6 +1009,30 @@ find_current_window (char **window_title)
   return window;
 }
 
+static GdkRectangle *
+find_rectangle (void)
+{
+  GdkRectangle *rectangle;
+
+  if (!take_area_shot)
+    return NULL;
+
+  rectangle = g_new0 (GdkRectangle, 1);
+  if (screenshot_select_area (&rectangle->x, &rectangle->y,
+                              &rectangle->width, &rectangle->height))
+    {
+      g_assert (rectangle->width >= 0);
+      g_assert (rectangle->height >= 0);
+
+      return rectangle;
+    }
+  else
+    {
+      g_free (rectangle);
+      return NULL;
+    }
+}
+
 static void
 prepare_screenshot (void)
 {
@@ -997,6 +1046,16 @@ prepare_screenshot (void)
   job->iteration = 0;
   job->type = TEST_LAST_DIR;
   job->window = find_current_window (&window_title);
+  job->rectangle = find_rectangle ();
+
+  /* Check if the area selection was cancelled */
+  if (job->rectangle &&
+      (job->rectangle->width == 0 || job->rectangle->height == 0))
+    {
+      async_existence_job_free (job);
+      gtk_main_quit ();
+      return;
+    }
 
   g_io_scheduler_push_job (try_check_file,
                            job,
@@ -1168,6 +1227,7 @@ main (int argc, char *argv[])
   GOptionContext *context;
   GOptionGroup *group;
   gboolean window_arg = FALSE;
+  gboolean area_arg = FALSE;
   gboolean include_border_arg = FALSE;
   gboolean disable_border_arg = FALSE;
   gboolean interactive_arg = FALSE;
@@ -1177,6 +1237,7 @@ main (int argc, char *argv[])
 
   const GOptionEntry entries[] = {
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
+    { "area", 'a', 0, G_OPTION_ARG_NONE, &area_arg, N_("Grab an area of the screen instead of the entire screen"), NULL },
     { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
     { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, N_("Remove the window border from the screenshot"), NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
@@ -1209,6 +1270,12 @@ main (int argc, char *argv[])
 
   g_option_context_free (context);
 
+  if (window_arg && area_arg) {
+    g_printerr (_("Conflicting options: --window and --area should not be "
+                  "used at the same time.\n"));
+    exit (1);
+  }
+
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
 
@@ -1216,6 +1283,9 @@ main (int argc, char *argv[])
   /* allow the command line to override options */
   if (window_arg)
     take_window_shot = TRUE;
+
+  if (area_arg)
+    take_area_shot = TRUE;
 
   if (include_border_arg)
     include_border = TRUE;

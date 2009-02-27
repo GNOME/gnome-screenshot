@@ -1,3 +1,17 @@
+2009-02-27  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* gnome-screenshot.c (target_toggled_cb),
+	(create_screenshot_frame), (finish_prepare_screenshot),
+	(async_existence_job_free), (check_file_done), (find_rectangle),
+	(prepare_screenshot), (main):
+	* screenshot-utils.c (select_area_button_press),
+	(select_area_button_release), (select_area_motion_notify),
+	(select_area_filter), (screenshot_select_area),
+	(screenshot_get_pixbuf):
+	* screenshot-utils.h: add support for taking a screenshot of an
+	user-defined selection.
+	Patch by Vincent Untz, bug #155061.
+
 2009-02-24  Federico Mena Quintero  <federico@novell.com>
 
 	https://bugzilla.novell.com/show_bug.cgi?id=381135
