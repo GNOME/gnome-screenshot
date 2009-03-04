@@ -114,6 +114,7 @@ static void  save_options           (void);
 static GtkWidget *border_check = NULL;
 static GtkWidget *effect_combo = NULL;
 static GtkWidget *effect_label = NULL;
+static GtkWidget *delay_hbox = NULL;
 
 static void
 display_help (GtkWindow *parent)
@@ -168,6 +169,8 @@ target_toggled_cb (GtkToggleButton *button,
       gtk_widget_set_sensitive (border_check, take_window_shot);
       gtk_widget_set_sensitive (effect_combo, take_window_shot);
       gtk_widget_set_sensitive (effect_label, take_window_shot);
+
+      gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
     }
 }
 
@@ -461,16 +464,16 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (radio);
 
   /** Grab after delay **/
-  hbox = gtk_hbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
+  delay_hbox = gtk_hbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), delay_hbox, FALSE, FALSE, 0);
+  gtk_widget_show (delay_hbox);
 
   /* translators: this is the first part of the "grab after a
    * delay of <spin button> seconds".
    */
   label = gtk_label_new_with_mnemonic (_("Grab _after a delay of"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
 
   adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) delay,
@@ -481,7 +484,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   g_signal_connect (spin, "value-changed",
                     G_CALLBACK (delay_spin_value_changed_cb),
                     NULL);
-  gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (delay_hbox), spin, FALSE, FALSE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
   gtk_widget_show (spin);
 
@@ -490,7 +493,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
    */
   label = gtk_label_new (_("seconds"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_end (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_end (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
 }
 
@@ -1325,7 +1328,8 @@ main (int argc, char *argv[])
         }
     }
 
-  if ((delay > 0 && interactive_arg) || delay_arg > 0)
+  if (((delay > 0 && interactive_arg) || delay_arg > 0) &&
+      !take_area_shot)
     {      
       g_timeout_add (delay * 1000,
 		     prepare_screenshot_timeout,

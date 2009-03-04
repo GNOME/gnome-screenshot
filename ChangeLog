@@ -1,3 +1,9 @@
+2009-03-04  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* gnome-screenshot.c (target_toggled_cb),
+	(create_screenshot_frame), (main): disable the delay option
+	when taking a screenshot of an user selected area (#573939).
+
 2009-02-27  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c (target_toggled_cb),
