@@ -1,3 +1,10 @@
+2009-04-04  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* gnome-screenshot.c (target_toggled_cb), (create_effects_frame),
+	(create_screenshot_frame): disable the effects section altogether
+	when taking a screenshot of an user selected area. Use better
+	wording for the user selection feature (#577861).
+
 2009-03-04  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* gnome-screenshot.c (target_toggled_cb),

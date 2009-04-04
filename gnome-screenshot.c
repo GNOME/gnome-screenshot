@@ -114,6 +114,7 @@ static void  save_options           (void);
 static GtkWidget *border_check = NULL;
 static GtkWidget *effect_combo = NULL;
 static GtkWidget *effect_label = NULL;
+static GtkWidget *effects_vbox = NULL;
 static GtkWidget *delay_hbox = NULL;
 
 static void
@@ -171,6 +172,7 @@ target_toggled_cb (GtkToggleButton *button,
       gtk_widget_set_sensitive (effect_label, take_window_shot);
 
       gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
+      gtk_widget_set_sensitive (effects_vbox, !take_area_shot);
     }
 }
 
@@ -321,6 +323,7 @@ create_effects_frame (GtkWidget   *outer_vbox,
   main_vbox = gtk_vbox_new (FALSE, 6);
   gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
   gtk_widget_show (main_vbox);
+  effects_vbox = main_vbox;
 
   title = g_strconcat ("<b>", frame_title, "</b>", NULL);
   label = gtk_label_new (title);
@@ -454,7 +457,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
 
   /** Grab area of the desktop **/
   radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Grab a selected _area"));
+                                              _("Select _area to grab"));
   if (take_area_shot)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
   g_signal_connect (radio, "toggled",
