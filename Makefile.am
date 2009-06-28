@@ -40,6 +40,8 @@ gnome_screenshot_in_files = gnome-screenshot.desktop.in
 gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+man_MANS = gnome-screenshot.1
+
 uidir = $(datadir)/gnome-screenshot
 ui_DATA =					\
 	gnome-screenshot.ui			\
@@ -48,6 +50,7 @@ ui_DATA =					\
 EXTRA_DIST =					\
 	$(schemas_in_files)			\
 	$(gnome_screenshot_in_files)		\
+	$(man_MANS)				\
 	$(ui_DATA)				\
 	$(NULL)
 
