@@ -867,5 +867,4 @@ screenshot_show_gerror_dialog (GtkWindow   *parent,
   g_return_if_fail (error != NULL);
 
   screenshot_show_error_dialog (parent, message, error->message);
-  g_clear_error (&error);
 }
