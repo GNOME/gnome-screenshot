@@ -40,6 +40,7 @@
 #include <gio/gio.h>
 #include <pwd.h>
 #include <X11/Xutil.h>
+#include <canberra-gtk.h>
 
 #include "screenshot-shadow.h"
 #include "screenshot-utils.h"
@@ -773,6 +774,45 @@ run_dialog (ScreenshotDialog *dialog)
 }
 
 static void
+play_sound_effect (GdkWindow *window)
+{
+  ca_context *c;
+  ca_proplist *p = NULL;
+  int res;
+
+  c = ca_gtk_context_get ();
+
+  res = ca_proplist_create (&p);
+  if (res < 0)
+    goto done;
+
+  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, "screen-capture");
+  if (res < 0)
+    goto done;
+
+  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, _("Screenshot taken"));
+  if (res < 0)
+    goto done;
+
+  if (window != NULL)
+    {
+      res = ca_proplist_setf (p,
+                              CA_PROP_WINDOW_X11_XID,
+                              "%lu",
+                              (unsigned long) GDK_WINDOW_XID (window));
+      if (res < 0)
+        goto done;
+    }
+
+  ca_context_play_full (c, 0, p, NULL, NULL);
+
+ done:
+  if (p != NULL)
+    ca_proplist_destroy (p);
+
+}
+
+static void
 finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *rectangle)
 {  
   ScreenshotDialog *dialog;
@@ -808,6 +848,8 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
                                     NULL);
       exit (1);
     }
+
+  play_sound_effect (window);
 
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
   g_free (initial_uri);

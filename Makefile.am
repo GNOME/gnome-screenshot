@@ -6,6 +6,7 @@ INCLUDES =							\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DUIDIR=\""$(uidir)"\"					\
 	$(GNOME_UTILS_CFLAGS)					\
+	$(LIBCANBERRA_GTK_CFLAGS)				\
 	$(GTHREAD_CFLAGS)					\
 	$(NULL)
 
@@ -32,6 +33,7 @@ gnome_screenshot_LDFLAGS = -export-dynamic
 gnome_screenshot_LDADD =		\
 	$(XSHAPE_LIBS)			\
 	$(GNOME_UTILS_LIBS)		\
+	$(LIBCANBERRA_GTK_LIBS)		\
 	$(GTHREAD_LIBS)			\
 	$(NULL)
 
