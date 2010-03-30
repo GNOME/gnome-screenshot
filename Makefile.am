@@ -35,6 +35,7 @@ gnome_screenshot_LDADD =		\
 	$(GNOME_UTILS_LIBS)		\
 	$(LIBCANBERRA_GTK_LIBS)		\
 	$(GTHREAD_LIBS)			\
+	-lm				\
 	$(NULL)
 
 gnome_screenshotdir  = $(datadir)/applications
