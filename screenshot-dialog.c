@@ -75,7 +75,7 @@ on_preview_expose_event (GtkWidget      *drawing_area,
 
   /* Stolen from GtkImage.  I really should just make the drawing area an
    * image some day */
-  if (GTK_WIDGET_STATE (drawing_area) != GTK_STATE_NORMAL)
+  if (gtk_widget_get_state (drawing_area) != GTK_STATE_NORMAL)
     {
       GtkIconSource *source;
 
@@ -87,7 +87,7 @@ on_preview_expose_event (GtkWidget      *drawing_area,
       pixbuf = gtk_style_render_icon (drawing_area->style,
 				      source,
 				      gtk_widget_get_direction (drawing_area),
-				      GTK_WIDGET_STATE (drawing_area),
+				      gtk_widget_get_state (drawing_area),
 				      (GtkIconSize) -1,
 				      drawing_area,
 				      "gtk-image");
