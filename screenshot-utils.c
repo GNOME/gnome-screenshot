@@ -91,7 +91,6 @@ gboolean
 screenshot_grab_lock (void)
 {
   GdkAtom selection_atom;
-  GdkCursor *cursor;
   gboolean result = FALSE;
 
   selection_atom = gdk_atom_intern (SELECTION_NAME, FALSE);
@@ -268,17 +267,56 @@ select_area_button_press (XKeyEvent    *event,
 }
 
 static void
+select_area_update_rect (GtkWidget    *window,
+                         GdkRectangle *rect)
+{
+  if (rect->width <= 0 || rect->height <= 0)
+    {
+      gtk_widget_hide (window);
+      return;
+    }
+
+  gtk_window_move (GTK_WINDOW (window), rect->x, rect->y);
+  gtk_window_resize (GTK_WINDOW (window), rect->width, rect->height);
+  gtk_widget_show (window);
+  
+  /* We (ab)use app-paintable to indicate if we have an RGBA window */
+  if (!gtk_widget_get_app_paintable (window))
+    {
+      GdkWindow *gdkwindow = gtk_widget_get_window (window);
+
+      /* Shape the window to make only the outline visible */
+      if (rect->width > 2 && rect->height > 2)
+        {
+          GdkRegion *region, *region2;
+          GdkRectangle region_rect = { 0, 0,
+                                       rect->width - 2, rect->height - 2 };
+
+          region = gdk_region_rectangle (&region_rect);
+          region_rect.x++;
+          region_rect.y++;
+          region_rect.width -= 2;
+          region_rect.height -= 2;
+          region2 = gdk_region_rectangle (&region_rect);
+          gdk_region_subtract (region, region2);
+
+          gdk_window_shape_combine_region (gdkwindow, region, 0, 0);
+
+          gdk_region_destroy (region);
+          gdk_region_destroy (region2);
+        }
+      else
+        gdk_window_shape_combine_region (gdkwindow, NULL, 0, 0);
+    }
+}
+
+static void
 select_area_button_release (XKeyEvent    *event,
                             GdkRectangle *rect,
                             GdkRectangle *draw_rect,
-                            GdkWindow    *root,
-                            GdkGC        *gc)
+                            GtkWidget    *window)
 {
-  /* remove the old rectangle */
-  if (draw_rect->width > 0 && draw_rect->height > 0)
-    gdk_draw_rectangle (root, gc, FALSE, 
-                        draw_rect->x, draw_rect->y,
-                        draw_rect->width, draw_rect->height);
+  gtk_widget_hide (window);
 
   rect->width  = ABS (rect->x - event->x_root);
   rect->height = ABS (rect->y - event->y_root);
@@ -291,38 +329,86 @@ static void
 select_area_motion_notify (XKeyEvent    *event,
                            GdkRectangle *rect,
                            GdkRectangle *draw_rect,
-                           GdkWindow    *root,
-                           GdkGC        *gc)
+                           GtkWidget    *window)
 {
-  /* FIXME: draw some nice rubberband with cairo if composited */
-
-  /* remove the old rectangle */
-  if (draw_rect->width > 0 && draw_rect->height > 0)
-    gdk_draw_rectangle (root, gc, FALSE, 
-                        draw_rect->x, draw_rect->y,
-                        draw_rect->width, draw_rect->height);
-
   draw_rect->width  = ABS (rect->x - event->x_root);
   draw_rect->height = ABS (rect->y - event->y_root);
 
   draw_rect->x = MIN (rect->x, event->x_root);
   draw_rect->y = MIN (rect->y, event->y_root);
 
-  /* draw the new rectangle */
-  if (draw_rect->width > 0 && draw_rect->height > 0)
-    gdk_draw_rectangle (root, gc, FALSE, 
-                        draw_rect->x, draw_rect->y,
-                        draw_rect->width, draw_rect->height);
+  select_area_update_rect (window, draw_rect);
 }
 
 typedef struct {
   GdkRectangle  rect;
   GdkRectangle  draw_rect;
   gboolean      button_pressed;
-  /* only needed because we're not using cairo to draw the rectangle */
-  GdkWindow    *root;
-  GdkGC        *gc;
+  GtkWidget    *window;
 } select_area_filter_data;
+
+static gboolean
+expose (GtkWidget *window, GdkEventExpose *event, gpointer unused)
+{
+  GtkAllocation allocation;
+  GtkStyle *style;
+  cairo_t *cr;
+
+  cr = gdk_cairo_create (event->window);
+  gdk_cairo_region (cr, event->region);
+  cairo_clip (cr);
+
+  style = gtk_widget_get_style (window);
+
+  if (gtk_widget_get_app_paintable (window))
+    {
+      cairo_set_line_width (cr, 1.0);
+
+      gtk_widget_get_allocation (window, &allocation);
+
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+      cairo_set_source_rgba (cr, 0, 0, 0, 0);
+      cairo_paint (cr);
+
+      cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+      gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
+      cairo_paint_with_alpha (cr, 0.25);
+
+      cairo_rectangle (cr, 
+                       allocation.x + 0.5, allocation.y + 0.5,
+                       allocation.width - 1, allocation.height - 1);
+      cairo_stroke (cr);
+    }
+  else
+    {
+      gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
+      cairo_paint (cr);
+    }
+
+  cairo_destroy (cr);
+
+  return TRUE;
+}
+
+static GtkWidget *
+create_select_window (void)
+{
+  GtkWidget *window;
+  GdkScreen *screen;
+
+  screen = gdk_screen_get_default ();
+
+  window = gtk_window_new (GTK_WINDOW_POPUP);
+  if (gdk_screen_is_composited (screen) &&
+      gdk_screen_get_rgba_colormap (screen))
+    {
+      gtk_widget_set_colormap (window, gdk_screen_get_rgba_colormap (screen));
+      gtk_widget_set_app_paintable (window, TRUE);
+    }
+  g_signal_connect (window, "expose-event", G_CALLBACK (expose), NULL);
+
+  return window;
+}
 
 static GdkFilterReturn
 select_area_filter (GdkXEvent *gdk_xevent,
@@ -347,7 +433,7 @@ select_area_filter (GdkXEvent *gdk_xevent,
       {
         select_area_button_release (&xevent->xkey,
                                     &data->rect, &data->draw_rect,
-                                    data->root, data->gc);
+                                    data->window);
         gtk_main_quit ();
       }
       return GDK_FILTER_REMOVE;
@@ -355,7 +441,7 @@ select_area_filter (GdkXEvent *gdk_xevent,
       if (data->button_pressed)
         select_area_motion_notify (&xevent->xkey,
                                    &data->rect, &data->draw_rect,
-                                   data->root, data->gc);
+                                   data->window);
       return GDK_FILTER_REMOVE;
     case KeyPress:
       if (xevent->xkey.keycode == XKeysymToKeycode (gdk_display, XK_Escape))
@@ -384,8 +470,6 @@ screenshot_select_area (int *px,
   GdkWindow               *root;
   GdkCursor               *cursor;
   select_area_filter_data  data;
-  GdkGCValues              values;
-  GdkColor                 color;
 
   root = gdk_get_default_root_window ();
   cursor = gdk_cursor_new (GDK_CROSSHAIR);
@@ -415,37 +499,13 @@ screenshot_select_area (int *px,
   data.rect.width  = 0;
   data.rect.height = 0;
   data.button_pressed = FALSE;
-  data.root = root;
-
-  values.function = GDK_XOR;
-  values.fill = GDK_SOLID;
-  values.clip_mask = NULL;
-  values.subwindow_mode = GDK_INCLUDE_INFERIORS;
-  values.clip_x_origin = 0;
-  values.clip_y_origin = 0;
-  values.graphics_exposures = 0;
-  values.line_width = 0;
-  values.line_style = GDK_LINE_SOLID;
-  values.cap_style = GDK_CAP_BUTT;
-  values.join_style = GDK_JOIN_MITER;
-
-  data.gc = gdk_gc_new_with_values (root, &values,
-                                    GDK_GC_FUNCTION | GDK_GC_FILL |
-                                    GDK_GC_CLIP_MASK | GDK_GC_SUBWINDOW |
-                                    GDK_GC_CLIP_X_ORIGIN |
-                                    GDK_GC_CLIP_Y_ORIGIN | GDK_GC_EXPOSURES |
-                                    GDK_GC_LINE_WIDTH | GDK_GC_LINE_STYLE |
-                                    GDK_GC_CAP_STYLE | GDK_GC_JOIN_STYLE);
-  gdk_color_parse ("white", &color);
-  gdk_gc_set_rgb_fg_color (data.gc, &color);
-  gdk_color_parse ("black", &color);
-  gdk_gc_set_rgb_bg_color (data.gc, &color);
+  data.window = create_select_window();
 
   gtk_main ();
 
-  g_object_unref (data.gc);
-
   gdk_window_remove_filter (root, (GdkFilterFunc) select_area_filter, &data);
+
+  gtk_widget_destroy (data.window);
 
   gdk_keyboard_ungrab (GDK_CURRENT_TIME);
   gdk_pointer_ungrab (GDK_CURRENT_TIME);
