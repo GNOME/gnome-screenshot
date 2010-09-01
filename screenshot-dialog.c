@@ -72,6 +72,7 @@ on_preview_expose_event (GtkWidget      *drawing_area,
   ScreenshotDialog *dialog = data;
   GdkPixbuf *pixbuf = NULL;
   gboolean free_pixbuf = FALSE;
+  cairo_t *cr;
 
   /* Stolen from GtkImage.  I really should just make the drawing area an
    * image some day */
@@ -99,18 +100,14 @@ on_preview_expose_event (GtkWidget      *drawing_area,
       pixbuf = g_object_ref (dialog->preview_image);
     }
   
-  /* FIXME: Draw it insensitive in that case */
-  gdk_draw_pixbuf (drawing_area->window,
-		   drawing_area->style->white_gc,
-		   pixbuf,
-		   event->area.x,
-		   event->area.y,
-		   event->area.x,
-		   event->area.y,
-		   event->area.width,
-		   event->area.height,
-		   GDK_RGB_DITHER_NORMAL,
-		   0, 0);
+  cr = gdk_cairo_create (drawing_area->window);
+  gdk_cairo_region (cr, event->region);
+  cairo_clip (cr);
+
+  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+  cairo_paint (cr);
+
+  cairo_destroy (cr);
 
   g_object_unref (pixbuf);
 }
