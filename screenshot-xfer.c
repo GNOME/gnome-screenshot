@@ -57,8 +57,6 @@ typedef struct
   char *basename;
 } ErrorDialogData;
 
-static goffset total_size = 0;
-
 static gboolean
 do_run_overwrite_confirm_dialog (gpointer _data)
 {
@@ -119,8 +117,7 @@ transfer_progress_dialog_new (TransferJob *job)
                                     GTK_DIALOG_DESTROY_WITH_PARENT,
                                     GTK_MESSAGE_OTHER,
                                     GTK_BUTTONS_CANCEL,
-                                    _("Saving file..."),
-                                    NULL);
+                                    _("Saving file..."));
   widget = gtk_progress_bar_new ();
   gtk_box_pack_start (GTK_BOX (GTK_MESSAGE_DIALOG (gdialog)->label->parent),
                       widget, FALSE, 0, 0);
@@ -282,7 +279,6 @@ transfer_file (GIOSchedulerJob *io_job,
 {
   TransferJob *job = user_data;
   GError *error;
-  gboolean result;
   
   job->io_job = io_job;
   job->total_bytes = get_file_size (job->source);

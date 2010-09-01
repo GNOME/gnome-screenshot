@@ -654,8 +654,7 @@ save_callback (TransferResult result,
                                        GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_ERROR,
                                        GTK_BUTTONS_OK,
-                                       _("Error while saving screenshot"),
-                                       NULL);
+                                       _("Error while saving screenshot"));
       /* translators: first %s is the file path, second %s is the VFS error */
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
                                                 _("Impossible to save the screenshot "
@@ -1273,7 +1272,6 @@ int
 main (int argc, char *argv[])
 {
   GOptionContext *context;
-  GOptionGroup *group;
   gboolean window_arg = FALSE;
   gboolean area_arg = FALSE;
   gboolean include_border_arg = FALSE;
