@@ -30,7 +30,7 @@ gnome_screenshot_CFLAGS =		\
 	$(GIO_CFLAGS)			\
 	$(LIBCANBERRA_GTK_CFLAGS)	\
 	$(GTHREAD_CFLAGS)		\
-	$(GTK2_CFLAGS)			\
+	$(GTK_CFLAGS)			\
 	$(GCONF_CFLAGS)			\
 	$(NULL)
 
@@ -42,7 +42,7 @@ gnome_screenshot_LDADD =		\
 	$(GIO_LIBS)			\
 	$(LIBCANBERRA_GTK_LIBS)		\
 	$(GTHREAD_LIBS)			\
-	$(GTK2_LIBS)			\
+	$(GTK_LIBS)			\
 	$(GCONF_LIBS)			\
 	-lm				\
 	$(NULL)

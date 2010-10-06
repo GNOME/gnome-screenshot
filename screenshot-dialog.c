@@ -65,14 +65,13 @@ on_toplevel_key_press_event (GtkWidget *widget,
 }
 
 static void
-on_preview_expose_event (GtkWidget      *drawing_area,
-			 GdkEventExpose *event,
-			 gpointer        data)
+on_preview_draw (GtkWidget      *drawing_area,
+                 cairo_t        *cr,
+                 gpointer        data)
 {
   ScreenshotDialog *dialog = data;
   GdkPixbuf *pixbuf = NULL;
   gboolean free_pixbuf = FALSE;
-  cairo_t *cr;
 
   /* Stolen from GtkImage.  I really should just make the drawing area an
    * image some day */
@@ -99,15 +98,9 @@ on_preview_expose_event (GtkWidget      *drawing_area,
     {
       pixbuf = g_object_ref (dialog->preview_image);
     }
-  
-  cr = gdk_cairo_create (drawing_area->window);
-  gdk_cairo_region (cr, event->region);
-  cairo_clip (cr);
 
   gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
   cairo_paint (cr);
-
-  cairo_destroy (cr);
 
   g_object_unref (pixbuf);
 }
@@ -268,7 +261,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 			(gfloat) gdk_pixbuf_get_height (screenshot),
 			FALSE);
   g_signal_connect (toplevel, "key_press_event", G_CALLBACK (on_toplevel_key_press_event), dialog);
-  g_signal_connect (preview_darea, "expose_event", G_CALLBACK (on_preview_expose_event), dialog);
+  g_signal_connect (preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
   g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
   g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
   g_signal_connect (preview_darea, "configure_event", G_CALLBACK (on_preview_configure_event), dialog);
