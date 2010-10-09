@@ -5,9 +5,6 @@ INCLUDES =							\
 	-I$(srcdir)						\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DUIDIR=\""$(uidir)"\"					\
-	$(GNOME_UTILS_CFLAGS)					\
-	$(LIBCANBERRA_GTK_CFLAGS)				\
-	$(GTHREAD_CFLAGS)					\
 	$(NULL)
 
 bin_PROGRAMS = \
@@ -28,13 +25,25 @@ gnome_screenshot_SOURCES = \
 	screenshot-xfer.h		\
 	$(NULL)
 
+gnome_screenshot_CFLAGS =		\
+	$(GLIB_CFLAGS)			\
+	$(GIO_CFLAGS)			\
+	$(LIBCANBERRA_GTK_CFLAGS)	\
+	$(GTHREAD_CFLAGS)		\
+	$(GTK2_CFLAGS)			\
+	$(GCONF_CFLAGS)			\
+	$(NULL)
+
 gnome_screenshot_LDFLAGS = -export-dynamic
 
 gnome_screenshot_LDADD =		\
 	$(XSHAPE_LIBS)			\
-	$(GNOME_UTILS_LIBS)		\
+	$(GLIB_LIBS)			\
+	$(GIO_LIBS)			\
 	$(LIBCANBERRA_GTK_LIBS)		\
 	$(GTHREAD_LIBS)			\
+	$(GTK2_LIBS)			\
+	$(GCONF_LIBS)			\
 	-lm				\
 	$(NULL)
 
