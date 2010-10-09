@@ -119,7 +119,7 @@ transfer_progress_dialog_new (TransferJob *job)
                                     GTK_BUTTONS_CANCEL,
                                     _("Saving file..."));
   widget = gtk_progress_bar_new ();
-  gtk_box_pack_start (GTK_BOX (GTK_MESSAGE_DIALOG (gdialog)->label->parent),
+  gtk_box_pack_start (GTK_BOX (gtk_message_dialog_get_message_area GTK_MESSAGE_DIALOG (gdialog)),
                       widget, FALSE, 0, 0);
   gtk_widget_show (widget);
   dialog->progress_bar = widget;

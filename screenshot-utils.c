@@ -894,7 +894,8 @@ screenshot_show_error_dialog (GtkWindow   *parent,
                               const gchar *detail)
 {
   GtkWidget *dialog;
-  
+  GtkWindowGroup *group;
+
   g_return_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)));
   g_return_if_fail (message != NULL);
   
@@ -908,10 +909,14 @@ screenshot_show_error_dialog (GtkWindow   *parent,
   if (detail)
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
   					      "%s", detail);
-  
-  if (parent && parent->group)
-    gtk_window_group_add_window (parent->group, GTK_WINDOW (dialog));
-  
+
+  if (parent)
+    {
+      group = gtk_window_get_group (parent);
+      if (group != NULL)
+        gtk_window_group_add_window (group, GTK_WINDOW (dialog));
+    }
+
   gtk_dialog_run (GTK_DIALOG (dialog));
   
   gtk_widget_destroy (dialog);

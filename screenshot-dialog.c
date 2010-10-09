@@ -84,8 +84,8 @@ on_preview_expose_event (GtkWidget      *drawing_area,
       gtk_icon_source_set_pixbuf (source, dialog->preview_image);
       gtk_icon_source_set_size (source, GTK_ICON_SIZE_SMALL_TOOLBAR);
       gtk_icon_source_set_size_wildcarded (source, FALSE);
-                  
-      pixbuf = gtk_style_render_icon (drawing_area->style,
+
+      pixbuf = gtk_style_render_icon (gtk_widget_get_style (drawing_area),
 				      source,
 				      gtk_widget_get_direction (drawing_area),
 				      gtk_widget_get_state (drawing_area),
@@ -380,20 +380,22 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 			    gboolean          busy)
 {
   GtkWidget *toplevel;
+  GdkWindow *window;
 
   toplevel = screenshot_dialog_get_toplevel (dialog);
+  window = gtk_widget_get_window (toplevel);
 
   if (busy)
     {
       GdkCursor *cursor;
       /* Change cursor to busy */
       cursor = gdk_cursor_new (GDK_WATCH);
-      gdk_window_set_cursor (toplevel->window, cursor);
+      gdk_window_set_cursor (window, cursor);
       gdk_cursor_unref (cursor);
     }
   else
     {
-      gdk_window_set_cursor (toplevel->window, NULL);
+      gdk_window_set_cursor (window, NULL);
     }
 
   gtk_widget_set_sensitive (toplevel, ! busy);
