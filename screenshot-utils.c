@@ -288,22 +288,24 @@ select_area_update_rect (GtkWidget    *window,
       /* Shape the window to make only the outline visible */
       if (rect->width > 2 && rect->height > 2)
         {
-          GdkRegion *region, *region2;
-          GdkRectangle region_rect = { 0, 0,
-                                       rect->width - 2, rect->height - 2 };
+          cairo_region_t *region, *region2;
+          cairo_rectangle_int_t region_rect = {
+            0, 0,
+            rect->width - 2, rect->height - 2
+          };
 
-          region = gdk_region_rectangle (&region_rect);
+          region = cairo_region_create_rectangle (&region_rect);
           region_rect.x++;
           region_rect.y++;
           region_rect.width -= 2;
           region_rect.height -= 2;
-          region2 = gdk_region_rectangle (&region_rect);
-          gdk_region_subtract (region, region2);
+          region2 = cairo_region_create_rectangle (&region_rect);
+          cairo_region_subtract (region, region2);
 
           gdk_window_shape_combine_region (gdkwindow, region, 0, 0);
 
-          gdk_region_destroy (region);
-          gdk_region_destroy (region2);
+          cairo_region_destroy (region);
+          cairo_region_destroy (region2);
         }
       else
         gdk_window_shape_combine_region (gdkwindow, NULL, 0, 0);
@@ -348,15 +350,10 @@ typedef struct {
 } select_area_filter_data;
 
 static gboolean
-expose (GtkWidget *window, GdkEventExpose *event, gpointer unused)
+select_window_draw (GtkWidget *window, cairo_t *cr, gpointer unused)
 {
   GtkAllocation allocation;
   GtkStyle *style;
-  cairo_t *cr;
-
-  cr = gdk_cairo_create (event->window);
-  gdk_cairo_region (cr, event->region);
-  cairo_clip (cr);
 
   style = gtk_widget_get_style (window);
 
@@ -385,8 +382,6 @@ expose (GtkWidget *window, GdkEventExpose *event, gpointer unused)
       cairo_paint (cr);
     }
 
-  cairo_destroy (cr);
-
   return TRUE;
 }
 
@@ -395,17 +390,19 @@ create_select_window (void)
 {
   GtkWidget *window;
   GdkScreen *screen;
+  GdkVisual *visual;
 
   screen = gdk_screen_get_default ();
+  visual = gdk_screen_get_rgba_visual (screen);
 
   window = gtk_window_new (GTK_WINDOW_POPUP);
-  if (gdk_screen_is_composited (screen) &&
-      gdk_screen_get_rgba_colormap (screen))
+  if (gdk_screen_is_composited (screen) && visual)
     {
-      gtk_widget_set_colormap (window, gdk_screen_get_rgba_colormap (screen));
+      gtk_widget_set_visual (window, visual);
       gtk_widget_set_app_paintable (window, TRUE);
     }
-  g_signal_connect (window, "expose-event", G_CALLBACK (expose), NULL);
+
+  g_signal_connect (window, "draw", G_CALLBACK (select_window_draw), NULL);
 
   return window;
 }
@@ -444,7 +441,7 @@ select_area_filter (GdkXEvent *gdk_xevent,
                                    data->window);
       return GDK_FILTER_REMOVE;
     case KeyPress:
-      if (xevent->xkey.keycode == XKeysymToKeycode (gdk_display, XK_Escape))
+      if (xevent->xkey.keycode == XKeysymToKeycode (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XK_Escape))
         {
           data->rect.x = 0;
           data->rect.y = 0;
@@ -527,8 +524,8 @@ find_wm_window (Window xid)
 
   do
     {
-      if (XQueryTree (GDK_DISPLAY (), xid, &root,
-		      &parent, &children, &nchildren) == 0)
+      if (XQueryTree (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+                      xid, &root, &parent, &children, &nchildren) == 0)
 	{
 	  g_warning ("Couldn't find window manager window");
 	  return None;
@@ -542,23 +539,23 @@ find_wm_window (Window xid)
   while (TRUE);
 }
 
-static GdkRegion *
+static cairo_region_t *
 make_region_with_monitors (GdkScreen *screen)
 {
-  GdkRegion *region;
+  cairo_region_t *region;
   int num_monitors;
   int i;
 
   num_monitors = gdk_screen_get_n_monitors (screen);
 
-  region = gdk_region_new ();
+  region = cairo_region_create ();
 
   for (i = 0; i < num_monitors; i++)
     {
       GdkRectangle rect;
 
       gdk_screen_get_monitor_geometry (screen, i, &rect);
-      gdk_region_union_with_rect (region, &rect);
+      cairo_region_union_rectangle (region, &rect);
     }
 
   return region;
@@ -605,15 +602,14 @@ blank_rectangle_in_pixbuf (GdkPixbuf *pixbuf, GdkRectangle *rect)
 }
 
 static void
-blank_region_in_pixbuf (GdkPixbuf *pixbuf, GdkRegion *region)
+blank_region_in_pixbuf (GdkPixbuf *pixbuf, cairo_region_t *region)
 {
-  GdkRectangle *rects;
   int n_rects;
   int i;
   int width, height;
-  GdkRectangle pixbuf_rect;
+  cairo_rectangle_int_t pixbuf_rect;
 
-  gdk_region_get_rectangles (region, &rects, &n_rects);
+  n_rects = cairo_region_num_rectangles (region);
 
   width = gdk_pixbuf_get_width (pixbuf);
   height = gdk_pixbuf_get_height (pixbuf);
@@ -625,13 +621,12 @@ blank_region_in_pixbuf (GdkPixbuf *pixbuf, GdkRegion *region)
 
   for (i = 0; i < n_rects; i++)
     {
-      GdkRectangle dest;
+      cairo_rectangle_int_t rect, dest;
 
-      if (gdk_rectangle_intersect (rects + i, &pixbuf_rect, &dest))
+      cairo_region_get_rectangle (region, i, &rect);
+      if (gdk_rectangle_intersect (&rect, &pixbuf_rect, &dest))
 	blank_rectangle_in_pixbuf (pixbuf, &dest);
     }
-
-  g_free (rects);
 }
 
 /* When there are multiple monitors with different resolutions, the visible area
@@ -644,11 +639,11 @@ static void
 mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
 {
   GdkScreen *screen;
-  GdkRegion *region_with_monitors;
-  GdkRegion *invisible_region;
-  GdkRectangle rect;
+  cairo_region_t *region_with_monitors;
+  cairo_region_t *invisible_region;
+  cairo_rectangle_int_t rect;
 
-  screen = gdk_drawable_get_screen (GDK_DRAWABLE (root_window));
+  screen = gdk_window_get_screen (root_window);
 
   region_with_monitors = make_region_with_monitors (screen);
 
@@ -657,13 +652,13 @@ mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
   rect.width = gdk_screen_get_width (screen);
   rect.height = gdk_screen_get_height (screen);
 
-  invisible_region = gdk_region_rectangle (&rect);
-  gdk_region_subtract (invisible_region, region_with_monitors);
+  invisible_region = cairo_region_create_rectangle (&rect);
+  cairo_region_subtract (invisible_region, region_with_monitors);
 
   blank_region_in_pixbuf (pixbuf, invisible_region);
 
-  gdk_region_destroy (region_with_monitors);
-  gdk_region_destroy (invisible_region);
+  cairo_region_destroy (region_with_monitors);
+  cairo_region_destroy (invisible_region);
 }
 
 GdkPixbuf *
@@ -694,7 +689,8 @@ screenshot_get_pixbuf (GdkWindow    *window,
 
   root = gdk_get_default_root_window ();
 
-  gdk_drawable_get_size (window, &real_width, &real_height);      
+  real_width = gdk_window_get_width (window);
+  real_height = gdk_window_get_height (window);
   gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
 
   x_orig = x_real_orig;
@@ -727,10 +723,10 @@ screenshot_get_pixbuf (GdkWindow    *window,
       width  = rectangle->width;
       height = rectangle->height;
     }
-  
-  screenshot = gdk_pixbuf_get_from_drawable (NULL, root, NULL,
-                                             x_orig, y_orig, 0, 0,
-                                             width, height);
+
+  screenshot = gdk_pixbuf_get_from_window (root,
+                                           x_orig, y_orig,
+                                           width, height);
 
   mask_monitors (screenshot, root);
 
@@ -745,7 +741,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
        * of the WM decoration.
        */
 
-      rectangles = XShapeGetRectangles (GDK_DISPLAY (),
+      rectangles = XShapeGetRectangles (GDK_DISPLAY_XDISPLAY (gdk_display_get_default()),
                                         GDK_WINDOW_XWINDOW (window),
                                         ShapeBounding,
                                         &rectangle_count,
