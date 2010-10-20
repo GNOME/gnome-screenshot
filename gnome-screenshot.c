@@ -221,7 +221,7 @@ effect_combo_changed_cb (GtkComboBox *combo,
 static gint 
 key_press_cb (GtkWidget* widget, GdkEventKey* event, gpointer data)
 {
-  if (event->keyval == GDK_F1)
+  if (event->keyval == GDK_KEY_F1)
     {
       display_help (GTK_WINDOW (widget));
       return TRUE;
@@ -524,7 +524,6 @@ create_interactive_dialog (void)
   create_screenshot_frame (main_vbox, _("Take Screenshot"));
   create_effects_frame (main_vbox, _("Effects"));
 
-  gtk_dialog_set_has_separator (GTK_DIALOG (retval), FALSE);
   gtk_dialog_add_buttons (GTK_DIALOG (retval),
                           GTK_STOCK_HELP, GTK_RESPONSE_HELP,
                           GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,

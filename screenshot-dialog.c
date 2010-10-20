@@ -55,7 +55,7 @@ static gboolean
 on_toplevel_key_press_event (GtkWidget *widget,
 			     GdkEventKey *key)
 {
-  if (key->keyval == GDK_F1)
+  if (key->keyval == GDK_KEY_F1)
     {
       gtk_dialog_response (GTK_DIALOG (widget), GTK_RESPONSE_HELP);
       return TRUE;
