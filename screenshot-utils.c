@@ -678,7 +678,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
     {
       Window xid, wm;
 
-      xid = GDK_WINDOW_XWINDOW (window);
+      xid = GDK_WINDOW_XID (window);
       wm = find_wm_window (xid);
 
       if (wm != None)
@@ -742,7 +742,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
        */
 
       rectangles = XShapeGetRectangles (GDK_DISPLAY_XDISPLAY (gdk_display_get_default()),
-                                        GDK_WINDOW_XWINDOW (window),
+                                        GDK_WINDOW_XID (window),
                                         ShapeBounding,
                                         &rectangle_count,
                                         &rectangle_order);
