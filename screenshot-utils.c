@@ -682,7 +682,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
       wm = find_wm_window (xid);
 
       if (wm != None)
-        window = gdk_window_foreign_new (wm);
+        window = gdk_x11_window_foreign_new_for_display (gdk_window_get_display (window), wm);
 
       /* fallback to no border if we can't find the WM window. */
     }
