@@ -25,7 +25,6 @@
 /* MAYBE I LIED... -jrb */
 
 #include <config.h>
-#include <gconf/gconf-client.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
 #include <sys/types.h>
@@ -50,13 +49,12 @@
 
 #define SCREENSHOOTER_ICON "applets-screenshooter"
 
-#define GNOME_SCREENSHOT_GCONF  "/apps/gnome-screenshot"
-#define INCLUDE_BORDER_KEY      GNOME_SCREENSHOT_GCONF "/include_border"
-#define INCLUDE_POINTER_KEY     GNOME_SCREENSHOT_GCONF "/include_pointer"
-#define LAST_SAVE_DIRECTORY_KEY GNOME_SCREENSHOT_GCONF "/last_save_directory"
-#define BORDER_EFFECT_KEY       GNOME_SCREENSHOT_GCONF "/border_effect"
-#define DELAY_KEY               GNOME_SCREENSHOT_GCONF "/delay"
-
+#define GNOME_SCREENSHOT_SCHEMA "org.gnome.gnome-screenshot"
+#define INCLUDE_BORDER_KEY      "include-border"
+#define INCLUDE_POINTER_KEY     "include-pointer"
+#define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
+#define BORDER_EFFECT_KEY       "border-effect"
+#define DELAY_KEY               "delay"
 
 enum
 {
@@ -97,6 +95,7 @@ static char *last_save_dir = NULL;
 static char *window_title = NULL;
 static char *temporary_file = NULL;
 static gboolean save_immediately = FALSE;
+static GSettings *settings = NULL;
 
 /* Options */
 static gboolean take_window_shot = FALSE;
@@ -547,21 +546,15 @@ create_interactive_dialog (void)
 }
 
 static void
-save_folder_to_gconf (ScreenshotDialog *dialog)
+save_folder_to_settings (ScreenshotDialog *dialog)
 {
-  GConfClient *gconf_client;
   char *folder;
 
-  gconf_client = gconf_client_get_default ();
-
   folder = screenshot_dialog_get_folder (dialog);
-  /* Error is NULL, as there's nothing we can do */
-  gconf_client_set_string (gconf_client,
-			   LAST_SAVE_DIRECTORY_KEY, folder,
-                           NULL);
+  g_settings_set_string (settings,
+                         LAST_SAVE_DIRECTORY_KEY, folder);
 
   g_free (folder);
-  g_object_unref (gconf_client);
 }
 
 static void
@@ -625,7 +618,7 @@ save_callback (TransferResult result,
 
   if (result == TRANSFER_OK)
     {
-      save_folder_to_gconf (dialog);
+      save_folder_to_settings (dialog);
       set_recent_entry (dialog);
       gtk_widget_destroy (toplevel);
       
@@ -1123,20 +1116,19 @@ prepare_screenshot_timeout (gpointer data)
 static gchar *
 get_desktop_dir (void)
 {
-  GConfClient *gconf_client;
+  GSettings *nautilus_prefs;
   gboolean desktop_is_home_dir = FALSE;
   gchar *desktop_dir;
 
-  gconf_client = gconf_client_get_default ();
-  desktop_is_home_dir = gconf_client_get_bool (gconf_client,
-                                               "/apps/nautilus/preferences/desktop_is_home_dir",
-                                               NULL);
+  nautilus_prefs = g_settings_new ("org.gnome.nautilus.preferences");
+  desktop_is_home_dir = g_settings_get_boolean (nautilus_prefs, "desktop-is-home-dir");
+
   if (desktop_is_home_dir)
     desktop_dir = g_strconcat ("file://", g_get_home_dir (), NULL);
   else
     desktop_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP), NULL);
 
-  g_object_unref (gconf_client);
+  g_object_unref (nautilus_prefs);
 
   return desktop_dir;
 }
@@ -1175,14 +1167,9 @@ expand_initial_tilde (const char *path)
 static void
 load_options (void)
 {
-  GConfClient *gconf_client;
-
-  gconf_client = gconf_client_get_default ();
-
   /* Find various dirs */
-  last_save_dir = gconf_client_get_string (gconf_client,
-                                           LAST_SAVE_DIRECTORY_KEY,
-                                           NULL);
+  last_save_dir = g_settings_get_string (settings,
+                                         LAST_SAVE_DIRECTORY_KEY);
   if (!last_save_dir || !last_save_dir[0])
     {
       last_save_dir = get_desktop_dir ();
@@ -1194,46 +1181,30 @@ load_options (void)
       last_save_dir = tmp;
     }
 
-  include_border = gconf_client_get_bool (gconf_client,
-                                          INCLUDE_BORDER_KEY,
-                                          NULL);
+  include_border = g_settings_get_boolean (settings,
+                                           INCLUDE_BORDER_KEY);
 
-  include_pointer = gconf_client_get_bool (gconf_client,
-                                          INCLUDE_POINTER_KEY,
-                                          NULL);
+  include_pointer = g_settings_get_boolean (settings,
+                                            INCLUDE_POINTER_KEY);
 
-  border_effect = gconf_client_get_string (gconf_client,
-                                           BORDER_EFFECT_KEY,
-                                           NULL);
+  border_effect = g_settings_get_string (settings,
+                                         BORDER_EFFECT_KEY);
   if (!border_effect)
     border_effect = g_strdup ("none");
 
-  delay = gconf_client_get_int (gconf_client, DELAY_KEY, NULL);
-
-  g_object_unref (gconf_client);
+  delay = g_settings_get_int (settings, DELAY_KEY);
 }
 
 static void
 save_options (void)
 {
-  GConfClient *gconf_client;
-
-  gconf_client = gconf_client_get_default ();
-
-  /* Error is NULL, as there's nothing we can do */
-
-  gconf_client_set_bool (gconf_client,
-                         INCLUDE_BORDER_KEY, include_border,
-                         NULL);
-  gconf_client_set_bool (gconf_client,
-                         INCLUDE_POINTER_KEY, include_pointer,
-                         NULL);
-  gconf_client_set_int (gconf_client, DELAY_KEY, delay, NULL);
-  gconf_client_set_string (gconf_client,
-                           BORDER_EFFECT_KEY, border_effect,
-                           NULL);
- 
-  g_object_unref (gconf_client);
+  g_settings_set_boolean (settings,
+                          INCLUDE_BORDER_KEY, include_border);
+  g_settings_set_boolean (settings,
+                          INCLUDE_POINTER_KEY, include_pointer);
+  g_settings_set_int (settings, DELAY_KEY, delay);
+  g_settings_set_string (settings,
+                         BORDER_EFFECT_KEY, border_effect);
 }
 
 
@@ -1324,6 +1295,7 @@ main (int argc, char *argv[])
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
 
+  settings = g_settings_new ("org.gnome.gnome-screenshot");
   load_options ();
   /* allow the command line to override options */
   if (window_arg)

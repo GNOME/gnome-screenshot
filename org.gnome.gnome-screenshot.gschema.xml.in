@@ -1,0 +1,34 @@
+<schemalist gettext-domain="gnome-utils-2.0">
+  <schema id="org.gnome.gnome-screenshot" path="/apps/gnome-screenshot/">
+    <key name="take-window-shot" type="b">
+      <default>false</default>
+      <_summary>Window-specific screenshot (deprecated)</_summary>
+      <_description>Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use.</_description>
+    </key>
+    <key name="delay" type="i">
+      <default>0</default>
+      <_summary>Screenshot delay</_summary>
+      <_description>The number of seconds to wait before taking the screenshot.</_description>
+    </key>
+    <key name="last-save-directory" type="s">
+      <default>''</default>
+      <_summary>Screenshot directory</_summary>
+      <_description>The directory the last screenshot was saved in.</_description>
+    </key>
+    <key name="include-border" type="b">
+      <default>true</default>
+      <_summary>Include Border</_summary>
+      <_description>Include the window manager border along with the screenshot</_description>
+    </key>
+    <key name="include-pointer" type="b">
+      <default>true</default>
+      <_summary>Include Pointer</_summary>
+      <_description>Include the pointer in the screenshot</_description>
+    </key>
+    <key name="border-effect" type="s">
+      <default>'none'</default>
+      <_summary>Border Effect</_summary>
+      <_description>Effect to add to the outside of a border.  Possible values are "shadow", "none", and "border".</_description>
+    </key>
+  </schema>
+</schemalist>

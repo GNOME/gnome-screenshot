@@ -31,7 +31,6 @@ gnome_screenshot_CFLAGS =		\
 	$(LIBCANBERRA_GTK_CFLAGS)	\
 	$(GTHREAD_CFLAGS)		\
 	$(GTK_CFLAGS)			\
-	$(GCONF_CFLAGS)			\
 	$(NULL)
 
 gnome_screenshot_LDFLAGS = -export-dynamic
@@ -43,7 +42,6 @@ gnome_screenshot_LDADD =		\
 	$(LIBCANBERRA_GTK_LIBS)		\
 	$(GTHREAD_LIBS)			\
 	$(GTK_LIBS)			\
-	$(GCONF_LIBS)			\
 	-lm				\
 	$(NULL)
 
@@ -59,35 +57,27 @@ ui_DATA =					\
 	gnome-screenshot.ui			\
 	$(NULL)
 
+gsettingsschema_in_files = org.gnome.gnome-screenshot.gschema.xml.in
+gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
+.PRECIOUS: $(gsettings_SCHEMAS)
+
+convertdir = $(datadir)/GConf/gsettings
+convert_DATA = gnome-screenshot.convert
+
+@INTLTOOL_XML_NOMERGE_RULE@
+
+@GSETTINGS_RULES@
+
 EXTRA_DIST =					\
-	$(schemas_in_files)			\
+	$(gsettingsschema_in_files)		\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
 	$(ui_DATA)				\
 	$(NULL)
 
-schemasdir       = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files =				\
-	gnome-screenshot.schemas.in		\
-	$(NULL)
-schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
-
-@INTLTOOL_SCHEMAS_RULE@
-
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	if test -z "$(DESTDIR)" ; then \
-		for p in $(schemas_DATA) ; do \
-			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/gnome-screenshot/$$p ; \
-		done ; \
-	fi
-else
-install-data-local:
-endif
-
 CLEANFILES = \
 	$(BUILT_SOURCES)			 \
-	$(schemas_in_files:.schemas.in=.schemas) \
+	$(gsettings_SCHEMAS)			 \
 	$(gnome_screenshot_DATA)		 \
 	$(sys_DATA)
 
