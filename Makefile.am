@@ -73,6 +73,7 @@ EXTRA_DIST =					\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
 	$(ui_DATA)				\
+	$(convert_DATA)				\
 	$(NULL)
 
 CLEANFILES = \
