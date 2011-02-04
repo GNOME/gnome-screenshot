@@ -21,7 +21,7 @@
 #include "config.h"
 #include "screenshot-utils.h"
 
-#include <gdk/gdkx.h>
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -252,46 +252,64 @@ screenshot_find_current_window ()
   return current_window;
 }
 
-static void
-select_area_button_press (XKeyEvent    *event,
-                          GdkRectangle *rect,
-                          GdkRectangle *draw_rect)
-{
-  rect->x = event->x_root;
-  rect->y = event->y_root;
+typedef struct {
+  GdkRectangle  rect;
+  gboolean      button_pressed;
+  GtkWidget    *window;
+} select_area_filter_data;
 
-  draw_rect->x = rect->x;
-  draw_rect->y = rect->y;
-  draw_rect->width  = 0;
-  draw_rect->height = 0;
+static gboolean
+select_area_button_press (GtkWidget               *window,
+                          GdkEventButton          *event,
+                          select_area_filter_data *data)
+{
+  if (data->button_pressed)
+    return TRUE;
+
+  data->button_pressed = TRUE;
+  data->rect.x = event->x_root;
+  data->rect.y = event->y_root;
+
+  return TRUE;
 }
 
-static void
-select_area_update_rect (GtkWidget    *window,
-                         GdkRectangle *rect)
+static gboolean
+select_area_motion_notify (GtkWidget               *window,
+                           GdkEventMotion          *event,
+                           select_area_filter_data *data)
 {
-  if (rect->width <= 0 || rect->height <= 0)
+  GdkRectangle draw_rect;
+
+  if (!data->button_pressed)
+    return TRUE;
+
+  draw_rect.width = ABS (data->rect.x - event->x_root);
+  draw_rect.height = ABS (data->rect.y - event->y_root);
+  draw_rect.x = MIN (data->rect.x, event->x_root);
+  draw_rect.y = MIN (data->rect.y, event->y_root);
+
+  if (draw_rect.width <= 0 || draw_rect.height <= 0)
     {
-      gtk_widget_hide (window);
-      return;
+      gtk_window_move (GTK_WINDOW (window), -100, -100);
+      gtk_window_resize (GTK_WINDOW (window), 10, 10);
+      return TRUE;
     }
 
-  gtk_window_move (GTK_WINDOW (window), rect->x, rect->y);
-  gtk_window_resize (GTK_WINDOW (window), rect->width, rect->height);
-  gtk_widget_show (window);
-  
+  gtk_window_move (GTK_WINDOW (window), draw_rect.x, draw_rect.y);
+  gtk_window_resize (GTK_WINDOW (window), draw_rect.width, draw_rect.height);
+
   /* We (ab)use app-paintable to indicate if we have an RGBA window */
   if (!gtk_widget_get_app_paintable (window))
     {
       GdkWindow *gdkwindow = gtk_widget_get_window (window);
 
       /* Shape the window to make only the outline visible */
-      if (rect->width > 2 && rect->height > 2)
+      if (draw_rect.width > 2 && draw_rect.height > 2)
         {
-          cairo_region_t *region, *region2;
+          cairo_region_t *region;
           cairo_rectangle_int_t region_rect = {
             0, 0,
-            rect->width - 2, rect->height - 2
+            draw_rect.width, draw_rect.height
           };
 
           region = cairo_region_create_rectangle (&region_rect);
@@ -299,55 +317,53 @@ select_area_update_rect (GtkWidget    *window,
           region_rect.y++;
           region_rect.width -= 2;
           region_rect.height -= 2;
-          region2 = cairo_region_create_rectangle (&region_rect);
-          cairo_region_subtract (region, region2);
+          cairo_region_subtract_rectangle (region, &region_rect);
 
           gdk_window_shape_combine_region (gdkwindow, region, 0, 0);
 
           cairo_region_destroy (region);
-          cairo_region_destroy (region2);
         }
       else
         gdk_window_shape_combine_region (gdkwindow, NULL, 0, 0);
     }
+
+  return TRUE;
 }
 
-static void
-select_area_button_release (XKeyEvent    *event,
-                            GdkRectangle *rect,
-                            GdkRectangle *draw_rect,
-                            GtkWidget    *window)
+static gboolean
+select_area_button_release (GtkWidget               *window,
+                            GdkEventButton          *event,
+                            select_area_filter_data *data)
 {
-  gtk_widget_hide (window);
+  if (!data->button_pressed)
+    return TRUE;
 
-  rect->width  = ABS (rect->x - event->x_root);
-  rect->height = ABS (rect->y - event->y_root);
+  data->rect.width  = ABS (data->rect.x - event->x_root);
+  data->rect.height = ABS (data->rect.y - event->y_root);
+  data->rect.x = MIN (data->rect.x, event->x_root);
+  data->rect.y = MIN (data->rect.y, event->y_root);
+  
+  gtk_main_quit ();
 
-  rect->x = MIN (rect->x, event->x_root);
-  rect->y = MIN (rect->y, event->y_root);
+  return TRUE;
 }
 
-static void
-select_area_motion_notify (XKeyEvent    *event,
-                           GdkRectangle *rect,
-                           GdkRectangle *draw_rect,
-                           GtkWidget    *window)
+static gboolean
+select_area_key_press (GtkWidget               *window,
+                       GdkEventKey             *event,
+                       select_area_filter_data *data)
 {
-  draw_rect->width  = ABS (rect->x - event->x_root);
-  draw_rect->height = ABS (rect->y - event->y_root);
-
-  draw_rect->x = MIN (rect->x, event->x_root);
-  draw_rect->y = MIN (rect->y, event->y_root);
-
-  select_area_update_rect (window, draw_rect);
+  if (event->keyval == GDK_KEY_Escape)
+    {
+      data->rect.x = 0;
+      data->rect.y = 0;
+      data->rect.width  = 0;
+      data->rect.height = 0;
+      gtk_main_quit ();
+    }
+ 
+  return TRUE;
 }
-
-typedef struct {
-  GdkRectangle  rect;
-  GdkRectangle  draw_rect;
-  gboolean      button_pressed;
-  GtkWidget    *window;
-} select_area_filter_data;
 
 static gboolean
 select_window_draw (GtkWidget *window, cairo_t *cr, gpointer unused)
@@ -404,58 +420,11 @@ create_select_window (void)
 
   g_signal_connect (window, "draw", G_CALLBACK (select_window_draw), NULL);
 
+  gtk_window_move (GTK_WINDOW (window), -100, -100);
+  gtk_window_resize (GTK_WINDOW (window), 10, 10);
+  gtk_widget_show (window);
+  
   return window;
-}
-
-static GdkFilterReturn
-select_area_filter (GdkXEvent *gdk_xevent,
-                    GdkEvent  *event,
-                    gpointer   user_data)
-{
-  select_area_filter_data *data = user_data;
-  XEvent *xevent = (XEvent *) gdk_xevent;
-
-  switch (xevent->type)
-    {
-    case ButtonPress:
-      if (!data->button_pressed)
-        {
-          select_area_button_press (&xevent->xkey,
-                                    &data->rect, &data->draw_rect);
-          data->button_pressed = TRUE;
-        }
-      return GDK_FILTER_REMOVE;
-    case ButtonRelease:
-      if (data->button_pressed)
-      {
-        select_area_button_release (&xevent->xkey,
-                                    &data->rect, &data->draw_rect,
-                                    data->window);
-        gtk_main_quit ();
-      }
-      return GDK_FILTER_REMOVE;
-    case MotionNotify:
-      if (data->button_pressed)
-        select_area_motion_notify (&xevent->xkey,
-                                   &data->rect, &data->draw_rect,
-                                   data->window);
-      return GDK_FILTER_REMOVE;
-    case KeyPress:
-      if (xevent->xkey.keycode == XKeysymToKeycode (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XK_Escape))
-        {
-          data->rect.x = 0;
-          data->rect.y = 0;
-          data->rect.width  = 0;
-          data->rect.height = 0;
-          gtk_main_quit ();
-          return GDK_FILTER_REMOVE;
-        }
-      break;
-    default:
-      break;
-    }
- 
-  return GDK_FILTER_CONTINUE;
 }
 
 gboolean
@@ -464,32 +433,8 @@ screenshot_select_area (int *px,
                         int *pwidth,
                         int *pheight)
 {
-  GdkWindow               *root;
   GdkCursor               *cursor;
   select_area_filter_data  data;
-
-  root = gdk_get_default_root_window ();
-  cursor = gdk_cursor_new (GDK_CROSSHAIR);
-
-  if (gdk_pointer_grab (root, FALSE,
-                        GDK_POINTER_MOTION_MASK|GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK,
-                        NULL, cursor,
-                        GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
-    {
-      gdk_cursor_unref (cursor);
-      return FALSE;
-    }
-
-  if (gdk_keyboard_grab (root, FALSE, GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
-    {
-      gdk_pointer_ungrab (GDK_CURRENT_TIME);
-      gdk_cursor_unref (cursor);
-      return FALSE;
-    }
-
-  gdk_window_add_filter (root, (GdkFilterFunc) select_area_filter, &data);
-
-  gdk_flush ();
 
   data.rect.x = 0;
   data.rect.y = 0;
@@ -498,14 +443,37 @@ screenshot_select_area (int *px,
   data.button_pressed = FALSE;
   data.window = create_select_window();
 
+  g_signal_connect (data.window, "key-press-event", G_CALLBACK (select_area_key_press), &data);
+  g_signal_connect (data.window, "button-press-event", G_CALLBACK (select_area_button_press), &data);
+  g_signal_connect (data.window, "button-release-event", G_CALLBACK (select_area_button_release), &data);
+  g_signal_connect (data.window, "motion-notify-event", G_CALLBACK (select_area_motion_notify), &data);
+
+  cursor = gdk_cursor_new (GDK_CROSSHAIR);
+
+  if (gdk_pointer_grab (gtk_widget_get_window (data.window), FALSE,
+                        GDK_POINTER_MOTION_MASK|GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK,
+                        NULL, cursor,
+                        GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
+    {
+      gdk_cursor_unref (cursor);
+      return FALSE;
+    }
+
+  if (gdk_keyboard_grab (gtk_widget_get_window (data.window), FALSE, GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
+    {
+      gdk_pointer_ungrab (GDK_CURRENT_TIME);
+      gdk_cursor_unref (cursor);
+      return FALSE;
+    }
+
+  gdk_flush ();
+
   gtk_main ();
-
-  gdk_window_remove_filter (root, (GdkFilterFunc) select_area_filter, &data);
-
-  gtk_widget_destroy (data.window);
 
   gdk_keyboard_ungrab (GDK_CURRENT_TIME);
   gdk_pointer_ungrab (GDK_CURRENT_TIME);
+
+  gtk_widget_destroy (data.window);
   gdk_cursor_unref (cursor);
 
   *px = data.rect.x;
