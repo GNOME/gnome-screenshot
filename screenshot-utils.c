@@ -466,8 +466,6 @@ screenshot_select_area (int *px,
       return FALSE;
     }
 
-  gdk_flush ();
-
   gtk_main ();
 
   gdk_keyboard_ungrab (GDK_CURRENT_TIME);
@@ -475,6 +473,8 @@ screenshot_select_area (int *px,
 
   gtk_widget_destroy (data.window);
   gdk_cursor_unref (cursor);
+
+  gdk_flush ();
 
   *px = data.rect.x;
   *py = data.rect.y;
