@@ -23,7 +23,6 @@
 
 #include "screenshot-dialog.h"
 #include "screenshot-save.h"
-#include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
@@ -50,19 +49,6 @@ struct ScreenshotDialog
   gint drag_x;
   gint drag_y;
 };
-
-static gboolean
-on_toplevel_key_press_event (GtkWidget *widget,
-			     GdkEventKey *key)
-{
-  if (key->keyval == GDK_KEY_F1)
-    {
-      gtk_dialog_response (GTK_DIALOG (widget), GTK_RESPONSE_HELP);
-      return TRUE;
-    }
-
-  return FALSE;
-}
 
 static void
 on_preview_draw (GtkWidget      *drawing_area,
@@ -260,7 +246,6 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 			gdk_pixbuf_get_width (screenshot)/
 			(gfloat) gdk_pixbuf_get_height (screenshot),
 			FALSE);
-  g_signal_connect (toplevel, "key_press_event", G_CALLBACK (on_toplevel_key_press_event), dialog);
   g_signal_connect (preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
   g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
   g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);

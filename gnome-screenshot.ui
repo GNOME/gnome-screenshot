@@ -14,7 +14,6 @@
     <property name="skip_pager_hint">False</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
-    <signal handler="on_toplevel_key_press_event" last_modification_time="Thu, 21 Oct 2004 13:29:25 GMT" name="key_press_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -24,17 +23,6 @@
           <object class="GtkHButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="layout_style">GTK_BUTTONBOX_END</property>
-            <child>
-              <object class="GtkButton" id="help_button">
-                <property name="visible">True</property>
-                <property name="can_default">True</property>
-                <property name="can_focus">True</property>
-                <property name="label">gtk-help</property>
-                <property name="use_stock">True</property>
-                <property name="relief">GTK_RELIEF_NORMAL</property>
-                <property name="focus_on_click">True</property>
-              </object>
-            </child>
             <child>
               <object class="GtkButton" id="copy_button">
                 <property name="visible">True</property>
@@ -46,6 +34,12 @@
                 <property name="focus_on_click">True</property>
                 <accelerator key="C" modifiers="GDK_CONTROL_MASK" signal="activate"/>
               </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+                <property name="secondary">True</property>
+              </packing>
             </child>
             <child>
               <object class="GtkButton" id="cancel_button">
@@ -244,7 +238,6 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-11">help_button</action-widget>
       <action-widget response="-6">cancel_button</action-widget>
       <action-widget response="-5">ok_button</action-widget>
       <action-widget response="1">copy_button</action-widget>
