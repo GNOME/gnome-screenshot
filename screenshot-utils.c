@@ -427,14 +427,30 @@ create_select_window (void)
   return window;
 }
 
-gboolean
-screenshot_select_area (int *px,
-                        int *py,
-                        int *pwidth,
-                        int *pheight)
+typedef struct {
+  GdkRectangle rectangle;
+  SelectAreaCallback callback;
+} CallbackData;
+
+static gboolean
+emit_select_callback_in_idle (gpointer user_data)
+{
+  CallbackData *data = user_data;
+
+  data->callback (&data->rectangle);
+
+  g_slice_free (CallbackData, data);
+
+  return FALSE;
+}
+
+void
+screenshot_select_area_async (SelectAreaCallback callback)
 {
   GdkCursor               *cursor;
   select_area_filter_data  data;
+  GdkRectangle *rectangle;
+  CallbackData *cb_data;
 
   data.rect.x = 0;
   data.rect.y = 0;
@@ -442,6 +458,9 @@ screenshot_select_area (int *px,
   data.rect.height = 0;
   data.button_pressed = FALSE;
   data.window = create_select_window();
+
+  cb_data = g_slice_new0 (CallbackData);
+  cb_data->callback = callback;
 
   g_signal_connect (data.window, "key-press-event", G_CALLBACK (select_area_key_press), &data);
   g_signal_connect (data.window, "button-press-event", G_CALLBACK (select_area_button_press), &data);
@@ -456,14 +475,14 @@ screenshot_select_area (int *px,
                         GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
     {
       gdk_cursor_unref (cursor);
-      return FALSE;
+      goto out;
     }
 
   if (gdk_keyboard_grab (gtk_widget_get_window (data.window), FALSE, GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
     {
       gdk_pointer_ungrab (GDK_CURRENT_TIME);
       gdk_cursor_unref (cursor);
-      return FALSE;
+      goto out;
     }
 
   gtk_main ();
@@ -476,12 +495,14 @@ screenshot_select_area (int *px,
 
   gdk_flush ();
 
-  *px = data.rect.x;
-  *py = data.rect.y;
-  *pwidth  = data.rect.width;
-  *pheight = data.rect.height;
+ out:
+  cb_data->rectangle = data.rect;
 
-  return TRUE;
+  /* FIXME: we should actually be emitting the callback When
+   * the compositor has finished re-drawing, but there seems to be no easy
+   * way to know that.
+   */
+  g_timeout_add (200, emit_select_callback_in_idle, cb_data);
 }
 
 static Window

@@ -858,7 +858,10 @@ async_existence_job_free (AsyncExistenceJob *job)
 
   g_free (job->base_uris[1]);
   g_free (job->base_uris[2]);
-  g_free (job->rectangle);
+
+  if (job->rectangle != NULL)
+    g_slice_free (GdkRectangle, job->rectangle);
+
   g_slice_free (AsyncExistenceJob, job);
 }
 
@@ -1048,35 +1051,11 @@ find_current_window (char **window_title)
   return window;
 }
 
-static GdkRectangle *
-find_rectangle (void)
-{
-  GdkRectangle *rectangle;
-
-  if (!take_area_shot)
-    return NULL;
-
-  rectangle = g_new0 (GdkRectangle, 1);
-  if (screenshot_select_area (&rectangle->x, &rectangle->y,
-                              &rectangle->width, &rectangle->height))
-    {
-      g_assert (rectangle->width >= 0);
-      g_assert (rectangle->height >= 0);
-
-      return rectangle;
-    }
-  else
-    {
-      g_free (rectangle);
-      return NULL;
-    }
-}
-
 static void
-prepare_screenshot (void)
-{
+push_check_file_job (GdkRectangle *rectangle)
+{ 
   AsyncExistenceJob *job;
-  
+
   job = g_slice_new0 (AsyncExistenceJob);
   job->base_uris[0] = last_save_dir;
   /* we'll have to free these two */
@@ -1085,7 +1064,15 @@ prepare_screenshot (void)
   job->iteration = 0;
   job->type = TEST_LAST_DIR;
   job->window = find_current_window (&window_title);
-  job->rectangle = find_rectangle ();
+
+  if (rectangle != NULL)
+    {
+      job->rectangle = g_slice_new0 (GdkRectangle);
+      job->rectangle->x = rectangle->x;
+      job->rectangle->y = rectangle->y;
+      job->rectangle->width = rectangle->width;
+      job->rectangle->height = rectangle->height;
+    }
 
   /* Check if the area selection was cancelled */
   if (job->rectangle &&
@@ -1100,7 +1087,21 @@ prepare_screenshot (void)
                            job,
                            NULL,
                            0, NULL);
-                           
+}
+
+static void
+rectangle_found_cb (GdkRectangle *rectangle)
+{
+  push_check_file_job (rectangle);
+}
+
+static void
+prepare_screenshot (void)
+{
+  if (take_area_shot)
+    screenshot_select_area_async (rectangle_found_cb);
+  else
+    push_check_file_job (NULL);
 }
 
 static gboolean
