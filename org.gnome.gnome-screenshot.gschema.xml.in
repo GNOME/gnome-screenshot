@@ -25,6 +25,11 @@
       <_summary>Include Pointer</_summary>
       <_description>Include the pointer in the screenshot</_description>
     </key>
+    <key name="include-icc-profile" type="b">
+      <default>true</default>
+      <_summary>Include ICC Profile</_summary>
+      <_description>Include the ICC profile of the target in the screenshot file</_description>
+    </key>
     <key name="border-effect" type="s">
       <default>'none'</default>
       <_summary>Border Effect</_summary>

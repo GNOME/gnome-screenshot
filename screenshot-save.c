@@ -29,9 +29,17 @@
 
 static char *parent_dir = NULL;
 static char *tmp_filename = NULL;
+static char *icc_profile_base64 = NULL;
 
 static SaveFunction save_callback = NULL;
 static gpointer save_user_data = NULL;
+
+void
+screenshot_set_icc_profile (const gchar *icc_profile)
+{
+  icc_profile_base64 = g_strdup (icc_profile);
+}
+
 
 /* Strategy for saving:
  *
@@ -74,6 +82,7 @@ clean_up_temporary_dir (gboolean gui_on_error)
       g_free (message);
     }
   g_free (tmp_filename);
+  g_free (icc_profile_base64);
   g_free (parent_dir);
 }
 
@@ -182,6 +191,7 @@ screenshot_save_start (GdkPixbuf    *pixbuf,
 		       gpointer      user_data)
 {
   GPid pid;
+  gboolean ret;
   int parent_exit_notification[2];
   int pipe_from_child[2];
 
@@ -210,10 +220,23 @@ screenshot_save_start (GdkPixbuf    *pixbuf,
       close (parent_exit_notification [1]);
       close (pipe_from_child [0]);
 
-      if (! gdk_pixbuf_save (pixbuf, tmp_filename,
-			     "png", &error,
-			     "tEXt::Software", "gnome-screenshot",
-			     NULL))
+      if (icc_profile_base64 != NULL)
+        {
+          ret = gdk_pixbuf_save (pixbuf, tmp_filename,
+                                 "png", &error,
+                                 "icc-profile", icc_profile_base64,
+                                 "tEXt::Software", "gnome-screenshot",
+                                 NULL);
+        }
+      else
+        {
+          ret = gdk_pixbuf_save (pixbuf, tmp_filename,
+                                 "png", &error,
+                                 "tEXt::Software", "gnome-screenshot",
+                                 NULL);
+        }
+
+      if (!ret)
 	{
 	  if (error && error->message)
 	    write (pipe_from_child[1],

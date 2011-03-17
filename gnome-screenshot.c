@@ -52,6 +52,7 @@
 #define GNOME_SCREENSHOT_SCHEMA "org.gnome.gnome-screenshot"
 #define INCLUDE_BORDER_KEY      "include-border"
 #define INCLUDE_POINTER_KEY     "include-pointer"
+#define INCLUDE_ICC_PROFILE     "include-icc-profile"
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
 #define BORDER_EFFECT_KEY       "border-effect"
 #define DELAY_KEY               "delay"
@@ -102,6 +103,7 @@ static gboolean take_window_shot = FALSE;
 static gboolean take_area_shot = FALSE;
 static gboolean include_border = FALSE;
 static gboolean include_pointer = TRUE;
+static gboolean include_icc_profile = TRUE;
 static char *border_effect = NULL;
 static guint delay = 0;
 
@@ -803,9 +805,72 @@ play_sound_effect (GdkWindow *window)
 
 }
 
+static gchar *
+get_profile_for_window (GdkWindow *window)
+{
+  gboolean ret = FALSE;
+  GDBusConnection *connection;
+  GError *error = NULL;
+  guint xid;
+  gchar *icc_profile = NULL;
+  GVariant *args = NULL;
+  GVariant *response = NULL;
+  GVariant *response_child = NULL;
+  GVariantIter *iter = NULL;
+
+  /* get a session bus connection */
+  connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+  if (connection == NULL)
+    {
+      g_debug ("Failed to connect to session bus: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  /* get color profile */
+  xid = GDK_WINDOW_XID (window);
+  args = g_variant_new ("(u)", xid),
+  response = g_dbus_connection_call_sync (connection,
+                                          "org.gnome.ColorManager",
+                                          "/org/gnome/ColorManager",
+                                          "org.gnome.ColorManager",
+                                          "GetProfileForWindow",
+                                          args,
+                                          G_VARIANT_TYPE ("(s)"),
+                                          G_DBUS_CALL_FLAGS_NONE,
+                                          -1, NULL, &error);
+  if (response == NULL)
+    {
+      /* not a warning, as GCM might not be installed / running */
+      g_debug ("The GetProfileForWindow request failed: %s",
+               error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  /* get icc profile filename */
+  response_child = g_variant_get_child_value (response, 0);
+  icc_profile = g_variant_dup_string (response_child, NULL);
+out:
+  if (iter != NULL)
+    g_variant_iter_free (iter);
+  if (args != NULL)
+    g_variant_unref (args);
+  if (response != NULL)
+    g_variant_unref (response);
+  return icc_profile;
+}
+
 static void
 finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *rectangle)
 {  
+  char *icc_profile_filename;
+  guchar *icc_profile;
+  gsize icc_profile_size;
+  char *icc_profile_base64;
+  gboolean ret;
+  GError *error = NULL;
+
   ScreenshotDialog *dialog;
 
   /* always disable window border for full-desktop or selected-area screenshots */
@@ -844,6 +909,36 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
 
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
   g_free (initial_uri);
+
+  /* load ICC profile */
+  if (include_icc_profile)
+    {
+      icc_profile_filename = get_profile_for_window (window);
+      if (icc_profile_filename != NULL)
+        {
+          ret = g_file_get_contents (icc_profile_filename,
+                                     (gchar **) &icc_profile,
+                                     &icc_profile_size,
+                                     &error);
+          if (ret)
+            {
+              icc_profile_base64 = g_base64_encode (icc_profile,
+                                                    icc_profile_size);
+
+              /* use this profile for saving the image */
+              screenshot_set_icc_profile (icc_profile_base64);
+              g_free (icc_profile);
+              g_free (icc_profile_base64);
+            }
+          else
+            {
+              g_warning ("could not open ICC file: %s",
+                         error->message);
+              g_error_free (error);
+            }
+          g_free (icc_profile_filename);
+        }
+    }
 
   screenshot_save_start (screenshot, save_done_notification, dialog);
 
@@ -1185,6 +1280,9 @@ load_options (void)
   include_border = g_settings_get_boolean (settings,
                                            INCLUDE_BORDER_KEY);
 
+  include_icc_profile = g_settings_get_boolean (settings,
+                                                INCLUDE_ICC_PROFILE);
+
   include_pointer = g_settings_get_boolean (settings,
                                             INCLUDE_POINTER_KEY);
 
@@ -1203,6 +1301,8 @@ save_options (void)
                           INCLUDE_BORDER_KEY, include_border);
   g_settings_set_boolean (settings,
                           INCLUDE_POINTER_KEY, include_pointer);
+  g_settings_set_boolean (settings,
+                          INCLUDE_ICC_PROFILE, include_icc_profile);
   g_settings_set_int (settings, DELAY_KEY, delay);
   g_settings_set_string (settings,
                          BORDER_EFFECT_KEY, border_effect);
