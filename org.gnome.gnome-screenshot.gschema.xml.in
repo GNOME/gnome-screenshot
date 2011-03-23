@@ -1,5 +1,5 @@
 <schemalist gettext-domain="gnome-utils-2.0">
-  <schema id="org.gnome.gnome-screenshot" path="/apps/gnome-screenshot/">
+  <schema id="org.gnome.gnome-screenshot" path="/org/gnome/gnome-screenshot/">
     <key name="take-window-shot" type="b">
       <default>false</default>
       <_summary>Window-specific screenshot (deprecated)</_summary>
