@@ -110,7 +110,7 @@ static guint delay = 0;
 /* some local prototypes */
 static void  display_help           (GtkWindow *parent);
 static void  save_done_notification (gpointer   data);
-static char *get_desktop_dir        (void);
+static char *get_screenshot_dir     (void);
 static void  save_options           (void);
 
 static GtkWidget *border_check = NULL;
@@ -1144,7 +1144,7 @@ push_check_file_job (GdkRectangle *rectangle)
   job = g_slice_new0 (AsyncExistenceJob);
   job->base_uris[0] = last_save_dir;
   /* we'll have to free these two */
-  job->base_uris[1] = get_desktop_dir ();
+  job->base_uris[1] = get_screenshot_dir ();
   job->base_uris[2] = g_strconcat ("file://", g_get_tmp_dir (), NULL);
   job->iteration = 0;
   job->type = TEST_LAST_DIR;
@@ -1200,23 +1200,13 @@ prepare_screenshot_timeout (gpointer data)
 
 
 static gchar *
-get_desktop_dir (void)
+get_screenshot_dir (void)
 {
-  GSettings *nautilus_prefs;
-  gboolean desktop_is_home_dir = FALSE;
-  gchar *desktop_dir;
+  gchar *shot_dir;
 
-  nautilus_prefs = g_settings_new ("org.gnome.nautilus.preferences");
-  desktop_is_home_dir = g_settings_get_boolean (nautilus_prefs, "desktop-is-home-dir");
+  shot_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_PICTURES), NULL);
 
-  if (desktop_is_home_dir)
-    desktop_dir = g_strconcat ("file://", g_get_home_dir (), NULL);
-  else
-    desktop_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP), NULL);
-
-  g_object_unref (nautilus_prefs);
-
-  return desktop_dir;
+  return shot_dir;
 }
 
 /* Taken from gnome-vfs-utils.c */
@@ -1258,7 +1248,7 @@ load_options (void)
                                          LAST_SAVE_DIRECTORY_KEY);
   if (!last_save_dir || !last_save_dir[0])
     {
-      last_save_dir = get_desktop_dir ();
+      last_save_dir = get_screenshot_dir ();
     }
   else if (last_save_dir[0] == '~')
     {
