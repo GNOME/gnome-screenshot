@@ -186,7 +186,7 @@
                         <property name="has_frame">True</property>
                         <property name="invisible_char" translatable="yes">*</property>
                         <property name="activates_default">True</property>
-                        <property name="width_chars">24</property>
+                        <property name="width_chars">32</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
