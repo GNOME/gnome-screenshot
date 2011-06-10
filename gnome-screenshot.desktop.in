@@ -1,5 +1,5 @@
 [Desktop Entry]
-_Name=Take Screenshot
+_Name=Screenshot
 _Comment=Save images of your desktop or individual windows
 Exec=gnome-screenshot --interactive
 Terminal=false
