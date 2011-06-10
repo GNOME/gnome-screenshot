@@ -986,40 +986,18 @@ build_uri (AsyncExistenceJob *job)
   timestamp = g_date_time_format (d, _("%Y-%m-%d %H:%M:%S"));
   g_date_time_unref (d);
 
-  if (window_title)
+  if (job->iteration == 0)
     {
       /* translators: this is the name of the file that gets made up
-       * with the screenshot if a specific window is taken */
-      if (job->iteration == 0)
-        {
-          file_name = g_strdup_printf (_("Screenshot %s - %s.png"), timestamp, window_title);
-        }
-      else
-        {
-          /* translators: this is the name of the file that gets
-           * made up with the screenshot if a specific window is
-           * taken */
-          file_name = g_strdup_printf (_("Screenshot %s - %s-%d.png"),
-                                       timestamp,
-                                       window_title,
-                                       job->iteration);
-        }
+       * with the screenshot if the entire screen is taken */
+      file_name = g_strdup_printf (_("Screenshot at %s.png"), timestamp);
     }
   else
     {
-      if (job->iteration == 0)
-        {
-          /* translators: this is the name of the file that gets made up
-           * with the screenshot if the entire screen is taken */
-          file_name = g_strdup_printf (_("Screenshot %s.png"), timestamp);
-        }
-      else
-        {
-          /* translators: this is the name of the file that gets
-           * made up with the screenshot if the entire screen is
-           * taken */
-          file_name = g_strdup_printf (_("Screenshot %s - %d.png"), timestamp, job->iteration);
-        }
+      /* translators: this is the name of the file that gets
+       * made up with the screenshot if the entire screen is
+       * taken */
+      file_name = g_strdup_printf (_("Screenshot at %s - %d.png"), timestamp, job->iteration);
     }
 
   retval = g_build_filename (job->base_uris[job->type], file_name, NULL);
