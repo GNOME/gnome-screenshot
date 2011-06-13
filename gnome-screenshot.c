@@ -1432,8 +1432,17 @@ main (int argc, char *argv[])
     }
   else
     {
-      /* start this in an idle anyway and fire up the mainloop */
-      g_idle_add (prepare_screenshot_timeout, NULL);
+      if (interactive_arg)
+        {
+          /* HACK: give time to the dialog to actually disappear.
+           * We don't have any way to tell when the compositor has finished 
+           * re-drawing.
+           */
+          g_timeout_add (200,
+                         prepare_screenshot_timeout, NULL);
+        }
+      else
+        g_idle_add (prepare_screenshot_timeout, NULL);
     }
 
   gtk_main ();
