@@ -35,13 +35,13 @@
 #endif /* GDK_WINDOWING_X11 */
 
 /* How long to hold the flash for */
-#define FLASH_DURATION 250
+#define FLASH_DURATION 150
 
 /* The factor which defines how much the flash fades per frame */
 #define FLASH_FADE_FACTOR 0.95
 
 /* How many frames per second */
-#define FLASH_ANIMATION_RATE 50
+#define FLASH_ANIMATION_RATE 120
 
 /* When to consider the flash finished so we can stop fading */
 #define FLASH_LOW_THRESHOLD 0.01
