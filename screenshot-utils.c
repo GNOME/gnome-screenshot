@@ -650,6 +650,60 @@ mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
   cairo_region_destroy (invisible_region);
 }
 
+void
+screenshot_get_window_rect (GdkWindow *window,
+                            GdkRectangle *rect)
+{
+  gint x_real_orig, y_real_orig, x_orig, y_orig;
+  gint width, real_width, height, real_height;
+
+  /* If the screenshot should include the border, we look for the WM window. */
+
+  if (window != gdk_get_default_root_window ())
+    {
+      Window xid, wm;
+
+      xid = GDK_WINDOW_XID (window);
+      wm = find_wm_window (xid);
+
+      if (wm != None)
+        window = gdk_x11_window_foreign_new_for_display (gdk_window_get_display (window), wm);
+      /* fallback to no border if we can't find the WM window. */
+    }
+
+  real_width = gdk_window_get_width (window);
+  real_height = gdk_window_get_height (window);
+  gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
+
+  x_orig = x_real_orig;
+  y_orig = y_real_orig;
+  width  = real_width;
+  height = real_height;
+
+  if (x_orig < 0)
+    {
+      width = width + x_orig;
+      x_orig = 0;
+    }
+
+  if (y_orig < 0)
+    {
+      height = height + y_orig;
+      y_orig = 0;
+    }
+
+  if (x_orig + width > gdk_screen_width ())
+    width = gdk_screen_width () - x_orig;
+
+  if (y_orig + height > gdk_screen_height ())
+    height = gdk_screen_height () - y_orig;
+
+  rect->x = x_orig;
+  rect->y = y_orig;
+  rect->width = width;
+  rect->height = height;
+}
+
 GdkPixbuf *
 screenshot_get_pixbuf (GdkWindow    *window,
                        GdkRectangle *rectangle,

@@ -46,6 +46,7 @@
 #include "screenshot-save.h"
 #include "screenshot-dialog.h"
 #include "screenshot-xfer.h"
+#include "cheese-flash.h"
 
 #define SCREENSHOOTER_ICON "applets-screenshooter"
 
@@ -97,6 +98,7 @@ static char *window_title = NULL;
 static char *temporary_file = NULL;
 static gboolean save_immediately = FALSE;
 static GSettings *settings = NULL;
+static CheeseFlash *flash = NULL;
 
 /* Options */
 static gboolean take_window_shot = FALSE;
@@ -870,7 +872,7 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
   char *icc_profile_base64;
   gboolean ret;
   GError *error = NULL;
-
+  GdkRectangle rect;
   ScreenshotDialog *dialog;
 
   /* always disable window border for full-desktop or selected-area screenshots */
@@ -905,6 +907,14 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
       exit (1);
     }
 
+  flash = cheese_flash_new ();
+
+  if (rectangle != NULL)
+    rect = *rectangle;
+  else
+    screenshot_get_window_rect (window, &rect);
+
+  cheese_flash_fire (flash, &rect);
   play_sound_effect (window);
 
   dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
@@ -1446,6 +1456,9 @@ main (int argc, char *argv[])
     }
 
   gtk_main ();
+
+  if (flash != NULL)
+    g_object_unref (flash);
 
   return EXIT_SUCCESS;
 }
