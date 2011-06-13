@@ -316,7 +316,7 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
   gchar *uri, *file, *tmp;
   GError *error;
 
-  folder = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
 
   error = NULL;
@@ -344,7 +344,7 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
 char *
 screenshot_dialog_get_folder (ScreenshotDialog *dialog)
 {
-  return gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
 }
 
 GdkPixbuf *
