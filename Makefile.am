@@ -23,8 +23,6 @@ gnome_screenshot_SOURCES = \
 	screenshot-utils.h		\
 	screenshot-save.c		\
 	screenshot-save.h		\
-	screenshot-xfer.c		\
-	screenshot-xfer.h		\
 	$(NULL)
 
 gnome_screenshot_CFLAGS =		\

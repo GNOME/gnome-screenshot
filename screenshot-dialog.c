@@ -311,12 +311,32 @@ screenshot_dialog_get_toplevel (ScreenshotDialog *dialog)
 char *
 screenshot_dialog_get_uri (ScreenshotDialog *dialog)
 {
-  gchar *folder;
-  const gchar *file_name;
-  gchar *uri, *file, *tmp;
-  GError *error;
+  gchar *folder, *file;
+  gchar *uri;
 
   folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  file = screenshot_dialog_get_filename (dialog);
+  uri = g_build_filename (folder, file, NULL);
+
+  g_free (folder);
+  g_free (file);
+
+  return uri;
+}
+
+char *
+screenshot_dialog_get_folder (ScreenshotDialog *dialog)
+{
+  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+}
+
+char *
+screenshot_dialog_get_filename (ScreenshotDialog *dialog)
+{
+  const gchar *file_name;
+  gchar *file, *tmp;
+  GError *error;
+
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
 
   error = NULL;
@@ -332,19 +352,10 @@ screenshot_dialog_get_uri (ScreenshotDialog *dialog)
     }
 
   file = g_uri_escape_string (tmp, NULL, FALSE);
-  uri = g_build_filename (folder, file, NULL);
 
-  g_free (folder);
   g_free (tmp);
-  g_free (file);
 
-  return uri;
-}
-
-char *
-screenshot_dialog_get_folder (ScreenshotDialog *dialog)
-{
-  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  return file;
 }
 
 GdkPixbuf *
