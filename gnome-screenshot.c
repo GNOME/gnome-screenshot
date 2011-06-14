@@ -101,6 +101,7 @@ static CheeseFlash *flash = NULL;
 static GDBusConnection *connection = NULL;
 
 /* Options */
+static gboolean copy_to_clipboard = FALSE;
 static gboolean take_window_shot = FALSE;
 static gboolean take_area_shot = FALSE;
 static gboolean include_border = FALSE;
@@ -916,42 +917,54 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
   cheese_flash_fire (flash, &rect);
   play_sound_effect (window);
 
-  dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
-  g_free (initial_uri);
-
-  /* load ICC profile */
-  if (include_icc_profile)
+  if (copy_to_clipboard)
     {
-      icc_profile_filename = get_profile_for_window (window);
-      if (icc_profile_filename != NULL)
-        {
-          ret = g_file_get_contents (icc_profile_filename,
-                                     (gchar **) &icc_profile,
-                                     &icc_profile_size,
-                                     &error);
-          if (ret)
-            {
-              icc_profile_base64 = g_base64_encode (icc_profile,
-                                                    icc_profile_size);
+      GtkClipboard *clipboard;
 
-              /* use this profile for saving the image */
-              screenshot_set_icc_profile (icc_profile_base64);
-              g_free (icc_profile);
-              g_free (icc_profile_base64);
-            }
-          else
+      clipboard = gtk_clipboard_get_for_display (gdk_display_get_default (),
+                                                 GDK_SELECTION_CLIPBOARD);
+      gtk_clipboard_set_image (clipboard, screenshot);
+      gtk_main_quit ();
+    }
+  else
+    {
+      /* load ICC profile */
+      if (include_icc_profile)
+        {
+          icc_profile_filename = get_profile_for_window (window);
+          if (icc_profile_filename != NULL)
             {
-              g_warning ("could not open ICC file: %s",
-                         error->message);
-              g_error_free (error);
+              ret = g_file_get_contents (icc_profile_filename,
+                                         (gchar **) &icc_profile,
+                                         &icc_profile_size,
+                                         &error);
+              if (ret)
+                {
+                  icc_profile_base64 = g_base64_encode (icc_profile,
+                                                        icc_profile_size);
+
+                  /* use this profile for saving the image */
+                  screenshot_set_icc_profile (icc_profile_base64);
+                  g_free (icc_profile);
+                  g_free (icc_profile_base64);
+                }
+              else
+                {
+                  g_warning ("could not open ICC file: %s",
+                             error->message);
+                  g_error_free (error);
+                }
+              g_free (icc_profile_filename);
             }
-          g_free (icc_profile_filename);
         }
+      dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
+
+      screenshot_save_start (screenshot, save_done_notification, dialog);
+
+      run_dialog (dialog);
     }
 
-  screenshot_save_start (screenshot, save_done_notification, dialog);
-
-  run_dialog (dialog);
+  g_free (initial_uri);
 }
 
 static void
@@ -1349,6 +1362,7 @@ int
 main (int argc, char *argv[])
 {
   GOptionContext *context;
+  gboolean clipboard_arg = FALSE;
   gboolean window_arg = FALSE;
   gboolean area_arg = FALSE;
   gboolean include_border_arg = FALSE;
@@ -1359,6 +1373,7 @@ main (int argc, char *argv[])
   GError *error = NULL;
 
   const GOptionEntry entries[] = {
+    { "clipboard", 'c', 0, G_OPTION_ARG_NONE, &clipboard_arg, N_("Send the grab directly to the clipboard"), NULL },
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
     { "area", 'a', 0, G_OPTION_ARG_NONE, &area_arg, N_("Grab an area of the screen instead of the entire screen"), NULL },
     { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
@@ -1427,6 +1442,9 @@ main (int argc, char *argv[])
 
   if (delay_arg > 0)
     delay = delay_arg;
+
+  if (clipboard_arg)
+    copy_to_clipboard = TRUE;
 
   /* interactive mode overrides everything */
   if (interactive_arg)
