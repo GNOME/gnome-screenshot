@@ -197,7 +197,7 @@ cheese_flash_fire (CheeseFlash  *flash,
   gtk_window_resize (flash_window, rect->width, rect->height);
   gtk_window_move (flash_window, rect->x, rect->y);
 
-  gtk_window_set_opacity (flash_window, 1);
+  gtk_window_set_opacity (flash_window, 0.99);
   gtk_widget_show_all (GTK_WIDGET (flash_window));
   flash_priv->flash_timeout_tag = g_timeout_add (FLASH_DURATION, cheese_flash_start_fade, (gpointer) flash);
 }
