@@ -731,7 +731,8 @@ GdkPixbuf *
 screenshot_get_pixbuf (GdkWindow    *window,
                        GdkRectangle *rectangle,
                        gboolean      include_pointer,
-                       gboolean      include_border)
+                       gboolean      include_border,
+                       gboolean      include_mask)
 {
   GdkWindow *root;
   GdkPixbuf *screenshot;
@@ -763,7 +764,8 @@ screenshot_get_pixbuf (GdkWindow    *window,
                                            x_orig, y_orig,
                                            width, height);
 
-  mask_monitors (screenshot, root);
+  if (include_mask)
+    mask_monitors (screenshot, root);
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
   if (include_border)

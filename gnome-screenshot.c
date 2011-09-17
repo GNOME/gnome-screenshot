@@ -874,13 +874,14 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
   GError *error = NULL;
   GdkRectangle rect;
   ScreenshotDialog *dialog;
+  gboolean include_mask = (!take_window_shot && !take_area_shot);
 
   /* always disable window border for full-desktop or selected-area screenshots */
   if (!take_window_shot)
-    screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, FALSE);
+    screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, FALSE, include_mask);
   else
     {
-      screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, include_border);
+      screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, include_border, include_mask);
 
       switch (border_effect[0])
         {

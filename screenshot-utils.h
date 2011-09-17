@@ -37,7 +37,8 @@ void       screenshot_select_area_async   (SelectAreaCallback callback);
 GdkPixbuf *screenshot_get_pixbuf          (GdkWindow *win,
                                            GdkRectangle *rectangle,
                                            gboolean include_pointer,
-                                           gboolean include_border);
+                                           gboolean include_border,
+                                           gboolean include_mask);
 
 void       screenshot_show_error_dialog   (GtkWindow   *parent,
                                            const gchar *message,
