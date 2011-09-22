@@ -913,7 +913,7 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
   if (rectangle != NULL)
     rect = *rectangle;
   else
-    screenshot_get_window_rect (window, &rect);
+    screenshot_get_window_rect (window, include_border, &rect);
 
   cheese_flash_fire (flash, &rect);
   play_sound_effect (window);

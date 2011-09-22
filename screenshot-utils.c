@@ -506,10 +506,15 @@ screenshot_select_area_async (SelectAreaCallback callback)
 }
 
 static Window
-find_wm_window (Window xid)
+find_wm_window (GdkWindow *window)
 {
-  Window root, parent, *children;
+  Window xid, root, parent, *children;
   unsigned int nchildren;
+
+  if (window == gdk_get_default_root_window ())
+    return None;
+
+  xid = GDK_WINDOW_XID (window);
 
   do
     {
@@ -650,46 +655,35 @@ mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
   cairo_region_destroy (invisible_region);
 }
 
-static GdkWindow *
-screenshot_ensure_wm_window (GdkWindow *window)
-{
-  GdkWindow *retval = window;
-
-  /* If the screenshot should include the border, we look for the WM window. */
-  if (window != gdk_get_default_root_window ())
-    {
-      Window xid, wm;
-
-      xid = GDK_WINDOW_XID (window);
-      wm = find_wm_window (xid);
-
-      if (wm != None)
-        retval = gdk_x11_window_foreign_new_for_display (gdk_window_get_display (window), wm);
-
-      /* fallback to no border if we can't find the WM window. */
-    }
-
-  return retval;
-}
-
 static void
 screenshot_get_window_rect_coords (GdkWindow *window,
-                                   gint *x_orig_out,
-                                   gint *y_orig_out,
-                                   gint *width_out,
-                                   gint *height_out)
+                                   gboolean include_border,
+                                   GdkRectangle *real_coordinates_out,
+                                   GdkRectangle *screenshot_coordinates_out)
 {
-  gint x_real_orig, y_real_orig, x_orig, y_orig;
-  gint width, real_width, height, real_height;
+  gint x_orig, y_orig;
+  gint width, height;
+  GdkRectangle real_coordinates;
 
-  real_width = gdk_window_get_width (window);
-  real_height = gdk_window_get_height (window);
-  gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
+  if (include_border)
+    {
+      gdk_window_get_frame_extents (window, &real_coordinates);
+    }
+  else
+    {
+      real_coordinates.width = gdk_window_get_width (window);
+      real_coordinates.height = gdk_window_get_height (window);
+      
+      gdk_window_get_origin (window, &real_coordinates.x, &real_coordinates.y);
+    }
 
-  x_orig = x_real_orig;
-  y_orig = y_real_orig;
-  width  = real_width;
-  height = real_height;
+  x_orig = real_coordinates.x;
+  y_orig = real_coordinates.y;
+  width  = real_coordinates.width;
+  height = real_coordinates.height;
+
+  if (real_coordinates_out != NULL)
+    *real_coordinates_out = real_coordinates;
 
   if (x_orig < 0)
     {
@@ -709,22 +703,24 @@ screenshot_get_window_rect_coords (GdkWindow *window,
   if (y_orig + height > gdk_screen_height ())
     height = gdk_screen_height () - y_orig;
 
-  *x_orig_out = x_orig;
-  *y_orig_out = y_orig;
-  *width_out = width;
-  *height_out = height;
+  if (screenshot_coordinates_out != NULL)
+    {
+      screenshot_coordinates_out->x = x_orig;
+      screenshot_coordinates_out->y = y_orig;
+      screenshot_coordinates_out->width = width;
+      screenshot_coordinates_out->height = height;
+    }
 }
 
 void
 screenshot_get_window_rect (GdkWindow *window,
+                            gboolean include_border,
                             GdkRectangle *rect)
 {
-  GdkWindow *wm_window;
-
-  wm_window = screenshot_ensure_wm_window (window);
-  screenshot_get_window_rect_coords (wm_window,
-                                     &rect->x, &rect->y,
-                                     &rect->width, &rect->height);
+  screenshot_get_window_rect_coords (window,
+                                     include_border,
+                                     NULL,
+                                     rect);
 }
 
 GdkPixbuf *
@@ -734,41 +730,54 @@ screenshot_get_pixbuf (GdkWindow    *window,
                        gboolean      include_border,
                        gboolean      include_mask)
 {
-  GdkWindow *root;
+  GdkWindow *root, *wm_window = NULL;
   GdkPixbuf *screenshot;
-  gint x_real_orig, y_real_orig, x_orig, y_orig;
-  gint width, real_width, height, real_height;
-
-  if (include_border)
-    window = screenshot_ensure_wm_window (window);
-
-  root = gdk_get_default_root_window ();
-
-  gdk_window_get_origin (window, &x_real_orig, &y_real_orig);
-  real_width = gdk_window_get_width (window);
-  real_height = gdk_window_get_height (window);
+  GdkRectangle real_coords, screenshot_coords;
+  Window wm;
+  GtkBorder frame_offset = { 0, 0, 0, 0 };
 
   screenshot_get_window_rect_coords (window, 
-                                     &x_orig, &y_orig,
-                                     &width, &height);
+                                     include_border,
+                                     &real_coords,
+                                     &screenshot_coords);
+
+  wm = find_wm_window (window);
+  if (wm != None)
+    {
+      GdkRectangle wm_real_coords;
+
+      wm_window = gdk_x11_window_foreign_new_for_display 
+        (gdk_window_get_display (window), wm);
+
+      screenshot_get_window_rect_coords (wm_window,
+                                         FALSE,
+                                         &wm_real_coords,
+                                         NULL);
+
+      frame_offset.left = (gdouble) (real_coords.x - wm_real_coords.x);
+      frame_offset.top = (gdouble) (real_coords.y - wm_real_coords.y);
+      frame_offset.right = (gdouble) (wm_real_coords.width - real_coords.width - frame_offset.left);
+      frame_offset.bottom = (gdouble) (wm_real_coords.height - real_coords.height - frame_offset.top);
+    }
 
   if (rectangle)
     {
-      x_orig = rectangle->x - x_orig;
-      y_orig = rectangle->y - y_orig;
-      width  = rectangle->width;
-      height = rectangle->height;
+      screenshot_coords.x = rectangle->x - screenshot_coords.x;
+      screenshot_coords.y = rectangle->y - screenshot_coords.y;
+      screenshot_coords.width  = rectangle->width;
+      screenshot_coords.height = rectangle->height;
     }
 
+  root = gdk_get_default_root_window ();
   screenshot = gdk_pixbuf_get_from_window (root,
-                                           x_orig, y_orig,
-                                           width, height);
+                                           screenshot_coords.x, screenshot_coords.y,
+                                           screenshot_coords.width, screenshot_coords.height);
 
   if (include_mask)
     mask_monitors (screenshot, root);
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
-  if (include_border)
+  if (include_border && (wm != None))
     {
       XRectangle *rectangles;
       GdkPixbuf *tmp;
@@ -777,17 +786,17 @@ screenshot_get_pixbuf (GdkWindow    *window,
       /* we must use XShape to avoid showing what's under the rounder corners
        * of the WM decoration.
        */
-
       rectangles = XShapeGetRectangles (GDK_DISPLAY_XDISPLAY (gdk_display_get_default()),
-                                        GDK_WINDOW_XID (window),
+                                        wm,
                                         ShapeBounding,
                                         &rectangle_count,
                                         &rectangle_order);
-      if (rectangles && rectangle_count > 0 && window != root)
+      if (rectangles && rectangle_count > 0)
         {
           gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
           
-          tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
+          tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
+                                screenshot_coords.width, screenshot_coords.height);
           gdk_pixbuf_fill (tmp, 0);
           
           for (i = 0; i < rectangle_count; i++)
@@ -796,30 +805,36 @@ screenshot_get_pixbuf (GdkWindow    *window,
               gint rec_width, rec_height;
               gint y;
 
+              /* If we're using invisible borders, the ShapeBounding might not
+               * have the same size as the frame extents, as it would include the
+               * areas for the invisible borders themselves.
+               * In that case, trim every rectangle we get by the offset between the
+               * WM window size and the frame extents.
+               */
               rec_x = rectangles[i].x;
               rec_y = rectangles[i].y;
-              rec_width = rectangles[i].width;
-              rec_height = rectangles[i].height;
+              rec_width = rectangles[i].width - (frame_offset.left + frame_offset.right);
+              rec_height = rectangles[i].height - (frame_offset.top + frame_offset.bottom);
 
-              if (x_real_orig < 0)
+              if (real_coords.x < 0)
                 {
-                  rec_x += x_real_orig;
+                  rec_x += real_coords.x;
                   rec_x = MAX(rec_x, 0);
-                  rec_width += x_real_orig;
+                  rec_width += real_coords.x;
                 }
 
-              if (y_real_orig < 0)
+              if (real_coords.y < 0)
                 {
-                  rec_y += y_real_orig;
+                  rec_y += real_coords.y;
                   rec_y = MAX(rec_y, 0);
-                  rec_height += y_real_orig;
+                  rec_height += real_coords.y;
                 }
 
-              if (x_orig + rec_x + rec_width > gdk_screen_width ())
-                rec_width = gdk_screen_width () - x_orig - rec_x;
+              if (screenshot_coords.x + rec_x + rec_width > gdk_screen_width ())
+                rec_width = gdk_screen_width () - screenshot_coords.x - rec_x;
 
-              if (y_orig + rec_y + rec_height > gdk_screen_height ())
-                rec_height = gdk_screen_height () - y_orig - rec_y;
+              if (screenshot_coords.y + rec_y + rec_height > gdk_screen_height ())
+                rec_height = gdk_screen_height () - screenshot_coords.y - rec_y;
 
               for (y = rec_y; y < rec_y + rec_height; y++)
                 {
@@ -849,6 +864,8 @@ screenshot_get_pixbuf (GdkWindow    *window,
 
           g_object_unref (screenshot);
           screenshot = tmp;
+
+          XFree (rectangles);
         }
     }
 #endif /* HAVE_X11_EXTENSIONS_SHAPE_H */
@@ -865,32 +882,34 @@ screenshot_get_pixbuf (GdkWindow    *window,
 
       if (cursor_pixbuf != NULL) 
         {
-          GdkRectangle r1, r2;
+          GdkRectangle rect;
           gint cx, cy, xhot, yhot;
 
-          gdk_window_get_pointer (window, &cx, &cy, NULL);
+          if (wm_window != NULL)
+            gdk_window_get_pointer (wm_window, &cx, &cy, NULL);
+          else
+            gdk_window_get_pointer (window, &cx, &cy, NULL);
+
           sscanf (gdk_pixbuf_get_option (cursor_pixbuf, "x_hot"), "%d", &xhot);
           sscanf (gdk_pixbuf_get_option (cursor_pixbuf, "y_hot"), "%d", &yhot);
 
-          /* in r1 we have the window coordinates */
-          r1.x = x_real_orig;
-          r1.y = y_real_orig;
-          r1.width = real_width;
-          r1.height = real_height;
-
-          /* in r2 we have the cursor window coordinates */
-          r2.x = cx + x_real_orig;
-          r2.y = cy + y_real_orig;
-          r2.width = gdk_pixbuf_get_width (cursor_pixbuf);
-          r2.height = gdk_pixbuf_get_height (cursor_pixbuf);
+          /* in rect we have the cursor window coordinates */
+          rect.x = cx + real_coords.x;
+          rect.y = cy + real_coords.y;
+          rect.width = gdk_pixbuf_get_width (cursor_pixbuf);
+          rect.height = gdk_pixbuf_get_height (cursor_pixbuf);
 
           /* see if the pointer is inside the window */
-          if (gdk_rectangle_intersect (&r1, &r2, &r2)) 
+          if (gdk_rectangle_intersect (&real_coords, &rect, &rect)) 
             {
+              gint cursor_x, cursor_y;
+
+              cursor_x = cx - xhot - frame_offset.left;
+              cursor_y = cy - yhot - frame_offset.top;
               gdk_pixbuf_composite (cursor_pixbuf, screenshot,
-                                    cx - xhot, cy - yhot,
-                                    r2.width, r2.height,
-                                    cx - xhot, cy - yhot,
+                                    cursor_x, cursor_y,
+                                    rect.width, rect.height,
+                                    cursor_x, cursor_y,
                                     1.0, 1.0, 
                                     GDK_INTERP_BILINEAR,
                                     255);
