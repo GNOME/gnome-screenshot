@@ -693,7 +693,7 @@ screenshot_display_help (GtkWindow *parent)
   GError *error = NULL;
 
   gtk_show_uri (gtk_window_get_screen (parent),
-		"ghelp:user-guide#goseditmainmenu-53",
+		"help:gnome-help/screen-shot-record",
 		gtk_get_current_event_time (), &error);
 
   if (error)
