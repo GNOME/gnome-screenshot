@@ -562,14 +562,16 @@ screenshot_get_pixbuf (GdkWindow    *window,
                        GdkRectangle *rectangle)
 {
   GdkPixbuf *screenshot;
-  gchar *path, *filename;
+  gchar *path, *filename, *tmpname;
   const gchar *method_name;
   GVariant *method_params;
   GError *error = NULL;
 
   path = g_build_filename (g_get_user_cache_dir (), "gnome-screenshot", NULL);
   g_mkdir_with_parents (path, 0700);
-  filename = g_build_filename (path, "tmp.png", NULL);
+
+  tmpname = g_strdup_printf ("scr-%d.png", g_random_int ());
+  filename = g_build_filename (path, tmpname, NULL);
 
   if (screenshot_config->take_window_shot)
     {
@@ -624,9 +626,15 @@ screenshot_get_pixbuf (GdkWindow    *window,
 
           screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
         }
+      else
+        {
+          /* remove the temporary file created by the shell */
+          g_unlink (filename);
+        }
     }
 
   g_free (path);
+  g_free (tmpname);
   g_free (filename);
 
   return screenshot;
