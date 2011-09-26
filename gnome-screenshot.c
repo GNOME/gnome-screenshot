@@ -522,22 +522,59 @@ rectangle_found_cb (GdkRectangle *rectangle)
   finish_prepare_screenshot (rectangle);
 }
 
-static void
-prepare_screenshot (void)
+static gboolean
+prepare_screenshot_timeout (gpointer data)
 {
   if (screenshot_config->take_area_shot)
     screenshot_select_area_async (rectangle_found_cb);
   else
     finish_prepare_screenshot (NULL);
-}
 
-static gboolean
-prepare_screenshot_timeout (gpointer data)
-{
-  prepare_screenshot ();
   screenshot_save_config ();
 
   return FALSE;
+}
+
+static void
+screenshot_start (gboolean interactive)
+{
+  guint delay = screenshot_config->delay * 1000;
+
+  /* HACK: give time to the dialog to actually disappear.
+   * We don't have any way to tell when the compositor has finished 
+   * re-drawing.
+   */
+  if (delay == 0 && interactive)
+    delay = 200;
+
+  if (delay > 0)
+    g_timeout_add (delay,
+                   prepare_screenshot_timeout,
+                   NULL);
+  else
+    g_idle_add (prepare_screenshot_timeout, NULL);
+}
+
+static void
+interactive_dialog_response_cb (GtkWidget *d,
+                                gint response,
+                                gpointer _user_data)
+{
+  gtk_widget_destroy (d);
+
+  switch (response)
+    {
+    case GTK_RESPONSE_DELETE_EVENT:
+    case GTK_RESPONSE_CANCEL:
+      gtk_main_quit ();
+      break;
+    case GTK_RESPONSE_OK:
+      screenshot_start (TRUE);
+      break;
+    default:
+      g_assert_not_reached ();
+      break;
+    }
 }
 
 static void
@@ -569,10 +606,11 @@ screenshooter_init_stock_icons (void)
   g_object_unref (factory);
 }
 
-static void
+static gboolean
 init_dbus_session (void)
 {
   GError *error = NULL;
+  gboolean retval = TRUE;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
 
@@ -581,9 +619,19 @@ init_dbus_session (void)
       g_critical ("Unable to connect to the session bus: %s",
                   error->message);
       g_error_free (error);
-
-      exit (1);
+      retval = FALSE;
     }
+
+  return retval;
+}
+
+static gboolean
+screenshot_app_init (void)
+{
+  gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
+  screenshooter_init_stock_icons ();
+
+  return init_dbus_session ();
 }
 
 /* main */
@@ -647,56 +695,22 @@ main (int argc, char *argv[])
                                 border_effect_arg,
                                 delay_arg);
 
-  if (!res)
+  if (!res || !screenshot_app_init ())
     exit (1);
 
-  gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
-  screenshooter_init_stock_icons ();
-
-  init_dbus_session ();
-
-  /* interactive mode overrides everything */
+  /* interactive mode: trigger the dialog and wait for the response */
   if (interactive_arg)
     {
       GtkWidget *dialog;
-      gint response;
 
       dialog = screenshot_interactive_dialog_new ();
-      response = gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      switch (response)
-        {
-        case GTK_RESPONSE_DELETE_EVENT:
-        case GTK_RESPONSE_CANCEL:
-          return EXIT_SUCCESS;
-        case GTK_RESPONSE_OK:
-          break;
-        default:
-          g_assert_not_reached ();
-          break;
-        }
-    }
-
-  if (screenshot_config->delay > 0)
-    {
-      g_timeout_add (screenshot_config->delay * 1000,
-		     prepare_screenshot_timeout,
-		     NULL);
+      gtk_widget_show (dialog);
+      g_signal_connect (dialog, "response",
+                        G_CALLBACK (interactive_dialog_response_cb), NULL);
     }
   else
     {
-      if (interactive_arg)
-        {
-          /* HACK: give time to the dialog to actually disappear.
-           * We don't have any way to tell when the compositor has finished 
-           * re-drawing.
-           */
-          g_timeout_add (200,
-                         prepare_screenshot_timeout, NULL);
-        }
-      else
-        g_idle_add (prepare_screenshot_timeout, NULL);
+      screenshot_start (FALSE);
     }
 
   gtk_main ();
