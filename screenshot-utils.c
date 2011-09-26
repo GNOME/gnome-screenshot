@@ -18,9 +18,7 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  */
 
-#include "config.h"
-#include "screenshot-utils.h"
-
+#include <config.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <glib.h>
@@ -29,6 +27,9 @@
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
 #include <X11/extensions/shape.h>
 #endif
+
+#include "screenshot-config.h"
+#include "screenshot-utils.h"
 
 static GtkWidget *selection_window;
 
@@ -713,21 +714,17 @@ screenshot_get_window_rect_coords (GdkWindow *window,
 
 void
 screenshot_get_window_rect (GdkWindow *window,
-                            gboolean include_border,
                             GdkRectangle *rect)
 {
   screenshot_get_window_rect_coords (window,
-                                     include_border,
+                                     screenshot_config->include_border,
                                      NULL,
                                      rect);
 }
 
 GdkPixbuf *
 screenshot_get_pixbuf (GdkWindow    *window,
-                       GdkRectangle *rectangle,
-                       gboolean      include_pointer,
-                       gboolean      include_border,
-                       gboolean      include_mask)
+                       GdkRectangle *rectangle)
 {
   GdkWindow *root, *wm_window = NULL;
   GdkPixbuf *screenshot;
@@ -736,7 +733,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
   GtkBorder frame_offset = { 0, 0, 0, 0 };
 
   screenshot_get_window_rect_coords (window, 
-                                     include_border,
+                                     screenshot_config->include_border,
                                      &real_coords,
                                      &screenshot_coords);
 
@@ -772,11 +769,12 @@ screenshot_get_pixbuf (GdkWindow    *window,
                                            screenshot_coords.x, screenshot_coords.y,
                                            screenshot_coords.width, screenshot_coords.height);
 
-  if (include_mask)
+  if (!screenshot_config->take_window_shot &&
+      !screenshot_config->take_area_shot)
     mask_monitors (screenshot, root);
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
-  if (include_border && (wm != None))
+  if (screenshot_config->include_border && (wm != None))
     {
       XRectangle *rectangles;
       GdkPixbuf *tmp;
@@ -871,7 +869,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
 
   /* if we have a selected area, there were by definition no cursor in the
    * screenshot */
-  if (include_pointer && !rectangle) 
+  if (screenshot_config->include_pointer && !rectangle) 
     {
       GdkCursor *cursor;
       GdkPixbuf *cursor_pixbuf;
@@ -983,4 +981,22 @@ screenshot_show_gerror_dialog (GtkWindow   *parent,
   g_return_if_fail (error != NULL);
 
   screenshot_show_error_dialog (parent, message, error->message);
+}
+
+void
+screenshot_display_help (GtkWindow *parent)
+{
+  GError *error = NULL;
+
+  gtk_show_uri (gtk_window_get_screen (parent),
+		"ghelp:user-guide#goseditmainmenu-53",
+		gtk_get_current_event_time (), &error);
+
+  if (error)
+    {
+      screenshot_show_gerror_dialog (parent,
+                                     _("Error loading the help page"),
+                                     error);
+      g_error_free (error);
+    }
 }

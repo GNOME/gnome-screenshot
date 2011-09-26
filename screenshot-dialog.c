@@ -21,6 +21,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "screenshot-config.h"
 #include "screenshot-dialog.h"
 #include "screenshot-save.h"
 #include <glib/gi18n.h>
@@ -173,8 +174,7 @@ drag_begin (GtkWidget        *widget,
 
 ScreenshotDialog *
 screenshot_dialog_new (GdkPixbuf *screenshot,
-		       char      *initial_uri,
-		       gboolean   take_window_shot)
+		       char      *initial_uri)
 {
   ScreenshotDialog *dialog;
   GtkWidget *toplevel;
@@ -249,7 +249,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
   g_signal_connect (preview_darea, "configure_event", G_CALLBACK (on_preview_configure_event), dialog);
 
-  if (take_window_shot)
+  if (screenshot_config->take_window_shot)
     gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_NONE);
   else
     gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_IN);

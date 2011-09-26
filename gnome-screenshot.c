@@ -41,7 +41,9 @@
 #include <X11/Xutil.h>
 #include <canberra-gtk.h>
 
+#include "screenshot-config.h"
 #include "screenshot-filename-builder.h"
+#include "screenshot-interactive-dialog.h"
 #include "screenshot-shadow.h"
 #include "screenshot-utils.h"
 #include "screenshot-save.h"
@@ -50,487 +52,18 @@
 
 #define SCREENSHOOTER_ICON "applets-screenshooter"
 
-#define GNOME_SCREENSHOT_SCHEMA "org.gnome.gnome-screenshot"
-#define INCLUDE_BORDER_KEY      "include-border"
-#define INCLUDE_POINTER_KEY     "include-pointer"
-#define INCLUDE_ICC_PROFILE     "include-icc-profile"
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
-#define BORDER_EFFECT_KEY       "border-effect"
-#define DELAY_KEY               "delay"
-
-enum
-{
-  COLUMN_NICK,
-  COLUMN_LABEL,
-  COLUMN_ID,
-
-  N_COLUMNS
-};
-
-typedef enum {
-  SCREENSHOT_EFFECT_NONE,
-  SCREENSHOT_EFFECT_SHADOW,
-  SCREENSHOT_EFFECT_BORDER
-} ScreenshotEffectType;
 
 static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
-static char *last_save_dir = NULL;
 static char *temporary_file = NULL;
 static gboolean save_immediately = FALSE;
-static GSettings *settings = NULL;
 static CheeseFlash *flash = NULL;
 static GDBusConnection *connection = NULL;
 
-/* Options */
-static gboolean copy_to_clipboard = FALSE;
-static gboolean take_window_shot = FALSE;
-static gboolean take_area_shot = FALSE;
-static gboolean include_border = FALSE;
-static gboolean include_pointer = TRUE;
-static gboolean include_icc_profile = TRUE;
-static char *border_effect = NULL;
-static guint delay = 0;
-
 /* some local prototypes */
-static void  display_help           (GtkWindow *parent);
 static void  save_done_notification (gpointer   data);
-static void  save_options           (void);
-
-static GtkWidget *border_check = NULL;
-static GtkWidget *effect_combo = NULL;
-static GtkWidget *effect_label = NULL;
-static GtkWidget *effects_vbox = NULL;
-static GtkWidget *delay_hbox = NULL;
-
-static void
-display_help (GtkWindow *parent)
-{
-  GError *error = NULL;
-
-  gtk_show_uri (gtk_window_get_screen (parent),
-		"ghelp:user-guide#goseditmainmenu-53",
-		gtk_get_current_event_time (), &error);
-
-  if (error)
-    {
-      screenshot_show_gerror_dialog (parent,
-                                     _("Error loading the help page"),
-                                     error);
-      g_error_free (error);
-    }
-}
-
-static void
-interactive_dialog_response_cb (GtkDialog *dialog,
-                                gint       response,
-                                gpointer   user_data)
-{
-  switch (response)
-    {
-    case GTK_RESPONSE_HELP:
-      g_signal_stop_emission_by_name (dialog, "response");
-      display_help (GTK_WINDOW (dialog));
-      break;
-    default:
-      gtk_widget_hide (GTK_WIDGET (dialog));
-      break;
-    }
-}
-
-#define TARGET_TOGGLE_DESKTOP 0
-#define TARGET_TOGGLE_WINDOW  1
-#define TARGET_TOGGLE_AREA    2
-
-static void
-target_toggled_cb (GtkToggleButton *button,
-                   gpointer         data)
-{
-  int target_toggle = GPOINTER_TO_INT (data);
-
-  if (gtk_toggle_button_get_active (button))
-    {
-      take_window_shot = (target_toggle == TARGET_TOGGLE_WINDOW);
-      take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
-      
-      gtk_widget_set_sensitive (border_check, take_window_shot);
-      gtk_widget_set_sensitive (effect_combo, take_window_shot);
-      gtk_widget_set_sensitive (effect_label, take_window_shot);
-
-      gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
-      gtk_widget_set_sensitive (effects_vbox, !take_area_shot);
-    }
-}
-
-static void
-delay_spin_value_changed_cb (GtkSpinButton *button)
-{
-  delay = gtk_spin_button_get_value_as_int (button);
-}
-
-static void
-include_border_toggled_cb (GtkToggleButton *button,
-                           gpointer         data)
-{
-  include_border = gtk_toggle_button_get_active (button);
-}
-
-static void
-include_pointer_toggled_cb (GtkToggleButton *button,
-                            gpointer         data)
-{
-  include_pointer = gtk_toggle_button_get_active (button);
-}
-
-static void
-effect_combo_changed_cb (GtkComboBox *combo,
-                         gpointer     user_data)
-{
-  GtkTreeIter iter;
-
-  if (gtk_combo_box_get_active_iter (combo, &iter))
-    {
-      GtkTreeModel *model;
-      gchar *effect;
-
-      model = gtk_combo_box_get_model (combo);
-      gtk_tree_model_get (model, &iter, COLUMN_NICK, &effect, -1);
-
-      g_assert (effect != NULL);
-
-      g_free (border_effect);
-      border_effect = effect; /* gets free'd later */
-    }
-}
-
-static gint 
-key_press_cb (GtkWidget* widget, GdkEventKey* event, gpointer data)
-{
-  if (event->keyval == GDK_KEY_F1)
-    {
-      display_help (GTK_WINDOW (widget));
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
-typedef struct {
-  ScreenshotEffectType id;
-  const gchar *label;
-  const gchar *nick;
-} ScreenshotEffect;
-
-/* Translators:
- * these are the names of the effects available which will be
- * displayed inside a combo box in interactive mode for the user
- * to chooser.
- */
-static const ScreenshotEffect effects[] = {
-  { SCREENSHOT_EFFECT_NONE, N_("None"), "none" },
-  { SCREENSHOT_EFFECT_SHADOW, N_("Drop shadow"), "shadow" },
-  { SCREENSHOT_EFFECT_BORDER, N_("Border"), "border" }
-};
-
-static guint n_effects = G_N_ELEMENTS (effects);
-
-static GtkWidget *
-create_effects_combo (void)
-{
-  GtkWidget *retval;
-  GtkListStore *model;
-  GtkCellRenderer *renderer;
-  gint i;
-
-  model = gtk_list_store_new (N_COLUMNS,
-                              G_TYPE_STRING,
-                              G_TYPE_STRING,
-                              G_TYPE_UINT);
-  
-  for (i = 0; i < n_effects; i++)
-    {
-      GtkTreeIter iter;
-
-      gtk_list_store_insert (model, &iter, i);
-      gtk_list_store_set (model, &iter,
-                          COLUMN_ID, effects[i].id,
-                          COLUMN_LABEL, gettext (effects[i].label),
-                          COLUMN_NICK, effects[i].nick,
-                          -1);
-    }
-
-  retval = gtk_combo_box_new ();
-  gtk_combo_box_set_model (GTK_COMBO_BOX (retval),
-                           GTK_TREE_MODEL (model));
-  g_object_unref (model);
-
-  switch (border_effect[0])
-    {
-    case 's': /* shadow */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_SHADOW);
-      break;
-    case 'b': /* border */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_BORDER);
-      break;
-    case 'n': /* none */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_NONE);
-      break;
-    default:
-      break;
-    }
-  
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (retval), renderer, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (retval), renderer,
-                                  "text", COLUMN_LABEL,
-                                  NULL);
-
-  g_signal_connect (retval, "changed",
-                    G_CALLBACK (effect_combo_changed_cb),
-                    NULL);
-
-  return retval;
-}
-
-static void
-create_effects_frame (GtkWidget   *outer_vbox,
-                      const gchar *frame_title)
-{
-  GtkWidget *main_vbox, *vbox, *hbox;
-  GtkWidget *align;
-  GtkWidget *label;
-  GtkWidget *check;
-  GtkWidget *combo;
-  gchar *title;
-
-  main_vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
-  gtk_widget_show (main_vbox);
-  effects_vbox = main_vbox;
-
-  title = g_strconcat ("<b>", frame_title, "</b>", NULL);
-  label = gtk_label_new (title);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  g_free (title);
-
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, 12, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
-  gtk_widget_show (align);
-
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (align), vbox);
-  gtk_widget_show (vbox);
-
-  /** Include pointer **/
-  check = gtk_check_button_new_with_mnemonic (_("Include _pointer"));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), include_pointer);
-  g_signal_connect (check, "toggled",
-                    G_CALLBACK (include_pointer_toggled_cb),
-                    NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), check, FALSE, FALSE, 0);
-  gtk_widget_show (check);
-
-  /** Include window border **/
-  check = gtk_check_button_new_with_mnemonic (_("Include the window _border"));
-  gtk_widget_set_sensitive (check, take_window_shot);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), include_border);
-  g_signal_connect (check, "toggled",
-                    G_CALLBACK (include_border_toggled_cb),
-                    NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), check, FALSE, FALSE, 0);
-  gtk_widget_show (check);
-  border_check = check;
-
-  /** Effects **/
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new_with_mnemonic (_("Apply _effect:"));
-  gtk_widget_set_sensitive (label, take_window_shot);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  effect_label = label;
-
-  combo = create_effects_combo ();
-  gtk_widget_set_sensitive (combo, take_window_shot);
-  gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
-  gtk_widget_show (combo);
-  effect_combo = combo;
-}
-
-static void
-create_screenshot_frame (GtkWidget   *outer_vbox,
-                         const gchar *frame_title)
-{
-  GtkWidget *main_vbox, *vbox, *hbox;
-  GtkWidget *align;
-  GtkWidget *radio;
-  GtkWidget *image;
-  GtkWidget *spin;
-  GtkWidget *label;
-  GtkAdjustment *adjust;
-  GSList *group;
-  gchar *title;
-
-  main_vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
-  gtk_widget_show (main_vbox);
-
-  title = g_strconcat ("<b>", frame_title, "</b>", NULL);
-  label = gtk_label_new (title);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  g_free (title);
-
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
-  gtk_widget_set_size_request (align, 48, -1);
-  gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
-  gtk_widget_show (align);
-
-  image = gtk_image_new_from_stock (SCREENSHOOTER_ICON,
-                                    GTK_ICON_SIZE_DIALOG);
-  gtk_container_add (GTK_CONTAINER (align), image);
-  gtk_widget_show (image);
-
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
-  gtk_widget_show (vbox);
-
-  /** Grab whole desktop **/
-  group = NULL;
-  radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Grab the whole _desktop"));
-  if (take_window_shot || take_area_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), FALSE);
-  g_signal_connect (radio, "toggled",
-                    G_CALLBACK (target_toggled_cb),
-                    GINT_TO_POINTER (TARGET_TOGGLE_DESKTOP));
-  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
-  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
-  gtk_widget_show (radio);
-
-  /** Grab current window **/
-  radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Grab the current _window"));
-  if (take_window_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-  g_signal_connect (radio, "toggled",
-                    G_CALLBACK (target_toggled_cb),
-                    GINT_TO_POINTER (TARGET_TOGGLE_WINDOW));
-  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
-  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
-  gtk_widget_show (radio);
-
-  /** Grab area of the desktop **/
-  radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Select _area to grab"));
-  if (take_area_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-  g_signal_connect (radio, "toggled",
-                    G_CALLBACK (target_toggled_cb),
-                    GINT_TO_POINTER (TARGET_TOGGLE_AREA));
-  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
-  gtk_widget_show (radio);
-
-  /** Grab after delay **/
-  delay_hbox = gtk_hbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), delay_hbox, FALSE, FALSE, 0);
-  gtk_widget_show (delay_hbox);
-
-  /* translators: this is the first part of the "grab after a
-   * delay of <spin button> seconds".
-   */
-  label = gtk_label_new_with_mnemonic (_("Grab _after a delay of"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_start (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) delay,
-                                               0.0, 99.0,
-                                               1.0,  1.0,
-                                               0.0));
-  spin = gtk_spin_button_new (adjust, 1.0, 0);
-  g_signal_connect (spin, "value-changed",
-                    G_CALLBACK (delay_spin_value_changed_cb),
-                    NULL);
-  gtk_box_pack_start (GTK_BOX (delay_hbox), spin, FALSE, FALSE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
-  gtk_widget_show (spin);
-
-  /* translators: this is the last part of the "grab after a
-   * delay of <spin button> seconds".
-   */
-  label = gtk_label_new (_("seconds"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_box_pack_end (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-}
-
-static GtkWidget *
-create_interactive_dialog (void)
-{
-  GtkWidget *retval;
-  GtkWidget *main_vbox;
-  GtkWidget *content_area;
-
-  retval = gtk_dialog_new ();
-  gtk_window_set_resizable (GTK_WINDOW (retval), FALSE);
-  gtk_container_set_border_width (GTK_CONTAINER (retval), 5);
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (retval));
-  gtk_box_set_spacing (GTK_BOX (content_area), 2);
-  gtk_window_set_title (GTK_WINDOW (retval), _("Take Screenshot"));
-
-  /* main container */
-  main_vbox = gtk_vbox_new (FALSE, 18);
-  gtk_container_set_border_width (GTK_CONTAINER (main_vbox), 5);
-  gtk_box_pack_start (GTK_BOX (content_area), main_vbox, TRUE, TRUE, 0);
-  gtk_widget_show (main_vbox);
-
-  create_screenshot_frame (main_vbox, _("Take Screenshot"));
-  create_effects_frame (main_vbox, _("Effects"));
-
-  gtk_dialog_add_buttons (GTK_DIALOG (retval),
-                          GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                          _("Take _Screenshot"), GTK_RESPONSE_OK,
-                          NULL);
-
-  gtk_dialog_set_default_response (GTK_DIALOG (retval), GTK_RESPONSE_OK);
-
-  /* we need to block on "response" and keep showing the interactive
-   * dialog in case the user did choose "help"
-   */
-  g_signal_connect (retval, "response",
-                    G_CALLBACK (interactive_dialog_response_cb),
-                    NULL);
-
-  g_signal_connect (G_OBJECT (retval), "key-press-event",
-                    G_CALLBACK(key_press_cb), 
-                    NULL);
-
-  return retval;
-}
 
 static void
 save_folder_to_settings (ScreenshotDialog *dialog)
@@ -538,7 +71,7 @@ save_folder_to_settings (ScreenshotDialog *dialog)
   char *folder;
 
   folder = screenshot_dialog_get_folder (dialog);
-  g_settings_set_string (settings,
+  g_settings_set_string (screenshot_config->settings,
                          LAST_SAVE_DIRECTORY_KEY, folder);
 
   g_free (folder);
@@ -710,7 +243,7 @@ screenshot_dialog_response_cb (GtkDialog *d,
 {
   if (response_id == GTK_RESPONSE_HELP)
     {
-      display_help (GTK_WINDOW (d));
+      screenshot_display_help (GTK_WINDOW (d));
     }
   else if (response_id == GTK_RESPONSE_OK)
     {
@@ -780,7 +313,7 @@ build_filename_ready_cb (GObject *source,
       exit(1);
     }
 
-  dialog = screenshot_dialog_new (screenshot, save_uri, take_window_shot);
+  dialog = screenshot_dialog_new (screenshot, save_uri);
   screenshot_save_start (screenshot, save_done_notification, dialog);
   run_dialog (dialog);
 
@@ -879,12 +412,12 @@ find_current_window (void)
   if (!screenshot_grab_lock ())
     exit (0);
 
-  if (take_window_shot)
+  if (screenshot_config->take_window_shot)
     {
       window = screenshot_find_current_window ();
 
       if (window == NULL)
-        take_window_shot = FALSE;
+        screenshot_config->take_window_shot = FALSE;
     }
 
   if (window == NULL)
@@ -903,19 +436,14 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
   gboolean ret;
   GError *error = NULL;
   GdkRectangle rect;
-  gboolean include_mask = (!take_window_shot && !take_area_shot);
   GdkWindow *window;
 
   window = find_current_window ();
+  screenshot = screenshot_get_pixbuf (window, rectangle);
 
-  /* always disable window border for full-desktop or selected-area screenshots */
-  if (!take_window_shot)
-    screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, FALSE, include_mask);
-  else
+  if (screenshot_config->take_window_shot)
     {
-      screenshot = screenshot_get_pixbuf (window, rectangle, include_pointer, include_border, include_mask);
-
-      switch (border_effect[0])
+      switch (screenshot_config->border_effect[0])
         {
         case 's': /* shadow */
           screenshot_add_shadow (&screenshot);
@@ -945,12 +473,12 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
   if (rectangle != NULL)
     rect = *rectangle;
   else
-    screenshot_get_window_rect (window, include_border, &rect);
+    screenshot_get_window_rect (window, &rect);
 
   cheese_flash_fire (flash, &rect);
   play_sound_effect (window);
 
-  if (copy_to_clipboard)
+  if (screenshot_config->copy_to_clipboard)
     {
       GtkClipboard *clipboard;
 
@@ -962,7 +490,7 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
   else
     {
       /* load ICC profile */
-      if (include_icc_profile)
+      if (screenshot_config->include_icc_profile)
         {
           icc_profile_filename = get_profile_for_window (window);
           if (icc_profile_filename != NULL)
@@ -991,7 +519,7 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
             }
         }
 
-      screenshot_build_filename_async (last_save_dir,
+      screenshot_build_filename_async (screenshot_config->last_save_dir,
                                        build_filename_ready_cb, screenshot);
     }
 }
@@ -1005,7 +533,7 @@ rectangle_found_cb (GdkRectangle *rectangle)
 static void
 prepare_screenshot (void)
 {
-  if (take_area_shot)
+  if (screenshot_config->take_area_shot)
     screenshot_select_area_async (rectangle_found_cb);
   else
     finish_prepare_screenshot (NULL);
@@ -1015,50 +543,10 @@ static gboolean
 prepare_screenshot_timeout (gpointer data)
 {
   prepare_screenshot ();
-  save_options ();
+  screenshot_save_config ();
 
   return FALSE;
 }
-
-/* Load options */
-static void
-load_options (void)
-{
-  /* Find various dirs */
-  last_save_dir = g_settings_get_string (settings,
-                                         LAST_SAVE_DIRECTORY_KEY);
-
-  include_border = g_settings_get_boolean (settings,
-                                           INCLUDE_BORDER_KEY);
-
-  include_icc_profile = g_settings_get_boolean (settings,
-                                                INCLUDE_ICC_PROFILE);
-
-  include_pointer = g_settings_get_boolean (settings,
-                                            INCLUDE_POINTER_KEY);
-
-  border_effect = g_settings_get_string (settings,
-                                         BORDER_EFFECT_KEY);
-  if (!border_effect)
-    border_effect = g_strdup ("none");
-
-  delay = g_settings_get_int (settings, DELAY_KEY);
-}
-
-static void
-save_options (void)
-{
-  g_settings_set_boolean (settings,
-                          INCLUDE_BORDER_KEY, include_border);
-  g_settings_set_boolean (settings,
-                          INCLUDE_POINTER_KEY, include_pointer);
-  g_settings_set_boolean (settings,
-                          INCLUDE_ICC_PROFILE, include_icc_profile);
-  g_settings_set_int (settings, DELAY_KEY, delay);
-  g_settings_set_string (settings,
-                         BORDER_EFFECT_KEY, border_effect);
-}
-
 
 static void
 register_screenshooter_icon (GtkIconFactory * factory)
@@ -1120,6 +608,7 @@ main (int argc, char *argv[])
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
   GError *error = NULL;
+  gboolean res;
 
   const GOptionEntry entries[] = {
     { "clipboard", 'c', 0, G_OPTION_ARG_NONE, &clipboard_arg, N_("Send the grab directly to the clipboard"), NULL },
@@ -1157,43 +646,21 @@ main (int argc, char *argv[])
 
   g_option_context_free (context);
 
-  if (window_arg && area_arg) {
-    g_printerr (_("Conflicting options: --window and --area should not be "
-                  "used at the same time.\n"));
+  res = screenshot_load_config (clipboard_arg,
+                                window_arg,
+                                area_arg,
+                                include_border_arg,
+                                disable_border_arg,
+                                border_effect_arg,
+                                delay_arg);
+
+  if (!res)
     exit (1);
-  }
 
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
 
   init_dbus_session ();
-
-  settings = g_settings_new ("org.gnome.gnome-screenshot");
-  load_options ();
-  /* allow the command line to override options */
-  if (window_arg)
-    take_window_shot = TRUE;
-
-  if (area_arg)
-    take_area_shot = TRUE;
-
-  if (include_border_arg)
-    include_border = TRUE;
-
-  if (disable_border_arg)
-    include_border = FALSE;
-
-  if (border_effect_arg)
-    {
-      g_free (border_effect);
-      border_effect = border_effect_arg;
-    }
-
-  if (delay_arg > 0)
-    delay = delay_arg;
-
-  if (clipboard_arg)
-    copy_to_clipboard = TRUE;
 
   /* interactive mode overrides everything */
   if (interactive_arg)
@@ -1201,7 +668,7 @@ main (int argc, char *argv[])
       GtkWidget *dialog;
       gint response;
 
-      dialog = create_interactive_dialog ();
+      dialog = screenshot_interactive_dialog_new ();
       response = gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
 
@@ -1218,10 +685,10 @@ main (int argc, char *argv[])
         }
     }
 
-  if (((delay > 0 && interactive_arg) || delay_arg > 0) &&
-      !take_area_shot)
+  if (((screenshot_config->delay > 0 && interactive_arg) || delay_arg > 0) &&
+      !screenshot_config->take_area_shot)
     {      
-      g_timeout_add (delay * 1000,
+      g_timeout_add (screenshot_config->delay * 1000,
 		     prepare_screenshot_timeout,
 		     NULL);
     }

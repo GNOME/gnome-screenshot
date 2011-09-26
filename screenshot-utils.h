@@ -31,15 +31,11 @@ gboolean   screenshot_grab_lock           (void);
 void       screenshot_release_lock        (void);
 gchar     *screenshot_get_window_title    (GdkWindow *win);
 void       screenshot_get_window_rect     (GdkWindow *win,
-                                           gboolean include_border,
                                            GdkRectangle *rect);
 GdkWindow *screenshot_find_current_window (void);
 void       screenshot_select_area_async   (SelectAreaCallback callback);
 GdkPixbuf *screenshot_get_pixbuf          (GdkWindow *win,
-                                           GdkRectangle *rectangle,
-                                           gboolean include_pointer,
-                                           gboolean include_border,
-                                           gboolean include_mask);
+                                           GdkRectangle *rectangle);
 
 void       screenshot_show_error_dialog   (GtkWindow   *parent,
                                            const gchar *message,
@@ -47,6 +43,7 @@ void       screenshot_show_error_dialog   (GtkWindow   *parent,
 void       screenshot_show_gerror_dialog  (GtkWindow   *parent,
                                            const gchar *message,
                                            GError      *error);
+void       screenshot_display_help        (GtkWindow *parent);
 
 G_END_DECLS
 
