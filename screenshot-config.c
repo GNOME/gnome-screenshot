@@ -79,6 +79,13 @@ screenshot_load_config (gboolean clipboard_arg,
       return FALSE;
     }
 
+  if (delay_arg && area_arg)
+    {
+      g_printerr (_("Conflicting options: --area and --delay should not be "
+                    "used at the same time.\n"));
+      return FALSE;
+    }
+
   config = g_slice_new0 (ScreenshotConfig);
   initialized = TRUE;
 

@@ -685,9 +685,8 @@ main (int argc, char *argv[])
         }
     }
 
-  if (((screenshot_config->delay > 0 && interactive_arg) || delay_arg > 0) &&
-      !screenshot_config->take_area_shot)
-    {      
+  if (screenshot_config->delay > 0)
+    {
       g_timeout_add (screenshot_config->delay * 1000,
 		     prepare_screenshot_timeout,
 		     NULL);
