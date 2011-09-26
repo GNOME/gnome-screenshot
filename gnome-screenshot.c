@@ -46,7 +46,6 @@
 #include "screenshot-interactive-dialog.h"
 #include "screenshot-shadow.h"
 #include "screenshot-utils.h"
-#include "screenshot-save.h"
 #include "screenshot-dialog.h"
 #include "cheese-flash.h"
 
@@ -57,13 +56,9 @@
 static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
-static char *temporary_file = NULL;
-static gboolean save_immediately = FALSE;
 static CheeseFlash *flash = NULL;
 static GDBusConnection *connection = NULL;
-
-/* some local prototypes */
-static void  save_done_notification (gpointer   data);
+static gchar *icc_profile_base64 = NULL;
 
 static void
 save_folder_to_settings (ScreenshotDialog *dialog)
@@ -121,119 +116,146 @@ error_dialog_response_cb (GtkDialog *d,
                           ScreenshotDialog *dialog)
 {
   gtk_widget_destroy (GTK_WIDGET (d));
-  
+
   screenshot_dialog_focus_entry (dialog);
 }
 
 static void
-save_callback (GObject *source,
-               GAsyncResult *res,
-               gpointer user_data)
+save_file_failed_error (ScreenshotDialog *dialog,
+                        GError *error)
 {
-  ScreenshotDialog *dialog = user_data;
   GtkWidget *toplevel;
-  GError *error = NULL;
-  
+  GtkWidget *error_dialog;
+  char *folder;
+
   toplevel = screenshot_dialog_get_toplevel (dialog);
   screenshot_dialog_set_busy (dialog, FALSE);
 
-  g_dbus_connection_call_finish (connection, res, &error);
+  /* we had an error, display a dialog to the user and let him choose
+   * another name/location to save the screenshot.
+   */      
+  folder = screenshot_dialog_get_folder (dialog);
+  error_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+                                         GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_OK,
+                                         _("Error while saving screenshot"));
+
+  /* translators: first %s is the folder URI, second %s is the VFS error */
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
+                                            _("Impossible to save the screenshot "
+                                              "to %s.\n Error was %s.\n Please choose another "
+                                              "location and retry."), folder, error->message);
+  gtk_widget_show (error_dialog);
+  g_signal_connect (error_dialog,
+                    "response",
+                    G_CALLBACK (error_dialog_response_cb),
+                    dialog);
+
+  g_free (folder);
+}
+
+static void
+save_file_completed (ScreenshotDialog *dialog)
+{
+  GtkWidget *toplevel;
+
+  toplevel = screenshot_dialog_get_toplevel (dialog);
+
+  save_folder_to_settings (dialog);
+  set_recent_entry (dialog);
+  gtk_widget_destroy (toplevel);
+
+  /* we're done, stop the mainloop now */
+  gtk_main_quit ();
+}
+
+static void
+save_pixbuf_ready_cb (GObject *source,
+                      GAsyncResult *res,
+                      gpointer user_data)
+{
+  GError *error = NULL;
+  ScreenshotDialog *dialog = user_data;
+
+  gdk_pixbuf_save_to_stream_finish (res, &error);
 
   if (error != NULL)
     {
-      /* we had an error, display a dialog to the user and let him choose
-       * another name/location to save the screenshot.
-       */
-      GtkWidget *error_dialog;
-      char *folder;
-      
-      folder = screenshot_dialog_get_folder (dialog);
-      error_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_OK,
-                                       _("Error while saving screenshot"));
-
-      /* translators: first %s is the folder URI, second %s is the VFS error */
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
-                                                _("Impossible to save the screenshot "
-                                                  "to %s.\n Error was %s.\n Please choose another "
-                                                  "location and retry."), folder, error->message);
-      gtk_widget_show (error_dialog);
-      g_signal_connect (error_dialog,
-                        "response",
-                        G_CALLBACK (error_dialog_response_cb),
-                        dialog);
-
-      g_free (folder);
+      save_file_failed_error (dialog, error);
       g_error_free (error);
+      return;
     }
-  else
+
+  save_file_completed (dialog);
+}
+
+static void
+save_file_create_ready_cb (GObject *source,
+                           GAsyncResult *res,
+                           gpointer user_data)
+{
+  GFileOutputStream *os;
+  GError *error = NULL;
+  ScreenshotDialog *dialog = user_data;
+
+  os = g_file_create_finish (G_FILE (source), res, &error);
+
+  if (error != NULL)
     {
-      save_folder_to_settings (dialog);
-      set_recent_entry (dialog);
-      gtk_widget_destroy (toplevel);
-      
-      /* we're done, stop the mainloop now */
-      gtk_main_quit ();
+      save_file_failed_error (dialog, error);
+      g_error_free (error);
+      return;
     }
+
+  if (icc_profile_base64 != NULL)
+    gdk_pixbuf_save_to_stream_async (screenshot,
+                                     G_OUTPUT_STREAM (os),
+                                     "png", NULL,
+                                     save_pixbuf_ready_cb, dialog,
+                                     "icc-profile", icc_profile_base64,
+                                     "tEXt::Software", "gnome-screenshot",
+                                     NULL);
+  else
+    gdk_pixbuf_save_to_stream_async (screenshot,
+                                     G_OUTPUT_STREAM (os),
+                                     "png", NULL,
+                                     save_pixbuf_ready_cb, dialog,
+                                     "tEXt::Software", "gnome-screenshot",
+                                     NULL);
+
+  g_object_unref (os);
 }
 
 static void
 try_to_save (ScreenshotDialog *dialog)
 {
-  gchar *target_folder, *target_filename, *source_uri;
-  GFile *source_file;
-
-  g_assert (temporary_file);
+  gchar *target_uri;
+  GFile *target_file;
 
   screenshot_dialog_set_busy (dialog, TRUE);
 
-  source_file = g_file_new_for_path (temporary_file);
-  source_uri = g_file_get_uri (source_file);
+  target_uri = screenshot_dialog_get_uri (dialog);
+  target_file = g_file_new_for_uri (target_uri);
 
-  target_folder = screenshot_dialog_get_folder (dialog);
-  target_filename = screenshot_dialog_get_filename (dialog);
+  g_file_create_async (target_file,
+                       G_FILE_CREATE_NONE,
+                       G_PRIORITY_DEFAULT,
+                       NULL,
+                       save_file_create_ready_cb, dialog);
 
-  g_dbus_connection_call (connection,
-                          "org.gnome.Nautilus",
-                          "/org/gnome/Nautilus",
-                          "org.gnome.Nautilus.FileOperations",
-                          "CopyFile",
-                          g_variant_new ("(ssss)",
-                                         source_uri,
-                                         target_filename,
-                                         target_folder,
-                                         target_filename),
-                          NULL,
-                          G_DBUS_CALL_FLAGS_NONE,
-                          -1,
-                          NULL,
-                          save_callback,
-                          dialog);
-
-  g_object_unref (source_file);
-
-  g_free (source_uri);
-  g_free (target_folder);
-  g_free (target_filename);
+  g_object_unref (target_file);
+  g_free (target_uri);
 }
 
 static void
-save_done_notification (gpointer data)
+screenshot_save_to_clipboard (void)
 {
-  ScreenshotDialog *dialog = data;
+  GtkClipboard *clipboard;
 
-  temporary_file = g_strdup (screenshot_save_get_filename ());
-  screenshot_dialog_enable_dnd (dialog);
-
-  if (save_immediately)
-    {
-      GtkWidget *toplevel;
-
-      toplevel = screenshot_dialog_get_toplevel (dialog);
-      gtk_dialog_response (GTK_DIALOG (toplevel), GTK_RESPONSE_OK);
-    }
+  clipboard = gtk_clipboard_get_for_display (gdk_display_get_default (),
+                                             GDK_SELECTION_CLIPBOARD);
+  gtk_clipboard_set_image (clipboard, screenshot);
 }
 
 static void
@@ -241,39 +263,21 @@ screenshot_dialog_response_cb (GtkDialog *d,
                                gint response_id,
                                ScreenshotDialog *dialog)
 {
-  if (response_id == GTK_RESPONSE_HELP)
+  switch (response_id)
     {
+    case GTK_RESPONSE_HELP:
       screenshot_display_help (GTK_WINDOW (d));
-    }
-  else if (response_id == GTK_RESPONSE_OK)
-    {
-      if (temporary_file == NULL)
-        {
-          save_immediately = TRUE;
-          screenshot_dialog_set_busy (dialog, TRUE);
-        }
-      else
-        {
-          /* we've saved the temporary file, lets try to copy it to the
-           * correct location.
-           */
-          try_to_save (dialog);
-        }
-    }
-  else if (response_id == SCREENSHOT_RESPONSE_COPY)
-    {
-      GtkClipboard *clipboard;
-      GdkPixbuf    *screenshot;
-
-      clipboard = gtk_clipboard_get_for_display (gtk_widget_get_display (GTK_WIDGET (d)),
-                                                 GDK_SELECTION_CLIPBOARD);
-      screenshot = screenshot_dialog_get_screenshot (dialog);
-      gtk_clipboard_set_image (clipboard, screenshot);
-    }
-  else /* dialog was canceled */
-    {
+      break;
+    case GTK_RESPONSE_OK:
+      try_to_save (dialog);
+      break;
+    case SCREENSHOT_RESPONSE_COPY:
+      screenshot_save_to_clipboard ();
+      break;
+    default:
       gtk_widget_destroy (GTK_WIDGET (d));
       gtk_main_quit ();
+      break;
     }
 }
                                
@@ -300,7 +304,6 @@ build_filename_ready_cb (GObject *source,
     }
 
   dialog = screenshot_dialog_new (screenshot, save_uri);
-  screenshot_save_start (screenshot, save_done_notification, dialog);
   toplevel = screenshot_dialog_get_toplevel (dialog);
   gtk_widget_show (toplevel);
   
@@ -402,7 +405,6 @@ screenshot_ensure_icc_profile (GdkWindow *window)
   char *icc_profile_filename;
   guchar *icc_profile;
   gsize icc_profile_size;
-  char *icc_profile_base64;
   gboolean ret;
   GError *error = NULL;
 
@@ -424,10 +426,7 @@ screenshot_ensure_icc_profile (GdkWindow *window)
       icc_profile_base64 = g_base64_encode (icc_profile,
                                             icc_profile_size);
 
-      /* use this profile for saving the image */
-      screenshot_set_icc_profile (icc_profile_base64);
       g_free (icc_profile);
-      g_free (icc_profile_base64);
     }
   else
     {
@@ -509,11 +508,7 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
 
   if (screenshot_config->copy_to_clipboard)
     {
-      GtkClipboard *clipboard;
-
-      clipboard = gtk_clipboard_get_for_display (gdk_display_get_default (),
-                                                 GDK_SELECTION_CLIPBOARD);
-      gtk_clipboard_set_image (clipboard, screenshot);
+      screenshot_save_to_clipboard ();
       gtk_main_quit ();
 
       return;

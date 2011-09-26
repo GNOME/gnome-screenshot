@@ -29,12 +29,10 @@ typedef struct ScreenshotDialog ScreenshotDialog;
 
 ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf        *screenshot,
 						  char             *initial_uri);
-void              screenshot_dialog_enable_dnd   (ScreenshotDialog *dialog);
 GtkWidget        *screenshot_dialog_get_toplevel (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_filename (ScreenshotDialog *dialog);
-GdkPixbuf        *screenshot_dialog_get_screenshot (ScreenshotDialog *dialog);
 void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
 						  gboolean          busy);
 void              screenshot_dialog_focus_entry  (ScreenshotDialog *dialog);

@@ -23,21 +23,17 @@
 
 #include "screenshot-config.h"
 #include "screenshot-dialog.h"
-#include "screenshot-save.h"
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
 enum {
   TYPE_IMAGE_PNG,
-  TYPE_TEXT_URI_LIST,
-  
   LAST_TYPE
 };
 
 static GtkTargetEntry drag_types[] =
 {
   { "image/png", 0, TYPE_IMAGE_PNG },
-  { "text/uri-list", 0, TYPE_TEXT_URI_LIST },
 };
 
 struct ScreenshotDialog
@@ -140,26 +136,10 @@ drag_data_get (GtkWidget          *widget,
 	       guint               time,
 	       ScreenshotDialog   *dialog)
 {
-  if (info == TYPE_TEXT_URI_LIST)
-    {
-      gchar **uris;
-
-      uris = g_new (gchar *, 2);
-      uris[0] = g_strconcat ("file://",
-                             screenshot_save_get_filename (),
-                             NULL);
-      uris[1] = NULL;
-      
-      gtk_selection_data_set_uris (selection_data, uris);
-    }
-  else if (info == TYPE_IMAGE_PNG)
-    {
-      gtk_selection_data_set_pixbuf (selection_data, dialog->screenshot);
-    }
+  if (info == TYPE_IMAGE_PNG)
+    gtk_selection_data_set_pixbuf (selection_data, dialog->screenshot);
   else
-    {
-      g_warning ("Unknown type %d", info);
-    }
+    g_warning ("Unknown type %d", info);
 }
 
 static void
@@ -249,6 +229,11 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
   g_signal_connect (preview_darea, "configure_event", G_CALLBACK (on_preview_configure_event), dialog);
 
+  gtk_drag_source_set (preview_darea,
+		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
+		       drag_types, G_N_ELEMENTS (drag_types),
+		       GDK_ACTION_COPY);
+
   if (screenshot_config->take_window_shot)
     gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_NONE);
   else
@@ -284,20 +269,6 @@ void
 screenshot_dialog_focus_entry (ScreenshotDialog *dialog)
 {
   gtk_widget_grab_focus (dialog->filename_entry);
-}
-
-void
-screenshot_dialog_enable_dnd (ScreenshotDialog *dialog)
-{
-  GtkWidget *preview_darea;
-
-  g_return_if_fail (dialog != NULL);
-
-  preview_darea = GTK_WIDGET (gtk_builder_get_object (dialog->ui, "preview_darea"));
-  gtk_drag_source_set (preview_darea,
-		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
-		       drag_types, G_N_ELEMENTS (drag_types),
-		       GDK_ACTION_COPY);
 }
 
 GtkWidget *
@@ -353,12 +324,6 @@ screenshot_dialog_get_filename (ScreenshotDialog *dialog)
     }
 
   return tmp;
-}
-
-GdkPixbuf *
-screenshot_dialog_get_screenshot (ScreenshotDialog *dialog)
-{
-  return dialog->screenshot;
 }
 
 void

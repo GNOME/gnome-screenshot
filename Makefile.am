@@ -27,8 +27,6 @@ gnome_screenshot_SOURCES = \
 	screenshot-shadow.h		\
 	screenshot-utils.c		\
 	screenshot-utils.h		\
-	screenshot-save.c		\
-	screenshot-save.h		\
 	$(NULL)
 
 gnome_screenshot_CFLAGS =		\
