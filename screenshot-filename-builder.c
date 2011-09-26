@@ -27,8 +27,7 @@
 typedef enum
 {
   TEST_LAST_DIR = 0,
-  TEST_DESKTOP = 1,
-  TEST_TMP = 2,
+  TEST_DEFAULT = 1
 } TestType;
 
 typedef struct 
@@ -220,7 +219,7 @@ retry:
            * accessible.
            */
           g_free (uri);
-          if (job->type == TEST_TMP)
+          if (job->type == TEST_DEFAULT)
             {
               retval = NULL;
               goto out;
@@ -266,7 +265,6 @@ screenshot_build_filename_async (const gchar *save_dir,
 
   job->base_uris[0] = sanitize_save_directory (save_dir);
   job->base_uris[1] = get_default_screenshot_dir ();
-  job->base_uris[2] = g_strconcat ("file://", g_get_tmp_dir (), NULL);
   job->iteration = 0;
   job->type = TEST_LAST_DIR;
 
