@@ -542,7 +542,7 @@ prepare_screenshot_timeout (gpointer data)
 }
 
 static void
-screenshot_start (gboolean interactive)
+screenshot_start ()
 {
   guint delay = screenshot_config->delay * 1000;
 
@@ -550,7 +550,7 @@ screenshot_start (gboolean interactive)
    * We don't have any way to tell when the compositor has finished 
    * re-drawing.
    */
-  if (delay == 0 && interactive)
+  if (delay == 0 && screenshot_config->interactive)
     delay = 200;
 
   if (delay > 0)
@@ -575,7 +575,7 @@ interactive_dialog_response_cb (GtkWidget *d,
       gtk_main_quit ();
       break;
     case GTK_RESPONSE_OK:
-      screenshot_start (TRUE);
+      screenshot_start ();
       break;
     default:
       g_assert_not_reached ();
@@ -701,7 +701,8 @@ main (int argc, char *argv[])
                                 include_border_arg,
                                 disable_border_arg,
                                 border_effect_arg,
-                                delay_arg);
+                                delay_arg,
+                                interactive_arg);
 
   if (!res || !screenshot_app_init ())
     exit (1);
@@ -718,7 +719,7 @@ main (int argc, char *argv[])
     }
   else
     {
-      screenshot_start (FALSE);
+      screenshot_start ();
     }
 
   gtk_main ();

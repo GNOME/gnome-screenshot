@@ -42,6 +42,8 @@ typedef struct {
   gchar *border_effect;
 
   guint delay;
+
+  gboolean interactive;
 } ScreenshotConfig;
 
 ScreenshotConfig *screenshot_config;
@@ -52,7 +54,8 @@ gboolean screenshot_load_config (gboolean clipboard_arg,
                                  gboolean include_border_arg,
                                  gboolean disable_border_arg,
                                  const gchar *border_effect_arg,
-                                 guint delay_arg);
+                                 guint delay_arg,
+                                 gboolean interactive_arg);
 void screenshot_save_config      (void);
 
 G_END_DECLS

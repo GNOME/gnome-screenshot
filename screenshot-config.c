@@ -64,7 +64,8 @@ screenshot_load_config (gboolean clipboard_arg,
                         gboolean include_border_arg,
                         gboolean disable_border_arg,
                         const gchar *border_effect_arg,
-                        guint delay_arg)
+                        guint delay_arg,
+                        gboolean interactive_arg)
 {
   static gboolean initialized = FALSE;
   ScreenshotConfig *config;
@@ -88,6 +89,8 @@ screenshot_load_config (gboolean clipboard_arg,
 
   config = g_slice_new0 (ScreenshotConfig);
   initialized = TRUE;
+
+  config->interactive = interactive_arg;
 
   config->settings = g_settings_new ("org.gnome.gnome-screenshot");
   populate_from_settings (config);
@@ -128,6 +131,12 @@ screenshot_save_config (void)
   ScreenshotConfig *c = screenshot_config;
 
   g_assert (c != NULL);
+
+  /* if we were not started up in interactive mode, avoid
+   * overwriting these settings.
+   */
+  if (!c->interactive)
+    return;
 
   g_settings_set_boolean (c->settings,
                           INCLUDE_BORDER_KEY, c->include_border);
