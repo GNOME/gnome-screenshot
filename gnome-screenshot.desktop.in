@@ -12,3 +12,14 @@ X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-utils
 X-GNOME-Bugzilla-Component=screenshot
 X-GNOME-Bugzilla-OtherBinaries=gnome-panel-screenshot
+X-Ayatana-Desktop-Shortcuts=Screen;Window
+
+[Screen Shortcut Group]
+_Name=Take a screenshot of the whole screen
+Exec=gnome-screenshot
+TargetEnvironment=Unity
+
+[Window Shortcut Group]
+_Name=Take a screenshot of the current window
+Exec=gnome-screenshot -w
+TargetEnvironment=Unity
