@@ -276,27 +276,13 @@ screenshot_dialog_response_cb (GtkDialog *d,
       gtk_main_quit ();
     }
 }
-
-static void
-run_dialog (ScreenshotDialog *dialog)
-{
-  GtkWidget *toplevel;
-
-  toplevel = screenshot_dialog_get_toplevel (dialog);
-  
-  gtk_widget_show (toplevel);
-  
-  g_signal_connect (toplevel,
-                    "response",
-                    G_CALLBACK (screenshot_dialog_response_cb),
-                    dialog);
-}
                                
 static void
 build_filename_ready_cb (GObject *source,
                          GAsyncResult *res,
                          gpointer user_data)
 {
+  GtkWidget *toplevel;
   ScreenshotDialog *dialog;
   GdkPixbuf *screenshot = user_data;
   gchar *save_uri;
@@ -315,7 +301,13 @@ build_filename_ready_cb (GObject *source,
 
   dialog = screenshot_dialog_new (screenshot, save_uri);
   screenshot_save_start (screenshot, save_done_notification, dialog);
-  run_dialog (dialog);
+  toplevel = screenshot_dialog_get_toplevel (dialog);
+  gtk_widget_show (toplevel);
+  
+  g_signal_connect (toplevel,
+                    "response",
+                    G_CALLBACK (screenshot_dialog_response_cb),
+                    dialog);
 
   g_free (save_uri);
 }
@@ -637,12 +629,13 @@ main (int argc, char *argv[])
 
   g_option_context_parse (context, &argc, &argv, &error);
 
-  if (error) {
-    g_critical ("Unable to parse arguments: %s", error->message);
-    g_error_free (error);
-    g_option_context_free (context);
-    exit (1);
-  }
+  if (error)
+    {
+      g_critical ("Unable to parse arguments: %s", error->message);
+      g_error_free (error);
+      g_option_context_free (context);
+      exit (1);
+    }
 
   g_option_context_free (context);
 
