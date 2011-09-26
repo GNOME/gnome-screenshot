@@ -15,6 +15,8 @@ gnome_screenshot_SOURCES = \
 	gnome-screenshot.c		\
 	cheese-flash.c			\
 	cheese-flash.h			\
+	screenshot-area-selection.c	\
+	screenshot-area-selection.h	\
 	screenshot-config.c		\
 	screenshot-config.h		\
 	screenshot-dialog.c		\

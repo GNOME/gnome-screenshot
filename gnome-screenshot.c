@@ -41,6 +41,7 @@
 #include <X11/Xutil.h>
 #include <canberra-gtk.h>
 
+#include "screenshot-area-selection.h"
 #include "screenshot-config.h"
 #include "screenshot-filename-builder.h"
 #include "screenshot-interactive-dialog.h"
