@@ -28,6 +28,7 @@
 #include <X11/extensions/shape.h>
 #endif
 
+#include "gnome-screenshot.h"
 #include "screenshot-config.h"
 #include "screenshot-utils.h"
 
@@ -348,19 +349,9 @@ screenshot_get_window_rect_coords (GdkWindow *window,
     }
 }
 
-void
-screenshot_get_window_rect (GdkWindow *window,
-                            GdkRectangle *rect)
-{
-  screenshot_get_window_rect_coords (window,
-                                     screenshot_config->include_border,
-                                     NULL,
-                                     rect);
-}
-
-GdkPixbuf *
-screenshot_get_pixbuf (GdkWindow    *window,
-                       GdkRectangle *rectangle)
+static GdkPixbuf *
+screenshot_get_pixbuf_fallback (GdkWindow *window,
+                                GdkRectangle *rectangle)
 {
   GdkWindow *root, *wm_window = NULL;
   GdkPixbuf *screenshot;
@@ -552,6 +543,91 @@ screenshot_get_pixbuf (GdkWindow    *window,
           gdk_cursor_unref (cursor);
         }
     }
+
+  return screenshot;
+}
+
+void
+screenshot_get_window_rect (GdkWindow *window,
+                            GdkRectangle *rect)
+{
+  screenshot_get_window_rect_coords (window,
+                                     screenshot_config->include_border,
+                                     NULL,
+                                     rect);
+}
+
+GdkPixbuf *
+screenshot_get_pixbuf (GdkWindow    *window,
+                       GdkRectangle *rectangle)
+{
+  GdkPixbuf *screenshot;
+  gchar *path, *filename;
+  const gchar *method_name;
+  GVariant *method_params;
+  GError *error = NULL;
+
+  path = g_build_filename (g_get_user_cache_dir (), "gnome-screenshot", NULL);
+  g_mkdir_with_parents (path, 0700);
+  filename = g_build_filename (path, "tmp.png", NULL);
+
+  if (screenshot_config->take_window_shot)
+    {
+      method_name = "ScreenshotWindow";
+      method_params = g_variant_new ("(bs)",
+                                     screenshot_config->include_border,
+                                     filename);
+    }
+  else if (rectangle != NULL)
+    {
+      method_name = "ScreenshotArea";
+      method_params = g_variant_new ("(iiiis)",
+                                     rectangle->x, rectangle->y,
+                                     rectangle->width, rectangle->height,
+                                     filename);
+    }
+  else
+    {
+      method_name = "Screenshot";
+      method_params = g_variant_new ("(s)", filename);
+    }
+
+  g_dbus_connection_call_sync (connection,
+                               "org.gnome.Shell",
+                               "/org/gnome/Shell",
+                               "org.gnome.Shell",
+                               method_name,
+                               method_params,
+                               NULL,
+                               G_DBUS_CALL_FLAGS_NONE,
+                               -1,
+                               NULL,
+                               &error);
+
+  if (error != NULL)
+    {
+      g_warning ("Unable to use GNOME Shell's builtin screenshot interface, "
+                 "resorting to fallback X11. Error: %s", error->message);
+      g_error_free (error);
+
+      screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
+    }
+  else
+    {
+      screenshot = gdk_pixbuf_new_from_file (filename, &error);
+
+      if (error != NULL)
+        {
+          g_warning ("Unable to load GNOME Shell's builtin screenshot result, "
+                     "resorting to fallback X11. Error: %s", error->message);
+          g_error_free (error);
+
+          screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
+        }
+    }
+
+  g_free (path);
+  g_free (filename);
 
   return screenshot;
 }

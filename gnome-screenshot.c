@@ -41,6 +41,7 @@
 #include <X11/Xutil.h>
 #include <canberra-gtk.h>
 
+#include "gnome-screenshot.h"
 #include "screenshot-area-selection.h"
 #include "screenshot-config.h"
 #include "screenshot-filename-builder.h"
@@ -58,7 +59,6 @@ static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
 static CheeseFlash *flash = NULL;
-static GDBusConnection *connection = NULL;
 static gchar *icc_profile_base64 = NULL;
 
 static void
@@ -615,6 +615,8 @@ init_dbus_session (void)
 {
   GError *error = NULL;
   gboolean retval = TRUE;
+
+  g_assert (connection == NULL);
 
   connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
 
