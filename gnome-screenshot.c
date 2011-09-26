@@ -41,6 +41,7 @@
 #include <X11/Xutil.h>
 #include <canberra-gtk.h>
 
+#include "screenshot-filename-builder.h"
 #include "screenshot-shadow.h"
 #include "screenshot-utils.h"
 #include "screenshot-save.h"
@@ -72,28 +73,10 @@ typedef enum {
   SCREENSHOT_EFFECT_BORDER
 } ScreenshotEffectType;
 
-typedef enum
-{
-  TEST_LAST_DIR = 0,
-  TEST_DESKTOP = 1,
-  TEST_TMP = 2,
-} TestType;
-
-typedef struct 
-{
-  char *base_uris[3];
-  char *retval;
-  int iteration;
-  TestType type;
-  GdkWindow *window;
-  GdkRectangle *rectangle;
-} AsyncExistenceJob;
-
 static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
 static char *last_save_dir = NULL;
-static char *window_title = NULL;
 static char *temporary_file = NULL;
 static gboolean save_immediately = FALSE;
 static GSettings *settings = NULL;
@@ -113,7 +96,6 @@ static guint delay = 0;
 /* some local prototypes */
 static void  display_help           (GtkWindow *parent);
 static void  save_done_notification (gpointer   data);
-static char *get_screenshot_dir     (void);
 static void  save_options           (void);
 
 static GtkWidget *border_check = NULL;
@@ -761,7 +743,6 @@ screenshot_dialog_response_cb (GtkDialog *d,
       gtk_main_quit ();
     }
 }
-                               
 
 static void
 run_dialog (ScreenshotDialog *dialog)
@@ -776,6 +757,34 @@ run_dialog (ScreenshotDialog *dialog)
                     "response",
                     G_CALLBACK (screenshot_dialog_response_cb),
                     dialog);
+}
+                               
+static void
+build_filename_ready_cb (GObject *source,
+                         GAsyncResult *res,
+                         gpointer user_data)
+{
+  ScreenshotDialog *dialog;
+  GdkPixbuf *screenshot = user_data;
+  gchar *save_uri;
+  GError *error = NULL;
+
+  save_uri = screenshot_build_filename_finish (res, &error);
+
+  if (error != NULL)
+    {
+      g_critical ("Impossible to find a valid location to save the screenshot: %s",
+                  error->message);
+      g_error_free (error);
+
+      exit(1);
+    }
+
+  dialog = screenshot_dialog_new (screenshot, save_uri, take_window_shot);
+  screenshot_save_start (screenshot, save_done_notification, dialog);
+  run_dialog (dialog);
+
+  g_free (save_uri);
 }
 
 static void
@@ -820,7 +829,6 @@ play_sound_effect (GdkWindow *window)
 static gchar *
 get_profile_for_window (GdkWindow *window)
 {
-  gboolean ret = FALSE;
   GError *error = NULL;
   guint xid;
   gchar *icc_profile = NULL;
@@ -863,8 +871,30 @@ out:
   return icc_profile;
 }
 
+static GdkWindow *
+find_current_window (void)
+{
+  GdkWindow *window = NULL;
+
+  if (!screenshot_grab_lock ())
+    exit (0);
+
+  if (take_window_shot)
+    {
+      window = screenshot_find_current_window ();
+
+      if (window == NULL)
+        take_window_shot = FALSE;
+    }
+
+  if (window == NULL)
+    window = gdk_get_default_root_window ();
+
+  return window;
+}
+
 static void
-finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *rectangle)
+finish_prepare_screenshot (GdkRectangle *rectangle)
 {  
   char *icc_profile_filename;
   guchar *icc_profile;
@@ -873,8 +903,10 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
   gboolean ret;
   GError *error = NULL;
   GdkRectangle rect;
-  ScreenshotDialog *dialog;
   gboolean include_mask = (!take_window_shot && !take_area_shot);
+  GdkWindow *window;
+
+  window = find_current_window ();
 
   /* always disable window border for full-desktop or selected-area screenshots */
   if (!take_window_shot)
@@ -958,246 +990,16 @@ finish_prepare_screenshot (char *initial_uri, GdkWindow *window, GdkRectangle *r
               g_free (icc_profile_filename);
             }
         }
-      dialog = screenshot_dialog_new (screenshot, initial_uri, take_window_shot);
 
-      screenshot_save_start (screenshot, save_done_notification, dialog);
-
-      run_dialog (dialog);
+      screenshot_build_filename_async (last_save_dir,
+                                       build_filename_ready_cb, screenshot);
     }
-
-  g_free (initial_uri);
-}
-
-static void
-async_existence_job_free (AsyncExistenceJob *job)
-{
-  if (!job)
-    return;
-
-  g_free (job->base_uris[1]);
-  g_free (job->base_uris[2]);
-
-  if (job->rectangle != NULL)
-    g_slice_free (GdkRectangle, job->rectangle);
-
-  g_slice_free (AsyncExistenceJob, job);
-}
-
-static gboolean
-check_file_done (gpointer user_data)
-{
-  AsyncExistenceJob *job = user_data;
-
-  finish_prepare_screenshot (job->retval, job->window, job->rectangle);
-
-  async_existence_job_free (job);
-  
-  return FALSE;
-}
-
-static char *
-build_uri (AsyncExistenceJob *job)
-{
-  char *retval, *file_name;
-  char *timestamp;
-  GDateTime *d;
-
-  d = g_date_time_new_now_local ();
-  timestamp = g_date_time_format (d, "%Y-%m-%d %H:%M:%S");
-  g_date_time_unref (d);
-
-  if (job->iteration == 0)
-    {
-      /* translators: this is the name of the file that gets made up
-       * with the screenshot if the entire screen is taken */
-      file_name = g_strdup_printf (_("Screenshot at %s.png"), timestamp);
-    }
-  else
-    {
-      /* translators: this is the name of the file that gets
-       * made up with the screenshot if the entire screen is
-       * taken */
-      file_name = g_strdup_printf (_("Screenshot at %s - %d.png"), timestamp, job->iteration);
-    }
-
-  retval = g_build_filename (job->base_uris[job->type], file_name, NULL);
-  g_free (file_name);
-  g_free (timestamp);
-
-  return retval;
-}
-
-static gboolean
-try_check_file (GIOSchedulerJob *io_job,
-                GCancellable *cancellable,
-                gpointer data)
-{
-  AsyncExistenceJob *job = data;
-  GFile *file;
-  GFileInfo *info;
-  GError *error;
-  char *uri;
-
-retry:
-  error = NULL;
-  uri = build_uri (job);
-  file = g_file_new_for_uri (uri);
-
-  info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
-			    G_FILE_QUERY_INFO_NONE, cancellable, &error);
-  if (info != NULL)
-    {
-      /* file already exists, iterate again */
-      g_object_unref (info);
-      g_object_unref (file);
-      g_free (uri);
-
-      (job->iteration)++;
-
-      goto retry;
-    }
-  else
-    {
-      /* see the error to check whether the location is not accessible
-       * or the file does not exist.
-       */
-      if (error->code == G_IO_ERROR_NOT_FOUND)
-        {
-          GFile *parent;
-
-          /* if the parent directory doesn't exist as well, forget the saved
-           * directory and treat this as a generic error.
-           */
-
-          parent = g_file_get_parent (file);
-
-          if (!g_file_query_exists (parent, NULL))
-            {
-              (job->type)++;
-              job->iteration = 0;
-
-              g_object_unref (file);
-              g_object_unref (parent);
-              goto retry;
-            }
-          else
-            {
-              job->retval = uri;
-
-              g_object_unref (parent);
-              goto out;
-            }
-        }
-      else
-        {
-          /* another kind of error, assume this location is not
-           * accessible.
-           */
-          g_free (uri);
-          if (job->type == TEST_TMP)
-            {
-              job->retval = NULL;
-              goto out;
-            }
-          else
-            {
-              (job->type)++;
-              job->iteration = 0;
-
-              g_error_free (error);
-              g_object_unref (file);
-              goto retry;
-            }
-        }
-    }
-
-out:
-  g_error_free (error);
-  g_object_unref (file);
-
-  g_io_scheduler_job_send_to_mainloop_async (io_job,
-                                             check_file_done,
-                                             job,
-                                             NULL);
-  return FALSE;
-}
-
-static GdkWindow *
-find_current_window (char **window_title)
-{
-  GdkWindow *window;
-
-  if (!screenshot_grab_lock ())
-    exit (0);
-
-  if (take_window_shot)
-    {
-      window = screenshot_find_current_window ();
-      if (!window)
-	{
-	  take_window_shot = FALSE;
-	  window = gdk_get_default_root_window ();
-	}
-      else
-	{
-	  gchar *tmp, *sanitized;
-
-	  tmp = screenshot_get_window_title (window);
-	  sanitized = screenshot_sanitize_filename (tmp);
-	  g_free (tmp);
-	  *window_title = sanitized;
-	}
-    }
-  else
-    {
-      window = gdk_get_default_root_window ();
-    }
-
-  return window;
-}
-
-static void
-push_check_file_job (GdkRectangle *rectangle)
-{ 
-  AsyncExistenceJob *job;
-
-  job = g_slice_new0 (AsyncExistenceJob);
-  job->base_uris[0] = last_save_dir;
-  /* we'll have to free these two */
-  job->base_uris[1] = get_screenshot_dir ();
-  job->base_uris[2] = g_strconcat ("file://", g_get_tmp_dir (), NULL);
-  job->iteration = 0;
-  job->type = TEST_LAST_DIR;
-  job->window = find_current_window (&window_title);
-
-  if (rectangle != NULL)
-    {
-      job->rectangle = g_slice_new0 (GdkRectangle);
-      job->rectangle->x = rectangle->x;
-      job->rectangle->y = rectangle->y;
-      job->rectangle->width = rectangle->width;
-      job->rectangle->height = rectangle->height;
-    }
-
-  /* Check if the area selection was cancelled */
-  if (job->rectangle &&
-      (job->rectangle->width == 0 || job->rectangle->height == 0))
-    {
-      async_existence_job_free (job);
-      gtk_main_quit ();
-      return;
-    }
-
-  g_io_scheduler_push_job (try_check_file,
-                           job,
-                           NULL,
-                           0, NULL);
 }
 
 static void
 rectangle_found_cb (GdkRectangle *rectangle)
 {
-  push_check_file_job (rectangle);
+  finish_prepare_screenshot (rectangle);
 }
 
 static void
@@ -1206,7 +1008,7 @@ prepare_screenshot (void)
   if (take_area_shot)
     screenshot_select_area_async (rectangle_found_cb);
   else
-    push_check_file_job (NULL);
+    finish_prepare_screenshot (NULL);
 }
 
 static gboolean
@@ -1218,47 +1020,6 @@ prepare_screenshot_timeout (gpointer data)
   return FALSE;
 }
 
-
-static gchar *
-get_screenshot_dir (void)
-{
-  gchar *shot_dir;
-
-  shot_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_PICTURES), NULL);
-
-  return shot_dir;
-}
-
-/* Taken from gnome-vfs-utils.c */
-static char *
-expand_initial_tilde (const char *path)
-{
-  char *slash_after_user_name, *user_name;
-  struct passwd *passwd_file_entry;
-
-  if (path[1] == '/' || path[1] == '\0') {
-    return g_strconcat (g_get_home_dir (), &path[1], NULL);
-  }
-  
-  slash_after_user_name = strchr (&path[1], '/');
-  if (slash_after_user_name == NULL) {
-    user_name = g_strdup (&path[1]);
-  } else {
-    user_name = g_strndup (&path[1],
-                           slash_after_user_name - &path[1]);
-  }
-  passwd_file_entry = getpwnam (user_name);
-  g_free (user_name);
-  
-  if (passwd_file_entry == NULL || passwd_file_entry->pw_dir == NULL) {
-    return g_strdup (path);
-  }
-  
-  return g_strconcat (passwd_file_entry->pw_dir,
-                      slash_after_user_name,
-                      NULL);
-}
-
 /* Load options */
 static void
 load_options (void)
@@ -1266,16 +1027,6 @@ load_options (void)
   /* Find various dirs */
   last_save_dir = g_settings_get_string (settings,
                                          LAST_SAVE_DIRECTORY_KEY);
-  if (!last_save_dir || !last_save_dir[0])
-    {
-      last_save_dir = get_screenshot_dir ();
-    }
-  else if (last_save_dir[0] == '~')
-    {
-      char *tmp = expand_initial_tilde (last_save_dir);
-      g_free (last_save_dir);
-      last_save_dir = tmp;
-    }
 
   include_border = g_settings_get_boolean (settings,
                                            INCLUDE_BORDER_KEY);
