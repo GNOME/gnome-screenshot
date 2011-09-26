@@ -507,6 +507,8 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
   cheese_flash_fire (flash, &rect);
   play_sound_effect (window);
 
+  g_object_unref (flash);
+
   if (screenshot_config->copy_to_clipboard)
     {
       screenshot_save_to_clipboard ();
@@ -721,7 +723,6 @@ main (int argc, char *argv[])
 
   gtk_main ();
 
-  g_clear_object (&flash);
   g_clear_object (&connection);
 
   return EXIT_SUCCESS;

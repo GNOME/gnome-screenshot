@@ -165,8 +165,8 @@ cheese_flash_opacity_fade (gpointer data)
 static gboolean
 cheese_flash_start_fade (gpointer data)
 {
-  CheeseFlashPrivate *flash_priv = CHEESE_FLASH_GET_PRIVATE (CHEESE_FLASH (data));
-
+  CheeseFlash *self = data;
+  CheeseFlashPrivate *flash_priv = CHEESE_FLASH_GET_PRIVATE (self);
   GtkWindow *flash_window = flash_priv->window;
 
   /* If the screen is non-composited, just hide and finish up */
@@ -176,7 +176,11 @@ cheese_flash_start_fade (gpointer data)
     return FALSE;
   }
 
-  flash_priv->fade_timeout_tag = g_timeout_add (1000.0 / FLASH_ANIMATION_RATE, cheese_flash_opacity_fade, data);
+  flash_priv->fade_timeout_tag = 
+    g_timeout_add_full (G_PRIORITY_DEFAULT,
+                        1000.0 / FLASH_ANIMATION_RATE,
+                        cheese_flash_opacity_fade,
+                        g_object_ref (self), g_object_unref);
   return FALSE;
 }
 
@@ -197,7 +201,11 @@ cheese_flash_fire (CheeseFlash  *flash,
 
   gtk_window_set_opacity (flash_window, 0.99);
   gtk_widget_show_all (GTK_WIDGET (flash_window));
-  flash_priv->flash_timeout_tag = g_timeout_add (FLASH_DURATION, cheese_flash_start_fade, (gpointer) flash);
+  flash_priv->flash_timeout_tag = 
+    g_timeout_add_full (G_PRIORITY_DEFAULT,
+                        FLASH_DURATION,
+                        cheese_flash_start_fade,
+                        g_object_ref (flash), g_object_unref);
 }
 
 CheeseFlash *
