@@ -35,55 +35,6 @@ static GtkWidget *selection_window;
 
 #define SELECTION_NAME "_GNOME_PANEL_SCREENSHOT"
 
-static char *
-get_utf8_property (GdkWindow *window,
-		   GdkAtom    atom)
-{
-  gboolean res;
-  GdkAtom utf8_string;
-  GdkAtom type;
-  int actual_format, actual_length;
-  guchar *data;
-  char *retval;
-  
-  utf8_string = gdk_x11_xatom_to_atom (gdk_x11_get_xatom_by_name ("UTF8_STRING"));
-  res = gdk_property_get (window, atom, utf8_string,
-                          0, G_MAXLONG, FALSE,
-                          &type,
-                          &actual_format, &actual_length,
-                          &data);
-  if (!res)
-    return NULL;
-
-  if (type != utf8_string || actual_format != 8 || actual_length == 0)
-    {
-      g_free (data);
-      return NULL;
-    }
-
-  if (!g_utf8_validate ((gchar *) data, actual_length, NULL))
-    {
-      char *atom_name = gdk_atom_name (atom);
-
-      g_warning ("Property `%s' (format: %d, length: %d) contained "
-                 "invalid UTF-8",
-                 atom_name,
-                 actual_format,
-                 actual_length);
-
-      g_free (atom_name);
-      g_free (data);
-
-      return NULL;
-    }
-  
-  retval = g_strndup ((gchar *) data, actual_length);
-
-  g_free (data);
-  
-  return retval;
-}
-
 /* To make sure there is only one screenshot taken at a time,
  * (Imagine key repeat for the print screen key) we hold a selection
  * until we are done taking the screenshot
@@ -160,69 +111,6 @@ screenshot_window_is_desktop (GdkWindow *window)
 
   return FALSE;
       
-}
-
-#define MAXIMUM_WM_REPARENTING_DEPTH 4
-
-static GdkWindow *
-look_for_hint_helper (GdkWindow *window,
-		      GdkAtom    property,
-		      int       depth)
-{
-  gboolean res;
-  GdkAtom actual_type;
-  int actual_format, actual_length;
-  guchar *data;
-  
-  res = gdk_property_get (window, property, GDK_NONE,
-                          0, 1, FALSE,
-                          &actual_type,
-                          &actual_format, &actual_length,
-                          &data);
-
-  if (res == TRUE &&
-      data != NULL &&
-      actual_format == 32 &&
-      data[0] == 1)
-    {
-      g_free (data);
-
-      return window;
-    }
-
-  if (depth < MAXIMUM_WM_REPARENTING_DEPTH)
-    {
-      GList *children, *l;
-
-      children = gdk_window_get_children (window);
-      if (children != NULL)
-        {
-          for (l = children; l; l = l->next)
-            {
-              window = look_for_hint_helper (l->data, property, depth + 1);
-              if (window)
-                break;
-            }
-
-          g_list_free (children);
-
-          if (window)
-            return window;
-        }
-    }
-
-  return NULL;
-}
-
-static GdkWindow *
-look_for_hint (GdkWindow *window,
-	       GdkAtom property)
-{
-  GdkWindow *retval;
-
-  retval = look_for_hint_helper (window, property, 0);
-
-  return retval;
 }
 
 GdkWindow *
@@ -918,23 +806,6 @@ screenshot_get_pixbuf (GdkWindow    *window,
     }
 
   return screenshot;
-}
-
-gchar *
-screenshot_get_window_title (GdkWindow *win)
-{
-  gchar *name;
-
-  win = gdk_window_get_toplevel (win);
-  win = look_for_hint (win, gdk_x11_xatom_to_atom (gdk_x11_get_xatom_by_name ("WM_STATE")));
-
-  name = get_utf8_property (win, gdk_x11_xatom_to_atom (gdk_x11_get_xatom_by_name ("_NET_WM_NAME")));
-  if (name)
-    return name;
-
-  /* TODO: maybe we should also look at WM_NAME and WM_CLASS? */
-
-  return g_strdup (_("Untitled Window"));
 }
 
 void
