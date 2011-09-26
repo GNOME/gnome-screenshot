@@ -57,7 +57,6 @@ on_preview_draw (GtkWidget      *drawing_area,
 {
   ScreenshotDialog *dialog = data;
   GdkPixbuf *pixbuf = NULL;
-  gboolean free_pixbuf = FALSE;
 
   /* Stolen from GtkImage.  I really should just make the drawing area an
    * image some day */
@@ -77,7 +76,6 @@ on_preview_draw (GtkWidget      *drawing_area,
 				      (GtkIconSize) -1,
 				      drawing_area,
 				      "gtk-image");
-      free_pixbuf = TRUE;
       gtk_icon_source_free (source);
     }
   else

@@ -285,24 +285,3 @@ screenshot_save_get_filename (void)
 {
   return tmp_filename;
 }
-
-gchar *
-screenshot_sanitize_filename (const char *filename)
-{
-  char *retval, *p;
-
-  g_assert (filename);
-  g_assert (g_utf8_validate (filename, -1, NULL));
-
-  retval = g_uri_escape_string (filename,
-                                "/",
-                                TRUE);
-
-  for (p = retval; *p != '\000'; p = g_utf8_next_char (p))
-    {
-      if (*p == G_DIR_SEPARATOR)
-	*p = '-';
-    }
-
-  return retval;
-}

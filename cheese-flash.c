@@ -185,8 +185,6 @@ cheese_flash_fire (CheeseFlash  *flash,
                    GdkRectangle *rect)
 {
   CheeseFlashPrivate *flash_priv = CHEESE_FLASH_GET_PRIVATE (flash);
-  GdkScreen          *screen;
-  int                 monitor;
   GtkWindow *flash_window = flash_priv->window;
 
   if (flash_priv->flash_timeout_tag > 0)
