@@ -1,0 +1,12 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+src/gnome-screenshot.c
+src/gnome-screenshot.desktop.in
+[type: gettext/glade]src/gnome-screenshot.ui
+src/org.gnome.gnome-screenshot.gschema.xml.in
+src/screenshot-config.c
+src/screenshot-dialog.c
+src/screenshot-filename-builder.c
+src/screenshot-interactive-dialog.c
+src/screenshot-shadow.c
+src/screenshot-utils.c
