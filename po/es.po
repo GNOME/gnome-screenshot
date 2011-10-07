@@ -15,15 +15,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-14 17:43+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-10-07 07:05+0000\n"
+"PO-Revision-Date: 2011-10-07 10:16+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -106,14 +107,12 @@ msgid "Screenshot"
 msgstr "Pantallazo"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "No se puede tomar una captura de pantalla de la ventana actual"
+msgstr "Tomar una captura de pantalla de la ventana actual"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Capturar imagen de la pantalla"
+msgstr "Tomar una captura de pantalla completa"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -210,12 +209,12 @@ msgstr ""
 "Opciones con conflictos: --window y --area no se deberían usar a la vez.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Opciones con conflictos: --window y --area no se deberían usar a la vez.\n"
+"Opciones con conflictos: ---area y --delay no se deben usar a la vez.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
