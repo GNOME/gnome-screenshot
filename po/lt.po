@@ -6,20 +6,23 @@
 # Tomas Kuliavas <tokul@users.sourceforge.net>, 2003.
 # Žygimantas Beručka <zygis@gnome.org>, 2003-2006, 2009, 2010.
 # Gintautas Miliauskas <gintas@akl.lt>, 2006, 2007, 2008.
+# Algimantas Margevičius <gymka@mail.ru>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: lt\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-03 23:26+0300\n"
-"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
-"Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
-"Language: lt\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-10-07 08:17+0000\n"
+"PO-Revision-Date: 2011-10-08 19:22+0300\n"
+"Last-Translator: Algimantas Margevičius <gymka@mail.ru>\n"
+"Language-Team: Lietuvių <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2)\n"
 "X-Generator: Virtaal 0.5.2\n"
 
 #: ../src/gnome-screenshot.c:143
@@ -101,14 +104,12 @@ msgid "Screenshot"
 msgstr "Nuotrauka"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Nepavyko padaryti dabartinio lango nuotraukos"
+msgstr "Padaryti dabartinio lango nuotrauką"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Padaryti ekrano nuotrauką"
+msgstr "Padaryti viso ekrano nuotrauką"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -204,12 +205,12 @@ msgstr ""
 "pačiu metu.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Besikertančios parinktys: --window ir --area neturėtų būti naudojamos tuo "
+"Besikertančios parinktys: --area ir --delay neturėtų būti naudojamos tuo "
 "pačiu metu.\n"
 
 #: ../src/screenshot-dialog.c:193
