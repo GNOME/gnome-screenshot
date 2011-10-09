@@ -1,4 +1,4 @@
-# Swedish messages for gnome-utils.
+# Swedish messages for gnome-screenshot.
 # Copyright (C) 2000-2011 Free Software Foundation, Inc.
 # Martin Norbäck <d95mback@dtek.chalmers.se>, 2000.
 # Andreas Hyden <a.hyden@cyberpoint.se>.
@@ -9,10 +9,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils\n"
+"Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:34-0400\n"
-"PO-Revision-Date: 2011-08-02 00:26+0100\n"
+"POT-Creation-Date: 2011-10-09 21:05+0200\n"
+"PO-Revision-Date: 2011-10-09 21:06+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -71,7 +71,8 @@ msgstr "Ta skärmbild efter angiven fördröjning [i sekunder]"
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:667
+#: ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "sekunder"
 
@@ -100,14 +101,12 @@ msgid "Screenshot"
 msgstr "Skärmbild"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Kunde inte ta en skärmbild av det aktuella fönstret"
+msgstr "Ta en skärmbild av det aktuella fönstret"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Ta en bild av skärmen"
+msgstr "Ta en skärmbild av hela skärmen"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -134,20 +133,12 @@ msgid "Border Effect"
 msgstr "Rameffekt"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Effekt att lägga till utsidan på ramen. Möjliga värden är \"shadow\", \"none"
-"\" och \"border\"."
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "Effekt att lägga till utsidan på ramen. Möjliga värden är \"shadow\", \"none\" och \"border\"."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"Fånga bara det aktuella fönstret istället för hela skrivbordet. Denna nyckel "
-"har fasats ut och används inte längre."
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "Fånga bara det aktuella fönstret istället för hela skrivbordet. Denna nyckel har fasats ut och används inte längre."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "Include Border"
@@ -195,17 +186,13 @@ msgstr "Fönsterspecifik skärmbild (utfasad)"
 
 #: ../src/screenshot-config.c:78
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
 msgstr "Flaggor i konflikt: --window och --area bör inte användas samtidigt.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr "Flaggor i konflikt: --window och --area bör inte användas samtidigt.\n"
+#, c-format
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Flaggor i konflikt: --area och --delay bör inte användas samtidigt.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
@@ -299,3 +286,4 @@ msgstr "Ta en _skärmbild"
 #: ../src/screenshot-utils.c:702
 msgid "Error loading the help page"
 msgstr "Fil vid inläsning av hjälpsidan"
+
