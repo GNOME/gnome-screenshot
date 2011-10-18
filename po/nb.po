@@ -1,4 +1,4 @@
-# Norwegian translation of gnome-utils (bokmål dialect).
+# Norwegian bokmål translation of gnome-screenshot.
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
 #
 # Kjartan Maraas <kmaraas@gnome.org>, 1999-2011.
@@ -6,10 +6,10 @@
 # Torstein Adolf Winterseth <kvikende@fsfe.org>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils 2.91.x\n"
+"Project-Id-Version: gnome-screenshot 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-08-10 15:24+0200\n"
+"POT-Creation-Date: 2011-10-18 07:45+0200\n"
+"PO-Revision-Date: 2011-10-18 07:47+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -98,14 +98,12 @@ msgid "Screenshot"
 msgstr "Skjermdump"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Kan ikke ta skjermdump av dette vinduet"
+msgstr "Ta skjermdump av aktivt vindu"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Ta et bilde av skjermen"
+msgstr "Ta skjermdump av hele skjermen"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -199,11 +197,11 @@ msgid ""
 msgstr "Konflikt mellom flagg: --window og --area kan ikke brukes samtidig.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Konflikt mellom flagg: --window og --area kan ikke brukes samtidig.\n"
+msgstr "Konflikt mellom flagg: --area og --delay kan ikke brukes samtidig.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
