@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-11 22:13+0300\n"
+"POT-Creation-Date: 2011-10-20 23:06+0300\n"
+"PO-Revision-Date: 2011-10-20 23:06+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -96,14 +96,12 @@ msgid "Screenshot"
 msgstr "Экранны здымак"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Не ўдалося зрабіць здымак актыўнага акна"
+msgstr "Здымак актыўнага акна"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Экранныя здымкі"
+msgstr "Здымак усяго экрана"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -126,55 +124,52 @@ msgid "_Name:"
 msgstr "_Назва:"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-#, fuzzy
 msgid "Border Effect"
-msgstr "Аблямоўка"
+msgstr "Эфект для аблямоўкі"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
+"Эфект для аблямоўкі. Магчымыя значэнні: \"shadow\" (цень), \"none\" (нічога) "
+"і \"border\" (асадка)."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
+"Здымаць актыўнае акно, а не ўвесь экран. Гэты ключ састарэў і ўжо насамрэч "
+"не выкарыстоўваецца."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-#, fuzzy
 msgid "Include Border"
-msgstr "Улучыць паказальнік мышы"
+msgstr "Улучыць аблямоўку"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-#, fuzzy
 msgid "Include ICC Profile"
-msgstr "Улучыць паказальнік мышы"
+msgstr "Улучыць профіль ICC"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
 msgid "Include Pointer"
 msgstr "Улучыць паказальнік мышы"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-#, fuzzy
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Улучыць у здымак аблямоўку акна"
+msgstr "Улучыць профіль ICC мэтавага прыстасавання ў файл здымка"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-#, fuzzy
 msgid "Include the pointer in the screenshot"
-msgstr "Улучыць у здымак аблямоўку акна"
+msgstr "Улучыць у здымак паказальнік мышы"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-#, fuzzy
 msgid "Include the window manager border along with the screenshot"
 msgstr "Улучыць у здымак аблямоўку акна"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
-#, fuzzy
 msgid "Screenshot delay"
-msgstr "Каталог для экранных здымкаў"
+msgstr "Затрымка здымкі"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Screenshot directory"
@@ -182,15 +177,15 @@ msgstr "Каталог для экранных здымкаў"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "The directory the last screenshot was saved in."
-msgstr ""
+msgstr "Апошні каталог, у якім быў захаваны здымак."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
+msgstr "Затрымка ў секундах да ўтварэння экраннага здымка."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
 msgid "Window-specific screenshot (deprecated)"
-msgstr ""
+msgstr "Экранны здымак акна (састарэлы ключ)"
 
 #: ../src/screenshot-config.c:78
 #, c-format
@@ -200,11 +195,11 @@ msgid ""
 msgstr "Канфліктныя опцыі: нельга адначасова ўжыць --window і --area.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Канфліктныя опцыі: нельга адначасова ўжыць --window і --area.\n"
+msgstr "Канфліктныя опцыі: нельга адначасова ўжыць --area і --delay.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
