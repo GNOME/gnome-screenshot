@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-08-06 14:55+0200\n"
+"POT-Creation-Date: 2011-10-22 12:54+0200\n"
+"PO-Revision-Date: 2011-10-22 12:55+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -79,7 +79,8 @@ msgstr "Take screenshot after specified delay [in seconds]"
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:667
+#: ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "שניות"
 
@@ -108,14 +109,12 @@ msgid "Screenshot"
 msgstr "צילום מסך"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "לא ניתן לצלם את החלון הנוכחי."
+msgstr "צילום החלון הנוכחי"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Take a picture of the screen"
+msgstr "צילום המסך כולו"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -142,20 +141,12 @@ msgid "Border Effect"
 msgstr "Border Effect"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "Include Border"
@@ -203,21 +194,13 @@ msgstr "Window-specific screenshot (deprecated)"
 
 #: ../src/screenshot-config.c:78
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "Conflicting options: --window and --area should not be used at the same time.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
+#, c-format
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Conflicting options: --area and --delay should not be used at the same time.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
@@ -311,3 +294,4 @@ msgstr "צילום ה_מסך"
 #: ../src/screenshot-utils.c:702
 msgid "Error loading the help page"
 msgstr "שגיאה בטעינת דף העזרה"
+
