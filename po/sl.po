@@ -1,25 +1,22 @@
-# Slovenian translations for gnome-utils.
+# Slovenian translations for gnome-screenshot.
 # Copyright (C) 2000-2006 Free Software Foundation, Inc.
-# This file is distributed under the same license as the gnome-utils package.
+# This file is distributed under the same license as the gnome-screenshot package.
 #
-# Andraž Tori <andraz.tori1@guest.arnes.si>, 2000.
-# Matic Žgur <mr.zgur@gmail.com>, 2006.
-# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2011.
+# Matej Urbančič <mateju@svn.gnome.org>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:34-0400\n"
-"PO-Revision-Date: 2011-09-07 20:27+0100\n"
+"Project-Id-Version: gnome-screenshot master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-10-07 07:05+0000\n"
+"PO-Revision-Date: 2011-10-23 19:52+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Language: \n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -74,7 +71,8 @@ msgstr "Zajemi zaslonsko sliko po navedenem zamiku [v sekundah]"
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:667
+#: ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "sekund"
 
@@ -103,14 +101,12 @@ msgid "Screenshot"
 msgstr "Zaslonska slika"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Ni mogoče zajeti zaslonske slike trenutnega namizja."
+msgstr "Zajem zaslonske slike trenutnega okna"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Zajem zaslonske slike"
+msgstr "Zajem zaslonske slike celotnega zaslona"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -137,20 +133,12 @@ msgid "Border Effect"
 msgstr "Učinki na robovih"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Učinki, ki so dodani izven robov. Vrednosti na voljo so \"senca\", \"brez\" "
-"in \"rob\"."
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "Učinki, ki so dodani izven robov. Vrednosti na voljo so \"senca\", \"brez\" in \"rob\"."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"Zajemi slike le trenutnega okna in ne celotnega namizja. Možnost je opuščena "
-"in ni več v uporabi."
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "Zajemi slike le trenutnega okna in ne celotnega namizja. Možnost je opuščena in ni več v uporabi."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "Include Border"
@@ -198,29 +186,20 @@ msgstr "Okenski zajem (opuščeno)"
 
 #: ../src/screenshot-config.c:78
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"Možnosti v sporu: zastavic --window in --area ni mogoče uporabljati "
-"sočasno.\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "Možnosti v sporu: zastavic --window in --area ni mogoče uporabljati sočasno.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"Možnosti v sporu: zastavic --window in --area ni mogoče uporabljati "
-"sočasno.\n"
+#, c-format
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Možnosti v sporu: zastavic --area in --delay ni mogoče uporabljati sočasno.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
 msgstr ""
-"Datoteka uporabniškega vmesnika za program zajemanja zaslonske slike "
-"manjka.\n"
+"Datoteka uporabniškega vmesnika za program zajemanja zaslonske slike manjka.\n"
 "Preverite namestitev gnome-utils"
 
 #: ../src/screenshot-dialog.c:214
@@ -278,7 +257,7 @@ msgstr "Zajemi celotno _namizje"
 
 #: ../src/screenshot-interactive-dialog.c:374
 msgid "Grab the current _window"
-msgstr "Zajemi trenutnego _okno"
+msgstr "Zajemi trenutno _okno"
 
 #: ../src/screenshot-interactive-dialog.c:386
 msgid "Select _area to grab"
@@ -307,3 +286,4 @@ msgstr "Zajemi zaslonsko _sliko"
 #: ../src/screenshot-utils.c:702
 msgid "Error loading the help page"
 msgstr "Napaka med nalaganjem pomoči"
+
