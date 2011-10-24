@@ -2,26 +2,28 @@
 # Copyright (C) 2003 gnome-utils' copyright holder
 # This file is distributed under the same license as the gnome-utils package.
 #
+#
 # Barbaros Uluta�_ <tebarul@yahoo.com>, 2003.
 # Rıdvan CAN <ridvan@linuxdeneyimi.com>, 2003.
 # Deniz Koçak <lenduha@gmail.com>, 2005.
 # Baris Cicek <baris@teamforce.name.tr>, 2004, 2005, 2008, 2009.
 # İlker DAĞLI <ilker@ilkerdagli.info>, 2011.
 # Muhammet Kara <muhammet.k@gmail.com>, 2011.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:34-0400\n"
-"PO-Revision-Date: 2011-07-03 13:07+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-10-07 07:05+0000\n"
+"PO-Revision-Date: 2011-10-24 21:46+0300\n"
 "Last-Translator: Muhammet Kara <muhammet.k@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: ../src/gnome-screenshot.c:143
 msgid "Error while saving screenshot"
@@ -102,14 +104,12 @@ msgid "Screenshot"
 msgstr "Ekran Görüntüsü"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Mevcut pencerenin ekran görüntüsü alınamadı"
+msgstr "Geçerli pencerenin ekran görüntüsünü al"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Ekranın resmini çek"
+msgstr "Tüm ekranın resmini çek"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -203,11 +203,11 @@ msgid ""
 msgstr "Çakışan seçenekler: --window ve --area aynı anda kullanılmamalıdır.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Çakışan seçenekler: --window ve --area aynı anda kullanılmamalıdır.\n"
+msgstr "Çakışan seçenekler: --area ve --delay aynı anda kullanılmamalıdır.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
@@ -301,3 +301,4 @@ msgstr "Ekran Görüntüsü _Al"
 #: ../src/screenshot-utils.c:702
 msgid "Error loading the help page"
 msgstr "Yardım sayfası yüklenirken hata"
+
