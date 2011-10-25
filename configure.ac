@@ -9,9 +9,8 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_CANONICAL_TARGET
 
-# require automake 1.10
-AM_INIT_AUTOMAKE([1.10 dist-bzip2 no-dist-gzip foreign])
-AM_MAINTAINER_MODE
+AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip foreign])
+AM_SILENT_RULES([yes])
 
 GETTEXT_PACKAGE=AC_PACKAGE_NAME
 AC_SUBST(GETTEXT_PACKAGE)
@@ -27,10 +26,6 @@ AM_PROG_CC_C_O
 AC_PROG_CXX
 AC_ISC_POSIX
 AC_HEADER_STDC
-
-AM_DISABLE_STATIC
-# enable libtool
-AC_PROG_LIBTOOL
 
 ## don't rerun to this point if we abort
 AC_CACHE_SAVE
