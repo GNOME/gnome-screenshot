@@ -53,37 +53,15 @@ on_preview_draw (GtkWidget      *drawing_area,
                  gpointer        data)
 {
   ScreenshotDialog *dialog = data;
-  GdkPixbuf *pixbuf = NULL;
+  GtkStyleContext *context;
 
-  /* Stolen from GtkImage.  I really should just make the drawing area an
-   * image some day */
-  if (gtk_widget_get_state (drawing_area) != GTK_STATE_NORMAL)
-    {
-      GtkIconSource *source;
+  context = gtk_widget_get_style_context (drawing_area);
+  gtk_style_context_save (context);
 
-      source = gtk_icon_source_new ();
-      gtk_icon_source_set_pixbuf (source, dialog->preview_image);
-      gtk_icon_source_set_size (source, GTK_ICON_SIZE_SMALL_TOOLBAR);
-      gtk_icon_source_set_size_wildcarded (source, FALSE);
+  gtk_style_context_set_state (context, gtk_widget_get_state_flags (drawing_area));
+  gtk_render_icon (context, cr, dialog->preview_image, 0, 0);
 
-      pixbuf = gtk_style_render_icon (gtk_widget_get_style (drawing_area),
-				      source,
-				      gtk_widget_get_direction (drawing_area),
-				      gtk_widget_get_state (drawing_area),
-				      (GtkIconSize) -1,
-				      drawing_area,
-				      "gtk-image");
-      gtk_icon_source_free (source);
-    }
-  else
-    {
-      pixbuf = g_object_ref (dialog->preview_image);
-    }
-
-  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-  cairo_paint (cr);
-
-  g_object_unref (pixbuf);
+  gtk_style_context_restore (context);
 }
 
 static gboolean
