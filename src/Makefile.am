@@ -82,7 +82,3 @@ CLEANFILES = \
 
 dist-hook:
 	cd $(distdir) ; rm -f $(CLEANFILES)
-
-install-exec-local:
-	rm -f $(DESTDIR)$(bindir)/gnome-panel-screenshot
-	ln -s gnome-screenshot $(DESTDIR)$(bindir)/gnome-panel-screenshot
