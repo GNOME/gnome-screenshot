@@ -119,14 +119,18 @@ GdkWindow *
 screenshot_find_current_window ()
 {
   GdkWindow *current_window;
+  GdkDeviceManager *manager;
+  GdkDevice *device;
 
   current_window = screenshot_find_active_window ();
+  manager = gdk_display_get_device_manager (gdk_display_get_default ());
+  device = gdk_device_manager_get_client_pointer (manager);
   
   /* If there's no active window, we fall back to returning the
    * window that the cursor is in.
    */
   if (!current_window)
-    current_window = gdk_window_at_pointer (NULL, NULL);
+    current_window = gdk_device_get_window_at_position (device, NULL, NULL);
 
   if (current_window)
     {
@@ -507,13 +511,20 @@ screenshot_get_pixbuf_fallback (GdkWindow *window,
 
       if (cursor_pixbuf != NULL) 
         {
+          GdkDeviceManager *manager;
+          GdkDevice *device;
           GdkRectangle rect;
           gint cx, cy, xhot, yhot;
 
+          manager = gdk_display_get_device_manager (gdk_display_get_default ());
+          device = gdk_device_manager_get_client_pointer (manager);
+
           if (wm_window != NULL)
-            gdk_window_get_pointer (wm_window, &cx, &cy, NULL);
+            gdk_window_get_device_position (wm_window, device,
+                                            &cx, &cy, NULL);
           else
-            gdk_window_get_pointer (window, &cx, &cy, NULL);
+            gdk_window_get_device_position (window, device,
+                                            &cx, &cy, NULL);
 
           sscanf (gdk_pixbuf_get_option (cursor_pixbuf, "x_hot"), "%d", &xhot);
           sscanf (gdk_pixbuf_get_option (cursor_pixbuf, "y_hot"), "%d", &yhot);

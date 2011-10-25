@@ -218,9 +218,12 @@ emit_select_callback_in_idle (gpointer user_data)
 void
 screenshot_select_area_async (SelectAreaCallback callback)
 {
-  GdkCursor               *cursor;
+  GdkCursor *cursor;
   select_area_filter_data  data;
   CallbackData *cb_data;
+  GdkDeviceManager *manager;
+  GdkDevice *pointer, *keyboard;
+  GdkGrabStatus res;
 
   data.rect.x = 0;
   data.rect.y = 0;
@@ -238,27 +241,39 @@ screenshot_select_area_async (SelectAreaCallback callback)
   g_signal_connect (data.window, "motion-notify-event", G_CALLBACK (select_area_motion_notify), &data);
 
   cursor = gdk_cursor_new (GDK_CROSSHAIR);
+  manager = gdk_display_get_device_manager (gdk_display_get_default ());
+  pointer = gdk_device_manager_get_client_pointer (manager);
+  keyboard = gdk_device_get_associated_device (pointer);
 
-  if (gdk_pointer_grab (gtk_widget_get_window (data.window), FALSE,
-                        GDK_POINTER_MOTION_MASK|GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK,
-                        NULL, cursor,
-                        GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
+  res = gdk_device_grab (pointer, gtk_widget_get_window (data.window),
+                         GDK_OWNERSHIP_NONE, FALSE,
+                         GDK_POINTER_MOTION_MASK |
+                         GDK_BUTTON_PRESS_MASK | 
+                         GDK_BUTTON_RELEASE_MASK,
+                         cursor, GDK_CURRENT_TIME);
+
+  if (res != GDK_GRAB_SUCCESS)
     {
       g_object_unref (cursor);
       goto out;
     }
 
-  if (gdk_keyboard_grab (gtk_widget_get_window (data.window), FALSE, GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
+  res = gdk_device_grab (keyboard, gtk_widget_get_window (data.window),
+                         GDK_OWNERSHIP_NONE, FALSE,
+                         GDK_KEY_PRESS_MASK |
+                         GDK_KEY_RELEASE_MASK,
+                         NULL, GDK_CURRENT_TIME);
+  if (res != GDK_GRAB_SUCCESS)
     {
-      gdk_pointer_ungrab (GDK_CURRENT_TIME);
-      gdk_cursor_unref (cursor);
+      gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
+      g_object_unref (cursor);
       goto out;
     }
 
   gtk_main ();
 
-  gdk_keyboard_ungrab (GDK_CURRENT_TIME);
-  gdk_pointer_ungrab (GDK_CURRENT_TIME);
+  gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
+  gdk_device_ungrab (keyboard, GDK_CURRENT_TIME);
 
   gtk_widget_destroy (data.window);
   g_object_unref (cursor);
