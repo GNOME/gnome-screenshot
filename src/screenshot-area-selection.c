@@ -244,7 +244,7 @@ screenshot_select_area_async (SelectAreaCallback callback)
                         NULL, cursor,
                         GDK_CURRENT_TIME) != GDK_GRAB_SUCCESS)
     {
-      gdk_cursor_unref (cursor);
+      g_object_unref (cursor);
       goto out;
     }
 
@@ -261,7 +261,7 @@ screenshot_select_area_async (SelectAreaCallback callback)
   gdk_pointer_ungrab (GDK_CURRENT_TIME);
 
   gtk_widget_destroy (data.window);
-  gdk_cursor_unref (cursor);
+  g_object_unref (cursor);
 
   gdk_flush ();
 

@@ -541,7 +541,7 @@ screenshot_get_pixbuf_fallback (GdkWindow *window,
             }
 
           g_object_unref (cursor_pixbuf);
-          gdk_cursor_unref (cursor);
+          g_object_unref (cursor);
         }
     }
 

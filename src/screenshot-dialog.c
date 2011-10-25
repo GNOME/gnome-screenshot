@@ -320,7 +320,7 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
       /* Change cursor to busy */
       cursor = gdk_cursor_new (GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
-      gdk_cursor_unref (cursor);
+      g_object_unref (cursor);
     }
   else
     {
