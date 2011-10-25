@@ -241,7 +241,7 @@ create_effects_frame (GtkWidget   *outer_vbox,
   GtkWidget *combo;
   gchar *title;
 
-  main_vbox = gtk_vbox_new (FALSE, 6);
+  main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
   gtk_widget_show (main_vbox);
   effects_vbox = main_vbox;
@@ -254,7 +254,7 @@ create_effects_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (label);
   g_free (title);
 
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
@@ -263,7 +263,7 @@ create_effects_frame (GtkWidget   *outer_vbox,
   gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
   gtk_widget_show (align);
 
-  vbox = gtk_vbox_new (FALSE, 6);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_container_add (GTK_CONTAINER (align), vbox);
   gtk_widget_show (vbox);
 
@@ -291,7 +291,7 @@ create_effects_frame (GtkWidget   *outer_vbox,
   border_check = check;
 
   /** Effects **/
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
@@ -324,7 +324,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   GSList *group;
   gchar *title;
 
-  main_vbox = gtk_vbox_new (FALSE, 6);
+  main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
   gtk_widget_show (main_vbox);
 
@@ -336,7 +336,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (label);
   g_free (title);
 
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
@@ -350,7 +350,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_container_add (GTK_CONTAINER (align), image);
   gtk_widget_show (image);
 
-  vbox = gtk_vbox_new (FALSE, 6);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
   gtk_widget_show (vbox);
 
@@ -393,7 +393,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (radio);
 
   /** Grab after delay **/
-  delay_hbox = gtk_hbox_new (FALSE, 6);
+  delay_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_box_pack_start (GTK_BOX (vbox), delay_hbox, FALSE, FALSE, 0);
   gtk_widget_show (delay_hbox);
 
@@ -441,7 +441,7 @@ screenshot_interactive_dialog_new (void)
   gtk_window_set_title (GTK_WINDOW (retval), _("Take Screenshot"));
 
   /* main container */
-  main_vbox = gtk_vbox_new (FALSE, 18);
+  main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 18);
   gtk_container_set_border_width (GTK_CONTAINER (main_vbox), 5);
   gtk_box_pack_start (GTK_BOX (content_area), main_vbox, TRUE, TRUE, 0);
   gtk_widget_show (main_vbox);
