@@ -27,6 +27,8 @@ typedef struct {
   GdkRectangle  rect;
   gboolean      button_pressed;
   GtkWidget    *window;
+
+  gboolean      aborted;
 } select_area_filter_data;
 
 static gboolean
@@ -130,6 +132,8 @@ select_area_key_press (GtkWidget               *window,
       data->rect.y = 0;
       data->rect.width  = 0;
       data->rect.height = 0;
+      data->aborted = TRUE;
+
       gtk_main_quit ();
     }
  
@@ -201,6 +205,7 @@ create_select_window (void)
 typedef struct {
   GdkRectangle rectangle;
   SelectAreaCallback callback;
+  gboolean aborted;
 } CallbackData;
 
 static gboolean
@@ -208,7 +213,10 @@ emit_select_callback_in_idle (gpointer user_data)
 {
   CallbackData *data = user_data;
 
-  data->callback (&data->rectangle);
+  if (!data->aborted)
+    data->callback (&data->rectangle);
+  else
+    data->callback (NULL);
 
   g_slice_free (CallbackData, data);
 
@@ -230,6 +238,7 @@ screenshot_select_area_async (SelectAreaCallback callback)
   data.rect.width  = 0;
   data.rect.height = 0;
   data.button_pressed = FALSE;
+  data.aborted = FALSE;
   data.window = create_select_window();
 
   cb_data = g_slice_new0 (CallbackData);
@@ -281,6 +290,7 @@ screenshot_select_area_async (SelectAreaCallback callback)
   gdk_flush ();
 
  out:
+  cb_data->aborted = data.aborted;
   cb_data->rectangle = data.rect;
 
   /* FIXME: we should actually be emitting the callback When

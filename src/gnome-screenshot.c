@@ -525,7 +525,11 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
 static void
 rectangle_found_cb (GdkRectangle *rectangle)
 {
-  finish_prepare_screenshot (rectangle);
+  if (rectangle != NULL)
+    finish_prepare_screenshot (rectangle);
+  else
+    /* just quit here; user dismissed the rectangle with Esc */
+    gtk_main_quit ();
 }
 
 static gboolean
