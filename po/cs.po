@@ -16,19 +16,20 @@
 # Lucas Lommer <llommer@svn.gnome.org>, 2009 (just a small fix).
 # Adrian Guniš <andygun696@gmail.com>, 2008, 2009, 2010.
 # Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011.
+# Jan Turoň <turon.honza@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-07-20 20:29+0200\n"
-"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-10-07 07:05+0000\n"
+"PO-Revision-Date: 2011-11-13 14:13+0100\n"
+"Last-Translator: Jan Turoň <turon.honza@gmail.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
-"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -82,7 +83,8 @@ msgstr "Zachytit snímek obrazovky po zadaném zpoždění [v sekundách]"
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:667
+#: ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "sekund"
 
@@ -111,14 +113,12 @@ msgid "Screenshot"
 msgstr "Snímek obrazovky"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Nelze zachytit snímek aktuálního okna"
+msgstr "Zachytit snímek aktuálního okna"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Zachytit snímek obrazovky"
+msgstr "Zachytit snímek celé obrazovky"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -145,20 +145,12 @@ msgid "Border Effect"
 msgstr "Efekt rámečku"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Efekt přidaný k vnější části rámečku. Možné hodnoty jsou „shadow“, „none“ a "
-"„border“."
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "Efekt přidaný k vnější části rámečku. Možné hodnoty jsou „shadow“, „none“ a „border“."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"Zachytit pouze aktuální okno, nikoliv celou pracovní plochu. Tento klíč je "
-"zastaralý a už se nepoužívá."
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "Zachytit pouze aktuální okno, nikoliv celou pracovní plochu. Tento klíč je zastaralý a už se nepoužívá."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "Include Border"
@@ -206,19 +198,13 @@ msgstr "Snímek obrazovky podle specifického nastavení okna (zastaralé)"
 
 #: ../src/screenshot-config.c:78
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"Konfliktní možnosti: --window a --area nelze použít ve stejnou chvíli.\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "Konfliktní možnosti: --window a --area nelze použít ve stejnou chvíli.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"Konfliktní možnosti: --window a --area nelze použít ve stejnou chvíli.\n"
+#, c-format
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Konflikt přepínačů: --area a --delay nelze použít ve zároveň.\n"
 
 #: ../src/screenshot-dialog.c:193
 msgid ""
