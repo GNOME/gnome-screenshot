@@ -14,17 +14,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils trunk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-01 14:45+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-10-25 14:02+0000\n"
+"PO-Revision-Date: 2011-11-15 12:01+0300\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "10<=4 && (n%100<10 || n%100>=20) ? 1: 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
@@ -51,50 +50,51 @@ msgstr "Cнимок экрана сделан"
 msgid "Unable to take a screenshot of the current window"
 msgstr "Не удалось сделать снимок текущего окна"
 
-#: ../src/gnome-screenshot.c:662
+#: ../src/gnome-screenshot.c:666
 msgid "Send the grab directly to the clipboard"
 msgstr "Отправить снимок сразу в буфер обмена"
 
-#: ../src/gnome-screenshot.c:663
+#: ../src/gnome-screenshot.c:667
 msgid "Grab a window instead of the entire screen"
 msgstr "Захватить снимок окна, а не всего экрана"
 
-#: ../src/gnome-screenshot.c:664
+#: ../src/gnome-screenshot.c:668
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Захватить область экрана, а не весь экран"
 
-#: ../src/gnome-screenshot.c:665
+#: ../src/gnome-screenshot.c:669
 msgid "Include the window border with the screenshot"
 msgstr "Включить рамку окна в снимок"
 
-#: ../src/gnome-screenshot.c:666
+#: ../src/gnome-screenshot.c:670
 msgid "Remove the window border from the screenshot"
 msgstr "Исключить рамку окна из снимка"
 
-#: ../src/gnome-screenshot.c:667
+#: ../src/gnome-screenshot.c:671
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Сделать снимок через указанное время [в секундах]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:671
+#: ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "секунд"
 
-#: ../src/gnome-screenshot.c:668
+#: ../src/gnome-screenshot.c:672
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Эффект, добавляемый к рамке окна (тень, рамка или никакого)"
 
-#: ../src/gnome-screenshot.c:668
+#: ../src/gnome-screenshot.c:672
 msgid "effect"
 msgstr "эффект"
 
-#: ../src/gnome-screenshot.c:669
+#: ../src/gnome-screenshot.c:673
 msgid "Interactively set options"
 msgstr "Установить параметры интерактивно"
 
-#: ../src/gnome-screenshot.c:680
+#: ../src/gnome-screenshot.c:682
 msgid "Take a picture of the screen"
 msgstr "Сделать снимок экрана"
 
@@ -107,14 +107,12 @@ msgid "Screenshot"
 msgstr "Снимок рабочего стола"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Не удалось сделать снимок текущего окна"
+msgstr "Сделать снимок текущего окна"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Сделать снимок экрана"
+msgstr "Сделать снимок всего экрана"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -141,20 +139,12 @@ msgid "Border Effect"
 msgstr "Эффект рамки"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Эффект, добавляемый вокруг рамки. Возможные варианты: «shadow», «none» и "
-"«border»."
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "Эффект, добавляемый вокруг рамки. Возможные варианты: «shadow», «none» и «border»."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"Снимать только текущее окно, а не весь рабочий стол. Этот ключ устарел и "
-"больше не используется."
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "Снимать только текущее окно, а не весь рабочий стол. Этот ключ устарел и больше не используется."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "Include Border"
@@ -194,9 +184,7 @@ msgstr "Каталог, в который последний раз был со�
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
-"Число секунд, которое будет ожидаться до того, как будет сделан снимок "
-"экрана."
+msgstr "Число секунд, которое будет ожидаться до того, как будет сделан снимок экрана."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
 msgid "Window-specific screenshot (deprecated)"
@@ -204,23 +192,15 @@ msgstr "Делать снимок текущего окна (устарел)"
 
 #: ../src/screenshot-config.c:78
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"Несовместимые параметры: --window и --area не могут быть использованы "
-"одновременно.\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "Несовместимые параметры: --window и --area не могут быть использованы одновременно.\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"Несовместимые параметры: --window и --area не могут быть использованы "
-"одновременно.\n"
+#, c-format
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Несовместимые параметры: --area и --delay не могут быть использованы одновременно.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -228,11 +208,11 @@ msgstr ""
 "Файл Glade для программы снимков экрана отсутствует.\n"
 "Проверьте, правильно ли установлен gnome-utils"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Выберите папку"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Снимок.png"
 
@@ -309,6 +289,7 @@ msgstr "Эффекты"
 msgid "Take _Screenshot"
 msgstr "Сделать _снимок экрана"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:713
 msgid "Error loading the help page"
 msgstr "Произошла ошибка при загрузке страницы справки"
+
