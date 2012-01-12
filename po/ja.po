@@ -1,5 +1,5 @@
-# gnome-utils ja.po.
-# Copyright (C) 1998-2011 gnome-util's COPYRIGHT HOLDER
+# gnome-screenshot ja.po.
+# Copyright (C) 1998-2012 gnome-screenshot's COPYRIGHT HOLDER
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1998.
 # Yuusuke Tahara <tahara@gnome.gr.jp>, 2000.
 # Yukihiro Nakai <nakai@gnome.gr.jp>, 2000.
@@ -9,21 +9,24 @@
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
 # Satoru SATOH <ss@gnome.gr.jp>, 2006.
 # Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2009, 2010.
+# Hideki Yamane <henrich@debian.org>, 2011.
 # Yasumichi Akahoshi <yasumichi@vinelinux.org>, 2010, 2011.
 # Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
+# Jiro Matsuzawa <jmatsuzawa@src.gnome.org>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-24 18:11+0900\n"
-"Last-Translator: Yasumichi Akahoshi <yasumichi@vinelinux.org>\n"
+"Project-Id-Version: gnome-screenshot master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-11-15 08:02+0000\n"
+"PO-Revision-Date: 2012-01-03 23:44+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../src/gnome-screenshot.c:143
@@ -39,7 +42,7 @@ msgid ""
 msgstr ""
 "スクリーンショットを %s へ保存できません。\n"
 " エラー: %s\n"
-"別の場所を選択してもう一度実行してみてください。"
+"別の場所を選択して、もう一度実行してみてください。"
 
 #: ../src/gnome-screenshot.c:336
 msgid "Screenshot taken"
@@ -49,52 +52,52 @@ msgstr "スクリーンショットを撮影しました"
 msgid "Unable to take a screenshot of the current window"
 msgstr "ウィンドウのスクリーンショットを撮れません"
 
-#: ../src/gnome-screenshot.c:662
+#: ../src/gnome-screenshot.c:666
 msgid "Send the grab directly to the clipboard"
 msgstr "取得したスクリーンショットをクリップボードへ直接送信する"
 
-#: ../src/gnome-screenshot.c:663
+#: ../src/gnome-screenshot.c:667
 msgid "Grab a window instead of the entire screen"
 msgstr "画面全体ではなくウィンドウ単体を取得する"
 
-#: ../src/gnome-screenshot.c:664
+#: ../src/gnome-screenshot.c:668
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "画面全体ではなく一部を取得する"
 
-#: ../src/gnome-screenshot.c:665
+#: ../src/gnome-screenshot.c:669
 msgid "Include the window border with the screenshot"
-msgstr "スクリーンショットにウィンドウの境界線を含める"
+msgstr "スクリーンショットにウィンドウの境界を含める"
 
-#: ../src/gnome-screenshot.c:666
+#: ../src/gnome-screenshot.c:670
 msgid "Remove the window border from the screenshot"
 msgstr "スクリーンショットからウィンドウの境界を取り除く"
 
-#: ../src/gnome-screenshot.c:667
+#: ../src/gnome-screenshot.c:671
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "指定した時間を経過してからスクリーンショットを撮る [秒単位]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:671 ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "秒"
 
-#: ../src/gnome-screenshot.c:668
+#: ../src/gnome-screenshot.c:672
 msgid "Effect to add to the border (shadow, border or none)"
-msgstr "境界線に適用する画像効果を指定する (shadow, border, none)"
+msgstr "境界の縁に適用するエフェクトを指定する (shadow、border、または none)"
 
-#: ../src/gnome-screenshot.c:668
+#: ../src/gnome-screenshot.c:672
 msgid "effect"
-msgstr "画像効果"
+msgstr "エフェクト"
 
-#: ../src/gnome-screenshot.c:669
+#: ../src/gnome-screenshot.c:673
 msgid "Interactively set options"
 msgstr "設定ダイアログを表示する"
 
-#: ../src/gnome-screenshot.c:680
+#: ../src/gnome-screenshot.c:682
 msgid "Take a picture of the screen"
-msgstr "画面全体のスクリーンショットを撮る"
+msgstr "画面のスクリーンショットを撮る"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
@@ -105,12 +108,10 @@ msgid "Screenshot"
 msgstr "スクリーンショット"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "ウィンドウのスクリーンショットを撮れません"
+msgstr "現在のウィンドウのスクリーンショットを撮る"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
 msgstr "画面全体のスクリーンショットを撮る"
 
@@ -136,15 +137,15 @@ msgstr "名前(_N):"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Border Effect"
-msgstr "追加する画像効果"
+msgstr "追加するエフェクト"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"画像の境界の外側に適用する効果です。選択可能な値: \"shadow\"、\"none"
-"\"、\"border\""
+"画像の境界の縁に適用するエフェクトです。選択可能な値: \"shadow\"、\"none\"、"
+"\"border\""
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
@@ -157,7 +158,7 @@ msgstr ""
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "Include Border"
-msgstr "ウィンドウの境界線を含める"
+msgstr "ウィンドウの境界を含める"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Include ICC Profile"
@@ -177,7 +178,7 @@ msgstr "スクリーンショットにマウスのポインターを含める"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include the window manager border along with the screenshot"
-msgstr "スクリーンショットにウィンドウマネージャーの境界線を含める"
+msgstr "スクリーンショットにウィンドウの境界を含める"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
 msgid "Screenshot delay"
@@ -204,28 +205,32 @@ msgstr "【廃止】ウィンドウだけスクリーンショットを撮るか
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr "注意: --window と --area のオプションは同時に指定できません\n"
+msgstr ""
+"オプションの競合: --window オプションと --area オプションは同時に指定できませ"
+"ん\n"
 
 #: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "注意: --window と --area のオプションは同時に指定できません\n"
+msgstr ""
+"オプションの競合: --area オプションと --delay オプションは同時に指定できませ"
+"ん\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
 msgstr ""
 "スクリーンショット取得プログラムの UI 定義ファイルが見つかりません。\n"
-"'gnome-utils' というパッケージのインストールを確認してください。"
+"gnome-utils がインストールされているかどうかを確認してください。"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "フォルダーの選択"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
@@ -254,7 +259,7 @@ msgstr "影を付ける"
 
 #: ../src/screenshot-interactive-dialog.c:167
 msgid "Border"
-msgstr "境界線を付ける"
+msgstr "境界を含める"
 
 #. * Include pointer *
 #: ../src/screenshot-interactive-dialog.c:271
@@ -264,11 +269,11 @@ msgstr "マウスのポインターを含める(_P)"
 #. * Include window border *
 #: ../src/screenshot-interactive-dialog.c:281
 msgid "Include the window _border"
-msgstr "ウィンドウの境界線を含める(_B)"
+msgstr "ウィンドウの境界を含める(_B)"
 
 #: ../src/screenshot-interactive-dialog.c:298
 msgid "Apply _effect:"
-msgstr "適用する効果(_E):"
+msgstr "適用するエフェクト(_E):"
 
 #: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the whole _desktop"
@@ -296,12 +301,12 @@ msgstr "スクリーンショットの取得"
 
 #: ../src/screenshot-interactive-dialog.c:450
 msgid "Effects"
-msgstr "画像効果"
+msgstr "エフェクト"
 
 #: ../src/screenshot-interactive-dialog.c:455
 msgid "Take _Screenshot"
 msgstr "スクリーンショットの取得(_S)"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:713
 msgid "Error loading the help page"
 msgstr "ヘルプを読み込む際にエラー"
