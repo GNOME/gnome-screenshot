@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 #include <canberra-gtk.h>
+#include <stdlib.h>
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
 #include <X11/extensions/shape.h>
@@ -115,38 +116,6 @@ screenshot_window_is_desktop (GdkWindow *window)
 
   return FALSE;
       
-}
-
-GdkWindow *
-screenshot_find_current_window ()
-{
-  GdkWindow *current_window;
-  GdkDeviceManager *manager;
-  GdkDevice *device;
-
-  current_window = screenshot_find_active_window ();
-  manager = gdk_display_get_device_manager (gdk_display_get_default ());
-  device = gdk_device_manager_get_client_pointer (manager);
-  
-  /* If there's no active window, we fall back to returning the
-   * window that the cursor is in.
-   */
-  if (!current_window)
-    current_window = gdk_device_get_window_at_position (device, NULL, NULL);
-
-  if (current_window)
-    {
-      if (screenshot_window_is_desktop (current_window))
-	/* if the current window is the desktop (e.g. nautilus), we
-	 * return NULL, as getting the whole screen makes more sense.
-         */
-        return NULL;
-
-      /* Once we have a window, we take the toplevel ancestor. */
-      current_window = gdk_window_get_toplevel (current_window);
-    }
-
-  return current_window;
 }
 
 static Window
@@ -406,15 +375,68 @@ screenshot_fallback_fire_flash (GdkWindow *window,
   g_object_unref (flash);
 }
 
+GdkWindow *
+do_find_current_window (void)
+{
+  GdkWindow *current_window;
+  GdkDeviceManager *manager;
+  GdkDevice *device;
+
+  current_window = screenshot_find_active_window ();
+  manager = gdk_display_get_device_manager (gdk_display_get_default ());
+  device = gdk_device_manager_get_client_pointer (manager);
+  
+  /* If there's no active window, we fall back to returning the
+   * window that the cursor is in.
+   */
+  if (!current_window)
+    current_window = gdk_device_get_window_at_position (device, NULL, NULL);
+
+  if (current_window)
+    {
+      if (screenshot_window_is_desktop (current_window))
+	/* if the current window is the desktop (e.g. nautilus), we
+	 * return NULL, as getting the whole screen makes more sense.
+         */
+        return NULL;
+
+      /* Once we have a window, we take the toplevel ancestor. */
+      current_window = gdk_window_get_toplevel (current_window);
+    }
+
+  return current_window;
+}
+
+static GdkWindow *
+screenshot_fallback_find_current_window (void)
+{
+  GdkWindow *window = NULL;
+
+  if (screenshot_config->take_window_shot)
+    {
+      window = do_find_current_window ();
+
+      if (window == NULL)
+        screenshot_config->take_window_shot = FALSE;
+    }
+
+  if (window == NULL)
+    window = gdk_get_default_root_window ();
+
+  return window;
+}
+
 static GdkPixbuf *
-screenshot_fallback_get_pixbuf (GdkWindow *window,
-                                GdkRectangle *rectangle)
+screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
 {
   GdkWindow *root, *wm_window = NULL;
   GdkPixbuf *screenshot;
   GdkRectangle real_coords, screenshot_coords;
   Window wm;
   GtkBorder frame_offset = { 0, 0, 0, 0 };
+  GdkWindow *window;
+
+  window = screenshot_fallback_find_current_window ();
 
   screenshot_fallback_get_window_rect_coords (window, 
                                               screenshot_config->include_border,
@@ -614,14 +636,16 @@ screenshot_fallback_get_pixbuf (GdkWindow *window,
 }
 
 GdkPixbuf *
-screenshot_get_pixbuf (GdkWindow    *window,
-                       GdkRectangle *rectangle)
+screenshot_get_pixbuf (GdkRectangle *rectangle)
 {
   GdkPixbuf *screenshot = NULL;
   gchar *path, *filename, *tmpname;
   const gchar *method_name;
   GVariant *method_params;
   GError *error = NULL;
+
+  if (!screenshot_grab_lock ())
+    exit (0);
 
   path = g_build_filename (g_get_user_cache_dir (), "gnome-screenshot", NULL);
   g_mkdir_with_parents (path, 0700);
@@ -678,11 +702,14 @@ screenshot_get_pixbuf (GdkWindow    *window,
                  "resorting to fallback X11. Error: %s", error->message);
       g_error_free (error);
 
-      screenshot = screenshot_fallback_get_pixbuf (window, rectangle);
+      screenshot = screenshot_fallback_get_pixbuf (rectangle);
     }
 
   if (screenshot != NULL)
     screenshot_play_sound_effect ();
+
+  /* release now the lock */
+  screenshot_release_lock ();
 
   g_free (path);
   g_free (tmpname);

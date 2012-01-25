@@ -313,35 +313,18 @@ build_filename_ready_cb (GObject *source,
   g_free (save_uri);
 }
 
-static GdkWindow *
-find_current_window (void)
-{
-  GdkWindow *window = NULL;
-
-  if (!screenshot_grab_lock ())
-    exit (0);
-
-  if (screenshot_config->take_window_shot)
-    {
-      window = screenshot_find_current_window ();
-
-      if (window == NULL)
-        screenshot_config->take_window_shot = FALSE;
-    }
-
-  if (window == NULL)
-    window = gdk_get_default_root_window ();
-
-  return window;
-}
-
 static void
 finish_prepare_screenshot (GdkRectangle *rectangle)
 {
-  GdkWindow *window;
+  screenshot = screenshot_get_pixbuf (rectangle);
 
-  window = find_current_window ();
-  screenshot = screenshot_get_pixbuf (window, rectangle);
+  if (screenshot == NULL)
+    {
+      screenshot_show_error_dialog (NULL,
+                                    _("Unable to take a screenshot of the current window"),
+                                    NULL);
+      exit (1);
+    }
 
   if (screenshot_config->take_window_shot)
     {
@@ -357,17 +340,6 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
         default:
           break;
         }
-    }
-
-  /* release now the lock, it was acquired when we were finding the window */
-  screenshot_release_lock ();
-
-  if (screenshot == NULL)
-    {
-      screenshot_show_error_dialog (NULL,
-                                    _("Unable to take a screenshot of the current window"),
-                                    NULL);
-      exit (1);
     }
 
   if (screenshot_config->copy_to_clipboard)
