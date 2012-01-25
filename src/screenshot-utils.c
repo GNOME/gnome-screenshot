@@ -24,6 +24,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
+#include <canberra-gtk.h>
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
 #include <X11/extensions/shape.h>
@@ -356,6 +357,35 @@ screenshot_get_window_rect_coords (GdkWindow *window,
 }
 
 static void
+screenshot_play_sound_effect (void)
+{
+  ca_context *c;
+  ca_proplist *p = NULL;
+  int res;
+
+  c = ca_gtk_context_get ();
+
+  res = ca_proplist_create (&p);
+  if (res < 0)
+    goto done;
+
+  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, "screen-capture");
+  if (res < 0)
+    goto done;
+
+  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, _("Screenshot taken"));
+  if (res < 0)
+    goto done;
+
+  ca_context_play_full (c, 0, p, NULL, NULL);
+
+ done:
+  if (p != NULL)
+    ca_proplist_destroy (p);
+
+}
+
+static void
 screenshot_fallback_fire_flash (GdkWindow *window,
                                 GdkRectangle *rectangle)
 {
@@ -650,6 +680,9 @@ screenshot_get_pixbuf (GdkWindow    *window,
 
       screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
     }
+
+  if (screenshot != NULL)
+    screenshot_play_sound_effect ();
 
   g_free (path);
   g_free (tmpname);

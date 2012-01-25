@@ -39,7 +39,6 @@
 #include <gio/gio.h>
 #include <pwd.h>
 #include <X11/Xutil.h>
-#include <canberra-gtk.h>
 
 #include "gnome-screenshot.h"
 #include "screenshot-area-selection.h"
@@ -314,45 +313,6 @@ build_filename_ready_cb (GObject *source,
   g_free (save_uri);
 }
 
-static void
-play_sound_effect (GdkWindow *window)
-{
-  ca_context *c;
-  ca_proplist *p = NULL;
-  int res;
-
-  c = ca_gtk_context_get ();
-
-  res = ca_proplist_create (&p);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, "screen-capture");
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, _("Screenshot taken"));
-  if (res < 0)
-    goto done;
-
-  if (window != NULL)
-    {
-      res = ca_proplist_setf (p,
-                              CA_PROP_WINDOW_X11_XID,
-                              "%lu",
-                              (unsigned long) GDK_WINDOW_XID (window));
-      if (res < 0)
-        goto done;
-    }
-
-  ca_context_play_full (c, 0, p, NULL, NULL);
-
- done:
-  if (p != NULL)
-    ca_proplist_destroy (p);
-
-}
-
 static gchar *
 get_profile_for_window (GdkWindow *window)
 {
@@ -489,8 +449,6 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
                                     NULL);
       exit (1);
     }
-
-  play_sound_effect (window);
 
   if (screenshot_config->copy_to_clipboard)
     {
