@@ -602,22 +602,24 @@ screenshot_get_pixbuf (GdkWindow    *window,
   if (screenshot_config->take_window_shot)
     {
       method_name = "ScreenshotWindow";
-      method_params = g_variant_new ("(bs)",
+      method_params = g_variant_new ("(bbs)",
                                      screenshot_config->include_border,
+                                     TRUE,
                                      filename);
     }
   else if (rectangle != NULL)
     {
       method_name = "ScreenshotArea";
-      method_params = g_variant_new ("(iiiis)",
+      method_params = g_variant_new ("(iiiibs)",
                                      rectangle->x, rectangle->y,
                                      rectangle->width, rectangle->height,
+                                     TRUE,
                                      filename);
     }
   else
     {
       method_name = "Screenshot";
-      method_params = g_variant_new ("(s)", filename);
+      method_params = g_variant_new ("(bs)", TRUE, filename);
     }
 
   g_dbus_connection_call_sync (connection,
