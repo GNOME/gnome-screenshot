@@ -300,10 +300,10 @@ mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
 }
 
 static void
-screenshot_get_window_rect_coords (GdkWindow *window,
-                                   gboolean include_border,
-                                   GdkRectangle *real_coordinates_out,
-                                   GdkRectangle *screenshot_coordinates_out)
+screenshot_fallback_get_window_rect_coords (GdkWindow *window,
+                                            gboolean include_border,
+                                            GdkRectangle *real_coordinates_out,
+                                            GdkRectangle *screenshot_coordinates_out)
 {
   gint x_orig, y_orig;
   gint width, height;
@@ -395,10 +395,10 @@ screenshot_fallback_fire_flash (GdkWindow *window,
   if (rectangle != NULL)
     rect = *rectangle;
   else
-    screenshot_get_window_rect_coords (window,
-                                       screenshot_config->include_border,
-                                       NULL,
-                                       &rect);
+    screenshot_fallback_get_window_rect_coords (window,
+                                                screenshot_config->include_border,
+                                                NULL,
+                                                &rect);
 
   flash = cheese_flash_new ();
   cheese_flash_fire (flash, &rect);
@@ -407,7 +407,7 @@ screenshot_fallback_fire_flash (GdkWindow *window,
 }
 
 static GdkPixbuf *
-screenshot_get_pixbuf_fallback (GdkWindow *window,
+screenshot_fallback_get_pixbuf (GdkWindow *window,
                                 GdkRectangle *rectangle)
 {
   GdkWindow *root, *wm_window = NULL;
@@ -416,10 +416,10 @@ screenshot_get_pixbuf_fallback (GdkWindow *window,
   Window wm;
   GtkBorder frame_offset = { 0, 0, 0, 0 };
 
-  screenshot_get_window_rect_coords (window, 
-                                     screenshot_config->include_border,
-                                     &real_coords,
-                                     &screenshot_coords);
+  screenshot_fallback_get_window_rect_coords (window, 
+                                              screenshot_config->include_border,
+                                              &real_coords,
+                                              &screenshot_coords);
 
   wm = find_wm_window (window);
   if (wm != None)
@@ -429,10 +429,10 @@ screenshot_get_pixbuf_fallback (GdkWindow *window,
       wm_window = gdk_x11_window_foreign_new_for_display 
         (gdk_window_get_display (window), wm);
 
-      screenshot_get_window_rect_coords (wm_window,
-                                         FALSE,
-                                         &wm_real_coords,
-                                         NULL);
+      screenshot_fallback_get_window_rect_coords (wm_window,
+                                                  FALSE,
+                                                  &wm_real_coords,
+                                                  NULL);
 
       frame_offset.left = (gdouble) (real_coords.x - wm_real_coords.x);
       frame_offset.top = (gdouble) (real_coords.y - wm_real_coords.y);
@@ -678,7 +678,7 @@ screenshot_get_pixbuf (GdkWindow    *window,
                  "resorting to fallback X11. Error: %s", error->message);
       g_error_free (error);
 
-      screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
+      screenshot = screenshot_fallback_get_pixbuf (window, rectangle);
     }
 
   if (screenshot != NULL)
