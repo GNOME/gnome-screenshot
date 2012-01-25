@@ -36,59 +36,6 @@
 #include "screenshot-config.h"
 #include "screenshot-utils.h"
 
-static GtkWidget *selection_window;
-
-#define SELECTION_NAME "_GNOME_PANEL_SCREENSHOT"
-
-/* To make sure there is only one screenshot taken at a time,
- * (Imagine key repeat for the print screen key) we hold a selection
- * until we are done taking the screenshot
- */
-gboolean
-screenshot_grab_lock (void)
-{
-  GdkAtom selection_atom;
-  gboolean result = FALSE;
-
-  selection_atom = gdk_atom_intern (SELECTION_NAME, FALSE);
-  gdk_x11_grab_server ();
-
-  if (gdk_selection_owner_get (selection_atom) != NULL)
-    goto out;
-
-  selection_window = gtk_invisible_new ();
-  gtk_widget_show (selection_window);
-
-  if (!gtk_selection_owner_set (selection_window,
-				gdk_atom_intern (SELECTION_NAME, FALSE),
-				GDK_CURRENT_TIME))
-    {
-      gtk_widget_destroy (selection_window);
-      selection_window = NULL;
-      goto out;
-    }
-
-  result = TRUE;
-
- out:
-  gdk_x11_ungrab_server ();
-  gdk_flush ();
-
-  return result;
-}
-
-void
-screenshot_release_lock (void)
-{
-  if (selection_window)
-    {
-      gtk_widget_destroy (selection_window);
-      selection_window = NULL;
-    }
-
-  gdk_flush ();
-}
-
 static GdkWindow *
 screenshot_find_active_window (void)
 {
@@ -645,9 +592,6 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
   GError *error = NULL;
   GDBusConnection *connection;
 
-  if (!screenshot_grab_lock ())
-    exit (0);
-
   path = g_build_filename (g_get_user_cache_dir (), "gnome-screenshot", NULL);
   g_mkdir_with_parents (path, 0700);
 
@@ -709,9 +653,6 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
 
   if (screenshot != NULL)
     screenshot_play_sound_effect ();
-
-  /* release now the lock */
-  screenshot_release_lock ();
 
   g_free (path);
   g_free (tmpname);
