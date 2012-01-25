@@ -1,23 +1,22 @@
 # Norwegian bokmål translation of gnome-screenshot.
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
 #
-# Kjartan Maraas <kmaraas@gnome.org>, 1999-2011.
+# Kjartan Maraas <kmaraas@gnome.org>, 1999-2012.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 # Torstein Adolf Winterseth <kvikende@fsfe.org>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-18 07:45+0200\n"
-"PO-Revision-Date: 2011-10-18 07:47+0200\n"
+"POT-Creation-Date: 2012-01-25 20:15+0100\n"
+"PO-Revision-Date: 2012-01-25 20:16+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
-"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.1\n"
 
 #: ../src/gnome-screenshot.c:143
 msgid "Error while saving screenshot"
@@ -42,102 +41,94 @@ msgstr "Skjermdump tatt"
 msgid "Unable to take a screenshot of the current window"
 msgstr "Kan ikke ta skjermdump av dette vinduet"
 
-#: ../src/gnome-screenshot.c:662
+#: ../src/gnome-screenshot.c:666
 msgid "Send the grab directly to the clipboard"
-msgstr "Send «grab» direkte til utklippstavlen"
+msgstr "Send dump direkte til utklippstavlen"
 
-#: ../src/gnome-screenshot.c:663
+#: ../src/gnome-screenshot.c:667
 msgid "Grab a window instead of the entire screen"
 msgstr "Dump et vindu i stedet for hele skjermen"
 
-#: ../src/gnome-screenshot.c:664
+#: ../src/gnome-screenshot.c:668
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Dump en del av skjermen i stedet for hele området"
 
-#: ../src/gnome-screenshot.c:665
+#: ../src/gnome-screenshot.c:669
 msgid "Include the window border with the screenshot"
 msgstr "Ta med vinduskant i skjermdumpet"
 
-#: ../src/gnome-screenshot.c:666
+#: ../src/gnome-screenshot.c:670
 msgid "Remove the window border from the screenshot"
 msgstr "Fjern vinduskanten i skjermdumpet"
 
-#: ../src/gnome-screenshot.c:667
+#: ../src/gnome-screenshot.c:671
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Ta skjermdump etter oppgitt pause [i sekunder]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
+#: ../src/gnome-screenshot.c:671 ../src/screenshot-interactive-dialog.c:423
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../src/gnome-screenshot.c:668
+#: ../src/gnome-screenshot.c:672
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Effekt som skal brukes på vinduskanten (skygge, kant eller ingen)"
 
-#: ../src/gnome-screenshot.c:668
+#: ../src/gnome-screenshot.c:672
 msgid "effect"
 msgstr "effekt"
 
-#: ../src/gnome-screenshot.c:669
+#: ../src/gnome-screenshot.c:673
 msgid "Interactively set options"
 msgstr "Spør etter alternativer"
 
-#: ../src/gnome-screenshot.c:680
+#: ../src/gnome-screenshot.c:682
 msgid "Take a picture of the screen"
 msgstr "Ta et bilde av skjermen"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "Lagre bilder av ditt skrivebord eller individuelle vinduer"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "Skjermdump"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the current window"
-msgstr "Ta skjermdump av aktivt vindu"
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "Lagre bilder av ditt skrivebord eller individuelle vinduer"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:3
 msgid "Take a screenshot of the whole screen"
 msgstr "Ta skjermdump av hele skjermen"
 
+#: ../src/gnome-screenshot.desktop.in.h:4
+msgid "Take a screenshot of the current window"
+msgstr "Ta skjermdump av aktivt vindu"
+
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "Lagre skjermdump"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "K_opier til utklippstavlen"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "Lagre skjermdump"
+msgid "_Name:"
+msgstr "_Navn:"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "Lagre i _mappe:"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "_Navn:"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "Effekt for kant"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "Vindusspesifikt skjermdump (utgått)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Effekt som skal legges til på utsiden av kanten. Mulige verdier er «shadow», "
-"«none» og «border»."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -145,49 +136,57 @@ msgstr ""
 "Dump kun aktivt vindu i stedet for hele skrivebordet. Denne nøkkelen er "
 "utgått og er ikke lenger i bruk."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "Ta med kant"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "Ta med ICC-profil"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "Ta med peker"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Ta med ICC-profil for målet i skjermdumpfilen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "Ta med peker i skjermdumpet"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "Ta med vindushåndtererens kant i skjermdumpet"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "Pause før skjermdump"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "Mappe for skjermdump"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "Katalog hvor forrige skjermdump ble lagret."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Antall sekunder pause før skjermdumpet tas."
 
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "Mappe for skjermdump"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory the last screenshot was saved in."
+msgstr "Katalog hvor forrige skjermdump ble lagret."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Include Border"
+msgstr "Ta med kant"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "Include the window manager border along with the screenshot"
+msgstr "Ta med vindushåndtererens kant i skjermdumpet"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Pointer"
+msgstr "Ta med peker"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the pointer in the screenshot"
+msgstr "Ta med peker i skjermdumpet"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include ICC Profile"
+msgstr "Ta med ICC-profil"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "Ta med ICC-profil for målet i skjermdumpfilen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Border Effect"
+msgstr "Effekt for kant"
+
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "Vindusspesifikt skjermdump (utgått)"
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Effekt som skal legges til på utsiden av kanten. Mulige verdier er «shadow», "
+"«none» og «border»."
 
 #: ../src/screenshot-config.c:78
 #, c-format
@@ -203,7 +202,7 @@ msgid ""
 "time.\n"
 msgstr "Konflikt mellom flagg: --area og --delay kan ikke brukes samtidig.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -211,11 +210,11 @@ msgstr ""
 "Fil med definisjon av brukergrensesnitt for skjermdumpprogrammet mangler.\n"
 "Vennligst sjekk gnome-utils-installasjonen."
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Velg en mappe"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Skjermdump.png"
 
@@ -292,6 +291,6 @@ msgstr "Effekter"
 msgid "Take _Screenshot"
 msgstr "Ta _skjermdump"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:713
 msgid "Error loading the help page"
 msgstr "Feil under lasting av hjelpsiden"
