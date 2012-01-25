@@ -313,86 +313,6 @@ build_filename_ready_cb (GObject *source,
   g_free (save_uri);
 }
 
-static gchar *
-get_profile_for_window (GdkWindow *window)
-{
-  GError *error = NULL;
-  guint xid;
-  gchar *icc_profile = NULL;
-  GVariant *response = NULL;
-  GVariant *response_child = NULL;
-  GVariantIter *iter = NULL;
-
-  /* get color profile */
-  xid = GDK_WINDOW_XID (window);
-  response = g_dbus_connection_call_sync (connection,
-                                          "org.gnome.ColorManager",
-                                          "/org/gnome/ColorManager",
-                                          "org.gnome.ColorManager",
-                                          "GetProfileForWindow",
-                                          g_variant_new ("(u)", xid),
-                                          G_VARIANT_TYPE ("(s)"),
-                                          G_DBUS_CALL_FLAGS_NONE,
-                                          -1, NULL, &error);
-  if (response == NULL)
-    {
-      /* not a warning, as GCM might not be installed / running */
-      g_debug ("The GetProfileForWindow request failed: %s",
-               error->message);
-      g_error_free (error);
-      goto out;
-    }
-
-  /* get icc profile filename */
-  response_child = g_variant_get_child_value (response, 0);
-  icc_profile = g_variant_dup_string (response_child, NULL);
-out:
-  if (iter != NULL)
-    g_variant_iter_free (iter);
-  if (response != NULL)
-    g_variant_unref (response);
-  return icc_profile;
-}
-
-static void
-screenshot_ensure_icc_profile (GdkWindow *window)
-{
-  char *icc_profile_filename;
-  guchar *icc_profile;
-  gsize icc_profile_size;
-  gboolean ret;
-  GError *error = NULL;
-
-  if (!screenshot_config->include_icc_profile)
-    return;
-
-  /* load ICC profile */
-  icc_profile_filename = get_profile_for_window (window);
-  if (icc_profile_filename == NULL)
-    return;
-
-
-  ret = g_file_get_contents (icc_profile_filename,
-                             (gchar **) &icc_profile,
-                             &icc_profile_size,
-                             &error);
-  if (ret)
-    {
-      icc_profile_base64 = g_base64_encode (icc_profile,
-                                            icc_profile_size);
-
-      g_free (icc_profile);
-    }
-  else
-    {
-      g_warning ("could not open ICC file: %s",
-                 error->message);
-      g_error_free (error);
-    }
-
-  g_free (icc_profile_filename);
-}
-
 static GdkWindow *
 find_current_window (void)
 {
@@ -458,7 +378,13 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
       return;
     }
 
-  screenshot_ensure_icc_profile (window);
+  /* FIXME: apply the ICC profile according to the preferences.
+   * org.gnome.ColorManager.GetProfileForWindow() does not exist anymore,
+   * so we probably need to fetch the color profile of the screen where
+   * the area/window was.
+   *
+   * screenshot_ensure_icc_profile (window);
+   */
   screenshot_build_filename_async (screenshot_config->last_save_dir,
                                    build_filename_ready_cb, screenshot);
 }
