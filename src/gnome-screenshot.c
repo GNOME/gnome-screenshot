@@ -359,20 +359,18 @@ get_profile_for_window (GdkWindow *window)
   GError *error = NULL;
   guint xid;
   gchar *icc_profile = NULL;
-  GVariant *args = NULL;
   GVariant *response = NULL;
   GVariant *response_child = NULL;
   GVariantIter *iter = NULL;
 
   /* get color profile */
   xid = GDK_WINDOW_XID (window);
-  args = g_variant_new ("(u)", xid),
   response = g_dbus_connection_call_sync (connection,
                                           "org.gnome.ColorManager",
                                           "/org/gnome/ColorManager",
                                           "org.gnome.ColorManager",
                                           "GetProfileForWindow",
-                                          args,
+                                          g_variant_new ("(u)", xid),
                                           G_VARIANT_TYPE ("(s)"),
                                           G_DBUS_CALL_FLAGS_NONE,
                                           -1, NULL, &error);
@@ -391,8 +389,6 @@ get_profile_for_window (GdkWindow *window)
 out:
   if (iter != NULL)
     g_variant_iter_free (iter);
-  if (args != NULL)
-    g_variant_unref (args);
   if (response != NULL)
     g_variant_unref (response);
   return icc_profile;
