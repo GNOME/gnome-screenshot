@@ -630,6 +630,9 @@ screenshot_get_pixbuf (GdkWindow    *window,
     {
       screenshot = gdk_pixbuf_new_from_file (filename, &error);
 
+      /* remove the temporary file created by the shell */
+      g_unlink (filename);
+
       if (error != NULL)
         {
           g_warning ("Unable to load GNOME Shell's builtin screenshot result, "
@@ -637,11 +640,6 @@ screenshot_get_pixbuf (GdkWindow    *window,
           g_error_free (error);
 
           screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
-        }
-      else
-        {
-          /* remove the temporary file created by the shell */
-          g_unlink (filename);
         }
     }
 
