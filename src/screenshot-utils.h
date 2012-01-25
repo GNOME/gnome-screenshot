@@ -27,8 +27,6 @@ G_BEGIN_DECLS
 
 gboolean   screenshot_grab_lock           (void);
 void       screenshot_release_lock        (void);
-void       screenshot_get_window_rect     (GdkWindow *win,
-                                           GdkRectangle *rect);
 GdkWindow *screenshot_find_current_window (void);
 GdkPixbuf *screenshot_get_pixbuf          (GdkWindow *win,
                                            GdkRectangle *rectangle);

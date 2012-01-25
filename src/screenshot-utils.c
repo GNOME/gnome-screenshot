@@ -29,6 +29,7 @@
 #include <X11/extensions/shape.h>
 #endif
 
+#include "cheese-flash.h"
 #include "gnome-screenshot.h"
 #include "screenshot-config.h"
 #include "screenshot-utils.h"
@@ -354,6 +355,27 @@ screenshot_get_window_rect_coords (GdkWindow *window,
     }
 }
 
+static void
+screenshot_fallback_fire_flash (GdkWindow *window,
+                                GdkRectangle *rectangle)
+{
+  GdkRectangle rect;
+  CheeseFlash *flash = NULL;
+
+  if (rectangle != NULL)
+    rect = *rectangle;
+  else
+    screenshot_get_window_rect_coords (window,
+                                       screenshot_config->include_border,
+                                       NULL,
+                                       &rect);
+
+  flash = cheese_flash_new ();
+  cheese_flash_fire (flash, &rect);
+
+  g_object_unref (flash);
+}
+
 static GdkPixbuf *
 screenshot_get_pixbuf_fallback (GdkWindow *window,
                                 GdkRectangle *rectangle)
@@ -556,17 +578,9 @@ screenshot_get_pixbuf_fallback (GdkWindow *window,
         }
     }
 
-  return screenshot;
-}
+  screenshot_fallback_fire_flash (window, rectangle);
 
-void
-screenshot_get_window_rect (GdkWindow *window,
-                            GdkRectangle *rect)
-{
-  screenshot_get_window_rect_coords (window,
-                                     screenshot_config->include_border,
-                                     NULL,
-                                     rect);
+  return screenshot;
 }
 
 GdkPixbuf *

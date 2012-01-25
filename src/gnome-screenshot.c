@@ -49,7 +49,6 @@
 #include "screenshot-shadow.h"
 #include "screenshot-utils.h"
 #include "screenshot-dialog.h"
-#include "cheese-flash.h"
 
 #define SCREENSHOOTER_ICON "applets-screenshooter"
 
@@ -58,7 +57,6 @@
 static GdkPixbuf *screenshot = NULL;
 
 /* Global variables*/
-static CheeseFlash *flash = NULL;
 static gchar *icc_profile_base64 = NULL;
 
 static void
@@ -464,7 +462,6 @@ find_current_window (void)
 static void
 finish_prepare_screenshot (GdkRectangle *rectangle)
 {
-  GdkRectangle rect;
   GdkWindow *window;
 
   window = find_current_window ();
@@ -497,17 +494,7 @@ finish_prepare_screenshot (GdkRectangle *rectangle)
       exit (1);
     }
 
-  flash = cheese_flash_new ();
-
-  if (rectangle != NULL)
-    rect = *rectangle;
-  else
-    screenshot_get_window_rect (window, &rect);
-
-  cheese_flash_fire (flash, &rect);
   play_sound_effect (window);
-
-  g_object_unref (flash);
 
   if (screenshot_config->copy_to_clipboard)
     {
