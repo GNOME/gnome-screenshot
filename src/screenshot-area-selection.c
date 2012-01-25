@@ -143,34 +143,29 @@ select_area_key_press (GtkWidget               *window,
 static gboolean
 select_window_draw (GtkWidget *window, cairo_t *cr, gpointer unused)
 {
-  GtkAllocation allocation;
-  GtkStyle *style;
+  GtkStyleContext *style;
 
-  style = gtk_widget_get_style (window);
+  style = gtk_widget_get_style_context (window);
 
   if (gtk_widget_get_app_paintable (window))
     {
-      cairo_set_line_width (cr, 1.0);
-
-      gtk_widget_get_allocation (window, &allocation);
-
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
       cairo_set_source_rgba (cr, 0, 0, 0, 0);
       cairo_paint (cr);
 
-      cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
-      gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
-      cairo_paint_with_alpha (cr, 0.25);
+      gtk_style_context_save (style);
+      gtk_style_context_add_class (style, GTK_STYLE_CLASS_RUBBERBAND);
 
-      cairo_rectangle (cr, 
-                       allocation.x + 0.5, allocation.y + 0.5,
-                       allocation.width - 1, allocation.height - 1);
-      cairo_stroke (cr);
-    }
-  else
-    {
-      gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
-      cairo_paint (cr);
+      gtk_render_background (style, cr,
+                             0, 0,
+                             gtk_widget_get_allocated_width (window),
+                             gtk_widget_get_allocated_height (window));
+      gtk_render_frame (style, cr,
+                        0, 0,
+                        gtk_widget_get_allocated_width (window),
+                        gtk_widget_get_allocated_height (window));
+
+      gtk_style_context_restore (style);
     }
 
   return TRUE;
