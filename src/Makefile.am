@@ -13,9 +13,10 @@ bin_PROGRAMS = \
 
 gnome_screenshot_SOURCES = \
 	gnome-screenshot.c		\
-	gnome-screenshot.h		\
 	cheese-flash.c			\
 	cheese-flash.h			\
+	screenshot-application.c	\
+	screenshot-application.h	\
 	screenshot-area-selection.c	\
 	screenshot-area-selection.h	\
 	screenshot-config.c		\

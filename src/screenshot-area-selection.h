@@ -25,9 +25,11 @@
 
 G_BEGIN_DECLS
 
-typedef void (* SelectAreaCallback) (GdkRectangle *rectangle);
+typedef void (* SelectAreaCallback) (GdkRectangle *rectangle,
+                                     gpointer user_data);
 
-void       screenshot_select_area_async   (SelectAreaCallback callback);
+void       screenshot_select_area_async   (SelectAreaCallback callback,
+                                           gpointer callback_data);
 
 G_END_DECLS
 

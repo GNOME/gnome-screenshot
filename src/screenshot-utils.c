@@ -32,7 +32,7 @@
 #endif
 
 #include "cheese-flash.h"
-#include "gnome-screenshot.h"
+#include "screenshot-application.h"
 #include "screenshot-config.h"
 #include "screenshot-utils.h"
 
@@ -643,6 +643,7 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
   const gchar *method_name;
   GVariant *method_params;
   GError *error = NULL;
+  GDBusConnection *connection;
 
   if (!screenshot_grab_lock ())
     exit (0);
@@ -676,6 +677,7 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
       method_params = g_variant_new ("(bs)", TRUE, filename);
     }
 
+  connection = screenshot_application_get_session_bus ();
   g_dbus_connection_call_sync (connection,
                                "org.gnome.Shell",
                                "/org/gnome/Shell",

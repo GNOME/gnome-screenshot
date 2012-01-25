@@ -205,6 +205,7 @@ create_select_window (void)
 typedef struct {
   GdkRectangle rectangle;
   SelectAreaCallback callback;
+  gpointer callback_data;
   gboolean aborted;
 } CallbackData;
 
@@ -214,9 +215,9 @@ emit_select_callback_in_idle (gpointer user_data)
   CallbackData *data = user_data;
 
   if (!data->aborted)
-    data->callback (&data->rectangle);
+    data->callback (&data->rectangle, data->callback_data);
   else
-    data->callback (NULL);
+    data->callback (NULL, data->callback_data);
 
   g_slice_free (CallbackData, data);
 
@@ -224,7 +225,8 @@ emit_select_callback_in_idle (gpointer user_data)
 }
 
 void
-screenshot_select_area_async (SelectAreaCallback callback)
+screenshot_select_area_async (SelectAreaCallback callback,
+                              gpointer callback_data)
 {
   GdkCursor *cursor;
   select_area_filter_data  data;
@@ -243,6 +245,7 @@ screenshot_select_area_async (SelectAreaCallback callback)
 
   cb_data = g_slice_new0 (CallbackData);
   cb_data->callback = callback;
+  cb_data->callback_data = callback_data;
 
   g_signal_connect (data.window, "key-press-event", G_CALLBACK (select_area_key_press), &data);
   g_signal_connect (data.window, "button-press-event", G_CALLBACK (select_area_button_press), &data);
