@@ -573,7 +573,7 @@ GdkPixbuf *
 screenshot_get_pixbuf (GdkWindow    *window,
                        GdkRectangle *rectangle)
 {
-  GdkPixbuf *screenshot;
+  GdkPixbuf *screenshot = NULL;
   gchar *path, *filename, *tmpname;
   const gchar *method_name;
   GVariant *method_params;
@@ -618,6 +618,14 @@ screenshot_get_pixbuf (GdkWindow    *window,
                                NULL,
                                &error);
 
+  if (error == NULL)
+    {
+      screenshot = gdk_pixbuf_new_from_file (filename, &error);
+
+      /* remove the temporary file created by the shell */
+      g_unlink (filename);
+    }
+
   if (error != NULL)
     {
       g_warning ("Unable to use GNOME Shell's builtin screenshot interface, "
@@ -625,22 +633,6 @@ screenshot_get_pixbuf (GdkWindow    *window,
       g_error_free (error);
 
       screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
-    }
-  else
-    {
-      screenshot = gdk_pixbuf_new_from_file (filename, &error);
-
-      /* remove the temporary file created by the shell */
-      g_unlink (filename);
-
-      if (error != NULL)
-        {
-          g_warning ("Unable to load GNOME Shell's builtin screenshot result, "
-                     "resorting to fallback X11. Error: %s", error->message);
-          g_error_free (error);
-
-          screenshot = screenshot_get_pixbuf_fallback (window, rectangle);
-        }
     }
 
   g_free (path);
