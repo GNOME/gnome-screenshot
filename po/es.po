@@ -10,15 +10,15 @@
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 1999.
 # Manuel de Vega Barreiro <barreiro@arrakis.es> 2000-2001.
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-10-07 07:05+0000\n"
-"PO-Revision-Date: 2011-10-07 10:16+0200\n"
+"POT-Creation-Date: 2012-01-26 14:20+0000\n"
+"PO-Revision-Date: 2012-01-26 16:58+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,76 +27,6 @@ msgstr ""
 "Language: \n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "Error al guardar la captura de pantalla"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"No se pudo guardar la captura de pantalla en %s.\n"
-" El error fue %s.\n"
-" Elija otra ubicación e inténtelo de nuevo."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "Captura de pantalla obtenida"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "No se puede tomar una captura de pantalla de la ventana actual"
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "Enviar directamente lo obtenido al portapapeles"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Capturar una ventana en vez de la pantalla entera"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Capturar un área de la pantalla en lugar de la pantalla entera"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "Incluir el borde de la ventana en la captura de pantalla"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "Quitar el borde de la ventana de la captura de pantalla"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Capturar la pantalla después del retardo especificado [en segundos]"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "segundos"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Efecto para añadir al borde (sombra, borde o ninguno)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "efecto"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Establecer las opciones interactivamente"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Capturar imagen de la pantalla"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
@@ -200,6 +130,87 @@ msgstr "El número de segundos que esperar antes de obtener la captura."
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Captura específica de ventana (obsoleto)"
 
+#: ../src/screenshot-application.c:138
+msgid "Error while saving screenshot"
+msgstr "Error al guardar la captura de pantalla"
+
+#: ../src/screenshot-application.c:142
+#, c-format
+msgid ""
+"Impossible to save the screenshot to %s.\n"
+" Error was %s.\n"
+" Please choose another location and retry."
+msgstr ""
+"No se pudo guardar la captura de pantalla en %s.\n"
+" El error fue %s.\n"
+" Elija otra ubicación e inténtelo de nuevo."
+
+#: ../src/screenshot-application.c:304 ../src/screenshot-application.c:307
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#| msgid "Unable to take a screenshot of the current window"
+msgid "Unable to capture a screenshot"
+msgstr "No se pudo tomar una captura de pantalla"
+
+#: ../src/screenshot-application.c:305
+msgid "Error creating file"
+msgstr "Error al crear el archivo"
+
+#: ../src/screenshot-application.c:312 ../src/screenshot-application.c:373
+msgid "Screenshot taken"
+msgstr "Captura de pantalla obtenida"
+
+#: ../src/screenshot-application.c:343
+msgid "All possible methods failed"
+msgstr "Fallaron todos los métodos posibles"
+
+#: ../src/screenshot-application.c:456
+msgid "Send the grab directly to the clipboard"
+msgstr "Enviar directamente lo obtenido al portapapeles"
+
+#: ../src/screenshot-application.c:457
+msgid "Grab a window instead of the entire screen"
+msgstr "Capturar una ventana en vez de la pantalla entera"
+
+#: ../src/screenshot-application.c:458
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Capturar un área de la pantalla en lugar de la pantalla entera"
+
+#: ../src/screenshot-application.c:459
+msgid "Include the window border with the screenshot"
+msgstr "Incluir el borde de la ventana en la captura de pantalla"
+
+#: ../src/screenshot-application.c:460
+msgid "Remove the window border from the screenshot"
+msgstr "Quitar el borde de la ventana de la captura de pantalla"
+
+#: ../src/screenshot-application.c:461
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Capturar la pantalla después del retardo especificado [en segundos]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:461
+#: ../src/screenshot-interactive-dialog.c:423
+msgid "seconds"
+msgstr "segundos"
+
+#: ../src/screenshot-application.c:462
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Efecto para añadir al borde (sombra, borde o ninguno)"
+
+#: ../src/screenshot-application.c:462
+msgid "effect"
+msgstr "efecto"
+
+#: ../src/screenshot-application.c:463
+msgid "Interactively set options"
+msgstr "Establecer las opciones interactivamente"
+
+#: ../src/screenshot-application.c:477
+msgid "Take a picture of the screen"
+msgstr "Capturar imagen de la pantalla"
+
 #: ../src/screenshot-config.c:78
 #, c-format
 msgid ""
@@ -216,7 +227,7 @@ msgid ""
 msgstr ""
 "Opciones con conflictos: ---area y --delay no se deben usar a la vez.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -225,11 +236,11 @@ msgstr ""
 "pantalla.\n"
 "Revise su instalación de gnome-utils"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Selecciona una carpeta"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Pantallazo.png"
 
@@ -306,6 +317,6 @@ msgstr "Efectos"
 msgid "Take _Screenshot"
 msgstr "Cap_turar pantalla"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:720
 msgid "Error loading the help page"
 msgstr "Error al cargar la página de ayuda"
