@@ -25,8 +25,6 @@
 
 G_BEGIN_DECLS
 
-gboolean   screenshot_grab_lock           (void);
-void       screenshot_release_lock        (void);
 GdkPixbuf *screenshot_get_pixbuf          (GdkRectangle *rectangle);
 
 void       screenshot_show_error_dialog   (GtkWindow   *parent,
