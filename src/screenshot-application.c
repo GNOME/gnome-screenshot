@@ -290,17 +290,24 @@ build_filename_ready_cb (GObject *source,
 
   save_uri = screenshot_build_filename_finish (res, &error);
 
+  /* now release the application */
+  g_application_release (G_APPLICATION (self));
+
   if (error != NULL)
     {
       g_critical ("Impossible to find a valid location to save the screenshot: %s",
                   error->message);
       g_error_free (error);
 
-      exit(1);
-    }
+      if (screenshot_config->interactive)
+        screenshot_show_error_dialog (NULL,
+                                      _("Unable to capture a screenshot"),
+                                      _("Error creating file"));
+      else
+        screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
 
-  /* now release the application */
-  g_application_release (G_APPLICATION (self));
+      return;
+    }
 
   self->priv->dialog = screenshot_dialog_new (self->priv->screenshot, save_uri);
   toplevel = screenshot_dialog_get_toplevel (self->priv->dialog);
@@ -326,10 +333,18 @@ finish_prepare_screenshot (ScreenshotApplication *self,
 
   if (screenshot == NULL)
     {
-      screenshot_show_error_dialog (NULL,
-                                    _("Unable to take a screenshot of the current window"),
-                                    NULL);
-      exit (1);
+      g_critical ("Unable to capture a screenshot of any window");
+
+      if (screenshot_config->interactive)
+        screenshot_show_error_dialog (NULL,
+                                      _("Unable to capture a screenshot"),
+                                      _("All possible methods failed"));
+      else
+        screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
+
+      g_application_release (G_APPLICATION (self));
+
+      return;
     }
 
   if (screenshot_config->take_window_shot)
