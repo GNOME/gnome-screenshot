@@ -694,18 +694,6 @@ screenshot_show_error_dialog (GtkWindow   *parent,
 }
 
 void
-screenshot_show_gerror_dialog (GtkWindow   *parent,
-                               const gchar *message,
-                               GError      *error)
-{
-  g_return_if_fail (parent == NULL || GTK_IS_WINDOW (parent));
-  g_return_if_fail (message != NULL);
-  g_return_if_fail (error != NULL);
-
-  screenshot_show_error_dialog (parent, message, error->message);
-}
-
-void
 screenshot_display_help (GtkWindow *parent)
 {
   GError *error = NULL;
@@ -716,9 +704,9 @@ screenshot_display_help (GtkWindow *parent)
 
   if (error)
     {
-      screenshot_show_gerror_dialog (parent,
-                                     _("Error loading the help page"),
-                                     error);
+      screenshot_show_error_dialog (parent, 
+                                    _("Error loading the help page"), 
+                                    error->message);
       g_error_free (error);
     }
 }

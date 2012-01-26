@@ -30,9 +30,6 @@ GdkPixbuf *screenshot_get_pixbuf          (GdkRectangle *rectangle);
 void       screenshot_show_error_dialog   (GtkWindow   *parent,
                                            const gchar *message,
                                            const gchar *detail);
-void       screenshot_show_gerror_dialog  (GtkWindow   *parent,
-                                           const gchar *message,
-                                           GError      *error);
 void       screenshot_play_sound_effect (const gchar *event_id,
                                          const gchar *event_desc);
 void       screenshot_display_help        (GtkWindow *parent);
