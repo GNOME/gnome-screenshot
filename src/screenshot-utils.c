@@ -294,6 +294,10 @@ screenshot_play_sound_effect (const gchar *event_id,
   if (res < 0)
     goto done;
 
+  res = ca_proplist_sets (p, CA_PROP_CANBERRA_CACHE_CONTROL, "permanent");
+  if (res < 0)
+    goto done;
+
   ca_context_play_full (c, 0, p, NULL, NULL);
 
  done:
