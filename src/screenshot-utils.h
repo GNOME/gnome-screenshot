@@ -33,6 +33,8 @@ void       screenshot_show_error_dialog   (GtkWindow   *parent,
 void       screenshot_show_gerror_dialog  (GtkWindow   *parent,
                                            const gchar *message,
                                            GError      *error);
+void       screenshot_play_sound_effect (const gchar *event_id,
+                                         const gchar *event_desc);
 void       screenshot_display_help        (GtkWindow *parent);
 
 G_END_DECLS

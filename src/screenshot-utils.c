@@ -272,8 +272,9 @@ screenshot_fallback_get_window_rect_coords (GdkWindow *window,
     }
 }
 
-static void
-screenshot_play_sound_effect (void)
+void
+screenshot_play_sound_effect (const gchar *event_id,
+                              const gchar *event_desc)
 {
   ca_context *c;
   ca_proplist *p = NULL;
@@ -285,11 +286,11 @@ screenshot_play_sound_effect (void)
   if (res < 0)
     goto done;
 
-  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, "screen-capture");
+  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, event_id);
   if (res < 0)
     goto done;
 
-  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, _("Screenshot taken"));
+  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, event_desc);
   if (res < 0)
     goto done;
 
@@ -652,7 +653,7 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
     }
 
   if (screenshot != NULL)
-    screenshot_play_sound_effect ();
+    screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
 
   g_free (path);
   g_free (tmpname);
