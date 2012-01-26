@@ -663,21 +663,24 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
   return screenshot;
 }
 
-void
-screenshot_show_error_dialog (GtkWindow   *parent,
-                              const gchar *message,
-                              const gchar *detail)
+gint
+screenshot_show_dialog (GtkWindow   *parent,
+                        GtkMessageType message_type,
+                        GtkButtonsType buttons_type,
+                        const gchar *message,
+                        const gchar *detail)
 {
   GtkWidget *dialog;
   GtkWindowGroup *group;
+  gint response;
 
   g_return_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)));
   g_return_if_fail (message != NULL);
   
   dialog = gtk_message_dialog_new (parent,
   				   GTK_DIALOG_DESTROY_WITH_PARENT,
-  				   GTK_MESSAGE_ERROR,
-  				   GTK_BUTTONS_OK,
+  				   message_type,
+  				   buttons_type,
   				   "%s", message);
   gtk_window_set_title (GTK_WINDOW (dialog), "");
   
@@ -692,9 +695,11 @@ screenshot_show_error_dialog (GtkWindow   *parent,
         gtk_window_group_add_window (group, GTK_WINDOW (dialog));
     }
 
-  gtk_dialog_run (GTK_DIALOG (dialog));
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
   
   gtk_widget_destroy (dialog);
+
+  return response;
 }
 
 void
@@ -708,9 +713,11 @@ screenshot_display_help (GtkWindow *parent)
 
   if (error)
     {
-      screenshot_show_error_dialog (parent, 
-                                    _("Error loading the help page"), 
-                                    error->message);
+      screenshot_show_dialog (parent, 
+                              GTK_MESSAGE_ERROR,
+                              GTK_BUTTONS_OK,
+                              _("Error loading the help page"), 
+                              error->message);
       g_error_free (error);
     }
 }

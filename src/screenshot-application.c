@@ -47,6 +47,8 @@ G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATI
 
 static ScreenshotApplication *_app_singleton = NULL;
 
+static void screenshot_save_to_file (ScreenshotApplication *self);
+
 struct _ScreenshotApplicationPriv {
   GDBusConnection *connection;
 
@@ -54,6 +56,7 @@ struct _ScreenshotApplicationPriv {
   GdkPixbuf *screenshot;
 
   gchar *save_uri;
+  gboolean should_overwrite;
 
   ScreenshotDialog *dialog;
 };
@@ -125,16 +128,54 @@ save_pixbuf_handle_success (ScreenshotApplication *self)
 }
 
 static void
-save_pixbuf_handle_error (ScreenshotApplication *self)
+save_pixbuf_handle_error (ScreenshotApplication *self,
+                          GError *error)
 {
   if (screenshot_config->interactive)
     {
       ScreenshotDialog *dialog = self->priv->dialog;
+      GtkWidget *toplevel = screenshot_dialog_get_toplevel (dialog);
 
       screenshot_dialog_set_busy (dialog, FALSE);
-      screenshot_show_error_dialog (GTK_WINDOW (screenshot_dialog_get_toplevel (dialog)),
-                                    _("Unable to capture a screenshot"),
-                                    _("Error creating file. Please choose another location and retry."));
+
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS) &&
+          !self->priv->should_overwrite)
+        {
+          gchar *folder = screenshot_dialog_get_folder (dialog);
+          gchar *folder_name = g_path_get_basename (folder);
+          gchar *file_name = screenshot_dialog_get_filename (dialog);
+          gchar *detail = g_strdup_printf (_("A file named \"%s\" already exists in \"%s\""),
+                                           file_name, folder_name);
+          gint response;
+                                             
+          response = screenshot_show_dialog (GTK_WINDOW (toplevel),
+                                             GTK_MESSAGE_WARNING,
+                                             GTK_BUTTONS_YES_NO,
+                                             _("Overwrite existing file?"),
+                                             detail);
+
+          g_free (folder);
+          g_free (folder_name);
+          g_free (file_name);
+          g_free (detail);
+
+          if (response == GTK_RESPONSE_YES)
+            {
+              self->priv->should_overwrite = TRUE;
+              screenshot_save_to_file (self);
+
+              return;
+            }
+        }
+      else
+        {
+          screenshot_show_dialog (GTK_WINDOW (toplevel),
+                                  GTK_MESSAGE_ERROR,
+                                  GTK_BUTTONS_OK,
+                                  _("Unable to capture a screenshot"),
+                                  _("Error creating file. Please choose another location and retry."));
+        }
+
       screenshot_dialog_focus_entry (dialog);
     }
   else
@@ -156,8 +197,8 @@ save_pixbuf_ready_cb (GObject *source,
 
   if (error != NULL)
     {
+      save_pixbuf_handle_error (self, error);
       g_error_free (error);
-      save_pixbuf_handle_error (self);
       return;
     }
 
@@ -173,12 +214,15 @@ save_file_create_ready_cb (GObject *source,
   GFileOutputStream *os;
   GError *error = NULL;
 
-  os = g_file_create_finish (G_FILE (source), res, &error);
+  if (self->priv->should_overwrite)
+    os = g_file_replace_finish (G_FILE (source), res, &error);
+  else
+    os = g_file_create_finish (G_FILE (source), res, &error);
 
   if (error != NULL)
     {
+      save_pixbuf_handle_error (self, error);
       g_error_free (error);
-      save_pixbuf_handle_error (self);
       return;
     }
 
@@ -210,11 +254,24 @@ screenshot_save_to_file (ScreenshotApplication *self)
     screenshot_dialog_set_busy (self->priv->dialog, TRUE);
 
   target_file = g_file_new_for_uri (self->priv->save_uri);
-  g_file_create_async (target_file,
-                       G_FILE_CREATE_NONE,
-                       G_PRIORITY_DEFAULT,
-                       NULL,
-                       save_file_create_ready_cb, self);
+
+  if (self->priv->should_overwrite)
+    {
+      g_file_replace_async (target_file,
+                            NULL, FALSE,
+                            G_FILE_CREATE_NONE,
+                            G_PRIORITY_DEFAULT,
+                            NULL, 
+                            save_file_create_ready_cb, self);
+    }
+  else
+    {
+      g_file_create_async (target_file,
+                           G_FILE_CREATE_NONE,
+                           G_PRIORITY_DEFAULT,
+                           NULL,
+                           save_file_create_ready_cb, self);
+    }
 
   g_object_unref (target_file);
 }
@@ -279,9 +336,11 @@ build_filename_ready_cb (GObject *source,
       g_error_free (error);
 
       if (screenshot_config->interactive)
-        screenshot_show_error_dialog (NULL,
-                                      _("Unable to capture a screenshot"),
-                                      _("Error creating file"));
+        screenshot_show_dialog (NULL,
+                                GTK_MESSAGE_ERROR,
+                                GTK_BUTTONS_OK,
+                                _("Unable to capture a screenshot"),
+                                _("Error creating file"));
       else
         screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
 
@@ -323,9 +382,11 @@ finish_prepare_screenshot (ScreenshotApplication *self,
       g_critical ("Unable to capture a screenshot of any window");
 
       if (screenshot_config->interactive)
-        screenshot_show_error_dialog (NULL,
-                                      _("Unable to capture a screenshot"),
-                                      _("All possible methods failed"));
+        screenshot_show_dialog (NULL,
+                                GTK_MESSAGE_ERROR,
+                                GTK_BUTTONS_OK,
+                                _("Unable to capture a screenshot"),
+                                _("All possible methods failed"));
       else
         screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
 
