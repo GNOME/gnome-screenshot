@@ -309,6 +309,8 @@ build_filename_ready_cb (GObject *source,
       return;
     }
 
+  screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
+
   self->priv->dialog = screenshot_dialog_new (self->priv->screenshot, save_uri);
   toplevel = screenshot_dialog_get_toplevel (self->priv->dialog);
   gtk_widget_show (toplevel);
@@ -368,6 +370,8 @@ finish_prepare_screenshot (ScreenshotApplication *self,
   if (screenshot_config->copy_to_clipboard)
     {
       screenshot_save_to_clipboard (self);
+      screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
+
       g_application_release (G_APPLICATION (self));
 
       return;

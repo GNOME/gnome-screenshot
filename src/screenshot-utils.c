@@ -652,9 +652,6 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
       screenshot = screenshot_fallback_get_pixbuf (rectangle);
     }
 
-  if (screenshot != NULL)
-    screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
-
   g_free (path);
   g_free (tmpname);
   g_free (filename);
