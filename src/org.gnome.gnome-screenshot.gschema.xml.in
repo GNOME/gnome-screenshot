@@ -10,10 +10,15 @@
       <_summary>Screenshot delay</_summary>
       <_description>The number of seconds to wait before taking the screenshot.</_description>
     </key>
-    <key name="last-save-directory" type="s">
+    <key name="auto-save-directory" type="s">
       <default>''</default>
       <_summary>Screenshot directory</_summary>
-      <_description>The directory the last screenshot was saved in.</_description>
+      <_description>The directory where the screenshots will be saved by default.</_description>
+    </key>
+    <key name="last-save-directory" type="s">
+      <default>''</default>
+      <_summary>Last save directory</_summary>
+      <_description>The last directory a screenshot was saved in interactive mode.</_description>
     </key>
     <key name="include-border" type="b">
       <default>true</default>

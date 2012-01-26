@@ -53,15 +53,17 @@ struct _ScreenshotApplicationPriv {
   gchar *icc_profile_base64;
   GdkPixbuf *screenshot;
 
+  gchar *save_uri;
+
   ScreenshotDialog *dialog;
 };
 
 static void
-save_folder_to_settings (ScreenshotDialog *dialog)
+save_folder_to_settings (ScreenshotApplication *self)
 {
   char *folder;
 
-  folder = screenshot_dialog_get_folder (dialog);
+  folder = screenshot_dialog_get_folder (self->priv->dialog);
   g_settings_set_string (screenshot_config->settings,
                          LAST_SAVE_DIRECTORY_KEY, folder);
 
@@ -69,9 +71,9 @@ save_folder_to_settings (ScreenshotDialog *dialog)
 }
 
 static void
-set_recent_entry (ScreenshotDialog *dialog)
+set_recent_entry (ScreenshotApplication *self)
 {
-  char *uri, *app_exec = NULL;
+  char *app_exec = NULL;
   GtkRecentManager *recent;
   GtkRecentData recent_data;
   GAppInfo *app;
@@ -85,7 +87,6 @@ set_recent_entry (ScreenshotDialog *dialog)
     return;
   }
 
-  uri = screenshot_dialog_get_uri (dialog);
   recent = gtk_recent_manager_get_default ();
   
   exec_name = g_app_info_get_executable (app);
@@ -99,68 +100,48 @@ set_recent_entry (ScreenshotDialog *dialog)
   recent_data.groups = groups;
   recent_data.is_private = FALSE;
 
-  gtk_recent_manager_add_full (recent, uri, &recent_data);
+  gtk_recent_manager_add_full (recent, self->priv->save_uri, &recent_data);
 
   g_object_unref (app);
   g_free (app_exec);
-  g_free (uri);
 }
 
 static void
-error_dialog_response_cb (GtkDialog *d,
-                          gint response,
-                          ScreenshotDialog *dialog)
+save_pixbuf_handle_success (ScreenshotApplication *self)
 {
-  gtk_widget_destroy (GTK_WIDGET (d));
+  set_recent_entry (self);
 
-  screenshot_dialog_focus_entry (dialog);
+  if (screenshot_config->interactive)
+    {
+      ScreenshotDialog *dialog = self->priv->dialog;
+
+      save_folder_to_settings (self);
+      gtk_widget_destroy (screenshot_dialog_get_toplevel (dialog));
+    }
+  else
+    {
+      g_application_release (G_APPLICATION (self));
+    }
 }
 
 static void
-save_file_failed_error (ScreenshotDialog *dialog,
-                        GError *error)
+save_pixbuf_handle_error (ScreenshotApplication *self)
 {
-  GtkWidget *toplevel;
-  GtkWidget *error_dialog;
-  char *folder;
+  if (screenshot_config->interactive)
+    {
+      ScreenshotDialog *dialog = self->priv->dialog;
 
-  toplevel = screenshot_dialog_get_toplevel (dialog);
-  screenshot_dialog_set_busy (dialog, FALSE);
-
-  /* we had an error, display a dialog to the user and let him choose
-   * another name/location to save the screenshot.
-   */      
-  folder = screenshot_dialog_get_folder (dialog);
-  error_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_OK,
-                                         _("Error while saving screenshot"));
-
-  /* translators: first %s is the folder URI, second %s is the VFS error */
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
-                                            _("Impossible to save the screenshot "
-                                              "to %s.\n Error was %s.\n Please choose another "
-                                              "location and retry."), folder, error->message);
-  gtk_widget_show (error_dialog);
-  g_signal_connect (error_dialog,
-                    "response",
-                    G_CALLBACK (error_dialog_response_cb),
-                    dialog);
-
-  g_free (folder);
-}
-
-static void
-save_file_completed (ScreenshotDialog *dialog)
-{
-  GtkWidget *toplevel;
-
-  toplevel = screenshot_dialog_get_toplevel (dialog);
-
-  save_folder_to_settings (dialog);
-  set_recent_entry (dialog);
-  gtk_widget_destroy (toplevel);
+      screenshot_dialog_set_busy (dialog, FALSE);
+      screenshot_show_error_dialog (GTK_WINDOW (screenshot_dialog_get_toplevel (dialog)),
+                                    _("Unable to capture a screenshot"),
+                                    _("Error creating file. Please choose another location and retry."));
+      screenshot_dialog_focus_entry (dialog);
+    }
+  else
+    {
+      screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
+      g_application_release (G_APPLICATION (self));
+    }
 }
 
 static void
@@ -169,18 +150,18 @@ save_pixbuf_ready_cb (GObject *source,
                       gpointer user_data)
 {
   GError *error = NULL;
-  ScreenshotDialog *dialog = user_data;
+  ScreenshotApplication *self = user_data;
 
   gdk_pixbuf_save_to_stream_finish (res, &error);
 
   if (error != NULL)
     {
-      save_file_failed_error (dialog, error);
       g_error_free (error);
+      save_pixbuf_handle_error (self);
       return;
     }
 
-  save_file_completed (dialog);
+  save_pixbuf_handle_success (self);
 }
 
 static void
@@ -189,7 +170,6 @@ save_file_create_ready_cb (GObject *source,
                            gpointer user_data)
 {
   ScreenshotApplication *self = user_data;
-  ScreenshotDialog *dialog = self->priv->dialog;
   GFileOutputStream *os;
   GError *error = NULL;
 
@@ -197,8 +177,8 @@ save_file_create_ready_cb (GObject *source,
 
   if (error != NULL)
     {
-      save_file_failed_error (dialog, error);
       g_error_free (error);
+      save_pixbuf_handle_error (self);
       return;
     }
 
@@ -206,7 +186,7 @@ save_file_create_ready_cb (GObject *source,
     gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
                                      G_OUTPUT_STREAM (os),
                                      "png", NULL,
-                                     save_pixbuf_ready_cb, dialog,
+                                     save_pixbuf_ready_cb, self,
                                      "icc-profile", self->priv->icc_profile_base64,
                                      "tEXt::Software", "gnome-screenshot",
                                      NULL);
@@ -214,7 +194,7 @@ save_file_create_ready_cb (GObject *source,
     gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
                                      G_OUTPUT_STREAM (os),
                                      "png", NULL,
-                                     save_pixbuf_ready_cb, dialog,
+                                     save_pixbuf_ready_cb, self,
                                      "tEXt::Software", "gnome-screenshot",
                                      NULL);
 
@@ -222,17 +202,14 @@ save_file_create_ready_cb (GObject *source,
 }
 
 static void
-try_to_save (ScreenshotApplication *self)
+screenshot_save_to_file (ScreenshotApplication *self)
 {
-  ScreenshotDialog *dialog = self->priv->dialog;
-  gchar *target_uri;
   GFile *target_file;
 
-  screenshot_dialog_set_busy (dialog, TRUE);
+  if (self->priv->dialog != NULL)
+    screenshot_dialog_set_busy (self->priv->dialog, TRUE);
 
-  target_uri = screenshot_dialog_get_uri (dialog);
-  target_file = g_file_new_for_uri (target_uri);
-
+  target_file = g_file_new_for_uri (self->priv->save_uri);
   g_file_create_async (target_file,
                        G_FILE_CREATE_NONE,
                        G_PRIORITY_DEFAULT,
@@ -240,7 +217,6 @@ try_to_save (ScreenshotApplication *self)
                        save_file_create_ready_cb, self);
 
   g_object_unref (target_file);
-  g_free (target_uri);
 }
 
 static void
@@ -266,7 +242,10 @@ screenshot_dialog_response_cb (GtkDialog *d,
       screenshot_display_help (GTK_WINDOW (d));
       break;
     case GTK_RESPONSE_OK:
-      try_to_save (self);
+      /* update to the new URI */
+      g_free (self->priv->save_uri);
+      self->priv->save_uri = screenshot_dialog_get_uri (self->priv->dialog);
+      screenshot_save_to_file (self);
       break;
     case SCREENSHOT_RESPONSE_COPY:
       screenshot_save_to_clipboard (self);
@@ -288,7 +267,7 @@ build_filename_ready_cb (GObject *source,
   gchar *save_uri;
   GError *error = NULL;
 
-  save_uri = screenshot_build_filename_finish (res, &error);
+  self->priv->save_uri = screenshot_build_filename_finish (res, &error);
 
   /* now release the application */
   g_application_release (G_APPLICATION (self));
@@ -311,18 +290,24 @@ build_filename_ready_cb (GObject *source,
 
   screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
 
-  self->priv->dialog = screenshot_dialog_new (self->priv->screenshot, save_uri);
-  toplevel = screenshot_dialog_get_toplevel (self->priv->dialog);
-  gtk_widget_show (toplevel);
+  if (screenshot_config->interactive)
+    {
+      self->priv->dialog = screenshot_dialog_new (self->priv->screenshot, self->priv->save_uri);
+      toplevel = screenshot_dialog_get_toplevel (self->priv->dialog);
+      gtk_widget_show (toplevel);
 
-  gtk_application_add_window (GTK_APPLICATION (self), GTK_WINDOW (toplevel));
+      gtk_application_add_window (GTK_APPLICATION (self), GTK_WINDOW (toplevel));
   
-  g_signal_connect (toplevel,
-                    "response",
-                    G_CALLBACK (screenshot_dialog_response_cb),
-                    self);
-
-  g_free (save_uri);
+      g_signal_connect (toplevel,
+                        "response",
+                        G_CALLBACK (screenshot_dialog_response_cb),
+                        self);
+    }
+  else
+    {
+      g_application_hold (G_APPLICATION (self));
+      screenshot_save_to_file (self);
+    }
 }
 
 static void
@@ -625,6 +610,7 @@ screenshot_application_finalize (GObject *object)
   g_clear_object (&self->priv->connection);
   g_clear_object (&self->priv->screenshot);
   g_free (self->priv->icc_profile_base64);
+  g_free (self->priv->save_uri);
 
   G_OBJECT_CLASS (screenshot_application_parent_class)->finalize (object);
 }

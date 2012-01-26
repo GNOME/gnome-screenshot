@@ -30,11 +30,15 @@
 #define INCLUDE_BORDER_KEY      "include-border"
 #define INCLUDE_POINTER_KEY     "include-pointer"
 #define INCLUDE_ICC_PROFILE     "include-icc-profile"
+#define AUTO_SAVE_DIRECTORY_KEY "auto-save-directory"
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
 
 static void
 populate_from_settings (ScreenshotConfig *config)
 {
+  config->auto_save_dir =
+    g_settings_get_string (config->settings,
+                           AUTO_SAVE_DIRECTORY_KEY);
   config->last_save_dir =
     g_settings_get_string (config->settings,
                            LAST_SAVE_DIRECTORY_KEY);
