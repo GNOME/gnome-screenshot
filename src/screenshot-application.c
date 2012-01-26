@@ -384,8 +384,7 @@ finish_prepare_screenshot (ScreenshotApplication *self,
    *
    * screenshot_ensure_icc_profile (window);
    */
-  screenshot_build_filename_async (screenshot_config->last_save_dir,
-                                   build_filename_ready_cb, self);
+  screenshot_build_filename_async (build_filename_ready_cb, self);
 }
 
 static void

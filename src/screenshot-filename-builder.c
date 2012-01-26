@@ -24,15 +24,18 @@
 #include <pwd.h>
 #include <string.h>
 
+#include "screenshot-config.h"
+
 typedef enum
 {
-  TEST_LAST_DIR = 0,
-  TEST_DEFAULT = 1
+  TEST_SAVED_DIR = 0,
+  TEST_DEFAULT,
+  NUM_TESTS
 } TestType;
 
 typedef struct 
 {
-  char *base_uris[3];
+  char *base_uris[NUM_TESTS];
   int iteration;
   TestType type;
 
@@ -138,7 +141,7 @@ async_existence_job_free (AsyncExistenceJob *job)
 {
   gint idx;
 
-  for (idx = 0; idx < 3; idx++)
+  for (idx = 0; idx < NUM_TESTS; idx++)
     g_free (job->base_uris[idx]);
 
   g_clear_object (&job->async_result);
@@ -255,18 +258,17 @@ out:
 }
 
 void
-screenshot_build_filename_async (const gchar *save_dir,
-                                 GAsyncReadyCallback callback,
+screenshot_build_filename_async (GAsyncReadyCallback callback,
                                  gpointer user_data)
 {
   AsyncExistenceJob *job;
 
   job = g_slice_new0 (AsyncExistenceJob);
 
-  job->base_uris[0] = sanitize_save_directory (save_dir);
+  job->base_uris[0] = sanitize_save_directory (screenshot_config->last_save_dir);
   job->base_uris[1] = get_default_screenshot_dir ();
   job->iteration = 0;
-  job->type = TEST_LAST_DIR;
+  job->type = TEST_SAVED_DIR;
 
   job->async_result = g_simple_async_result_new (NULL,
                                                  callback, user_data,
