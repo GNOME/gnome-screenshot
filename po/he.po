@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:54+0200\n"
-"PO-Revision-Date: 2011-10-22 12:55+0200\n"
+"POT-Creation-Date: 2012-01-28 12:37+0200\n"
+"PO-Revision-Date: 2012-01-28 12:38+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -28,77 +28,6 @@ msgstr ""
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Hebrew\n"
-
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "שגיאה בשמירת צילום המסך"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"לא ניתן לשמור את צילום המסך ל־%s.‏\n"
-" השגיאה הייתה %s.‏\n"
-"‏ נא לבחור מיקום שונה ולנסות שוב."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "המסך צולם"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "לא ניתן לצלם את החלון הנוכחי."
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "שליחת הצילום ישירות ללוח הגזירים"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Grab a window instead of the entire screen"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Grab an area of the screen instead of the entire screen"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "Include the window border with the screenshot"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "Remove the window border from the screenshot"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Take screenshot after specified delay [in seconds]"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667
-#: ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "שניות"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Effect to add to the border (shadow, border or none)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "effect"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Interactively set options"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Take a picture of the screen"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
@@ -173,36 +102,127 @@ msgid "Include the window manager border along with the screenshot"
 msgstr "Include the window manager border along with the screenshot"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Last save directory"
+msgstr "Last save directory"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Screenshot delay"
 msgstr "Screenshot delay"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Screenshot directory"
 msgstr "Screenshot directory"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "The directory the last screenshot was saved in."
-
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "The directory where the screenshots will be saved by default."
+msgstr "The directory where the screenshots will be saved by default."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "The last directory a screenshot was saved in interactive mode."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "The number of seconds to wait before taking the screenshot."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Window-specific screenshot (deprecated)"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "קובץ בשם „%s“ כבר קיים תחת „%s“"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "האם לשכתב על הקובץ הקיים?"
+
+#: ../src/screenshot-application.c:175
+#: ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342
+#: ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388
+#: ../src/screenshot-application.c:391
+msgid "Unable to capture a screenshot"
+msgstr "לא ניתן לצלם"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr "שגיאה בעת יצירת הקובץ. נא לבחור במיקום שונה ולנסות שוב."
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "אירעה שגיאה בעת יצירת הקובץ"
+
+#: ../src/screenshot-application.c:350
+#: ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "המסך צולם"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "כל השיטות האפשרויות נכשלו"
+
+#: ../src/screenshot-application.c:501
+msgid "Send the grab directly to the clipboard"
+msgstr "שליחת הצילום ישירות ללוח הגזירים"
+
+#: ../src/screenshot-application.c:502
+msgid "Grab a window instead of the entire screen"
+msgstr "Grab a window instead of the entire screen"
+
+#: ../src/screenshot-application.c:503
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Grab an area of the screen instead of the entire screen"
+
+#: ../src/screenshot-application.c:504
+msgid "Include the window border with the screenshot"
+msgstr "Include the window border with the screenshot"
+
+#: ../src/screenshot-application.c:505
+msgid "Remove the window border from the screenshot"
+msgstr "Remove the window border from the screenshot"
+
+#: ../src/screenshot-application.c:506
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Take screenshot after specified delay [in seconds]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:506
+#: ../src/screenshot-interactive-dialog.c:423
+msgid "seconds"
+msgstr "שניות"
+
+#: ../src/screenshot-application.c:507
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Effect to add to the border (shadow, border or none)"
+
+#: ../src/screenshot-application.c:507
+msgid "effect"
+msgstr "effect"
+
+#: ../src/screenshot-application.c:508
+msgid "Interactively set options"
+msgstr "Interactively set options"
+
+#: ../src/screenshot-application.c:522
+msgid "Take a picture of the screen"
+msgstr "Take a picture of the screen"
+
+#: ../src/screenshot-config.c:82
 #, c-format
 msgid "Conflicting options: --window and --area should not be used at the same time.\n"
 msgstr "Conflicting options: --window and --area should not be used at the same time.\n"
 
-#: ../src/screenshot-config.c:85
+#: ../src/screenshot-config.c:89
 #, c-format
 msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
 msgstr "Conflicting options: --area and --delay should not be used at the same time.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -210,17 +230,17 @@ msgstr ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "בחירת תיקייה"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "צילום מסך.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
 msgid "Screenshot at %s.png"
 msgstr "צילום מסך ב־%s.png"
@@ -228,7 +248,7 @@ msgstr "צילום מסך ב־%s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
 msgid "Screenshot at %s - %d.png"
 msgstr "צילום מסך ב־%s - %d.png"
@@ -291,7 +311,9 @@ msgstr "אפקטים"
 msgid "Take _Screenshot"
 msgstr "צילום ה_מסך"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:719
 msgid "Error loading the help page"
 msgstr "שגיאה בטעינת דף העזרה"
 
+#~ msgid "Error while saving screenshot"
+#~ msgstr "שגיאה בשמירת צילום המסך"
