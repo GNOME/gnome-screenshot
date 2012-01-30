@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils 3.1.90\n"
+"Project-Id-Version: gnome-utils 3.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:34-0400\n"
-"PO-Revision-Date: 2011-09-06 19:36+0800\n"
+"POT-Creation-Date: 2012-01-30 19:28+0800\n"
+"PO-Revision-Date: 2012-01-30 19:29+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: zh_TW\n"
@@ -22,76 +22,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "儲存螢幕截圖時發生錯誤"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"不可能將螢幕截圖儲存為 %s。\n"
-" 錯誤為 %s\n"
-"。請選擇另一個位置並再試一次。"
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "螢幕截圖拍攝"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "無法拍下目前視窗的螢幕截圖"
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "將抓圖直接傳送至剪貼簿"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "擷取單一視窗而不是整個畫面"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "擷取畫面的一個區域而不是整個畫面"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "螢幕截圖包含視窗邊框"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "自螢幕截圖移除視窗邊框"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "在指定的時間後（秒）拍攝螢幕截圖"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "秒後拍下螢幕截圖"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "加到視窗邊框的效果（陰影、邊框或沒有）"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "效果"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "互動設定選項"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "拍下整個螢幕"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
@@ -102,14 +32,12 @@ msgid "Screenshot"
 msgstr "螢幕截圖"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "無法拍下目前視窗的螢幕截圖"
+msgstr "拍下目前視窗的螢幕截圖"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "拍下整個螢幕"
+msgstr "拍下全螢幕的螢幕截圖"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -172,40 +100,127 @@ msgid "Include the window manager border along with the screenshot"
 msgstr "螢幕截圖包含視窗管理員邊框"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Last save directory"
+msgstr "上次儲存的目錄"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Screenshot delay"
 msgstr "螢幕截圖延遲"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Screenshot directory"
 msgstr "螢幕截圖目錄"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "上次螢幕截圖擷取程式用作儲存的目錄"
-
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "The directory where the screenshots will be saved by default."
+msgstr "螢幕截圖預設儲存的目錄。"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "上次在互動模式中儲存螢幕截圖的目錄。"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "在照下螢幕截圖前等待的秒數。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid "Window-specific screenshot (deprecated)"
 msgstr "指定視窗的螢幕截圖 (已廢棄)"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "「%s」中已存在名為「%s」的檔案"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "是否覆寫已存在的檔案？"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+msgid "Unable to capture a screenshot"
+msgstr "無法拍下螢幕截圖"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr "建立檔案時發生錯誤。請選擇另一個位置並再試一次。"
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "建立檔案時發生錯誤"
+
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "螢幕截圖拍攝"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "所有可能的方法都失敗了"
+
+#: ../src/screenshot-application.c:501
+msgid "Send the grab directly to the clipboard"
+msgstr "將抓圖直接傳送至剪貼簿"
+
+#: ../src/screenshot-application.c:502
+msgid "Grab a window instead of the entire screen"
+msgstr "擷取單一視窗而不是整個畫面"
+
+#: ../src/screenshot-application.c:503
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "擷取畫面的一個區域而不是整個畫面"
+
+#: ../src/screenshot-application.c:504
+msgid "Include the window border with the screenshot"
+msgstr "螢幕截圖包含視窗邊框"
+
+#: ../src/screenshot-application.c:505
+msgid "Remove the window border from the screenshot"
+msgstr "自螢幕截圖移除視窗邊框"
+
+#: ../src/screenshot-application.c:506
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "在指定的時間後（秒）拍攝螢幕截圖"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:506
+#: ../src/screenshot-interactive-dialog.c:423
+msgid "seconds"
+msgstr "秒後拍下螢幕截圖"
+
+#: ../src/screenshot-application.c:507
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "加到視窗邊框的效果（陰影、邊框或沒有）"
+
+#: ../src/screenshot-application.c:507
+msgid "effect"
+msgstr "效果"
+
+#: ../src/screenshot-application.c:508
+msgid "Interactively set options"
+msgstr "互動設定選項"
+
+#: ../src/screenshot-application.c:522
+msgid "Take a picture of the screen"
+msgstr "拍下整個螢幕"
+
+#: ../src/screenshot-config.c:82
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "衝突的選項：--window 和 --area 不應同時使用。\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:89
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "衝突的選項：--window 和 --area 不應同時使用。\n"
+msgstr "衝突的選項：--area 和 --delay 不應同時使用。\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -213,17 +228,17 @@ msgstr ""
 "找不到螢幕截圖程式的使用者介面定義檔案。\n"
 "請檢查 gnome-utils 的安裝是否正確"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "選擇資料夾"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
 msgid "Screenshot at %s.png"
 msgstr "螢幕截圖存為 %s.png"
@@ -231,7 +246,7 @@ msgstr "螢幕截圖存為 %s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
 msgid "Screenshot at %s - %d.png"
 msgstr "螢幕截圖存為 %s - %d.png"
@@ -294,6 +309,6 @@ msgstr "效果"
 msgid "Take _Screenshot"
 msgstr "拍下螢幕截圖(_S)"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:719
 msgid "Error loading the help page"
 msgstr "載入說明文件時發生錯誤"
