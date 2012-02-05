@@ -33,34 +33,6 @@
 #define AUTO_SAVE_DIRECTORY_KEY "auto-save-directory"
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
 
-static void
-populate_from_settings (ScreenshotConfig *config)
-{
-  config->auto_save_dir =
-    g_settings_get_string (config->settings,
-                           AUTO_SAVE_DIRECTORY_KEY);
-  config->last_save_dir =
-    g_settings_get_string (config->settings,
-                           LAST_SAVE_DIRECTORY_KEY);
-  config->include_border =
-    g_settings_get_boolean (config->settings,
-                            INCLUDE_BORDER_KEY);
-  config->include_icc_profile =
-    g_settings_get_boolean (config->settings,
-                            INCLUDE_ICC_PROFILE);
-  config->include_pointer =
-    g_settings_get_boolean (config->settings,
-                            INCLUDE_POINTER_KEY);
-  config->delay =
-    g_settings_get_int (config->settings, DELAY_KEY);
-
-  config->border_effect =
-    g_settings_get_string (config->settings,
-                           BORDER_EFFECT_KEY);
-  if (config->border_effect == NULL)
-    config->border_effect = g_strdup ("none");
-}
-
 gboolean
 screenshot_load_config (gboolean clipboard_arg,
                         gboolean window_arg,
@@ -97,32 +69,57 @@ screenshot_load_config (gboolean clipboard_arg,
   config->interactive = interactive_arg;
 
   config->settings = g_settings_new ("org.gnome.gnome-screenshot");
-  populate_from_settings (config);
-
-  /* override the settings with cmdline parameters */
-  if (window_arg)
-    config->take_window_shot = TRUE;
-
-  if (area_arg)
-    config->take_area_shot = TRUE;
-
-  if (include_border_arg)
-    config->include_border = TRUE;
-
-  if (disable_border_arg)
-    config->include_border = FALSE;
-
-  if (border_effect_arg != NULL)
+  if (config->interactive)
     {
-      g_free (config->border_effect);
-      config->border_effect = g_strdup (border_effect_arg);
+      config->save_dir =
+        g_settings_get_string (config->settings,
+                               LAST_SAVE_DIRECTORY_KEY);
+      config->delay =
+        g_settings_get_int (config->settings, DELAY_KEY);
+      if (delay_arg > 0)
+        config->delay = delay_arg;
+
+      config->include_border =
+        g_settings_get_boolean (config->settings,
+                                INCLUDE_BORDER_KEY);
+      if (include_border_arg)
+        config->include_border = TRUE;
+      if (disable_border_arg)
+        config->include_border = FALSE;
+
+      if (border_effect_arg != NULL)
+        config->border_effect =
+          g_settings_get_string (config->settings,
+                                 BORDER_EFFECT_KEY);
+      else
+        config->border_effect = g_strdup (border_effect_arg);
+    }
+  else
+    {
+      config->save_dir =
+        g_settings_get_string (config->settings,
+                               AUTO_SAVE_DIRECTORY_KEY);
+      config->delay = delay_arg;
+      config->include_border = include_border_arg;
+      config->include_border = !disable_border_arg;
+      if (border_effect_arg != NULL)
+        config->border_effect = g_strdup (border_effect_arg);
+
+      config->copy_to_clipboard = clipboard_arg;
     }
 
-  if (delay_arg > 0)
-    config->delay = delay_arg;
+  config->include_icc_profile =
+    g_settings_get_boolean (config->settings,
+                            INCLUDE_ICC_PROFILE);
+  config->include_pointer =
+    g_settings_get_boolean (config->settings,
+                            INCLUDE_POINTER_KEY);
 
-  if (clipboard_arg)
-    config->copy_to_clipboard = TRUE;
+  if (config->border_effect == NULL)
+    config->border_effect = g_strdup ("none");
+
+  config->take_window_shot = window_arg;
+  config->take_area_shot = area_arg;
 
   screenshot_config = config;
 

@@ -265,11 +265,7 @@ screenshot_build_filename_async (GAsyncReadyCallback callback,
 
   job = g_slice_new0 (AsyncExistenceJob);
 
-  if (screenshot_config->interactive)
-    job->base_uris[0] = sanitize_save_directory (screenshot_config->last_save_dir);
-  else
-    job->base_uris[0] = sanitize_save_directory (screenshot_config->auto_save_dir);
-
+  job->base_uris[0] = sanitize_save_directory (screenshot_config->save_dir);
   job->base_uris[1] = get_default_screenshot_dir ();
   job->iteration = 0;
   job->type = TEST_SAVED_DIR;

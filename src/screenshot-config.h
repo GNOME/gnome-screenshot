@@ -28,8 +28,7 @@ G_BEGIN_DECLS
 typedef struct {
   GSettings *settings;
 
-  gchar *auto_save_dir;
-  gchar *last_save_dir;
+  gchar *save_dir;
 
   gboolean copy_to_clipboard;
 
