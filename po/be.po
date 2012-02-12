@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-30 19:21+0300\n"
-"PO-Revision-Date: 2012-01-30 19:21+0300\n"
+"POT-Creation-Date: 2012-02-12 20:32+0300\n"
+"PO-Revision-Date: 2012-02-12 20:32+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -205,14 +205,14 @@ msgstr "Інтэрактыўная настройка опцый"
 msgid "Take a picture of the screen"
 msgstr "Экранныя здымкі"
 
-#: ../src/screenshot-config.c:82
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "Канфліктныя опцыі: нельга адначасова ўжыць --window і --area.\n"
 
-#: ../src/screenshot-config.c:89
+#: ../src/screenshot-config.c:61
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
@@ -225,7 +225,7 @@ msgid ""
 "Please check your installation of gnome-utils"
 msgstr ""
 "Файл апісання графічнага інтэрфейсу праграмы gnome-screenshot адсутнічае.\n"
-"Праверце правільнасць усталёўкі пакунка gnome-utils"
+"Праверце правільнасць усталявання пакунка gnome-utils"
 
 #: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
