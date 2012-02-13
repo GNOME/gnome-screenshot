@@ -34,6 +34,7 @@ static GtkWidget *effect_combo = NULL;
 static GtkWidget *effect_label = NULL;
 static GtkWidget *effects_vbox = NULL;
 static GtkWidget *delay_hbox = NULL;
+static GtkWidget *delay_spin = NULL;
 
 enum
 {
@@ -89,6 +90,11 @@ target_toggled_cb (GtkToggleButton *button,
 
       gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
       gtk_widget_set_sensitive (effects_vbox, !take_area_shot);
+
+      if (take_area_shot)
+        screenshot_config->delay = 0;
+      else
+        screenshot_config->delay = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (delay_spin));
 
       screenshot_config->take_window_shot = take_window_shot;
       screenshot_config->take_area_shot = take_area_shot;
@@ -409,13 +415,13 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
                                                0.0, 99.0,
                                                1.0,  1.0,
                                                0.0));
-  spin = gtk_spin_button_new (adjust, 1.0, 0);
-  g_signal_connect (spin, "value-changed",
+  delay_spin = gtk_spin_button_new (adjust, 1.0, 0);
+  g_signal_connect (delay_spin, "value-changed",
                     G_CALLBACK (delay_spin_value_changed_cb),
                     NULL);
-  gtk_box_pack_start (GTK_BOX (delay_hbox), spin, FALSE, FALSE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
-  gtk_widget_show (spin);
+  gtk_box_pack_start (GTK_BOX (delay_hbox), delay_spin, FALSE, FALSE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), delay_spin);
+  gtk_widget_show (delay_spin);
 
   /* translators: this is the last part of the "grab after a
    * delay of <spin button> seconds".
