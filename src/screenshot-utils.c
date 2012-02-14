@@ -606,9 +606,10 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
   if (screenshot_config->take_window_shot)
     {
       method_name = "ScreenshotWindow";
-      method_params = g_variant_new ("(bbs)",
+      method_params = g_variant_new ("(bbbs)",
                                      screenshot_config->include_border,
-                                     TRUE,
+                                     screenshot_config->include_pointer,
+                                     TRUE, /* flash */
                                      filename);
     }
   else if (rectangle != NULL)
@@ -617,13 +618,16 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
       method_params = g_variant_new ("(iiiibs)",
                                      rectangle->x, rectangle->y,
                                      rectangle->width, rectangle->height,
-                                     TRUE,
+                                     TRUE, /* flash */
                                      filename);
     }
   else
     {
       method_name = "Screenshot";
-      method_params = g_variant_new ("(bs)", TRUE, filename);
+      method_params = g_variant_new ("(bbs)",
+                                     screenshot_config->include_pointer,
+                                     TRUE, /* flash */
+                                     filename);
     }
 
   connection = screenshot_application_get_session_bus ();
