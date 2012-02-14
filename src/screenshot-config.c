@@ -143,7 +143,9 @@ screenshot_save_config (void)
                           INCLUDE_BORDER_KEY, c->include_border);
   g_settings_set_boolean (c->settings,
                           INCLUDE_POINTER_KEY, c->include_pointer);
-  g_settings_set_int (c->settings, DELAY_KEY, c->delay);
   g_settings_set_string (c->settings,
                          BORDER_EFFECT_KEY, c->border_effect);
+
+  if (!c->take_area_shot)
+    g_settings_set_int (c->settings, DELAY_KEY, c->delay);
 }

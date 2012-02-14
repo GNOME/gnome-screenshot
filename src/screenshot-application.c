@@ -469,6 +469,9 @@ screenshot_start (ScreenshotApplication *self)
   /* hold the GApplication while doing the async screenshot op */
   g_application_hold (G_APPLICATION (self));
 
+  if (screenshot_config->take_area_shot)
+    delay = 0;
+
   /* HACK: give time to the dialog to actually disappear.
    * We don't have any way to tell when the compositor has finished 
    * re-drawing.
