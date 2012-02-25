@@ -119,14 +119,14 @@ build_uri (AsyncExistenceJob *job)
     {
       /* translators: this is the name of the file that gets made up
        * with the screenshot if the entire screen is taken */
-      file_name = g_strdup_printf (_("Screenshot at %s.png"), timestamp);
+      file_name = g_strdup_printf (_("Screenshot from %s.png"), timestamp);
     }
   else
     {
       /* translators: this is the name of the file that gets
        * made up with the screenshot if the entire screen is
        * taken */
-      file_name = g_strdup_printf (_("Screenshot at %s - %d.png"), timestamp, job->iteration);
+      file_name = g_strdup_printf (_("Screenshot from %s - %d.png"), timestamp, job->iteration);
     }
 
   retval = g_build_filename (base_uri, file_name, NULL);
