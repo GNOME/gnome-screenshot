@@ -24,8 +24,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils-master-po-gl-14799\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-05 23:24+0100\n"
-"PO-Revision-Date: 2012-02-05 23:28+0100\n"
+"POT-Creation-Date: 2012-02-25 13:50+0100\n"
+"PO-Revision-Date: 2012-02-25 13:51+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -180,27 +180,27 @@ msgstr "Captura de pantalla feita"
 msgid "All possible methods failed"
 msgstr "Fallaron todos os métodos posíbeis"
 
-#: ../src/screenshot-application.c:501
+#: ../src/screenshot-application.c:504
 msgid "Send the grab directly to the clipboard"
 msgstr "Enviar directamente o obtido ao portapapeis"
 
-#: ../src/screenshot-application.c:502
+#: ../src/screenshot-application.c:505
 msgid "Grab a window instead of the entire screen"
 msgstr "Capturar unha xanela en vez de toda a pantalla"
 
-#: ../src/screenshot-application.c:503
+#: ../src/screenshot-application.c:506
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Capturar unha área da pantalla en vez de toda a pantalla"
 
-#: ../src/screenshot-application.c:504
+#: ../src/screenshot-application.c:507
 msgid "Include the window border with the screenshot"
 msgstr "Incluír o bordo da xanela na captura de pantalla"
 
-#: ../src/screenshot-application.c:505
+#: ../src/screenshot-application.c:508
 msgid "Remove the window border from the screenshot"
 msgstr "Eliminar o bordo da xanela na captura de pantalla"
 
-#: ../src/screenshot-application.c:506
+#: ../src/screenshot-application.c:509
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr ""
 "Facer a captura de pantalla despois do atraso especificado [en segundos]"
@@ -208,24 +208,24 @@ msgstr ""
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:506
-#: ../src/screenshot-interactive-dialog.c:423
+#: ../src/screenshot-application.c:509
+#: ../src/screenshot-interactive-dialog.c:426
 msgid "seconds"
 msgstr "segundos"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:510
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Efecto para engadir ao bordo (sombra, bordo ou ningún)"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:510
 msgid "effect"
 msgstr "efecto"
 
-#: ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:511
 msgid "Interactively set options"
 msgstr "Definir as opcións interactivamente"
 
-#: ../src/screenshot-application.c:522
+#: ../src/screenshot-application.c:525
 msgid "Take a picture of the screen"
 msgstr "Capturar unha imaxe da pantalla"
 
@@ -266,7 +266,7 @@ msgstr "Captura-de-pantalla.png"
 #. * with the screenshot if the entire screen is taken
 #: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
+msgid "Screenshot from %s.png"
 msgstr "Captura de pantalla de %s.png"
 
 #. translators: this is the name of the file that gets
@@ -274,7 +274,7 @@ msgstr "Captura de pantalla de %s.png"
 #. * taken
 #: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
+msgid "Screenshot from %s - %d.png"
 msgstr "Captura de pantalla de %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
@@ -318,24 +318,24 @@ msgstr "Seleccione _área a capturar"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "Capturar despois dun _atraso de"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "Facer unha captura de pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Efectos"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "Facer unha _captura de pantalla"
 
-#: ../src/screenshot-utils.c:719
+#: ../src/screenshot-utils.c:723
 msgid "Error loading the help page"
 msgstr "Produciuse un erro ao cargar a páxina de axuda"
 
