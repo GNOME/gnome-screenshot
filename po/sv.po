@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 19:32+0100\n"
-"PO-Revision-Date: 2012-02-19 19:34+0100\n"
+"POT-Creation-Date: 2012-02-26 17:47+0100\n"
+"PO-Revision-Date: 2012-02-26 17:47+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -234,16 +234,16 @@ msgstr "Skärmbild.png"
 #. * with the screenshot if the entire screen is taken
 #: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Skärmbild %s.png"
+msgid "Screenshot from %s.png"
+msgstr "Skärmbild från %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
 #: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Skärmbild %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "Skärmbild från %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
