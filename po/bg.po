@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-22 21:10+0200\n"
-"PO-Revision-Date: 2012-02-22 21:09+0200\n"
+"POT-Creation-Date: 2012-02-27 06:49+0200\n"
+"PO-Revision-Date: 2012-02-27 06:49+0200\n"
 "Last-Translator: Krasimir Chonov <mk2616@abv.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -250,16 +250,16 @@ msgstr "Снимка.png"
 #. * with the screenshot if the entire screen is taken
 #: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Снимка-%s.png"
+msgid "Screenshot from %s.png"
+msgstr "Снимка от %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
 #: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Снимка-%s-%d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "Снимка от %s — %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
