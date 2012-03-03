@@ -1,98 +1,28 @@
-# Hungarian translation of gnome-utils.
-# Copyright (C) 1999 - 2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
-# This file is distributed under the same license as the gnome-utils package.
+# Hungarian translation of gnome-screenshot.
+# Copyright (C) 1999 - 2006, 2007, 2008, 2009, 2010, 2011, 2012 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-screenshot package.
 #
 # Szabolcs Ban <shooby at gnome dot hu>, 1999, 2000.
 # Gergely Nagy <greg at gnome dot hu>, 2001.
 # Andras Timar <timar at gnome dot hu>, 2001, 2002, 2003.
 # Gabor Sari <saga at gnome dot hu>, 2003, 2004.
 # Laszlo Dvornik <dvornik at gnome dot hu>, 2004.
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2004, 2006, 2007, 2008, 2009, 2010, 2011.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2004, 2006, 2007, 2008, 2009, 2010, 2011, 2012.
 # Mate ORY <orymate at gmail d0t com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils master\n"
+"Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-21 03:19+0200\n"
+"POT-Creation-Date: 2012-03-03 16:51+0100\n"
+"PO-Revision-Date: 2012-03-03 16:52+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
-"Language-Team: Magyar <gnome-hu-list at gnome dot org>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.0\n"
-
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "Hiba történt a képernyőkép mentésekor"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"A képernyőkép nem menthető a(z) %s helyre.\n"
-" A hiba: %s\n"
-" Válasszon másik helyet és próbálja újra."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "A képernyőkép elkészült"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "Nem készíthető képernyőkép az aktuális ablakról"
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "A kép közvetlenül vágólapra küldése"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Csak egy ablakról készítsen képernyőképet az egész képernyő helyett"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Csak egy területről készítsen képernyőképet az egész képernyő helyett"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "Az ablak keretének bevétele a képernyőképbe"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "Az ablak keretének bevétele a képernyőképbe"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Képernyőkép készítése (másodpercekben) megadott idő letelte után"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "másodperc"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Az ablak keretéhez adandó hatás (árnyék, szegély vagy nincs)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "hatás"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Interaktív mód"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Kép készítése a képernyőről"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
@@ -103,14 +33,12 @@ msgid "Screenshot"
 msgstr "Képernyőkép"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Nem készíthető képernyőkép az aktuális ablakról"
+msgstr "Kép készítése az aktuális ablakról"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Kép készítése a képernyőről"
+msgstr "Kép készítése a teljes képernyőről"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -177,40 +105,127 @@ msgid "Include the window manager border along with the screenshot"
 msgstr "Az ablakkezelő határának bevétele a képernyőképbe"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Last save directory"
+msgstr "Utolsó mentés könyvtára"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Screenshot delay"
 msgstr "Képernyőkép késleltetése"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Screenshot directory"
 msgstr "Képernyőkép-könyvtár"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "Az utoljára képernyőkép mentéséhez használt könyvtár."
-
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "The directory where the screenshots will be saved by default."
+msgstr "A képernyőképek mentéséhez alapértelmezetten használandó könyvtár."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "Az interaktív módban utoljára képernyőkép mentéséhez használt könyvtár."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "A képernyőkép készítése előtt várakozás ennyi másodpercig."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Ablakra jellemző képernyőkép (elavult)"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Már létezik „%s” nevű fájl itt: „%s”"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "Felülírja a meglévő fájlt?"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+msgid "Unable to capture a screenshot"
+msgstr "Nem készíthető képernyőkép"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr "Hiba a fájl létrehozásakor. Válasszon másik helyet, és próbálja újra."
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "Hiba a fájl létrehozásakor"
+
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "A képernyőkép elkészült"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "Minden lehetséges módszer sikertelen"
+
+#: ../src/screenshot-application.c:504
+msgid "Send the grab directly to the clipboard"
+msgstr "A kép közvetlenül vágólapra küldése"
+
+#: ../src/screenshot-application.c:505
+msgid "Grab a window instead of the entire screen"
+msgstr "Csak egy ablakról készítsen képernyőképet az egész képernyő helyett"
+
+#: ../src/screenshot-application.c:506
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Csak egy területről készítsen képernyőképet az egész képernyő helyett"
+
+#: ../src/screenshot-application.c:507
+msgid "Include the window border with the screenshot"
+msgstr "Az ablak keretének bevétele a képernyőképbe"
+
+#: ../src/screenshot-application.c:508
+msgid "Remove the window border from the screenshot"
+msgstr "Az ablak keretének bevétele a képernyőképbe"
+
+#: ../src/screenshot-application.c:509
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Képernyőkép készítése (másodpercekben) megadott idő letelte után"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:509
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "másodperc"
+
+#: ../src/screenshot-application.c:510
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Az ablak keretéhez adandó hatás (árnyék, szegély vagy nincs)"
+
+#: ../src/screenshot-application.c:510
+msgid "effect"
+msgstr "hatás"
+
+#: ../src/screenshot-application.c:511
+msgid "Interactively set options"
+msgstr "Interaktív mód"
+
+#: ../src/screenshot-application.c:525
+msgid "Take a picture of the screen"
+msgstr "Kép készítése a képernyőről"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "Ütköző kapcsolók: a --window és --area nem használható egyszerre.\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:61
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Ütköző kapcsolók: a --window és --area nem használható egyszerre.\n"
+msgstr "Ütköző kapcsolók: a --area és --delay nem használható egyszerre.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -218,27 +233,27 @@ msgstr ""
 "A képernyőkép-készítő program felületfájlja hiányzik.\n"
 "Ellenőrizze a gnome-utils telepítését."
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Válasszon egy mappát"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Képernyőkép.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
+msgid "Screenshot from %s.png"
 msgstr "Képernyőkép – %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
+msgid "Screenshot from %s - %d.png"
 msgstr "Képernyőkép – %s – %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
@@ -282,23 +297,27 @@ msgstr "_Terület kiválasztása"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "Késl_eltetés:"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "Képernyőkép készítése"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Hatások"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "_Felvétel"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:723
 msgid "Error loading the help page"
 msgstr "Hiba a súgóoldal betöltése közben"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "Hiba történt a képernyőkép mentésekor"
+
