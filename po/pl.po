@@ -6,10 +6,10 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils\n"
+"Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-08-11 22:30+0200\n"
+"POT-Creation-Date: 2012-03-04 00:42+0100\n"
+"PO-Revision-Date: 2012-03-04 00:43+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -21,76 +21,6 @@ msgstr ""
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "Błąd podczas zapisywania zrzutu ekranu"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"Zapis zrzutu ekranu do %s jest niemożliwy.\n"
-" Błąd: %s\n"
-". Proszę wybrać inne położenie i spróbować ponownie."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "Pobrano zrzut ekranu"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "Nie można pobrać zrzutu ekranu bieżącego okna."
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "Wysyła pobranie bezpośrednio do schowka"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Pobiera okno zamiast całego ekranu"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Pobiera określony obszar ekranu zamiast całego ekranu"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "Dołącza ramkę okna do zrzutu ekranu"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "Usuwa ramkę okna ze zrzutu ekranu"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Pobiera zrzut ekranu po określonym opóźnieniu (w sekundach)"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "sekund"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Efekt dodawany do krawędzi (cień, krawędź lub brak)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "efekt"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Interaktywne ustawienie opcji"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Wykonuje zdjęcie ekranu"
-
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
 msgstr "Zapisanie obrazu pulpitu lub poszczególnych okien"
@@ -100,14 +30,12 @@ msgid "Screenshot"
 msgstr "Zrzut ekranu"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Nie można pobrać zrzutu ekranu bieżącego okna."
+msgstr "Wykonanie zrzutu bieżącego okna"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Wykonuje zdjęcie ekranu"
+msgstr "Wykonanie zrzutu całego ekranu"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -174,26 +102,116 @@ msgid "Include the window manager border along with the screenshot"
 msgstr "Dołączanie do zrzutu ekranu ramki menedżera okien"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Last save directory"
+msgstr "Katalog ostatniego zapisu"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Screenshot delay"
 msgstr "Opóźnienie pobrania zrzutu ekranu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Screenshot directory"
 msgstr "Katalog zrzutów ekranu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "Katalog, w którym ostatnio zapisywane były zrzuty ekranu."
-
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "The directory where the screenshots will be saved by default."
+msgstr "Katalog, w którym zrzuty ekranu są domyślnie zapisywane."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr ""
+"Ostatni katalog, w którym zapisano zrzut ekranu w trybie interaktywnym."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Opóźnienie pobrania zrzutu ekranu w sekundach."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Zrzut ekranu dla okna (przestarzałe)"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Plik o nazwie \"%s\" już istnieje w \"%s\""
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "Zastąpić istniejący plik?"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+msgid "Unable to capture a screenshot"
+msgstr "Nie można pobrać zrzutu ekranu"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+"Błąd podczas tworzenia pliku. Proszę wybrać inne położenie i spróbować "
+"ponownie."
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "Błąd podczas tworzenia pliku"
+
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "Pobrano zrzut ekranu"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "Żadna możliwa metoda się nie powiodła"
+
+#: ../src/screenshot-application.c:504
+msgid "Send the grab directly to the clipboard"
+msgstr "Wysyła pobranie bezpośrednio do schowka"
+
+#: ../src/screenshot-application.c:505
+msgid "Grab a window instead of the entire screen"
+msgstr "Pobiera okno zamiast całego ekranu"
+
+#: ../src/screenshot-application.c:506
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Pobiera określony obszar ekranu zamiast całego ekranu"
+
+#: ../src/screenshot-application.c:507
+msgid "Include the window border with the screenshot"
+msgstr "Dołącza ramkę okna do zrzutu ekranu"
+
+#: ../src/screenshot-application.c:508
+msgid "Remove the window border from the screenshot"
+msgstr "Usuwa ramkę okna ze zrzutu ekranu"
+
+#: ../src/screenshot-application.c:509
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Pobiera zrzut ekranu po określonym opóźnieniu (w sekundach)"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:509
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "sekund"
+
+#: ../src/screenshot-application.c:510
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Efekt dodawany do krawędzi (cień, krawędź lub brak)"
+
+#: ../src/screenshot-application.c:510
+msgid "effect"
+msgstr "efekt"
+
+#: ../src/screenshot-application.c:511
+msgid "Interactively set options"
+msgstr "Interaktywne ustawienie opcji"
+
+#: ../src/screenshot-application.c:525
+msgid "Take a picture of the screen"
+msgstr "Wykonuje zdjęcie ekranu"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -202,16 +220,16 @@ msgstr ""
 "Sprzeczne opcje: --window oraz --area nie mogą być używane w tym samym "
 "czasie.\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:61
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Sprzeczne opcje: --window oraz --area nie mogą być używane w tym samym "
+"Sprzeczne opcje: --area oraz --delay nie mogą być używane w tym samym "
 "czasie.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -219,28 +237,28 @@ msgstr ""
 "Brakuje pliku określającego wygląd programu pobierającego zrzuty ekranu.\n"
 "Proszę sprawdzić instalację programu gnome-utils"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Wybór katalogu"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "zrzut_ekranu.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Zrzut ekranu %s.png"
+msgid "Screenshot from %s.png"
+msgstr "Zrzut ekranu z %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Zrzut ekranu %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "Zrzut ekranu z %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -283,23 +301,23 @@ msgstr "Wybór _obszaru do przechwycenia"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "P_rzechwycenie po upływie"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "Pobranie zrzutu ekranu"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Efekty"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "_Pobierz zrzut ekranu"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:723
 msgid "Error loading the help page"
 msgstr "Błąd podczas wczytywania pomocy"
