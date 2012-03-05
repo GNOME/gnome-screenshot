@@ -678,8 +678,9 @@ screenshot_show_dialog (GtkWindow   *parent,
   GtkWindowGroup *group;
   gint response;
 
-  g_return_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)));
-  g_return_if_fail (message != NULL);
+  g_return_val_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)),
+                        GTK_RESPONSE_NONE);
+  g_return_val_if_fail (message != NULL, GTK_RESPONSE_NONE);
   
   dialog = gtk_message_dialog_new (parent,
   				   GTK_DIALOG_DESTROY_WITH_PARENT,

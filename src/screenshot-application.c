@@ -320,8 +320,6 @@ build_filename_ready_cb (GObject *source,
 {
   ScreenshotApplication *self = user_data;
   GtkWidget *toplevel;
-  ScreenshotDialog *dialog;
-  gchar *save_uri;
   GError *error = NULL;
 
   self->priv->save_uri = screenshot_build_filename_finish (res, &error);
