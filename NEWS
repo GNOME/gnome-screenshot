@@ -1,3 +1,9 @@
+GNOME Screenshot 3.3.91 - 5th March 2012
+========================================
+
+- Use the new Shell API to include mouse pointer
+- Make sure not to override the delay setting for non-interactive mode
+
 GNOME Screenshot 3.3.2 - 6th February 2012
 ==========================================
 
