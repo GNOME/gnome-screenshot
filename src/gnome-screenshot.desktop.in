@@ -11,14 +11,14 @@ NotShowIn=KDE;
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-utils
 X-GNOME-Bugzilla-Component=screenshot
-X-Ayatana-Desktop-Shortcuts=Screen;Window
+Actions=Screen;Window;
 
-[Screen Shortcut Group]
-_Name=Take a screenshot of the whole screen
+[Desktop Action Screen]
+_Name=Take a Screenshot of the Whole Screen
 Exec=gnome-screenshot
-TargetEnvironment=Unity
+OnlyShowIn=Unity;
 
-[Window Shortcut Group]
-_Name=Take a screenshot of the current window
+[Desktop Action Window]
+_Name=Take a Screenshot of the Current Window
 Exec=gnome-screenshot -w
-TargetEnvironment=Unity
+OnlyShowIn=Unity;
