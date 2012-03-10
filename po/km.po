@@ -1,0 +1,299 @@
+# translation of gnome-screenshot.master.po to Khmer
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2012.
+# Sok Sophea <sophea@khmeros.info>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-screenshot.master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-01-12 08:46+0000\n"
+"PO-Revision-Date: 2012-03-02 09:38+0700\n"
+"Last-Translator: Sok Sophea <sophea@khmeros.info>\n"
+"Language-Team: Khmer <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
+
+#: ../src/gnome-screenshot.c:143
+msgid "Error while saving screenshot"
+msgstr "កំហុស​ពេលរក្សាទុក​រូបថត​អេក្រង់"
+
+#: ../src/gnome-screenshot.c:147
+#, c-format
+msgid ""
+"Impossible to save the screenshot to %s.\n"
+" Error was %s.\n"
+" Please choose another location and retry."
+msgstr ""
+"មិន​អាច​រក្សាទុក​រូបថត​អេក្រង់​ទៅ %s បាន​ទេ ។\n"
+" កំហុស​គឺ %s ។\n"
+" សូម​ជ្រើសរើស​ទីតាំង​ផ្សេង ហើយ​ព្យាយាម​ម្ដង​ទៀត ។"
+
+#: ../src/gnome-screenshot.c:336
+msgid "Screenshot taken"
+msgstr "បាន​ថត​អេក្រង់"
+
+#: ../src/gnome-screenshot.c:495
+msgid "Unable to take a screenshot of the current window"
+msgstr "មិន​អាច​ថត​អេក្រង់​របស់​បង្អួច​បច្ចុប្បន្ន​បាន​ទេ"
+
+#: ../src/gnome-screenshot.c:666
+msgid "Send the grab directly to the clipboard"
+msgstr "ផ្ញើ​ការ​ចាប់​យក​ដោយ​ផ្ទាល់​ទៅ​ក្ដារ​តម្បៀត​ខ្ទាស់"
+
+#: ../src/gnome-screenshot.c:667
+msgid "Grab a window instead of the entire screen"
+msgstr "ចាប់​យក​បង្អួច​ជំនួស​អេក្រង់​ទាំងមូល"
+
+#: ../src/gnome-screenshot.c:668
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "ចាប់​យក​ផ្ទៃ​អេក្រង់​ជំនួស​អេក្រង់​ទាំងមូល"
+
+#: ../src/gnome-screenshot.c:669
+msgid "Include the window border with the screenshot"
+msgstr "រួមបញ្ចូល​ទាំង​ស៊ុម​បង្អួច​ដែល​មាន​រូបថត​អេក្រង់"
+
+#: ../src/gnome-screenshot.c:670
+msgid "Remove the window border from the screenshot"
+msgstr "យក​ស៊ុម​បង្អួចចេញពី​រូបថត​អេក្រង់"
+
+#: ../src/gnome-screenshot.c:671
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "ថតរូប​អេក្រង់​បន្ទាប់ពី​ពេល​ពន្យារ​ដែល​បាន​បញ្ជាក់ [គិតជា​វិនាទី]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/gnome-screenshot.c:671 ../src/screenshot-interactive-dialog.c:423
+msgid "seconds"
+msgstr "វិនាទី"
+
+#: ../src/gnome-screenshot.c:672
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "បែបផែន​ដែល​ត្រូវ​បន្ថែម​ទៅកាន់​ស៊ុម (ស្រមោល ស៊ុម ឬ​គ្មាន)"
+
+#: ../src/gnome-screenshot.c:672
+msgid "effect"
+msgstr "បែបផែន"
+
+#: ../src/gnome-screenshot.c:673
+msgid "Interactively set options"
+msgstr "ជម្រើស​កំណត់​អសកម្ម"
+
+#: ../src/gnome-screenshot.c:682
+msgid "Take a picture of the screen"
+msgstr "ថតរូប​ភាព​អេក្រង់"
+
+#: ../src/gnome-screenshot.desktop.in.h:1
+msgid "Save images of your desktop or individual windows"
+msgstr "រក្សាទុក​រូបភាព​ផ្ទៃតុ​របស់​អ្នក ឬ​បង្អួច​នីមួយៗ"
+
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Screenshot"
+msgstr "រូបថត​​អេក្រង់​"
+
+#: ../src/gnome-screenshot.desktop.in.h:3
+msgid "Take a screenshot of the current window"
+msgstr "ថតរូប​អេក្រង់​នៃ​បង្អួច​បច្ចុប្បន្ន"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
+msgid "Take a screenshot of the whole screen"
+msgstr "ថតរូប​អេក្រង់​នៃ​អេក្រង់​ទាំងមូល"
+
+#: ../src/gnome-screenshot.ui.h:1
+msgid "*"
+msgstr "*"
+
+#: ../src/gnome-screenshot.ui.h:2
+msgid "C_opy to Clipboard"
+msgstr "ចម្លង​ក្ដារ​តម្បៀត​ខ្ទាស់"
+
+#: ../src/gnome-screenshot.ui.h:3
+msgid "Save Screenshot"
+msgstr "រក្សាទុក​រូបថត​អេក្រង់"
+
+#: ../src/gnome-screenshot.ui.h:4
+msgid "Save in _folder:"
+msgstr "រក្សាទុក​ក្នុង​ថត ៖"
+
+#: ../src/gnome-screenshot.ui.h:5
+msgid "_Name:"
+msgstr "ឈ្មោះ ៖"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+msgid "Border Effect"
+msgstr "បែបផែន​ស៊ុម"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"បែបផែន​ដែល​ត្រូវ​បន្ថែម​ទៅកាន់​ផ្នែក​ខាងក្រៅ​នៃ​ស៊ុម ។ "
+"តម្លៃ​ដែល​អាច​ប្រើ​បាន​គឺ ៖ \"ស្រមោល\" \"គ្មាន\" និង \"ស៊ុម\" ។"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+"ចាប់​យក​តែ​បង្អួច​បច្ចុប្បន្ន​ប៉ុណ្ណោះ ជាជាង​ផ្ទៃតុ​ទាំងមូល ។ "
+"គ្រាប់ចុច​នេះ​ត្រូវ​បាន​បដិសេធ ហើយ​​លែង​ប្រើ​ទៀត​ហើយ ។"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+msgid "Include Border"
+msgstr "រួមបញ្ចូល​ទាំង​ស៊ុម"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Include ICC Profile"
+msgstr "រួមបញ្ចូល​ទម្រង់ ICC"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "Include Pointer"
+msgstr "រួមបញ្ចូល​ទាំង​សញ្ញា​ចង្អុល"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "រួមបញ្ចូល​ទម្រង់ ICC របស់​គោលដៅ​នៅ​ក្នុង​ឯកសារ​រូបថត​អេក្រង់"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "Include the pointer in the screenshot"
+msgstr "រួមបញ្ចូល​ទាំង​សញ្ញា​ចង្អុល​នៅ​ក្នុង​រូបថត​អេក្រង់"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include the window manager border along with the screenshot"
+msgstr "រួមបញ្ចូល​ទាំង​ស៊ុម​កម្មវិធី​គ្រប់គ្រង​ដែល​នៅ​ជាមួយ​រូបថត​អេក្រង់"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Screenshot delay"
+msgstr "ការ​ពន្យារពេល​រូបថត​អេក្រង់"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Screenshot directory"
+msgstr "ថត​រូបថត​អេក្រង់"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "The directory the last screenshot was saved in."
+msgstr "ថត​ដែល​រូបថត​អេក្រង់​ចុងក្រោយ​បាន​រក្សាទុក​នៅ​ក្នុង ។"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr "ចំនួន​វិនាទី​ដែល​ត្រូវ​រង់ចាំ​មុន​ពេល​ថត​រូប​អេក្រង់ ។"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Window-specific screenshot (deprecated)"
+msgstr "រូបថត​អេក្រង់​របស់​បង្អួច​ជាក់លាក់ (បាន​បដិសេធ)"
+
+#: ../src/screenshot-config.c:78
+#, c-format
+msgid ""
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
+msgstr ""
+"ជម្រើស​ប៉ះទង្គិច ៖ --បង្អួច និង --ផ្ទៃ​គួរតែ​ត្រូវ​បាន​ប្រើ​នៅ​ពេល​តែមួយ ។\n"
+
+#: ../src/screenshot-config.c:85
+#, c-format
+msgid ""
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
+msgstr ""
+"ជម្រើស​ប៉ះទង្គិច ៖ --ផ្ទៃ និង "
+"--ការ​ពន្យារពេល​គួរតែ​ត្រូវ​បាន​ប្រើ​នៅ​ពេល​តែមួយ ។\n"
+
+#: ../src/screenshot-dialog.c:171
+msgid ""
+"UI definition file for the screenshot program is missing.\n"
+"Please check your installation of gnome-utils"
+msgstr ""
+"ឯកសារ​ការ​កំណត់ UI សម្រាប់​កម្មវិធី​ថតរូប​អេក្រង់​គឺ​បាត់ "
+"។\nសូម​ពិនិត្យមើល​ការ​ដំឡើង gnome-utils របស់​អ្នក"
+
+#: ../src/screenshot-dialog.c:192
+msgid "Select a folder"
+msgstr "ជ្រើស​ថត"
+
+#: ../src/screenshot-dialog.c:301
+msgid "Screenshot.png"
+msgstr "Screenshot.png"
+
+#. translators: this is the name of the file that gets made up
+#. * with the screenshot if the entire screen is taken
+#: ../src/screenshot-filename-builder.c:119
+#, c-format
+msgid "Screenshot at %s.png"
+msgstr "ថតរូប​អេក្រង់​នៅ %s.png"
+
+#. translators: this is the name of the file that gets
+#. * made up with the screenshot if the entire screen is
+#. * taken
+#: ../src/screenshot-filename-builder.c:126
+#, c-format
+msgid "Screenshot at %s - %d.png"
+msgstr "ថតរូប​អេក្រង់​នៅ %s - %d.png"
+
+#: ../src/screenshot-interactive-dialog.c:165
+msgid "None"
+msgstr "គ្មាន"
+
+#: ../src/screenshot-interactive-dialog.c:166
+msgid "Drop shadow"
+msgstr "ទម្លាក់​ស្រមោល"
+
+#: ../src/screenshot-interactive-dialog.c:167
+msgid "Border"
+msgstr "ស៊ុម"
+
+#. * Include pointer *
+#: ../src/screenshot-interactive-dialog.c:271
+msgid "Include _pointer"
+msgstr "រួមបញ្ចូល​ទាំង​សញ្ញា​ចង្អុល"
+
+#. * Include window border *
+#: ../src/screenshot-interactive-dialog.c:281
+msgid "Include the window _border"
+msgstr "រួមបញ្ចូល​ទាំង​ស៊ុម​បង្អួច"
+
+#: ../src/screenshot-interactive-dialog.c:298
+msgid "Apply _effect:"
+msgstr "អនុវត្ត​បែបផែន ៖"
+
+#: ../src/screenshot-interactive-dialog.c:360
+msgid "Grab the whole _desktop"
+msgstr "ចាប់​យក​ផ្ទៃតុ​ទាំងមូល"
+
+#: ../src/screenshot-interactive-dialog.c:374
+msgid "Grab the current _window"
+msgstr "ចាប់​យក​បង្អួច​បច្ចុប្បន្ន"
+
+#: ../src/screenshot-interactive-dialog.c:386
+msgid "Select _area to grab"
+msgstr "ជ្រើស​តំបន់​ដើម្បី​ចាប់​យក"
+
+#. translators: this is the first part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-interactive-dialog.c:403
+msgid "Grab _after a delay of"
+msgstr "ចាប់​យក​បន្ទាប់ពី​ការ​ពន្យារ​នៃ"
+
+#: ../src/screenshot-interactive-dialog.c:441
+#: ../src/screenshot-interactive-dialog.c:449
+msgid "Take Screenshot"
+msgstr "ថតរូប​អេក្រង់"
+
+#: ../src/screenshot-interactive-dialog.c:450
+msgid "Effects"
+msgstr "បែបផែន"
+
+#: ../src/screenshot-interactive-dialog.c:455
+msgid "Take _Screenshot"
+msgstr "ថតរូប​អេក្រង់"
+
+#: ../src/screenshot-utils.c:713
+msgid "Error loading the help page"
+msgstr "កំហុស​ក្នុង​ការ​ផ្ទុក​ទំព័រ​ជំនួយ"
