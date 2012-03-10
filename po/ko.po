@@ -3,6 +3,7 @@
 #
 # update by Young-Ho, Cha <ganadist@chollian.net>, 2001
 # Changwoo Ryu <cwryu@debian.org>, 1998, 2002-2006, 2007, 2008, 2009, 2010, 2011.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2012.
 #
 # 새로 번역하시는 분은 아래 translator-credits에 추가하세요.
 #
@@ -12,138 +13,59 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-09-23 06:19+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-05 16:10+0000\n"
+"PO-Revision-Date: 2012-03-06 06:22+0900\n"
+"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "스크린샷을 저장하는 데 오류가 발생했습니다"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"%s에 스크린샷을 저장할 수 없습니다.\n"
-" 오류는 %s.\n"
-" 다른 위치를 선택하고 다시 시도해 보십시오."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "스크린샷을 찍었습니다"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "현재 창의 스크린샷을 찍을 수 없습니다."
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "화면을 찍어 직접 클립보드로 복사합니다"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "전체 화면 대신에 창을 찍습니다"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "전체 화면 대신에 화면의 일정 영역을 찍습니다"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "화면을 찍을 때 창 테두리를 포함합니다"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "화면을 찍을 때 창 테두리를 제거합니다"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "지정한 시간 (초 단위) 이후에 화면을 찍습니다"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "초"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "테두리에 넣을 효과 (shadow, border 아니면 none)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "테두리 효과"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "대화형 인터페이스로 옵션 설정"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "화면을 찍습니다"
-
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "데스크톱이나 창 한 개의 스크린샷을 저장합니다"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "스크린샷"
 
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "데스크톱이나 창 한 개의 스크린샷을 저장합니다"
+
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
-msgid "Take a screenshot of the current window"
-msgstr "현재 창의 스크린샷을 찍을 수 없습니다."
+msgid "Take a screenshot of the whole screen"
+msgstr "전체 화면을 찍습니다"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
-msgid "Take a screenshot of the whole screen"
-msgstr "화면을 찍습니다"
+msgid "Take a screenshot of the current window"
+msgstr "현재 창을 찍습니다"
 
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "스크린샷 저장"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "클립보드로 복사(_O)"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "스크린샷 저장"
+msgid "_Name:"
+msgstr "이름(_N):"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "폴더에 저장(_F):"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "이름(_N):"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "테두리 효과"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "창의 스크린샷 (낡음)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"테두리에 바깥 쪽에 넣을 효과. 쓸 수 있는 값은 \"shadow\", \"none\", \"border"
-"\"입니다."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -151,65 +73,162 @@ msgstr ""
 "전체 데스크톱이 아니라 현재 창만 캡쳐합니다. 오래 된 설정이고, 이제 더 이상 "
 "사용하지 않습니다."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "테두리 포함"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "ICC 프로파일 포함"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "마우스 포인터 포함"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "스크린샷 파일에 대상의 ICC 프로파일을 포함합니다"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "화면을 찍을 때 마우스 포인터를 포함합니다"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "화면을 잡을 때 창 관리자 테두리도 포함"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "스크린샷 지연 시간"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "스크린샷 디렉터리"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "스크린샷을 마지막에 저장할 때 사용한 디렉터리."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "스크린샷을 찍기 전에 기다릴 시간, 초 단위."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "창의 스크린샷 (낡음)"
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "스크린샷 디렉터리"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory where the screenshots will be saved by default."
+msgstr "기본으로 저장할 스크린샷의 디렉터리입니다."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Last save directory"
+msgstr "최근 저장 디렉터리"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "대화식 모드로 저장한 스크린샷의 최근 디렉터리입니다."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "테두리 포함"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "화면을 잡을 때 창 관리자 테두리도 포함"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "마우스 포인터 포함"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "화면을 찍을 때 마우스 포인터를 포함합니다"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "ICC 프로파일 포함"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "스크린샷 파일에 대상의 ICC 프로파일을 포함합니다"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "테두리 효과"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"테두리에 바깥 쪽에 넣을 효과. 쓸 수 있는 값은 \"shadow\", \"none\", \"border"
+"\"입니다."
+
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "\"%s\" 파일이 \"%s\"에 이미 존재합니다"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "현재 파일을 덮어씁니까?"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
+msgid "Unable to capture a screenshot"
+msgstr "스크린샷을 찍을 수 없습니다."
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+"파일을 만드는데 오류가 발생했습니다. 다른 위치를 선택하고 다시 시도하기 바랍"
+"니다."
+
+#: ../src/screenshot-application.c:341
+msgid "Error creating file"
+msgstr "파일을 만드는 중 오류"
+
+#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
+msgid "Screenshot taken"
+msgstr "스크린샷을 찍었습니다"
+
+#: ../src/screenshot-application.c:387
+msgid "All possible methods failed"
+msgstr "모든 가능한 방법이 실패했습니다"
+
+#: ../src/screenshot-application.c:502
+msgid "Send the grab directly to the clipboard"
+msgstr "화면을 찍어 직접 클립보드로 복사합니다"
+
+#: ../src/screenshot-application.c:503
+msgid "Grab a window instead of the entire screen"
+msgstr "전체 화면 대신에 창을 찍습니다"
+
+#: ../src/screenshot-application.c:504
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "전체 화면 대신에 화면의 일정 영역을 찍습니다"
+
+#: ../src/screenshot-application.c:505
+msgid "Include the window border with the screenshot"
+msgstr "화면을 찍을 때 창 테두리를 포함합니다"
+
+#: ../src/screenshot-application.c:506
+msgid "Remove the window border from the screenshot"
+msgstr "화면을 찍을 때 창 테두리를 제거합니다"
+
+#: ../src/screenshot-application.c:507
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "지정한 시간 (초 단위) 이후에 화면을 찍습니다"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:507
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "초"
+
+#: ../src/screenshot-application.c:508
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "테두리에 넣을 효과 (shadow, border 아니면 none)"
+
+#: ../src/screenshot-application.c:508
+msgid "effect"
+msgstr "테두리 효과"
+
+#: ../src/screenshot-application.c:509
+msgid "Interactively set options"
+msgstr "대화형 인터페이스로 옵션 설정"
+
+#: ../src/screenshot-application.c:523
+msgid "Take a picture of the screen"
+msgstr "화면을 찍습니다"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "옵션 충돌: --window 옵션과 --area 옵션은 같이 사용할 수 없습니다.\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:61
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "옵션 충돌: --window 옵션과 --area 옵션은 같이 사용할 수 없습니다.\n"
+msgstr "옵션 충돌: --area 옵션과 --delay 옵션을 동시에 사용할 수 없습니다.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -217,28 +236,28 @@ msgstr ""
 "스크린샷 프로그램의 UI 정의 파일이 없습니다.\n"
 "gnome-utils를 제대로 설치했는지 확인하십시오"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "폴더 선택"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "화면.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "화면 - 시각 %s.png"
+msgid "Screenshot from %s.png"
+msgstr "%s.png 스크린샷"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "화면 - 시각 %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "%s - %d.png 스크린샷"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -281,23 +300,26 @@ msgstr "잡을 영역 선택(_A)"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "다음 시간이 지난 후에 찍기(_A): "
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "스크린샷 찍기"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "효과"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "스크린샷 찍기(_S)"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "도움말 페이지를 읽어들이는 데 오류"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "스크린샷을 저장하는 데 오류가 발생했습니다"
