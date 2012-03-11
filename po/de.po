@@ -12,8 +12,8 @@
 # Jochen Skulj <jochen@jochenskulj.de>, 2008.
 # Hendrik Richter <hendrikr@gnome.org>, 2004, 2005, 2006, 2007, 2008, 2009.
 # Nathan-J. Hirschauer <nathanhirschauer@verfriemelt.org>, 2009.
-# Mario Blättermann <mariobl@freenet.de>, 2009, 2011.
-# Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2011.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2009, 2011, 2012.
+# Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2011, 2012.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2011.
 # Christian Kirbach <Christian.Kirbach@googlemail.com>, 2009, 2011.
 #
@@ -22,9 +22,9 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-10-07 07:05+0000\n"
-"PO-Revision-Date: 2011-10-08 21:41+0100\n"
-"Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
+"POT-Creation-Date: 2012-03-05 16:10+0000\n"
+"PO-Revision-Date: 2012-03-04 17:46+0100\n"
+"Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,120 +32,110 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "Fehler beim Speichern des Bildschirmfotos"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"Das Bildschirmfoto kann nicht nach »%s« gespeichert werden.\n"
-"Fehler: %s.\n"
-" Bitte wählen Sie einen anderen Ort und versuchen Sie es erneut."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "Aufgenommenes Bildschirmfoto"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "Es war nicht möglich ein Foto des aktuellen Fensters zu erstellen."
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "Aufnahme direkt an die Zwischenablage senden"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "Den Fensterrahmen mit in das Bildschirmfoto aufnehmen"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "Den Fensterrahmen aus Bildschirmfoto entfernen"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr ""
-"Ein Bildschirmfoto erst nach der angegebenen zeit aufnehmen [in Sekunden]"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "Sekunden"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr ""
-"Der Effekt (Schatten, Rahmen oder keiner), der auf den Fensterrahmen "
-"angewendet werden soll"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "Effekt"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Optionen interaktiv festlegen"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Ein Foto des Bildschirms aufnehmen"
-
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "Bildschirmfotos Ihrer Arbeitsumgebung oder einzelner Fenster speichern"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "Bildschirmfoto"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the current window"
-msgstr "Ein Bildschirmfoto des aktuellen Fensters erstellen"
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "Bildschirmfotos Ihrer Arbeitsumgebung oder einzelner Fenster speichern"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:3
 msgid "Take a screenshot of the whole screen"
 msgstr "Ein Foto des gesamten Bildschirms aufnehmen"
 
+#: ../src/gnome-screenshot.desktop.in.h:4
+msgid "Take a screenshot of the current window"
+msgstr "Ein Bildschirmfoto des aktuellen Fensters erstellen"
+
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "Bildschirmfoto speichern"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "In Zwischenablage _kopieren"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "Bildschirmfoto speichern"
+msgid "_Name:"
+msgstr "_Name:"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "Im _Ordner speichern:"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "_Name:"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+msgid "Window-specific screenshot (deprecated)"
+msgstr "Fensterbezogenes Bildschirmfoto (veraltet)"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+"Nur das aktuelle Fenster statt der ganzen Arbeitsfläche aufnehmen. Dieser "
+"Schlüssel ist veraltet und wird nicht mehr verwendet."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+msgid "Screenshot delay"
+msgstr "Aufnahmeverzögerung"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr ""
+"Die Anzahl der Sekunden, die bis zur Aufnahme des Bildschirmfotos gewartet "
+"wird."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "Ordner für Bildschirmfotos"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory where the screenshots will be saved by default."
+msgstr "Der Ordner, in dem Bildschirmfotos standardmäßig abgelegt werden."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Last save directory"
+msgstr "Letzter Ordner für Bildschirmfotos"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "Der Ordner, in dem zuletzt Bildschirmfotos abgelegt wurden."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "Rahmen einbeziehen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr ""
+"Bezieht den Fensterrahmen des Fenster-Managers mit in das Bildschirmfoto ein"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "Zeiger einbeziehen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "Den Zeiger mit in das Bildschirmfoto aufnehmen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "ICC-Profil einbeziehen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "Das ICC-Profil des Ziels mit in das Bildschirmfoto aufnehmen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
 msgstr "Rahmeneffekt"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
@@ -154,62 +144,91 @@ msgstr ""
 "Mögliche Werte sind »shadow« (Schatten), »none« (kein Effekt) und "
 "»border«(Rahmen)."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Eine Datei mit dem Namen »%s« existiert bereits in »%s«"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "Vorhandene Datei überschreiben?"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
+msgid "Unable to capture a screenshot"
+msgstr "Es war nicht möglich, ein Bildschirmfoto aufzunehmen."
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
 msgstr ""
-"Nur das aktuelle Fenster statt der ganzen Arbeitsfläche aufnehmen. Dieser "
-"Schlüssel ist veraltet und wird nicht mehr verwendet."
+"Es ist ein Fehler beim Erstellen der Datei aufgetreten. Bitte wählen Sie "
+"einen anderen Ordner und versuchen Sie es erneut."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "Rahmen einbeziehen"
+#: ../src/screenshot-application.c:341
+msgid "Error creating file"
+msgstr "Fehler beim Erstellen der Datei"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "ICC-Profil einbeziehen"
+#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
+msgid "Screenshot taken"
+msgstr "Aufgenommenes Bildschirmfoto"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "Zeiger einbeziehen"
+#: ../src/screenshot-application.c:387
+msgid "All possible methods failed"
+msgstr "Alle möglichen Methoden schlugen fehl"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Das ICC-Profil des Ziels mit in das Bildschirmfoto aufnehmen"
+#: ../src/screenshot-application.c:502
+msgid "Send the grab directly to the clipboard"
+msgstr "Aufnahme direkt an die Zwischenablage senden"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "Den Zeiger mit in das Bildschirmfoto aufnehmen"
+#: ../src/screenshot-application.c:503
+msgid "Grab a window instead of the entire screen"
+msgstr "Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
+#: ../src/screenshot-application.c:504
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen"
+
+#: ../src/screenshot-application.c:505
+msgid "Include the window border with the screenshot"
+msgstr "Den Fensterrahmen mit in das Bildschirmfoto aufnehmen"
+
+#: ../src/screenshot-application.c:506
+msgid "Remove the window border from the screenshot"
+msgstr "Den Fensterrahmen aus Bildschirmfoto entfernen"
+
+#: ../src/screenshot-application.c:507
+msgid "Take screenshot after specified delay [in seconds]"
 msgstr ""
-"Bezieht den Fensterrahmen des Fenster-Managers mit in das Bildschirmfoto ein"
+"Ein Bildschirmfoto erst nach der angegebenen zeit aufnehmen [in Sekunden]"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
-msgid "Screenshot delay"
-msgstr "Aufnahmeverzögerung"
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:507
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "Sekunden"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "Ordner für Bildschirmfotos"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "Der Ordner, in dem zuletzt Bildschirmfotos abgelegt wurden."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
-msgid "The number of seconds to wait before taking the screenshot."
+#: ../src/screenshot-application.c:508
+msgid "Effect to add to the border (shadow, border or none)"
 msgstr ""
-"Die Anzahl der Sekunden, die bis zur Aufnahme des Bildschirmfotos gewartet "
-"wird."
+"Der Effekt (Schatten, Rahmen oder keiner), der auf den Fensterrahmen "
+"angewendet werden soll"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "Fensterbezogenes Bildschirmfoto (veraltet)"
+#: ../src/screenshot-application.c:508
+msgid "effect"
+msgstr "Effekt"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:509
+msgid "Interactively set options"
+msgstr "Optionen interaktiv festlegen"
+
+#: ../src/screenshot-application.c:523
+msgid "Take a picture of the screen"
+msgstr "Ein Foto des Bildschirms aufnehmen"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -218,15 +237,16 @@ msgstr ""
 "Optionen im Konflikt: »--window« und »--area« können nicht gleichzeitig "
 "verwendet werden.\n"
 
-#: ../src/screenshot-config.c:85
+#: ../src/screenshot-config.c:61
 #, c-format
 msgid ""
-"Conflicting options: --area and --delay should not be used at the same time.\n"
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
 msgstr ""
 "Optionen im Konflikt: »--area« und »--delay« können nicht gleichzeitig "
 "verwendet werden.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -234,30 +254,30 @@ msgstr ""
 "Die Benutzeroberflächendatei des Bildschirmfotoprogramms fehlt.\n"
 "Bitte überprüfen Sie Ihre Installation von »gnome-utils«."
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Ordner auswählen"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Bildschirmfoto.png"
 
 # gemeint ist mit %s das Datum
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Bildschirmfoto am %s.png"
+msgid "Screenshot from %s.png"
+msgstr "Bildschirmfoto vom %s.png"
 
 # gemeint ist mit %s das Datum
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Bildschirmfoto am %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "Bildschirmfoto vom %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -300,23 +320,26 @@ msgstr "Aufnahmebereich _auswählen"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "Bildschirmfoto aufnehmen _nach"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "Bildschirmfoto aufnehmen"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Effekte"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "Bildschirmfoto _aufnehmen"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Fehler beim Laden der Hilfe"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "Fehler beim Speichern des Bildschirmfotos"
