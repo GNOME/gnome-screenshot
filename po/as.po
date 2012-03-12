@@ -4,143 +4,64 @@
 #
 # Amitakhya Phukan <aphukan@redhat.com>, 2008.
 # Amitakhya Phukan <amitakhya@svn.gnome.org>, 2008, 2009.
-# Nilamdyuti Goswami <ngoswami@redhat.com>, 2011.
+# Nilamdyuti Goswami <ngoswami@redhat.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: as\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-03-15 15:19+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-02-25 00:17+0000\n"
+"PO-Revision-Date: 2012-03-12 16:12+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
-"Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
-"Language: as\n"
+"Language-Team: as_IN <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: as\n"
 "Plural-Forms: nplurals=2; plural=(n!=1)\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "পৰ্দাৰ ছবি সংৰক্ষণ কৰিবলৈ সমস্যা"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"%s ত পৰ্দাৰ ছবি সংৰক্ষণ কৰা সম্ভৱ নহয় ।\n"
-" উৎপন্ন ত্ৰুটি %s\n"
-" অনুগ্ৰহ কৰি ভিন্ন অবস্থান নিৰ্বাচন কৰি পুনৰায় প্ৰচেষ্টা কৰক ।"
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "পৰ্দাৰ ছবি গ্ৰহণ কৰা হৈছে"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "a মুঠ"
-
-#: ../src/gnome-screenshot.c:662
-#, fuzzy
-msgid "Send the grab directly to the clipboard"
-msgstr "ৰেখাচিত্ৰৰ মডেল নিৰ্ধাৰণ কৰক"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "সম্পৰ্ণ পৰ্দাৰ পৰিবৰ্তে অকল এটা উইন্ডোৰ ছবি নিয়া হ'ব"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "সম্পৰ্ণ পৰ্দাৰ পৰিবৰ্তে, পৰ্দাৰ এটা অংশৰ ছবি নিয়া হ'ব"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "পৰ্দাৰ ছবিতে উইন্ডোৰ প্ৰান্তৰেখা অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "পৰ্দাৰ ছবিত উইন্ডোৰ প্ৰান্তৰেখা অন্তৰ্ভুক্ত কৰা ন'হ'ব"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "সনিৰ্দিষ্ট সময় [ছেকেণ্ডে ব্যক্ত] অতিক্ৰান্ত হওয়াৰ পৰে ছবি নিয়া হ'ব"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "ছেকেণ্ড"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "শূণ্য"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "ইফেক্ট"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Interactively set options"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "সম্পূৰ্ণ পৰ্দাৰ এটা ছবি নিন"
-
 #: ../src/gnome-screenshot.desktop.in.h:1
+msgid "Screenshot"
+msgstr "স্ক্ৰিনশ্বট"
+
+#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Save images of your desktop or individual windows"
 msgstr "ডেস্কটপ বা স্বতন্ত্ৰ উইন্ডোৰ ছবি সংৰক্ষণ কৰক"
 
-#: ../src/gnome-screenshot.desktop.in.h:2
-#, fuzzy
-msgid "Screenshot"
-msgstr "Scৰeenshot.png"
-
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
-msgid "Take a screenshot of the current window"
-msgstr "a মুঠ"
+msgid "Take a screenshot of the whole screen"
+msgstr "সম্পূৰ্ণ পৰ্দাৰ এটা স্ক্ৰিনশ্বট লওক"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
-msgid "Take a screenshot of the whole screen"
-msgstr "সম্পূৰ্ণ পৰ্দাৰ এটা ছবি নিন"
+msgid "Take a screenshot of the current window"
+msgstr "বৰ্তমান উইন্ডোৰ এটা স্ক্ৰিনশ্বট লওক"
 
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "পৰ্দাৰ ছবি সংৰক্ষণ কৰক"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "ক্লিপ-বোৰ্ডত নকল কৰক (_o)"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "পৰ্দাৰ ছবি সংৰক্ষণ কৰক"
+msgid "_Name:"
+msgstr "নাম :(_N)"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "চিহ্নিত ফোল্ডাৰে সংৰক্ষণ কৰা হ'ব (_f)"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "নাম :(_N)"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "প্ৰান্তৰেখাৰ ইফেক্ট"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "উইন্ডোৰ ক্ষেত্ৰত নিৰ্দিষ্ট পৰ্দাৰ ছবি (অবচিত)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr "মুঠ a শূণ্য আৰু."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -148,53 +69,154 @@ msgstr ""
 "সম্পূৰ্ণ ডেস্কটপৰ পৰিবৰ্তে, অকল বৰ্তমান উইন্ডোৰ ছবি গ্ৰহণ কৰা হ'ব । এই চাবি অবচিত "
 "হৈছে আৰু বৰ্তমানে ব্যৱহাৰ কৰা নহয় ।"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "প্ৰান্ত ৰেখা অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-#, fuzzy
-msgid "Include ICC Profile"
-msgstr "পইন্টাৰ অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "পইন্টাৰ অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-#, fuzzy
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "পৰ্দাৰ ছবিত পইন্টাৰ অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "পৰ্দাৰ ছবিত পইন্টাৰ অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "পৰ্দাৰ ছবিত উইন্ডো পৰিচালনব্যৱস্থাৰ প্ৰান্তৰেখা অন্তৰ্ভুক্ত কৰা হ'ব"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "পৰ্দাৰ ছবি গ্ৰহণৰ আগতে অপেক্ষাৰ সময়"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "পৰ্দাৰ ছবি সংৰক্ষণৰ পঞ্জিকা"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "পৰ্দাৰ ছবি সংৰক্ষণৰ উদ্দেশ্যে ব্যৱহৃত সৰ্বশেষ ফোল্ডাৰ ।"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "পৰ্দাৰ ছবি তোলাৰ আগতে অপেক্ষাৰ সময়, ছেকেণ্ড অনুযায়ী ধাৰ্য ।"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "উইন্ডোৰ ক্ষেত্ৰত নিৰ্দিষ্ট পৰ্দাৰ ছবি (অবচিত)"
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "পৰ্দাৰ ছবি সংৰক্ষণৰ পঞ্জিকা"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#| msgid "The directory the last screenshot was saved in."
+msgid "The directory where the screenshots will be saved by default."
+msgstr "ডাইৰেকটৰি যত স্ক্ৰিনশ্বটসমূহ অবিকল্পিতভাৱে সংৰক্ষণ কৰা হব।"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#| msgid "Screenshot directory"
+msgid "Last save directory"
+msgstr "শেষ সংৰক্ষিত ডাইৰেকটৰি"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#| msgid "The directory the last screenshot was saved in."
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "সৰ্বশেষ ডাইৰেকটৰি যত এটা স্ক্ৰিনশ্বট ভাৱবিনিময়ী অৱস্থাত সংৰক্ষণ কৰা হৈছিল"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "প্ৰান্ত ৰেখা অন্তৰ্ভুক্ত কৰা হ'ব"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "পৰ্দাৰ ছবিত উইন্ডো পৰিচালনব্যৱস্থাৰ প্ৰান্তৰেখা অন্তৰ্ভুক্ত কৰা হ'ব"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "পইন্টাৰ অন্তৰ্ভুক্ত কৰা হ'ব"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "পৰ্দাৰ ছবিত পইন্টাৰ অন্তৰ্ভুক্ত কৰা হ'ব"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "ICC আলেখ্য অন্তৰ্ভুক্ত কৰক"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "স্ক্ৰিনশ্বটত লক্ষ্যৰ ICC আলেখ্য অন্তৰ্ভুক্ত কৰক"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "প্ৰান্তৰেখাৰ ইফেক্ট"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr "মুঠ a শূণ্য আৰু."
+
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "\"%s\" নামৰ এটা নথিপত্ৰ \"%s\" ত ইতিমধ্যে অস্তিত্ববান"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "স্থায়ী নথিপত্ৰ পুনৰলিখিব নে?"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+#| msgid "Unable to take a screenshot of the current window"
+msgid "Unable to capture a screenshot"
+msgstr "এটা স্ক্ৰিনশ্বট কৰগত কৰিবলে অক্ষম"
+
+#: ../src/screenshot-application.c:176
+#| msgid ""
+#| "Impossible to save the screenshot to %s.\n"
+#| " Error was %s.\n"
+#| " Please choose another location and retry."
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+"নথিতপত্ৰ সৃষ্টি কৰোতে ত্ৰুটি। অনুগ্ৰহ কৰি অন্য এটা অৱস্থান নিৰ্বাচন কৰি পুনৰ "
+"চেষ্টা কৰক।"
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "নথিপত্ৰ সৃষ্টি কৰোতে ত্ৰুটি"
+
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "পৰ্দাৰ ছবি গ্ৰহণ কৰা হৈছে"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "সকলো সম্ভাব্য পদ্ধতি ব্যৰ্থ হল"
+
+#: ../src/screenshot-application.c:504
+msgid "Send the grab directly to the clipboard"
+msgstr "গ্ৰেবক প্ৰত্যক্ষভাৱে ক্লিপবৰ্ডত পঠাওক"
+
+#: ../src/screenshot-application.c:505
+msgid "Grab a window instead of the entire screen"
+msgstr "সম্পৰ্ণ পৰ্দাৰ পৰিবৰ্তে অকল এটা উইন্ডোৰ ছবি নিয়া হ'ব"
+
+#: ../src/screenshot-application.c:506
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "সম্পৰ্ণ পৰ্দাৰ পৰিবৰ্তে, পৰ্দাৰ এটা অংশৰ ছবি নিয়া হ'ব"
+
+#: ../src/screenshot-application.c:507
+msgid "Include the window border with the screenshot"
+msgstr "পৰ্দাৰ ছবিতে উইন্ডোৰ প্ৰান্তৰেখা অন্তৰ্ভুক্ত কৰা হ'ব"
+
+#: ../src/screenshot-application.c:508
+msgid "Remove the window border from the screenshot"
+msgstr "পৰ্দাৰ ছবিত উইন্ডোৰ প্ৰান্তৰেখা অন্তৰ্ভুক্ত কৰা ন'হ'ব"
+
+#: ../src/screenshot-application.c:509
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "সনিৰ্দিষ্ট সময় [ছেকেণ্ডে ব্যক্ত] অতিক্ৰান্ত হওয়াৰ পৰে ছবি নিয়া হ'ব"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:509
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "ছেকেণ্ড"
+
+#: ../src/screenshot-application.c:510
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "শূণ্য"
+
+#: ../src/screenshot-application.c:510
+msgid "effect"
+msgstr "ইফেক্ট"
+
+#: ../src/screenshot-application.c:511
+msgid "Interactively set options"
+msgstr "Interactively set options"
+
+#: ../src/screenshot-application.c:525
+msgid "Take a picture of the screen"
+msgstr "সম্পূৰ্ণ পৰ্দাৰ এটা ছবি নিন"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -202,15 +224,14 @@ msgid ""
 msgstr ""
 "দ্বন্দ্বপূৰ্ণ বিকল্প: --window আৰু --area বিকল্প দুটা একেলগে ব্যৱহাৰ কৰা নাযাব ।\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:61
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr ""
-"দ্বন্দ্বপূৰ্ণ বিকল্প: --window আৰু --area বিকল্প দুটা একেলগে ব্যৱহাৰ কৰা নাযাব ।\n"
+msgstr "দ্বন্দ্বপূৰ্ণ বিকল্পসমূহ: --area আৰু --delay একেলগে ব্যৱহাৰ কৰিব নালাগিব।\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -218,28 +239,28 @@ msgstr ""
 "পৰ্দাৰ ছবি গ্ৰহণকৰ্তা প্ৰোগ্ৰামৰ বাবে আৱশ্যক UI ডেফিনিছন নথিপত্ৰ উপস্থিত নাই ।\n"
 " অনুগ্ৰহ কৰি প্ৰণালীত gnome-utils সংস্থাপন পৰীক্ষা কৰক"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "এটা ফোল্ডাৰ নিৰ্বাচন কৰক"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Scৰeenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
-#, fuzzy, c-format
-msgid "Screenshot at %s.png"
-msgstr "Scৰeenshot-%s.png"
+#: ../src/screenshot-filename-builder.c:122
+#, c-format
+msgid "Screenshot from %s.png"
+msgstr "%s.png ৰ পৰা স্ক্ৰিনশ্বট"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
-#, fuzzy, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Scৰeenshot-%s-%d.png"
+#: ../src/screenshot-filename-builder.c:129
+#, c-format
+msgid "Screenshot from %s - %d.png"
+msgstr "%s - %d.png ৰ পৰা স্ক্ৰিনশ্বট"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -282,23 +303,26 @@ msgstr "গ্ৰহণ কৰাৰ উদ্দেশ্যে প্ৰয়ো
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "পৰে a মুঠ"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "পৰ্দাৰ ছবি নিন"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Effects"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "পৰ্দাৰ ছবি"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:723
 msgid "Error loading the help page"
 msgstr "ত্ৰুটি পৃষ্ঠা"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "পৰ্দাৰ ছবি সংৰক্ষণ কৰিবলৈ সমস্যা"
