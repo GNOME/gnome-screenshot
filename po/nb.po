@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-02 18:39+0100\n"
-"PO-Revision-Date: 2012-02-02 18:42+0100\n"
+"POT-Creation-Date: 2012-03-12 19:00+0100\n"
+"PO-Revision-Date: 2012-03-12 19:00+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -136,83 +136,84 @@ msgid "Overwrite existing file?"
 msgstr "Overskriv eksisterende fil?"
 
 #: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
-#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
-#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
 msgid "Unable to capture a screenshot"
 msgstr "Kan ikke utføre skjermdump"
 
 #: ../src/screenshot-application.c:176
 msgid "Error creating file. Please choose another location and retry."
-msgstr "Feil ved oppretting av fil. Vennligst velg en annen lokasjon og prøv igjen."
+msgstr ""
+"Feil ved oppretting av fil. Vennligst velg en annen lokasjon og prøv igjen."
 
-#: ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:341
 msgid "Error creating file"
 msgstr "Feil ved oppretting av fil"
 
-#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
 msgid "Screenshot taken"
 msgstr "Skjermdump tatt"
 
-#: ../src/screenshot-application.c:389
+#: ../src/screenshot-application.c:387
 msgid "All possible methods failed"
 msgstr "Alle mulige metoder feilet"
 
-#: ../src/screenshot-application.c:501
+#: ../src/screenshot-application.c:502
 msgid "Send the grab directly to the clipboard"
 msgstr "Send dump direkte til utklippstavlen"
 
-#: ../src/screenshot-application.c:502
+#: ../src/screenshot-application.c:503
 msgid "Grab a window instead of the entire screen"
 msgstr "Dump et vindu i stedet for hele skjermen"
 
-#: ../src/screenshot-application.c:503
+#: ../src/screenshot-application.c:504
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Dump en del av skjermen i stedet for hele området"
 
-#: ../src/screenshot-application.c:504
+#: ../src/screenshot-application.c:505
 msgid "Include the window border with the screenshot"
 msgstr "Ta med vinduskant i skjermdumpet"
 
-#: ../src/screenshot-application.c:505
+#: ../src/screenshot-application.c:506
 msgid "Remove the window border from the screenshot"
 msgstr "Fjern vinduskanten i skjermdumpet"
 
-#: ../src/screenshot-application.c:506
+#: ../src/screenshot-application.c:507
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Ta skjermdump etter oppgitt pause [i sekunder]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:506
-#: ../src/screenshot-interactive-dialog.c:423
+#: ../src/screenshot-application.c:507
+#: ../src/screenshot-interactive-dialog.c:426
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:508
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Effekt som skal brukes på vinduskanten (skygge, kant eller ingen)"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:508
 msgid "effect"
 msgstr "effekt"
 
-#: ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:509
 msgid "Interactively set options"
 msgstr "Spør etter alternativer"
 
-#: ../src/screenshot-application.c:522
+#: ../src/screenshot-application.c:523
 msgid "Take a picture of the screen"
 msgstr "Ta et bilde av skjermen"
 
-#: ../src/screenshot-config.c:82
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "Konflikt mellom flagg: --window og --area kan ikke brukes samtidig.\n"
 
-#: ../src/screenshot-config.c:89
+#: ../src/screenshot-config.c:61
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
@@ -239,16 +240,16 @@ msgstr "Skjermdump.png"
 #. * with the screenshot if the entire screen is taken
 #: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Skjermdump på %s.png"
+msgid "Screenshot from %s.png"
+msgstr "Skjermdump fra %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
 #: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Skjermdump på %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "Skjermdump fra %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -291,23 +292,23 @@ msgstr "Velg _område for skjermdump"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "T_a skjermdump etter"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "Ta skjermdump"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Effekter"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "Ta _skjermdump"
 
-#: ../src/screenshot-utils.c:719
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Feil under lasting av hjelpsiden"
