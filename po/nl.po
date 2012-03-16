@@ -5,8 +5,8 @@
 # Jan-Willem Harmanny <jwharmanny@hotmail.com>, 2003.
 # Tino Meinen <a.t.meinen@chello.nl>, 2004–2008.
 # Vincent van Adrighem <adrighem@gnome.org>, 2006.
-# Wouter Bolsterlee <wbolster@gnome.org>, 2006–2011.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2010–2011.
+# Wouter Bolsterlee <wbolster@gnome.org>, 2006–2012.
 #
 # side bar = side pane = zijpaneel
 #
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-03-26 15:01+0100\n"
+"POT-Creation-Date: 2012-03-16 23:30+0100\n"
+"PO-Revision-Date: 2012-03-16 23:30+0100\n"
 "Last-Translator: Wouter Bolsterlee <wbolster@gnome.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
@@ -24,133 +24,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "Fout bij opslaan van schermafdruk"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"Kon schermafdruk niet opslaan naar ‘%s’.\n"
-"Foutmelding: %s.\n"
-"Kies een andere locatie en probeer opnieuw."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "Schermafdruk gemaakt"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "Kon geen schermafdruk maken van het huidige venster."
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "Afdruk direct naar het klembord sturen"
-
-# Vrij vertaald (Wouter Bolsterlee)
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Een afdruk maken van een enkel venster"
-
-# Vrij vertaald (Wouter Bolsterlee)
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Een afdruk maken van een gedeelte van het scherm"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "De vensterrand in de schermafdruk opnemen"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "De vensterrand van de schermafdruk verwijderen"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Schermafdruk maken na opgegeven vertraging [in seconden]"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "seconden"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Effect voor de vensterrand (schaduw, lijn of geen)"
-
-# Vensterrand-effect?
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "effect"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Interactief opties instellen"
-
-# "Een plaatje schieten"
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Schermafdruk maken"
-
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "Afbeeldingen van uw bureaublad of vensters maken"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "Schermafdruk"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
-msgid "Take a screenshot of the current window"
-msgstr "Kon geen schermafdruk maken van het huidige venster."
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "Afbeeldingen van uw bureaublad of vensters maken"
 
-# "Een plaatje schieten"
-#: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
+#: ../src/gnome-screenshot.desktop.in.h:3
 msgid "Take a screenshot of the whole screen"
-msgstr "Schermafdruk maken"
+msgstr "Schermafdruk maken van het hele scherm"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
+msgid "Take a screenshot of the current window"
+msgstr "Schermafdruk maken van het huidige venster"
 
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "Schermafdruk opslaan"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "Naar klembord k_opiëren"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "Schermafdruk opslaan"
+msgid "_Name:"
+msgstr "_Naam:"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "Opslaan in _map:"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "_Naam:"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "Vensterrand-effect"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "Venster-specifieke schermafdruk (verouderd)"
 
-# valschaduw, geen en donkere lijn
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Effect dat aan de buitenkant van een venster wordt toegevoegd. Mogelijke "
-"waarden zijn ‘schaduw’, ‘geen’, en ‘rand’."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -158,51 +72,152 @@ msgstr ""
 "Alleen het huidige venster opnemen, in plaats van het hele scherm. Deze "
 "sleutel is verouderd en wordt niet langer gebruikt."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "Vensterrand opnemen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "ICC-profiel opnemen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "Muisaanwijzer opnemen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Het ICC-profiel opnemen in het bestand met de schermafdruk"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "De muisaanwijzer in de schermafdruk opnemen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "De vensterrand van de window manager in de schermafdruk opnemen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "Vertraging voor schermadruk"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "Schermafdruk map"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "Map waarin de meest recente schermafdruk is opgeslagen"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Het aantal te wachten seconden voordat de schermafdruk genomen wordt."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "Venster-specifieke schermafdruk (verouderd)"
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "Schermafdruk map"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory where the screenshots will be saved by default."
+msgstr "Map waarin de schermafdrukken worden opgeslagen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Last save directory"
+msgstr "Laatst gebruikte map voor opslaan"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "De laatst gebruikte map voor opslaan in interactieve modus."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "Vensterrand opnemen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "De vensterrand van de window manager in de schermafdruk opnemen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "Muisaanwijzer opnemen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "De muisaanwijzer in de schermafdruk opnemen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "ICC-profiel opnemen"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "Het ICC-profiel opnemen in het bestand met de schermafdruk"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "Vensterrand-effect"
+
+# valschaduw, geen en donkere lijn
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Effect dat aan de buitenkant van een venster wordt toegevoegd. Mogelijke "
+"waarden zijn ‘schaduw’, ‘geen’, en ‘rand’."
+
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Er bestaat al een bestand ‘%s’ in ‘%s’."
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "Bestaand bestand overschrijven?"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+msgid "Unable to capture a screenshot"
+msgstr "Kon geen schermafdruk maken"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+"Fout bij maken van het bestand. Kies een andere locatie en probeer opnieuw."
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "Fout bij aanmaken van bestand"
+
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "Schermafdruk gemaakt"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "Alle mogelijke methoden zijn mislukt"
+
+#: ../src/screenshot-application.c:501
+msgid "Send the grab directly to the clipboard"
+msgstr "Afdruk direct naar het klembord sturen"
+
+# Vrij vertaald (Wouter Bolsterlee)
+#: ../src/screenshot-application.c:502
+msgid "Grab a window instead of the entire screen"
+msgstr "Een afdruk maken van een enkel venster"
+
+# Vrij vertaald (Wouter Bolsterlee)
+#: ../src/screenshot-application.c:503
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Een afdruk maken van een gedeelte van het scherm"
+
+#: ../src/screenshot-application.c:504
+msgid "Include the window border with the screenshot"
+msgstr "De vensterrand in de schermafdruk opnemen"
+
+#: ../src/screenshot-application.c:505
+msgid "Remove the window border from the screenshot"
+msgstr "De vensterrand van de schermafdruk verwijderen"
+
+#: ../src/screenshot-application.c:506
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Schermafdruk maken na opgegeven vertraging [in seconden]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:506
+#: ../src/screenshot-interactive-dialog.c:423
+msgid "seconds"
+msgstr "seconden"
+
+#: ../src/screenshot-application.c:507
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Effect voor de vensterrand (schaduw, lijn of geen)"
+
+# Vensterrand-effect?
+#: ../src/screenshot-application.c:507
+msgid "effect"
+msgstr "effect"
+
+#: ../src/screenshot-application.c:508
+msgid "Interactively set options"
+msgstr "Interactief opties instellen"
+
+# "Een plaatje schieten"
+#: ../src/screenshot-application.c:522
+msgid "Take a picture of the screen"
+msgstr "Schermafdruk maken"
+
+#: ../src/screenshot-config.c:82
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -211,16 +226,16 @@ msgstr ""
 "Tegenstrijdige opties: ‘--window’ en ‘--area’ kunnen niet tegelijk opgegeven "
 "worden.\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:89
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Tegenstrijdige opties: ‘--window’ en ‘--area’ kunnen niet tegelijk opgegeven "
+"Tegenstrijdige opties: ‘--area’ en ‘--delay’ kunnen niet tegelijk opgegeven "
 "worden.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -228,17 +243,17 @@ msgstr ""
 "Het interface-definitiebestand voor het schermafdruktoepassing ontbreekt.\n"
 "Controleer uw installatie van ‘gnome-utils’."
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Kies een map"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Schermafdruk.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
 msgid "Screenshot at %s.png"
 msgstr "Schermafdruk op %s.png"
@@ -246,7 +261,7 @@ msgstr "Schermafdruk op %s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
 msgid "Screenshot at %s - %d.png"
 msgstr "Schermafdruk op %s - %d.png"
@@ -320,6 +335,9 @@ msgstr "Effecten"
 msgid "Take _Screenshot"
 msgstr "_Schermafdruk maken"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:719
 msgid "Error loading the help page"
 msgstr "Fout bij laden van hulptekst"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "Fout bij opslaan van schermafdruk"
