@@ -1,6 +1,6 @@
 dnl -*- mode: m4 -*-
 AC_PREREQ(2.63)
-AC_INIT([gnome-screenshot],[3.3.91],[],[gnome-screenshot])
+AC_INIT([gnome-screenshot],[3.3.92],[],[gnome-screenshot])
 
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
