@@ -1,6 +1,6 @@
 # translation of te.po to Telugu
 # Telugu translation of gnome-utils.
-# Copyright (C) 2007 Swecha Telugu Localisation Team <localisation@swecha.org>
+# Copyright (C) 2007,2012 Swecha Telugu Localisation Team <localisation@swecha.org>
 # Copyright (C) 2011 Gnome Telugu Contributors
 # This file is distributed under the same license as the gnome-utils package.
 #
@@ -8,141 +8,64 @@
 # Pramod <pramodfsf@gmail.com>, 2007.
 # Krishna Babu K <kkrothap@redhat.com>, 2007, 2009, 2010.
 # Praveen Illa <mail2ipn@gmail.com>, 2011.
+# Bhuvan Krishna <bhuvan@swecha.net>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: te\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-10-07 07:05+0000\n"
-"PO-Revision-Date: 2011-10-21 09:33+0530\n"
-"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
+"POT-Creation-Date: 2012-02-25 00:17+0000\n"
+"PO-Revision-Date: 2012-03-20 01:25+0530\n"
+"Last-Translator: Bhuvan Krishna <bhuvan@swecha.net>\n"
 "Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: te\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "తెరపట్టును భద్రపరుస్తున్నప్పుడు దోషం"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"తెరపట్టును %sకు భద్రపరుచుట అసాధ్యం.\n"
-" దోషము %s.\n"
-" దయచేసి వేరొక స్థానమును యెంచుకొని మరలాప్రయత్నించండి."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "తెరపట్టు తీసుకోబడింది"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "ప్రస్తుత విండో యొక్క తెరపట్టును తీసుకొనలేకపోతున్నది"
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "లాగిన దానిని నేరుగా క్లిప్‌బోర్డునకు పంపు"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "మొత్తం తెరకు బదులు విండోను లాక్కొను"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "మొత్తం తెరకు బదులుగా తెరనందలి ఒక ప్రాంతమును లాగుము"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "తెరపట్టుతో పాటు విండో సరిహద్దును కూడా ఉంచు"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "తెరపట్టు నుండి విండో సరిహద్దును తీసివేయి"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "నిర్దేశిత ఆలస్యం తరువాత తెరపట్టు తీసుకొను [క్షణాలలో]"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "క్షణాలు"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "సరిహద్దుకు జతచేయవలసిన ప్రభావం (నీడ, సరిహద్దు లేదా ఏమీవద్దు)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "ప్రభావం"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "అనుకూలరీతిలో అమర్చిన ఐచ్ఛికాలు"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "తెర యొక్క చిత్రాన్ని తీసుకొను"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "మీ డెస్క్‍టాప్ లేదా వ్యక్తిగత విండోల యొక్క బొమ్మలను భద్రపరుచు"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "తెరపట్టు"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the current window"
-msgstr "ప్రస్తుత విండో యొక్క తెరపట్టును తీయండి"
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "మీ డెస్క్‍టాప్ లేదా వ్యక్తిగత విండోల యొక్క బొమ్మలను భద్రపరుచు"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:3
 msgid "Take a screenshot of the whole screen"
 msgstr "మొత్తం తెర యొక్క తెరపట్టుని తీయండి"
 
+#: ../src/gnome-screenshot.desktop.in.h:4
+msgid "Take a screenshot of the current window"
+msgstr "ప్రస్తుత విండో యొక్క తెరపట్టును తీయండి"
+
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "తెరపట్టుని భద్రపరుచు"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "క్లిప్‌బోర్డునకు నకలుతీయి (_o)"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "తెరపట్టుని భద్రపరుచు"
+msgid "_Name:"
+msgstr "పేరు (_N):"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "సంచయంలో భద్రపర్చు (_f):"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "పేరు (_N):"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "సరిహద్దు ప్రభావం"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "విండో-నిర్దేశిత తెరపట్టు (తీసివేయబడిన)పడవేయు ఛాయ"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"బయటవున్న సరిహద్దుకు కలుపవలిసిన ప్రభావం. సాధ్యమగు విలువలు \"నీడ\", \"ఏదీకాదు\", మరియు "
-"\"సరిహద్దు\"."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -150,65 +73,168 @@ msgstr ""
 "మొత్తం డెస్కుటాపునకు బదులుగా ప్రస్తుత విండోను లాగుము. ఈ కీ తీసివేయబడింది ఇది ఇక ఏ మాత్రం వాడుకలో "
 "వుండదు."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "సరిహద్దును చేర్చు"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "ఐసిసి ప్రొఫైలును ఉంచు"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "సూచకిని ఉంచు"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "ఐసిసి ప్రొఫైలు యొక్క లక్ష్యమును తెరపట్టు ఫైల్ నందు ఉంచు"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "తెరపట్టునందు సూచకిని ఉంచు"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "తెరపట్టుతో విండో నిర్వాహకం సరిహద్దును కూడా ఉంచు"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "తెరపట్టు ఆలస్యం"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "తెరపట్టు సంచయం"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "చివరి తెరపట్టు భద్రపరుచబడిన సంచయం."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "తెరపట్టు తీసుకొనుటకు ముందు వేచివుండవలసిన సమయం సెకనులలో."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "విండో-నిర్దేశిత తెరపట్టు (తీసివేయబడిన)పడవేయు ఛాయ"
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "తెరపట్టు సంచయం"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#| msgid "The directory the last screenshot was saved in."
+msgid "The directory where the screenshots will be saved by default."
+msgstr "తెర ఛాయాచిత్రం భద్రపరుచబడిన అప్రమేయం సంచయం."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#| msgid "Screenshot directory"
+msgid "Last save directory"
+msgstr "గతంలో దాచిన సంచయం"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#| msgid "The directory the last screenshot was saved in."
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "గత తెర ఛాయాచిత్రం భద్రపరుచబడిన సంచయం."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "సరిహద్దును చేర్చు"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "తెరపట్టుతో విండో నిర్వాహకం సరిహద్దును కూడా ఉంచు"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "సూచకిని ఉంచు"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "తెరపట్టునందు సూచకిని ఉంచు"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "ఐసిసి ప్రొఫైలును ఉంచు"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "ఐసిసి ప్రొఫైలు యొక్క లక్ష్యమును తెరపట్టు ఫైల్ నందు ఉంచు"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "సరిహద్దు ప్రభావం"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"బయటవున్న సరిహద్దుకు కలుపవలిసిన ప్రభావం. సాధ్యమగు విలువలు \"నీడ\", \"ఏదీకాదు\", మరియు "
+"\"సరిహద్దు\"."
+
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "\"%s\" అనే ఒక దస్త్రం \"%s\" లో ఇప్పటికే ఉంది"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "ఇప్పటికే ఉన్న దస్త్రమును చెరిపిరాయే"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
+#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+#| msgid "Unable to take a screenshot of the current window"
+msgid "Unable to capture a screenshot"
+msgstr "తెర ఛాయాచిత్రం తీయే లేకపోతున్నది"
+
+#: ../src/screenshot-application.c:176
+#| msgid ""
+#| "Impossible to save the screenshot to %s.\n"
+#| " Error was %s.\n"
+#| " Please choose another location and retry."
+msgid "Error creating file. Please choose another location and retry."
+msgstr "దస్త్రమును సృష్టించడంలో లోపం. మరొక స్థానాన్ని ఎంచుకుని, దయచేసి మళ్ళీ ప్రయత్నించండి."
+
+#: ../src/screenshot-application.c:343
+msgid "Error creating file"
+msgstr "దస్త్రమును సృష్టించడంలో లోపం"
+
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+msgid "Screenshot taken"
+msgstr "తెరపట్టు తీసుకోబడింది"
+
+#: ../src/screenshot-application.c:389
+msgid "All possible methods failed"
+msgstr "అన్ని సాధ్యమ్యేన పద్ధతులు విఫలమయ్యాయి"
+
+#: ../src/screenshot-application.c:504
+msgid "Send the grab directly to the clipboard"
+msgstr "లాగిన దానిని నేరుగా క్లిప్‌బోర్డునకు పంపు"
+
+#: ../src/screenshot-application.c:505
+msgid "Grab a window instead of the entire screen"
+msgstr "మొత్తం తెరకు బదులు విండోను లాక్కొను"
+
+#: ../src/screenshot-application.c:506
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "మొత్తం తెరకు బదులుగా తెరనందలి ఒక ప్రాంతమును లాగుము"
+
+#: ../src/screenshot-application.c:507
+msgid "Include the window border with the screenshot"
+msgstr "తెరపట్టుతో పాటు విండో సరిహద్దును కూడా ఉంచు"
+
+#: ../src/screenshot-application.c:508
+msgid "Remove the window border from the screenshot"
+msgstr "తెరపట్టు నుండి విండో సరిహద్దును తీసివేయి"
+
+#: ../src/screenshot-application.c:509
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "నిర్దేశిత ఆలస్యం తరువాత తెరపట్టు తీసుకొను [క్షణాలలో]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:509
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "క్షణాలు"
+
+#: ../src/screenshot-application.c:510
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "సరిహద్దుకు జతచేయవలసిన ప్రభావం (నీడ, సరిహద్దు లేదా ఏమీవద్దు)"
+
+#: ../src/screenshot-application.c:510
+msgid "effect"
+msgstr "ప్రభావం"
+
+#: ../src/screenshot-application.c:511
+msgid "Interactively set options"
+msgstr "అనుకూలరీతిలో అమర్చిన ఐచ్ఛికాలు"
+
+#: ../src/screenshot-application.c:525
+msgid "Take a picture of the screen"
+msgstr "తెర యొక్క చిత్రాన్ని తీసుకొను"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "విభేదించుచున్న ఐచ్చికములు: --window మరియు --area వొకేసారి వుపయోగించకూడదు.\n"
 
-#: ../src/screenshot-config.c:85
+#: ../src/screenshot-config.c:61
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr "విభేదించుచున్న ఐచ్చికములు: --area మరియు --delay వొకేసారి ఉపయోగించకూడదు.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -216,28 +242,30 @@ msgstr ""
 "తెరపట్టు కార్యక్రమానికి UI నిర్వచన ఫైల్ తప్పిపోయినది.\n"
 "దయచేసి మీ gnome-utils స్థాపనను సరిచూసుకోండి"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "ఒక సంచయాన్ని ఎంచుకొను"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "తెరపట్టు.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "%s వద్ద తెరపట్టు.png"
+#| msgid "Screenshot at %s.png"
+msgid "Screenshot from %s.png"
+msgstr "%s.png నుండి తెర ఛాయాచిత్రం"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "%s వద్ద తెరపట్టు - %d.png"
+#| msgid "Screenshot at %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "%s - %d.png నుండి తెర ఛాయాచిత్రం"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -280,23 +308,26 @@ msgstr "లాగుటకు ప్రాంతమును ఎంపికచ�
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "ఇంత ఆలస్యం తర్వాత లాక్కొను (_a)"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "తెరపట్టు తీయి"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "ప్రభావాలు"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "తెరపట్టును తీసుకొను (_S)"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:723
 msgid "Error loading the help page"
 msgstr "సహాయ పేజీని నింపుటలో దోషం"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "తెరపట్టును భద్రపరుస్తున్నప్పుడు దోషం"
