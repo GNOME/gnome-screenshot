@@ -8,233 +8,251 @@
 # Hinker <hinkerliu@gmail.com>, 2009.
 # chiachen <luojiazhen@gmail.com>, 2011.
 # Aron Xu <happyaron.xu@gmail.com>, 2009, 2011.
+# tuhaihe <wangdianjin@linuxdeepin.com>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:34-0400\n"
-"PO-Revision-Date: 2011-08-21 23:03+0800\n"
-"Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-05 16:10+0000\n"
+"PO-Revision-Date: 2012-03-20 12:10+0000\n"
+"Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
-"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "保存抓图时出错"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"无法将抓图保存到 %s。\n"
-"错误为 %s\n"
-"请另选一个位置然后重试。"
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "屏幕截图已完成"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "无法对当前窗口抓图"
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "将抓取的窗口直接存入剪贴板"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "抓取窗口，而不是整个屏幕"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "抓取屏幕的一个区域，而不是整个屏幕"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "抓图中包含窗口边框"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "去除屏幕截图的窗口边框"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "在指定延迟后抓图[以秒计]"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "秒"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "添加到边框的特效(阴影 shadow 、边框 border 或无特效 none)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "效果"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "交互式设定选项"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "抓取屏幕的图片"
-
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "保存您桌面还是单个窗口的图像"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "Screenshot"
 
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "将您的桌面或单个窗口保存为图像"
+
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
-msgid "Take a screenshot of the current window"
-msgstr "无法对当前窗口抓图"
+msgid "Take a screenshot of the whole screen"
+msgstr "对整个屏幕截图"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
-msgid "Take a screenshot of the whole screen"
-msgstr "抓取屏幕的图片"
+msgid "Take a screenshot of the current window"
+msgstr "对当前窗口截图"
 
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "保存截图"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "复制到剪贴板(_O)"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "保存抓图"
+msgid "_Name:"
+msgstr "名称(_N)："
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "保存于文件夹(_F)："
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "名称(_N)："
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "边框效果"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "对特定窗口截图(废弃)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr "在边框上添加的特效，可供选择的值包括“shadow”、“none”和“border”。"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr "只抓取当前窗口，而不是整个桌面。这个关键码已失效不能再使用。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "包含边框"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "包含 ICC 配置文件"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "包含指针"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "在抓图中包含 ICC 配置文件"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "在抓图中包含鼠标指针"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "在抓图中包含窗口管理器边框"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "抓图延迟"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "抓图目录"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "上次用于保存屏幕抓图的目录。"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "抓图前等候的秒数。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "窗口特定屏幕截图(推荐)"
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "截图目录"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory where the screenshots will be saved by default."
+msgstr "保存屏幕截图的默认目录。"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Last save directory"
+msgstr "上次保存的目录"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "上次交互模式下保存屏幕截图的目录。"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "包含边框"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "在抓图中包含窗口管理器边框"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "包含指针"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "在抓图中包含鼠标指针"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "包含 ICC 配置文件"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "在抓图中包含 ICC 配置文件"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "边框效果"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr "在边框上添加的特效，可供选择的值包括“shadow”、“none”和“border”。"
+
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "“%2$s”中已存在同名的文件“%1$s ”"
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "覆盖现有的文件？"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
+msgid "Unable to capture a screenshot"
+msgstr "无法截取图像"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr "创建文件时出错，请选择其他位置并重试。"
+
+#: ../src/screenshot-application.c:341
+msgid "Error creating file"
+msgstr "创建文件时出错"
+
+#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
+msgid "Screenshot taken"
+msgstr "已截图"
+
+#: ../src/screenshot-application.c:387
+msgid "All possible methods failed"
+msgstr "所有可行的方法均已失败"
+
+#: ../src/screenshot-application.c:502
+msgid "Send the grab directly to the clipboard"
+msgstr "将截图直接发送到剪贴板"
+
+#: ../src/screenshot-application.c:503
+msgid "Grab a window instead of the entire screen"
+msgstr "抓取窗口，而不是整个屏幕"
+
+#: ../src/screenshot-application.c:504
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "抓取屏幕的一个区域，而不是整个屏幕"
+
+#: ../src/screenshot-application.c:505
+msgid "Include the window border with the screenshot"
+msgstr "抓图中包含窗口边框"
+
+#: ../src/screenshot-application.c:506
+msgid "Remove the window border from the screenshot"
+msgstr "去除屏幕截图的窗口边框"
+
+#: ../src/screenshot-application.c:507
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "在指定延迟后抓图[以秒计]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:507
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "秒"
+
+#: ../src/screenshot-application.c:508
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "添加到边框的特效(阴影 shadow 、边框 border 或无特效 none)"
+
+#: ../src/screenshot-application.c:508
+msgid "effect"
+msgstr "效果"
+
+#: ../src/screenshot-application.c:509
+msgid "Interactively set options"
+msgstr "交互式设定选项"
+
+#: ../src/screenshot-application.c:523
+msgid "Take a picture of the screen"
+msgstr "对屏幕截图"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr "冲突的选项： --窗口和--区域不在同一时间使用。\n"
+msgstr "冲突的选项：--window 和 --area 不能同时使用。\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+# - -area 和 - - delay 是命令行下执行命令时的参数，不用翻译。
+#: ../src/screenshot-config.c:61
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "冲突的选项： --窗口和--区域不在同一时间使用。\n"
+msgstr "冲突的选项：--area 和 --delay 参数不能同时使用。\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
 msgstr ""
 "屏幕抓图程序的界面定义文件丢失。\n"
-"请检查 gnome-utils 的安装"
+"请检查 gnome-utils 安装是否正确"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "选择文件夹"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
-msgstr "Screenshot.png"
+msgstr "屏幕截图.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:122
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Screenshot-%s.png"
+msgid "Screenshot from %s.png"
+msgstr "%s的屏幕截图.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:129
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Screenshot-%s-%d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "屏幕截图%s-%d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -277,23 +295,26 @@ msgstr "选择一个截取区域(_A)"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "抓取前的延迟(_A)"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "抓图"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "特效"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "抓图(_S)"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "装入帮助页时出错"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "保存抓图时出错"
