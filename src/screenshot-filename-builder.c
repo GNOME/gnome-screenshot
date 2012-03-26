@@ -161,6 +161,22 @@ async_existence_job_free (AsyncExistenceJob *job)
 }
 
 static gboolean
+prepare_next_cycle (AsyncExistenceJob *job)
+{
+  gboolean res = FALSE;
+
+  if (job->type != (NUM_TESTS - 1))
+    {
+      (job->type)++;
+      job->iteration = 0;
+
+      res = TRUE;
+    }
+
+  return res;
+}
+
+static gboolean
 try_check_file (GIOSchedulerJob *io_job,
                 GCancellable *cancellable,
                 gpointer data)
@@ -212,8 +228,13 @@ retry:
 
           if (!g_file_query_exists (parent, NULL))
             {
-              (job->type)++;
-              job->iteration = 0;
+              if (!prepare_next_cycle (job))
+                {
+                  retval = NULL;
+
+                  g_object_unref (parent);
+                  goto out;
+                }
 
               g_object_unref (file);
               g_object_unref (parent);
@@ -233,19 +254,17 @@ retry:
            * accessible.
            */
           g_free (uri);
-          if (job->type == (NUM_TESTS - 1))
-            {
-              retval = NULL;
-              goto out;
-            }
-          else
-            {
-              (job->type)++;
-              job->iteration = 0;
 
+          if (prepare_next_cycle (job))
+            {
               g_error_free (error);
               g_object_unref (file);
               goto retry;
+            }
+          else
+            {
+              retval = NULL;
+              goto out;
             }
         }
     }
