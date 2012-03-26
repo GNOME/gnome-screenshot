@@ -30,6 +30,7 @@ typedef enum
 {
   TEST_SAVED_DIR = 0,
   TEST_DEFAULT,
+  TEST_FALLBACK,
   NUM_TESTS
 } TestType;
 
@@ -70,6 +71,16 @@ expand_initial_tilde (const char *path)
   return g_strconcat (passwd_file_entry->pw_dir,
                       slash_after_user_name,
                       NULL);
+}
+
+static gchar *
+get_fallback_screenshot_dir (void)
+{
+  gchar *shot_dir;
+
+  shot_dir = g_strconcat ("file://", g_get_home_dir (), NULL);
+
+  return shot_dir;
 }
 
 static gchar *
@@ -222,7 +233,7 @@ retry:
            * accessible.
            */
           g_free (uri);
-          if (job->type == TEST_DEFAULT)
+          if (job->type == (NUM_TESTS - 1))
             {
               retval = NULL;
               goto out;
@@ -265,8 +276,9 @@ screenshot_build_filename_async (GAsyncReadyCallback callback,
 
   job = g_slice_new0 (AsyncExistenceJob);
 
-  job->base_uris[0] = sanitize_save_directory (screenshot_config->save_dir);
-  job->base_uris[1] = get_default_screenshot_dir ();
+  job->base_uris[TEST_SAVED_DIR] = sanitize_save_directory (screenshot_config->save_dir);
+  job->base_uris[TEST_DEFAULT] = get_default_screenshot_dir ();
+  job->base_uris[TEST_FALLBACK] = get_fallback_screenshot_dir ();
   job->iteration = 0;
   job->type = TEST_SAVED_DIR;
 
