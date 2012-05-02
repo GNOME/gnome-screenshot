@@ -1,9 +1,8 @@
 # translation of gnome-utils.gnome-2-26.po to Ελληνικά
 # gnome-utils Greek translation.
 # Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
-#
-#    385 translated messages, 127 fuzzy translations, 188 untranslated messages.
-#    Finished! now, 700 messages fully translated.
+# 385 translated messages, 127 fuzzy translations, 188 untranslated messages.
+# Finished! now, 700 messages fully translated.
 # simos: 780 messages, visual verification, 14Feb2001 (sgpbea).
 # simos: 483 messages, 30Oct2002, translation review.
 # kostas: 483 messages, 30Oct2002, completed translation for GNOME2.
@@ -11,15 +10,15 @@
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
 # Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
 # Nikos Charonitakis <frolix68@yahoo.gr>, 2003, 2004.
-# Kostas Papadimas <pkst@gnome.org>, 2002, 2003, 2004, 2005, 2006, 2008.
+# Kostas Papadimas <pkst@gnome.org>, 2002, 2003, 2004, 2005, 2006, 2008, 2012.
 # Jennie Petoumenou <epetoumenou@gmail.com>, 2009.
 # Fotis Tsamis <ftsamis@gmail.com>, 2009.
 # Sterios Prosiniklis <steriosprosiniklis@gmail.com>, 2009.
 # spyros:
-#    translated around 500 messages, in 2000.
+# translated around 500 messages, in 2000.
 # simos:
-#    updated this:
-#    One more update, now 701 total messages.
+# updated this:
+# One more update, now 701 total messages.
 # kostas: 26 Dec2002, updated translation for Gnome 2.1x
 # kostas: 03Aug2003, update translation for 2.4
 # Nikos: 13Oct2003, review translation for 2.4
@@ -32,108 +31,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.gnome-2-26\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2010-03-27 20:22+0200\n"
-"Last-Translator: Simos Xenitellis <simos.lists@googlemail.com>\n"
-"Language-Team: Greek <team@lists.gnome.gr>\n"
+"POT-Creation-Date: 2012-05-02 13:44+0300\n"
+"PO-Revision-Date: 2012-05-02 13:44+0300\n"
+"Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
+"Language-Team: team@gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
-
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "Σφάλμα κατά το αποθήκευση στιγμιοτύπου οθόνης"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"Αδυναμία αποθήκευσης του στιγμιοτύπου στο %s.\n"
-" Το σφάλμα ήταν %s\n"
-" Παρακαλώ, επιλέξτε άλλη τοποθεσία και προσπαθήστε ξανά."
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "Λήφθηκε στιγμιότυπο οθόνης"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "Αδυναμία λήψης στιγμιότυπου οθόνης του τρέχοντος παραθύρου"
-
-#: ../src/gnome-screenshot.c:662
-#, fuzzy
-msgid "Send the grab directly to the clipboard"
-msgstr "Ορισμός του μοντέλου για το διάγραμμα"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "Λήψη ενός παραθύρου αντί ολόκληρης της οθόνης"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Λήψη μιας περιοχής της οθόνης αντί ολόκληρης της οθόνης"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "Να συμπεριλαμβάνεται το περίγραμμα παραθύρου με το στιγμιότυπο οθόνης"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "Αφαίρεση του περιγράμματος παραθύρου από το στιγμιότυπο οθόνης"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr ""
-"Λήψη στιγμιότυπου οθόνης μετά από μια καθορισμένη καθυστέρηση (σε "
-"δευτερόλεπτα)"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "δευτερόλεπτα"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Εφέ για προσθήκη στο περίγραμμα  (σκιά, περίγραμμα ή κανένα)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "Εφέ"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "Διαδραστικός ορισμός επιλογών"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Λήψη μιας φωτογραφίας της οθόνης"
+"X-Generator: Virtaal 0.6.1\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
 msgid "Save images of your desktop or individual windows"
 msgstr "Αποθήκευση εικόνων της επιφάνειας εργασίας σας ή ξεχωριστών παραθύρων"
 
 #: ../src/gnome-screenshot.desktop.in.h:2
-#, fuzzy
 msgid "Screenshot"
-msgstr "Screenshot.png"
+msgstr "Στιγμιότυπο"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
 msgid "Take a screenshot of the current window"
-msgstr "Αδυναμία λήψης στιγμιότυπου οθόνης του τρέχοντος παραθύρου"
+msgstr "Λήψη μιας φωτογραφίας του τρέχοντος παραθύρου"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
 msgid "Take a screenshot of the whole screen"
-msgstr "Λήψη μιας φωτογραφίας της οθόνης"
+msgstr "Λήψη μιας φωτογραφίας ολόκληρης της οθόνης"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "*"
@@ -180,18 +103,16 @@ msgid "Include Border"
 msgstr "Να συμπεριλαμβάνεται το περίγραμμα"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-#, fuzzy
 msgid "Include ICC Profile"
-msgstr "Να συμπεριλαμβάνεται ο δείκτης"
+msgstr "Συμπεριέλαβε το προφίλ ICC"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
 msgid "Include Pointer"
 msgstr "Να συμπεριλαμβάνεται ο δείκτης"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-#, fuzzy
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Να συμπεριλαμβάνεται ο δείκτης στο στιγμιότυπο οθόνης"
+msgstr "Να συμπεριλαμβάνεται το προφίλ ICC στο αρχείο του στιγμιότυπου οθόνης"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "Include the pointer in the screenshot"
@@ -204,26 +125,120 @@ msgstr ""
 "στιγμιότυπο οθόνης"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Last save directory"
+msgstr "Τελευταίος κατάλογος αποθήκευσης"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Screenshot delay"
 msgstr "Καθυστέρηση στιγμιότυπου οθόνης"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Screenshot directory"
 msgstr "Κατάλογος στιγμιότυπου οθόνης"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "Ο κατάλογος που την προηγούμενη φορά αποθηκεύτηκε στιγμιότυπο οθόνης"
-
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "The directory where the screenshots will be saved by default."
+msgstr ""
+"Ο προεπιλεγμένος κατάλογος όπου θα αποθηκεύονται τα στιγμιότυπα οθόνης."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr ""
+"Ο τελευταίος κατάλογος που αποθηκεύτηκε ένα στιγμιότυπο οθόνης σε "
+"διαδραστική κατάσταση."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Ο αριθμός των δευτερολέπτων αναμονής πριν τη λήψη στιγμιοτύπου οθόνης"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Στιγμιότυπο οθόνης συγκεκριμένου παραθύρου (υπό κατάργηση)"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:147
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Υπάρχει ήδη ένα αρχείο με όνομα \"%s\"  στο \"%s\""
+
+#: ../src/screenshot-application.c:154
+msgid "Overwrite existing file?"
+msgstr "Αντικατάσταση του υπάρχοντος αρχείου ;"
+
+#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
+msgid "Unable to capture a screenshot"
+msgstr "Αδυναμία λήψης στιγμιότυπου οθόνης"
+
+#: ../src/screenshot-application.c:176
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+"Σφάλμα κατά τη δημιουργία του αρχείου. Παρακαλώ ξαναπροσπαθήστε επιλέγοντας "
+"μια άλλη τοποθεσία."
+
+#: ../src/screenshot-application.c:341
+msgid "Error creating file"
+msgstr "Σφάλμα κατά τη δημιουργία του αρχείου"
+
+#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
+msgid "Screenshot taken"
+msgstr "Λήφθηκε στιγμιότυπο οθόνης"
+
+#: ../src/screenshot-application.c:387
+msgid "All possible methods failed"
+msgstr "Απέτυχαν όλες πο δ"
+
+#: ../src/screenshot-application.c:502
+msgid "Send the grab directly to the clipboard"
+msgstr "Αποστολή της λήψης απευθείας στο πρόχειρο"
+
+#: ../src/screenshot-application.c:503
+msgid "Grab a window instead of the entire screen"
+msgstr "Λήψη ενός παραθύρου αντί ολόκληρης της οθόνης"
+
+#: ../src/screenshot-application.c:504
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Λήψη μιας περιοχής της οθόνης αντί ολόκληρης της οθόνης"
+
+#: ../src/screenshot-application.c:505
+msgid "Include the window border with the screenshot"
+msgstr "Να συμπεριλαμβάνεται το περίγραμμα παραθύρου με το στιγμιότυπο οθόνης"
+
+#: ../src/screenshot-application.c:506
+msgid "Remove the window border from the screenshot"
+msgstr "Αφαίρεση του περιγράμματος παραθύρου από το στιγμιότυπο οθόνης"
+
+#: ../src/screenshot-application.c:507
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr ""
+"Λήψη στιγμιότυπου οθόνης μετά από μια καθορισμένη καθυστέρηση (σε "
+"δευτερόλεπτα)"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:507
+#: ../src/screenshot-interactive-dialog.c:426
+msgid "seconds"
+msgstr "δευτερόλεπτα"
+
+#: ../src/screenshot-application.c:508
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Εφέ για προσθήκη στο περίγραμμα  (σκιά, περίγραμμα ή κανένα)"
+
+#: ../src/screenshot-application.c:508
+msgid "effect"
+msgstr "Εφέ"
+
+#: ../src/screenshot-application.c:509
+msgid "Interactively set options"
+msgstr "Διαδραστικός ορισμός επιλογών"
+
+#: ../src/screenshot-application.c:523
+msgid "Take a picture of the screen"
+msgstr "Λήψη μιας φωτογραφίας της οθόνης"
+
+#: ../src/screenshot-config.c:54
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -232,16 +247,16 @@ msgstr ""
 "Συγκρουόμενες επιλογές: Τα --windows και --area δεν πρέπει να "
 "χρησιμοποιούνται την ίδια στιγμή.\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:61
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Συγκρουόμενες επιλογές: Τα --windows και --area δεν πρέπει να "
-"χρησιμοποιούνται την ίδια στιγμή.\n"
+"Συγκρουόμενες επιλογές: Τα --area και --delay δεν πρέπει να χρησιμοποιούνται "
+"την ίδια στιγμή.\n"
 
-#: ../src/screenshot-dialog.c:193
+#: ../src/screenshot-dialog.c:171
 msgid ""
 "UI definition file for the screenshot program is missing.\n"
 "Please check your installation of gnome-utils"
@@ -250,28 +265,28 @@ msgstr ""
 "απουσιάζει.\n"
 "Παρακαλώ ελέγξτε την εγκατάσταση του gnome-utils"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:192
 msgid "Select a folder"
 msgstr "Επιλογή ενός φακέλου"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:301
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
-#, fuzzy, c-format
-msgid "Screenshot at %s.png"
-msgstr "Screenshot-%s.png"
+#: ../src/screenshot-filename-builder.c:133
+#, c-format
+msgid "Screenshot from %s.png"
+msgstr "Στιγμιότυπο από %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
-#, fuzzy, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Screenshot-%s-%d.png"
+#: ../src/screenshot-filename-builder.c:140
+#, c-format
+msgid "Screenshot from %s - %d.png"
+msgstr "Στιγμιότυπο από %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -314,23 +329,26 @@ msgstr "Επιλογή _περιοχής για λήψη"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
+#: ../src/screenshot-interactive-dialog.c:406
 msgid "Grab _after a delay of"
 msgstr "Λήψη _μετά από καθυστέρηση "
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:444
+#: ../src/screenshot-interactive-dialog.c:452
 msgid "Take Screenshot"
 msgstr "Λήψη στιγμιότυπου οθόνης"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Effects"
 msgstr "Εφέ"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take _Screenshot"
 msgstr "Λήψη _στιγμιότυπου οθόνης"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Σφάλμα φόρτωσης της σελίδας βοήθειας"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "Σφάλμα κατά το αποθήκευση στιγμιοτύπου οθόνης"
