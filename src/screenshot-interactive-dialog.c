@@ -354,10 +354,10 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
   gtk_widget_show (vbox);
 
-  /** Grab whole desktop **/
+  /** Grab whole screen **/
   group = NULL;
   radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Grab the whole _desktop"));
+                                              _("Grab the whole sc_reen"));
   if (screenshot_config->take_window_shot ||
       screenshot_config->take_area_shot)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), FALSE);
