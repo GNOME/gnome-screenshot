@@ -45,6 +45,26 @@
 
 G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION);
 
+static const gchar *app_menu =
+    "<interface>"
+    "  <menu id=\"app-menu\">"
+    "    <section>"
+    "      <item>"
+    "        <attribute name=\"action\">app.about</attribute>"
+    "	     <attribute name=\"label\" translatable=\"yes\">About Screenshot</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name=\"action\">app.help</attribute>"
+    "	     <attribute name=\"label\" translatable=\"yes\">Help</attribute>"
+    "      </item>"
+    "      <item>"
+    "       <attribute name=\"action\">app.quit</attribute>"
+    "	    <attribute name=\"label\" translatable=\"yes\">Quit</attribute>"
+    "      </item>"
+    "    </section>"
+    "  <menu>"
+    "</interface>";
+
 static void screenshot_save_to_file (ScreenshotApplication *self);
 
 struct _ScreenshotApplicationPriv {
@@ -115,7 +135,7 @@ save_pixbuf_handle_success (ScreenshotApplication *self)
       ScreenshotDialog *dialog = self->priv->dialog;
 
       save_folder_to_settings (self);
-      gtk_widget_destroy (screenshot_dialog_get_toplevel (dialog));
+      gtk_widget_destroy (dialog->window);
     }
   else
     {
@@ -130,7 +150,6 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
   if (screenshot_config->interactive)
     {
       ScreenshotDialog *dialog = self->priv->dialog;
-      GtkWidget *toplevel = screenshot_dialog_get_toplevel (dialog);
 
       screenshot_dialog_set_busy (dialog, FALSE);
 
@@ -144,7 +163,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
                                            file_name, folder_name);
           gint response;
                                              
-          response = screenshot_show_dialog (GTK_WINDOW (toplevel),
+          response = screenshot_show_dialog (GTK_WINDOW (dialog->window),
                                              GTK_MESSAGE_WARNING,
                                              GTK_BUTTONS_YES_NO,
                                              _("Overwrite existing file?"),
@@ -165,14 +184,14 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
       else
         {
-          screenshot_show_dialog (GTK_WINDOW (toplevel),
+          screenshot_show_dialog (GTK_WINDOW (dialog->window),
                                   GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
                                   _("Error creating file. Please choose another location and retry."));
         }
 
-      screenshot_dialog_focus_entry (dialog);
+      gtk_widget_grab_focus (dialog->filename_entry);
     }
   else
     {
@@ -315,7 +334,6 @@ build_filename_ready_cb (GObject *source,
                          gpointer user_data)
 {
   ScreenshotApplication *self = user_data;
-  GtkWidget *toplevel;
   GError *error = NULL;
 
   self->priv->save_uri = screenshot_build_filename_finish (res, &error);
@@ -346,12 +364,7 @@ build_filename_ready_cb (GObject *source,
   if (screenshot_config->interactive)
     {
       self->priv->dialog = screenshot_dialog_new (self->priv->screenshot, self->priv->save_uri);
-      toplevel = screenshot_dialog_get_toplevel (self->priv->dialog);
-      gtk_widget_show (toplevel);
-
-      gtk_application_add_window (GTK_APPLICATION (self), GTK_WINDOW (toplevel));
-  
-      g_signal_connect (toplevel,
+      g_signal_connect (self->priv->dialog->dialog,
                         "response",
                         G_CALLBACK (screenshot_dialog_response_cb),
                         self);
@@ -594,21 +607,73 @@ interactive_dialog_response_cb (GtkWidget *d,
 {
   ScreenshotApplication *self = user_data;
 
-  gtk_widget_destroy (d);
+  if (response != GTK_RESPONSE_HELP)
+    gtk_widget_destroy (d);
 
   switch (response)
     {
     case GTK_RESPONSE_DELETE_EVENT:
-    case GTK_RESPONSE_CANCEL:
       break;
     case GTK_RESPONSE_OK:
       screenshot_start (self);
+      break;
+    case GTK_RESPONSE_HELP:
+      screenshot_display_help (GTK_WINDOW (d));
       break;
     default:
       g_assert_not_reached ();
       break;
     }
 }
+
+static void
+action_quit (GSimpleAction *action,
+             GVariant *parameter,
+             gpointer user_data)
+{
+  GList *windows = gtk_application_get_windows (GTK_APPLICATION (user_data));
+  gtk_widget_destroy (g_list_nth_data (windows, 0));
+}
+
+static void
+action_help (GSimpleAction *action,
+             GVariant *parameter,
+             gpointer user_data)
+{
+  GList *windows = gtk_application_get_windows (GTK_APPLICATION (user_data));
+  screenshot_display_help (g_list_nth_data (windows, 0));
+}
+
+static void
+action_about (GSimpleAction *action,
+              GVariant *parameter,
+              gpointer user_data)
+{
+  const gchar *authors[] = {
+    "Emmanuele Bassi",
+    "Jonathan Blandford",
+    "Cosimo Cecchi",
+    NULL
+  };
+
+  GList *windows = gtk_application_get_windows (GTK_APPLICATION (user_data));
+  gtk_show_about_dialog (GTK_WINDOW (g_list_nth_data (windows, 0)),
+                         "version", VERSION,
+                         "authors", authors,
+                         "program-name", _("Screenshot"),
+                         "comments", _("Save images of your screen or individual windows"),
+                         "logo-icon-name", "applets-screenshooter",
+                         "translator-credits", _("translator-credits"),
+                         "license-type", GTK_LICENSE_GPL_2_0,
+                         "wrap-license", TRUE,
+                         NULL);
+}
+
+static GActionEntry action_entries[] = {
+  { "about", action_about, NULL, NULL, NULL },
+  { "help", action_help, NULL, NULL, NULL },
+  { "quit", action_quit, NULL, NULL, NULL }
+};
 
 static void
 screenshot_application_startup (GApplication *app)
@@ -624,10 +689,21 @@ screenshot_application_startup (GApplication *app)
   if (screenshot_config->interactive)
     {
       GtkWidget *dialog;
+      GtkBuilder *builder;
+      GMenuModel *menu;
+
+      g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
+                                       G_N_ELEMENTS (action_entries), self);
+
+      builder = gtk_builder_new ();
+      gtk_builder_add_from_string (builder, app_menu, -1, NULL);
+      menu = G_MENU_MODEL (gtk_builder_get_object (builder, "app-menu"));
+      gtk_application_set_app_menu (GTK_APPLICATION (self), menu);
+
+      g_object_unref (builder);
+      g_object_unref (menu);
 
       dialog = screenshot_interactive_dialog_new ();
-      gtk_application_add_window (GTK_APPLICATION (app), GTK_WINDOW (dialog));
-      gtk_widget_show (dialog);
       g_signal_connect (dialog, "response",
                         G_CALLBACK (interactive_dialog_response_cb), self);
     }

@@ -36,17 +36,6 @@ static GtkTargetEntry drag_types[] =
   { "image/png", 0, TYPE_IMAGE_PNG },
 };
 
-struct ScreenshotDialog
-{
-  GtkBuilder *ui;
-  GdkPixbuf *screenshot;
-  GdkPixbuf *preview_image;
-  GtkWidget *save_widget;
-  GtkWidget *filename_entry;
-  gint drag_x;
-  gint drag_y;
-};
-
 static void
 on_preview_draw (GtkWidget      *drawing_area,
                  cairo_t        *cr,
@@ -129,13 +118,20 @@ drag_begin (GtkWidget        *widget,
 			    dialog->drag_x, dialog->drag_y);
 }
 
+static void
+dialog_destroy_cb (GtkWidget *widget,
+                   gpointer user_data)
+{
+  ScreenshotDialog *dialog = user_data;
+  gtk_widget_destroy (dialog->window);
+}
 
 ScreenshotDialog *
 screenshot_dialog_new (GdkPixbuf *screenshot,
 		       char      *initial_uri)
 {
   ScreenshotDialog *dialog;
-  GtkWidget *toplevel;
+  GtkBuilder *ui;
   GtkWidget *preview_darea;
   GtkWidget *aspect_frame;
   GtkWidget *file_chooser_box;
@@ -157,10 +153,11 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   g_object_unref (parent_file);
 
   dialog = g_new0 (ScreenshotDialog, 1);
-
-  dialog-> ui = gtk_builder_new ();
-  res = gtk_builder_add_from_file (dialog->ui, UIDIR "/gnome-screenshot.ui", NULL);
   dialog->screenshot = screenshot;
+
+  ui = gtk_builder_new ();
+  gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
+  res = gtk_builder_add_from_file (ui, UIDIR "/gnome-screenshot.ui", NULL);
 
   if (res == 0)
     {
@@ -175,19 +172,31 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
       exit (1);
     }
 
-  gtk_builder_set_translation_domain (dialog->ui, GETTEXT_PACKAGE);
-
   width = gdk_pixbuf_get_width (screenshot);
   height = gdk_pixbuf_get_height (screenshot);
 
   width /= 5;
   height /= 5;
 
-  toplevel = GTK_WIDGET (gtk_builder_get_object (dialog->ui, "toplevel"));
-  aspect_frame = GTK_WIDGET (gtk_builder_get_object (dialog->ui, "aspect_frame"));
-  preview_darea = GTK_WIDGET (gtk_builder_get_object (dialog->ui, "preview_darea"));
-  dialog->filename_entry = GTK_WIDGET (gtk_builder_get_object (dialog->ui, "filename_entry"));
-  file_chooser_box = GTK_WIDGET (gtk_builder_get_object (dialog->ui, "file_chooser_box"));
+  dialog->window =
+    gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
+  gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (dialog->window), FALSE);
+  gtk_window_set_resizable (GTK_WINDOW (dialog->window), FALSE);
+  gtk_window_set_title (GTK_WINDOW (dialog->window), _("Save Screenshot"));
+  gtk_window_set_position (GTK_WINDOW (dialog->window), GTK_WIN_POS_CENTER);
+  gtk_widget_realize (dialog->window);
+
+  dialog->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "toplevel"));
+  gtk_widget_set_parent_window (dialog->dialog, gtk_widget_get_window (dialog->window));
+  gtk_container_add (GTK_CONTAINER (dialog->window), dialog->dialog);
+  g_signal_connect (dialog->dialog, "destroy",
+                    G_CALLBACK (dialog_destroy_cb), dialog);
+
+  aspect_frame = GTK_WIDGET (gtk_builder_get_object (ui, "aspect_frame"));
+  preview_darea = GTK_WIDGET (gtk_builder_get_object (ui, "preview_darea"));
+  dialog->filename_entry = GTK_WIDGET (gtk_builder_get_object (ui, "filename_entry"));
+  file_chooser_box = GTK_WIDGET (gtk_builder_get_object (ui, "file_chooser_box"));
+  g_object_unref (ui);
 
   dialog->save_widget = gtk_file_chooser_button_new (_("Select a folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog->save_widget), FALSE);
@@ -223,7 +232,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   g_signal_connect (G_OBJECT (preview_darea), "drag_data_get",
 		    G_CALLBACK (drag_data_get), dialog);
 
-  gtk_widget_show_all (toplevel);
+  gtk_widget_show_all (dialog->window);
 
   /* select the name of the file but leave out the extension if there's any;
    * the dialog must be realized for select_region to work
@@ -241,18 +250,6 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   g_free (current_name);
 
   return dialog;
-}
-
-void
-screenshot_dialog_focus_entry (ScreenshotDialog *dialog)
-{
-  gtk_widget_grab_focus (dialog->filename_entry);
-}
-
-GtkWidget *
-screenshot_dialog_get_toplevel (ScreenshotDialog *dialog)
-{
-  return GTK_WIDGET (gtk_builder_get_object (dialog->ui, "toplevel"));
 }
 
 char *
@@ -308,11 +305,9 @@ void
 screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 			    gboolean          busy)
 {
-  GtkWidget *toplevel;
   GdkWindow *window;
 
-  toplevel = screenshot_dialog_get_toplevel (dialog);
-  window = gtk_widget_get_window (toplevel);
+  window = gtk_widget_get_window (dialog->window);
 
   if (busy)
     {
@@ -327,7 +322,7 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
       gdk_window_set_cursor (window, NULL);
     }
 
-  gtk_widget_set_sensitive (toplevel, ! busy);
+  gtk_widget_set_sensitive (dialog->window, ! busy);
 
   gdk_flush ();
 }

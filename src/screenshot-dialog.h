@@ -22,19 +22,29 @@
 
 #include <gtk/gtk.h>
 
-typedef struct ScreenshotDialog ScreenshotDialog;
+typedef struct {
+  GdkPixbuf *screenshot;
+  GdkPixbuf *preview_image;
+
+  GtkWidget *window;
+  GtkWidget *dialog;
+  GtkWidget *save_widget;
+  GtkWidget *filename_entry;
+
+  gint drag_x;
+  gint drag_y;
+}  ScreenshotDialog;
 
 /* Keep in sync with the value defined in the UI file */
 #define SCREENSHOT_RESPONSE_COPY 1
 
 ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf        *screenshot,
 						  char             *initial_uri);
-GtkWidget        *screenshot_dialog_get_toplevel (ScreenshotDialog *dialog);
+
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_filename (ScreenshotDialog *dialog);
 void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
 						  gboolean          busy);
-void              screenshot_dialog_focus_entry  (ScreenshotDialog *dialog);
 
 #endif /* __SCREENSHOT_DIALOG_H__ */
