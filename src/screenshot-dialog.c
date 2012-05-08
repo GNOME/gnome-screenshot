@@ -155,22 +155,10 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   dialog = g_new0 (ScreenshotDialog, 1);
   dialog->screenshot = screenshot;
 
-  ui = gtk_builder_new ();
-  gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
-  res = gtk_builder_add_from_file (ui, UIDIR "/gnome-screenshot.ui", NULL);
-
-  if (res == 0)
-    {
-      GtkWidget *dialog;
-      dialog = gtk_message_dialog_new (NULL, 0,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK,
-				       _("UI definition file for the screenshot program is missing.\n"
-					 "Please check your installation of gnome-utils"));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      exit (1);
-    }
+  dialog-> ui = gtk_builder_new ();
+  gtk_builder_set_translation_domain (dialog->ui, GETTEXT_PACKAGE);
+  res = gtk_builder_add_from_file (dialog->ui, UIDIR "/gnome-screenshot.ui", NULL);
+  g_assert (res != 0);
 
   width = gdk_pixbuf_get_width (screenshot);
   height = gdk_pixbuf_get_height (screenshot);
