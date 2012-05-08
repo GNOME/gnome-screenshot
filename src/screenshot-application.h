@@ -49,7 +49,6 @@ typedef struct {
 } ScreenshotApplicationClass;
 
 GType screenshot_application_get_type (void);
-ScreenshotApplication * screenshot_application_get (void);
-GDBusConnection * screenshot_application_get_session_bus (void);
+ScreenshotApplication * screenshot_application_new (void);
 
 #endif /* __SCREENSHOT_APPLICATION_H__ */

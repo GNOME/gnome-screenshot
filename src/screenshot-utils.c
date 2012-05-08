@@ -630,7 +630,7 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
                                      filename);
     }
 
-  connection = screenshot_application_get_session_bus ();
+  connection = g_application_get_dbus_connection (g_application_get_default ());
   g_dbus_connection_call_sync (connection,
                                "org.gnome.Shell",
                                "/org/gnome/Shell",

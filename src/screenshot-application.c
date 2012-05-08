@@ -45,13 +45,9 @@
 
 G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION);
 
-static ScreenshotApplication *_app_singleton = NULL;
-
 static void screenshot_save_to_file (ScreenshotApplication *self);
 
 struct _ScreenshotApplicationPriv {
-  GDBusConnection *connection;
-
   gchar *icc_profile_base64;
   GdkPixbuf *screenshot;
 
@@ -614,38 +610,15 @@ interactive_dialog_response_cb (GtkWidget *d,
     }
 }
 
-static ScreenshotApplication *
-get_singleton (void)
-{
-  if (_app_singleton == NULL)
-    _app_singleton = g_object_new (SCREENSHOT_TYPE_APPLICATION, 
-                                   "application-id", "org.gnome.Screenshot",
-                                   NULL);
-
-  return _app_singleton;
-}
-
 static void
 screenshot_application_startup (GApplication *app)
 {
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
-  GError *error = NULL;
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
 
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
   screenshooter_init_stock_icons ();
-
-  self->priv->connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
-
-  if (error != NULL)
-    {
-      g_critical ("Unable to connect to the session bus: %s",
-                  error->message);
-      g_error_free (error);
-
-      return;
-    }
 
   /* interactive mode: trigger the dialog and wait for the response */
   if (screenshot_config->interactive)
@@ -669,7 +642,6 @@ screenshot_application_finalize (GObject *object)
 {
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (object);
 
-  g_clear_object (&self->priv->connection);
   g_clear_object (&self->priv->screenshot);
   g_free (self->priv->icc_profile_base64);
   g_free (self->priv->save_uri);
@@ -698,15 +670,10 @@ screenshot_application_init (ScreenshotApplication *self)
                                             ScreenshotApplicationPriv);
 }
 
-GDBusConnection *
-screenshot_application_get_session_bus (void)
-{
-  ScreenshotApplication *self = get_singleton ();
-  return self->priv->connection;
-}
-
 ScreenshotApplication *
-screenshot_application_get (void)
+screenshot_application_new (void)
 {
-  return get_singleton ();
+  return g_object_new (SCREENSHOT_TYPE_APPLICATION, 
+                       "application-id", "org.gnome.Screenshot",
+                       NULL);
 }
