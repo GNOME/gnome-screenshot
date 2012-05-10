@@ -1,3 +1,4 @@
+*~
 gnome-screenshot
 gnome-screenshot.desktop
 gnome-screenshot.schemas
@@ -26,6 +27,9 @@ po/*.sed
 po/*.template
 po/*.sin
 po/*.header
+po/*.pot
+
+src/screenshot-resources.*
 
 Makefile
 Makefile.in*
