@@ -3,6 +3,7 @@
 src/gnome-screenshot.c
 src/gnome-screenshot.desktop.in
 [type: gettext/glade]src/gnome-screenshot.ui
+[type: gettext/glade]src/screenshot-app-menu.ui
 src/org.gnome.gnome-screenshot.gschema.xml.in
 src/screenshot-application.c
 src/screenshot-config.c

@@ -1,0 +1,18 @@
+<interface>
+  <menu id="app-menu">
+    <section>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">About Screenshot</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.help</attribute>
+        <attribute name="label" translatable="yes">Help</attribute>
+      </item>
+      <item>
+       <attribute name="action">app.quit</attribute>
+       <attribute name="label" translatable="yes">Quit</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

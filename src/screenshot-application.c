@@ -45,26 +45,6 @@
 
 G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION);
 
-static const gchar *app_menu =
-    "<interface>"
-    "  <menu id=\"app-menu\">"
-    "    <section>"
-    "      <item>"
-    "        <attribute name=\"action\">app.about</attribute>"
-    "	     <attribute name=\"label\" translatable=\"yes\">About Screenshot</attribute>"
-    "      </item>"
-    "      <item>"
-    "        <attribute name=\"action\">app.help</attribute>"
-    "	     <attribute name=\"label\" translatable=\"yes\">Help</attribute>"
-    "      </item>"
-    "      <item>"
-    "       <attribute name=\"action\">app.quit</attribute>"
-    "	    <attribute name=\"label\" translatable=\"yes\">Quit</attribute>"
-    "      </item>"
-    "    </section>"
-    "  <menu>"
-    "</interface>";
-
 static void screenshot_save_to_file (ScreenshotApplication *self);
 
 struct _ScreenshotApplicationPriv {
@@ -696,7 +676,7 @@ screenshot_application_startup (GApplication *app)
                                        G_N_ELEMENTS (action_entries), self);
 
       builder = gtk_builder_new ();
-      gtk_builder_add_from_string (builder, app_menu, -1, NULL);
+      gtk_builder_add_from_resource (builder, "/org/gnome/screenshot/screenshot-app-menu.ui", NULL);
       menu = G_MENU_MODEL (gtk_builder_get_object (builder, "app-menu"));
       gtk_application_set_app_menu (GTK_APPLICATION (self), menu);
 

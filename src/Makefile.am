@@ -11,7 +11,23 @@ bin_PROGRAMS = \
 	gnome-screenshot		\
 	$(NULL)
 
+UI_FILES = \
+	screenshot-app-menu.ui		\
+	$(NULL)
+
+screenshot-resources.c: gnome-screenshot.gresource.xml $(UI_FILES)
+	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
+
+screenshot-resources.h: gnome-screenshot.gresource.xml $(UI_FILES)
+	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
+
+BUILT_SOURCES = \
+	screenshot-resources.c		\
+	screenshot-resources.h		\
+	$(NULL)
+
 gnome_screenshot_SOURCES = \
+	$(BUILT_SOURCES)		\
 	gnome-screenshot.c		\
 	cheese-flash.c			\
 	cheese-flash.h			\
