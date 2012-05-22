@@ -88,11 +88,11 @@ screenshot_load_config (gboolean clipboard_arg,
         config->include_border = FALSE;
 
       if (border_effect_arg != NULL)
+        config->border_effect = g_strdup (border_effect_arg);
+      else
         config->border_effect =
           g_settings_get_string (config->settings,
                                  BORDER_EFFECT_KEY);
-      else
-        config->border_effect = g_strdup (border_effect_arg);
     }
   else
     {
