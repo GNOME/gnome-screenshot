@@ -72,6 +72,8 @@ screenshot_load_config (gboolean clipboard_arg,
   config->settings = g_settings_new ("org.gnome.gnome-screenshot");
   if (config->interactive)
     {
+      if (clipboard_arg)
+        g_warning ("Option --clipboard is ignored in interactive mode.");
       if (file_arg)
         g_warning ("Option --file is ignored in interactive mode.");
 
