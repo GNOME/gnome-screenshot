@@ -41,7 +41,8 @@ screenshot_load_config (gboolean clipboard_arg,
                         gboolean disable_border_arg,
                         const gchar *border_effect_arg,
                         guint delay_arg,
-                        gboolean interactive_arg)
+                        gboolean interactive_arg,
+                        const gchar *file_arg)
 {
   static gboolean initialized = FALSE;
   ScreenshotConfig *config;
@@ -71,6 +72,9 @@ screenshot_load_config (gboolean clipboard_arg,
   config->settings = g_settings_new ("org.gnome.gnome-screenshot");
   if (config->interactive)
     {
+      if (file_arg)
+        g_warning ("Option --file is ignored in interactive mode.");
+
       config->save_dir =
         g_settings_get_string (config->settings,
                                LAST_SAVE_DIRECTORY_KEY);
@@ -106,6 +110,8 @@ screenshot_load_config (gboolean clipboard_arg,
         config->border_effect = g_strdup (border_effect_arg);
 
       config->copy_to_clipboard = clipboard_arg;
+      if (file_arg != NULL)
+        config->file = g_file_new_for_commandline_arg (file_arg);
     }
 
   config->include_icc_profile =

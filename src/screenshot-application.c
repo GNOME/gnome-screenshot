@@ -175,8 +175,11 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
     }
   else
     {
+      g_critical ("Unable to save the screenshot: %s", error->message);
       screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
       g_application_release (G_APPLICATION (self));
+      if (screenshot_config->file != NULL)
+        exit (EXIT_FAILURE);
     }
 }
 
@@ -334,7 +337,11 @@ build_filename_ready_cb (GObject *source,
                                 _("Unable to capture a screenshot"),
                                 _("Error creating file"));
       else
-        screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
+        {
+          screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
+          if (screenshot_config->file != NULL)
+            exit (EXIT_FAILURE);
+        }
 
       return;
     }
@@ -378,6 +385,8 @@ finish_prepare_screenshot (ScreenshotApplication *self,
         screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
 
       g_application_release (G_APPLICATION (self));
+      if (screenshot_config->file != NULL)
+        exit (EXIT_FAILURE);
 
       return;
     }
@@ -417,7 +426,14 @@ finish_prepare_screenshot (ScreenshotApplication *self,
    *
    * screenshot_ensure_icc_profile (window);
    */
-  screenshot_build_filename_async (build_filename_ready_cb, self);
+  if (screenshot_config->file != NULL)
+    {
+      self->priv->save_uri = g_file_get_uri (screenshot_config->file);
+      self->priv->should_overwrite = TRUE;
+      screenshot_save_to_file (self);
+    }
+  else
+    screenshot_build_filename_async (build_filename_ready_cb, self);
 }
 
 static void
@@ -487,6 +503,7 @@ screenshot_application_local_command_line (GApplication *app,
   gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
+  gchar *file_arg = NULL;
   const GOptionEntry entries[] = {
     { "clipboard", 'c', 0, G_OPTION_ARG_NONE, &clipboard_arg, N_("Send the grab directly to the clipboard"), NULL },
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
@@ -496,6 +513,7 @@ screenshot_application_local_command_line (GApplication *app,
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
     { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
+    { "file", 'f', 0, G_OPTION_ARG_FILENAME, &file_arg, N_("Save screenshot directly to this file"), N_("filename") },
     { NULL },
   };
 
@@ -529,7 +547,8 @@ screenshot_application_local_command_line (GApplication *app,
                                 disable_border_arg,
                                 border_effect_arg,
                                 delay_arg,
-                                interactive_arg);
+                                interactive_arg,
+                                file_arg);
 
   if (!res)
     {
@@ -547,6 +566,8 @@ screenshot_application_local_command_line (GApplication *app,
 
  out:
   g_option_context_free (context);
+  g_free (border_effect_arg);
+  g_free (file_arg);
 
   return TRUE;	
 }

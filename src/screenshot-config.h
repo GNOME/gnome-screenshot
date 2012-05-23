@@ -29,6 +29,7 @@ typedef struct {
   GSettings *settings;
 
   gchar *save_dir;
+  GFile *file;
 
   gboolean copy_to_clipboard;
 
@@ -55,7 +56,8 @@ gboolean screenshot_load_config (gboolean clipboard_arg,
                                  gboolean disable_border_arg,
                                  const gchar *border_effect_arg,
                                  guint delay_arg,
-                                 gboolean interactive_arg);
+                                 gboolean interactive_arg,
+                                 const gchar *file_arg);
 void screenshot_save_config      (void);
 
 G_END_DECLS
