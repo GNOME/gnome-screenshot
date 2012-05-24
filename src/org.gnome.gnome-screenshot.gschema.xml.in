@@ -26,7 +26,7 @@
       <_description>Include the window manager border along with the screenshot</_description>
     </key>
     <key name="include-pointer" type="b">
-      <default>true</default>
+      <default>false</default>
       <_summary>Include Pointer</_summary>
       <_description>Include the pointer in the screenshot</_description>
     </key>

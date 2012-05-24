@@ -39,6 +39,7 @@ screenshot_load_config (gboolean clipboard_arg,
                         gboolean area_arg,
                         gboolean include_border_arg,
                         gboolean disable_border_arg,
+                        gboolean include_pointer_arg,
                         const gchar *border_effect_arg,
                         guint delay_arg,
                         gboolean interactive_arg,
@@ -74,6 +75,8 @@ screenshot_load_config (gboolean clipboard_arg,
     {
       if (clipboard_arg)
         g_warning ("Option --clipboard is ignored in interactive mode.");
+      if (include_pointer_arg)
+        g_warning ("Option --include-pointer is ignored in interactive mode.");
       if (file_arg)
         g_warning ("Option --file is ignored in interactive mode.");
 
@@ -93,6 +96,10 @@ screenshot_load_config (gboolean clipboard_arg,
       if (disable_border_arg)
         config->include_border = FALSE;
 
+      config->include_pointer =
+        g_settings_get_boolean (config->settings,
+                                INCLUDE_POINTER_KEY);
+
       if (border_effect_arg != NULL)
         config->border_effect = g_strdup (border_effect_arg);
       else
@@ -108,6 +115,7 @@ screenshot_load_config (gboolean clipboard_arg,
       config->delay = delay_arg;
       config->include_border = include_border_arg;
       config->include_border = !disable_border_arg;
+      config->include_pointer = include_pointer_arg;
       if (border_effect_arg != NULL)
         config->border_effect = g_strdup (border_effect_arg);
 
@@ -119,9 +127,6 @@ screenshot_load_config (gboolean clipboard_arg,
   config->include_icc_profile =
     g_settings_get_boolean (config->settings,
                             INCLUDE_ICC_PROFILE);
-  config->include_pointer =
-    g_settings_get_boolean (config->settings,
-                            INCLUDE_POINTER_KEY);
 
   if (config->border_effect == NULL)
     config->border_effect = g_strdup ("none");

@@ -500,6 +500,7 @@ screenshot_application_local_command_line (GApplication *app,
   gboolean area_arg = FALSE;
   gboolean include_border_arg = FALSE;
   gboolean disable_border_arg = FALSE;
+  gboolean include_pointer_arg = FALSE;
   gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
@@ -510,6 +511,7 @@ screenshot_application_local_command_line (GApplication *app,
     { "area", 'a', 0, G_OPTION_ARG_NONE, &area_arg, N_("Grab an area of the screen instead of the entire screen"), NULL },
     { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
     { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, N_("Remove the window border from the screenshot"), NULL },
+    { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, &include_pointer_arg, N_("Include the pointer with the screenshot"), NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
     { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
@@ -545,6 +547,7 @@ screenshot_application_local_command_line (GApplication *app,
                                 area_arg,
                                 include_border_arg,
                                 disable_border_arg,
+                                include_pointer_arg,
                                 border_effect_arg,
                                 delay_arg,
                                 interactive_arg,
