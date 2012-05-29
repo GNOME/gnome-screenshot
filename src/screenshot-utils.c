@@ -653,8 +653,8 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
 
   if (error != NULL)
     {
-      g_warning ("Unable to use GNOME Shell's builtin screenshot interface, "
-                 "resorting to fallback X11. Error: %s", error->message);
+      g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
+                 "resorting to fallback X11.");
       g_error_free (error);
 
       screenshot = screenshot_fallback_get_pixbuf (rectangle);
