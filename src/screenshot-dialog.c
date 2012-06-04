@@ -156,8 +156,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   dialog->screenshot = screenshot;
 
   ui = gtk_builder_new ();
-  gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
-  res = gtk_builder_add_from_file (ui, UIDIR "/gnome-screenshot.ui", NULL);
+  res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/screenshot-dialog.ui", NULL);
   g_assert (res != 0);
 
   width = gdk_pixbuf_get_width (screenshot);

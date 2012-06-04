@@ -11,14 +11,15 @@ bin_PROGRAMS = \
 	gnome-screenshot		\
 	$(NULL)
 
-UI_FILES = \
+ui_files = \
 	screenshot-app-menu.ui		\
+	screenshot-dialog.ui		\
 	$(NULL)
 
-screenshot-resources.c: gnome-screenshot.gresource.xml $(UI_FILES)
+screenshot-resources.c: gnome-screenshot.gresource.xml $(ui_files)
 	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
 
-screenshot-resources.h: gnome-screenshot.gresource.xml $(UI_FILES)
+screenshot-resources.h: gnome-screenshot.gresource.xml $(ui_files)
 	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
 
 BUILT_SOURCES = \
@@ -67,11 +68,6 @@ gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
 
 man_MANS = gnome-screenshot.1
 
-uidir = $(datadir)/gnome-screenshot
-ui_DATA =					\
-	gnome-screenshot.ui			\
-	$(NULL)
-
 gsettingsschema_in_files = org.gnome.gnome-screenshot.gschema.xml.in
 gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
 .PRECIOUS: $(gsettings_SCHEMAS)
@@ -87,8 +83,9 @@ EXTRA_DIST =					\
 	$(gsettingsschema_in_files)		\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
-	$(ui_DATA)				\
 	$(convert_DATA)				\
+	$(ui_files)				\
+	gnome-screenshot.gresource.xml		\
 	$(NULL)
 
 CLEANFILES = \
