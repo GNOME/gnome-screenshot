@@ -1,3 +1,21 @@
+GNOME Screenshot 3.5.2 - 4th June 2012
+======================================
+
+- Add an application menu for interactive mode
+- Add a --file commandline option (Kjell Ahlstedt)
+- Add an --include-pointer commandline option (Kjell Ahlstedt)
+- Don't warn if fallback X11 code path is hit
+- Warn if --interactive is combined with --clipboard (Kjell Ahlstedt)
+- Rename "whole desktop" to "whole screen"
+- Update quicklists for new fd.o spec (Jeremy Bicha)
+- Use GResource for UI files
+
+GNOME Screenshot 3.4.1 - 16th April 2012
+========================================
+
+- Fall back to $HOME when XDG_PICTURES_DIR fails
+- Translation updates
+
 GNOME Screenshot 3.4.0 - 26th March 2012
 ========================================
 
