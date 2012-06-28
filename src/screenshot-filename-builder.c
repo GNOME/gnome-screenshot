@@ -98,6 +98,9 @@ sanitize_save_directory (const gchar *save_dir)
 {
   gchar *retval = g_strdup (save_dir);
 
+  if (save_dir == NULL)
+    return NULL;
+
   if (save_dir[0] == '~')
     {
       char *tmp = expand_initial_tilde (save_dir);
