@@ -446,7 +446,7 @@ finish_prepare_screenshot (ScreenshotApplication *self,
       screenshot_save_to_file (self);
     }
   else
-    screenshot_build_filename_async (screenshot_config->save_dir, build_filename_ready_cb, self);
+    screenshot_build_filename_async (screenshot_config->save_dir, NULL, build_filename_ready_cb, self);
 }
 
 static void

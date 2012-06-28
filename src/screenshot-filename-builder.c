@@ -37,6 +37,7 @@ typedef enum
 typedef struct 
 {
   char *base_paths[NUM_TESTS];
+  char *screenshot_origin;
   int iteration;
   TestType type;
 
@@ -117,8 +118,7 @@ build_path (AsyncExistenceJob *job)
 {
   const gchar *base_path;
   char *retval, *file_name;
-  char *timestamp;
-  GDateTime *d;
+  char *origin;
 
   base_path = job->base_paths[job->type];
 
@@ -126,27 +126,34 @@ build_path (AsyncExistenceJob *job)
       base_path[0] == '\0')
     return NULL;
 
-  d = g_date_time_new_now_local ();
-  timestamp = g_date_time_format (d, "%Y-%m-%d %H:%M:%S");
-  g_date_time_unref (d);
+  if (job->screenshot_origin == NULL)
+    {
+      GDateTime *d;
+
+      d = g_date_time_new_now_local ();
+      origin = g_date_time_format (d, "%Y-%m-%d %H:%M:%S");
+      g_date_time_unref (d);
+    }
+  else
+    origin = g_strdup (job->screenshot_origin);
 
   if (job->iteration == 0)
     {
       /* translators: this is the name of the file that gets made up
        * with the screenshot if the entire screen is taken */
-      file_name = g_strdup_printf (_("Screenshot from %s.png"), timestamp);
+      file_name = g_strdup_printf (_("Screenshot from %s.png"), origin);
     }
   else
     {
       /* translators: this is the name of the file that gets
        * made up with the screenshot if the entire screen is
        * taken */
-      file_name = g_strdup_printf (_("Screenshot from %s - %d.png"), timestamp, job->iteration);
+      file_name = g_strdup_printf (_("Screenshot from %s - %d.png"), origin, job->iteration);
     }
 
   retval = g_build_filename (base_path, file_name, NULL);
   g_free (file_name);
-  g_free (timestamp);
+  g_free (origin);
 
   return retval;
 }
@@ -158,6 +165,8 @@ async_existence_job_free (AsyncExistenceJob *job)
 
   for (idx = 0; idx < NUM_TESTS; idx++)
     g_free (job->base_paths[idx]);
+
+  g_free (job->screenshot_origin);
 
   g_clear_object (&job->async_result);
 
@@ -293,6 +302,7 @@ out:
 
 void
 screenshot_build_filename_async (const char *save_dir,
+				 const char *screenshot_origin,
                                  GAsyncReadyCallback callback,
                                  gpointer user_data)
 {
@@ -305,6 +315,8 @@ screenshot_build_filename_async (const char *save_dir,
   job->base_paths[TEST_FALLBACK] = get_fallback_screenshot_dir ();
   job->iteration = 0;
   job->type = TEST_SAVED_DIR;
+
+  job->screenshot_origin = g_strdup (screenshot_origin);
 
   job->async_result = g_simple_async_result_new (NULL,
                                                  callback, user_data,
