@@ -23,7 +23,8 @@
 
 #include <gio/gio.h>
 
-void screenshot_build_filename_async (GAsyncReadyCallback callback,
+void screenshot_build_filename_async (const char *save_dir,
+                                      GAsyncReadyCallback callback,
                                       gpointer user_data);
 gchar *screenshot_build_filename_finish (GAsyncResult *result,
                                          GError **error);

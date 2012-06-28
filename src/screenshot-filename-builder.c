@@ -24,8 +24,6 @@
 #include <pwd.h>
 #include <string.h>
 
-#include "screenshot-config.h"
-
 typedef enum
 {
   TEST_SAVED_DIR = 0,
@@ -288,14 +286,15 @@ out:
 }
 
 void
-screenshot_build_filename_async (GAsyncReadyCallback callback,
+screenshot_build_filename_async (const char *save_dir,
+                                 GAsyncReadyCallback callback,
                                  gpointer user_data)
 {
   AsyncExistenceJob *job;
 
   job = g_slice_new0 (AsyncExistenceJob);
 
-  job->base_uris[TEST_SAVED_DIR] = sanitize_save_directory (screenshot_config->save_dir);
+  job->base_uris[TEST_SAVED_DIR] = sanitize_save_directory (save_dir);
   job->base_uris[TEST_DEFAULT] = get_default_screenshot_dir ();
   job->base_uris[TEST_FALLBACK] = get_fallback_screenshot_dir ();
   job->iteration = 0;
