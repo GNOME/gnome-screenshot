@@ -24,6 +24,8 @@
 #include <pwd.h>
 #include <string.h>
 
+#include "screenshot-filename-builder.h"
+
 typedef enum
 {
   TEST_SAVED_DIR = 0,
