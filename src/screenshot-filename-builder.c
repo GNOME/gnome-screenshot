@@ -36,7 +36,7 @@ typedef enum
 
 typedef struct 
 {
-  char *base_uris[NUM_TESTS];
+  char *base_paths[NUM_TESTS];
   int iteration;
   TestType type;
 
@@ -51,7 +51,7 @@ expand_initial_tilde (const char *path)
   struct passwd *passwd_file_entry;
 
   if (path[1] == '/' || path[1] == '\0') {
-    return g_strconcat (g_get_home_dir (), &path[1], NULL);
+    return g_build_filename (g_get_home_dir (), &path[1], NULL);
   }
   
   slash_after_user_name = strchr (&path[1], '/');
@@ -76,21 +76,13 @@ expand_initial_tilde (const char *path)
 static gchar *
 get_fallback_screenshot_dir (void)
 {
-  gchar *shot_dir;
-
-  shot_dir = g_strconcat ("file://", g_get_home_dir (), NULL);
-
-  return shot_dir;
+  return g_strdup (g_get_home_dir ());
 }
 
 static gchar *
 get_default_screenshot_dir (void)
 {
-  gchar *shot_dir;
-
-  shot_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_PICTURES), NULL);
-
-  return shot_dir;
+  return g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
 }
 
 static gchar *
@@ -107,22 +99,31 @@ sanitize_save_directory (const gchar *save_dir)
       g_free (retval);
       retval = tmp;
     }
+  else if (strstr (save_dir, "://") != NULL)
+    {
+      GFile *file;
+
+      g_free (retval);
+      file = g_file_new_for_uri (save_dir);
+      retval = g_file_get_path (file);
+      g_object_unref (file);
+    }
 
   return retval;
 }
 
 static char *
-build_uri (AsyncExistenceJob *job)
+build_path (AsyncExistenceJob *job)
 {
-  const gchar *base_uri;
+  const gchar *base_path;
   char *retval, *file_name;
   char *timestamp;
   GDateTime *d;
 
-  base_uri = job->base_uris[job->type];
+  base_path = job->base_paths[job->type];
 
-  if (base_uri == NULL ||
-      base_uri[0] == '\0')
+  if (base_path == NULL ||
+      base_path[0] == '\0')
     return NULL;
 
   d = g_date_time_new_now_local ();
@@ -143,7 +144,7 @@ build_uri (AsyncExistenceJob *job)
       file_name = g_strdup_printf (_("Screenshot from %s - %d.png"), timestamp, job->iteration);
     }
 
-  retval = g_build_filename (base_uri, file_name, NULL);
+  retval = g_build_filename (base_path, file_name, NULL);
   g_free (file_name);
   g_free (timestamp);
 
@@ -156,7 +157,7 @@ async_existence_job_free (AsyncExistenceJob *job)
   gint idx;
 
   for (idx = 0; idx < NUM_TESTS; idx++)
-    g_free (job->base_uris[idx]);
+    g_free (job->base_paths[idx]);
 
   g_clear_object (&job->async_result);
 
@@ -188,19 +189,19 @@ try_check_file (GIOSchedulerJob *io_job,
   GFile *file;
   GFileInfo *info;
   GError *error;
-  char *uri, *retval;
+  char *path, *retval;
 
 retry:
   error = NULL;
-  uri = build_uri (job);
+  path = build_path (job);
 
-  if (uri == NULL)
+  if (path == NULL)
     {
       (job->type)++;
       goto retry;
     }
 
-  file = g_file_new_for_uri (uri);
+  file = g_file_new_for_path (path);
   info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
 			    G_FILE_QUERY_INFO_NONE, cancellable, &error);
   if (info != NULL)
@@ -208,7 +209,7 @@ retry:
       /* file already exists, iterate again */
       g_object_unref (info);
       g_object_unref (file);
-      g_free (uri);
+      g_free (path);
 
       (job->iteration)++;
 
@@ -245,7 +246,7 @@ retry:
             }
           else
             {
-              retval = uri;
+              retval = path;
 
               g_object_unref (parent);
               goto out;
@@ -256,7 +257,7 @@ retry:
           /* another kind of error, assume this location is not
            * accessible.
            */
-          g_free (uri);
+          g_free (path);
 
           if (prepare_next_cycle (job))
             {
@@ -299,9 +300,9 @@ screenshot_build_filename_async (const char *save_dir,
 
   job = g_slice_new0 (AsyncExistenceJob);
 
-  job->base_uris[TEST_SAVED_DIR] = sanitize_save_directory (save_dir);
-  job->base_uris[TEST_DEFAULT] = get_default_screenshot_dir ();
-  job->base_uris[TEST_FALLBACK] = get_fallback_screenshot_dir ();
+  job->base_paths[TEST_SAVED_DIR] = sanitize_save_directory (save_dir);
+  job->base_paths[TEST_DEFAULT] = get_default_screenshot_dir ();
+  job->base_paths[TEST_FALLBACK] = get_fallback_screenshot_dir ();
   job->iteration = 0;
   job->type = TEST_SAVED_DIR;
 

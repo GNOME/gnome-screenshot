@@ -318,8 +318,21 @@ build_filename_ready_cb (GObject *source,
 {
   ScreenshotApplication *self = user_data;
   GError *error = NULL;
+  char *save_path;
 
-  self->priv->save_uri = screenshot_build_filename_finish (res, &error);
+  save_path = screenshot_build_filename_finish (res, &error);
+  if (save_path != NULL)
+    {
+      GFile *file;
+
+      file = g_file_new_for_path (save_path);
+      g_free (save_path);
+
+      self->priv->save_uri = g_file_get_uri (file);
+      g_object_unref (file);
+    }
+  else
+    self->priv->save_uri = NULL;
 
   /* now release the application */
   g_application_release (G_APPLICATION (self));
