@@ -205,6 +205,106 @@ save_pixbuf_ready_cb (GObject *source,
 }
 
 static void
+find_out_writable_format_by_extension (gpointer data,
+                                      gpointer user_data)
+{
+  GdkPixbufFormat *format     = (GdkPixbufFormat*) data;
+  gchar          **name       = (gchar **) user_data;
+  gchar          **extensions = gdk_pixbuf_format_get_extensions (format);
+  gchar          **ptr        = extensions;
+  gboolean         found      = FALSE;
+
+  while (*ptr != NULL)
+    {
+      if (g_strcmp0 (*ptr, *name) == 0 &&
+          gdk_pixbuf_format_is_writable (format) == TRUE)
+        {
+          *name = gdk_pixbuf_format_get_name (format);
+	  found = TRUE;
+          break;
+        }
+      ptr++;
+    }
+
+  g_strfreev (extensions);
+
+  /* Needing to duplicate string here because
+   * gdk_pixbuf_format_get_name will return a duplicated string.
+   */
+  if (!found)
+    *name = g_strdup (*name);
+}
+
+static gboolean
+is_png (gchar *format)
+{
+  if (g_strcmp0 (format, "png") == 0)
+    return TRUE;
+  else
+    return FALSE;
+}
+
+static gboolean
+has_profile (ScreenshotApplication *self)
+{
+  if (self->priv->icc_profile_base64 != NULL)
+    return TRUE;
+  else
+    return FALSE;
+}
+
+static void
+save_with_description_and_profile (ScreenshotApplication *self,
+                                   GFileOutputStream     *os,
+                                   gchar                 *format)
+{
+  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+                                   G_OUTPUT_STREAM (os),
+                                   format, NULL,
+                                   save_pixbuf_ready_cb, self,
+                                   "icc-profile", self->priv->icc_profile_base64,
+                                   "tEXt::Software", "gnome-screenshot",
+                                   NULL);
+}
+static void
+save_with_description (ScreenshotApplication *self,
+                       GFileOutputStream     *os,
+                       gchar                 *format)
+{
+  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+                                   G_OUTPUT_STREAM (os),
+                                   format, NULL,
+                                   save_pixbuf_ready_cb, self,
+                                   "tEXt::Software", "gnome-screenshot",
+                                   NULL);
+}
+
+static void
+save_with_profile (ScreenshotApplication *self,
+                   GFileOutputStream     *os,
+                   gchar                 *format)
+{
+  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+                                   G_OUTPUT_STREAM (os),
+                                   format, NULL,
+                                   save_pixbuf_ready_cb, self,
+                                   "icc-profile", self->priv->icc_profile_base64,
+                                   NULL);
+}
+
+static void
+save_with_no_profile_or_description (ScreenshotApplication *self,
+                                     GFileOutputStream     *os,
+                                     gchar                 *format)
+{
+  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+                                   G_OUTPUT_STREAM (os),
+                                   format, NULL,
+                                   save_pixbuf_ready_cb, self,
+                                   NULL);
+}
+
+static void
 save_file_create_ready_cb (GObject *source,
                            GAsyncResult *res,
                            gpointer user_data)
@@ -212,6 +312,24 @@ save_file_create_ready_cb (GObject *source,
   ScreenshotApplication *self = user_data;
   GFileOutputStream *os;
   GError *error = NULL;
+  gchar *basename = g_file_get_basename (G_FILE (source));
+  gchar *extension = g_strrstr (basename, ".");
+  gchar *format = NULL;
+  GSList *formats = NULL;
+
+  if (extension == NULL)
+    extension = "png";
+  else
+    extension++;
+
+  format = extension;
+
+  formats = gdk_pixbuf_get_formats();
+  g_slist_foreach (formats,
+                   find_out_writable_format_by_extension,
+                   (gpointer) &format);
+  g_slist_free (formats);
+  g_free (basename);
 
   if (self->priv->should_overwrite)
     os = g_file_replace_finish (G_FILE (source), res, &error);
@@ -225,23 +343,20 @@ save_file_create_ready_cb (GObject *source,
       return;
     }
 
-  if (self->priv->icc_profile_base64 != NULL)
-    gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
-                                     G_OUTPUT_STREAM (os),
-                                     "png", NULL,
-                                     save_pixbuf_ready_cb, self,
-                                     "icc-profile", self->priv->icc_profile_base64,
-                                     "tEXt::Software", "gnome-screenshot",
-                                     NULL);
+  if (is_png (format))
+    {
+      if (has_profile (self))
+        save_with_description_and_profile (self, os, format);
+      else
+        save_with_description (self, os, format);
+    }
   else
-    gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
-                                     G_OUTPUT_STREAM (os),
-                                     "png", NULL,
-                                     save_pixbuf_ready_cb, self,
-                                     "tEXt::Software", "gnome-screenshot",
-                                     NULL);
+    {
+      save_with_no_profile_or_description (self, os, format);
+    }
 
   g_object_unref (os);
+  g_free (format);
 }
 
 static void
