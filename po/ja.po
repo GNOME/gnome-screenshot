@@ -17,51 +17,60 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-30 10:02+0000\n"
-"PO-Revision-Date: 2012-04-03 20:14+0900\n"
-"Last-Translator: Kentaro KAZUHAMA <kazken3@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-07-11 01:58+0000\n"
+"PO-Revision-Date: 2012-07-16 00:36+0900\n"
+"Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "スクリーンショット"
 
-#: ../src/gnome-screenshot.desktop.in.h:2
-msgid "Save images of your desktop or individual windows"
-msgstr "デスクトップ全体またはウィンドウの画像を保存します"
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
+msgid "Save images of your screen or individual windows"
+msgstr "画面またはウィンドウの画像を保存します"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the whole screen"
+msgid "Take a Screenshot of the Whole Screen"
 msgstr "画面全体のスクリーンショットを撮る"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-msgid "Take a screenshot of the current window"
+msgid "Take a Screenshot of the Current Window"
 msgstr "現在のウィンドウのスクリーンショットを撮る"
 
-#: ../src/gnome-screenshot.ui.h:1
-msgid "Save Screenshot"
-msgstr "スクリーンショットの保存"
+#: ../src/screenshot-app-menu.ui.h:1
+#, fuzzy
+#| msgid "Screenshot"
+msgid "About Screenshot"
+msgstr "スクリーンショット"
 
-#: ../src/gnome-screenshot.ui.h:2
+#: ../src/screenshot-app-menu.ui.h:2
+msgid "Help"
+msgstr "ヘルプ"
+
+#: ../src/screenshot-app-menu.ui.h:3
+msgid "Quit"
+msgstr "終了"
+
+#: ../src/screenshot-dialog.ui.h:1
 msgid "C_opy to Clipboard"
 msgstr "クリップボードにコピーする(_O)"
 
-#: ../src/gnome-screenshot.ui.h:3
+#: ../src/screenshot-dialog.ui.h:2
 msgid "_Name:"
 msgstr "名前(_N):"
 
-#: ../src/gnome-screenshot.ui.h:4
+#: ../src/screenshot-dialog.ui.h:3
 msgid "Save in _folder:"
 msgstr "保存するフォルダー(_F):"
 
-#: ../src/gnome-screenshot.ui.h:5
+#: ../src/screenshot-dialog.ui.h:4
 msgid "*"
 msgstr "*"
 
@@ -70,13 +79,8 @@ msgid "Window-specific screenshot (deprecated)"
 msgstr "【廃止】ウィンドウだけスクリーンショットを撮るかどうか"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"【このキーは廃止になり、最新版では適用されなくなりました】デスクトップ全体で"
-"はなく、現在フォーカスが当たっているウィンドウのスクリーンショットを撮りま"
-"す。"
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "【このキーは廃止になり、最新版では適用されなくなりました】デスクトップ全体ではなく、現在フォーカスが当たっているウィンドウのスクリーンショットを撮ります。"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -100,8 +104,7 @@ msgstr "最後に保存したディレクトリー"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr ""
-"インタラクティブモードでスクリーンショットを保存したディレクトリーです。"
+msgstr "インタラクティブモードでスクリーンショットを保存したディレクトリーです。"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -132,129 +135,131 @@ msgid "Border Effect"
 msgstr "追加するエフェクト"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"画像の境界の縁に適用するエフェクトです。選択可能な値: \"shadow\"、\"none\"、"
-"\"border\""
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "画像の境界の縁に適用するエフェクトです。選択可能な値: \"shadow\"、\"none\"、\"border\""
 
-#: ../src/screenshot-application.c:147
+#: ../src/screenshot-application.c:142
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
 msgstr "ファイル \"%s\" はすでに \"%s\" にあります"
 
-#: ../src/screenshot-application.c:154
+#: ../src/screenshot-application.c:149
 msgid "Overwrite existing file?"
 msgstr "既存のファイルを上書きしますか?"
 
-#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
-#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
-#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
+#: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
 msgid "Unable to capture a screenshot"
 msgstr "スクリーンショットを取得できません"
 
-#: ../src/screenshot-application.c:176
+#: ../src/screenshot-application.c:171
 msgid "Error creating file. Please choose another location and retry."
 msgstr "ファイルの作成エラー。他の場所を選択するか、もう一度試してください。"
 
-#: ../src/screenshot-application.c:341
+#: ../src/screenshot-application.c:351
 msgid "Error creating file"
 msgstr "ファイル作成エラー"
 
-#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
+#: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
 msgid "Screenshot taken"
 msgstr "スクリーンショットを撮影しました"
 
-#: ../src/screenshot-application.c:387
+#: ../src/screenshot-application.c:396
 msgid "All possible methods failed"
 msgstr "すべての方法で失敗しました"
 
-#: ../src/screenshot-application.c:502
+#: ../src/screenshot-application.c:522
 msgid "Send the grab directly to the clipboard"
 msgstr "取得したスクリーンショットをクリップボードへ直接送信する"
 
-#: ../src/screenshot-application.c:503
+#: ../src/screenshot-application.c:523
 msgid "Grab a window instead of the entire screen"
 msgstr "画面全体ではなくウィンドウ単体を取得する"
 
-#: ../src/screenshot-application.c:504
+#: ../src/screenshot-application.c:524
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "画面全体ではなく一部を取得する"
 
-#: ../src/screenshot-application.c:505
+#: ../src/screenshot-application.c:525
 msgid "Include the window border with the screenshot"
 msgstr "スクリーンショットにウィンドウの境界を含める"
 
-#: ../src/screenshot-application.c:506
+#: ../src/screenshot-application.c:526
 msgid "Remove the window border from the screenshot"
 msgstr "スクリーンショットからウィンドウの境界を取り除く"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:527
+msgid "Include the pointer with the screenshot"
+msgstr "スクリーンショットにマウスのポインターを含める"
+
+#: ../src/screenshot-application.c:528
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "指定した時間を経過してからスクリーンショットを撮る [秒単位]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:507
-#: ../src/screenshot-interactive-dialog.c:426
+#: ../src/screenshot-application.c:528
+#: ../src/screenshot-interactive-dialog.c:409
 msgid "seconds"
 msgstr "秒"
 
-#: ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:529
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "境界の縁に適用するエフェクトを指定する (shadow、border、または none)"
 
-#: ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:529
 msgid "effect"
 msgstr "エフェクト"
 
-#: ../src/screenshot-application.c:509
+#: ../src/screenshot-application.c:530
 msgid "Interactively set options"
 msgstr "設定ダイアログを表示する"
 
-#: ../src/screenshot-application.c:523
+#: ../src/screenshot-application.c:531
+msgid "Save screenshot directly to this file"
+msgstr "スクリーンショットを指定のファイルに保存する"
+
+#: ../src/screenshot-application.c:531
+msgid "filename"
+msgstr "ファイル名"
+
+#: ../src/screenshot-application.c:545
 msgid "Take a picture of the screen"
 msgstr "画面のスクリーンショットを撮る"
 
-#: ../src/screenshot-config.c:54
+#: ../src/screenshot-application.c:683
+msgid "translator-credits"
+msgstr ""
+"Mitsuya Shibata <mty.shibata@gmail.com>\n"
+"日本GNOMEユーザー会 <http://www.gnome.gr.jp/>"
+
+#: ../src/screenshot-config.c:56
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"オプションの競合: --window オプションと --area オプションは同時に指定できませ"
-"ん\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "オプションの競合: --window オプションと --area オプションは同時に指定できません\n"
 
-#: ../src/screenshot-config.c:61
+#: ../src/screenshot-config.c:63
 #, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"オプションの競合: --area オプションと --delay オプションは同時に指定できませ"
-"ん\n"
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "オプションの競合: --area オプションと --delay オプションは同時に指定できません\n"
 
-#: ../src/screenshot-dialog.c:171
-msgid ""
-"UI definition file for the screenshot program is missing.\n"
-"Please check your installation of gnome-utils"
-msgstr ""
-"スクリーンショット取得プログラムの UI 定義ファイルが見つかりません。\n"
-"gnome-utils がインストールされているかどうかを確認してください。"
+#: ../src/screenshot-dialog.c:172
+msgid "Save Screenshot"
+msgstr "スクリーンショットの保存"
 
-#: ../src/screenshot-dialog.c:192
+#: ../src/screenshot-dialog.c:188
 msgid "Select a folder"
 msgstr "フォルダーの選択"
 
-#: ../src/screenshot-dialog.c:301
+#: ../src/screenshot-dialog.c:285
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:122
+#: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
 msgstr "Screenshot_from_%s.png"
@@ -262,72 +267,79 @@ msgstr "Screenshot_from_%s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:129
+#: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
 msgstr "Screenshot_from_%s_%d.png"
 
-#: ../src/screenshot-interactive-dialog.c:165
+#: ../src/screenshot-interactive-dialog.c:148
 msgid "None"
 msgstr "なし"
 
-#: ../src/screenshot-interactive-dialog.c:166
+#: ../src/screenshot-interactive-dialog.c:149
 msgid "Drop shadow"
 msgstr "影を付ける"
 
-#: ../src/screenshot-interactive-dialog.c:167
+#: ../src/screenshot-interactive-dialog.c:150
 msgid "Border"
 msgstr "境界を含める"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:271
+#: ../src/screenshot-interactive-dialog.c:254
 msgid "Include _pointer"
 msgstr "マウスのポインターを含める(_P)"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:281
+#: ../src/screenshot-interactive-dialog.c:264
 msgid "Include the window _border"
 msgstr "ウィンドウの境界を含める(_B)"
 
-#: ../src/screenshot-interactive-dialog.c:298
+#: ../src/screenshot-interactive-dialog.c:281
 msgid "Apply _effect:"
 msgstr "適用するエフェクト(_E):"
 
-#: ../src/screenshot-interactive-dialog.c:360
-msgid "Grab the whole _desktop"
-msgstr "デスクトップ全体(_D)"
+#: ../src/screenshot-interactive-dialog.c:343
+msgid "Grab the whole sc_reen"
+msgstr "画面全体(_R)"
 
-#: ../src/screenshot-interactive-dialog.c:374
+#: ../src/screenshot-interactive-dialog.c:357
 msgid "Grab the current _window"
 msgstr "現在のウィンドウ(_W)"
 
-#: ../src/screenshot-interactive-dialog.c:386
+#: ../src/screenshot-interactive-dialog.c:369
 msgid "Select _area to grab"
 msgstr "取得する領域の選択(_A)"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:406
+#: ../src/screenshot-interactive-dialog.c:389
 msgid "Grab _after a delay of"
 msgstr "取得するまでの待ち時間(_A): "
 
-#: ../src/screenshot-interactive-dialog.c:444
-#: ../src/screenshot-interactive-dialog.c:452
+#: ../src/screenshot-interactive-dialog.c:435
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Take Screenshot"
 msgstr "スクリーンショットの取得"
 
-#: ../src/screenshot-interactive-dialog.c:453
+#: ../src/screenshot-interactive-dialog.c:454
 msgid "Effects"
 msgstr "エフェクト"
 
-#: ../src/screenshot-interactive-dialog.c:458
+#: ../src/screenshot-interactive-dialog.c:457
 msgid "Take _Screenshot"
 msgstr "スクリーンショットの取得(_S)"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "ヘルプを読み込む際にエラー"
+
+#~ msgid ""
+#~ "UI definition file for the screenshot program is missing.\n"
+#~ "Please check your installation of gnome-utils"
+#~ msgstr ""
+#~ "スクリーンショット取得プログラムの UI 定義ファイルが見つかりません。\n"
+#~ "gnome-utils がインストールされているかどうかを確認してください。"
 
 #~ msgid "Error while saving screenshot"
 #~ msgstr "スクリーンショットを保存する際にエラーが発生しました"
