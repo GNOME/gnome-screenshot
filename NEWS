@@ -1,3 +1,12 @@
+GNOME Screenshot 3.5.4 - 16th July 2012
+=======================================
+
+- Add a way for ScreenshotFilenameBuilder to be used standalone
+  (Bastien Nocera)
+- Don't use g_strconcat() to build URIs (Bastien Nocera)
+- Add API to change the "from..." text in ScreenshotFilenameBuilder
+  (Bastien Nocera)
+
 GNOME Screenshot 3.5.2 - 4th June 2012
 ======================================
 
