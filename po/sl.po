@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2012-05-27 07:48+0000\n"
-"PO-Revision-Date: 2012-05-29 09:05+0100\n"
-"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
+"PO-Revision-Date: 2012-07-19 11:46+0100\n"
+"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr "Zajem zaslonske slike trenutnega okna"
 
 #: ../src/gnome-screenshot.ui.h:1
 msgid "C_opy to Clipboard"
-msgstr "_Kopiraj v odložišče."
+msgstr "_Kopiraj v odložišče"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "_Name:"
@@ -168,7 +168,7 @@ msgstr "Vsi podprti načni so spodleteli."
 
 #: ../src/screenshot-application.c:509
 msgid "Send the grab directly to the clipboard"
-msgstr "Polji zajete podatke neposredno v odložišče"
+msgstr "Pošlje zajete podatke neposredno v odložišče"
 
 #: ../src/screenshot-application.c:510
 msgid "Grab a window instead of the entire screen"
