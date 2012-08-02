@@ -45,10 +45,8 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "現在のウィンドウのスクリーンショットを撮る"
 
 #: ../src/screenshot-app-menu.ui.h:1
-#, fuzzy
-#| msgid "Screenshot"
 msgid "About Screenshot"
-msgstr "スクリーンショット"
+msgstr "このアプリケーションについて"
 
 #: ../src/screenshot-app-menu.ui.h:2
 msgid "Help"
