@@ -86,9 +86,14 @@ get_fallback_screenshot_dir (void)
 static gchar *
 get_default_screenshot_dir (void)
 {
+  const gchar *pictures_dir;
   gchar *shot_dir;
 
-  shot_dir = g_strconcat ("file://", g_get_user_special_dir (G_USER_DIRECTORY_PICTURES), NULL);
+  pictures_dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  if (pictures_dir == NULL)
+    return NULL;
+
+  shot_dir = g_strconcat ("file://", pictures_dir, NULL);
 
   return shot_dir;
 }
