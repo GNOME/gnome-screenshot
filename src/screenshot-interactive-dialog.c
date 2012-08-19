@@ -386,7 +386,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   /* translators: this is the first part of the "grab after a
    * delay of <spin button> seconds".
    */
-  label = gtk_label_new_with_mnemonic (_("Grab _after a delay of"));
+  label = gtk_label_new_with_mnemonic (_("Grab after a _delay of"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_box_pack_start (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
