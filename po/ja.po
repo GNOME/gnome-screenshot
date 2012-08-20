@@ -12,15 +12,15 @@
 # Hideki Yamane <henrich@debian.org>, 2011.
 # Yasumichi Akahoshi <yasumichi@vinelinux.org>, 2010, 2011.
 # Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
-# Jiro Matsuzawa <jmatsuzawa@src.gnome.org>, 2012.
+# Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-07-11 01:58+0000\n"
-"PO-Revision-Date: 2012-07-16 00:36+0900\n"
-"Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
+"POT-Creation-Date: 2012-08-19 22:43+0000\n"
+"PO-Revision-Date: 2012-08-20 08:00+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -231,6 +231,7 @@ msgstr "画面のスクリーンショットを撮る"
 msgid "translator-credits"
 msgstr ""
 "Mitsuya Shibata <mty.shibata@gmail.com>\n"
+"松澤 二郎 <jmatsuzawa@gnome.org>\n"
 "日本GNOMEユーザー会 <http://www.gnome.gr.jp/>"
 
 #: ../src/screenshot-config.c:56
@@ -312,8 +313,8 @@ msgstr "取得する領域の選択(_A)"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-msgid "Grab _after a delay of"
-msgstr "取得するまでの待ち時間(_A): "
+msgid "Grab after a _delay of"
+msgstr "取得するまでの待ち時間(_D): "
 
 #: ../src/screenshot-interactive-dialog.c:435
 #: ../src/screenshot-interactive-dialog.c:453
