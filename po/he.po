@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-26 07:38+0300\n"
-"PO-Revision-Date: 2012-05-26 07:39+0200\n"
+"POT-Creation-Date: 2012-08-26 10:41+0300\n"
+"PO-Revision-Date: 2012-08-26 10:41+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -30,12 +30,12 @@ msgstr ""
 "X-Poedit-Language: Hebrew\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:667
+#: ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "צילום מסך"
 
 #: ../src/gnome-screenshot.desktop.in.h:2
-#: ../src/screenshot-application.c:668
+#: ../src/screenshot-application.c:681
 msgid "Save images of your screen or individual windows"
 msgstr "שמירת תמונות של שולחן העבודה או של חלונות בנפרד"
 
@@ -46,22 +46,6 @@ msgstr "צילום המסך כולו"
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Current Window"
 msgstr "צילום החלון הנוכחי"
-
-#: ../src/gnome-screenshot.ui.h:1
-msgid "C_opy to Clipboard"
-msgstr "ה_עתקה ללוח הגזירים"
-
-#: ../src/gnome-screenshot.ui.h:2
-msgid "_Name:"
-msgstr "_שם:"
-
-#: ../src/gnome-screenshot.ui.h:3
-msgid "Save in _folder:"
-msgstr "שמירה בתיקייה:"
-
-#: ../src/gnome-screenshot.ui.h:4
-msgid "*"
-msgstr "*"
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "About Screenshot"
@@ -74,6 +58,22 @@ msgstr "עזרה"
 #: ../src/screenshot-app-menu.ui.h:3
 msgid "Quit"
 msgstr "יציאה"
+
+#: ../src/screenshot-dialog.ui.h:1
+msgid "C_opy to Clipboard"
+msgstr "ה_עתקה ללוח הגזירים"
+
+#: ../src/screenshot-dialog.ui.h:2
+msgid "_Name:"
+msgstr "_שם:"
+
+#: ../src/screenshot-dialog.ui.h:3
+msgid "Save in _folder:"
+msgstr "שמירה בתיקייה:"
+
+#: ../src/screenshot-dialog.ui.h:4
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
@@ -150,10 +150,10 @@ msgstr "האם לשכתב על הקובץ הקיים?"
 
 #: ../src/screenshot-application.c:170
 #: ../src/screenshot-application.c:179
-#: ../src/screenshot-application.c:337
-#: ../src/screenshot-application.c:341
-#: ../src/screenshot-application.c:382
-#: ../src/screenshot-application.c:385
+#: ../src/screenshot-application.c:350
+#: ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395
+#: ../src/screenshot-application.c:398
 msgid "Unable to capture a screenshot"
 msgstr "לא ניתן לצלם"
 
@@ -161,80 +161,80 @@ msgstr "לא ניתן לצלם"
 msgid "Error creating file. Please choose another location and retry."
 msgstr "שגיאה בעת יצירת הקובץ. נא לבחור במיקום שונה ולנסות שוב."
 
-#: ../src/screenshot-application.c:338
+#: ../src/screenshot-application.c:351
 msgid "Error creating file"
 msgstr "אירעה שגיאה בעת יצירת הקובץ"
 
-#: ../src/screenshot-application.c:349
-#: ../src/screenshot-application.c:415
+#: ../src/screenshot-application.c:362
+#: ../src/screenshot-application.c:428
 msgid "Screenshot taken"
 msgstr "המסך צולם"
 
-#: ../src/screenshot-application.c:383
+#: ../src/screenshot-application.c:396
 msgid "All possible methods failed"
 msgstr "כל השיטות האפשרויות נכשלו"
 
-#: ../src/screenshot-application.c:509
+#: ../src/screenshot-application.c:522
 msgid "Send the grab directly to the clipboard"
 msgstr "שליחת הצילום ישירות ללוח הגזירים"
 
-#: ../src/screenshot-application.c:510
+#: ../src/screenshot-application.c:523
 msgid "Grab a window instead of the entire screen"
 msgstr "Grab a window instead of the entire screen"
 
-#: ../src/screenshot-application.c:511
+#: ../src/screenshot-application.c:524
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Grab an area of the screen instead of the entire screen"
 
-#: ../src/screenshot-application.c:512
+#: ../src/screenshot-application.c:525
 msgid "Include the window border with the screenshot"
 msgstr "Include the window border with the screenshot"
 
-#: ../src/screenshot-application.c:513
+#: ../src/screenshot-application.c:526
 msgid "Remove the window border from the screenshot"
 msgstr "Remove the window border from the screenshot"
 
-#: ../src/screenshot-application.c:514
+#: ../src/screenshot-application.c:527
 msgid "Include the pointer with the screenshot"
 msgstr "הצגת הסמן בצילום המסך"
 
-#: ../src/screenshot-application.c:515
+#: ../src/screenshot-application.c:528
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Take screenshot after specified delay [in seconds]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:515
+#: ../src/screenshot-application.c:528
 #: ../src/screenshot-interactive-dialog.c:409
 msgid "seconds"
 msgstr "שניות"
 
-#: ../src/screenshot-application.c:516
+#: ../src/screenshot-application.c:529
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Effect to add to the border (shadow, border or none)"
 
-#: ../src/screenshot-application.c:516
+#: ../src/screenshot-application.c:529
 msgid "effect"
 msgstr "effect"
 
-#: ../src/screenshot-application.c:517
+#: ../src/screenshot-application.c:530
 msgid "Interactively set options"
 msgstr "Interactively set options"
 
-#: ../src/screenshot-application.c:518
+#: ../src/screenshot-application.c:531
 msgid "Save screenshot directly to this file"
 msgstr "שמירת הצילום ישירות לקובץ זה"
 
-#: ../src/screenshot-application.c:518
+#: ../src/screenshot-application.c:531
 msgid "filename"
 msgstr "שם הקובץ"
 
-#: ../src/screenshot-application.c:532
+#: ../src/screenshot-application.c:545
 msgid "Take a picture of the screen"
 msgstr "Take a picture of the screen"
 
-#: ../src/screenshot-application.c:670
+#: ../src/screenshot-application.c:683
 msgid "translator-credits"
 msgstr "ירון שהרבני <sh.yaron@gmail.com>"
 
@@ -248,21 +248,21 @@ msgstr "Conflicting options: --window and --area should not be used at the same 
 msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
 msgstr "Conflicting options: --area and --delay should not be used at the same time.\n"
 
-#: ../src/screenshot-dialog.c:173
+#: ../src/screenshot-dialog.c:172
 msgid "Save Screenshot"
 msgstr "שמירת צילום המסך"
 
-#: ../src/screenshot-dialog.c:189
+#: ../src/screenshot-dialog.c:188
 msgid "Select a folder"
 msgstr "בחירת תיקייה"
 
-#: ../src/screenshot-dialog.c:286
+#: ../src/screenshot-dialog.c:285
 msgid "Screenshot.png"
 msgstr "צילום מסך.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:133
+#: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
 msgstr "צילום מסך מ־%s.png"
@@ -270,7 +270,7 @@ msgstr "צילום מסך מ־%s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:140
+#: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
 msgstr "צילום מסך מ־%s - %d.png"
@@ -317,7 +317,7 @@ msgstr "בחירת _אזור ללכידה"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-msgid "Grab _after a delay of"
+msgid "Grab after a _delay of"
 msgstr "צילום לאחר ה_שהייה של"
 
 #: ../src/screenshot-interactive-dialog.c:435
