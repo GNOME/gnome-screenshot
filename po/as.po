@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: as\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-09 21:44+0000\n"
-"PO-Revision-Date: 2012-08-10 14:29+0530\n"
+"POT-Creation-Date: 2012-08-19 22:43+0000\n"
+"PO-Revision-Date: 2012-08-27 14:40+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: as_IN <kde-i18n-doc@kde.org>\n"
+"Language: as\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: as\n"
 "Plural-Forms: nplurals=2; plural=(n!=1)\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -232,7 +232,8 @@ msgstr "পৰ্দাৰ এটা ছবি লওক"
 #: ../src/screenshot-application.c:683
 msgid "translator-credits"
 msgstr ""
-"অমিতাক্ষ ফুকন (aphukan@fedoraproject.org), নীলমদ্যুতি গোস্বামী (ngoswami@redhat.com)"
+"অমিতাক্ষ ফুকন (aphukan@fedoraproject.org), নীলমদ্যুতি গোস্বামী (ngoswami@redhat."
+"com)"
 
 #: ../src/screenshot-config.c:56
 #, c-format
@@ -318,8 +319,9 @@ msgstr "অন্তৰ্ভুক্ত কৰিবলে অংশ বাছ
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-msgid "Grab _after a delay of"
-msgstr "এটা বিলম্বৰ পিছত অন্তৰ্ভুক্ত কৰক (_a)"
+#| msgid "Grab _after a delay of"
+msgid "Grab after a _delay of"
+msgstr "এটা বিলম্বৰ পিছত অন্তৰ্ভুক্ত কৰক (_d)"
 
 #: ../src/screenshot-interactive-dialog.c:435
 #: ../src/screenshot-interactive-dialog.c:453
