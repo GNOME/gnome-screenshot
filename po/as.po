@@ -140,11 +140,11 @@ msgstr ""
 #: ../src/screenshot-application.c:142
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "\"%s\" নামৰ এটা নথিপত্ৰ \"%s\" ত ইতিমধ্যে অস্তিত্ববান"
+msgstr "\"%s\" নামৰ এটা ফাইল \"%s\" ত ইতিমধ্যে অস্তিত্ববান"
 
 #: ../src/screenshot-application.c:149
 msgid "Overwrite existing file?"
-msgstr "স্থায়ী নথিপত্ৰ পুনৰলিখিব নে?"
+msgstr "স্থায়ী ফাইল পুনৰলিখিব নে?"
 
 #: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
 #: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
@@ -159,7 +159,7 @@ msgstr ""
 
 #: ../src/screenshot-application.c:351
 msgid "Error creating file"
-msgstr "নথিপত্ৰ সৃষ্টি কৰোতে ত্ৰুটি"
+msgstr "ফাইল সৃষ্টি কৰোতে ত্ৰুটি"
 
 #: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
 msgid "Screenshot taken"
@@ -219,11 +219,11 @@ msgstr "ভাৱবিনিময়ীভাৱে বিকল্পসমূ�
 
 #: ../src/screenshot-application.c:531
 msgid "Save screenshot directly to this file"
-msgstr "স্ক্ৰিনশ্বটক এই নথিপত্ৰত প্ৰত্যক্ষভাৱে সংৰক্ষণ কৰক"
+msgstr "স্ক্ৰিনশ্বটক এই ফাইলত প্ৰত্যক্ষভাৱে সংৰক্ষণ কৰক"
 
 #: ../src/screenshot-application.c:531
 msgid "filename"
-msgstr "নথিপত্ৰনাম"
+msgstr "ফাইলনাম"
 
 #: ../src/screenshot-application.c:545
 msgid "Take a picture of the screen"
@@ -344,7 +344,7 @@ msgstr "সহায় পৃষ্ঠা ল'ড কৰোতে ত্ৰুট�
 #~ "UI definition file for the screenshot program is missing.\n"
 #~ "Please check your installation of gnome-utils"
 #~ msgstr ""
-#~ "স্ক্ৰিনশ্বট প্ৰগ্ৰামৰ বাবে আৱশ্যক UI বিৱৰণ নথিপত্ৰ উপস্থিত নাই।\n"
+#~ "স্ক্ৰিনশ্বট প্ৰগ্ৰামৰ বাবে আৱশ্যক UI বিৱৰণ ফাইল উপস্থিত নাই।\n"
 #~ " অনুগ্ৰহ কৰি আপোনাৰ gnome-utils ইনস্টলেষণ পৰীক্ষা কৰক"
 
 #~ msgid "Error while saving screenshot"
