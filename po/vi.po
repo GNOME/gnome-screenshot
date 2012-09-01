@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2012-08-19 22:43+0000\n"
-"PO-Revision-Date: 2012-09-01 22:08+0700\n"
+"PO-Revision-Date: 2012-09-01 22:09+0700\n"
 "Last-Translator: Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "Language: vi\n"
@@ -315,7 +315,6 @@ msgstr "Chọn _vùng cần chụp"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-#, fuzzy
 #| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
 msgstr "Chụp _sau khi chờ"
