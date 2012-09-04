@@ -13,18 +13,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-07-05 12:42+0000\n"
-"PO-Revision-Date: 2012-07-27 13:10+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-04 15:26+0200\n"
+"PO-Revision-Date: 2012-09-04 15:27+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
-"Language-Team: Magyar <gnome-hu-list at gnome dot org>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
@@ -104,8 +103,7 @@ msgstr "Utolsó mentés könyvtára"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr ""
-"Az interaktív módban utoljára képernyőkép mentéséhez használt könyvtár."
+msgstr "Az interaktív módban utoljára képernyőkép mentéséhez használt könyvtár."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -329,8 +327,8 @@ msgstr "_Terület kiválasztása"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-msgid "Grab _after a delay of"
-msgstr "Késl_eltetés:"
+msgid "Grab after a _delay of"
+msgstr "Ennyi késl_eltetés után:"
 
 #: ../src/screenshot-interactive-dialog.c:435
 #: ../src/screenshot-interactive-dialog.c:453
@@ -349,12 +347,3 @@ msgstr "_Felvétel"
 msgid "Error loading the help page"
 msgstr "Hiba a súgóoldal betöltése közben"
 
-#~ msgid ""
-#~ "UI definition file for the screenshot program is missing.\n"
-#~ "Please check your installation of gnome-utils"
-#~ msgstr ""
-#~ "A képernyőkép-készítő program felületfájlja hiányzik.\n"
-#~ "Ellenőrizze a gnome-utils telepítését."
-
-#~ msgid "Error while saving screenshot"
-#~ msgstr "Hiba történt a képernyőkép mentésekor"
