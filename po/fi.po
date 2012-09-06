@@ -4,6 +4,9 @@
 #
 # days = päivää sitten, ks. konteksti
 #
+# Gnome 2012-03 Finnish translation sprint participants:
+# Jiri Grönroos
+# Niklas Laxström
 # Tuomas Merilä <tuomas@merila.org>, 1999.
 # Antti Ahvensalmi <aahven@mbnet.fi>, 2000.
 # Lauri Nurmi <lanurmi@iki.fi>, 2003.
@@ -12,59 +15,68 @@
 # Timo Jyrinki <timo.jyrinki@iki.fi>, 2008.
 # Tommi Vainikainen <thv@iki.fi>, 2009-2011.
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2012.
-# Gnome 2012-03 Finnish translation sprint participants:
-# Jiri Grönroos
-# Niklas Laxström
 msgid ""
 msgstr ""
-""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-25 00:17+0000\n"
-"PO-Revision-Date: 2012-03-12 09:05:02+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-08-19 22:43+0000\n"
+"PO-Revision-Date: 2012-09-04 17:51+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: MediaWiki 1.20alpha (r113129); Translate 2012-03-02\n"
+"X-Generator: Lokalize 1.5\n"
 "X-POT-Import-Date: 2012-03-05 14:46:16+0000\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "Kuvakaappaus"
 
-#: ../src/gnome-screenshot.desktop.in.h:2
-msgid "Save images of your desktop or individual windows"
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
+#| msgid "Save images of your desktop or individual windows"
+msgid "Save images of your screen or individual windows"
 msgstr "Tallenna kuvia työpöydästä tai yksittäisistä ikkunoista"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the whole screen"
+#| msgid "Take a screenshot of the whole screen"
+msgid "Take a Screenshot of the Whole Screen"
 msgstr "Ota kuvakaappaus koko näytön sisällöstä"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-msgid "Take a screenshot of the current window"
+#| msgid "Take a screenshot of the current window"
+msgid "Take a Screenshot of the Current Window"
 msgstr "Ota kuvakaappaus nykyisestä ikkunasta"
 
-#: ../src/gnome-screenshot.ui.h:1
-msgid "Save Screenshot"
-msgstr "Tallenna kuvakaappaus"
+#: ../src/screenshot-app-menu.ui.h:1
+#| msgid "Screenshot"
+msgid "About Screenshot"
+msgstr "Tietoja kuvakaappauksesta"
 
-#: ../src/gnome-screenshot.ui.h:2
+#: ../src/screenshot-app-menu.ui.h:2
+msgid "Help"
+msgstr "Ohje"
+
+#: ../src/screenshot-app-menu.ui.h:3
+msgid "Quit"
+msgstr "Lopeta"
+
+#: ../src/screenshot-dialog.ui.h:1
 msgid "C_opy to Clipboard"
 msgstr "_Kopioi leikepöydälle"
 
-#: ../src/gnome-screenshot.ui.h:3
+#: ../src/screenshot-dialog.ui.h:2
 msgid "_Name:"
 msgstr "_Nimi:"
 
-#: ../src/gnome-screenshot.ui.h:4
+#: ../src/screenshot-dialog.ui.h:3
 msgid "Save in _folder:"
 msgstr "Tallenna _kansioon:"
 
-#: ../src/gnome-screenshot.ui.h:5
+#: ../src/screenshot-dialog.ui.h:4
 msgid "*"
 msgstr "×"
 
@@ -73,8 +85,12 @@ msgid "Window-specific screenshot (deprecated)"
 msgstr "Ikkunakohtainen kuvakaappaus (ei enää käytössä)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
-msgstr "Kaappaa vain tämänhetkinen ikkuna koko työpöydän sijasta. Tämä avain on vanhentunut eikä sitä enää käytetä."
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+"Kaappaa vain tämänhetkinen ikkuna koko työpöydän sijasta. Tämä avain on "
+"vanhentunut eikä sitä enää käytetä."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -98,7 +114,9 @@ msgstr "Viimeisin tallennuskansio"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "Viimeisin kansio, johon kuvakaappauksen tallennettiin vuorovaikutteisessa tilassa."
+msgstr ""
+"Viimeisin kansio, johon kuvakaappauksen tallennettiin vuorovaikutteisessa "
+"tilassa."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -129,112 +147,144 @@ msgid "Border Effect"
 msgstr "Reunatehoste"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
-msgstr "Reunojen ulkopuolelle lisättävä tehoste. Mahdollisia arvoja ovat ”shadow” (varjo), ”none” (ei mikään) ja ”border” (reunus)."
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Reunojen ulkopuolelle lisättävä tehoste. Mahdollisia arvoja ovat "
+"”shadow” (varjo), ”none” (ei mikään) ja ”border” (reunus)."
 
-#: ../src/screenshot-application.c:147
+#: ../src/screenshot-application.c:142
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
 msgstr "Tiedosto ”%s” on jo olemassa kansiossa ”%s”."
 
-#: ../src/screenshot-application.c:154
+#: ../src/screenshot-application.c:149
 msgid "Overwrite existing file?"
 msgstr "Korvataanko olemassa oleva tiedosto?"
 
-#: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
-#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
-#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+#: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
 msgid "Unable to capture a screenshot"
 msgstr "Kuvakaappauksen otto epäonnistui"
 
-#: ../src/screenshot-application.c:176
+#: ../src/screenshot-application.c:171
 msgid "Error creating file. Please choose another location and retry."
-msgstr "Virhe luotaessa tiedostoa. Yritä tallentaa uudelleen toiseen sijaintiin."
+msgstr ""
+"Virhe luotaessa tiedostoa. Yritä tallentaa uudelleen toiseen sijaintiin."
 
-#: ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:351
 msgid "Error creating file"
 msgstr "Tiedoston luonti epäonnistui"
 
-#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+#: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
 msgid "Screenshot taken"
 msgstr "Kuvakaappaus otettu"
 
-#: ../src/screenshot-application.c:389
+#: ../src/screenshot-application.c:396
 msgid "All possible methods failed"
 msgstr "Kaikki tavat kuvankaappauksen tuottamiseksi epäonnistuivat"
 
-#: ../src/screenshot-application.c:504
+#: ../src/screenshot-application.c:522
 msgid "Send the grab directly to the clipboard"
 msgstr "Lähetä kaappaus suoraan leikepöydälle"
 
-#: ../src/screenshot-application.c:505
+#: ../src/screenshot-application.c:523
 msgid "Grab a window instead of the entire screen"
 msgstr "Kaappaa kuva ikkunasta koko ruudun sijaan"
 
-#: ../src/screenshot-application.c:506
+#: ../src/screenshot-application.c:524
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Kaappa alue näytöltä koko ruudun sijaan"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:525
 msgid "Include the window border with the screenshot"
 msgstr "Kaappaa myös ikkunan kehykset mukaan kuvaan"
 
-#: ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:526
 msgid "Remove the window border from the screenshot"
 msgstr "Poista ikkunan kehykset kuvakaappauksesta"
 
-#: ../src/screenshot-application.c:509
+#: ../src/screenshot-application.c:527
+#| msgid "Include the pointer in the screenshot"
+msgid "Include the pointer with the screenshot"
+msgstr "Kaappaa myös kohdistin mukaan kuvaan"
+
+#: ../src/screenshot-application.c:528
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Kaappaa kuva annetun viiveen (sekuntia) jälkeen"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
-#: ../src/screenshot-application.c:509
-#: ../src/screenshot-interactive-dialog.c:426
+#.
+#: ../src/screenshot-application.c:528
+#: ../src/screenshot-interactive-dialog.c:409
 msgid "seconds"
 msgstr "sekuntia"
 
-#: ../src/screenshot-application.c:510
+#: ../src/screenshot-application.c:529
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Reunoihin lisättävä tehoste (varjo, reuna tai ei mitään)"
 
-#: ../src/screenshot-application.c:510
+#: ../src/screenshot-application.c:529
 msgid "effect"
 msgstr "tehoste"
 
-#: ../src/screenshot-application.c:511
+#: ../src/screenshot-application.c:530
 msgid "Interactively set options"
 msgstr "Aseta valinnat interaktiivisesti"
 
-#: ../src/screenshot-application.c:525
+#: ../src/screenshot-application.c:531
+#| msgid "Screenshot directory"
+msgid "Save screenshot directly to this file"
+msgstr "Tallenna kuvakaappaus suoraan tähän tiedostoon"
+
+#: ../src/screenshot-application.c:531
+msgid "filename"
+msgstr "tiedostonimi"
+
+#: ../src/screenshot-application.c:545
 msgid "Take a picture of the screen"
 msgstr "Ota kuva näytöstä"
 
-#: ../src/screenshot-config.c:54
+#: ../src/screenshot-application.c:683
+msgid "translator-credits"
+msgstr "Jiri Grönroos"
+
+#: ../src/screenshot-config.c:56
 #, c-format
-msgid "Conflicting options: --window and --area should not be used at the same time.\n"
-msgstr "Ristiriitaiset valitsimet: et voi käyttää valistimia --window ja --area samaan aikaan.\n"
+msgid ""
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
+msgstr ""
+"Ristiriitaiset valitsimet: et voi käyttää valistimia --window ja --area "
+"samaan aikaan.\n"
 
-#: ../src/screenshot-config.c:61
+#: ../src/screenshot-config.c:63
 #, c-format
-msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
-msgstr "Ristiriitaiset valitsimet: valistimia --area ja --delay ei voi käyttääsamaan aikaan.\n"
+msgid ""
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
+msgstr ""
+"Ristiriitaiset valitsimet: valistimia --area ja --delay ei voi käyttääsamaan "
+"aikaan.\n"
 
-#: ../src/screenshot-dialog.c:171
-msgid "UI definition file for the screenshot program is missing.\nPlease check your installation of gnome-utils"
-msgstr "Kuvakaappausohjelman käyttöliittymätiedosto puuttuu.\nTarkista, että gnome-utils on asennettu oikein"
+#: ../src/screenshot-dialog.c:172
+msgid "Save Screenshot"
+msgstr "Tallenna kuvakaappaus"
 
-#: ../src/screenshot-dialog.c:192
+#: ../src/screenshot-dialog.c:188
 msgid "Select a folder"
 msgstr "Valitse kansio"
 
-#: ../src/screenshot-dialog.c:301
+#: ../src/screenshot-dialog.c:285
 msgid "Screenshot.png"
 msgstr "Kuvakaappaus.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:122
+#: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
 msgstr "Kuvakaappaus %s.png"
@@ -242,69 +292,78 @@ msgstr "Kuvakaappaus %s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:129
+#: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
 msgstr "Kuvakaappaus %s - %d.png"
 
-#: ../src/screenshot-interactive-dialog.c:165
+#: ../src/screenshot-interactive-dialog.c:148
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../src/screenshot-interactive-dialog.c:166
+#: ../src/screenshot-interactive-dialog.c:149
 msgid "Drop shadow"
 msgstr "Varjo"
 
-#: ../src/screenshot-interactive-dialog.c:167
+#: ../src/screenshot-interactive-dialog.c:150
 msgid "Border"
 msgstr "Reuna"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:271
+#: ../src/screenshot-interactive-dialog.c:254
 msgid "Include _pointer"
 msgstr "Kaappaa myös _osoitin"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:281
+#: ../src/screenshot-interactive-dialog.c:264
 msgid "Include the window _border"
 msgstr "Kaappaa myös ikkunan _kehys"
 
-#: ../src/screenshot-interactive-dialog.c:298
+#: ../src/screenshot-interactive-dialog.c:281
 msgid "Apply _effect:"
 msgstr "Toteuta _tehoste:"
 
-#: ../src/screenshot-interactive-dialog.c:360
-msgid "Grab the whole _desktop"
-msgstr "Kaappaa koko _työpöytä"
+#: ../src/screenshot-interactive-dialog.c:343
+#| msgid "Grab the whole _desktop"
+msgid "Grab the whole sc_reen"
+msgstr "Kaappaa koko näy_ttö"
 
-#: ../src/screenshot-interactive-dialog.c:374
+#: ../src/screenshot-interactive-dialog.c:357
 msgid "Grab the current _window"
 msgstr "Kaappaa nykyinen _ikkuna"
 
-#: ../src/screenshot-interactive-dialog.c:386
+#: ../src/screenshot-interactive-dialog.c:369
 msgid "Select _area to grab"
 msgstr "Valitse kaapattava _alue"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
-#: ../src/screenshot-interactive-dialog.c:406
-msgid "Grab _after a delay of"
-msgstr "Kaappaa _viiveellä"
+#.
+#: ../src/screenshot-interactive-dialog.c:389
+#| msgid "Grab _after a delay of"
+msgid "Grab after a _delay of"
+msgstr "Kaappauksen _viive"
 
-#: ../src/screenshot-interactive-dialog.c:444
-#: ../src/screenshot-interactive-dialog.c:452
+#: ../src/screenshot-interactive-dialog.c:435
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Take Screenshot"
 msgstr "Ota kuvakaappaus"
 
-#: ../src/screenshot-interactive-dialog.c:453
+#: ../src/screenshot-interactive-dialog.c:454
 msgid "Effects"
 msgstr "Tehosteet"
 
-#: ../src/screenshot-interactive-dialog.c:458
+#: ../src/screenshot-interactive-dialog.c:457
 msgid "Take _Screenshot"
 msgstr "Ota _kuvakaappaus"
 
-#: ../src/screenshot-utils.c:723
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Virhe ladattaessa ohjetta"
 
+#~ msgid ""
+#~ "UI definition file for the screenshot program is missing.\n"
+#~ "Please check your installation of gnome-utils"
+#~ msgstr ""
+#~ "Kuvakaappausohjelman käyttöliittymätiedosto puuttuu.\n"
+#~ "Tarkista, että gnome-utils on asennettu oikein"
