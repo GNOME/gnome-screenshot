@@ -1,17 +1,18 @@
 # Thai translation for gnome-utils.
-# Copyright (C) 2004-2011 Free Software Foundation, Inc.
+# Copyright (C) 2004-2012 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-utils package.
 # Khunti Yeesoon <sc445138@bucc3.buu.ac.th>, 2003.
 # Paisa Seeluangsawat <paisa@users.sf.net>, 2004.
 # Supranee Thirawatthanasuk <supranee@opentle.org>, 2004.
-# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2011.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:34-0400\n"
-"PO-Revision-Date: 2011-09-18 14:16+0700\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-08-19 22:43+0000\n"
+"PO-Revision-Date: 2012-09-11 10:37+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -20,119 +21,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr "เกิดข้อผิดพลาดขณะบันทึกภาพหน้าจอ"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-"ไม่สามารถบันทึกภาพหน้าจอลงใน %s\n"
-" ข้อผิดพลาดคือ %s\n"
-" กรุณาเลือกแหล่งเก็บอื่นแล้วลองใหม่"
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "จับภาพหน้าจอเสร็จแล้ว"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr "จับภาพหน้าต่างปัจจุบันไม่สำเร็จ"
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr "ส่งภาพที่จับได้ตรงไปที่คลิปบอร์ด"
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr "จับภาพเฉพาะหน้าต่างหนึ่งแทนที่จะจับทั้งจอ"
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr "จับภาพเฉพาะพื้นที่หนึ่งบนหน้าจอแทนที่จะจับทั้งจอ"
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr "จับภาพกรอบหน้าต่างด้วย"
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr "ลบกรอบหน้าต่างออกจากภาพที่จับ"
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr "หน่วงเวลา [เป็นวินาที] ก่อนจับภาพ"
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "วินาที"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "เอฟเฟกต์ที่จะเพิ่มให้กับกรอบ (เงา, กรอบ หรือไม่มี)"
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "เอฟเฟกต์"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr "กำหนดตัวเลือกแบบโต้ตอบ"
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "จับภาพหน้าจอ"
-
-#: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "บันทึกภาพของเดสก์ท็อปหรือหน้าต่างที่กำหนด"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "จับภาพหน้าจอ"
 
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
+msgid "Save images of your screen or individual windows"
+msgstr "บันทึกภาพของหน้าจอหรือหน้าต่างที่กำหนด"
+
 #: ../src/gnome-screenshot.desktop.in.h:3
-#, fuzzy
-msgid "Take a screenshot of the current window"
-msgstr "จับภาพหน้าต่างปัจจุบันไม่สำเร็จ"
+msgid "Take a Screenshot of the Whole Screen"
+msgstr "จับภาพหน้าจอทั้งหน้า"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-#, fuzzy
-msgid "Take a screenshot of the whole screen"
-msgstr "จับภาพหน้าจอ"
+msgid "Take a Screenshot of the Current Window"
+msgstr "จับภาพหน้าต่างปัจจุบัน"
 
-#: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+#: ../src/screenshot-app-menu.ui.h:1
+msgid "About Screenshot"
+msgstr "เกี่ยวกับโปรแกรมจับภาพหน้าจอ"
 
-#: ../src/gnome-screenshot.ui.h:2
+#: ../src/screenshot-app-menu.ui.h:2
+msgid "Help"
+msgstr "วิธีใช้"
+
+#: ../src/screenshot-app-menu.ui.h:3
+msgid "Quit"
+msgstr "ออก"
+
+#: ../src/screenshot-dialog.ui.h:1
 msgid "C_opy to Clipboard"
 msgstr "_คัดลอกไปยังคลิปบอร์ด"
 
-#: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "บันทึกภาพหน้าจอ"
-
-#: ../src/gnome-screenshot.ui.h:4
-msgid "Save in _folder:"
-msgstr "บันทึกในโฟ_ลเดอร์:"
-
-#: ../src/gnome-screenshot.ui.h:5
+#: ../src/screenshot-dialog.ui.h:2
 msgid "_Name:"
 msgstr "_ชื่อ:"
 
+#: ../src/screenshot-dialog.ui.h:3
+msgid "Save in _folder:"
+msgstr "บันทึกในโฟ_ลเดอร์:"
+
+#: ../src/screenshot-dialog.ui.h:4
+msgid "*"
+msgstr "*"
+
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+msgid "Window-specific screenshot (deprecated)"
+msgstr "จับภาพเฉพาะหน้าต่าง (เลิกใช้แล้ว)"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr "จับภาพเฉพาะหน้าต่างปัจจุบัน ไม่ใช่พื้นโต๊ะทั้งหมด คีย์นี้เลิกใช้แล้ว"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+msgid "Screenshot delay"
+msgstr "เวลาหน่วงก่อนจับภาพ"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr "จำนวนวินาทีที่จะหยุดคอยก่อนที่จะจับภาพ"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "โฟลเดอร์เก็บภาพหน้าจอ"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory where the screenshots will be saved by default."
+msgstr "โฟลเดอร์สำหรับเก็บภาพหน้าจอโดยปริยาย"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Last save directory"
+msgstr "โฟลเดอร์ที่เก็บภาพหน้าจอล่าสุด"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "โฟลเดอร์ที่เก็บภาพหน้าจอครั้งล่าสุดในโหมดโต้ตอบ"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "รวมกรอบหน้าต่าง"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "รวมกรอบหน้าต่างในภาพหน้าต่างที่จับด้วย"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "รวมตัวชี้เมาส์"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "รวมตัวชี้เมาส์ในภาพหน้าจอที่จับด้วย"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "รวมโพรไฟล์ ICC"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "รวมโพรไฟล์ ICC ของเป้าหมายที่จับลงในแฟ้มภาพหน้าจอด้วย"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
 msgstr "เอฟเฟกต์กรอบหน้าต่าง"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
@@ -140,159 +135,214 @@ msgstr ""
 "เอฟเฟกต์ที่จะเพิ่มให้กับขอบนอกกรอบหน้าต่าง ค่าที่เป็นไปได้คือ \"shadow\", \"none\", และ "
 "\"border\""
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr "จับภาพเฉพาะหน้าต่างปัจจุบัน ไม่ใช่พื้นโต๊ะทั้งหมด คีย์นี้เลิกใช้แล้ว"
+#: ../src/screenshot-application.c:142
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "มีแฟ้มชื่อ \"%s\" อยู่ก่อนแล้วใน \"%s\""
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "รวมกรอบหน้าต่าง"
+#: ../src/screenshot-application.c:149
+msgid "Overwrite existing file?"
+msgstr "จะเขียนทับแฟ้มที่มีอยู่หรือไม่?"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "รวมโพรไฟล์ ICC"
+#: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
+msgid "Unable to capture a screenshot"
+msgstr "จับภาพหน้าจอไม่สำเร็จ"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "รวมตัวชี้เมาส์"
+#: ../src/screenshot-application.c:171
+msgid "Error creating file. Please choose another location and retry."
+msgstr "เกิดข้อผิดพลาดขณะสร้างแฟ้ม กรุณาเลือกแหล่งเก็บอื่นแล้วลองใหม่"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "รวมโพรไฟล์ ICC ของเป้าหมายที่จับลงในแฟ้มภาพหน้าจอด้วย"
+#: ../src/screenshot-application.c:351
+msgid "Error creating file"
+msgstr "เกิดข้อผิดพลาดขณะสร้างแฟ้ม"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
+#: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
+msgid "Screenshot taken"
+msgstr "จับภาพหน้าจอเสร็จแล้ว"
+
+#: ../src/screenshot-application.c:396
+msgid "All possible methods failed"
+msgstr "ทุกวิธีการล้มเหลวหมด"
+
+#: ../src/screenshot-application.c:522
+msgid "Send the grab directly to the clipboard"
+msgstr "ส่งภาพที่จับได้ตรงไปที่คลิปบอร์ด"
+
+#: ../src/screenshot-application.c:523
+msgid "Grab a window instead of the entire screen"
+msgstr "จับภาพเฉพาะหน้าต่างหนึ่งแทนที่จะจับทั้งจอ"
+
+#: ../src/screenshot-application.c:524
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "จับภาพเฉพาะพื้นที่หนึ่งบนหน้าจอแทนที่จะจับทั้งจอ"
+
+#: ../src/screenshot-application.c:525
+msgid "Include the window border with the screenshot"
+msgstr "จับภาพกรอบหน้าต่างด้วย"
+
+#: ../src/screenshot-application.c:526
+msgid "Remove the window border from the screenshot"
+msgstr "ลบกรอบหน้าต่างออกจากภาพที่จับ"
+
+#: ../src/screenshot-application.c:527
+msgid "Include the pointer with the screenshot"
 msgstr "รวมตัวชี้เมาส์ในภาพหน้าจอที่จับด้วย"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "รวมกรอบหน้าต่างในภาพหน้าต่างที่จับด้วย"
+#: ../src/screenshot-application.c:528
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "หน่วงเวลา [เป็นวินาที] ก่อนจับภาพ"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
-msgid "Screenshot delay"
-msgstr "เวลาหน่วงก่อนจับภาพ"
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:528
+#: ../src/screenshot-interactive-dialog.c:409
+msgid "seconds"
+msgstr "วินาที"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr "โฟลเดอร์เก็บภาพหน้าจอ"
+#: ../src/screenshot-application.c:529
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "เอฟเฟกต์ที่จะเพิ่มให้กับกรอบ (เงา, กรอบ หรือไม่มี)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr "โฟลเดอร์ที่เก็บภาพหน้าจอครั้งล่าสุด"
+#: ../src/screenshot-application.c:529
+msgid "effect"
+msgstr "เอฟเฟกต์"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
-msgid "The number of seconds to wait before taking the screenshot."
-msgstr "จำนวนวินาทีที่จะหยุดคอยก่อนที่จะจับภาพ"
+#: ../src/screenshot-application.c:530
+msgid "Interactively set options"
+msgstr "กำหนดตัวเลือกแบบโต้ตอบ"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr "จับภาพเฉพาะหน้าต่าง (เลิกใช้แล้ว)"
+#: ../src/screenshot-application.c:531
+msgid "Save screenshot directly to this file"
+msgstr "เก็บภาพหน้าจอลงในแฟ้มนี้โดยตรง"
 
-#: ../src/screenshot-config.c:78
+#: ../src/screenshot-application.c:531
+msgid "filename"
+msgstr "ชื่อแฟ้ม"
+
+#: ../src/screenshot-application.c:545
+msgid "Take a picture of the screen"
+msgstr "จับภาพหน้าจอ"
+
+#: ../src/screenshot-application.c:683
+msgid "translator-credits"
+msgstr ""
+"Khunti Yeesoon <sc445138@bucc3.buu.ac.th>\n"
+"Paisa Seeluangsawat <paisa@users.sf.net>\n"
+"Supranee Thirawatthanasuk <supranee@opentle.org>\n"
+"Theppitak Karoonboonyanan <thep@linux.thai.net>"
+
+#: ../src/screenshot-config.c:56
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "ตัวเลือกขัดแย้งกัน: --window และ --area ไม่สามารถใช้พร้อมกันได้\n"
 
-#: ../src/screenshot-config.c:85
-#, fuzzy, c-format
+#: ../src/screenshot-config.c:63
+#, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "ตัวเลือกขัดแย้งกัน: --window และ --area ไม่สามารถใช้พร้อมกันได้\n"
+msgstr "ตัวเลือกขัดแย้งกัน: --area และ --delay ไม่สามารถใช้พร้อมกันได้\n"
 
-#: ../src/screenshot-dialog.c:193
-msgid ""
-"UI definition file for the screenshot program is missing.\n"
-"Please check your installation of gnome-utils"
-msgstr ""
-"แฟ้มโครงแบบส่วนติดต่อผู้ใช้สำหรับโปรแกรมจับภาพหน้าจอขาดหายไป\n"
-"กรุณาตรวจสอบการติดตั้ง gnome-utils ของคุณ"
+#: ../src/screenshot-dialog.c:172
+msgid "Save Screenshot"
+msgstr "บันทึกภาพหน้าจอ"
 
-#: ../src/screenshot-dialog.c:214
+#: ../src/screenshot-dialog.c:188
 msgid "Select a folder"
 msgstr "เลือกโฟลเดอร์"
 
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:285
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:144
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr "Screenshot at %s.png"
+msgid "Screenshot from %s.png"
+msgstr "Screenshot from %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:151
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Screenshot at %s - %d.png"
+msgid "Screenshot from %s - %d.png"
+msgstr "Screenshot from %s - %d.png"
 
-#: ../src/screenshot-interactive-dialog.c:165
+#: ../src/screenshot-interactive-dialog.c:148
 msgid "None"
 msgstr "ไม่มี"
 
-#: ../src/screenshot-interactive-dialog.c:166
+#: ../src/screenshot-interactive-dialog.c:149
 msgid "Drop shadow"
 msgstr "เงาตกกระทบ"
 
-#: ../src/screenshot-interactive-dialog.c:167
+#: ../src/screenshot-interactive-dialog.c:150
 msgid "Border"
 msgstr "กรอบ"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:271
+#: ../src/screenshot-interactive-dialog.c:254
 msgid "Include _pointer"
 msgstr "จับภาพตัว_ชี้เมาส์ด้วย"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:281
+#: ../src/screenshot-interactive-dialog.c:264
 msgid "Include the window _border"
 msgstr "จับภาพ_กรอบหน้าต่างด้วย"
 
-#: ../src/screenshot-interactive-dialog.c:298
+#: ../src/screenshot-interactive-dialog.c:281
 msgid "Apply _effect:"
 msgstr "เพิ่มเ_อฟเฟกต์:"
 
-#: ../src/screenshot-interactive-dialog.c:360
-msgid "Grab the whole _desktop"
-msgstr "จับภาพพื้นโ_ต๊ะทั้งหมด"
+#: ../src/screenshot-interactive-dialog.c:343
+msgid "Grab the whole sc_reen"
+msgstr "จับภาพหน้า_จอทั้งหมด"
 
-#: ../src/screenshot-interactive-dialog.c:374
+#: ../src/screenshot-interactive-dialog.c:357
 msgid "Grab the current _window"
 msgstr "จับภาพห_น้าต่างปัจจุบัน"
 
-#: ../src/screenshot-interactive-dialog.c:386
+#: ../src/screenshot-interactive-dialog.c:369
 msgid "Select _area to grab"
 msgstr "เลือก_พื้นที่ที่จะจับภาพ"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
-msgid "Grab _after a delay of"
-msgstr "จับภาพห_ลังจากรอคอยเป็นเวลา"
+#: ../src/screenshot-interactive-dialog.c:389
+msgid "Grab after a _delay of"
+msgstr "จับภาพหลังจาก_รอคอยเป็นเวลา"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:435
+#: ../src/screenshot-interactive-dialog.c:453
 msgid "Take Screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:454
 msgid "Effects"
 msgstr "เอฟเฟกต์"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:457
 msgid "Take _Screenshot"
 msgstr "บันทึก_ภาพหน้าจอ"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "เกิดข้อผิดพลาดขณะเปิดหน้าแนะนำวิธีใช้"
+
+#~ msgid "Error while saving screenshot"
+#~ msgstr "เกิดข้อผิดพลาดขณะบันทึกภาพหน้าจอ"
+
+#~ msgid ""
+#~ "UI definition file for the screenshot program is missing.\n"
+#~ "Please check your installation of gnome-utils"
+#~ msgstr ""
+#~ "แฟ้มโครงแบบส่วนติดต่อผู้ใช้สำหรับโปรแกรมจับภาพหน้าจอขาดหายไป\n"
+#~ "กรุณาตรวจสอบการติดตั้ง gnome-utils ของคุณ"
