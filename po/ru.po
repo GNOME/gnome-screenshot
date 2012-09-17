@@ -11,29 +11,31 @@
 # Vasiliy Faronov <qvvx@yandex.ru>, 2008.
 # Yuri Kozlov <yuray@komyakino.ru>, 2010.
 # Alexander Saprykin <xelfium@gmail.com>, 2010.
+# Yuri Myasoedov <omerta13@yandex.ru>, 2012.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils trunk\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-24 18:06+0000\n"
-"PO-Revision-Date: 2012-05-27 11:47+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-08-19 22:43+0000\n"
+"PO-Revision-Date: 2012-09-17 16:36+0400\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
-"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"Language-Team: русский <gnome-cyr@gnome.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 "10<=4 && (n%100<10 || n%100>=20) ? 1: 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:667
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "Снимок экрана"
 
-#: ../src/gnome-screenshot.desktop.in.h:2
-#: ../src/screenshot-application.c:668
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
 msgid "Save images of your screen or individual windows"
 msgstr "Сохранить изображения экрана или отдельных окон"
 
@@ -44,22 +46,6 @@ msgstr "Сделать снимок всего экрана"
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Current Window"
 msgstr "Сделать снимок текущего окна"
-
-#: ../src/gnome-screenshot.ui.h:1
-msgid "C_opy to Clipboard"
-msgstr "К_опировать в буфер обмена"
-
-#: ../src/gnome-screenshot.ui.h:2
-msgid "_Name:"
-msgstr "_Имя:"
-
-#: ../src/gnome-screenshot.ui.h:3
-msgid "Save in _folder:"
-msgstr "Сохранить в _папке:"
-
-#: ../src/gnome-screenshot.ui.h:4
-msgid "*"
-msgstr "*"
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "About Screenshot"
@@ -73,13 +59,33 @@ msgstr "Справка"
 msgid "Quit"
 msgstr "Закончить"
 
+#: ../src/screenshot-dialog.ui.h:1
+msgid "C_opy to Clipboard"
+msgstr "К_опировать в буфер обмена"
+
+#: ../src/screenshot-dialog.ui.h:2
+msgid "_Name:"
+msgstr "_Имя:"
+
+#: ../src/screenshot-dialog.ui.h:3
+msgid "Save in _folder:"
+msgstr "Сохранить в _папке:"
+
+#: ../src/screenshot-dialog.ui.h:4
+msgid "*"
+msgstr "*"
+
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Делать снимок текущего окна (устарел)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
-msgstr "Снимать только текущее окно, а не весь рабочий стол. Этот ключ устарел и больше не используется."
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+"Снимать только текущее окно, а не весь рабочий стол. Этот ключ устарел и "
+"больше не используется."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -87,7 +93,9 @@ msgstr "Задержка снимка экрана"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Число секунд, которое будет ожидаться до того, как будет сделан снимок экрана."
+msgstr ""
+"Число секунд, которое будет ожидаться до того, как будет сделан снимок "
+"экрана."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
@@ -103,7 +111,8 @@ msgstr "Последний каталог для сохранения"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "Каталог, в котором последний раз в интерактивном режиме был сохранён снимок."
+msgstr ""
+"Каталог, в котором последний раз в интерактивном режиме был сохранён снимок."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -134,8 +143,12 @@ msgid "Border Effect"
 msgstr "Эффект рамки"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
-msgstr "Эффект, добавляемый вокруг рамки. Возможные варианты: «shadow», «none» и «border»."
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Эффект, добавляемый вокруг рамки. Возможные варианты: «shadow», «none» и "
+"«border»."
 
 #: ../src/screenshot-application.c:142
 #, c-format
@@ -146,123 +159,126 @@ msgstr "Файл с именем «%s» уже существует в «%s»"
 msgid "Overwrite existing file?"
 msgstr "Перезаписать существующий файл?"
 
-#: ../src/screenshot-application.c:170
-#: ../src/screenshot-application.c:179
-#: ../src/screenshot-application.c:337
-#: ../src/screenshot-application.c:341
-#: ../src/screenshot-application.c:382
-#: ../src/screenshot-application.c:385
+#: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
 msgid "Unable to capture a screenshot"
 msgstr "Не удалось сделать снимок экрана"
 
 #: ../src/screenshot-application.c:171
 msgid "Error creating file. Please choose another location and retry."
-msgstr "Ошибка создания файла. Выберите другое местоположение и повторите попытку."
+msgstr ""
+"Ошибка создания файла. Выберите другое местоположение и повторите попытку."
 
-#: ../src/screenshot-application.c:338
+#: ../src/screenshot-application.c:351
 msgid "Error creating file"
 msgstr "Ошибка создания файла"
 
-#: ../src/screenshot-application.c:349
-#: ../src/screenshot-application.c:415
+#: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
 msgid "Screenshot taken"
 msgstr "Cнимок экрана сделан"
 
-#: ../src/screenshot-application.c:383
+#: ../src/screenshot-application.c:396
 msgid "All possible methods failed"
 msgstr "Все доступные методы завершились неудачно"
 
-#: ../src/screenshot-application.c:509
+#: ../src/screenshot-application.c:522
 msgid "Send the grab directly to the clipboard"
 msgstr "Отправить снимок сразу в буфер обмена"
 
-#: ../src/screenshot-application.c:510
+#: ../src/screenshot-application.c:523
 msgid "Grab a window instead of the entire screen"
 msgstr "Захватить снимок окна, а не всего экрана"
 
-#: ../src/screenshot-application.c:511
+#: ../src/screenshot-application.c:524
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Захватить область экрана, а не весь экран"
 
-#: ../src/screenshot-application.c:512
+#: ../src/screenshot-application.c:525
 msgid "Include the window border with the screenshot"
 msgstr "Включить рамку окна в снимок"
 
-#: ../src/screenshot-application.c:513
+#: ../src/screenshot-application.c:526
 msgid "Remove the window border from the screenshot"
 msgstr "Исключить рамку окна из снимка"
 
-#: ../src/screenshot-application.c:514
-#| msgid "Include the pointer in the screenshot"
+#: ../src/screenshot-application.c:527
 msgid "Include the pointer with the screenshot"
 msgstr "Показывать указатель мыши на снимке экрана"
 
-#: ../src/screenshot-application.c:515
+#: ../src/screenshot-application.c:528
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Сделать снимок через указанное время [в секундах]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:515
+#: ../src/screenshot-application.c:528
 #: ../src/screenshot-interactive-dialog.c:409
 msgid "seconds"
 msgstr "секунд"
 
-#: ../src/screenshot-application.c:516
+#: ../src/screenshot-application.c:529
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "Эффект, добавляемый к рамке окна (тень, рамка или никакого)"
 
-#: ../src/screenshot-application.c:516
+#: ../src/screenshot-application.c:529
 msgid "effect"
 msgstr "эффект"
 
-#: ../src/screenshot-application.c:517
+#: ../src/screenshot-application.c:530
 msgid "Interactively set options"
 msgstr "Установить параметры интерактивно"
 
-#: ../src/screenshot-application.c:518
-#| msgid "Screenshot directory"
+#: ../src/screenshot-application.c:531
 msgid "Save screenshot directly to this file"
 msgstr "Сохранить снимок экрана в этот файл"
 
-#: ../src/screenshot-application.c:518
+#: ../src/screenshot-application.c:531
 msgid "filename"
 msgstr "имя_файла"
 
-#: ../src/screenshot-application.c:532
+#: ../src/screenshot-application.c:545
 msgid "Take a picture of the screen"
 msgstr "Сделать снимок экрана"
 
-#: ../src/screenshot-application.c:670
+#: ../src/screenshot-application.c:683
 msgid "translator-credits"
 msgstr "Aleksey Kabanov <ak099@mail.ru>, 2012"
 
 #: ../src/screenshot-config.c:56
 #, c-format
-msgid "Conflicting options: --window and --area should not be used at the same time.\n"
-msgstr "Несовместимые параметры: --window и --area не могут быть использованы одновременно.\n"
+msgid ""
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
+msgstr ""
+"Несовместимые параметры: --window и --area не могут быть использованы "
+"одновременно.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
-msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
-msgstr "Несовместимые параметры: --area и --delay не могут быть использованы одновременно.\n"
+msgid ""
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
+msgstr ""
+"Несовместимые параметры: --area и --delay не могут быть использованы "
+"одновременно.\n"
 
-#: ../src/screenshot-dialog.c:173
+#: ../src/screenshot-dialog.c:172
 msgid "Save Screenshot"
 msgstr "Сохранить снимок экрана"
 
-#: ../src/screenshot-dialog.c:189
+#: ../src/screenshot-dialog.c:188
 msgid "Select a folder"
 msgstr "Выберите папку"
 
-#: ../src/screenshot-dialog.c:286
+#: ../src/screenshot-dialog.c:285
 msgid "Screenshot.png"
 msgstr "Снимок.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:133
+#: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
 msgstr "Снимок экрана от %s.png"
@@ -270,7 +286,7 @@ msgstr "Снимок экрана от %s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:140
+#: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
 msgstr "Снимок экрана от %s - %d.png"
@@ -317,7 +333,8 @@ msgstr "Выбрать _область захвата"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-msgid "Grab _after a delay of"
+#| msgid "Grab _after a delay of"
+msgid "Grab after a _delay of"
 msgstr "Захватить после _задержки"
 
 #: ../src/screenshot-interactive-dialog.c:435
