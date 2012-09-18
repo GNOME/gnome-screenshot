@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-05 08:18+0300\n"
-"PO-Revision-Date: 2012-07-05 08:17+0300\n"
+"POT-Creation-Date: 2012-09-18 22:44+0300\n"
+"PO-Revision-Date: 2012-09-18 22:44+0300\n"
 "Last-Translator: Krasimir Chonov <mk2616@abv.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -336,7 +336,7 @@ msgstr "Избор на _област за заснемане"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-msgid "Grab _after a delay of"
+msgid "Grab after a _delay of"
 msgstr "Снимка _след"
 
 #: ../src/screenshot-interactive-dialog.c:435
