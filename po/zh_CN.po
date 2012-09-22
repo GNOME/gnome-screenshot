@@ -9,21 +9,23 @@
 # chiachen <luojiazhen@gmail.com>, 2011.
 # Aron Xu <happyaron.xu@gmail.com>, 2009, 2011.
 # tuhaihe <wangdianjin@linuxdeepin.com>, 2012.
+# YunQiang Su <wzssyqa@gmail.com>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-19 22:43+0000\n"
-"PO-Revision-Date: 2012-07-28 15:14+0800\n"
-"Last-Translator: PixelNecro <pixelnecro@foxmail.com>\n"
+"POT-Creation-Date: 2012-08-28 14:18+0000\n"
+"PO-Revision-Date: 2012-09-23 04:26+0800\n"
+"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.5\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
@@ -324,10 +326,9 @@ msgstr "选择一个截取区域(_A)"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-#, fuzzy
 #| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
-msgstr "抓取前的延迟(_A)"
+msgstr "抓取前的延迟(_D)"
 
 #: ../src/screenshot-interactive-dialog.c:435
 #: ../src/screenshot-interactive-dialog.c:453
