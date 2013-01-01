@@ -1,6 +1,7 @@
 [Desktop Entry]
 _Name=Screenshot
 _Comment=Save images of your screen or individual windows
+_Keywords=snapshot;capture;print;
 Exec=gnome-screenshot --interactive
 Terminal=false
 Type=Application
