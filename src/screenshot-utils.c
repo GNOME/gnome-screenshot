@@ -632,9 +632,9 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
 
   connection = g_application_get_dbus_connection (g_application_get_default ());
   g_dbus_connection_call_sync (connection,
-                               "org.gnome.Shell",
-                               "/org/gnome/Shell",
-                               "org.gnome.Shell",
+                               "org.gnome.Shell.Screenshot",
+                               "/org/gnome/Shell/Screenshot",
+                               "org.gnome.Shell.Screenshot",
                                method_name,
                                method_params,
                                NULL,
