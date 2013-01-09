@@ -1,20 +1,20 @@
-# Bulgarian translation of gnome-utils po-file.
+# Bulgarian translation of gnome-screenshot po-file.
 # Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
-# Copyright (C) 2009, 2010, 2011, 2012 Free Software Foundation, Inc.
+# Copyright (C) 2009, 2010, 2011, 2012, 2013 Free Software Foundation, Inc.
 # Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>, 2002.
 # Vladimir Petkov <kaladan@gmail.com>, 2004, 2005.
 # Peter Slavov <pslavov@i-space.org>, 2004.
 # Yavor Doganov <yavor@doganov.org>, 2005.
 # Rostislav Raykov <zbrox@i-space.org>, 2006.
-# Alexander Shopov <ash@kambanaria.org>, 2006, 2007, 2008, 2009, 2011, 2012.
+# Alexander Shopov <ash@kambanaria.org>, 2006, 2007, 2008, 2009, 2011, 2012, 2013.
 # Krasimir Chonov <mk2616@abv.bg>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils master\n"
+"Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-18 22:44+0300\n"
-"PO-Revision-Date: 2012-09-18 22:44+0300\n"
+"POT-Creation-Date: 2013-01-09 07:07+0200\n"
+"PO-Revision-Date: 2013-01-09 07:07+0200\n"
 "Last-Translator: Krasimir Chonov <mk2616@abv.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -32,10 +32,14 @@ msgid "Save images of your screen or individual windows"
 msgstr "Запазване на снимки на екрана или индивидуални прозорци"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "снимка;екран;печат;snapshot;capture;print;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Снимка на целия екран"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Снимка на текущия прозорец"
 
