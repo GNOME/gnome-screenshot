@@ -38,8 +38,6 @@ main (int argc, char *argv[])
   gint result;
   ScreenshotApplication *app;
 
-  g_type_init ();
-
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
