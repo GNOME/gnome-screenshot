@@ -1,3 +1,11 @@
+GNOME Screenshot 3.7.4 - 14th January 2013
+==========================================
+
+- Use the new Shell DBus interface name
+- Add keywords to the desktop file
+- Don't call g_type_init(), depends on GLib 2.35
+- Translation updates
+
 GNOME Screenshot 3.6.0 - 24th September 2012
 =============================================
 
