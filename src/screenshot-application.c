@@ -457,10 +457,17 @@ rectangle_found_cb (GdkRectangle *rectangle,
   ScreenshotApplication *self = user_data;
 
   if (rectangle != NULL)
-    finish_prepare_screenshot (self, rectangle);
+    {
+      finish_prepare_screenshot (self, rectangle);
+    }
   else
-    /* user dismissed the rectangle with Esc, no error; just quit */
-    g_application_release (G_APPLICATION (self));
+    {
+      /* user dismissed the area selection, possibly show the dialog again */
+      g_application_release (G_APPLICATION (self));
+
+      if (screenshot_config->interactive)
+        screenshot_show_interactive_dialog (self);
+    }
 }
 
 static gboolean
