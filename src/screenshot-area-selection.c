@@ -115,7 +115,10 @@ select_area_button_release (GtkWidget               *window,
   data->rect.height = ABS (data->rect.y - event->y_root);
   data->rect.x = MIN (data->rect.x, event->x_root);
   data->rect.y = MIN (data->rect.y, event->y_root);
-  
+
+  if (data->rect.width == 0 || data->rect.height == 0)
+    data->aborted = TRUE;
+
   gtk_main_quit ();
 
   return TRUE;
