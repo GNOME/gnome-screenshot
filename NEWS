@@ -1,3 +1,10 @@
+GNOME Screenshot 3.7.5 - 6th February 2013
+==========================================
+
+- Show interactive dialog again when the area selection is cancelled
+- Don't crash when the selected area rectangle is 0x0
+- Translation updates
+
 GNOME Screenshot 3.7.4 - 14th January 2013
 ==========================================
 
