@@ -16,15 +16,15 @@
 # Lucas Lommer <llommer@svn.gnome.org>, 2009 (just a small fix).
 # Adrian Guniš <andygun696@gmail.com>, 2008, 2009, 2010.
 # Jan Turoň <turon.honza@gmail.com>, 2011.
-# Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011, 2012.
+# Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-19 22:43+0000\n"
-"PO-Revision-Date: 2012-09-08 14:31+0200\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-02-18 10:05+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
@@ -43,10 +43,14 @@ msgid "Save images of your screen or individual windows"
 msgstr "Uložit obrázky pracovní plochy nebo konkrétních oken"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "snímek;zachytit;tisk;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Zachytit snímek celé obrazovky"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Zachytit snímek aktuálního okna"
 
