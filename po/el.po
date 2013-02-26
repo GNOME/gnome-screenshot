@@ -27,21 +27,23 @@
 # Nikos: 19Feb2004 update translation
 # Kostas: 14Jan2006 update for 2.14
 # Simos Xenitellis <simos.lists@googlemail.com>, 2010.
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.gnome-2-26\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-25 23:14+0000\n"
-"PO-Revision-Date: 2012-10-23 02:27+0200\n"
-"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-02-26 09:22+0300\n"
+"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
 "Language-Team: team@gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.6.1\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
@@ -52,10 +54,14 @@ msgid "Save images of your screen or individual windows"
 msgstr "Αποθηκεύστε εικόνες της επιφ. εργασίας σας ή ξεχωριστών παραθύρων"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "στιγμιότυπο;λήψη;εκτύπωση;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Λήψη στιγμιότυπου ολόκληρης της οθόνης"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Λήψη στιγμιότυπου του τρέχοντος παραθύρου"
 
@@ -105,7 +111,7 @@ msgstr "Καθυστέρηση στιγμιότυπου οθόνης"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Ο αριθμός των δευτερολέπτων αναμονής πριν τη λήψη στιγμιότυπου οθόνης"
+msgstr "Ο αριθμός των δευτερολέπτων αναμονής πριν τη λήψη στιγμιότυπου οθόνης."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
@@ -161,13 +167,13 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"Εφέ για προσθήκη στο εξωτερικό του περιγράμματος. Πιθανές τιμές είναι  "
-"\"shadow\", \"none\", και \"border\"."
+"Εφέ για προσθήκη στο εξωτερικό του περιγράμματος. Πιθανές τιμές είναι "
+"\"σκιά\", \"κανένα\", και \"περίγραμμα\"."
 
 #: ../src/screenshot-application.c:142
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "Υπάρχει ήδη ένα αρχείο με όνομα \"%s\"  στο \"%s\""
+msgstr "Υπάρχει ήδη ένα αρχείο με όνομα \"%s\" στο \"%s\""
 
 #: ../src/screenshot-application.c:149
 msgid "Overwrite existing file?"
@@ -195,7 +201,7 @@ msgstr "Λήφθηκε στιγμιότυπο οθόνης"
 
 #: ../src/screenshot-application.c:396
 msgid "All possible methods failed"
-msgstr "Απέτυχαν όλοι οι πιθανοί μέθοδοι "
+msgstr "Απέτυχαν όλοι οι πιθανοί μέθοδοι"
 
 #: ../src/screenshot-application.c:522
 msgid "Send the grab directly to the clipboard"
@@ -224,8 +230,8 @@ msgstr "Να συμπεριλαμβάνεται ο δρομέας στο στι�
 #: ../src/screenshot-application.c:528
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr ""
-"Λήψη στιγμιότυπου οθόνης μετά από μια καθορισμένη καθυστέρηση (σε "
-"δευτερόλεπτα)"
+"Λήψη στιγμιότυπου οθόνης μετά από μια καθορισμένη καθυστέρηση [σε "
+"δευτερόλεπτα]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -237,7 +243,7 @@ msgstr "δευτερολέπτων"
 
 #: ../src/screenshot-application.c:529
 msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Εφέ για προσθήκη στο περίγραμμα  (σκιά, περίγραμμα ή κανένα)"
+msgstr "Εφέ για προσθήκη στο περίγραμμα (σκιά, περίγραμμα ή κανένα)"
 
 #: ../src/screenshot-application.c:529
 msgid "effect"
@@ -263,8 +269,9 @@ msgstr "Λήψη φωτογραφίας της οθόνης"
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα Gnome\n"
-" Φώτης Τσάμης <ftsamis@gmail.com>, 2009\n"
-" Θάνος Τρυφωνίδης <tomtryf@gmail.com>, 2012\n"
+" Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
+" Φώτης Τσάμης <ftsamis@gmail.com>\n"
+" Θάνος Τρυφωνίδης <tomtryf@gmail.com>\n"
 "\n"
 "Για περισσότερα δείτε http://www.gnome.gr/"
 
@@ -273,8 +280,7 @@ msgstr ""
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr ""
-"Συγκρουόμενες επιλογές: Τα --windows και --area δεν πρέπει να "
+msgstr "Συγκρουόμενες επιλογές: Τα --windows και --area δεν πρέπει να "
 "χρησιμοποιούνται την ίδια στιγμή.\n"
 
 #: ../src/screenshot-config.c:63
@@ -356,7 +362,7 @@ msgstr "Επιλογή _περιοχής για λήψη"
 #.
 #: ../src/screenshot-interactive-dialog.c:389
 msgid "Grab after a _delay of"
-msgstr "Λήψη μετά από κ_αθυστέρηση "
+msgstr "Λήψη μετά από κ_αθυστέρηση"
 
 #: ../src/screenshot-interactive-dialog.c:435
 #: ../src/screenshot-interactive-dialog.c:453
