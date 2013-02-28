@@ -1,16 +1,16 @@
 # translation of gnome-utils.master.gu.po to Gujarati
 # Ankit Patel <ankit644@yahoo.com>, 2005, 2006.
 # Ankit Patel <ankit@redhat.com>, 2005, 2007, 2009.
-# Sweta Kothari <swkothar@redhat.com>, 2009, 2012.
+# Sweta Kothari <swkothar@redhat.com>, 2009, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-19 22:43+0000\n"
-"PO-Revision-Date: 2012-09-14 16:12+0530\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-02-28 12:40+0530\n"
 "Last-Translator: \n"
-"Language-Team: gu_IN <kde-i18n-doc@kde.org>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,10 +55,14 @@ msgid "Save images of your screen or individual windows"
 msgstr "તમારા સ્ક્રીન અથવા વ્યક્તિગત વિન્ડોના ચિત્રો સંગ્રહો"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "સ્નેપશોટ; કેપ્ચર; પ્રિન્ટ;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "આખી સ્ક્રીનનો સ્ક્રીનશોટ લો"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "વર્તમાન વિન્ડોના સ્ક્રીનશોટને લો"
 
@@ -340,7 +344,6 @@ msgstr "લેવા માટે વિસ્તારને પસંદ ક�
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-#| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
 msgstr "ના વિલંબ પછી મેળવો (_d)"
 
