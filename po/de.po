@@ -12,7 +12,7 @@
 # Jochen Skulj <jochen@jochenskulj.de>, 2008.
 # Hendrik Richter <hendrikr@gnome.org>, 2004, 2005, 2006, 2007, 2008, 2009.
 # Nathan-J. Hirschauer <nathanhirschauer@verfriemelt.org>, 2009.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2009, 2011, 2012.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2009, 2011-2013.
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2011, 2012.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2011.
 # Christian Kirbach <Christian.Kirbach@gmail.com>, 2009, 2011, 2012.
@@ -21,10 +21,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-02 11:33+0000\n"
-"PO-Revision-Date: 2012-09-07 09:52+0100\n"
-"Last-Translator: Christian Kirbach <Christian.Kirbach@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-03-04 09:44+0100\n"
+"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -32,22 +33,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 2.91.5\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:680
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "Bildschirmfoto"
 
-#: ../src/gnome-screenshot.desktop.in.h:2
-#: ../src/screenshot-application.c:681
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
 msgid "Save images of your screen or individual windows"
 msgstr "Bildschirmfotos Ihres Bildschirms oder einzelner Fenster speichern"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "Bildschirmfoto;Aufnahme;Druck;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Ein Bildschirmfoto des gesamten Bildschirms aufnehmen"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Ein Bildschirmfoto des aktuellen Fensters aufnehmen"
 
@@ -84,8 +89,12 @@ msgid "Window-specific screenshot (deprecated)"
 msgstr "Fensterbezogenes Bildschirmfoto (veraltet)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
-msgstr "Nur das aktuelle Fenster statt der ganzen Arbeitsfläche aufnehmen. Dieser Schlüssel ist veraltet und wird nicht mehr verwendet."
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+"Nur das aktuelle Fenster statt der ganzen Arbeitsfläche aufnehmen. Dieser "
+"Schlüssel ist veraltet und wird nicht mehr verwendet."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -93,7 +102,9 @@ msgstr "Aufnahmeverzögerung"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Die Anzahl der Sekunden, die bis zur Aufnahme des Bildschirmfotos gewartet wird."
+msgstr ""
+"Die Anzahl der Sekunden, die bis zur Aufnahme des Bildschirmfotos gewartet "
+"wird."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
@@ -117,7 +128,8 @@ msgstr "Rahmen einbeziehen"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
 msgid "Include the window manager border along with the screenshot"
-msgstr "Bezieht den Fensterrahmen des Fenster-Managers mit in das Bildschirmfoto ein"
+msgstr ""
+"Bezieht den Fensterrahmen des Fenster-Managers mit in das Bildschirmfoto ein"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Include Pointer"
@@ -140,8 +152,13 @@ msgid "Border Effect"
 msgstr "Rahmeneffekt"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
-msgstr "Der Effekt der auf die Außenseite des Fensterrahmens angewendet wird. Mögliche Werte sind »shadow« (Schatten), »none« (kein Effekt) und »border«(Rahmen)."
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Der Effekt der auf die Außenseite des Fensterrahmens angewendet wird. "
+"Mögliche Werte sind »shadow« (Schatten), »none« (kein Effekt) und "
+"»border«(Rahmen)."
 
 #: ../src/screenshot-application.c:142
 #, c-format
@@ -152,25 +169,23 @@ msgstr "Eine Datei mit dem Namen »%s« existiert bereits in »%s«"
 msgid "Overwrite existing file?"
 msgstr "Vorhandene Datei überschreiben?"
 
-#: ../src/screenshot-application.c:170
-#: ../src/screenshot-application.c:179
-#: ../src/screenshot-application.c:350
-#: ../src/screenshot-application.c:354
-#: ../src/screenshot-application.c:395
-#: ../src/screenshot-application.c:398
+#: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
+#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
 msgid "Unable to capture a screenshot"
 msgstr "Es war nicht möglich, ein Bildschirmfoto aufzunehmen."
 
 #: ../src/screenshot-application.c:171
 msgid "Error creating file. Please choose another location and retry."
-msgstr "Es ist ein Fehler beim Erstellen der Datei aufgetreten. Bitte wählen Sie einen anderen Ordner und versuchen Sie es erneut."
+msgstr ""
+"Es ist ein Fehler beim Erstellen der Datei aufgetreten. Bitte wählen Sie "
+"einen anderen Ordner und versuchen Sie es erneut."
 
 #: ../src/screenshot-application.c:351
 msgid "Error creating file"
 msgstr "Fehler beim Erstellen der Datei"
 
-#: ../src/screenshot-application.c:362
-#: ../src/screenshot-application.c:428
+#: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
 msgid "Screenshot taken"
 msgstr "Aufgenommenes Bildschirmfoto"
 
@@ -204,7 +219,8 @@ msgstr "Den Zeiger mit in das Bildschirmfoto aufnehmen"
 
 #: ../src/screenshot-application.c:528
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Ein Bildschirmfoto erst nach der angegebenen zeit aufnehmen [in Sekunden]"
+msgstr ""
+"Ein Bildschirmfoto erst nach der angegebenen zeit aufnehmen [in Sekunden]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -216,7 +232,9 @@ msgstr "Sekunden"
 
 #: ../src/screenshot-application.c:529
 msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Der Effekt (Schatten, Rahmen oder keiner), der auf den Fensterrahmen angewendet werden soll"
+msgstr ""
+"Der Effekt (Schatten, Rahmen oder keiner), der auf den Fensterrahmen "
+"angewendet werden soll"
 
 #: ../src/screenshot-application.c:529
 msgid "effect"
@@ -244,13 +262,20 @@ msgstr "Tobias Endrigkeit, tobiasendrigkeit@gmail.com"
 
 #: ../src/screenshot-config.c:56
 #, c-format
-msgid "Conflicting options: --window and --area should not be used at the same time.\n"
-msgstr "Optionen im Konflikt: »--window« und »--area« können nicht gleichzeitig verwendet werden.\n"
+msgid ""
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
+msgstr ""
+"Optionen im Konflikt: »--window« und »--area« können nicht gleichzeitig "
+"verwendet werden.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
-msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
-msgstr "Optionen im Konflikt: »--area« und »--delay« können nicht gleichzeitig verwendet werden.\n"
+msgid ""
+"Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr ""
+"Optionen im Konflikt: »--area« und »--delay« können nicht gleichzeitig "
+"verwendet werden.\n"
 
 #: ../src/screenshot-dialog.c:172
 msgid "Save Screenshot"
@@ -342,13 +367,3 @@ msgstr "Bildschirmfoto _aufnehmen"
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Fehler beim Laden der Hilfe"
-
-#~ msgid ""
-#~ "UI definition file for the screenshot program is missing.\n"
-#~ "Please check your installation of gnome-utils"
-#~ msgstr ""
-#~ "Die Benutzeroberflächendatei des Bildschirmfotoprogramms fehlt.\n"
-#~ "Bitte überprüfen Sie Ihre Installation von »gnome-utils«."
-
-#~ msgid "Error while saving screenshot"
-#~ msgstr "Fehler beim Speichern des Bildschirmfotos"
