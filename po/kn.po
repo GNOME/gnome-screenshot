@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Shankar Prasad <svenkate@redhat.com>, 2008, 2009, 2012.
+# Shankar Prasad <svenkate@redhat.com>, 2008, 2009, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-10-14 17:48+0000\n"
-"PO-Revision-Date: 2012-11-30 17:19+0530\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-03-22 17:41+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
 "Language: kn\n"
@@ -24,15 +24,18 @@ msgid "Screenshot"
 msgstr "ತೆರೆಚಿತ್ರ"
 
 #: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
-#| msgid "Save images of your desktop or individual windows"
 msgid "Save images of your screen or individual windows"
 msgstr "ನಿಮ್ಮ ತೆರೆಯನ್ನು ಅಥವ ಪ್ರತ್ಯೇಕ ಕಿಟಕಿಗಳ ಚಿತ್ರಗಳನ್ನು ಉಳಿಸಿ"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "ಸ್ನ್ಯಾಪ್‌ಶಾಟ್;ಸೆರೆಹಿಡಿಯುವಿಕೆ;ಮುದ್ರಣ;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "ಪೂರ್ಣ ತೆರೆಯ ಒಂದು ಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊ"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "ಸದ್ಯದ ಕಿಟಕಿಯ ಒಂದು ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊ"
 
@@ -89,17 +92,14 @@ msgid "Screenshot directory"
 msgstr "ತೆರೆಚಿತ್ರದ ಕೋಶದ"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-#| msgid "The directory the last screenshot was saved in."
 msgid "The directory where the screenshots will be saved by default."
 msgstr "ತೆರೆಚಿತ್ರಗಳನ್ನು ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಉಳಿಸಲಾಗುವ ಕೋಶ."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-#| msgid "Screenshot directory"
 msgid "Last save directory"
 msgstr "ಕೊನೆಯದಾಗಿ ಉಳಿಸಲಾದ ಕೋಶದ"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-#| msgid "The directory the last screenshot was saved in."
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "ಸಂವಾದಾತ್ಮಕವಾದ ರೀತಿಯಲ್ಲಿ ಕೊನೆಯ ತೆರೆಚಿತ್ರವನ್ನು ಉಳಿಸಲಾದ ಕೋಶ."
 
@@ -152,15 +152,10 @@ msgstr "ಈಗಿರುವ ಕಡತವನ್ನು ತಿದ್ದಿಬರೆ�
 #: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
 #: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
 #: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
-#| msgid "Unable to take a screenshot of the current window"
 msgid "Unable to capture a screenshot"
 msgstr "ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
 
 #: ../src/screenshot-application.c:171
-#| msgid ""
-#| "Impossible to save the screenshot to %s.\n"
-#| " Error was %s.\n"
-#| " Please choose another location and retry."
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
 "ಕಡತವನ್ನು ರಚಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ.  ದಯವಿಟ್ಟು ಬೇರೊಂದು ಸ್ಥಳವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಪುನಃ "
@@ -199,7 +194,6 @@ msgid "Remove the window border from the screenshot"
 msgstr "ತೆರೆಚಿತ್ರದಿಂದ ಕಿಟಕಿ ಅಂಚನ್ನು ತೆಗೆದು ಹಾಕಿ"
 
 #: ../src/screenshot-application.c:527
-#| msgid "Include the pointer in the screenshot"
 msgid "Include the pointer with the screenshot"
 msgstr "ತೆರೆಚಿತ್ರದಲ್ಲಿ ತೆರೆ ಸೂಚಕವನ್ನೂ ಸಹ ಸೇರಿಸು"
 
@@ -228,7 +222,6 @@ msgid "Interactively set options"
 msgstr "ಸಂವಾದಾತ್ಮಕವಾಗಿ ಹೊಂದಿಸಲಾದ ಆಯ್ಕೆಗಳು"
 
 #: ../src/screenshot-application.c:531
-#| msgid "Screenshot directory"
 msgid "Save screenshot directly to this file"
 msgstr "ತೆರೆಚಿತ್ರವನ್ನು ನೇರವಾಗಿ ಈ ಕೋಶದಲ್ಲಿ ಉಳಿಸು"
 
@@ -316,7 +309,6 @@ msgid "Apply _effect:"
 msgstr "ಪರಿಣಾಮಗಳನ್ನು ಅನ್ವಯಿಸು (_e):"
 
 #: ../src/screenshot-interactive-dialog.c:343
-#| msgid "Grab the whole _desktop"
 msgid "Grab the whole sc_reen"
 msgstr "ಸಂಪೂರ್ಣ ಗಣಕತೆರೆಯನ್ನು ತೆಗೆದುಕೋ (_r)"
 
@@ -332,7 +324,6 @@ msgstr "ಸೆಳೆದುಕೊಳ್ಳಲು ಜಾಗವನ್ನು ಆರ�
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-#| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
 msgstr "ಈ ವಿಳಂಬದ ನಂತರ ತೆಗೆದುಕೋ (_d)"
 
