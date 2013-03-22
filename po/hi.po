@@ -5,21 +5,21 @@
 # Ravishankar Shrivastava <raviratlami@yahoo.com>, 2004.
 # Rajesh Ranjan <rranjan@redhat.com>, 2005, 2006, 2009.
 # Rajesh Ranjan <rajesh672@gmail.com>, 2009.
-# rajesh <rajeshkajha@yahoo.com>, 2012.
+# rajesh <rajeshkajha@yahoo.com>, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-19 22:43+0000\n"
-"PO-Revision-Date: 2012-09-21 12:58+0530\n"
-"Last-Translator: rajesh <rajeshkajha@yahoo.com>\n"
-"Language-Team: Hindi <Indlinux>\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-03-22 13:59+0530\n"
+"Last-Translator: raj <raj>\n"
+"Language-Team: Hindi <kde-i18n-doc@kde.org>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "\n"
 "\n"
@@ -35,15 +35,18 @@ msgid "Screenshot"
 msgstr "स्क्रीनशॉट"
 
 #: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
-#| msgid "Save images of your desktop or individual windows"
 msgid "Save images of your screen or individual windows"
 msgstr "अपने स्क्रीन या निजी विंडो के चित्र को सहेजें"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "snapshot;capture;print;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "पूरे स्क्रीन का एक स्क्रीनशॉट लें"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "मौजूदा विंडो का स्क्रीनशॉट लें"
 
@@ -100,17 +103,14 @@ msgid "Screenshot directory"
 msgstr "निर्देशिका का स्क्रीनशॉट लें"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-#| msgid "The directory the last screenshot was saved in."
 msgid "The directory where the screenshots will be saved by default."
 msgstr "निर्देशिका जिसमें अंतिम स्क्रीनशॉट तयशुदा रूप से सहेजा जाएगा."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-#| msgid "Screenshot directory"
 msgid "Last save directory"
 msgstr "अंतिम बार सहेजा गया निर्देशिका"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-#| msgid "The directory the last screenshot was saved in."
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
 "अंतिम निर्देशिका जिसमें अंतिम स्क्रीनशॉट अंतःक्रियात्मक अवस्था में सहेजा गया "
@@ -165,15 +165,10 @@ msgstr "मौज़ूदा फ़ाइल मिटाकर लिखें
 #: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
 #: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
 #: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
-#| msgid "Unable to take a screenshot of the current window"
 msgid "Unable to capture a screenshot"
 msgstr "स्क्रीनशॉट लेने में असमर्थ."
 
 #: ../src/screenshot-application.c:171
-#| msgid ""
-#| "Impossible to save the screenshot to %s.\n"
-#| " Error was %s.\n"
-#| " Please choose another location and retry."
 msgid "Error creating file. Please choose another location and retry."
 msgstr "फ़ाइल बनाने में त्रुटि. कृपया दूसरे स्थान चुनें और फिर कोशिश करें."
 
@@ -210,7 +205,6 @@ msgid "Remove the window border from the screenshot"
 msgstr "स्क्रीनशॉट से विंडो किनारा हटाएँ"
 
 #: ../src/screenshot-application.c:527
-#| msgid "Include the pointer in the screenshot"
 msgid "Include the pointer with the screenshot"
 msgstr "स्क्रीनशॉट में प्वाइंटर सम्मिलित करें"
 
@@ -239,7 +233,6 @@ msgid "Interactively set options"
 msgstr "अंतःक्रियात्मक रूप से सेट विकल्प"
 
 #: ../src/screenshot-application.c:531
-#| msgid "Screenshot directory"
 msgid "Save screenshot directly to this file"
 msgstr "इस फ़ाइल में सीधे स्क्रीनशॉट सहेजें"
 
@@ -261,8 +254,8 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"विरोधी विकल्प: --window और --area को समान समय में प्रयोग नहीं किया जाना चाहिए."
-"\n"
+"विरोधी विकल्प: --window और --area को समान समय में प्रयोग नहीं किया जाना "
+"चाहिए.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
@@ -270,8 +263,8 @@ msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"विरोधी विकल्प: --area और --delay  को समान समय में प्रयोग नहीं किया जाना चाहिए."
-"\n"
+"विरोधी विकल्प: --area और --delay  को समान समय में प्रयोग नहीं किया जाना "
+"चाहिए.\n"
 
 #: ../src/screenshot-dialog.c:172
 msgid "Save Screenshot"
@@ -327,7 +320,6 @@ msgid "Apply _effect:"
 msgstr "प्रभाव लागू करें"
 
 #: ../src/screenshot-interactive-dialog.c:343
-#| msgid "Grab the whole _desktop"
 msgid "Grab the whole sc_reen"
 msgstr "पूरे स्क्रीन को पकड़ें (_r)"
 
@@ -343,7 +335,6 @@ msgstr "पकड़ने के लिए क्षेत्र चुने�
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-#| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
 msgstr "इतने विलंब के बाद पकड़ें (_d)"
 
