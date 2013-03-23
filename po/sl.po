@@ -7,26 +7,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"screenshot&keywords=I18N+L10N&component=general\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2013-01-09 05:07+0000\n"
-"PO-Revision-Date: 2013-01-09 15:19+0100\n"
-"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
+"PO-Revision-Date: 2013-03-23 08:17+0100\n"
+"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
+#: ../src/gnome-screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:680
 msgid "Screenshot"
 msgstr "Zaslonska slika"
 
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
+#: ../src/gnome-screenshot.desktop.in.h:2
+#: ../src/screenshot-application.c:681
 msgid "Save images of your screen or individual windows"
 msgstr "Zajemanje slik zaslona ali posameznih oken"
 
@@ -75,12 +75,8 @@ msgid "Window-specific screenshot (deprecated)"
 msgstr "Okenski zajem (opuščeno)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
-msgstr ""
-"Zajemi slike le trenutnega okna in ne celotnega namizja. Možnost je opuščena "
-"in ni več v uporabi."
+msgid "Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no longer in use."
+msgstr "Zajemi slike le trenutnega okna in ne celotnega namizja. Možnost je opuščena in ni več v uporabi."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -135,12 +131,8 @@ msgid "Border Effect"
 msgstr "Učinki na robovih"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"Učinki, ki so dodani izven robov. Vrednosti na voljo so \"senca\", \"brez\" "
-"in \"rob\"."
+msgid "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and \"border\"."
+msgstr "Učinki, ki so dodani izven robov. Vrednosti na voljo so \"senca\", \"brez\" in \"rob\"."
 
 #: ../src/screenshot-application.c:142
 #, c-format
@@ -151,22 +143,25 @@ msgstr "Datoteka z imenom \"%s\" že obstaja v mapi \"%s\""
 msgid "Overwrite existing file?"
 msgstr "Ali naj se obstoječa datoteka prepiše?"
 
-#: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
-#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
-#: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
+#: ../src/screenshot-application.c:170
+#: ../src/screenshot-application.c:179
+#: ../src/screenshot-application.c:350
+#: ../src/screenshot-application.c:354
+#: ../src/screenshot-application.c:395
+#: ../src/screenshot-application.c:398
 msgid "Unable to capture a screenshot"
 msgstr "Zajemanje slike ni mogoče."
 
 #: ../src/screenshot-application.c:171
 msgid "Error creating file. Please choose another location and retry."
-msgstr ""
-"Napaka med ustvarjanjem datoteke. Izberite novo mesto in poskusite znova."
+msgstr "Napaka med ustvarjanjem datoteke. Izberite novo mesto in poskusite znova."
 
 #: ../src/screenshot-application.c:351
 msgid "Error creating file"
 msgstr "Napaka med ustvarjanjem datoteke."
 
-#: ../src/screenshot-application.c:362 ../src/screenshot-application.c:428
+#: ../src/screenshot-application.c:362
+#: ../src/screenshot-application.c:428
 msgid "Screenshot taken"
 msgstr "Zaslonska slika je zajeta"
 
@@ -176,7 +171,7 @@ msgstr "Vsi podprti načni so spodleteli."
 
 #: ../src/screenshot-application.c:522
 msgid "Send the grab directly to the clipboard"
-msgstr "Pošlje zajete podatke neposredno v odložišče"
+msgstr "Pošlji zajete podatke neposredno v odložišče"
 
 #: ../src/screenshot-application.c:523
 msgid "Grab a window instead of the entire screen"
@@ -240,20 +235,13 @@ msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
 #: ../src/screenshot-config.c:56
 #, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"Možnosti v sporu: zastavic --window in --area ni mogoče uporabljati "
-"sočasno.\n"
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "Možnosti v sporu: zastavic --window in --area ni mogoče uporabljati sočasno.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"Možnosti v sporu: zastavic --area in --delay ni mogoče uporabljati sočasno.\n"
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Možnosti v sporu: zastavic --area in --delay ni mogoče uporabljati sočasno.\n"
 
 #: ../src/screenshot-dialog.c:172
 msgid "Save Screenshot"
