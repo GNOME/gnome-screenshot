@@ -4,14 +4,14 @@
 #
 # Subhransu Behera <arya_subhransu@yahoo.co.in>, 2006.
 # Manoj Kumar Giri <giri.manojkr@gmail.com>, 2008.
-# Manoj Kumar Giri <mgiri@redhat.com>, 2009, 2010, 2012.
+# Manoj Kumar Giri <mgiri@redhat.com>, 2009, 2010, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-25 23:14+0000\n"
-"PO-Revision-Date: 2012-11-28 20:15+0530\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-03-24 15:15+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
 "Language: or\n"
@@ -34,15 +34,18 @@ msgid "Screenshot"
 msgstr "ଆଶୁଚିତ୍ର"
 
 #: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:681
-#| msgid "Save images of your desktop or individual windows"
 msgid "Save images of your screen or individual windows"
 msgstr "ଆପଣଙ୍କ ପରଦା କିମ୍ବା ବ୍ଯକ୍ତିଗତ ୱିଣ୍ଡୋର ପ୍ରତିଛବିକୁ ସଂରକ୍ଷଣ କରନ୍ତୁ"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "ଆଶୁଚିତ୍ର;ଗ୍ରହଣ;ମୁଦ୍ରଣ;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "ସମ୍ପୂର୍ଣ୍ଣ ପରଦାର ଗୋଟିଏ ଆଶୁଚିତ୍ର ନିଅନ୍ତୁ"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "ପ୍ରଚଳିତ ୱିଣ୍ଡୋର ଗୋଟିଏ ଆଶୁଚିତ୍ର ନିଅନ୍ତୁ"
 
@@ -100,18 +103,15 @@ msgid "Screenshot directory"
 msgstr "ଆଶୁଚିତ୍ର ଡିରେକ୍ଟୋରି"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-#| msgid "The directory the last screenshot was saved in."
 msgid "The directory where the screenshots will be saved by default."
 msgstr ""
 "ଯେଉଁ ଡିରେକ୍ଟୋରିରେ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ଆଶୁଚିତ୍ରଗୁଡ଼ିକୁ ସଂରକ୍ଷିତ କରାଯିବ।"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-#| msgid "Screenshot directory"
 msgid "Last save directory"
 msgstr "ଶେଷଥର ସଂରକ୍ଷଣ କରାଯାଇଥିବା ଡିରେକ୍ଟୋରି"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-#| msgid "The directory the last screenshot was saved in."
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "ଡିରେକ୍ଟୋରି ଯେଉଁଥିରେ ଅନ୍ତିମ ଆଶୁଚିତ୍ରକୁ ସଂରକ୍ଷିତ କରା ଯାଇଥିଲା।"
 
@@ -164,15 +164,10 @@ msgstr "ସ୍ଥିତବାନ ଫାଇଲକୁ ନବଲିଖନ କରି
 #: ../src/screenshot-application.c:170 ../src/screenshot-application.c:179
 #: ../src/screenshot-application.c:350 ../src/screenshot-application.c:354
 #: ../src/screenshot-application.c:395 ../src/screenshot-application.c:398
-#| msgid "Unable to take a screenshot of the current window"
 msgid "Unable to capture a screenshot"
 msgstr "ଆଶୁଚିତ୍ରକୁ ନେବାରେ ଅସମର୍ଥ"
 
 #: ../src/screenshot-application.c:171
-#| msgid ""
-#| "Impossible to save the screenshot to %s.\n"
-#| " Error was %s.\n"
-#| " Please choose another location and retry."
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
 "ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ତ୍ରୁଟି। ଦୟାକରି ଅନ୍ୟ ଏକ ସ୍ଥାନ ବାଛନ୍ତୁ ଏବଂ ପୁଣି "
@@ -211,7 +206,6 @@ msgid "Remove the window border from the screenshot"
 msgstr "ଆଶୁଚିତ୍ରରୁ ୱିଣ୍ଡୋ ଧାରକୁ କାଢିଦିଅନ୍ତୁ"
 
 #: ../src/screenshot-application.c:527
-#| msgid "Include the pointer in the screenshot"
 msgid "Include the pointer with the screenshot"
 msgstr "ଆଶୁଚିତ୍ରରେ ସୂଚକକୁ ଅନ୍ତର୍ଭୂକ୍ତ କରନ୍ତୁ"
 
@@ -240,7 +234,6 @@ msgid "Interactively set options"
 msgstr "ପାରସ୍ପରିକ କ୍ରିୟାକ୍ଷମ ଭାବେ ବିକଳ୍ପ ଗୁଡିକୁ ସଜାଡନ୍ତୁ"
 
 #: ../src/screenshot-application.c:531
-#| msgid "Screenshot directory"
 msgid "Save screenshot directly to this file"
 msgstr "ଆଶୁଚିତ୍ରକୁ ସିଧାସଳଖ ଭାବରେ ଏହି ଫାଇଲରେ ସଂରକ୍ଷଣ କରନ୍ତୁ"
 
@@ -328,7 +321,6 @@ msgid "Apply _effect:"
 msgstr "ପ୍ରଭାବ ପକାନ୍ତୁ: (_e)"
 
 #: ../src/screenshot-interactive-dialog.c:343
-#| msgid "Grab the whole _desktop"
 msgid "Grab the whole sc_reen"
 msgstr "ସମ୍ପୂର୍ଣ୍ଣ ପରଦାକୁ ଧରନ୍ତୁ (_ r)"
 
@@ -344,7 +336,6 @@ msgstr "ଧରିବା ପାଇଁ ଗୋଟିଏ କ୍ଷେତ୍ର ବ�
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
-#| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
 msgstr "କିଛି ସମୟ ବିଳମ୍ୱ କରି ଧରନ୍ତୁ (_d)"
 
