@@ -32,7 +32,7 @@ msgstr "Desa imatges de la pantalla o de finestres individuals"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;"
-msgstr "instantània;captura;imprimeix"
+msgstr "instantània;captura;imprimeix;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
