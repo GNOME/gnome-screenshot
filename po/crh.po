@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-24 15:17-0500\n"
-"PO-Revision-Date: 2013-03-24 19:27-0500\n"
+"PO-Revision-Date: 2013-03-24 19:30-0500\n"
 "Last-Translator: Reşat SABIQ <tilde.birlik@gmail.com>\n"
 "Language-Team: QIRIMTATARCA (Qırım Türkçesi) <tilde-birlik-meydan@lists."
 "sourceforge.net>\n"
@@ -93,21 +93,21 @@ msgstr "Ekran görüntüsü alınmadan önce beklenecek saniye sayısı."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
-msgstr "Ekran körüntisi cilbenti"
+msgstr "Ekran körüntisi fihristi"
 
 # tr
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
 msgid "The directory where the screenshots will be saved by default."
-msgstr "Ekran körüntileriniñ ögbelgilengen olaraq saqlanacağı cilbent."
+msgstr "Ekran körüntileriniñ ögbelgilengen olaraq saqlanacağı fihrist."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
 msgid "Last save directory"
-msgstr "Soñki saqlama cilbenti"
+msgstr "Soñki saqlama fihristi"
 
 # tr
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "Bir ekran körüntisiniñ tesirleşimli tarzda saqlanğanı soñki cilbent."
+msgstr "Bir ekran körüntisiniñ tesirleşimli tarzda saqlanğanı soñki fihrist."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
