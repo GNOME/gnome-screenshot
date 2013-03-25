@@ -5,26 +5,26 @@
 # This file is distributed under the same license as the gnome-utils package.
 #
 #
+#
 # Pramod <pramodfsf@gmail.com>, 2007.
-# Krishna Babu K <kkrothap@redhat.com>, 2007, 2009, 2010.
+# Krishna Babu K <kkrothap@redhat.com>, 2007, 2009, 2010, 2013.
 # Bhuvan Krishna <bhuvan@swecha.net>, 2012.
 # Praveen Illa <mail2ipn@gmail.com>, 2011, 2012.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: te\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-18 19:45+0000\n"
-"PO-Revision-Date: 2012-09-19 23:31+0530\n"
-"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
-"Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2013-01-03 10:00+0000\n"
+"PO-Revision-Date: 2013-03-25 14:33+0530\n"
+"Last-Translator: Krishnababu Krothapalli <kkrothap@redhat.com>\n"
+"Language-Team: Telugu <Fedora-trans-te@redhat.com>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
@@ -35,10 +35,14 @@ msgid "Save images of your screen or individual windows"
 msgstr "మీ తెర లేదా వ్యక్తిగత కిటికీల యొక్క బొమ్మలను భద్రపరుచుకోండి"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;"
+msgstr "snapshot;capture;print;"
+
+#: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "మొత్తం తెర యొక్క తెరపట్టుని తీయండి"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "ప్రస్తుత కిటికీ యొక్క తెరపట్టును తీయండి"
 
@@ -79,7 +83,8 @@ msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
-"మొత్తం డెస్కుటాపునకు బదులుగా ప్రస్తుత కిటికీని లాగుము. ఈ కీ తీసివేయబడింది ఇది ఇక ఏ మాత్రం వాడుకలో "
+"మొత్తం డెస్కుటాపునకు బదులుగా ప్రస్తుత కిటికీని లాగుము. ఈ కీ తీసివేయబడింది ఇది "
+"ఇక ఏ మాత్రం వాడుకలో "
 "వుండదు."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
@@ -139,7 +144,8 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"బయటవున్న సరిహద్దుకు కలుపవలిసిన ప్రభావం. సాధ్యమగు విలువలు \"నీడ\", \"ఏదీకాదు\", మరియు "
+"బయటవున్న సరిహద్దుకు కలుపవలిసిన ప్రభావం. సాధ్యమగు విలువలు \"నీడ\", "
+"\"ఏదీకాదు\", మరియు "
 "\"సరిహద్దు\"."
 
 #: ../src/screenshot-application.c:142
@@ -159,7 +165,9 @@ msgstr "తెరపట్టు తీయే లేకపోతున్నద�
 
 #: ../src/screenshot-application.c:171
 msgid "Error creating file. Please choose another location and retry."
-msgstr "దస్త్రమును సృష్టించడంలో లోపం. మరొక స్థానాన్ని ఎంచుకుని, దయచేసి మళ్ళీ ప్రయత్నించండి."
+msgstr ""
+"దస్త్రమును సృష్టించడంలో లోపం. మరొక స్థానాన్ని ఎంచుకుని, దయచేసి మళ్ళీ "
+"ప్రయత్నించండి."
 
 #: ../src/screenshot-application.c:351
 msgid "Error creating file"
@@ -242,14 +250,16 @@ msgstr "Praveen Illa <mail2ipn@gmail.com>, 2012"
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr "విభేదించుచున్న ఐచ్చికములు: --window మరియు --area వొకేసారి వుపయోగించకూడదు.\n"
+msgstr ""
+"విభేదించుచున్న ఐచ్చికములు: --window మరియు --area వొకేసారి వుపయోగించకూడదు.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "విభేదించుచున్న ఐచ్చికములు: --area మరియు --delay వొకేసారి ఉపయోగించకూడదు.\n"
+msgstr ""
+"విభేదించుచున్న ఐచ్చికములు: --area మరియు --delay వొకేసారి ఉపయోగించకూడదు.\n"
 
 #: ../src/screenshot-dialog.c:172
 msgid "Save Screenshot"
