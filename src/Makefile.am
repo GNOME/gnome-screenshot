@@ -11,15 +11,10 @@ bin_PROGRAMS = \
 	gnome-screenshot		\
 	$(NULL)
 
-ui_files = \
-	screenshot-app-menu.ui		\
-	screenshot-dialog.ui		\
-	$(NULL)
-
-screenshot-resources.c: gnome-screenshot.gresource.xml $(ui_files)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gnome-screenshot.gresource.xml)
+screenshot-resources.c: gnome-screenshot.gresource.xml $(resource_files)
 	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
-
-screenshot-resources.h: gnome-screenshot.gresource.xml $(ui_files)
+screenshot-resources.h: gnome-screenshot.gresource.xml $(resource_files)
 	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
 
 BUILT_SOURCES = \
@@ -84,15 +79,15 @@ EXTRA_DIST =					\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
 	$(convert_DATA)				\
-	$(ui_files)				\
+	$(resource_files)			\
 	gnome-screenshot.gresource.xml		\
 	$(NULL)
 
 CLEANFILES = \
-	$(BUILT_SOURCES)			 \
-	$(gsettings_SCHEMAS)			 \
-	$(gnome_screenshot_DATA)		 \
-	$(sys_DATA)
+	$(BUILT_SOURCES)			\
+	$(gsettings_SCHEMAS)			\
+	$(gnome_screenshot_DATA)		\
+	$(NULL)
 
 dist-hook:
 	cd $(distdir) ; rm -f $(CLEANFILES)
