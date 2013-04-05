@@ -215,6 +215,7 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   else
     pos = -1;
 
+  gtk_widget_grab_focus (dialog->filename_entry);
   gtk_editable_select_region (GTK_EDITABLE (dialog->filename_entry),
 			      0,
 			      pos);
