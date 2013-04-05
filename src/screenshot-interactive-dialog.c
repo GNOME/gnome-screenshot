@@ -412,33 +412,21 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (label);
 }
 
-static void
-interactive_dialog_destroy_cb (GtkWidget *widget,
-                               gpointer user_data)
-{
-  GtkWidget *window = user_data;
-  gtk_widget_destroy (window);
-}
 
 GtkWidget *
 screenshot_interactive_dialog_new (void)
 {
-  GtkWidget *window, *dialog;
+  GtkWidget *dialog;
   GtkWidget *main_vbox;
   GtkWidget *content_area;
   gboolean shows_app_menu;
   GtkSettings *settings;
 
-  window = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
-  gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (window), FALSE);
-  gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
-  gtk_window_set_title (GTK_WINDOW (window), _("Take Screenshot"));
-  gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
-  gtk_widget_realize (window);
-
   dialog = gtk_dialog_new ();
-  gtk_widget_set_parent_window (dialog, gtk_widget_get_window (window));
-  gtk_container_add (GTK_CONTAINER (window), dialog);
+  gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (g_application_get_default ()));
+  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Take Screenshot"));
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
@@ -457,7 +445,7 @@ screenshot_interactive_dialog_new (void)
                          _("Take _Screenshot"), GTK_RESPONSE_OK);
 
   /* add help as a dialog button if we're not showing the application menu */
-  settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (window)));
+  settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (dialog)));
   g_object_get (settings,
                 "gtk-shell-shows-app-menu", &shows_app_menu,
                 NULL);
@@ -470,11 +458,8 @@ screenshot_interactive_dialog_new (void)
   g_signal_connect (dialog, "key-press-event",
                     G_CALLBACK (interactive_dialog_key_press_cb), 
                     NULL);
-  g_signal_connect (dialog, "destroy",
-                    G_CALLBACK (interactive_dialog_destroy_cb),
-                    window);
 
-  gtk_widget_show_all (window);
+  gtk_widget_show_all (dialog);
 
   return dialog;
 }

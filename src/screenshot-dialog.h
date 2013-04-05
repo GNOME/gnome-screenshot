@@ -26,7 +26,6 @@ typedef struct {
   GdkPixbuf *screenshot;
   GdkPixbuf *preview_image;
 
-  GtkWidget *window;
   GtkWidget *dialog;
   GtkWidget *save_widget;
   GtkWidget *filename_entry;

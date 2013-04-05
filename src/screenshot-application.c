@@ -116,7 +116,7 @@ save_pixbuf_handle_success (ScreenshotApplication *self)
       ScreenshotDialog *dialog = self->priv->dialog;
 
       save_folder_to_settings (self);
-      gtk_widget_destroy (dialog->window);
+      gtk_widget_destroy (dialog->dialog);
     }
   else
     {
@@ -144,7 +144,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
                                            file_name, folder_name);
           gint response;
                                              
-          response = screenshot_show_dialog (GTK_WINDOW (dialog->window),
+          response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
                                              GTK_MESSAGE_WARNING,
                                              GTK_BUTTONS_YES_NO,
                                              _("Overwrite existing file?"),
@@ -165,7 +165,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
       else
         {
-          screenshot_show_dialog (GTK_WINDOW (dialog->window),
+          screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
                                   GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
