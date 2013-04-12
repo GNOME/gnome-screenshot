@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2013-01-03 10:00+0000\n"
-"PO-Revision-Date: 2013-02-28 12:40+0530\n"
+"PO-Revision-Date: 2013-04-12 15:04+0530\n"
 "Last-Translator: \n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -285,7 +285,7 @@ msgstr "ફોલ્ડર પસંદ કરો"
 
 #: ../src/screenshot-dialog.c:285
 msgid "Screenshot.png"
-msgstr "ફોટો.png"
+msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
