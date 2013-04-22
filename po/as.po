@@ -278,7 +278,7 @@ msgstr "Screenshot.png"
 #: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
-msgstr "%s.png ৰ পৰা স্ক্ৰিনশ্বট"
+msgstr "স্ক্ৰিনশ্বট য'ৰ পৰা লোৱা হৈছে সেই %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -286,7 +286,7 @@ msgstr "%s.png ৰ পৰা স্ক্ৰিনশ্বট"
 #: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
-msgstr "%s - %d.png ৰ পৰা স্ক্ৰিনশ্বট"
+msgstr "%s ৰ পৰা স্ক্ৰিনশ্বট - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:148
 msgid "None"
@@ -349,13 +349,3 @@ msgstr "স্ক্ৰিনশ্বট লওক (_S)"
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "সহায় পৃষ্ঠা ল'ড কৰোতে ত্ৰুটি"
-
-#~ msgid ""
-#~ "UI definition file for the screenshot program is missing.\n"
-#~ "Please check your installation of gnome-utils"
-#~ msgstr ""
-#~ "স্ক্ৰিনশ্বট প্ৰগ্ৰামৰ বাবে আৱশ্যক UI বিৱৰণ ফাইল উপস্থিত নাই।\n"
-#~ " অনুগ্ৰহ কৰি আপোনাৰ gnome-utils ইনস্টলেষণ পৰীক্ষা কৰক"
-
-#~ msgid "Error while saving screenshot"
-#~ msgstr "স্ক্ৰিনশ্বট সংৰক্ষণ কৰিবলৈ সমস্যা"
