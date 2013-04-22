@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: gnome-utils.master.hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-23 15:21+0000\n"
+"POT-Creation-Date: 2013-04-22 07:36+0000\n"
 "PO-Revision-Date: 2013-03-22 13:59+0530\n"
 "Last-Translator: raj <raj>\n"
 "Language-Team: Hindi <kde-i18n-doc@kde.org>\n"
@@ -261,15 +261,15 @@ msgid ""
 msgstr ""
 "विरोधी विकल्प: --area और --delay  को समान समय में प्रयोग नहीं किया जाना चाहिए.\n"
 
-#: ../src/screenshot-dialog.c:172
+#: ../src/screenshot-dialog.c:163
 msgid "Save Screenshot"
 msgstr "सहेजें स्क्रीनशॉट"
 
-#: ../src/screenshot-dialog.c:188
+#: ../src/screenshot-dialog.c:173
 msgid "Select a folder"
 msgstr "फोल्डर चुनें"
 
-#: ../src/screenshot-dialog.c:285
+#: ../src/screenshot-dialog.c:271
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
@@ -278,7 +278,7 @@ msgstr "Screenshot.png"
 #: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
-msgstr "%s.png से स्क्रीनशॉट"
+msgstr "%s से स्क्रीनशॉट.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -286,7 +286,7 @@ msgstr "%s.png से स्क्रीनशॉट"
 #: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
-msgstr "%s से स्क्रीनशॉट - %d.png"
+msgstr "%s - %d से स्क्रीनशॉट.png"
 
 #: ../src/screenshot-interactive-dialog.c:148
 msgid "None"
@@ -333,16 +333,16 @@ msgstr "पकड़ने के लिए क्षेत्र चुने�
 msgid "Grab after a _delay of"
 msgstr "इतने विलंब के बाद पकड़ें (_d)"
 
-#: ../src/screenshot-interactive-dialog.c:435
-#: ../src/screenshot-interactive-dialog.c:453
+#: ../src/screenshot-interactive-dialog.c:428
+#: ../src/screenshot-interactive-dialog.c:441
 msgid "Take Screenshot"
 msgstr "स्क्रीनशॉट लें"
 
-#: ../src/screenshot-interactive-dialog.c:454
+#: ../src/screenshot-interactive-dialog.c:442
 msgid "Effects"
 msgstr "प्रभाव"
 
-#: ../src/screenshot-interactive-dialog.c:457
+#: ../src/screenshot-interactive-dialog.c:445
 msgid "Take _Screenshot"
 msgstr "स्क्रीनशॉट लें"
 
