@@ -292,7 +292,7 @@ msgstr "Screenshot.png"
 #: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
-msgstr "%s.png માંથી સ્ક્રીનશોટ"
+msgstr "જેમાંથી સ્ક્રીનશોટ છે તે %s.png "
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
