@@ -12,18 +12,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.ta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-26 12:42+0530\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-04-10 18:19+0000\n"
 "PO-Revision-Date: 2012-02-26 12:56+0530\n"
 "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: Lokalize 1.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
-"\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
 "\n"
 "\n"
 "\n"
@@ -33,54 +33,46 @@ msgstr ""
 "\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr "உங்கள் பணிமேடையின் படங்களை அல்லது தனித்தனி சாளரங்களை சேமிக்கவும்"
-
-#: ../src/gnome-screenshot.desktop.in.h:2
 msgid "Screenshot"
 msgstr "திரைவெட்டு"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the current window"
-msgstr "நடப்பு சாளரத்தை திரை பிடிப்பு செய்க"
+#: ../src/gnome-screenshot.desktop.in.h:2
+msgid "Save images of your desktop or individual windows"
+msgstr "உங்கள் பணிமேடையின் படங்களை அல்லது தனித்தனி சாளரங்களை சேமிக்கவும்"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/gnome-screenshot.desktop.in.h:3
 msgid "Take a screenshot of the whole screen"
 msgstr "முழுத்திரையினை ஒரு திரைவெட்டு பிடிக்கவும்"
 
+#: ../src/gnome-screenshot.desktop.in.h:4
+msgid "Take a screenshot of the current window"
+msgstr "நடப்பு சாளரத்தை திரை பிடிப்பு செய்க"
+
 #: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+msgid "Save Screenshot"
+msgstr "திரைப்பிடிப்பினை சேமி"
 
 #: ../src/gnome-screenshot.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "(_o) ஒட்டுப்பலகைக்கு பிரதி எடு"
 
 #: ../src/gnome-screenshot.ui.h:3
-msgid "Save Screenshot"
-msgstr "திரைப்பிடிப்பினை சேமி"
+msgid "_Name:"
+msgstr "பெயர்: (_N)"
 
 #: ../src/gnome-screenshot.ui.h:4
 msgid "Save in _folder:"
 msgstr "அடைவில் சேமி: (_f)"
 
 #: ../src/gnome-screenshot.ui.h:5
-msgid "_Name:"
-msgstr "பெயர்: (_N)"
+msgid "*"
+msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr "எல்லை தோற்றம்"
+msgid "Window-specific screenshot (deprecated)"
+msgstr "சாளரம் குறிப்பான திரைவெட்டு (நீக்கப்பட்டது)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"ஒரு விளிம்புக்கு அப்பால் சேர்க்க வேண்டிய விளைவு. இருக்கக்கூடிய மதிப்புகள் \"நிழல்\", "
-"\"எதுவும் இல்லை\", மற்றும் \"விளிம்பு\". "
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -88,57 +80,65 @@ msgstr ""
 "முழு பணிமேடை இல்லாமல் இப்போதைய சாளரத்தை மட்டும் பிடி. இந்த விசை நீக்கப்பட்டு இனி "
 "பயன்படுத்தப்பட மாட்டாது."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr "எல்லையை சேர்"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr "ஐசிசி வரியுரு சேர்"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr "சுட்டியை சேர்"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "திரைப்பிடிப்பில் இலக்கின் ஐசிசி வரியுரு சேர்க்கவும்"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr "திரைப்பிடிப்பில் சுட்டியை சேர்க்கவும்"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr "திரைப்பிடிப்புடன் சாளர மேலாளர் எல்லையையும் சேர்க்கவும்"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
-msgid "Last save directory"
-msgstr "கடைசியாக சேமித்த அடைவு"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
 msgstr "திரைப்பிடிப்பு தாமதம்"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "Screenshot directory"
-msgstr "திரைப்பிடிப்பு அடைவு"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
-msgid "The directory where the screenshots will be saved by default."
-msgstr "திரைப்பிடிப்புகளை முன்னிருப்பாக சேமிக்க  அடைவு."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "ஊடாடும் பாங்கில்  திரைப்பிடிப்பு சேமிக்கப்பட்ட கடைசி  அடைவு."
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "திரைவெட்டு எடுக்கு முன் தாமதிக்க வேண்டிய நேரம் வினாடிகளில்"
 
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+msgid "Screenshot directory"
+msgstr "திரைப்பிடிப்பு அடைவு"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+msgid "The directory where the screenshots will be saved by default."
+msgstr "திரைப்பிடிப்புகளை முன்னிருப்பாக சேமிக்க  அடைவு."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+msgid "Last save directory"
+msgstr "கடைசியாக சேமித்த அடைவு"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "ஊடாடும் பாங்கில்  திரைப்பிடிப்பு சேமிக்கப்பட்ட கடைசி  அடைவு."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+msgid "Include Border"
+msgstr "எல்லையை சேர்"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+msgid "Include the window manager border along with the screenshot"
+msgstr "திரைப்பிடிப்புடன் சாளர மேலாளர் எல்லையையும் சேர்க்கவும்"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+msgid "Include Pointer"
+msgstr "சுட்டியை சேர்"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+msgid "Include the pointer in the screenshot"
+msgstr "திரைப்பிடிப்பில் சுட்டியை சேர்க்கவும்"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+msgid "Include ICC Profile"
+msgstr "ஐசிசி வரியுரு சேர்"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "திரைப்பிடிப்பில் இலக்கின் ஐசிசி வரியுரு சேர்க்கவும்"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "எல்லை தோற்றம்"
+
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid "Window-specific screenshot (deprecated)"
-msgstr "சாளரம் குறிப்பான திரைவெட்டு (நீக்கப்பட்டது)"
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"ஒரு விளிம்புக்கு அப்பால் சேர்க்க வேண்டிய விளைவு. இருக்கக்கூடிய மதிப்புகள் \"நிழல்\", "
+"\"எதுவும் இல்லை\", மற்றும் \"விளிம்பு\". "
 
 #: ../src/screenshot-application.c:147
 #, c-format
@@ -150,74 +150,73 @@ msgid "Overwrite existing file?"
 msgstr "இருப்பில் உள்ள கோப்பை மேலெழுதவா?"
 
 #: ../src/screenshot-application.c:175 ../src/screenshot-application.c:183
-#: ../src/screenshot-application.c:342 ../src/screenshot-application.c:345
-#: ../src/screenshot-application.c:388 ../src/screenshot-application.c:391
+#: ../src/screenshot-application.c:340 ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:386 ../src/screenshot-application.c:389
 msgid "Unable to capture a screenshot"
 msgstr "திரை பிடிப்பு செய்ய முடியவில்லை"
 
 #: ../src/screenshot-application.c:176
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
-"கோப்பை உருவாக்குவதில் பிழை. தயவு செய்து வேறு இடம் தேர்ந்து எடுத்து மீண்டும் "
-"முயற்சிக்கவும்."
+"கோப்பை உருவாக்குவதில் பிழை. தயவு செய்து வேறு இடம் தேர்ந்து எடுத்து மீண்டும் முயற்சிக்கவும்."
 
-#: ../src/screenshot-application.c:343
+#: ../src/screenshot-application.c:341
 msgid "Error creating file"
 msgstr "கோப்பை உருவாக்கும் போது பிழை"
 
-#: ../src/screenshot-application.c:350 ../src/screenshot-application.c:419
+#: ../src/screenshot-application.c:348 ../src/screenshot-application.c:417
 msgid "Screenshot taken"
 msgstr "திரைப்பிடிப்பு எடுக்கப்பட்டது"
 
-#: ../src/screenshot-application.c:389
+#: ../src/screenshot-application.c:387
 msgid "All possible methods failed"
 msgstr "எல்லா இயலக்கூடிய முறைகளும் தோல்வியுற்றன."
 
-#: ../src/screenshot-application.c:504
+#: ../src/screenshot-application.c:502
 msgid "Send the grab directly to the clipboard"
 msgstr "பிடிப்பை நேரடியாக ஒட்டுப்பலகைக்கு அனுப்புக"
 
-#: ../src/screenshot-application.c:505
+#: ../src/screenshot-application.c:503
 msgid "Grab a window instead of the entire screen"
 msgstr "முழுத்திரைக்கு பதிலாக ஒரு சாளரத்தை எடுக்கவும்"
 
-#: ../src/screenshot-application.c:506
+#: ../src/screenshot-application.c:504
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "முழுத்திரைக்கு பதிலாக திரையின் ஒரு பகுதியை எடுக்கவும்"
 
-#: ../src/screenshot-application.c:507
+#: ../src/screenshot-application.c:505
 msgid "Include the window border with the screenshot"
 msgstr "திரைப்பிடிப்பில் சாளரத்தின் எல்லையை சேர்க்கவும்"
 
-#: ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:506
 msgid "Remove the window border from the screenshot"
 msgstr "திரைப்பிடிப்பில் சாளரத்தின் எல்லையை நீக்கவும்"
 
-#: ../src/screenshot-application.c:509
+#: ../src/screenshot-application.c:507
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "குறித்த தாமதம் சென்று பின் திரைவெட்டை எடுக்கவும் (நொடிகளில்)"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:509
+#: ../src/screenshot-application.c:507
 #: ../src/screenshot-interactive-dialog.c:426
 msgid "seconds"
 msgstr "விநாடிகள்"
 
-#: ../src/screenshot-application.c:510
+#: ../src/screenshot-application.c:508
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "எல்லைக்கு சேர்க்க வேண்டிய தோற்றம் (நிழல், விளிம்பு அல்லது ஏதுமில்லை)"
 
-#: ../src/screenshot-application.c:510
+#: ../src/screenshot-application.c:508
 msgid "effect"
 msgstr "தோற்றம்"
 
-#: ../src/screenshot-application.c:511
+#: ../src/screenshot-application.c:509
 msgid "Interactively set options"
 msgstr "ஊடாடல் வகையில் விருப்பங்களை அமை"
 
-#: ../src/screenshot-application.c:525
+#: ../src/screenshot-application.c:523
 msgid "Take a picture of the screen"
 msgstr "திரையினை ஒரு படம் பிடிக்கவும்"
 
@@ -258,7 +257,7 @@ msgstr "Screenshot.png"
 #: ../src/screenshot-filename-builder.c:122
 #, c-format
 msgid "Screenshot from %s.png"
-msgstr "திரைபிடிப்பு %s.png இலிருந்து"
+msgstr "%s இலிருந்து திரைப்பிடிப்பு.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -266,7 +265,7 @@ msgstr "திரைபிடிப்பு %s.png இலிருந்து"
 #: ../src/screenshot-filename-builder.c:129
 #, c-format
 msgid "Screenshot from %s - %d.png"
-msgstr "திரைப்பிடிப்பு %s இலிருந்து -%d.png"
+msgstr "%s - %d இலிருந்து திரைப்பிடிப்பு.png"
 
 #: ../src/screenshot-interactive-dialog.c:165
 msgid "None"
@@ -326,7 +325,7 @@ msgstr "விளைவுகள்"
 msgid "Take _Screenshot"
 msgstr "திரைப்பிடிப்பு செய்யவும்"
 
-#: ../src/screenshot-utils.c:723
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "உதவி பக்கத்தை ஏற்றுவதில் பிழை"
 
