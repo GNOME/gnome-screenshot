@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2013-01-03 10:00+0000\n"
-"PO-Revision-Date: 2013-03-24 15:15+0530\n"
+"PO-Revision-Date: 2013-04-23 12:19+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
 "Language: or\n"
@@ -284,7 +284,7 @@ msgstr "ଆଶୁଚିତ୍ର.png"
 #: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
-msgstr "%s.png ରୁ ଆଶୁଚିତ୍ର"
+msgstr "ଆଶୁଚିତ୍ର %s.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -292,7 +292,7 @@ msgstr "%s.png ରୁ ଆଶୁଚିତ୍ର"
 #: ../src/screenshot-filename-builder.c:151
 #, c-format
 msgid "Screenshot from %s - %d.png"
-msgstr "%s - %d.png ରୁ ଆଶୁଚିତ୍ର"
+msgstr "ଆଶୁଚିତ୍ର %s - %d.png"
 
 #: ../src/screenshot-interactive-dialog.c:148
 msgid "None"
