@@ -132,7 +132,7 @@ build_path (AsyncExistenceJob *job)
       GDateTime *d;
 
       d = g_date_time_new_now_local ();
-      origin = g_date_time_format (d, "%Y-%m-%d %H:%M:%S");
+      origin = g_date_time_format (d, "%Y-%m-%d-%H%M%S");
       g_date_time_unref (d);
     }
   else
@@ -142,14 +142,14 @@ build_path (AsyncExistenceJob *job)
     {
       /* translators: this is the name of the file that gets made up
        * with the screenshot if the entire screen is taken */
-      file_name = g_strdup_printf (_("Screenshot from %s.%s"), origin, file_type);
+      file_name = g_strdup_printf (_("Screenshot-from-%s.%s"), origin, file_type);
     }
   else
     {
       /* translators: this is the name of the file that gets
        * made up with the screenshot if the entire screen is
        * taken */
-      file_name = g_strdup_printf (_("Screenshot from %s - %d.%s"), origin, job->iteration, file_type);
+      file_name = g_strdup_printf (_("Screenshot-from-%s-%d.%s"), origin, job->iteration, file_type);
     }
 
   retval = g_build_filename (base_path, file_name, NULL);
