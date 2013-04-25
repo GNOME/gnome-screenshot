@@ -9,22 +9,23 @@
 # Dr.T.Vasudevan <agnihot3@gmail.com>, 2007, 2008, 2009, 2011, 2012.
 # I. Felix <ifelix@redhat.com>, 2009.
 # Dr,T,Vasudevan <agnihot3@gmail.com>, 2010, 2011.
-# Shantha kumar <shkumar@redhat.com>, 2012.
+# Shantha kumar <shkumar@redhat.com>, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-04-05 20:57+0000\n"
-"PO-Revision-Date: 2012-09-12 15:05+0530\n"
+"POT-Creation-Date: 2013-04-23 05:58+0000\n"
+"PO-Revision-Date: 2013-04-25 17:39+0000\n"
 "Last-Translator: Shantha kumar <shkumar@redhat.com>\n"
-"Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
+"Language-Team: American English <>\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -43,7 +44,7 @@ msgstr "உங்கள் பணிமேடையின்  அல்லது
 
 #: ../src/gnome-screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;"
-msgstr ""
+msgstr "snapshot;capture;print;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
@@ -90,7 +91,8 @@ msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
-"முழு பணிமேடை இல்லாமல் இப்போதைய சாளரத்தை மட்டும் பிடி. இந்த விசை நீக்கப்பட்டு இனி "
+"முழு பணிமேடை இல்லாமல் இப்போதைய சாளரத்தை மட்டும் பிடி. இந்த விசை நீக்கப்பட்டு "
+"இனி "
 "பயன்படுத்தப்பட மாட்டாது."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
@@ -150,7 +152,8 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"ஒரு விளிம்புக்கு அப்பால் சேர்க்க வேண்டிய விளைவு. இருக்கக்கூடிய மதிப்புகள் \"நிழல்\", "
+"ஒரு விளிம்புக்கு அப்பால் சேர்க்க வேண்டிய விளைவு. இருக்கக்கூடிய மதிப்புகள் "
+"\"நிழல்\", "
 "\"எதுவும் இல்லை\", மற்றும் \"விளிம்பு\". "
 
 #: ../src/screenshot-application.c:143
@@ -171,7 +174,8 @@ msgstr "திரை பிடிப்பு செய்ய முடியவ
 #: ../src/screenshot-application.c:172
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
-"கோப்பை உருவாக்குவதில் பிழை. தயவு செய்து வேறு இடம் தேர்ந்து எடுத்து மீண்டும் முயற்சிக்கவும்."
+"கோப்பை உருவாக்குவதில் பிழை. தயவு செய்து வேறு இடம் தேர்ந்து எடுத்து மீண்டும் "
+"முயற்சிக்கவும்."
 
 #: ../src/screenshot-application.c:352
 msgid "Error creating file"
@@ -258,7 +262,8 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"முரண்படும் விருப்பங்கள்: --window மற்றும் --area ஒரே நேரத்தில் பயன்படுத்தப்பட கூடாது.\n"
+"முரண்படும் விருப்பங்கள்: --window மற்றும் --area ஒரே நேரத்தில் பயன்படுத்தப்பட "
+"கூடாது.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
@@ -266,7 +271,8 @@ msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"முரண்படும் விருப்பங்கள்: --area மற்றும் --delay ஒரே நேரத்தில் பயன்படுத்தப்பட கூடாது.\n"
+"முரண்படும் விருப்பங்கள்: --area மற்றும் --delay ஒரே நேரத்தில் பயன்படுத்தப்பட "
+"கூடாது.\n"
 
 #: ../src/screenshot-dialog.c:163
 msgid "Save Screenshot"
