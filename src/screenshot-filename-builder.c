@@ -25,6 +25,7 @@
 #include <string.h>
 
 #include "screenshot-filename-builder.h"
+#include "screenshot-config.h"
 
 typedef enum
 {
@@ -116,11 +117,11 @@ sanitize_save_directory (const gchar *save_dir)
 static char *
 build_path (AsyncExistenceJob *job)
 {
-  const gchar *base_path;
-  char *retval, *file_name;
-  char *origin;
+  const gchar *base_path, *file_type;
+  char *retval, *file_name, *origin;
 
   base_path = job->base_paths[job->type];
+  file_type = screenshot_config->file_type;
 
   if (base_path == NULL ||
       base_path[0] == '\0')
@@ -141,14 +142,14 @@ build_path (AsyncExistenceJob *job)
     {
       /* translators: this is the name of the file that gets made up
        * with the screenshot if the entire screen is taken */
-      file_name = g_strdup_printf (_("Screenshot from %s.png"), origin);
+      file_name = g_strdup_printf (_("Screenshot from %s.%s"), origin, file_type);
     }
   else
     {
       /* translators: this is the name of the file that gets
        * made up with the screenshot if the entire screen is
        * taken */
-      file_name = g_strdup_printf (_("Screenshot from %s - %d.png"), origin, job->iteration);
+      file_name = g_strdup_printf (_("Screenshot from %s - %d.%s"), origin, job->iteration, file_type);
     }
 
   retval = g_build_filename (base_path, file_name, NULL);

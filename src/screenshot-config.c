@@ -32,6 +32,7 @@
 #define INCLUDE_ICC_PROFILE     "include-icc-profile"
 #define AUTO_SAVE_DIRECTORY_KEY "auto-save-directory"
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
+#define DEFAULT_FILE_TYPE_KEY   "default-file-type"
 
 ScreenshotConfig *screenshot_config;
 
@@ -124,6 +125,9 @@ screenshot_load_config (gboolean clipboard_arg,
       config->copy_to_clipboard = clipboard_arg;
       if (file_arg != NULL)
         config->file = g_file_new_for_commandline_arg (file_arg);
+      config->file_type =
+        g_settings_get_string (config->settings,
+                               DEFAULT_FILE_TYPE_KEY);
     }
 
   config->include_icc_profile =

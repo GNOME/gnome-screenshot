@@ -1,4 +1,10 @@
 <schemalist gettext-domain="gnome-utils-2.0">
+ <enum id="org.gnome.gnome-screenshot.file-types">
+    <value nick="bmp" value="0"/>
+    <value nick="jpg" value="1"/>
+    <value nick="png" value="2"/>
+    <value nick="tiff" value="3"/>
+  </enum>
   <schema id="org.gnome.gnome-screenshot" path="/org/gnome/gnome-screenshot/">
     <key name="take-window-shot" type="b">
       <default>false</default>
@@ -39,6 +45,11 @@
       <default>'none'</default>
       <_summary>Border Effect</_summary>
       <_description>Effect to add to the outside of a border.  Possible values are "shadow", "none", and "border".</_description>
+    </key>
+    <key name="default-file-type" enum="org.gnome.gnome-screenshot.file-types">
+      <default>'png'</default>
+      <_summary>Default file type extension</_summary>
+      <_description>The default file type extension for screenshots.</_description>
     </key>
   </schema>
 </schemalist>

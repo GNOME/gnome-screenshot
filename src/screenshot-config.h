@@ -29,6 +29,7 @@ typedef struct {
   GSettings *settings;
 
   gchar *save_dir;
+  gchar *file_type;
   GFile *file;
 
   gboolean copy_to_clipboard;
