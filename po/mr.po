@@ -1,9 +1,8 @@
 # translation of mr.po to Marathi
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
 # sandeep shedmake <sandeep.shedmake@gmail.com>, 2007.
-# Sandeep Shedmake <sshedmak@redhat.com>, 2008, 2009.
+# Sandeep Shedmake <sshedmak@redhat.com>, 2008, 2009, 2013.
 # Sandeep Shedmake <sshedmak@redhat.com>, 2009, 2012, 2013.
 msgid ""
 msgstr ""
@@ -11,23 +10,16 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2013-01-03 10:00+0000\n"
-"PO-Revision-Date: 2013-03-21 14:49+0530\n"
+"PO-Revision-Date: 2013-05-10 12:56+0530\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
-"Language-Team: Marathi <maajhe-sanganak@freelists.org>\n"
+"Language-Team: Marathi\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:680
 msgid "Screenshot"
@@ -147,9 +139,8 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"किनाराच्या बाहेरील बाजूस जोडण्याकरीता प्रभाव. संभाव्य मुल्य आहे  \"छाया\", "
-"\"काहीच नाही"
-"\", व \"किनार\"."
+"किनाराच्या बाहेरील बाजूस जोडण्याकरीता प्रभाव. संभाव्य मुल्य आहे \"छाया\", "
+"\"काहीच नाही\", व \"किनार\"."
 
 #: ../src/screenshot-application.c:142
 #, c-format
@@ -245,7 +236,7 @@ msgstr "पडद्याची प्रतिकृती घ्या"
 
 #: ../src/screenshot-application.c:683
 msgid "translator-credits"
-msgstr "संदिप शेडमाके <sshedmak@redhat.com>, 2012"
+msgstr "संदिप शेडमाके <sshedmak@redhat.com>, 2012,2013."
 
 #: ../src/screenshot-config.c:56
 #, c-format
@@ -278,7 +269,7 @@ msgstr "स्क्रीनशॉट.png"
 #: ../src/screenshot-filename-builder.c:144
 #, c-format
 msgid "Screenshot from %s.png"
-msgstr "%s.png पासून स्क्रीनशॉट"
+msgstr "%s पासून स्क्रीनशॉट.png"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
