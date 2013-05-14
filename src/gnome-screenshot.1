@@ -1,15 +1,18 @@
-.TH "GNOME-SCREENSHOT" "1" "June 28, 2009" "" ""
+.TH "GNOME-SCREENSHOT" "1" "May 14, 2013" "" ""
 .SH NAME
 gnome-screenshot \- capture the screen, a window, or an user-defined area and save the snapshot image to a file.
 .SH SYNOPSIS
 .sp
-\fBgnome-screenshot\fR [ \fB-w\fR ]  [ \fB-a\fR ]  [ \fB-b\fR ]  [ \fB-B\fR ]  [ \fB-d \fISECONDS\fB \fR ]  [ \fB-e \fIEFFECT\fB \fR ]  [ \fB-i\fR ]  [ \fB--display \fIDISPLAY\fB \fR ] 
+\fBgnome-screenshot\fR [ \fB-c\fR ]  [ \fB-w\fR ]  [ \fB-a\fR ]  [ \fB-b\fR ]  [ \fB-B\fR ]  [ \fB-p\fR ]  [ \fB-d \fISECONDS\fB \fR ]  [ \fB-e \fIEFFECT\fB \fR ]  [ \fB-i\fR ]  [ \fB-f \fIFILENAME\fB \fR ]  [ \fB--display \fIDISPLAY\fB \fR ]
 .SH "DESCRIPTION"
 .PP
 \fBgnome-screenshot\fR is a GNOME utility for taking
 screenshots of the entire screen, a window or an user-defined area of the screen, with optional beautifying
 border effects.
 .SH "OPTIONS"
+.TP
+\fB-c, --clipboard\fR
+Send the grab directly to the clipboard.
 .TP
 \fB-w, --window\fR
 Grab the current active window instead of the entire
@@ -24,10 +27,13 @@ Include the window border within the screenshot.
 \fB-B, --remove-border\fR
 Remove the window border from the screenshot.
 .TP
+\fB-p, --include-pointer\fR
+Include the pointer with the screenshot.
+.TP
 \fB-d, --delay=\fISECONDS\fB,\fR
 Take the screenshot after the specified delay [in seconds].
 .TP
-\fB-e, --effect=\fIEFFECT\fB,\fR
+\fB-e, --border-effect=\fIEFFECT\fB,\fR
 Add an effect to the outside of the screenshot border.
 \fIEFFECT\fR can be ``shadow'' 
 (adding drop shadow), ``border'' (adding rectangular
@@ -37,22 +43,21 @@ Default is ``none''.
 \fB-i, --interactive\fR
 Interactively set options in a dialog.
 .TP
+\fB-f, --file=\fIFILENAME\fB\fR
+Save screenshot directly to this file.
+.TP
 \fB--display=\fIDISPLAY\fB\fR
 X display to use.
 .TP
 \fB-?, -h, --help\fR
 Show a summary of the available options.
 .PP
-In addition, the usual GTK+ and GNOME command line options apply.
+In addition, the usual GTK+ command line options apply.
 See the output of --help for details.
-.PP
-.SH "SEE ALSO"
-.PP
-gnome-options(7), gtk-options(7)
 .SH "AUTHOR"
 .PP
 This manual page was written by Christian Marillat <marillat@debian.org> for
 the Debian GNU/Linux system (but may be used by others).
 .PP
 Updated by Theppitak Karoonboonyanan
-<thep@linux.thai.net>, Tom Feiner <feiner.tom@gmail.com> and Cosimo Cecchi <cosimoc@gnome.org>
+<thep@linux.thai.net>, Tom Feiner <feiner.tom@gmail.com>, Cosimo Cecchi <cosimoc@gnome.org> and others.
