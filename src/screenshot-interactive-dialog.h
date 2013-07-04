@@ -25,6 +25,8 @@
 
 #include <gtk/gtk.h>
 
-GtkWidget *screenshot_interactive_dialog_new (void);
+typedef void (*CaptureClickedCallback) (gpointer *user_data);
+
+GtkWidget *screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data);
 
 #endif /* __SCREENSHOT_INTERACTIVE_DIALOG_H__ */

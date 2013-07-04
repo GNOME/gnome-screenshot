@@ -741,39 +741,9 @@ screenshooter_init_stock_icons (void)
 }
 
 static void
-interactive_dialog_response_cb (GtkWidget *d,
-                                gint response,
-                                gpointer user_data)
-{
-  ScreenshotApplication *self = user_data;
-
-  if (response != GTK_RESPONSE_HELP)
-    gtk_widget_destroy (d);
-
-  switch (response)
-    {
-    case GTK_RESPONSE_DELETE_EVENT:
-      break;
-    case GTK_RESPONSE_OK:
-      screenshot_start (self);
-      break;
-    case GTK_RESPONSE_HELP:
-      screenshot_display_help (GTK_WINDOW (d));
-      break;
-    default:
-      g_assert_not_reached ();
-      break;
-    }
-}
-
-static void
 screenshot_show_interactive_dialog (ScreenshotApplication *self)
 {
-  GtkWidget *dialog;
-
-  dialog = screenshot_interactive_dialog_new ();
-  g_signal_connect (dialog, "response",
-                    G_CALLBACK (interactive_dialog_response_cb), self);
+  screenshot_interactive_dialog_new ((CaptureClickedCallback) screenshot_start, self);
 }
 
 static void
