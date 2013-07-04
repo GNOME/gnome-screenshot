@@ -130,6 +130,12 @@ interactive_dialog_key_press_cb (GtkWidget *widget,
       return TRUE;
     }
 
+  if (event->keyval == GDK_KEY_Escape)
+    {
+      gtk_widget_destroy (widget);
+      return TRUE;
+    }
+
   return FALSE;
 }
 
@@ -412,37 +418,49 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_widget_show (label);
 }
 
+typedef struct {
+  GtkWidget *widget;
+  CaptureClickedCallback callback;
+  gpointer user_data;
+} CaptureData;
+
+static void
+capure_button_clicked_cb (GtkButton *button, CaptureData *data)
+{
+  gtk_widget_destroy (data->widget);
+  data->callback (data->user_data);
+  g_free (data);
+}
 
 GtkWidget *
-screenshot_interactive_dialog_new (void)
+screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 {
   GtkWidget *dialog;
   GtkWidget *main_vbox;
-  GtkWidget *content_area;
+  GtkWidget *button_box;
+  GtkWidget *button;
   gboolean shows_app_menu;
   GtkSettings *settings;
+  CaptureData *data;
 
-  dialog = gtk_dialog_new ();
-  gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (g_application_get_default ()));
+  dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_title (GTK_WINDOW (dialog), _("Take Screenshot"));
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-  gtk_box_set_spacing (GTK_BOX (content_area), 2);
 
   /* main container */
   main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 18);
   gtk_container_set_border_width (GTK_CONTAINER (main_vbox), 5);
-  gtk_box_pack_start (GTK_BOX (content_area), main_vbox, TRUE, TRUE, 0);
-  gtk_widget_show (main_vbox);
+  gtk_container_add (GTK_CONTAINER (dialog), main_vbox);
 
   create_screenshot_frame (main_vbox, _("Take Screenshot"));
   create_effects_frame (main_vbox, _("Effects"));
 
-  gtk_dialog_add_button (GTK_DIALOG (dialog),
-                         _("Take _Screenshot"), GTK_RESPONSE_OK);
+  button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (button_box), GTK_BUTTONBOX_END);
+  gtk_container_add (GTK_CONTAINER (main_vbox), button_box);
 
   /* add help as a dialog button if we're not showing the application menu */
   settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (dialog)));
@@ -450,11 +468,23 @@ screenshot_interactive_dialog_new (void)
                 "gtk-shell-shows-app-menu", &shows_app_menu,
                 NULL);
   if (!shows_app_menu)
-    gtk_dialog_add_button (GTK_DIALOG (dialog),
-                           GTK_STOCK_HELP, GTK_RESPONSE_HELP);
+    {
+      button = gtk_button_new_from_stock (GTK_STOCK_HELP);
+      g_signal_connect_swapped (button, "clicked", G_CALLBACK (screenshot_display_help), dialog);
+      gtk_container_add (GTK_CONTAINER (button_box),
+                         button);
+      gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (button_box), button, TRUE);
+    }
 
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
+  button = gtk_button_new_with_mnemonic (_("Take _Screenshot"));
+  data = g_new (CaptureData, 1);
+  data->widget = dialog;
+  data->callback = f;
+  data->user_data = user_data;
+  g_signal_connect (button, "clicked", G_CALLBACK (capure_button_clicked_cb), data);
+  gtk_container_add (GTK_CONTAINER (button_box), button);
+  gtk_widget_set_can_default (button, TRUE);
+  gtk_widget_grab_default (button);
   g_signal_connect (dialog, "key-press-event",
                     G_CALLBACK (interactive_dialog_key_press_cb), 
                     NULL);
