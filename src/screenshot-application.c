@@ -117,6 +117,7 @@ save_pixbuf_handle_success (ScreenshotApplication *self)
 
       save_folder_to_settings (self);
       gtk_widget_destroy (dialog->dialog);
+      g_free (dialog);
     }
   else
     {
@@ -401,18 +402,12 @@ screenshot_save_to_clipboard (ScreenshotApplication *self)
 }
 
 static void
-screenshot_dialog_response_cb (GtkDialog *d,
-                               gint response_id,
-                               gpointer user_data)
+screenshot_dialog_response_cb (ScreenshotResponse response,
+                               ScreenshotApplication *self)
 {
-  ScreenshotApplication *self = user_data;
-
-  switch (response_id)
+  switch (response)
     {
-    case GTK_RESPONSE_HELP:
-      screenshot_display_help (GTK_WINDOW (d));
-      break;
-    case GTK_RESPONSE_OK:
+    case SCREENSHOT_RESPONSE_SAVE:
       /* update to the new URI */
       g_free (self->priv->save_uri);
       self->priv->save_uri = screenshot_dialog_get_uri (self->priv->dialog);
@@ -422,7 +417,7 @@ screenshot_dialog_response_cb (GtkDialog *d,
       screenshot_save_to_clipboard (self);
       break;
     default:
-      gtk_widget_destroy (GTK_WIDGET (d));
+      g_assert_not_reached ();
       break;
     }
 }
@@ -479,11 +474,10 @@ build_filename_ready_cb (GObject *source,
 
   if (screenshot_config->interactive)
     {
-      self->priv->dialog = screenshot_dialog_new (self->priv->screenshot, self->priv->save_uri);
-      g_signal_connect (self->priv->dialog->dialog,
-                        "response",
-                        G_CALLBACK (screenshot_dialog_response_cb),
-                        self);
+      self->priv->dialog = screenshot_dialog_new (self->priv->screenshot,
+                                                  self->priv->save_uri,
+                                                  (SaveScreenshotCallback)screenshot_dialog_response_cb,
+                                                  self);
     }
   else
     {
