@@ -118,9 +118,42 @@ drag_begin (GtkWidget        *widget,
 			    dialog->drag_x, dialog->drag_y);
 }
 
+static gboolean
+dialog_key_press_cb (GtkWidget *widget,
+                     GdkEventKey *event,
+                     gpointer user_data)
+{
+  if (event->keyval == GDK_KEY_F1)
+    {
+      screenshot_display_help (GTK_WINDOW (widget));
+      return TRUE;
+    }
+
+  if (event->keyval == GDK_KEY_Escape)
+    {
+      gtk_widget_destroy (widget);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static void
+button_clicked (GtkWidget *button, ScreenshotDialog *dialog)
+{
+  ScreenshotResponse res;
+
+  res = (button == dialog->save_button) ? SCREENSHOT_RESPONSE_SAVE
+                                        : SCREENSHOT_RESPONSE_COPY;
+
+  dialog->callback (res, dialog->user_data);
+}
+
 ScreenshotDialog *
-screenshot_dialog_new (GdkPixbuf *screenshot,
-		       char      *initial_uri)
+screenshot_dialog_new (GdkPixbuf              *screenshot,
+		       char                   *initial_uri,
+		       SaveScreenshotCallback f,
+		       gpointer               user_data)
 {
   ScreenshotDialog *dialog;
   GtkBuilder *ui;
@@ -146,6 +179,8 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 
   dialog = g_new0 (ScreenshotDialog, 1);
   dialog->screenshot = screenshot;
+  dialog->callback = f;
+  dialog->user_data = user_data;
 
   ui = gtk_builder_new ();
   res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/screenshot-dialog.ui", NULL);
@@ -159,23 +194,26 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
 
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "toplevel"));
   gtk_window_set_application (GTK_WINDOW (dialog->dialog), GTK_APPLICATION (g_application_get_default ()));
-  gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-  gtk_window_set_title (GTK_WINDOW (dialog->dialog), _("Save Screenshot"));
-  gtk_window_set_position (GTK_WINDOW (dialog->dialog), GTK_WIN_POS_CENTER);
   gtk_widget_realize (dialog->dialog);
+  g_signal_connect (dialog->dialog, "key-press-event",
+                    G_CALLBACK (dialog_key_press_cb),
+                    NULL);
 
   aspect_frame = GTK_WIDGET (gtk_builder_get_object (ui, "aspect_frame"));
   preview_darea = GTK_WIDGET (gtk_builder_get_object (ui, "preview_darea"));
   dialog->filename_entry = GTK_WIDGET (gtk_builder_get_object (ui, "filename_entry"));
   file_chooser_box = GTK_WIDGET (gtk_builder_get_object (ui, "file_chooser_box"));
-  g_object_unref (ui);
 
-  dialog->save_widget = gtk_file_chooser_button_new (_("Select a folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
-  gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog->save_widget), FALSE);
+  dialog->save_widget = GTK_WIDGET (gtk_builder_get_object (ui, "save_widget"));
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
   gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
 
-  gtk_box_pack_start (GTK_BOX (file_chooser_box), dialog->save_widget, TRUE, TRUE, 0);
+  dialog->save_button = GTK_WIDGET (gtk_builder_get_object (ui, "save_button"));
+  g_signal_connect (dialog->save_button, "clicked", G_CALLBACK (button_clicked), dialog);
+  dialog->copy_button = GTK_WIDGET (gtk_builder_get_object (ui, "copy_button"));
+  g_signal_connect (dialog->copy_button, "clicked", G_CALLBACK (button_clicked), dialog);
+
+  g_object_unref (ui);
   g_free (current_folder);
 
   gtk_widget_set_size_request (preview_darea, width, height);
