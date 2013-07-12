@@ -33,6 +33,8 @@
 #define AUTO_SAVE_DIRECTORY_KEY "auto-save-directory"
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
 
+ScreenshotConfig *screenshot_config;
+
 gboolean
 screenshot_load_config (gboolean clipboard_arg,
                         gboolean window_arg,

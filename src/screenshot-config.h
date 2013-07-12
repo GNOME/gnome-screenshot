@@ -47,7 +47,7 @@ typedef struct {
   gboolean interactive;
 } ScreenshotConfig;
 
-ScreenshotConfig *screenshot_config;
+extern ScreenshotConfig *screenshot_config;
 
 gboolean screenshot_load_config (gboolean clipboard_arg,
                                  gboolean window_arg,
