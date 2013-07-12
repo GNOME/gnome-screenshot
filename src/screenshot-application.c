@@ -635,6 +635,7 @@ screenshot_application_local_command_line (GApplication *app,
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
   gchar *file_arg = NULL;
+  gboolean version_arg = FALSE;
   const GOptionEntry entries[] = {
     { "clipboard", 'c', 0, G_OPTION_ARG_NONE, &clipboard_arg, N_("Send the grab directly to the clipboard"), NULL },
     { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
@@ -646,6 +647,7 @@ screenshot_application_local_command_line (GApplication *app,
     { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
     { "file", 'f', 0, G_OPTION_ARG_FILENAME, &file_arg, N_("Save screenshot directly to this file"), N_("filename") },
+    { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
     { NULL },
   };
 
@@ -669,6 +671,12 @@ screenshot_application_local_command_line (GApplication *app,
       g_error_free (error);
 
       *exit_status = EXIT_FAILURE;
+      goto out;
+    }
+
+  if (version_arg)
+    {
+      g_print ("%s %s\n", g_get_application_name (), VERSION);
       goto out;
     }
 
