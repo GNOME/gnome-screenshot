@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2013-05-14 23:47+0000\n"
-"PO-Revision-Date: 2013-06-18 10:25+0500\n"
+"PO-Revision-Date: 2013-07-18 16:13+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: \n"
 "Language: Tajik\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:813
 msgid "Screenshot"
@@ -28,7 +28,7 @@ msgstr "Тасвирҳои экранҳои худ ё равзанаҳои му�
 
 #: ../src/gnome-screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;"
-msgstr ""
+msgstr "акси экран;аксгирӣ;чоп;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
@@ -68,13 +68,15 @@ msgstr "*"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
-msgstr ""
+msgstr "Скриншоти махсуси равзана (мухтасар)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
+"Ба ҷои мизи кории комил қапидани танҳо равзанаи ҷорӣ. Ин калид бекор шуд ва "
+"дигар истифода намешавад."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -82,7 +84,7 @@ msgstr "Таъхири Сурати экран"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
+msgstr "Теъдоди сонияҳо барои интизорӣ пеш аз гирифтани скриншот."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
@@ -90,7 +92,7 @@ msgstr "Директорияи Сурати экран"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
 msgid "The directory where the screenshots will be saved by default."
-msgstr ""
+msgstr "Директорияе, ки скриншотҳо тавассути пешфарз захира мешаванд."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
 msgid "Last save directory"
@@ -99,6 +101,7 @@ msgstr "Директорияи охирини захиракунӣ"
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
+"Директорияи охирине, ки дар он скриншот дар ҳолати интерактивӣ захира шуд."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -106,7 +109,7 @@ msgstr "Илова кардани марз"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
 msgid "Include the window manager border along with the screenshot"
-msgstr ""
+msgstr "Илова кардани марзи мудири равзана дар канораҳои скриншот"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Include Pointer"
@@ -114,7 +117,7 @@ msgstr "Илова кардани нишондиҳанда"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Include the pointer in the screenshot"
-msgstr ""
+msgstr "Илова кардани ишорагар дар скриншот"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
 msgid "Include ICC Profile"
@@ -133,6 +136,8 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
+"Таъсир ва илова ба беруни марз. Қиматҳои эҳтимолӣ иборатанд аз: \"соя\", "
+"\"ҳеҷ кадом\", and \"марз\"."
 
 #: ../src/screenshot-application.c:143
 #, c-format
@@ -152,6 +157,8 @@ msgstr "Сурати экран гирифта нашуд"
 #: ../src/screenshot-application.c:172
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
+"Хатори эҷоди файл. Лутфан дигар ҷойгиршавиро интихоб кунед ва амалро такрор "
+"кунед. "
 
 #: ../src/screenshot-application.c:467
 msgid "Error creating file"
@@ -163,35 +170,35 @@ msgstr "Сурати экран гирифта шуд"
 
 #: ../src/screenshot-application.c:512
 msgid "All possible methods failed"
-msgstr ""
+msgstr "Ҳамаи равишҳои эҳтимолӣ қатъ шуданд."
 
 #: ../src/screenshot-application.c:645
 msgid "Send the grab directly to the clipboard"
-msgstr ""
+msgstr "Мустақиман фиристодани қапак ба ҳофизаи муваққатӣ"
 
 #: ../src/screenshot-application.c:646
 msgid "Grab a window instead of the entire screen"
-msgstr ""
+msgstr "Қапидани равзана ба ҷои ҳамаи экран"
 
 #: ../src/screenshot-application.c:647
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr ""
+msgstr "Қапидани минтақае аз экран ба ҷои ҳамаи экран"
 
 #: ../src/screenshot-application.c:648
 msgid "Include the window border with the screenshot"
-msgstr ""
+msgstr "Илова кардани марзи равзана ба скриншот"
 
 #: ../src/screenshot-application.c:649
 msgid "Remove the window border from the screenshot"
-msgstr ""
+msgstr "Тоза кардани марзи равзана аз скриншот"
 
 #: ../src/screenshot-application.c:650
 msgid "Include the pointer with the screenshot"
-msgstr ""
+msgstr "Илова кардани ишорагар ба скриншот"
 
 #: ../src/screenshot-application.c:651
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr ""
+msgstr "Гирифтани скриншот баъд аз таъхири муайян [бо сонияҳо]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -203,7 +210,7 @@ msgstr "сония"
 
 #: ../src/screenshot-application.c:652
 msgid "Effect to add to the border (shadow, border or none)"
-msgstr ""
+msgstr "Таъсир ва илова ба марз (соя, марз ё ҳеҷ кадом)"
 
 #: ../src/screenshot-application.c:652
 msgid "effect"
@@ -215,7 +222,7 @@ msgstr "Таъин кардани имконот ба таври интерак�
 
 #: ../src/screenshot-application.c:654
 msgid "Save screenshot directly to this file"
-msgstr ""
+msgstr "Захира кардани скриншот мустақиман ба ин файл"
 
 #: ../src/screenshot-application.c:654
 msgid "filename"
@@ -235,6 +242,7 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
+"Имконоти номусоид: --равзана ва --минтақа набояд ҳамзамон истифода шаванд.\n"
 
 #: ../src/screenshot-config.c:63
 #, c-format
@@ -242,6 +250,7 @@ msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
+"Имконоти номусоид: --минтақа ва --таъхир набояд ҳамзамон истифода шаванд.\n"
 
 #: ../src/screenshot-dialog.c:163
 msgid "Save Screenshot"
@@ -276,7 +285,7 @@ msgstr "Ҳеҷ"
 
 #: ../src/screenshot-interactive-dialog.c:149
 msgid "Drop shadow"
-msgstr ""
+msgstr "Рехтани соя"
 
 #: ../src/screenshot-interactive-dialog.c:150
 msgid "Border"
@@ -298,22 +307,22 @@ msgstr "Татбиқ кардани _таъсир:"
 
 #: ../src/screenshot-interactive-dialog.c:343
 msgid "Grab the whole sc_reen"
-msgstr ""
+msgstr "Қапидани ҳамаи эк_ран"
 
 #: ../src/screenshot-interactive-dialog.c:357
 msgid "Grab the current _window"
-msgstr ""
+msgstr "Қаридани равзанаи _ҷорӣ "
 
 #: ../src/screenshot-interactive-dialog.c:369
 msgid "Select _area to grab"
-msgstr ""
+msgstr "Интихоби _минтақа барои қапидан"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:389
 msgid "Grab after a _delay of"
-msgstr ""
+msgstr "Қапидан баъд аз  _таъхири"
 
 #: ../src/screenshot-interactive-dialog.c:428
 #: ../src/screenshot-interactive-dialog.c:441
