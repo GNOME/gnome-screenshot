@@ -3,6 +3,7 @@
  * Copyright (C) 2001 Jonathan Blandford <jrb@alum.mit.edu>
  * Copyright (C) 2006 Emmanuele Bassi <ebassi@gnome.org>
  * Copyright (C) 2008, 2011 Cosimo Cecchi <cosimoc@gnome.org>
+ * Copyright (C) 2013 Nils Dagsson Moskopp <nils@dieweltistgarnichtso.net>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -47,7 +48,8 @@ enum
 typedef enum {
   SCREENSHOT_EFFECT_NONE,
   SCREENSHOT_EFFECT_SHADOW,
-  SCREENSHOT_EFFECT_BORDER
+  SCREENSHOT_EFFECT_BORDER,
+  SCREENSHOT_EFFECT_VINTAGE
 } ScreenshotEffectType;
 
 #define TARGET_TOGGLE_DESKTOP 0
@@ -153,7 +155,8 @@ typedef struct {
 static const ScreenshotEffect effects[] = {
   { SCREENSHOT_EFFECT_NONE, N_("None"), "none" },
   { SCREENSHOT_EFFECT_SHADOW, N_("Drop shadow"), "shadow" },
-  { SCREENSHOT_EFFECT_BORDER, N_("Border"), "border" }
+  { SCREENSHOT_EFFECT_BORDER, N_("Border"), "border" },
+  { SCREENSHOT_EFFECT_VINTAGE, N_("Vintage"), "vintage" }
 };
 
 static guint n_effects = G_N_ELEMENTS (effects);
@@ -198,6 +201,9 @@ create_effects_combo (void)
       gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
                                 SCREENSHOT_EFFECT_BORDER);
       break;
+    case 'v': /* vintage */
+      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
+                                SCREENSHOT_EFFECT_VINTAGE);
     case 'n': /* none */
       gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
                                 SCREENSHOT_EFFECT_NONE);

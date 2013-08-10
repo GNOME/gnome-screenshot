@@ -526,6 +526,9 @@ finish_prepare_screenshot (ScreenshotApplication *self,
         case 'b': /* border */
           screenshot_add_border (&screenshot);
           break;
+        case 'v': /* vintage */
+          screenshot_add_vintage (&screenshot);
+          break;
         case 'n': /* none */
         default:
           break;
@@ -646,7 +649,7 @@ screenshot_application_local_command_line (GApplication *app,
     { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, N_("Remove the window border from the screenshot"), NULL },
     { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, &include_pointer_arg, N_("Include the pointer with the screenshot"), NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-    { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
+    { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
     { "file", 'f', 0, G_OPTION_ARG_FILENAME, &file_arg, N_("Save screenshot directly to this file"), N_("filename") },
     { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
