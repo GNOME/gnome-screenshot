@@ -109,6 +109,9 @@ screenshot_load_config (gboolean clipboard_arg,
         config->border_effect =
           g_settings_get_string (config->settings,
                                  BORDER_EFFECT_KEY);
+      config->file_type =
+        g_settings_get_string (config->settings,
+                               DEFAULT_FILE_TYPE_KEY);
     }
   else
     {
