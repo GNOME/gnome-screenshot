@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-11 07:04+0000\n"
-"PO-Revision-Date: 2013-03-12 16:51+0300\n"
+"POT-Creation-Date: 2013-09-10 10:48+0000\n"
+"PO-Revision-Date: 2013-09-11 23:06+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <>\n"
 "Language: et\n"
@@ -26,6 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 msgid "Screenshot"
 msgstr "Ekraanipilt"
@@ -51,8 +52,8 @@ msgstr "Abi"
 msgid "Quit"
 msgstr "Lõpeta"
 
-msgid "C_opy to Clipboard"
-msgstr "K_opeeri lõikelauale"
+msgid "Save Screenshot"
+msgstr "Ekraanipildi salvestamine"
 
 msgid "_Name:"
 msgstr "_Nimi:"
@@ -60,8 +61,8 @@ msgstr "_Nimi:"
 msgid "Save in _folder:"
 msgstr "Salvestada _kataloogi:"
 
-msgid "*"
-msgstr "*"
+msgid "C_opy to Clipboard"
+msgstr "K_opeeri lõikelauale"
 
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Aknaspetsiifiline ekraanipilt (aegunud)"
@@ -118,6 +119,12 @@ msgid ""
 msgstr ""
 "Äärise välisküljele määratav efekt. Võimalikud väärtused on \"shadow"
 "\" (vari), \"none\" (puudub) ja \"border\" (äärisjoon)."
+
+msgid "Default file type extension"
+msgstr "Vaikimisi faililaiend"
+
+msgid "The default file type extension for screenshots."
+msgstr "Ekraanipildi failide vaikimisi laiend."
 
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
@@ -208,27 +215,21 @@ msgid ""
 msgstr ""
 "Vastuolulised võtmed: --area ja --delay ei tohi korraga kasutusel olla.\n"
 
-msgid "Save Screenshot"
-msgstr "Ekraanipildi salvestamine"
-
-msgid "Select a folder"
-msgstr "Kataloogi valimine"
-
 msgid "Screenshot.png"
 msgstr "Ekraanipilt.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
 #, c-format
-msgid "Screenshot from %s.png"
-msgstr "Ekraanipilt %s.png"
+msgid "Screenshot from %s.%s"
+msgstr "Ekraanipilt %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
 #, c-format
-msgid "Screenshot from %s - %d.png"
-msgstr "Ekraanipilt %s - %d.png"
+msgid "Screenshot from %s - %d.%s"
+msgstr "Ekraanipilt %s - %d.%s"
 
 msgid "None"
 msgstr "Puudub"
@@ -276,3 +277,9 @@ msgstr "Võta _ekraanipilt"
 
 msgid "Error loading the help page"
 msgstr "Viga abiteabe lehe laadimisel"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "Select a folder"
+#~ msgstr "Kataloogi valimine"
