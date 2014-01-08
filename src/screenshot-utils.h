@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public
  * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  */
 
 #ifndef __SCREENSHOT_UTILS_H__
