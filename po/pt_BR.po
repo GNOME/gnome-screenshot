@@ -47,7 +47,7 @@ msgstr "Salvar imagens da sua tela ou de janelas individuais"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
-msgstr "captura de tela;captura;capturar;screenshot"
+msgstr "captura de tela;captura;capturar;screenshot;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
