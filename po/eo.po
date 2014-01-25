@@ -1,291 +1,358 @@
-# Esperanto translation for gnome-utils.
+# Esperanto translation for gnome-screenshot.
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
-# This file is distributed under the same license as the gnome-utils package.
+# This file is distributed under the same license as the gnome-screenshot package.
 # Kevin SCHAEFER <lugubrili@hotmail.com>, 2009.
 # Michael MORONI, <haikara90@gmail.com >, 2009.
-# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011.
+# Matthew Chisholm <mat.eo416@gmail.com>, 2014.
+# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2011-05-24 17:47+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-01-23 10:00+0000\n"
+"PO-Revision-Date: 2014-01-25 03:24+0100\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
-"Language-Team: Esperanto <ubuntu-l10n-eo@lists.launchpad.net>\n"
+"Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
 "X-Launchpad-Export-Date: 2011-05-24 14:28+0000\n"
-"X-Generator: Launchpad (build 13085)\n"
+"X-Project-Style: gnome\n"
 
-#: ../src/gnome-screenshot.c:143
-msgid "Error while saving screenshot"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr "Faris ekrankopion"
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr ""
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr "sekundoj"
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr "efekto"
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr "Fari bildon de la ekrano"
-
-#: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr ""
-
-#: ../src/gnome-screenshot.desktop.in.h:2
-#, fuzzy
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:787
 msgid "Screenshot"
-msgstr "Ekrankopio.png"
+msgstr "Ekrankopio"
+
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:788
+msgid "Save images of your screen or individual windows"
+msgstr "Konservi bildojn de via ekrano aŭ de unuopaj fenestroj"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the current window"
-msgstr "Fari ekrankopion de la aktuala fenestro"
+msgid "snapshot;capture;print;screenshot;"
+msgstr "ekkapti;ekrankopiilo;ekrankopio;ekranpresaĵo;kapti;presi;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
-msgid "Take a screenshot of the whole screen"
+msgid "Take a Screenshot of the Whole Screen"
 msgstr "Fari ekrankopion de la tuta ekrano"
 
-#: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+#: ../src/gnome-screenshot.desktop.in.h:5
+msgid "Take a Screenshot of the Current Window"
+msgstr "Fari ekrankopion de la aktuala fenestro"
 
-#: ../src/gnome-screenshot.ui.h:2
-msgid "C_opy to Clipboard"
-msgstr "K_opii al tondujo"
+#: ../src/screenshot-app-menu.ui.h:1
+msgid "Help"
+msgstr "Helpo"
 
-#: ../src/gnome-screenshot.ui.h:3
+#: ../src/screenshot-app-menu.ui.h:2
+msgid "About"
+msgstr "Pri"
+
+#: ../src/screenshot-app-menu.ui.h:3
+msgid "Quit"
+msgstr "Ĉesi"
+
+#: ../src/screenshot-dialog.ui.h:1
 msgid "Save Screenshot"
 msgstr "Konservi ekrankopion"
 
-#: ../src/gnome-screenshot.ui.h:4
-msgid "Save in _folder:"
-msgstr "Konservi en _dosierujo:"
-
-#: ../src/gnome-screenshot.ui.h:5
+#: ../src/screenshot-dialog.ui.h:2
 msgid "_Name:"
 msgstr "_Nomo:"
 
+#: ../src/screenshot-dialog.ui.h:3
+msgid "Save in _folder:"
+msgstr "Konservi en _dosierujon:"
+
+#: ../src/screenshot-dialog.ui.h:4
+msgid "C_opy to Clipboard"
+msgstr "K_opii al tondujo"
+
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr ""
+msgid "Window-specific screenshot (deprecated)"
+msgstr "Fenestro-specifa ekrankopio (evitinda)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
+"Kapti nur la aktualon fenestron, prefere ol la tuta tabulo. Ĉi tiu ŝlosilo "
+"evitindiĝis kaj oni ne plu uzas ĝin."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+msgid "Screenshot delay"
+msgstr "Ekrankopia prokrasto"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr ""
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr "La nombro da sekundoj por atendi antaŭ ol fari la ekrankopion."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr ""
+msgid "Screenshot directory"
+msgstr "Ekrankopia dosierujo"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-msgid "Include Pointer"
-msgstr ""
+msgid "The directory where the screenshots will be saved by default."
+msgstr "La dosierujo, en kiu la ekrankopioj konserviĝos implicite."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr ""
+msgid "Last save directory"
+msgstr "Dosierujo de lasta konservo"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
-msgstr ""
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr "La lasta dosierujo, en kiu ekrankopio konserviĝis en interaga reĝimo."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr ""
+msgid "Include Border"
+msgstr "Inkluzivi borderon"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
-msgid "Screenshot delay"
-msgstr ""
+msgid "Include the window manager border along with the screenshot"
+msgstr "Inkluzivi la borderon de la fenestra agordilo kun la ekrankopio"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr ""
+msgid "Include Pointer"
+msgstr "Inkluzivi musmontrilon"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr ""
+msgid "Include the pointer in the screenshot"
+msgstr "Inkluzivi la musmontrilon en la ekrankopio"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
-msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
+msgid "Include ICC Profile"
+msgstr "Inkluzivi profilon .icc"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr ""
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "Inkluzivi la profilon .icc de la celo en la ekrankopia dosiero"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "Bordera efekto"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Efekto por aldoni al la ekstero de bordero. Eblaj valoroj estas \"ombro\", "
+"\"neniu\", kaj \"bordero\"."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+msgid "Default file type extension"
+msgstr "Implicita dosiertipa sufikso"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+msgid "The default file type extension for screenshots."
+msgstr "La implicita dosiertipa sufikso por ekrankopioj."
+
+#: ../src/screenshot-application.c:145
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Dosiero nomita \"%s\" jam ekzistas en \"%s\""
+
+#: ../src/screenshot-application.c:152
+msgid "Overwrite existing file?"
+msgstr "Ĉu anstataŭigi ekzistantan dosieron?"
+
+#: ../src/screenshot-application.c:174 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:463 ../src/screenshot-application.c:467
+#: ../src/screenshot-application.c:507 ../src/screenshot-application.c:510
+msgid "Unable to capture a screenshot"
+msgstr "Ne povas kapti ekrankopion"
+
+#: ../src/screenshot-application.c:175
+msgid "Error creating file. Please choose another location and retry."
+msgstr "Eraro dum kreo de dosiero. Bonvolu elekti alian lokon, kaj reprovi."
+
+#: ../src/screenshot-application.c:464
+msgid "Error creating file"
+msgstr "Eraro dum kreo de dosiero"
+
+#: ../src/screenshot-application.c:475 ../src/screenshot-application.c:540
+msgid "Screenshot taken"
+msgstr "Faris ekrankopion"
+
+#: ../src/screenshot-application.c:508
+msgid "All possible methods failed"
+msgstr "Ĉiuj eblaj metodoj malsukcesis"
+
+#: ../src/screenshot-application.c:642
+msgid "Send the grab directly to the clipboard"
+msgstr "Sendi la kaptaĵon rekte al la tondujo"
+
+#: ../src/screenshot-application.c:643
+msgid "Grab a window instead of the entire screen"
+msgstr "Kapti fenestron anstataŭ ol la tuta ekrano"
+
+#: ../src/screenshot-application.c:644
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Kapti areon de la ekrano anstataŭ ol la tuta ekrano"
+
+#: ../src/screenshot-application.c:645
+msgid "Include the window border with the screenshot"
+msgstr "Inkluzivi la fenestran borderon kun la ekrankopio"
+
+#: ../src/screenshot-application.c:646
+msgid "Remove the window border from the screenshot"
+msgstr "Forigi la fenestran borderon de la ekrankopio"
+
+#: ../src/screenshot-application.c:647
+msgid "Include the pointer with the screenshot"
+msgstr "Inkluzivi la musmontrilon kun la ekrankopio"
+
+#: ../src/screenshot-application.c:648
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Fari ekrankopion post specifita prokrasto [en sekundoj]"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:648
+#: ../src/screenshot-interactive-dialog.c:415
+msgid "seconds"
+msgstr "sekundoj"
+
+#: ../src/screenshot-application.c:649
+msgid "Effect to add to the border (shadow, border or none)"
+msgstr "Efekto por aldoni al la bordero (ombro, bordero, aŭ neniu)"
+
+#: ../src/screenshot-application.c:649
+msgid "effect"
+msgstr "efekto"
+
+#: ../src/screenshot-application.c:650
+msgid "Interactively set options"
+msgstr "Interage agordi elekteblojn"
+
+#: ../src/screenshot-application.c:651
+msgid "Save screenshot directly to this file"
+msgstr "Konservi ekrankopion rekte al ĉi dosiero"
+
+#: ../src/screenshot-application.c:651
+msgid "filename"
+msgstr "dosiernomo"
+
+#: ../src/screenshot-application.c:652
+msgid "Print version information and exit"
+msgstr "Eligi versian informon kaj ĉesi"
+
+#: ../src/screenshot-application.c:666
+msgid "Take a picture of the screen"
+msgstr "Fari bildon de la ekrano"
+
+#: ../src/screenshot-application.c:790
+msgid "translator-credits"
+msgstr ""
+"Kevin SCHAEFER <lugubrili@hotmail.com>\n"
+"Michael MORONI, <haikara90@gmail.com >\n"
+"Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
+"Matthew Chisholm <mat.eo416@gmail.com>"
+
+#: ../src/screenshot-config.c:59
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
+"Konfliktaj elektebloj: Oni devus ne uzi je --fenestro kaj je --areo "
+"samtempe.\n"
 
-#: ../src/screenshot-config.c:85
+#: ../src/screenshot-config.c:66
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
+"Konfliktaj elektebloj: Oni devus ne uzi je --areo kaj je --prokrasto "
+"samtempe.\n"
 
-#: ../src/screenshot-dialog.c:193
-msgid ""
-"UI definition file for the screenshot program is missing.\n"
-"Please check your installation of gnome-utils"
-msgstr ""
-
-#: ../src/screenshot-dialog.c:214
-msgid "Select a folder"
-msgstr "Elekti dosierujon"
-
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:309
 msgid "Screenshot.png"
 msgstr "Ekrankopio.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
-#, fuzzy, c-format
-msgid "Screenshot at %s.png"
-msgstr "Ekrankopio-%s.png"
+#: ../src/screenshot-filename-builder.c:145
+#, c-format
+msgid "Screenshot from %s.%s"
+msgstr "Ekrankopio de %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
-#, fuzzy, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr "Ekrankopio-%s-%d.png"
+#: ../src/screenshot-filename-builder.c:152
+#, c-format
+msgid "Screenshot from %s - %d.%s"
+msgstr "Ekrankopio de %s - %d.%s"
 
-#: ../src/screenshot-interactive-dialog.c:165
+#: ../src/screenshot-interactive-dialog.c:154
 msgid "None"
 msgstr "Neniu"
 
-#: ../src/screenshot-interactive-dialog.c:166
+#: ../src/screenshot-interactive-dialog.c:155
 msgid "Drop shadow"
 msgstr "Demeti ombron"
 
-#: ../src/screenshot-interactive-dialog.c:167
+#: ../src/screenshot-interactive-dialog.c:156
 msgid "Border"
 msgstr "Bordero"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:271
+#: ../src/screenshot-interactive-dialog.c:260
 msgid "Include _pointer"
-msgstr ""
+msgstr "Inkluzivi _musmontrilon"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:281
+#: ../src/screenshot-interactive-dialog.c:270
 msgid "Include the window _border"
-msgstr ""
+msgstr "Inkluzivi la fenestran _borderon"
 
-#: ../src/screenshot-interactive-dialog.c:298
+#: ../src/screenshot-interactive-dialog.c:287
 msgid "Apply _effect:"
-msgstr ""
+msgstr "Apliki _efekton:"
 
-#: ../src/screenshot-interactive-dialog.c:360
-msgid "Grab the whole _desktop"
-msgstr ""
+#: ../src/screenshot-interactive-dialog.c:349
+msgid "Grab the whole sc_reen"
+msgstr "Kapti la tutan ek_ranon"
 
-#: ../src/screenshot-interactive-dialog.c:374
+#: ../src/screenshot-interactive-dialog.c:363
 msgid "Grab the current _window"
-msgstr ""
+msgstr "Kapti la aktualan _fenestron"
 
-#: ../src/screenshot-interactive-dialog.c:386
+#: ../src/screenshot-interactive-dialog.c:375
 msgid "Select _area to grab"
-msgstr ""
+msgstr "Elekti _areon por kapti"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
-msgid "Grab _after a delay of"
-msgstr ""
+#: ../src/screenshot-interactive-dialog.c:395
+msgid "Grab after a _delay of"
+msgstr "Kapti post _prokrasto de"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:448
+#: ../src/screenshot-interactive-dialog.c:458
 msgid "Take Screenshot"
-msgstr "Krei ekranopion"
+msgstr "Fari ekrankopion"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:459
 msgid "Effects"
 msgstr "Efektoj"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:479
 msgid "Take _Screenshot"
-msgstr "Krei _ekranopion"
+msgstr "Fari _ekrankopion"
 
-#: ../src/screenshot-utils.c:702
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
-msgstr ""
+msgstr "Eraro dum ŝarĝado de la helpa paĝo"
+
+#~ msgid "Select a folder"
+#~ msgstr "Elekti dosierujon"
