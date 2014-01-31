@@ -12,9 +12,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils 3.3.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-09 10:18+0800\n"
-"PO-Revision-Date: 2013-11-09 10:18+0800\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-12-28 02:26+0000\n"
+"PO-Revision-Date: 2014-02-01 07:23+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: zh_TW\n"
@@ -22,19 +23,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.3\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:785
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:787
 msgid "Screenshot"
 msgstr "螢幕擷圖"
 
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:786
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:788
 msgid "Save images of your screen or individual windows"
 msgstr "將整個桌面或獨立的視窗儲存為影片"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-msgid "snapshot;capture;print;"
-msgstr "snapshot;capture;print;螢幕擷圖;擷取;列印;"
+#| msgid "snapshot;capture;print;"
+msgid "snapshot;capture;print;screenshot;"
+msgstr "snapshot;capture;print;screenshot;螢幕擷圖;擷取;列印;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
@@ -45,12 +47,12 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "拍下視窗的螢幕擷圖"
 
 #: ../src/screenshot-app-menu.ui.h:1
-msgid "About Screenshot"
-msgstr "關於螢幕擷圖"
-
-#: ../src/screenshot-app-menu.ui.h:2
 msgid "Help"
 msgstr "求助"
+
+#: ../src/screenshot-app-menu.ui.h:2
+msgid "About"
+msgstr "關於"
 
 #: ../src/screenshot-app-menu.ui.h:3
 msgid "Quit"
@@ -148,102 +150,102 @@ msgstr "預設檔案類型延伸檔名"
 msgid "The default file type extension for screenshots."
 msgstr "螢幕擷圖的預設檔案類型延伸檔名。"
 
-#: ../src/screenshot-application.c:144
+#: ../src/screenshot-application.c:145
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
 msgstr "「%s」中已存在名為「%s」的檔案"
 
-#: ../src/screenshot-application.c:151
+#: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
 msgstr "是否覆寫已存在的檔案？"
 
-#: ../src/screenshot-application.c:172 ../src/screenshot-application.c:181
-#: ../src/screenshot-application.c:461 ../src/screenshot-application.c:465
-#: ../src/screenshot-application.c:505 ../src/screenshot-application.c:508
+#: ../src/screenshot-application.c:174 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:463 ../src/screenshot-application.c:467
+#: ../src/screenshot-application.c:507 ../src/screenshot-application.c:510
 msgid "Unable to capture a screenshot"
 msgstr "無法拍下螢幕擷圖"
 
-#: ../src/screenshot-application.c:173
+#: ../src/screenshot-application.c:175
 msgid "Error creating file. Please choose another location and retry."
 msgstr "建立檔案時發生錯誤。請選擇另一個位置並再試一次。"
 
-#: ../src/screenshot-application.c:462
+#: ../src/screenshot-application.c:464
 msgid "Error creating file"
 msgstr "建立檔案時發生錯誤"
 
-#: ../src/screenshot-application.c:473 ../src/screenshot-application.c:538
+#: ../src/screenshot-application.c:475 ../src/screenshot-application.c:540
 msgid "Screenshot taken"
 msgstr "螢幕擷圖拍攝"
 
-#: ../src/screenshot-application.c:506
+#: ../src/screenshot-application.c:508
 msgid "All possible methods failed"
 msgstr "所有可能的方法都失敗了"
 
-#: ../src/screenshot-application.c:640
+#: ../src/screenshot-application.c:642
 msgid "Send the grab directly to the clipboard"
 msgstr "將抓圖直接傳送至剪貼簿"
 
-#: ../src/screenshot-application.c:641
+#: ../src/screenshot-application.c:643
 msgid "Grab a window instead of the entire screen"
 msgstr "擷取單一視窗而不是整個畫面"
 
-#: ../src/screenshot-application.c:642
+#: ../src/screenshot-application.c:644
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "擷取畫面的一個區域而不是整個畫面"
 
-#: ../src/screenshot-application.c:643
+#: ../src/screenshot-application.c:645
 msgid "Include the window border with the screenshot"
 msgstr "螢幕擷圖包含視窗邊框"
 
-#: ../src/screenshot-application.c:644
+#: ../src/screenshot-application.c:646
 msgid "Remove the window border from the screenshot"
 msgstr "自螢幕擷圖移除視窗邊框"
 
-#: ../src/screenshot-application.c:645
+#: ../src/screenshot-application.c:647
 msgid "Include the pointer with the screenshot"
 msgstr "螢幕擷圖包含鼠標"
 
-#: ../src/screenshot-application.c:646
+#: ../src/screenshot-application.c:648
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "在指定的時間後（秒）拍攝螢幕擷圖"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:646
+#: ../src/screenshot-application.c:648
 #: ../src/screenshot-interactive-dialog.c:415
 msgid "seconds"
 msgstr "秒後拍下螢幕擷圖"
 
-#: ../src/screenshot-application.c:647
+#: ../src/screenshot-application.c:649
 msgid "Effect to add to the border (shadow, border or none)"
 msgstr "加到視窗邊框的效果（陰影、邊框或沒有）"
 
-#: ../src/screenshot-application.c:647
+#: ../src/screenshot-application.c:649
 msgid "effect"
 msgstr "效果"
 
-#: ../src/screenshot-application.c:648
+#: ../src/screenshot-application.c:650
 msgid "Interactively set options"
 msgstr "互動設定選項"
 
-#: ../src/screenshot-application.c:649
+#: ../src/screenshot-application.c:651
 msgid "Save screenshot directly to this file"
 msgstr "螢幕擷圖直接儲存到這個檔案"
 
-#: ../src/screenshot-application.c:649
+#: ../src/screenshot-application.c:651
 msgid "filename"
 msgstr "檔案名稱"
 
-#: ../src/screenshot-application.c:650
+#: ../src/screenshot-application.c:652
 msgid "Print version information and exit"
 msgstr "列印版本資訊並離開"
 
-#: ../src/screenshot-application.c:664
+#: ../src/screenshot-application.c:666
 msgid "Take a picture of the screen"
 msgstr "拍下整個螢幕"
 
-#: ../src/screenshot-application.c:788
+#: ../src/screenshot-application.c:790
 msgid "translator-credits"
 msgstr "Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>, 2012"
 
@@ -341,6 +343,9 @@ msgstr "拍下螢幕擷圖(_S)"
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "載入說明文件時發生錯誤"
+
+#~ msgid "About Screenshot"
+#~ msgstr "關於螢幕擷圖"
 
 #~ msgid "*"
 #~ msgstr "×"
