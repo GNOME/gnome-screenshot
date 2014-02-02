@@ -20,22 +20,23 @@
 # André Gondim <In memoriam>, 2011.
 # Enrico Nicoletto <liverig@gmail.com>, 2012.
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013, 2014.
+# Fábio Nogueira <deb-user-ba@ubuntu.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-28 02:26+0000\n"
-"PO-Revision-Date: 2014-01-02 05:18-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2014-01-18 13:37+0000\n"
+"PO-Revision-Date: 2014-01-21 15:24-0300\n"
+"Last-Translator: Fábio Nogueira <deb-user-ba@ubuntu.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:787
 msgid "Screenshot"
@@ -280,7 +281,7 @@ msgstr ""
 "Krix Apolinário <krixapolinario@gmail.com>.\n"
 "Antonio Fernandes C. Neto <fernandesn@gnome.org>.\n"
 "Rodrigo Padula de Oliveira <contato@rodrigopadula.com>.\n"
-"André Gondim <andregondim@ubuntu.com>.\n"
+"André Gondim (In memoriam) <In memoriam>.\n"
 "Enrico Nicoletto <liverig@gmail.com>.\n"
 "Rafael Ferreira <rafael.f.f1@gmail.com>."
 
