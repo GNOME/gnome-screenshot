@@ -486,7 +486,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   button = gtk_button_new_with_mnemonic (_("Take _Screenshot"));
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
   context = gtk_widget_get_style_context (button);
-  gtk_style_context_add_class (context, "text-button");
   gtk_style_context_add_class (context, "suggested-action");
   data = g_new (CaptureData, 1);
   data->widget = dialog;
@@ -502,8 +501,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 
   button = gtk_button_new_with_mnemonic (_("_Cancel"));
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-  context = gtk_widget_get_style_context (button);
-  gtk_style_context_add_class (context, "text-button");
   gtk_header_bar_pack_start (GTK_HEADER_BAR (header_bar), button);
   g_signal_connect_swapped (button, "clicked",
                             G_CALLBACK (gtk_widget_destroy), dialog);
