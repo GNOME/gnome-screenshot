@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-26 00:02+0200\n"
-"PO-Revision-Date: 2014-01-26 00:05+0200\n"
+"POT-Creation-Date: 2014-02-16 18:42+0200\n"
+"PO-Revision-Date: 2014-02-16 18:42+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -65,17 +65,25 @@ msgstr "יציאה"
 msgid "Save Screenshot"
 msgstr "שמירת צילום המסך"
 
-#: ../src/screenshot-dialog.ui.h:2
+#: ../src/screenshot-dialog.ui.h:2 ../src/screenshot-interactive-dialog.c:502
+msgid "_Cancel"
+msgstr "_ביטול"
+
+#: ../src/screenshot-dialog.ui.h:3
+msgid "C_opy to Clipboard"
+msgstr "ה_עתקה ללוח הגזירים"
+
+#: ../src/screenshot-dialog.ui.h:4
+msgid "_Save"
+msgstr "_שמירה"
+
+#: ../src/screenshot-dialog.ui.h:5
 msgid "_Name:"
 msgstr "_שם:"
 
-#: ../src/screenshot-dialog.ui.h:3
+#: ../src/screenshot-dialog.ui.h:6
 msgid "Save in _folder:"
 msgstr "שמירה ב_תיקייה:"
-
-#: ../src/screenshot-dialog.ui.h:4
-msgid "C_opy to Clipboard"
-msgstr "ה_עתקה ללוח הגזירים"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
@@ -276,7 +284,7 @@ msgstr ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 
-#: ../src/screenshot-dialog.c:309
+#: ../src/screenshot-dialog.c:316
 msgid "Screenshot.png"
 msgstr "צילום מסך.png"
 
@@ -340,11 +348,11 @@ msgstr "בחירת _אזור ללכידה"
 msgid "Grab after a _delay of"
 msgstr "צילום לאחר ה_שהייה של"
 
-#: ../src/screenshot-interactive-dialog.c:465
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "צילום המסך"
 
-#: ../src/screenshot-interactive-dialog.c:466
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "אפקטים"
 
