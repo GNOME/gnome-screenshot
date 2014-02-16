@@ -149,6 +149,50 @@ button_clicked (GtkWidget *button, ScreenshotDialog *dialog)
   dialog->callback (res, dialog->user_data);
 }
 
+static void
+setup_drawing_area (ScreenshotDialog *dialog, GtkBuilder *ui)
+{
+  GtkWidget *preview_darea;
+  GtkWidget *aspect_frame;
+  gint width, height, scale_factor;
+
+  aspect_frame = GTK_WIDGET (gtk_builder_get_object (ui, "aspect_frame"));
+  preview_darea = GTK_WIDGET (gtk_builder_get_object (ui, "preview_darea"));
+
+  width = gdk_pixbuf_get_width (dialog->screenshot);
+  height = gdk_pixbuf_get_height (dialog->screenshot);
+  scale_factor = gtk_widget_get_scale_factor (dialog->dialog);
+
+  width /= 5 * scale_factor;
+  height /= 5 * scale_factor;
+
+  gtk_widget_set_size_request (preview_darea, width, height);
+  gtk_aspect_frame_set (GTK_ASPECT_FRAME (aspect_frame), 0.0, 0.5,
+			(gfloat) width / (gfloat) height,
+			FALSE);
+
+  if (screenshot_config->take_window_shot)
+    gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_NONE);
+  else
+    gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_IN);
+
+  g_signal_connect (preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
+  g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
+  g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
+  g_signal_connect (preview_darea, "configure_event", G_CALLBACK (on_preview_configure_event), dialog);
+
+  /* setup dnd */
+  gtk_drag_source_set (preview_darea,
+		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
+		       drag_types, G_N_ELEMENTS (drag_types),
+		       GDK_ACTION_COPY);
+
+  g_signal_connect (G_OBJECT (preview_darea), "drag_begin",
+		    G_CALLBACK (drag_begin), dialog);
+  g_signal_connect (G_OBJECT (preview_darea), "drag_data_get",
+		    G_CALLBACK (drag_data_get), dialog);
+}
+
 ScreenshotDialog *
 screenshot_dialog_new (GdkPixbuf              *screenshot,
 		       char                   *initial_uri,
@@ -157,10 +201,6 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
 {
   ScreenshotDialog *dialog;
   GtkBuilder *ui;
-  GtkWidget *preview_darea;
-  GtkWidget *aspect_frame;
-  GtkWidget *file_chooser_box;
-  gint width, height;
   char *current_folder;
   char *current_name;
   char *ext;
@@ -186,12 +226,6 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/screenshot-dialog.ui", NULL);
   g_assert (res != 0);
 
-  width = gdk_pixbuf_get_width (screenshot);
-  height = gdk_pixbuf_get_height (screenshot);
-
-  width /= 5;
-  height /= 5;
-
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "toplevel"));
   gtk_window_set_application (GTK_WINDOW (dialog->dialog), GTK_APPLICATION (g_application_get_default ()));
   gtk_widget_realize (dialog->dialog);
@@ -199,11 +233,7 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
                     G_CALLBACK (dialog_key_press_cb),
                     NULL);
 
-  aspect_frame = GTK_WIDGET (gtk_builder_get_object (ui, "aspect_frame"));
-  preview_darea = GTK_WIDGET (gtk_builder_get_object (ui, "preview_darea"));
   dialog->filename_entry = GTK_WIDGET (gtk_builder_get_object (ui, "filename_entry"));
-  file_chooser_box = GTK_WIDGET (gtk_builder_get_object (ui, "file_chooser_box"));
-
   dialog->save_widget = GTK_WIDGET (gtk_builder_get_object (ui, "save_widget"));
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
   gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
@@ -215,34 +245,7 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   dialog->copy_button = GTK_WIDGET (gtk_builder_get_object (ui, "cancel_button"));
   g_signal_connect_swapped (dialog->copy_button, "clicked", G_CALLBACK (gtk_widget_destroy), dialog->dialog);
 
-  g_object_unref (ui);
-  g_free (current_folder);
-
-  gtk_widget_set_size_request (preview_darea, width, height);
-  gtk_aspect_frame_set (GTK_ASPECT_FRAME (aspect_frame), 0.0, 0.5,
-			gdk_pixbuf_get_width (screenshot)/
-			(gfloat) gdk_pixbuf_get_height (screenshot),
-			FALSE);
-  g_signal_connect (preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
-  g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
-  g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
-  g_signal_connect (preview_darea, "configure_event", G_CALLBACK (on_preview_configure_event), dialog);
-
-  gtk_drag_source_set (preview_darea,
-		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
-		       drag_types, G_N_ELEMENTS (drag_types),
-		       GDK_ACTION_COPY);
-
-  if (screenshot_config->take_window_shot)
-    gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_NONE);
-  else
-    gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_IN);
-
-  /* setup dnd */
-  g_signal_connect (G_OBJECT (preview_darea), "drag_begin",
-		    G_CALLBACK (drag_begin), dialog);
-  g_signal_connect (G_OBJECT (preview_darea), "drag_data_get",
-		    G_CALLBACK (drag_data_get), dialog);
+  setup_drawing_area (dialog, ui);
 
   gtk_widget_show_all (dialog->dialog);
 
@@ -261,6 +264,8 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
 			      pos);
   
   g_free (current_name);
+  g_free (current_folder);
+  g_object_unref (ui);
 
   return dialog;
 }
