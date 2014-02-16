@@ -11,18 +11,7 @@
       <object class="GtkHeaderBar" id="headerbar1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <child>
-          <object class="GtkButton" id="cancel_button">
-            <property name="label" translatable="yes">_Cancel</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_underline">True</property>
-          </object>
-          <packing>
-            <property name="pack-type">start</property>
-          </packing>
-        </child>
+        <property name="show_close_button">True</property>
         <child>
           <object class="GtkButton" id="copy_button">
             <property name="label" translatable="yes">C_opy to Clipboard</property>
@@ -162,7 +151,6 @@
   <object class="GtkSizeGroup" id="header_bar_size_group">
     <property name="mode">horizontal</property>
     <widgets>
-      <widget name="cancel_button"/>
       <widget name="copy_button"/>
       <widget name="save_button"/>
     </widgets>
