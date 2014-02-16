@@ -437,15 +437,22 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 {
   GtkWidget *dialog;
   GtkWidget *main_vbox;
+  GtkWidget *header_bar;
   GtkWidget *button_box;
   GtkWidget *button;
+  GtkStyleContext *context;
   gboolean shows_app_menu;
   GtkSettings *settings;
+  GtkSizeGroup *size_group;
   CaptureData *data;
 
   dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
+
+  header_bar = gtk_header_bar_new ();
+  gtk_header_bar_set_title (GTK_HEADER_BAR (header_bar), _("Take Screenshot"));
+  gtk_window_set_titlebar (GTK_WINDOW (dialog), header_bar);
+
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-  gtk_window_set_title (GTK_WINDOW (dialog), _("Take Screenshot"));
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
@@ -476,18 +483,36 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
       gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (button_box), button, TRUE);
     }
 
+  size_group = gtk_size_group_new (GTK_ORIENTATION_VERTICAL);
+
   button = gtk_button_new_with_mnemonic (_("Take _Screenshot"));
+  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+  context = gtk_widget_get_style_context (button);
+  gtk_style_context_add_class (context, "text-button");
+  gtk_style_context_add_class (context, "suggested-action");
   data = g_new (CaptureData, 1);
   data->widget = dialog;
   data->callback = f;
   data->user_data = user_data;
   g_signal_connect (button, "clicked", G_CALLBACK (capure_button_clicked_cb), data);
-  gtk_container_add (GTK_CONTAINER (button_box), button);
+  gtk_size_group_add_widget (size_group, button);
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (header_bar), button);
   gtk_widget_set_can_default (button, TRUE);
   gtk_widget_grab_default (button);
   g_signal_connect (dialog, "key-press-event",
                     G_CALLBACK (interactive_dialog_key_press_cb), 
                     NULL);
+
+  button = gtk_button_new_with_mnemonic (_("_Cancel"));
+  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+  context = gtk_widget_get_style_context (button);
+  gtk_style_context_add_class (context, "text-button");
+  gtk_size_group_add_widget (size_group, button);
+  gtk_header_bar_pack_start (GTK_HEADER_BAR (header_bar), button);
+  g_signal_connect_swapped (button, "clicked",
+                            G_CALLBACK (gtk_widget_destroy), dialog);
+
+  g_object_unref (size_group);
 
   gtk_widget_show_all (dialog);
 
