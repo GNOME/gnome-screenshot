@@ -449,7 +449,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
 
   header_bar = gtk_header_bar_new ();
-  gtk_header_bar_set_title (GTK_HEADER_BAR (header_bar), _("Take Screenshot"));
   gtk_window_set_titlebar (GTK_WINDOW (dialog), header_bar);
 
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
