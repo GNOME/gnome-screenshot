@@ -212,6 +212,8 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   g_signal_connect (dialog->save_button, "clicked", G_CALLBACK (button_clicked), dialog);
   dialog->copy_button = GTK_WIDGET (gtk_builder_get_object (ui, "copy_button"));
   g_signal_connect (dialog->copy_button, "clicked", G_CALLBACK (button_clicked), dialog);
+  dialog->copy_button = GTK_WIDGET (gtk_builder_get_object (ui, "cancel_button"));
+  g_signal_connect_swapped (dialog->copy_button, "clicked", G_CALLBACK (gtk_widget_destroy), dialog->dialog);
 
   g_object_unref (ui);
   g_free (current_folder);
