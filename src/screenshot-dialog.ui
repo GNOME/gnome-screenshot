@@ -159,4 +159,12 @@
       </object>
     </child>
   </object>
+  <object class="GtkSizeGroup" id="header_bar_size_group">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="cancel_button"/>
+      <widget name="copy_button"/>
+      <widget name="save_button"/>
+    </widgets>
+  </object>
 </interface>

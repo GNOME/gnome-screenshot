@@ -482,6 +482,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
       gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (button_box), button, TRUE);
     }
 
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
   button = gtk_button_new_with_mnemonic (_("Take _Screenshot"));
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
@@ -492,6 +493,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   data->callback = f;
   data->user_data = user_data;
   g_signal_connect (button, "clicked", G_CALLBACK (capure_button_clicked_cb), data);
+  gtk_size_group_add_widget (size_group, button);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (header_bar), button);
   gtk_widget_set_can_default (button, TRUE);
   gtk_widget_grab_default (button);
@@ -501,9 +503,12 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 
   button = gtk_button_new_with_mnemonic (_("_Cancel"));
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+  gtk_size_group_add_widget (size_group, button);
   gtk_header_bar_pack_start (GTK_HEADER_BAR (header_bar), button);
   g_signal_connect_swapped (button, "clicked",
                             G_CALLBACK (gtk_widget_destroy), dialog);
+
+  g_object_unref (size_group);
 
   gtk_widget_show_all (dialog);
 
