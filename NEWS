@@ -1,3 +1,10 @@
+GNOME Screenshot 3.11.90 - 17th February 2014
+=============================================
+
+- Use GtkHeaderBar (Yosef Or Boczko)
+- Standardize Help/About/Quit in app menu (Michael Catanzaro)
+- Support HiDpi scale factor when rendering preview
+
 GNOME Screenshot 3.10.1 - 18th November 2013
 ============================================
 
