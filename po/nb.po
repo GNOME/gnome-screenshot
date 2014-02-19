@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot 3.11.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-21 20:47+0100\n"
-"PO-Revision-Date: 2014-01-21 20:50+0100\n"
+"POT-Creation-Date: 2014-02-19 20:22+0100\n"
+"PO-Revision-Date: 2014-02-19 20:23+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -55,16 +55,20 @@ msgid "Save Screenshot"
 msgstr "Lagre skjermdump"
 
 #: ../src/screenshot-dialog.ui.h:2
+msgid "C_opy to Clipboard"
+msgstr "K_opier til utklippstavlen"
+
+#: ../src/screenshot-dialog.ui.h:3
+msgid "_Save"
+msgstr "_Lagre"
+
+#: ../src/screenshot-dialog.ui.h:4
 msgid "_Name:"
 msgstr "_Navn:"
 
-#: ../src/screenshot-dialog.ui.h:3
+#: ../src/screenshot-dialog.ui.h:5
 msgid "Save in _folder:"
 msgstr "Lagre i _mappe:"
-
-#: ../src/screenshot-dialog.ui.h:4
-msgid "C_opy to Clipboard"
-msgstr "K_opier til utklippstavlen"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
@@ -260,7 +264,7 @@ msgid ""
 "time.\n"
 msgstr "Konflikt mellom flagg: --area og --delay kan ikke brukes samtidig.\n"
 
-#: ../src/screenshot-dialog.c:309
+#: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
 msgstr "Skjermdump.png"
 
@@ -324,18 +328,21 @@ msgstr "Velg _område for skjermdump"
 msgid "Grab after a _delay of"
 msgstr "T_a skjermdump etter"
 
-#: ../src/screenshot-interactive-dialog.c:448
-#: ../src/screenshot-interactive-dialog.c:458
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Ta skjermdump"
 
-#: ../src/screenshot-interactive-dialog.c:459
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Effekter"
 
-#: ../src/screenshot-interactive-dialog.c:479
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "Ta _skjermdump"
+
+#: ../src/screenshot-interactive-dialog.c:504
+msgid "_Cancel"
+msgstr "A_vbryt"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
