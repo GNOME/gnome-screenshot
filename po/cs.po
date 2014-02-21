@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-28 02:26+0000\n"
-"PO-Revision-Date: 2014-01-12 09:27+0100\n"
+"POT-Creation-Date: 2014-02-20 20:20+0000\n"
+"PO-Revision-Date: 2014-02-21 08:30+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -43,7 +43,6 @@ msgid "Save images of your screen or individual windows"
 msgstr "Uložit obrázky pracovní plochy nebo konkrétních oken"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#| msgid "snapshot;capture;print;"
 msgid "snapshot;capture;print;screenshot;"
 msgstr "snímek;zachytit;otisk;obrazovka;"
 
@@ -72,16 +71,20 @@ msgid "Save Screenshot"
 msgstr "Uložit snímek obrazovky"
 
 #: ../src/screenshot-dialog.ui.h:2
+msgid "C_opy to Clipboard"
+msgstr "K_opírovat do schránky"
+
+#: ../src/screenshot-dialog.ui.h:3
+msgid "_Save"
+msgstr "_Uložit"
+
+#: ../src/screenshot-dialog.ui.h:4
 msgid "_Name:"
 msgstr "Náz_ev:"
 
-#: ../src/screenshot-dialog.ui.h:3
+#: ../src/screenshot-dialog.ui.h:5
 msgid "Save in _folder:"
 msgstr "Uložit do _složky:"
-
-#: ../src/screenshot-dialog.ui.h:4
-msgid "C_opy to Clipboard"
-msgstr "K_opírovat do schránky"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
@@ -279,7 +282,7 @@ msgid ""
 "time.\n"
 msgstr "Konflikt přepínačů: --area a --delay nelze použít ve zároveň.\n"
 
-#: ../src/screenshot-dialog.c:309
+#: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
 msgstr "Snímek obrazovky.png"
 
@@ -343,22 +346,22 @@ msgstr "Zvolit _oblast zachycení"
 msgid "Grab after a _delay of"
 msgstr "Zachytit po pro_dlevě"
 
-#: ../src/screenshot-interactive-dialog.c:448
-#: ../src/screenshot-interactive-dialog.c:458
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Zachytit snímek obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:459
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Efekty"
 
-#: ../src/screenshot-interactive-dialog.c:479
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "Zachytit _snímek obrazovky"
+
+#: ../src/screenshot-interactive-dialog.c:504
+msgid "_Cancel"
+msgstr "_Zrušit"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Chyba při načítání nápovědy"
-
-#~ msgid "About Screenshot"
-#~ msgstr "O snímku obrazovky"
