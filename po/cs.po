@@ -156,8 +156,8 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"Efekt přidaný k vnější části rámečku. Možné hodnoty jsou „shadow“, „none“ a "
-"„border“."
+"Efekt přidaný k vnější části okraje. Možné hodnoty jsou „shadow“ (stín), "
+"„none“ (nic) a „border“ (rámeček)."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
 msgid "Default file type extension"
@@ -237,7 +237,9 @@ msgstr "sekund"
 
 #: ../src/screenshot-application.c:652
 msgid "Effect to add to the border (shadow, border, vintage or none)"
-msgstr "Efekt přidaný k rámečku (stín, rámeček, patina nebo žádný)"
+msgstr ""
+"Přidaný efekt  – shadow (stín), border (rámeček), vintage (patina) nebo none "
+"(nic)"
 
 #: ../src/screenshot-application.c:652
 msgid "effect"
@@ -253,7 +255,7 @@ msgstr "Uložit snímek přímo do tohoto souboru"
 
 #: ../src/screenshot-application.c:654
 msgid "filename"
-msgstr "názevsouboru"
+msgstr "název_souboru"
 
 #: ../src/screenshot-application.c:655
 msgid "Print version information and exit"
@@ -329,7 +331,7 @@ msgstr "Zahrnout _rámeček okna"
 
 #: ../src/screenshot-interactive-dialog.c:293
 msgid "Apply _effect:"
-msgstr "Aplikovat _efekt:"
+msgstr "Použít _efekt:"
 
 #: ../src/screenshot-interactive-dialog.c:355
 msgid "Grab the whole sc_reen"
