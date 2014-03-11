@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2014-03-05 08:20+0000\n"
-"PO-Revision-Date: 2014-03-06 03:08+0900\n"
+"PO-Revision-Date: 2014-03-12 00:31+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: Korean\n"
@@ -227,7 +227,7 @@ msgstr "테두리에 넣을 효과(shadow, border, vintage 또는 none)"
 
 #: ../src/screenshot-application.c:652
 msgid "effect"
-msgstr "테두리 효과"
+msgstr "<테두리효과>"
 
 #: ../src/screenshot-application.c:653
 msgid "Interactively set options"
@@ -239,7 +239,7 @@ msgstr "스크린샷을 이 파일로 바로 저장"
 
 #: ../src/screenshot-application.c:654
 msgid "filename"
-msgstr "파일 이름"
+msgstr "<파일이름>"
 
 #: ../src/screenshot-application.c:655
 msgid "Print version information and exit"
