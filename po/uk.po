@@ -9,31 +9,29 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-10 08:20+0000\n"
-"PO-Revision-Date: 2014-02-10 12:32+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-15 21:59+0200\n"
+"PO-Revision-Date: 2014-03-15 22:03+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:787
+#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:790
 msgid "Screenshot"
 msgstr "Знімок екрана"
 
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:788
+#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:791
 msgid "Save images of your screen or individual windows"
 msgstr "Зберегти зображення екрана або окремого вікна"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
-#| msgid "snapshot;capture;print;"
 msgid "snapshot;capture;print;screenshot;"
 msgstr "знімок;захоплення;екран;надрукувати;"
 
@@ -62,16 +60,20 @@ msgid "Save Screenshot"
 msgstr "Зберегти знімок екрана"
 
 #: ../src/screenshot-dialog.ui.h:2
+msgid "C_opy to Clipboard"
+msgstr "К_опіювати у буфер обміну"
+
+#: ../src/screenshot-dialog.ui.h:3
+msgid "_Save"
+msgstr "З_берегти"
+
+#: ../src/screenshot-dialog.ui.h:4
 msgid "_Name:"
 msgstr "_Назва:"
 
-#: ../src/screenshot-dialog.ui.h:3
+#: ../src/screenshot-dialog.ui.h:5
 msgid "Save in _folder:"
 msgstr "Зберегти у _теці:"
-
-#: ../src/screenshot-dialog.ui.h:4
-msgid "C_opy to Clipboard"
-msgstr "К_опіювати у буфер обміну"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
@@ -177,7 +179,7 @@ msgstr "Помилка створення файла. Виберіть інак�
 msgid "Error creating file"
 msgstr "Помилка створення файла"
 
-#: ../src/screenshot-application.c:475 ../src/screenshot-application.c:540
+#: ../src/screenshot-application.c:475 ../src/screenshot-application.c:543
 msgid "Screenshot taken"
 msgstr "Знімок отримано"
 
@@ -185,71 +187,72 @@ msgstr "Знімок отримано"
 msgid "All possible methods failed"
 msgstr "Усі можливі способи безуспішні"
 
-#: ../src/screenshot-application.c:642
+#: ../src/screenshot-application.c:645
 msgid "Send the grab directly to the clipboard"
 msgstr "Надіслати шматок прямо у буфер"
 
-#: ../src/screenshot-application.c:643
+#: ../src/screenshot-application.c:646
 msgid "Grab a window instead of the entire screen"
 msgstr "Зробити знімок вікна, а не всього екрана"
 
-#: ../src/screenshot-application.c:644
+#: ../src/screenshot-application.c:647
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Захопити лише частину екрана"
 
-#: ../src/screenshot-application.c:645
+#: ../src/screenshot-application.c:648
 msgid "Include the window border with the screenshot"
 msgstr "Захопити рамку вікна у знімку"
 
-#: ../src/screenshot-application.c:646
+#: ../src/screenshot-application.c:649
 msgid "Remove the window border from the screenshot"
 msgstr "Вилучити рамку вікна із знімку"
 
-#: ../src/screenshot-application.c:647
+#: ../src/screenshot-application.c:650
 msgid "Include the pointer with the screenshot"
 msgstr "Захопити вказівник миші в знімок екрана"
 
-#: ../src/screenshot-application.c:648
+#: ../src/screenshot-application.c:651
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Зробити знімок через вказаний час [у секундах]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:648
-#: ../src/screenshot-interactive-dialog.c:415
+#: ../src/screenshot-application.c:651
+#: ../src/screenshot-interactive-dialog.c:421
 msgid "seconds"
 msgstr "секунд"
 
-#: ../src/screenshot-application.c:649
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "Ефект, що додається до рамки вікна (тінь, рамка або ніякого)"
+#: ../src/screenshot-application.c:652
+msgid "Effect to add to the border (shadow, border, vintage or none)"
+msgstr ""
+"Ефект, що додається до рамки вікна (тінь, рамка, старомодний або ніякого)"
 
-#: ../src/screenshot-application.c:649
+#: ../src/screenshot-application.c:652
 msgid "effect"
 msgstr "ефекти рамки"
 
-#: ../src/screenshot-application.c:650
+#: ../src/screenshot-application.c:653
 msgid "Interactively set options"
 msgstr "Встановити параметри інтерактивно"
 
-#: ../src/screenshot-application.c:651
+#: ../src/screenshot-application.c:654
 msgid "Save screenshot directly to this file"
 msgstr "Зберегти знімок напряму в цей файл"
 
-#: ../src/screenshot-application.c:651
+#: ../src/screenshot-application.c:654
 msgid "filename"
 msgstr "назва файла"
 
-#: ../src/screenshot-application.c:652
+#: ../src/screenshot-application.c:655
 msgid "Print version information and exit"
 msgstr "Показати інформацію про версію та вийти"
 
-#: ../src/screenshot-application.c:666
+#: ../src/screenshot-application.c:669
 msgid "Take a picture of the screen"
 msgstr "Зробити знімок екрана"
 
-#: ../src/screenshot-application.c:790
+#: ../src/screenshot-application.c:793
 msgid "translator-credits"
 msgstr ""
 "Daniel Korostil <ted.korostiled@gmail.com>.\n"
@@ -272,7 +275,7 @@ msgid ""
 msgstr ""
 "Конфліктні параметри: --area і --delay не слід використовувати одночасно.\n"
 
-#: ../src/screenshot-dialog.c:309
+#: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
 msgstr "Екран.png"
 
@@ -291,63 +294,70 @@ msgstr "Знімок екрана з %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Знімок екрана з %s — %d.%s"
 
-#: ../src/screenshot-interactive-dialog.c:154
+#: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
 msgstr "Немає"
 
-#: ../src/screenshot-interactive-dialog.c:155
+#: ../src/screenshot-interactive-dialog.c:157
 msgid "Drop shadow"
 msgstr "Відкидати тінь"
 
-#: ../src/screenshot-interactive-dialog.c:156
+#: ../src/screenshot-interactive-dialog.c:158
 msgid "Border"
 msgstr "Рамка"
 
+#: ../src/screenshot-interactive-dialog.c:159
+msgid "Vintage"
+msgstr "Старомодний"
+
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:260
+#: ../src/screenshot-interactive-dialog.c:266
 msgid "Include _pointer"
 msgstr "Захопити _вказівник"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:270
+#: ../src/screenshot-interactive-dialog.c:276
 msgid "Include the window _border"
 msgstr "Захопити _рамку вікна"
 
-#: ../src/screenshot-interactive-dialog.c:287
+#: ../src/screenshot-interactive-dialog.c:293
 msgid "Apply _effect:"
 msgstr "Застосувати _ефект"
 
-#: ../src/screenshot-interactive-dialog.c:349
+#: ../src/screenshot-interactive-dialog.c:355
 msgid "Grab the whole sc_reen"
 msgstr "Захопити весь _екран"
 
-#: ../src/screenshot-interactive-dialog.c:363
+#: ../src/screenshot-interactive-dialog.c:369
 msgid "Grab the current _window"
 msgstr "Захопити поточне _вікно"
 
-#: ../src/screenshot-interactive-dialog.c:375
+#: ../src/screenshot-interactive-dialog.c:381
 msgid "Select _area to grab"
 msgstr "Виберіть _ділянку захоплення"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:395
+#: ../src/screenshot-interactive-dialog.c:401
 msgid "Grab after a _delay of"
 msgstr "Захопити після _затримки на"
 
-#: ../src/screenshot-interactive-dialog.c:448
-#: ../src/screenshot-interactive-dialog.c:458
+#: ../src/screenshot-interactive-dialog.c:470
 msgid "Take Screenshot"
 msgstr "Зробити знімок"
 
-#: ../src/screenshot-interactive-dialog.c:459
+#: ../src/screenshot-interactive-dialog.c:471
 msgid "Effects"
 msgstr "Ефекти"
 
-#: ../src/screenshot-interactive-dialog.c:479
+#: ../src/screenshot-interactive-dialog.c:493
 msgid "Take _Screenshot"
 msgstr "Зробити з_німок екрана"
+
+#: ../src/screenshot-interactive-dialog.c:510
+msgid "_Cancel"
+msgstr "_Скасувати"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
