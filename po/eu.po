@@ -33,7 +33,7 @@ msgstr "Gorde mahaigaineko edo leiho bakarren irudiak"
 
 #: ../src/gnome-screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
-msgstr "argazkia;kaptura;inprimatu;pantaila-argazkia"
+msgstr "argazkia;kaptura;inprimatu;pantaila-argazkia;"
 
 #: ../src/gnome-screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
