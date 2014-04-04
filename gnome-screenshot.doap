@@ -7,9 +7,10 @@
   <name xml:lang="en">gnome-screenshot</name>
   <shortdesc xml:lang="en">Take pictures of your screen</shortdesc>
 
-  <license rdf:resource="http://usefulinc.com/doap/licenses/gpl"/>
+  <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
 
-  <download-page rdf:resource="http://download.gnome.org/sources/gnome-screenshot/"/>
+  <download-page rdf:resource="http://download.gnome.org/sources/gnome-screenshot/" />
+  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=gnome-screenshot" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
 
   <maintainer>
