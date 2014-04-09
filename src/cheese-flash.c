@@ -146,16 +146,16 @@ cheese_flash_opacity_fade (gpointer data)
 {
   CheeseFlash        *flash        = data;
   CheeseFlashPrivate *flash_priv   = CHEESE_FLASH_GET_PRIVATE (flash);
-  GtkWindow          *flash_window = flash_priv->window;
-  double              opacity      = gtk_window_get_opacity (flash_window);
+  GtkWidget          *flash_window = GTK_WIDGET (flash_priv->window);
+  double              opacity      = gtk_widget_get_opacity (flash_window);
 
   /* exponentially decrease */
-  gtk_window_set_opacity (flash_window, opacity * FLASH_FADE_FACTOR);
+  gtk_widget_set_opacity (flash_window, opacity * FLASH_FADE_FACTOR);
 
   if (opacity <= FLASH_LOW_THRESHOLD)
   {
     /* the flasher has finished when we reach the quit value */
-    gtk_widget_hide (GTK_WIDGET (flash_window));
+    gtk_widget_hide (flash_window);
     return FALSE;
   }
 
@@ -199,7 +199,7 @@ cheese_flash_fire (CheeseFlash  *flash,
   gtk_window_resize (flash_window, rect->width, rect->height);
   gtk_window_move (flash_window, rect->x, rect->y);
 
-  gtk_window_set_opacity (flash_window, 0.99);
+  gtk_widget_set_opacity (GTK_WIDGET (flash_window), 0.99);
   gtk_widget_show_all (GTK_WIDGET (flash_window));
   flash_priv->flash_timeout_tag = 
     g_timeout_add_full (G_PRIORITY_DEFAULT,
