@@ -719,35 +719,6 @@ screenshot_application_local_command_line (GApplication *app,
 }
 
 static void
-register_screenshooter_icon (GtkIconFactory * factory)
-{
-  GtkIconSource *source;
-  GtkIconSet *icon_set;
-
-  source = gtk_icon_source_new ();
-  gtk_icon_source_set_icon_name (source, SCREENSHOOTER_ICON);
-
-  icon_set = gtk_icon_set_new ();
-  gtk_icon_set_add_source (icon_set, source);
-
-  gtk_icon_factory_add (factory, SCREENSHOOTER_ICON, icon_set);
-  gtk_icon_set_unref (icon_set);
-  gtk_icon_source_free (source);
-}
-
-static void
-screenshooter_init_stock_icons (void)
-{
-  GtkIconFactory *factory;
-
-  factory = gtk_icon_factory_new ();
-  gtk_icon_factory_add_default (factory);
-
-  register_screenshooter_icon (factory);
-  g_object_unref (factory);
-}
-
-static void
 screenshot_show_interactive_dialog (ScreenshotApplication *self)
 {
   screenshot_interactive_dialog_new ((CaptureClickedCallback) screenshot_start, self);
@@ -812,7 +783,6 @@ screenshot_application_startup (GApplication *app)
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
 
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
-  screenshooter_init_stock_icons ();
 
   g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
                                    G_N_ELEMENTS (action_entries), self);
