@@ -17,9 +17,7 @@ Actions=Screen;Window;
 [Desktop Action Screen]
 _Name=Take a Screenshot of the Whole Screen
 Exec=gnome-screenshot
-OnlyShowIn=Unity;
 
 [Desktop Action Window]
 _Name=Take a Screenshot of the Current Window
 Exec=gnome-screenshot -w
-OnlyShowIn=Unity;
