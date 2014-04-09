@@ -625,10 +625,39 @@ screenshot_start (ScreenshotApplication *self)
     g_idle_add (prepare_screenshot_timeout, self);
 }
 
-static gboolean
-screenshot_application_local_command_line (GApplication *app,
-                                           gchar ***arguments,
-                                           gint *exit_status)
+static gboolean version_arg = FALSE;
+
+static const GOptionEntry entries[] = {
+  { "clipboard", 'c', 0, G_OPTION_ARG_NONE, NULL, N_("Send the grab directly to the clipboard"), NULL },
+  { "window", 'w', 0, G_OPTION_ARG_NONE, NULL, N_("Grab a window instead of the entire screen"), NULL },
+  { "area", 'a', 0, G_OPTION_ARG_NONE, NULL, N_("Grab an area of the screen instead of the entire screen"), NULL },
+  { "include-border", 'b', 0, G_OPTION_ARG_NONE, NULL, N_("Include the window border with the screenshot"), NULL },
+  { "remove-border", 'B', 0, G_OPTION_ARG_NONE, NULL, N_("Remove the window border from the screenshot"), NULL },
+  { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, NULL, N_("Include the pointer with the screenshot"), NULL },
+  { "delay", 'd', 0, G_OPTION_ARG_INT, NULL, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
+  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
+  { "interactive", 'i', 0, G_OPTION_ARG_NONE, NULL, N_("Interactively set options"), NULL },
+  { "file", 'f', 0, G_OPTION_ARG_FILENAME, NULL, N_("Save screenshot directly to this file"), N_("filename") },
+  { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
+  { NULL },
+};
+
+static gint
+screenshot_application_handle_local_options (GApplication *app,
+                                             GVariantDict *options)
+{
+  if (version_arg)
+    {
+      g_print ("%s %s\n", g_get_application_name (), VERSION);
+      exit (EXIT_SUCCESS);
+    }
+
+  return -1;
+}
+
+static gint
+screenshot_application_command_line (GApplication            *self,
+                                     GApplicationCommandLine *command_line)
 {
   gboolean clipboard_arg = FALSE;
   gboolean window_arg = FALSE;
@@ -640,50 +669,22 @@ screenshot_application_local_command_line (GApplication *app,
   gchar *border_effect_arg = NULL;
   guint delay_arg = 0;
   gchar *file_arg = NULL;
-  gboolean version_arg = FALSE;
-  const GOptionEntry entries[] = {
-    { "clipboard", 'c', 0, G_OPTION_ARG_NONE, &clipboard_arg, N_("Send the grab directly to the clipboard"), NULL },
-    { "window", 'w', 0, G_OPTION_ARG_NONE, &window_arg, N_("Grab a window instead of the entire screen"), NULL },
-    { "area", 'a', 0, G_OPTION_ARG_NONE, &area_arg, N_("Grab an area of the screen instead of the entire screen"), NULL },
-    { "include-border", 'b', 0, G_OPTION_ARG_NONE, &include_border_arg, N_("Include the window border with the screenshot"), NULL },
-    { "remove-border", 'B', 0, G_OPTION_ARG_NONE, &disable_border_arg, N_("Remove the window border from the screenshot"), NULL },
-    { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, &include_pointer_arg, N_("Include the pointer with the screenshot"), NULL },
-    { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-    { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
-    { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
-    { "file", 'f', 0, G_OPTION_ARG_FILENAME, &file_arg, N_("Save screenshot directly to this file"), N_("filename") },
-    { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
-    { NULL },
-  };
-
-  GOptionContext *context;
-  GError *error = NULL;
-  gint argc = 0;
-  gchar **argv = NULL;
+  GVariantDict *options;
+  gint exit_status = EXIT_SUCCESS;
   gboolean res;
 
-  *exit_status = EXIT_SUCCESS;
-  argv = *arguments;
-  argc = g_strv_length (argv);
-
-  context = g_option_context_new (_("Take a picture of the screen"));
-  g_option_context_add_main_entries (context, entries, NULL);
-  g_option_context_add_group (context, gtk_get_option_group (TRUE));
-
-  if (!g_option_context_parse (context, &argc, &argv, &error))
-    {
-      g_critical ("Unable to parse arguments: %s", error->message);
-      g_error_free (error);
-
-      *exit_status = EXIT_FAILURE;
-      goto out;
-    }
-
-  if (version_arg)
-    {
-      g_print ("%s %s\n", g_get_application_name (), VERSION);
-      goto out;
-    }
+  options = g_application_command_line_get_options_dict (command_line);
+  g_variant_dict_lookup (options, "clipboard", "b", &clipboard_arg);
+  g_variant_dict_lookup (options, "window", "b", &window_arg);
+  g_variant_dict_lookup (options, "area", "b", &area_arg);
+  g_variant_dict_lookup (options, "clipboard", "b", &clipboard_arg);
+  g_variant_dict_lookup (options, "include-border", "b", &include_border_arg);
+  g_variant_dict_lookup (options, "remove-border", "b", &disable_border_arg);
+  g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
+  g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
+  g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
+  g_variant_dict_lookup (options, "delay", "u", &delay_arg);
+  g_variant_dict_lookup (options, "file", "&s", &file_arg);
 
   res = screenshot_load_config (clipboard_arg,
                                 window_arg,
@@ -698,24 +699,18 @@ screenshot_application_local_command_line (GApplication *app,
 
   if (!res)
     {
-      *exit_status = EXIT_FAILURE;
+      exit_status = EXIT_FAILURE;
       goto out;
     }
 
-  if (!g_application_register (app, NULL, &error)) 
-    {
-      g_printerr ("Could not register the application: %s\n", error->message);
-      g_error_free (error);
-
-      *exit_status = EXIT_FAILURE;
-    }
+  /* interactive mode: trigger the dialog and wait for the response */
+  if (screenshot_config->interactive)
+    screenshot_show_interactive_dialog (SCREENSHOT_APPLICATION (self));
+  else
+    screenshot_start (SCREENSHOT_APPLICATION (self));
 
  out:
-  g_option_context_free (context);
-  g_free (border_effect_arg);
-  g_free (file_arg);
-
-  return TRUE;	
+  return exit_status;
 }
 
 static void
@@ -794,12 +789,6 @@ screenshot_application_startup (GApplication *app)
 
   g_object_unref (builder);
   g_object_unref (menu);
-
-  /* interactive mode: trigger the dialog and wait for the response */
-  if (screenshot_config->interactive)
-    screenshot_show_interactive_dialog (self);
-  else
-    screenshot_start (self);
 }
 
 static void
@@ -822,7 +811,8 @@ screenshot_application_class_init (ScreenshotApplicationClass *klass)
 
   oclass->finalize = screenshot_application_finalize;
 
-  aclass->local_command_line = screenshot_application_local_command_line;
+  aclass->handle_local_options = screenshot_application_handle_local_options;
+  aclass->command_line = screenshot_application_command_line;
   aclass->startup = screenshot_application_startup;
 
   g_type_class_add_private (klass, sizeof (ScreenshotApplicationPriv));
@@ -833,12 +823,15 @@ screenshot_application_init (ScreenshotApplication *self)
 {
   self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, SCREENSHOT_TYPE_APPLICATION,
                                             ScreenshotApplicationPriv);
+
+  g_application_add_main_option_entries (G_APPLICATION (self), entries);
 }
 
 ScreenshotApplication *
 screenshot_application_new (void)
 {
-  return g_object_new (SCREENSHOT_TYPE_APPLICATION, 
+  return g_object_new (SCREENSHOT_TYPE_APPLICATION,
                        "application-id", "org.gnome.Screenshot",
+                       "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                        NULL);
 }
