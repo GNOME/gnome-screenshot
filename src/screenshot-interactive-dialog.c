@@ -481,7 +481,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
                 NULL);
   if (!shows_app_menu)
     {
-      button = gtk_button_new_from_stock (GTK_STOCK_HELP);
+      button = gtk_button_new_with_mnemonic (_("_Help"));
       g_signal_connect_swapped (button, "clicked", G_CALLBACK (screenshot_display_help), dialog);
       gtk_container_add (GTK_CONTAINER (button_box),
                          button);
