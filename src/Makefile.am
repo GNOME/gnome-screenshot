@@ -56,10 +56,21 @@ gnome_screenshot_LDADD =		\
 	-lm				\
 	$(NULL)
 
-gnome_screenshotdir  = $(datadir)/applications
-gnome_screenshot_in_files = gnome-screenshot.desktop.in
+gnome_screenshotdir = $(datadir)/applications
+gnome_screenshot_in_files = org.gnome.Screenshot.desktop.in
 gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
+
+dbusservicedir = $(datadir)/dbus-1/services
+dbusservice_DATA = org.gnome.Screenshot.service
+
+org.gnome.Screenshot.service: Makefile
+	$(AM_V_GEN) (echo '[D-BUS Service]'; \
+		     echo 'Name=org.gnome.Screenshot'; \
+		     echo 'Exec=${bindir}/gnome-screenshot --gapplication-service') > $@.tmp && \
+		     mv $@.tmp $@
+
+CLEANFILES = $(dbusservice_DATA)
 
 man_MANS = gnome-screenshot.1
 

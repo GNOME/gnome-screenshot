@@ -13,6 +13,7 @@ X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-utils
 X-GNOME-Bugzilla-Component=screenshot
 Actions=Screen;Window;
+DBusActivatable=true
 
 [Desktop Action Screen]
 _Name=Take a Screenshot of the Whole Screen

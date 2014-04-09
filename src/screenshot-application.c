@@ -656,9 +656,10 @@ screenshot_application_handle_local_options (GApplication *app,
 }
 
 static gint
-screenshot_application_command_line (GApplication            *self,
+screenshot_application_command_line (GApplication            *app,
                                      GApplicationCommandLine *command_line)
 {
+  ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
   gboolean clipboard_arg = FALSE;
   gboolean window_arg = FALSE;
   gboolean area_arg = FALSE;
@@ -705,9 +706,9 @@ screenshot_application_command_line (GApplication            *self,
 
   /* interactive mode: trigger the dialog and wait for the response */
   if (screenshot_config->interactive)
-    screenshot_show_interactive_dialog (SCREENSHOT_APPLICATION (self));
+    screenshot_show_interactive_dialog (self);
   else
-    screenshot_start (SCREENSHOT_APPLICATION (self));
+    screenshot_start (self);
 
  out:
   return exit_status;
