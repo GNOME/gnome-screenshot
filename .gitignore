@@ -1,6 +1,7 @@
 *~
 gnome-screenshot
-gnome-screenshot.desktop
+org.gnome.Screenshot.desktop
+org.gnome.Screenshot.service
 gnome-screenshot.schemas
 *.o
 
