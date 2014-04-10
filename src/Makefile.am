@@ -70,8 +70,6 @@ org.gnome.Screenshot.service: Makefile
 		     echo 'Exec=${bindir}/gnome-screenshot --gapplication-service') > $@.tmp && \
 		     mv $@.tmp $@
 
-CLEANFILES = $(dbusservice_DATA)
-
 man_MANS = gnome-screenshot.1
 
 gsettingsschema_in_files = org.gnome.gnome-screenshot.gschema.xml.in
@@ -86,6 +84,7 @@ convert_DATA = gnome-screenshot.convert
 @GSETTINGS_RULES@
 
 EXTRA_DIST =					\
+	$(dbusservice_DATA)			\
 	$(gsettingsschema_in_files)		\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
