@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-27 08:19+0000\n"
+"POT-Creation-Date: 2014-04-15 08:09+0000\n"
 "PO-Revision-Date: 2014-02-27 17:46+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
@@ -172,7 +172,7 @@ msgstr "Ya existe un archivo llamado «%s» en «%s»"
 
 #: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
-msgstr "¿Sobreescribir el archivo existente?"
+msgstr "¿Sobrescribir el archivo existente?"
 
 #: ../src/screenshot-application.c:174 ../src/screenshot-application.c:183
 #: ../src/screenshot-application.c:463 ../src/screenshot-application.c:467
@@ -233,7 +233,6 @@ msgid "seconds"
 msgstr "segundos"
 
 #: ../src/screenshot-application.c:652
-#| msgid "Effect to add to the border (shadow, border or none)"
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr "Efecto para añadir al borde (sombra, borde, antiguo o ninguno)"
 
