@@ -1,3 +1,12 @@
+GNOME Screenshot 3.13.90 - 21st August 2014
+===========================================
+
+- Don't use deprecated GTK+ API (Matthias Clasen)
+- Port commandline handling to GApplication (Matthias Clasen)
+- Make DBus activatable (Matthias Clasen)
+- Implement g_application_activate() (Michael Catanzaro)
+- Translation updates
+
 GNOME Screenshot 3.12.0 - 25th March 2014
 =========================================
 
