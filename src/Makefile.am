@@ -84,7 +84,6 @@ convert_DATA = gnome-screenshot.convert
 @GSETTINGS_RULES@
 
 EXTRA_DIST =					\
-	$(dbusservice_DATA)			\
 	$(gsettingsschema_in_files)		\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
@@ -97,6 +96,7 @@ CLEANFILES = \
 	$(BUILT_SOURCES)			\
 	$(gsettings_SCHEMAS)			\
 	$(gnome_screenshot_DATA)		\
+	$(dbusservice_DATA)			\
 	$(NULL)
 
 dist-hook:
