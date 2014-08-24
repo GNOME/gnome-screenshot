@@ -678,7 +678,6 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "clipboard", "b", &clipboard_arg);
   g_variant_dict_lookup (options, "window", "b", &window_arg);
   g_variant_dict_lookup (options, "area", "b", &area_arg);
-  g_variant_dict_lookup (options, "clipboard", "b", &clipboard_arg);
   g_variant_dict_lookup (options, "include-border", "b", &include_border_arg);
   g_variant_dict_lookup (options, "remove-border", "b", &disable_border_arg);
   g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
