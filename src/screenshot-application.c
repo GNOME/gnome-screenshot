@@ -685,7 +685,7 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
   g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
-  g_variant_dict_lookup (options, "file", "&s", &file_arg);
+  g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
 
   res = screenshot_load_config (clipboard_arg,
                                 window_arg,
