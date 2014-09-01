@@ -795,6 +795,15 @@ screenshot_application_startup (GApplication *app)
 static void
 screenshot_application_activate (GApplication *app)
 {
+  GtkWindow *window;
+
+  window = gtk_application_get_active_window (GTK_APPLICATION (app));
+  if (window != NULL)
+    {
+      gtk_window_present (GTK_WINDOW (window));
+      return;
+    }
+
   screenshot_config->interactive = TRUE;
   screenshot_show_interactive_dialog (SCREENSHOT_APPLICATION (app));
 }
