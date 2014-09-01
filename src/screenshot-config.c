@@ -36,103 +36,32 @@
 
 ScreenshotConfig *screenshot_config;
 
-gboolean
-screenshot_load_config (gboolean clipboard_arg,
-                        gboolean window_arg,
-                        gboolean area_arg,
-                        gboolean include_border_arg,
-                        gboolean disable_border_arg,
-                        gboolean include_pointer_arg,
-                        const gchar *border_effect_arg,
-                        guint delay_arg,
-                        gboolean interactive_arg,
-                        const gchar *file_arg)
+void
+screenshot_load_config (void)
 {
-  static gboolean initialized = FALSE;
   ScreenshotConfig *config;
 
-  if (initialized)
-    return FALSE;
-
-  if (window_arg && area_arg)
-    {
-      g_printerr (_("Conflicting options: --window and --area should not be "
-                    "used at the same time.\n"));
-      return FALSE;
-    }
-
-  if (delay_arg && area_arg)
-    {
-      g_printerr (_("Conflicting options: --area and --delay should not be "
-                    "used at the same time.\n"));
-      return FALSE;
-    }
-
   config = g_slice_new0 (ScreenshotConfig);
-  initialized = TRUE;
-
-  config->interactive = interactive_arg;
 
   config->settings = g_settings_new ("org.gnome.gnome-screenshot");
-  if (config->interactive)
-    {
-      if (clipboard_arg)
-        g_warning ("Option --clipboard is ignored in interactive mode.");
-      if (include_pointer_arg)
-        g_warning ("Option --include-pointer is ignored in interactive mode.");
-      if (file_arg)
-        g_warning ("Option --file is ignored in interactive mode.");
-
-      config->save_dir =
-        g_settings_get_string (config->settings,
-                               LAST_SAVE_DIRECTORY_KEY);
-      config->delay =
-        g_settings_get_int (config->settings, DELAY_KEY);
-      if (delay_arg > 0)
-        config->delay = delay_arg;
-
-      config->include_border =
-        g_settings_get_boolean (config->settings,
-                                INCLUDE_BORDER_KEY);
-      if (include_border_arg)
-        config->include_border = TRUE;
-      if (disable_border_arg)
-        config->include_border = FALSE;
-
-      config->include_pointer =
-        g_settings_get_boolean (config->settings,
-                                INCLUDE_POINTER_KEY);
-
-      if (border_effect_arg != NULL)
-        config->border_effect = g_strdup (border_effect_arg);
-      else
-        config->border_effect =
-          g_settings_get_string (config->settings,
-                                 BORDER_EFFECT_KEY);
-      config->file_type =
-        g_settings_get_string (config->settings,
-                               DEFAULT_FILE_TYPE_KEY);
-    }
-  else
-    {
-      config->save_dir =
-        g_settings_get_string (config->settings,
-                               AUTO_SAVE_DIRECTORY_KEY);
-      config->delay = delay_arg;
-      config->include_border = include_border_arg;
-      config->include_border = !disable_border_arg;
-      config->include_pointer = include_pointer_arg;
-      if (border_effect_arg != NULL)
-        config->border_effect = g_strdup (border_effect_arg);
-
-      config->copy_to_clipboard = clipboard_arg;
-      if (file_arg != NULL)
-        config->file = g_file_new_for_commandline_arg (file_arg);
-      config->file_type =
-        g_settings_get_string (config->settings,
-                               DEFAULT_FILE_TYPE_KEY);
-    }
-
+  config->save_dir =
+    g_settings_get_string (config->settings,
+                           LAST_SAVE_DIRECTORY_KEY);
+  config->delay =
+    g_settings_get_int (config->settings,
+                        DELAY_KEY);
+  config->include_border =
+    g_settings_get_boolean (config->settings,
+                            INCLUDE_BORDER_KEY);
+  config->include_pointer =
+    g_settings_get_boolean (config->settings,
+                            INCLUDE_POINTER_KEY);
+  config->border_effect =
+    g_settings_get_string (config->settings,
+                           BORDER_EFFECT_KEY);
+  config->file_type =
+    g_settings_get_string (config->settings,
+                           DEFAULT_FILE_TYPE_KEY);
   config->include_icc_profile =
     g_settings_get_boolean (config->settings,
                             INCLUDE_ICC_PROFILE);
@@ -140,12 +69,10 @@ screenshot_load_config (gboolean clipboard_arg,
   if (config->border_effect == NULL)
     config->border_effect = g_strdup ("none");
 
-  config->take_window_shot = window_arg;
-  config->take_area_shot = area_arg;
+  config->take_window_shot = FALSE;
+  config->take_area_shot = FALSE;
 
   screenshot_config = config;
-
-  return TRUE;
 }
 
 void
@@ -170,4 +97,76 @@ screenshot_save_config (void)
 
   if (!c->take_area_shot)
     g_settings_set_int (c->settings, DELAY_KEY, c->delay);
+}
+
+gboolean
+screenshot_config_parse_command_line (gboolean clipboard_arg,
+                                      gboolean window_arg,
+                                      gboolean area_arg,
+                                      gboolean include_border_arg,
+                                      gboolean disable_border_arg,
+                                      gboolean include_pointer_arg,
+                                      const gchar *border_effect_arg,
+                                      guint delay_arg,
+                                      gboolean interactive_arg,
+                                      const gchar *file_arg)
+{
+  if (window_arg && area_arg)
+    {
+      g_printerr (_("Conflicting options: --window and --area should not be "
+                    "used at the same time.\n"));
+      return FALSE;
+    }
+
+  if (delay_arg && area_arg)
+    {
+      g_printerr (_("Conflicting options: --area and --delay should not be "
+                    "used at the same time.\n"));
+      return FALSE;
+    }
+
+  screenshot_config->interactive = interactive_arg;
+
+  if (screenshot_config->interactive)
+    {
+      if (clipboard_arg)
+        g_warning ("Option --clipboard is ignored in interactive mode.");
+      if (include_pointer_arg)
+        g_warning ("Option --include-pointer is ignored in interactive mode.");
+      if (file_arg)
+        g_warning ("Option --file is ignored in interactive mode.");
+
+      if (delay_arg > 0)
+        screenshot_config->delay = delay_arg;
+      if (include_border_arg)
+        screenshot_config->include_border = TRUE;
+      if (disable_border_arg)
+        screenshot_config->include_border = FALSE;
+    }
+  else
+    {
+      g_free (screenshot_config->save_dir);
+      screenshot_config->save_dir =
+        g_settings_get_string (screenshot_config->settings,
+                               AUTO_SAVE_DIRECTORY_KEY);
+
+      screenshot_config->delay = delay_arg;
+      screenshot_config->include_border = include_border_arg;
+      screenshot_config->include_border = !disable_border_arg;
+      screenshot_config->include_pointer = include_pointer_arg;
+      screenshot_config->copy_to_clipboard = clipboard_arg;
+      if (file_arg != NULL)
+        screenshot_config->file = g_file_new_for_commandline_arg (file_arg);
+    }
+
+  if (border_effect_arg != NULL)
+    {
+      g_free (screenshot_config->border_effect);
+      screenshot_config->border_effect = g_strdup (border_effect_arg);
+    }
+
+  screenshot_config->take_window_shot = window_arg;
+  screenshot_config->take_area_shot = area_arg;
+
+  return TRUE;
 }

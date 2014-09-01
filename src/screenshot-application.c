@@ -686,17 +686,16 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
   g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
 
-  res = screenshot_load_config (clipboard_arg,
-                                window_arg,
-                                area_arg,
-                                include_border_arg,
-                                disable_border_arg,
-                                include_pointer_arg,
-                                border_effect_arg,
-                                delay_arg,
-                                interactive_arg,
-                                file_arg);
-
+  res = screenshot_config_parse_command_line (clipboard_arg,
+                                              window_arg,
+                                              area_arg,
+                                              include_border_arg,
+                                              disable_border_arg,
+                                              include_pointer_arg,
+                                              border_effect_arg,
+                                              delay_arg,
+                                              interactive_arg,
+                                              file_arg);
   if (!res)
     {
       exit_status = EXIT_FAILURE;
@@ -705,7 +704,7 @@ screenshot_application_command_line (GApplication            *app,
 
   /* interactive mode: trigger the dialog and wait for the response */
   if (screenshot_config->interactive)
-    screenshot_show_interactive_dialog (self);
+    g_application_activate (app);
   else
     screenshot_start (self);
 
@@ -771,21 +770,18 @@ static GActionEntry action_entries[] = {
 static void
 screenshot_application_startup (GApplication *app)
 {
+  GMenuModel *menu;
+  GtkBuilder *builder;
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
+
+  screenshot_load_config ();
 
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
                                    G_N_ELEMENTS (action_entries), self);
-}
-
-static void
-screenshot_application_activate (GApplication *app)
-{
-  GtkBuilder *builder;
-  GMenuModel *menu;
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_resource (builder, "/org/gnome/screenshot/screenshot-app-menu.ui", NULL);
@@ -794,6 +790,13 @@ screenshot_application_activate (GApplication *app)
 
   g_object_unref (builder);
   g_object_unref (menu);
+}
+
+static void
+screenshot_application_activate (GApplication *app)
+{
+  screenshot_config->interactive = TRUE;
+  screenshot_show_interactive_dialog (SCREENSHOT_APPLICATION (app));
 }
 
 static void
