@@ -652,6 +652,18 @@ screenshot_application_handle_local_options (GApplication *app,
       exit (EXIT_SUCCESS);
     }
 
+  /* Start headless instances in non-unique mode */
+  if (!g_variant_dict_contains (options, "interactive"))
+    {
+      GApplicationFlags old_flags;
+
+      old_flags = g_application_get_flags (app);
+      if ((old_flags & G_APPLICATION_IS_SERVICE) == 0)
+        {
+          g_application_set_flags (app, old_flags | G_APPLICATION_NON_UNIQUE);
+        }
+    }
+
   return -1;
 }
 
