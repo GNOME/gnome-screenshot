@@ -1,3 +1,12 @@
+GNOME Screenshot 3.13.92 - 16th September 2014
+==============================================
+
+- Fix launching from gnome-shell in interactive mode (Kalev Lember)
+- Parse delay cmdline parameter correctly (Ryan Lortie)
+- Parse filename cmdline parameter correctly (Matthias Clasen)
+- Remove duplicate cmdline parsing (Dominique Leuenberger)
+- Add missing desktop file category (Elad Alfassa)
+
 GNOME Screenshot 3.13.90 - 21st August 2014
 ===========================================
 
