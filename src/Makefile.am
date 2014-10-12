@@ -61,6 +61,11 @@ gnome_screenshot_in_files = org.gnome.Screenshot.desktop.in
 gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+appdatadir = $(datadir)/appdata
+appdata_DATA = $(appdata_in_files:.xml.in=.xml)
+appdata_in_files = org.gnome.Screenshot.appdata.xml.in
+@INTLTOOL_XML_RULE@
+
 dbusservicedir = $(datadir)/dbus-1/services
 dbusservice_DATA = org.gnome.Screenshot.service
 
@@ -79,11 +84,10 @@ gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
 convertdir = $(datadir)/GConf/gsettings
 convert_DATA = gnome-screenshot.convert
 
-@INTLTOOL_XML_NOMERGE_RULE@
-
 @GSETTINGS_RULES@
 
 EXTRA_DIST =					\
+	$(appdata_in_files)			\
 	$(gsettingsschema_in_files)		\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
@@ -94,6 +98,7 @@ EXTRA_DIST =					\
 
 CLEANFILES = \
 	$(BUILT_SOURCES)			\
+	$(appdata_DATA)				\
 	$(gsettings_SCHEMAS)			\
 	$(gnome_screenshot_DATA)		\
 	$(dbusservice_DATA)			\

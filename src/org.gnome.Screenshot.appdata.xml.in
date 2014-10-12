@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
+<application>
+  <id type="desktop">org.gnome.Screenshot.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <_name>GNOME Screenshot</_name>
+  <_summary>Save images of your screen or individual windows</_summary>
+  <description>
+    <_p>
+      GNOME Screenshot is a simple utility that lets you take pictures of your computer screen.
+      Screenshots can be of your whole screen, any specific application, or a selected
+      rectangular area.
+      You can also copy the captured screenshot directly into the GNOME clipboard and
+      paste it into other applications.
+    </_p>
+    <_p>
+      GNOME Screenshot allows you to take screenshots even when it's not open: just
+      press the PrtSc button on your keyboard, and a snapshot of your whole screen will
+      be saved to your Pictures folder.
+      Hold Alt while pressing PrtSc and you will get a screenshot of only the currently
+      selected window.
+    </_p>
+  </description>
+  <url type="homepage">https://git.gnome.org/browse/gnome-screenshot/</url>
+  <screenshots>
+  <screenshot type="default">https://git.gnome.org/browse/gnome-screenshot/plain/src/gnome-screenshot.png</screenshot>
+  </screenshots>
+  <updatecontact>richard@hughsie.com</updatecontact>
+</application>
