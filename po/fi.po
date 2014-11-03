@@ -1,6 +1,6 @@
 # Finnish messages for gnome-utils
 # Copyright (C) 2003-2009 Free Software Foundation, Inc.
-# Suomennos: http://gnome.fi/
+# Suomennos: https://l10n.gnome.org/teams/fi/
 #
 # days = päivää sitten, ks. konteksti
 #
