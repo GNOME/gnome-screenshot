@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-09 15:58+0300\n"
-"PO-Revision-Date: 2014-04-09 15:59+0300\n"
+"POT-Creation-Date: 2014-11-04 18:56+0200\n"
+"PO-Revision-Date: 2014-11-04 18:57+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -29,25 +29,58 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:761
+#: ../src/org.gnome.Screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "צילום מסך"
 
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:762
+#: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "שמירת תמונות של שולחן העבודה או של חלונות בנפרד"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
+#: ../src/org.gnome.Screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
 msgstr "צילום;לכידה;מסך;הדפסה;הדפסה;תצלום;תמונה;"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/org.gnome.Screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "צילום המסך כולו"
 
-#: ../src/gnome-screenshot.desktop.in.h:5
+#: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "צילום החלון הנוכחי"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "GNOME Screenshot"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -192,77 +225,73 @@ msgstr "המסך צולם"
 msgid "All possible methods failed"
 msgstr "כל השיטות האפשריות נכשלו"
 
-#: ../src/screenshot-application.c:645
+#: ../src/screenshot-application.c:631
 msgid "Send the grab directly to the clipboard"
 msgstr "Send the grab directly to the clipboard"
 
-#: ../src/screenshot-application.c:646
+#: ../src/screenshot-application.c:632
 msgid "Grab a window instead of the entire screen"
 msgstr "Grab a window instead of the entire screen"
 
-#: ../src/screenshot-application.c:647
+#: ../src/screenshot-application.c:633
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Grab an area of the screen instead of the entire screen"
 
-#: ../src/screenshot-application.c:648
+#: ../src/screenshot-application.c:634
 msgid "Include the window border with the screenshot"
 msgstr "Include the window border with the screenshot"
 
-#: ../src/screenshot-application.c:649
+#: ../src/screenshot-application.c:635
 msgid "Remove the window border from the screenshot"
 msgstr "Remove the window border from the screenshot"
 
-#: ../src/screenshot-application.c:650
+#: ../src/screenshot-application.c:636
 msgid "Include the pointer with the screenshot"
 msgstr "Include the pointer with the screenshot"
 
-#: ../src/screenshot-application.c:651
+#: ../src/screenshot-application.c:637
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Take screenshot after specified delay [in seconds]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:651
+#: ../src/screenshot-application.c:637
 #: ../src/screenshot-interactive-dialog.c:420
 msgid "seconds"
 msgstr "שניות"
 
-#: ../src/screenshot-application.c:652
+#: ../src/screenshot-application.c:638
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr "אפקט להוספה למסגרת (הצללה, מסגרת, מיושן או ללא)"
 
-#: ../src/screenshot-application.c:652
+#: ../src/screenshot-application.c:638
 msgid "effect"
 msgstr "effect"
 
-#: ../src/screenshot-application.c:653
+#: ../src/screenshot-application.c:639
 msgid "Interactively set options"
 msgstr "Interactively set options"
 
-#: ../src/screenshot-application.c:654
+#: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
 msgstr "Save screenshot directly to this file"
 
-#: ../src/screenshot-application.c:654
+#: ../src/screenshot-application.c:640
 msgid "filename"
 msgstr "filename"
 
-#: ../src/screenshot-application.c:655
+#: ../src/screenshot-application.c:641
 msgid "Print version information and exit"
 msgstr "Print version information and exit"
 
-#: ../src/screenshot-application.c:669
-msgid "Take a picture of the screen"
-msgstr "Take a picture of the screen"
-
-#: ../src/screenshot-application.c:764
+#: ../src/screenshot-application.c:770
 msgid "translator-credits"
 msgstr ""
 "ירון שהרבני <sh.yaron@gmail.com>\n"
 "יוסף אור בוצ׳קו <yoseforb@gnome.org>"
 
-#: ../src/screenshot-config.c:59
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -271,7 +300,7 @@ msgstr ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 
-#: ../src/screenshot-config.c:66
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
@@ -371,6 +400,9 @@ msgstr "_ביטול"
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "שגיאה בטעינת דף העזרה"
+
+#~ msgid "Take a picture of the screen"
+#~ msgstr "Take a picture of the screen"
 
 #~ msgid "About Screenshot"
 #~ msgstr "על אודות צילום המסך"
