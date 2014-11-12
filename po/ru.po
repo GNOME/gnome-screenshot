@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils trunk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-11-06 08:19+0000\n"
-"PO-Revision-Date: 2014-11-06 21:06+0300\n"
+"POT-Creation-Date: 2014-11-12 08:18+0000\n"
+"PO-Revision-Date: 2014-11-12 21:22+0300\n"
 "Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -42,7 +42,7 @@ msgstr "Снимок экрана"
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
-msgstr "Сохранить изображения экрана или отдельных окон"
+msgstr "Сохранить изображение с экрана или отдельных окон"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
@@ -80,10 +80,10 @@ msgid ""
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
-"С помощью снимков экрана GNOME можно делать снимка даже не открывая данное "
-"приложение. Просто нажмите клавишу PrtScrn на клавиатуре и снимок экрана "
-"будет сохранён в папку «Изображения». Чтобы сделать снимок текущего "
-"используемого окна, нажмите PrtScrn, удерживая клавишу Alt."
+"С помощью приложения «Снимок экрана GNOME» можно делать снимки, не открывая "
+"само приложение. Просто нажмите клавишу PrtScrn на клавиатуре, и снимок "
+"экрана будет сохранён в папку «Изображения». Чтобы сделать снимок текущего "
+"окна, нажмите PrtScrn, удерживая клавишу Alt."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -135,7 +135,7 @@ msgstr "Задержка снимка экрана"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Количество секунд ожидания, прежде чем будет сделан снимок экрана."
+msgstr "Задержка в секундах перед созданием снимка экрана."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
@@ -152,31 +152,31 @@ msgstr "Последний каталог для сохранения"
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
-"Каталог, в котором последний раз в интерактивном режиме был сохранён снимок."
+"Каталог, в который последний раз сохранялся снимок в интерактивном режиме."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
-msgstr "Включить рамку"
+msgstr "Добавить рамку"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
 msgid "Include the window manager border along with the screenshot"
-msgstr "Включить рамку оконного менеджера в снимок окна"
+msgstr "Добавить рамку окна в снимок"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Include Pointer"
-msgstr "Включить указатель"
+msgstr "Добавить указатель"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Include the pointer in the screenshot"
-msgstr "Включает указатель мыши в снимок экрана"
+msgstr "Добавить указатель мыши в снимок экрана"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
 msgid "Include ICC Profile"
-msgstr "Включать профиль ICC"
+msgstr "Добавить профиль ICC"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Включать целевой профиль ICC в файл снимка рабочего стола"
+msgstr "Добавить целевой профиль ICC в файл снимка экрана"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
@@ -187,7 +187,7 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
 msgstr ""
-"Эффект, добавляемый вокруг рамки. Возможные варианты: «shadow», «none» и "
+"Эффект, добавляемый вокруг рамки. Возможные значения: «shadow», «none» и "
 "«border»."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
@@ -228,15 +228,15 @@ msgstr "Снимок экрана сделан"
 
 #: ../src/screenshot-application.c:508
 msgid "All possible methods failed"
-msgstr "Все доступные методы завершились неудачно"
+msgstr "Все доступные способы завершились неудачно"
 
 #: ../src/screenshot-application.c:631
 msgid "Send the grab directly to the clipboard"
-msgstr "Отправить снимок сразу в буфер обмена"
+msgstr "Отправить снимок в буфер обмена"
 
 #: ../src/screenshot-application.c:632
 msgid "Grab a window instead of the entire screen"
-msgstr "Захватить снимок окна, а не всего экрана"
+msgstr "Захватить окно, а не весь экран"
 
 #: ../src/screenshot-application.c:633
 msgid "Grab an area of the screen instead of the entire screen"
@@ -244,11 +244,11 @@ msgstr "Захватить область экрана, а не весь экр�
 
 #: ../src/screenshot-application.c:634
 msgid "Include the window border with the screenshot"
-msgstr "Включить рамку окна в снимок"
+msgstr "Добавить рамку окна в снимок"
 
 #: ../src/screenshot-application.c:635
 msgid "Remove the window border from the screenshot"
-msgstr "Исключить рамку окна из снимка"
+msgstr "Убрать рамку окна из снимка"
 
 #: ../src/screenshot-application.c:636
 msgid "Include the pointer with the screenshot"
@@ -276,7 +276,7 @@ msgstr "эффект"
 
 #: ../src/screenshot-application.c:639
 msgid "Interactively set options"
-msgstr "Установить параметры интерактивно"
+msgstr "Указать параметры"
 
 #: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
@@ -293,9 +293,9 @@ msgstr "Показать информацию о версии и выйти"
 #: ../src/screenshot-application.c:770
 msgid "translator-credits"
 msgstr ""
-"Aleksey Kabanov <ak099@mail.ru>, 2012.\n"
-"Yuri Myasoedov <omerta13@yandex.ru>, 2012.\n"
-"Stas Solovey <whats_up@tut.by>, 2013-2014."
+"Алексей Кабанов <ak099@mail.ru>, 2012.\n"
+"Юрий Мясоедов <ymyasoedov@yandex.ru>, 2012-2014.\n"
+"Стас Соловей <whats_up@tut.by>, 2013-2014."
 
 #: ../src/screenshot-config.c:116
 #, c-format
@@ -303,8 +303,8 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"Несовместимые параметры: --window и --area не могут быть использованы "
-"одновременно.\n"
+"Несовместимые параметры: нельзя одновременно использовать --window и --"
+"area.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
@@ -312,8 +312,7 @@ msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Несовместимые параметры: --area и --delay не могут быть использованы "
-"одновременно.\n"
+"Несовместимые параметры: нельзя одновременно использовать --area и --delay.\n"
 
 #: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
@@ -405,4 +404,4 @@ msgstr "_Отмена"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
-msgstr "Произошла ошибка при загрузке страницы справки"
+msgstr "При загрузке страницы справки произошла ошибка"
