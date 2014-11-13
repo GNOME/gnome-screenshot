@@ -6,10 +6,10 @@
 # Torstein Adolf Winterseth <kvikende@fsfe.org>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-screenshot 3.13.x\n"
+"Project-Id-Version: gnome-screenshot 3.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 11:00+0200\n"
-"PO-Revision-Date: 2014-07-23 11:00+0200\n"
+"POT-Creation-Date: 2014-11-13 19:32+0100\n"
+"PO-Revision-Date: 2014-11-13 19:35+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -19,12 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:757
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Skjermdump"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
-#: ../src/screenshot-application.c:758
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Lagre bilder av skjerminnhold eller individuelle vinduer"
 
@@ -39,6 +40,27 @@ msgstr "Ta skjermdump av hele skjermen"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Ta skjermdump av aktivt vindu"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "GNOME Skjermdump"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr "GNOME skjermdump er et enkelt verktøy som lar deg ta bilder av skjermen på datamaskinen. Skjermdump kan være av hele skjermen, et program, eller et utvalgt firkantet område. Du kan også kopiere et skjermdump direkte til utklippstavlen og lime det inn i andre programmer."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr "GNOME skjermdump lar deg ta skjermdump selv når det ikke er åpent: bare trykk PrtSc-knappen på ditt tastatur for å lagre et skjermdump av hele skjermen i Bilder-mappen. Hvis du holder nede Alt samtidig får du et skjermdump av valgt vindu."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -245,18 +267,18 @@ msgstr "filnavn"
 msgid "Print version information and exit"
 msgstr "Skriv versjonsinformasjon og avslutt"
 
-#: ../src/screenshot-application.c:760
+#: ../src/screenshot-application.c:770
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
-#: ../src/screenshot-config.c:59
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "Konflikt mellom flagg: --window og --area kan ikke brukes samtidig.\n"
 
-#: ../src/screenshot-config.c:66
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
