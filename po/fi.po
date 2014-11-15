@@ -1,6 +1,6 @@
 # Finnish messages for gnome-utils
 # Copyright (C) 2003-2009 Free Software Foundation, Inc.
-# Suomennos: http://gnome.fi/
+# Suomennos: https://l10n.gnome.org/teams/fi/
 #
 # days = päivää sitten, ks. konteksti
 #
@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-06 07:25+0000\n"
+"POT-Creation-Date: 2014-11-07 08:21+0000\n"
 "PO-Revision-Date: 2014-09-06 13:56+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -239,7 +239,6 @@ msgid "seconds"
 msgstr "sekuntia"
 
 #: ../src/screenshot-application.c:638
-#| msgid "Effect to add to the border (shadow, border or none)"
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr "Reunoihin lisättävä tehoste (varjo, reuna, vintage tai ei mitään)"
 
@@ -362,7 +361,6 @@ msgid "Effects"
 msgstr "Tehosteet"
 
 #: ../src/screenshot-interactive-dialog.c:483
-#| msgid "Help"
 msgid "_Help"
 msgstr "_Ohje"
 
