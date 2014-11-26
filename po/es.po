@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-10-12 19:31+0000\n"
-"PO-Revision-Date: 2014-10-20 13:02+0200\n"
+"POT-Creation-Date: 2014-11-26 08:23+0000\n"
+"PO-Revision-Date: 2014-11-26 12:19+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -52,7 +52,6 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "Tomar una captura de pantalla de la ventana actual"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
-#| msgid "Screenshot"
 msgid "GNOME Screenshot"
 msgstr "Captura de pantalla de GNOME"
 
@@ -319,16 +318,18 @@ msgstr "Captura.png"
 #. * with the screenshot if the entire screen is taken
 #: ../src/screenshot-filename-builder.c:145
 #, c-format
-msgid "Screenshot from %s.%s"
-msgstr "Captura de pantalla de %s.%s"
+#| msgid "Screenshot from %s.%s"
+msgid "Screenshot-from-%s.%s"
+msgstr "Captura-de-pantalla-de-%s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
 #: ../src/screenshot-filename-builder.c:152
 #, c-format
-msgid "Screenshot from %s - %d.%s"
-msgstr "Captura de pantalla de de %s - %d.%s"
+#| msgid "Screenshot from %s - %d.%s"
+msgid "Screenshot-from-%s-%d.%s"
+msgstr "Captura-de-pantalla-de-%s-%d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
