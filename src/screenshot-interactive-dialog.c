@@ -430,7 +430,7 @@ typedef struct {
 } CaptureData;
 
 static void
-capure_button_clicked_cb (GtkButton *button, CaptureData *data)
+capture_button_clicked_cb (GtkButton *button, CaptureData *data)
 {
   gtk_widget_destroy (data->widget);
   data->callback (data->user_data);
@@ -497,7 +497,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   data->widget = dialog;
   data->callback = f;
   data->user_data = user_data;
-  g_signal_connect (button, "clicked", G_CALLBACK (capure_button_clicked_cb), data);
+  g_signal_connect (button, "clicked", G_CALLBACK (capture_button_clicked_cb), data);
   gtk_size_group_add_widget (size_group, button);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (header_bar), button);
   gtk_widget_set_can_default (button, TRUE);
