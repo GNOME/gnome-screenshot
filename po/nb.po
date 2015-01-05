@@ -7,43 +7,45 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot 3.15.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-13 19:32+0100\n"
-"PO-Revision-Date: 2014-11-13 19:35+0100\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-11-26 08:23+0000\n"
+"PO-Revision-Date: 2014-11-26 11:34+0100\n"
+"Last-Translator: Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
-"Language: \n"
+"Language: Norwegian bokmål\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
 msgid "Screenshot"
-msgstr "Skjermdump"
+msgstr "Skjermbilde"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
-msgstr "Lagre bilder av skjerminnhold eller individuelle vinduer"
+msgstr "Lagre bilder av innholdet på skjermen eller i individuelle vinduer"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
-msgstr "skjermbilde;utskrift;skjermdump;"
+msgstr "skjermbilde;opptak;utskrift;skjermdump;"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
-msgstr "Ta skjermdump av hele skjermen"
+msgstr "Ta bilde av hele skjermen"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
-msgstr "Ta skjermdump av aktivt vindu"
+msgstr "Ta bilde av aktivt vindu"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
 msgid "GNOME Screenshot"
-msgstr "GNOME Skjermdump"
+msgstr "GNOME Skjermbilde"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
 msgid ""
@@ -52,7 +54,11 @@ msgid ""
 "application, or a selected rectangular area. You can also copy the captured "
 "screenshot directly into the GNOME clipboard and paste it into other "
 "applications."
-msgstr "GNOME skjermdump er et enkelt verktøy som lar deg ta bilder av skjermen på datamaskinen. Skjermdump kan være av hele skjermen, et program, eller et utvalgt firkantet område. Du kan også kopiere et skjermdump direkte til utklippstavlen og lime det inn i andre programmer."
+msgstr ""
+"GNOME skjermbilde er et enkelt verktøy som lar deg ta bilder av skjermen på "
+"datamaskinen. Du kan ta bilder av hele skjermen, et program, eller et "
+"utvalgt firkantet område. Du kan også kopiere et skjermbilde direkte til "
+"utklippstavlen og lime det inn i andre programmer."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
@@ -60,7 +66,10 @@ msgid ""
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
-msgstr "GNOME skjermdump lar deg ta skjermdump selv når det ikke er åpent: bare trykk PrtSc-knappen på ditt tastatur for å lagre et skjermdump av hele skjermen i Bilder-mappen. Hvis du holder nede Alt samtidig får du et skjermdump av valgt vindu."
+msgstr ""
+"Du kan ta skjermbilder selv når GNOME skjermbilde ikke er åpent. Trykk på "
+"PrtSc-tasten for å lagre et bilde av hele skjermen i Bilder-mappen. Hvis du "
+"holder nede Alt samtidig, får du et skjermbilde av aktivt vindu."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -76,7 +85,7 @@ msgstr "Avslutt"
 
 #: ../src/screenshot-dialog.ui.h:1
 msgid "Save Screenshot"
-msgstr "Lagre skjermdump"
+msgstr "Lagre skjermbilde"
 
 #: ../src/screenshot-dialog.ui.h:2
 msgid "C_opy to Clipboard"
@@ -96,31 +105,31 @@ msgstr "Lagre i _mappe:"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
 msgid "Window-specific screenshot (deprecated)"
-msgstr "Vindusspesifikt skjermdump (utgått)"
+msgstr "Vindusspesifikt skjermbilde (utgått)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
-"Dump kun aktivt vindu i stedet for hele skrivebordet. Denne nøkkelen er "
-"utgått og er ikke lenger i bruk."
+"Bare ta bilde av aktivt vindu i stedet for hele skrivebordet. Denne nøkkelen "
+"er utgått og er ikke lenger i bruk."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
-msgstr "Pause før skjermdump"
+msgstr "Skjermbilde-forsineksle"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Antall sekunder pause før skjermdumpet tas."
+msgstr "Antall sekunders pause før skjermbildet tas."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
 msgid "Screenshot directory"
-msgstr "Mappe for skjermdump"
+msgstr "Mappe for skjermbilder"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
 msgid "The directory where the screenshots will be saved by default."
-msgstr "Katalog hvor skjermdump blir lagret som forvalg."
+msgstr "Mappe hvor skjermbiler blir lagret som standard."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
 msgid "Last save directory"
@@ -128,7 +137,7 @@ msgstr "Mappe for siste lagring"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "Mappe hvor forrige skjermdump ble lagret i interaktiv modus."
+msgstr "Mappe hvor forrige skjermbilde ble lagret i interaktiv modus."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -136,7 +145,7 @@ msgstr "Ta med kant"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
 msgid "Include the window manager border along with the screenshot"
-msgstr "Ta med vindushåndtererens kant i skjermdumpet"
+msgstr "Ta med vindushåndtererens kant på skjermbildet"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Include Pointer"
@@ -144,7 +153,7 @@ msgstr "Ta med peker"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
 msgid "Include the pointer in the screenshot"
-msgstr "Ta med peker i skjermdumpet"
+msgstr "Ta med peker på skjermbildet"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
 msgid "Include ICC Profile"
@@ -152,7 +161,7 @@ msgstr "Ta med ICC-profil"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Ta med ICC-profil for målet i skjermdumpfilen"
+msgstr "Ta med ICC-profil for mål i skjermbildefil"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
@@ -172,22 +181,22 @@ msgstr "Forvalgt tiltype"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
 msgid "The default file type extension for screenshots."
-msgstr "Forvalgt filtype for skjermdump."
+msgstr "Forvalgt filtype for skjermbilder."
 
 #: ../src/screenshot-application.c:145
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "En fil med navn «%s» eksisterer allerede i «%s»"
+msgstr "Det finnes allerede en fil med navnet«%s» i «%s»"
 
 #: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
-msgstr "Overskriv eksisterende fil?"
+msgstr "Vil du overskrive filen som finnes allerede?"
 
 #: ../src/screenshot-application.c:174 ../src/screenshot-application.c:183
 #: ../src/screenshot-application.c:463 ../src/screenshot-application.c:467
 #: ../src/screenshot-application.c:507 ../src/screenshot-application.c:510
 msgid "Unable to capture a screenshot"
-msgstr "Kan ikke utføre skjermdump"
+msgstr "Klarte ikke å utføre skjermdump"
 
 #: ../src/screenshot-application.c:175
 msgid "Error creating file. Please choose another location and retry."
@@ -200,7 +209,7 @@ msgstr "Feil ved oppretting av fil"
 
 #: ../src/screenshot-application.c:475 ../src/screenshot-application.c:543
 msgid "Screenshot taken"
-msgstr "Skjermdump tatt"
+msgstr "Skjermbilde tatt"
 
 #: ../src/screenshot-application.c:508
 msgid "All possible methods failed"
@@ -208,31 +217,31 @@ msgstr "Alle mulige metoder feilet"
 
 #: ../src/screenshot-application.c:631
 msgid "Send the grab directly to the clipboard"
-msgstr "Send dump direkte til utklippstavlen"
+msgstr "Send bilde direkte til utklippstavle"
 
 #: ../src/screenshot-application.c:632
 msgid "Grab a window instead of the entire screen"
-msgstr "Dump et vindu i stedet for hele skjermen"
+msgstr "Ta bilde av et vindu, i stedet for hele skjermen"
 
 #: ../src/screenshot-application.c:633
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Dump en del av skjermen i stedet for hele området"
+msgstr "Ta bilde av en del av skjermen, i stedet for hele skjermen"
 
 #: ../src/screenshot-application.c:634
 msgid "Include the window border with the screenshot"
-msgstr "Ta med vinduskant i skjermdumpet"
+msgstr "Ta med vinduskant på skjermbildet"
 
 #: ../src/screenshot-application.c:635
 msgid "Remove the window border from the screenshot"
-msgstr "Fjern vinduskanten i skjermdumpet"
+msgstr "Fjern vinduskant fra skjermbildet"
 
 #: ../src/screenshot-application.c:636
 msgid "Include the pointer with the screenshot"
-msgstr "Ta med peker i skjermdumpet"
+msgstr "Ta med peker på skjermbildet"
 
 #: ../src/screenshot-application.c:637
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Ta skjermdump etter oppgitt pause [i sekunder]"
+msgstr "Ta skjermbilde etter valgt forsinkelse (i sekunder)"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -257,7 +266,7 @@ msgstr "Spør etter alternativer"
 
 #: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
-msgstr "Lagre skjermdump direkte til denne filen"
+msgstr "Lagre skjermbilde direkte i denne filen"
 
 #: ../src/screenshot-application.c:640
 msgid "filename"
@@ -276,33 +285,33 @@ msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr "Konflikt mellom flagg: --window og --area kan ikke brukes samtidig.\n"
+msgstr "Du kan ikke bruke valgene «--window» og «--area» samtidig.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Konflikt mellom flagg: --area og --delay kan ikke brukes samtidig.\n"
+msgstr "Du kan ikke bruke valgene «--area» og «--delay» samtidig.\n"
 
 #: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
-msgstr "Skjermdump.png"
+msgstr "Skjermbilde.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
 #: ../src/screenshot-filename-builder.c:145
 #, c-format
-msgid "Screenshot from %s.%s"
-msgstr "Skjermdump fra %s.%s"
+msgid "Screenshot-from-%s.%s"
+msgstr "Skjermbilde-fra-%s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
 #: ../src/screenshot-filename-builder.c:152
 #, c-format
-msgid "Screenshot from %s - %d.%s"
-msgstr "Skjermdump fra %s - %d.%s"
+msgid "Screenshot-from-%s-%d.%s"
+msgstr "Skjermbilde-fra-%s-%d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -336,26 +345,26 @@ msgstr "Bruk _effekt:"
 
 #: ../src/screenshot-interactive-dialog.c:354
 msgid "Grab the whole sc_reen"
-msgstr "Ta skjermdump av hele skje_rmen"
+msgstr "Ta bilde av hele skje_rmen"
 
 #: ../src/screenshot-interactive-dialog.c:368
 msgid "Grab the current _window"
-msgstr "Ta skjermdump av aktivt _vindu"
+msgstr "Ta bilde av aktivt _vindu"
 
 #: ../src/screenshot-interactive-dialog.c:380
 msgid "Select _area to grab"
-msgstr "Velg _område for skjermdump"
+msgstr "Velg _område som skal tas bilde av"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-interactive-dialog.c:400
 msgid "Grab after a _delay of"
-msgstr "T_a skjermdump etter"
+msgstr "T_a skjermbilde etter"
 
 #: ../src/screenshot-interactive-dialog.c:469
 msgid "Take Screenshot"
-msgstr "Ta skjermdump"
+msgstr "Ta skjermbilde"
 
 #: ../src/screenshot-interactive-dialog.c:470
 msgid "Effects"
@@ -367,7 +376,7 @@ msgstr "_Hjelp"
 
 #: ../src/screenshot-interactive-dialog.c:492
 msgid "Take _Screenshot"
-msgstr "Ta _skjermdump"
+msgstr "Ta _skjermbilde"
 
 #: ../src/screenshot-interactive-dialog.c:509
 msgid "_Cancel"
@@ -375,4 +384,4 @@ msgstr "A_vbryt"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
-msgstr "Feil under lasting av hjelpsiden"
+msgstr "Feil under lasting av hjelpeside"
