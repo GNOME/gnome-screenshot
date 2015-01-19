@@ -41,8 +41,6 @@ typedef struct
   char *screenshot_origin;
   int iteration;
   TestType type;
-
-  GSimpleAsyncResult *async_result;
 } AsyncExistenceJob;
 
 /* Taken from gnome-vfs-utils.c */
@@ -169,8 +167,6 @@ async_existence_job_free (AsyncExistenceJob *job)
 
   g_free (job->screenshot_origin);
 
-  g_clear_object (&job->async_result);
-
   g_slice_free (AsyncExistenceJob, job);
 }
 
@@ -190,10 +186,11 @@ prepare_next_cycle (AsyncExistenceJob *job)
   return res;
 }
 
-static gboolean
-try_check_file (GIOSchedulerJob *io_job,
-                GCancellable *cancellable,
-                gpointer data)
+static void
+try_check_file (GTask *task,
+                gpointer source_object,
+                gpointer data,
+                GCancellable *cancellable)
 {
   AsyncExistenceJob *job = data;
   GFile *file;
@@ -287,18 +284,13 @@ out:
   g_error_free (error);
   g_object_unref (file);
 
-  g_simple_async_result_set_op_res_gpointer (job->async_result,
-                                             retval, NULL);
   if (retval == NULL)
-    g_simple_async_result_set_error (job->async_result,
-                                     G_IO_ERROR,
-                                     G_IO_ERROR_FAILED,
-                                     "%s", "Failed to find a valid place to save");
+    g_task_return_new_error (task,
+                             G_IO_ERROR,
+                             G_IO_ERROR_FAILED,
+                             "%s", "Failed to find a valid place to save");
 
-  g_simple_async_result_complete_in_idle (job->async_result);
-  async_existence_job_free (job);
-
-  return FALSE;
+  g_task_return_pointer (task, retval, NULL);
 }
 
 void
@@ -308,6 +300,7 @@ screenshot_build_filename_async (const char *save_dir,
                                  gpointer user_data)
 {
   AsyncExistenceJob *job;
+  GTask *task;
 
   job = g_slice_new0 (AsyncExistenceJob);
 
@@ -319,21 +312,16 @@ screenshot_build_filename_async (const char *save_dir,
 
   job->screenshot_origin = g_strdup (screenshot_origin);
 
-  job->async_result = g_simple_async_result_new (NULL,
-                                                 callback, user_data,
-                                                 screenshot_build_filename_async);
+  task = g_task_new (NULL, NULL, callback, user_data);
+  g_task_set_task_data (task, job, (GDestroyNotify) async_existence_job_free);
 
-  g_io_scheduler_push_job (try_check_file,
-                           job, NULL,
-                           G_PRIORITY_DEFAULT, NULL);
+  g_task_run_in_thread (task, try_check_file);
+  g_object_unref (task);
 }
 
 gchar *
 screenshot_build_filename_finish (GAsyncResult *result,
                                   GError **error)
 {
-  if (g_simple_async_result_propagate_error (G_SIMPLE_ASYNC_RESULT (result), error))
-    return NULL;
-
-  return g_simple_async_result_get_op_res_gpointer (G_SIMPLE_ASYNC_RESULT (result));
+  return g_task_propagate_pointer (G_TASK (result), error);
 }
