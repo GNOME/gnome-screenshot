@@ -2,16 +2,16 @@
 # Copyright (C) 2013 gnome-screenshot's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-screenshot package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Martinez <dmartinez@src.gnome.org>, 2014.
+# Daniel Martinez <entaltoaragon@gmail.com>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-24 23:43+0000\n"
-"PO-Revision-Date: 2014-03-20 18:30+0100\n"
-"Last-Translator: Daniel Martinez <dmartinez@src.gnome.org>\n"
+"POT-Creation-Date: 2015-01-22 20:20+0000\n"
+"PO-Revision-Date: 2015-01-23 00:19+0100\n"
+"Last-Translator: Daniel Martinez <entaltoaragon@gmail.com>\n"
 "Language-Team: Aragonés <softaragones@googlegroups.com>\n"
 "Language: an\n"
 "MIME-Version: 1.0\n"
@@ -20,25 +20,59 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:790
+#: ../src/org.gnome.Screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Captura de pantalla"
 
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:791
+#: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Alce imachens d'a suya pantalla u de finestras individuals"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
+#: ../src/org.gnome.Screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
 msgstr "pantallazo;capturar;imprentar;captura de pantalla;"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/org.gnome.Screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Prener una captura de pantalla completa"
 
-#: ../src/gnome-screenshot.desktop.in.h:5
+#: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Prener una captura de pantalla d'a finestra actual"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+#| msgid "Screenshot"
+msgid "GNOME Screenshot"
+msgstr "Captura de pantalla de GNOME"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"Captura de pantalla de GNOME ye una sencilla utilidat que le permite fer "
+"capturas d'a pantalla d'o suyo equipo. As capturas pueden estar de toda la "
+"pantalla, d'una aplicación en concreto u d'un aria rectangular seleccionada. "
+"Tamién puede copiar la captura dreitament a o portafuellas de GNOME y apegar-"
+"la en atras aplicacions."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"Captura de pantalla de GNOME le aduya a realizar capturas de pantalla mesmo "
+"quan no ye ubierto: simplament prete o botón ImprPant en o suyo teclau y "
+"s'alzará una captura d'a pantalla completa en a suya carpeta Imachens. Prete "
+"Alt+ImprPant y obtendrá una captura solament d'a finestra seleccionada."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -187,76 +221,71 @@ msgstr "Captura de pantalla obtenida"
 msgid "All possible methods failed"
 msgstr "Falloron totz os metodos posibles"
 
-#: ../src/screenshot-application.c:645
+#: ../src/screenshot-application.c:631
 msgid "Send the grab directly to the clipboard"
 msgstr "Ninviar dreitament l'obteniu a o portafuellas"
 
-#: ../src/screenshot-application.c:646
+#: ../src/screenshot-application.c:632
 msgid "Grab a window instead of the entire screen"
 msgstr "Capturar una finestra en cuenta d'a pantalla entera"
 
-#: ../src/screenshot-application.c:647
+#: ../src/screenshot-application.c:633
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Capturar un aria d'a pantalla en cuenta d'a pantalla entera"
 
-#: ../src/screenshot-application.c:648
+#: ../src/screenshot-application.c:634
 msgid "Include the window border with the screenshot"
 msgstr "Incluir o borde d'a finestra en la captura de pantalla"
 
-#: ../src/screenshot-application.c:649
+#: ../src/screenshot-application.c:635
 msgid "Remove the window border from the screenshot"
 msgstr "Sacar o borde d'a finestra de la captura de pantalla"
 
-#: ../src/screenshot-application.c:650
+#: ../src/screenshot-application.c:636
 msgid "Include the pointer with the screenshot"
 msgstr "Incluir o puntero en la captura de pantalla"
 
-#: ../src/screenshot-application.c:651
+#: ../src/screenshot-application.c:637
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Capturar a pantalla dimpués d'o retardo especificau [en segundos]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:651
-#: ../src/screenshot-interactive-dialog.c:421
+#: ../src/screenshot-application.c:637
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "segundos"
 
-#: ../src/screenshot-application.c:652
-#| msgid "Effect to add to the border (shadow, border or none)"
+#: ../src/screenshot-application.c:638
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr "Efecto ta adhibir a o borde (uembra, borde, vintage u garra)"
 
-#: ../src/screenshot-application.c:652
+#: ../src/screenshot-application.c:638
 msgid "effect"
 msgstr "efecto"
 
-#: ../src/screenshot-application.c:653
+#: ../src/screenshot-application.c:639
 msgid "Interactively set options"
 msgstr "Establir as opcions interactivament"
 
-#: ../src/screenshot-application.c:654
+#: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
 msgstr "Alzar la captura de pantalla en iste fichero"
 
-#: ../src/screenshot-application.c:654
+#: ../src/screenshot-application.c:640
 msgid "filename"
 msgstr "nombre de fichero"
 
-#: ../src/screenshot-application.c:655
+#: ../src/screenshot-application.c:641
 msgid "Print version information and exit"
 msgstr "Imprentar a información d'a versión y salir"
 
-#: ../src/screenshot-application.c:669
-msgid "Take a picture of the screen"
-msgstr "Capturar imachen d'a pantalla"
-
-#: ../src/screenshot-application.c:793
+#: ../src/screenshot-application.c:770
 msgid "translator-credits"
 msgstr "Daniel Martinez <entaltoaragon@gmail.com>, 2013"
 
-#: ../src/screenshot-config.c:59
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -264,7 +293,7 @@ msgid ""
 msgstr ""
 "Opcions con conflictos: --window y --area no s'habrían d'usar de vez.\n"
 
-#: ../src/screenshot-config.c:66
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
@@ -277,18 +306,20 @@ msgstr "Captura.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-msgid "Screenshot from %s.%s"
-msgstr "Captura de pantalla de %s.%s"
+#| msgid "Screenshot from %s.%s"
+msgid "Screenshot-from-%s.%s"
+msgstr "Captura-de-pantalla-de-%s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-msgid "Screenshot from %s - %d.%s"
-msgstr "Captura de pantalla de %s - %d.%s"
+#| msgid "Screenshot from %s - %d.%s"
+msgid "Screenshot-from-%s-%d.%s"
+msgstr "Captura-de-pantalla-de-%s-%d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -307,57 +338,65 @@ msgid "Vintage"
 msgstr "Vintage"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Incluir _puntero"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Incluir o _borde de finestra"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Aplicar _efecto:"
 
-#: ../src/screenshot-interactive-dialog.c:355
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Capturar tot o esc_ritorio"
 
-#: ../src/screenshot-interactive-dialog.c:369
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Capturar a _finestra actual"
 
-#: ../src/screenshot-interactive-dialog.c:381
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Seleccionar áre_a que capturar"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:401
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Capturar con un _retardo de"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Capturar pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:471
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efectos"
 
-#: ../src/screenshot-interactive-dialog.c:493
+#: ../src/screenshot-interactive-dialog.c:477
+#| msgid "Help"
+msgid "_Help"
+msgstr "Ad_uya"
+
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Cap_turar pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:510
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Error en cargar a pachina d'aduya"
+
+#~ msgid "Take a picture of the screen"
+#~ msgstr "Capturar imachen d'a pantalla"
 
 #~ msgid "About Screenshot"
 #~ msgstr "Arredol de Captura de pantalla"
