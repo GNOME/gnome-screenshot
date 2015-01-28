@@ -130,7 +130,7 @@ build_path (AsyncExistenceJob *job)
       GDateTime *d;
 
       d = g_date_time_new_now_local ();
-      origin = g_date_time_format (d, "%Y-%m-%d %H%M%S");
+      origin = g_date_time_format (d, "%Y-%m-%d %H-%M-%S");
       g_date_time_unref (d);
     }
   else
