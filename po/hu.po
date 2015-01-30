@@ -10,14 +10,14 @@
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2004, 2006, 2007, 2008, 2009, 2010, 2011, 2012.
 # Mate ORY <orymate at gmail d0t com>, 2006.
 # Lukács Bence <lukacs.bence1 at gmail dot com>, 2012.
-# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014.
+# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-11-30 08:21+0000\n"
-"PO-Revision-Date: 2014-11-30 17:31+0100\n"
+"POT-Creation-Date: 2015-01-30 20:29+0000\n"
+"PO-Revision-Date: 2015-01-30 21:45+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -51,7 +51,6 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "Kép készítése az aktuális ablakról"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
-#| msgid "Screenshot"
 msgid "GNOME Screenshot"
 msgstr "GNOME Képernyőkép"
 
@@ -77,10 +76,10 @@ msgid ""
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
 "A GNOME Képernyőkép akkor is lehetővé teszi a képernyőképek készítését, ha "
-"nincs megnyitva: csak nyomja meg a PrtSc gombot a billentyűzeten, és a teljes "
-"képernyő pillanatképe el lesz mentve a Képek mappába. Tartsa lenyomva az Alt "
-"billentyűt a PrtSc megnyomásakor, és csak az aktuálisan kijelölt ablak "
-"képernyőképét fogja megkapni."
+"nincs megnyitva: csak nyomja meg a PrtSc gombot a billentyűzeten, és a "
+"teljes képernyő pillanatképe el lesz mentve a Képek mappába. Tartsa lenyomva "
+"az Alt billentyűt a PrtSc megnyomásakor, és csak az aktuálisan kijelölt "
+"ablak képernyőképét fogja megkapni."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -258,7 +257,7 @@ msgstr "Képernyőkép készítése (másodpercekben) megadott idő letelte utá
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "másodperc"
 
@@ -319,20 +318,20 @@ msgstr "Képernyőkép.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-#| msgid "Screenshot from %s.%s"
-msgid "Screenshot-from-%s.%s"
-msgstr "Képernyőkép-%s.%s"
+#| msgid "Screenshot-from-%s.%s"
+msgid "Screenshot from %s.%s"
+msgstr "Képernyőkép – %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-#| msgid "Screenshot from %s - %d.%s"
-msgid "Screenshot-from-%s-%d.%s"
-msgstr "Képernyőkép-%s-%d.%s"
+#| msgid "Screenshot-from-%s-%d.%s"
+msgid "Screenshot from %s - %d.%s"
+msgstr "Képernyőkép – %s – %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -351,55 +350,55 @@ msgid "Vintage"
 msgstr "Klasszikus"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "M_utató bevétele"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Az ablak _keretének bevétele a képernyőképbe"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "_Hatás alkalmazása:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Képkészítés az egész képe_rnyőről"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Az _aktuális ablakról"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "_Terület kiválasztása"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Ennyi késl_eltetés után:"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Képernyőkép készítése"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Hatások"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "_Felvétel"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Mégse"
 
