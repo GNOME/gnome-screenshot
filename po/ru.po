@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils trunk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-01-09 20:19+0000\n"
-"PO-Revision-Date: 2015-01-10 01:34+0300\n"
+"POT-Creation-Date: 2015-01-30 08:25+0000\n"
+"PO-Revision-Date: 2015-01-30 15:23+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -262,7 +262,7 @@ msgstr "Сделать снимок через указанное время [в
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "секунд"
 
@@ -316,20 +316,20 @@ msgstr ""
 
 #: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
-msgstr "Снимок.png"
+msgstr "Снимок экрана.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
-msgid "Screenshot-from-%s.%s"
-msgstr "Снимок-экрана-от-%s.%s"
+#: ../src/screenshot-filename-builder.c:143
+msgid "Screenshot from %s.%s"
+msgstr "Снимок экрана от %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
-msgid "Screenshot-from-%s-%d.%s"
-msgstr "Снимок-экрана-от-%s-%d.%s"
+#: ../src/screenshot-filename-builder.c:150
+msgid "Screenshot from %s - %d.%s"
+msgstr "Снимок экрана от %s - %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -348,55 +348,55 @@ msgid "Vintage"
 msgstr "Винтаж"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Включить _указатель"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Включить ра_мку окна"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Применить _эффект:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Захватить весь _экран"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Захватить текущее _окно"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Выбрать _область захвата"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Захватить после _задержки"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Сделать снимок экрана"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Эффекты"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Сделать _снимок экрана"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Отмена"
 
