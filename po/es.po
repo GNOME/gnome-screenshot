@@ -10,15 +10,15 @@
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 1999.
 # Manuel de Vega Barreiro <barreiro@arrakis.es> 2000-2001.
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012, 2013, 2014.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-11-26 08:23+0000\n"
-"PO-Revision-Date: 2014-11-26 12:19+0100\n"
+"POT-Creation-Date: 2015-02-02 08:27+0000\n"
+"PO-Revision-Date: 2015-02-02 11:20+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -262,7 +262,7 @@ msgstr "Capturar la pantalla después del retardo especificado [en segundos]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "segundos"
 
@@ -316,20 +316,20 @@ msgstr "Captura.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-#| msgid "Screenshot from %s.%s"
-msgid "Screenshot-from-%s.%s"
-msgstr "Captura-de-pantalla-de-%s.%s"
+#| msgid "Screenshot-from-%s.%s"
+msgid "Screenshot from %s.%s"
+msgstr "Captura de pantalla de %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-#| msgid "Screenshot from %s - %d.%s"
-msgid "Screenshot-from-%s-%d.%s"
-msgstr "Captura-de-pantalla-de-%s-%d.%s"
+#| msgid "Screenshot-from-%s-%d.%s"
+msgid "Screenshot from %s - %d.%s"
+msgstr "Captura de pantalla de %s - %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -348,55 +348,55 @@ msgid "Vintage"
 msgstr "Antiguo"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Incluir _puntero"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Incluir el _borde de ventana"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Aplicar _efecto:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Capturar todo el esc_ritorio"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Capturar la _ventana actual"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Seleccionar áre_a que capturar"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Capturar con un _retraso de"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Capturar pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efectos"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "A_yuda"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Cap_turar pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Cancelar"
 
