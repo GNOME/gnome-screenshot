@@ -16,15 +16,15 @@
 # Lucas Lommer <llommer@svn.gnome.org>, 2009 (just a small fix).
 # Adrian Guniš <andygun696@gmail.com>, 2008, 2009, 2010.
 # Jan Turoň <turon.honza@gmail.com>, 2011.
-# Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011, 2012, 2013, 2014.
+# Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011, 2012, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-11-25 08:20+0000\n"
-"PO-Revision-Date: 2014-11-25 20:08+0100\n"
+"POT-Creation-Date: 2015-02-03 08:31+0000\n"
+"PO-Revision-Date: 2015-02-03 19:38+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -263,7 +263,7 @@ msgstr "Zachytit snímek obrazovky po zadaném zpoždění [v sekundách]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "sekund"
 
@@ -318,17 +318,17 @@ msgstr "Snímek obrazovky.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-msgid "Screenshot-from-%s.%s"
+msgid "Screenshot from %s.%s"
 msgstr "Snímek obrazovky pořízený %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-msgid "Screenshot-from-%s-%d.%s"
+msgid "Screenshot from %s - %d.%s"
 msgstr "Snímek obrazovky pořízený %s – %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
@@ -348,55 +348,55 @@ msgid "Vintage"
 msgstr "Patina"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Zahrnout _kurzor myši"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Zahrnout _rámeček okna"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Použít _efekt:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Zachytit _celou obrazovku"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Zachytit _aktuální okno"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Zvolit _oblast zachycení"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Zachytit po pro_dlevě"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Zachytit snímek obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efekty"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "Nápo_věda"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Zachytit _snímek obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Zrušit"
 
