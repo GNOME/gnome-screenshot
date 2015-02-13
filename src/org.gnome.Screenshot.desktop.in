@@ -12,13 +12,13 @@ NotShowIn=KDE;
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-utils
 X-GNOME-Bugzilla-Component=screenshot
-Actions=Screen;Window;
+Actions=screen-shot;window-shot;
 DBusActivatable=true
 
-[Desktop Action Screen]
+[Desktop Action screen-shot]
 _Name=Take a Screenshot of the Whole Screen
 Exec=gnome-screenshot
 
-[Desktop Action Window]
+[Desktop Action window-shot]
 _Name=Take a Screenshot of the Current Window
 Exec=gnome-screenshot -w
