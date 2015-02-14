@@ -9,20 +9,21 @@
 # İlker DAĞLI <ilker@ilkerdagli.info>, 2011.
 # Osman Karagöz <osmank3@gmail.com>, 2012.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2013.
-# Muhammet Kara <muhammetk@gmail.com>, 2011, 2013, 2014.
+# Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2014.
+# Muhammet Kara <muhammetk@gmail.com>, 2011, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-18 19:27+0000\n"
-"PO-Revision-Date: 2014-09-18 20:04+0000\n"
+"POT-Creation-Date: 2015-02-14 08:27+0000\n"
+"PO-Revision-Date: 2015-02-14 15:32+0000\n"
 "Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr_TR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
@@ -31,6 +32,7 @@ msgid "Screenshot"
 msgstr "Ekran Görüntüsü"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Masaüstünüzün veya pencerelerinizin görüntülerini kaydedin"
@@ -46,6 +48,27 @@ msgstr "Tüm ekranın resmini çek"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Geçerli pencerenin ekran görüntüsünü al"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "GNOME Ekran Görüntüsü"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr "GNOME Ekran Görüntüsü bilgisayar ekranınızın resmini çekmenizi sağlayan basit bir araçtır. Tüm ekranınızın, belli bir uygulamanın veya seçili bir dikdörtgen alanın ekran görüntüleri alınabilir. Ayrıca yakalanan ekran görüntüsünü doğrudan GNOME panosuna kopyalayabilir ve başka uygulamalara yapıştırabilirsiniz."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr "GNOME Ekran Görüntüsü açık olmasa dahi ekran görüntüsü yakalamanıza izin verir: sadece klavyenizdeki Prt Scr tuşuna basın ve tüm ekranınızın bir görüntüsü Resimler klasörüne kaydedilsin. Alt tuşunu basılı tutup Prt Scr'ye basarak sadece şu an seçili olan pencerenin ekran görüntüsünü de alabilirsiniz."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -217,7 +240,7 @@ msgstr "Belirtilen süreden sonra [saniye olarak] ekran görüntüsü al"
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "saniye"
 
@@ -269,7 +292,7 @@ msgstr "EkranGoruntusu.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Ekran Görüntüsü - %s.%s"
@@ -277,7 +300,7 @@ msgstr "Ekran Görüntüsü - %s.%s"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Ekran Göntüsü - %s - %d.%s"
@@ -299,54 +322,54 @@ msgid "Vintage"
 msgstr "Eski"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "_Belirteç içer"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Pencere _kenarlığı içer"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Efekt _uygula:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Tüm _masaüstünü yakala"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Mevcut _pencereyi yakala"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Yakalamak için _alan seçin"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Yakalamadan ö_nce beklenecek süre"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Ekran Görüntüsü Al"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efektler"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Yardım"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Ekran Görüntüsü _Al"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Vazgeç"
 
