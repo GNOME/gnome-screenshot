@@ -1,3 +1,12 @@
+GNOME Screenshot 3.15.90 - 20th February 2015
+=============================================
+
+- Make desktop actions work
+- Deprecation cleanup (#742476)
+- Improve filename generation (#698740)
+- Port area selection code to GNOME Shell (#738972)
+- Translation updates
+
 GNOME Screenshot 3.14.0 - 22th September 2014
 =============================================
 
