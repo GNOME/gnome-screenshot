@@ -34,16 +34,16 @@ msgstr ""
 "Project-Id-Version: gnome-utils.gnome-2-26\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-11-16 20:28+0000\n"
-"PO-Revision-Date: 2014-11-16 22:51+0200\n"
-"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
+"POT-Creation-Date: 2015-01-22 20:20+0000\n"
+"PO-Revision-Date: 2015-01-23 00:22+0200\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
 "Language-Team: www.gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Project-Style: gnome\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
@@ -286,7 +286,7 @@ msgstr ""
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "δευτερολέπτων"
 
@@ -352,18 +352,20 @@ msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-msgid "Screenshot from %s.%s"
-msgstr "Στιγμιότυπο από %s.%s"
+#| msgid "Screenshot from %s.%s"
+msgid "Screenshot-from-%s.%s"
+msgstr "Στιγμιότυπο-από-%s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-msgid "Screenshot from %s - %d.%s"
-msgstr "Στιγμιότυπο από %s - %d.%s"
+#| msgid "Screenshot from %s - %d.%s"
+msgid "Screenshot-from-%s-%d.%s"
+msgstr "Στιγμιότυπο-από-%s-%d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -382,55 +384,55 @@ msgid "Vintage"
 msgstr "Ρετρό"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Να συμπεριλαμβάνεται ο _δρομέας"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Να συμπεριλαμβάνεται το περί_γραμμα παραθύρου"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Εφαρμογή _εφέ:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Λήψη όλης της επι_φάνειας εργασίας"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Λήψη του τρέχοντος παρα_θύρου"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Επιλογή _περιοχής για λήψη"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Λήψη μετά από κ_αθυστέρηση"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Λήψη στιγμιότυπου οθόνης"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Εφέ"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Λήψη _στιγμιότυπου οθόνης"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Ακύρωση"
 
