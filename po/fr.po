@@ -18,21 +18,22 @@
 # Bruno Brouard <annoa.b@gmail.com>, 2012
 # Andre Matuch <andre.matuch@videotron.ca>, 2012.
 # Julien Hardelin <jhardlin@orange.fr>, 2012, 2014.
+# Guillaume Bernard <translate@filorin.fr>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-23 20:28+0000\n"
-"PO-Revision-Date: 2015-02-24 01:58+0100\n"
-"Last-Translator: Julien Hardelin <jhardlin@orange.fr>\n"
-"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
+"POT-Creation-Date: 2015-02-25 08:31+0000\n"
+"PO-Revision-Date: 2015-02-25 17:17+0100\n"
+"Last-Translator: Guillaume Bernard <translate@filorin.fr>\n"
+"Language-Team: français <gnomefr@traduc.org>\n"
 "Language: français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
@@ -70,6 +71,11 @@ msgid ""
 "screenshot directly into the GNOME clipboard and paste it into other "
 "applications."
 msgstr ""
+"Capture d'écran de GNOME est un utilitaire pour vous permettre de prendre "
+"des captures d'écran facilement. Ces captures peuvent concerner votre écran "
+"entier, une application en particulier ou une zone que vous définissez. Vous "
+"pouvez aussi copier la capture directement dans le presse-papier de GNOME et "
+"la coller dans une autre application."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
@@ -78,6 +84,11 @@ msgid ""
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
+"Capture d'écran vous permet de prendre des captures d'écran même s'il n'est "
+"pas lancé : appuyez simplement sur le bouton Impr. écran sur votre clavier "
+"et l'intégralité de votre écran sera sauvegardé dans votre dossier Images. "
+"Maintenez la touche Alt en même temps que Impr. écran et seule la fenêtre en "
+"cours sera enregistrée."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -305,7 +316,8 @@ msgstr ""
 "Laurent Coudeur <laurentc@iol.ie>, 2009\n"
 "Bruno Brouard <annoa.b@gmail.com>, 2012\n"
 "Andre Matuch <andre.matuch@videotron.ca>, 2012\n"
-"Julien Hardelin <jhardlin@orange.fr>, 2012"
+"Julien Hardelin <jhardlin@orange.fr>, 2012\n"
+"Guillaume Bernard <translate@filorin.fr>, 2015"
 
 #: ../src/screenshot-config.c:116
 #, c-format
