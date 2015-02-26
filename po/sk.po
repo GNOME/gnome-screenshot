@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-04 23:58+0000\n"
-"PO-Revision-Date: 2014-09-09 22:12+0100\n"
+"POT-Creation-Date: 2015-02-26 08:34+0000\n"
+"PO-Revision-Date: 2015-02-26 12:07+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.4\n"
 
 # desktop entry name;
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
@@ -32,12 +32,12 @@ msgstr "Snímka obrazovky"
 
 # desktop entry comment;
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Ukladá obrázky vašej obrazovky alebo jednotlivých okien"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:3
-#| msgid "snapshot;capture;print;"
 msgid "snapshot;capture;print;screenshot;"
 msgstr "snímka;zachytenie;tlač;snímka obrazovky;"
 
@@ -51,6 +51,38 @@ msgstr "Zachytiť snímku celej obrazovky"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Zachytiť snímku aktuálneho okna"
+
+# desktop entry name;
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "Snímka obrazovky pre GNOME"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"Snímka obrazovky pre GNOME je jednoduchý nástroj, ktorý vám umožní zachytiť "
+"snímku vašej počítačovej obrazovky. Snímky obrazovky môžu zachytávať vašu "
+"celú obrazovku, akúkoľvek určenú aplikáciu, alebo vybranú obdĺžnikovú "
+"oblasť. Môžete tiež skopírovať zachytenú snímku obrazovky priamo do schránky "
+"prostredia GNOME a vložiť ju do inej aplikácie."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"Snímka obrazovky pre GNOME vám umožní zachytiť snímky obrazovky, aj keď nie "
+"je otvorená: stačí stlačiť tlačidlo PrtSc na vašej klávesnici a snímka celej "
+"vašej obrazovky bude uložená do vášho priečinka „Obrázky“. Pridržaním "
+"tlačidla Alt súčasne s tlačidlom PrtSc získate snímku obrazovky iba aktuálne "
+"vybraného okna."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -238,13 +270,12 @@ msgstr "Zachytí snímku obrazovky s určeným oneskorením [v sekundách]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "sekúnd"
 
 # cmd line desc
 #: ../src/screenshot-application.c:638
-#| msgid "Effect to add to the border (shadow, border or none)"
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr ""
 "Efekt, ktorý sa má pridať k okraju (shadow - tieň, border - okraj, vintage - "
@@ -297,7 +328,7 @@ msgstr "Obrazovka.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Snímka obrazovky z %s.%s"
@@ -305,7 +336,7 @@ msgstr "Snímka obrazovky z %s.%s"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Snímka obrazovky z %s - %d.%s"
@@ -328,56 +359,55 @@ msgid "Vintage"
 msgstr "Starodávny"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Zahrnúť k_urzor"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Zahrnúť ok_raj okna"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Použiť _efekt:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Zachytiť celú ob_razovku"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Zachytiť aktuálne o_kno"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Označiť obl_asť na zachytenie"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Zachytiť s _oneskorením"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Urobiť snímku obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efekty"
 
-#: ../src/screenshot-interactive-dialog.c:483
-#| msgid "Help"
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Urobiť _snímku obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
