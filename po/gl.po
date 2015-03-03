@@ -13,30 +13,32 @@
 # Antón Méixome <meixome@mancomun.org>, 2009.
 # Fran Diéguez <frandieguez@gnome.org>, 2009, 2010, 2011, 2012.
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2012.
-# Fran Dieguez <frandieguez@gnome.org>, 2012, 2013, 2014.
+# Fran Dieguez <frandieguez@gnome.org>, 2012, 2013, 2014, 2015.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils-master-po-gl-14799\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-01 22:23+0200\n"
-"PO-Revision-Date: 2014-07-01 22:23+0200\n"
+"POT-Creation-Date: 2015-03-03 01:23+0100\n"
+"PO-Revision-Date: 2015-03-03 01:26+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: gnome-l10n-gl@gnome.org\n"
+"Language-Team: Galician <>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Gtranslator 2.91.6\n"
 "X-Project-Style: gnome\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:757
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Captura de pantalla"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
-#: ../src/screenshot-application.c:758
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Gardar imaxes da súa pantalla ou de xanelas individuais"
 
@@ -51,6 +53,37 @@ msgstr "Facer unha captura de pantalla completa"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Facer unha captura de pantalla da xanela actual"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "Captura de pantalla de GNOME"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"Captura de pantalla de NGOME é unha utilidade sinxela que lle permite sacar "
+"imaxes da pantalla do seu computador. As capturar poden ser de toda a "
+"pantalla, dun aplicativo específico ou un área rectangular seleccionada. "
+"Tamén pode copiar as capturas feitas directamente no portapapeis de GNOME e "
+"pegalo noutros aplicativos."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"Captura de pantalla de GNOME permítelle tomar capturas de pantalla incluso "
+"cando non está aberta: simplemente prema a tecla ImpPan no seu teclado e "
+"realizarase unha captura de pantalla de toda a súa pantalla e gardarao no "
+"cartafol Imaxes. Manteña a tecla Alt ao premer ImpPan para obter unha "
+"captura da pantalla seleccionada actualmente."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -235,7 +268,7 @@ msgstr ""
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "segundos"
 
@@ -263,7 +296,7 @@ msgstr "nome-de-ficheiro"
 msgid "Print version information and exit"
 msgstr "Mostrar información da versión e saír"
 
-#: ../src/screenshot-application.c:760
+#: ../src/screenshot-application.c:770
 msgid "translator-credits"
 msgstr ""
 "Leandro Regueiro <leandro.regueiro@gmail.com>, 2012\n"
@@ -278,7 +311,7 @@ msgstr ""
 "Proxecto Trasno - Tradución de software libre ao galego <proxecto@trasno."
 "net>, 1999-2012"
 
-#: ../src/screenshot-config.c:59
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -286,7 +319,7 @@ msgid ""
 msgstr ""
 "Opcións en conflito: --window e --area non se deberían usar ao mesmo tempo.\n"
 
-#: ../src/screenshot-config.c:66
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
@@ -300,7 +333,7 @@ msgstr "Captura-de-pantalla.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Captura de pantalla de %s.%s.png"
@@ -308,7 +341,7 @@ msgstr "Captura de pantalla de %s.%s.png"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Captura de pantalla de %s - %d.%s.png"
@@ -330,55 +363,55 @@ msgid "Vintage"
 msgstr "Antigo"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Incluír p_unteiro"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Incluír o _bordo da xanela"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Aplicar _efecto:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Captu_rar toda a pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Capturar a _xanela actual"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Seleccione _área a capturar"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Capturar despois dun _atraso de"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Facer unha captura de pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efectos"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Axuda"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Facer unha _captura de pantalla"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Cancelar"
 
