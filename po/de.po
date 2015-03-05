@@ -14,7 +14,7 @@
 # Nathan-J. Hirschauer <nathanhirschauer@verfriemelt.org>, 2009.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2009, 2011-2013.
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2011, 2012.
-# Wolfgang Stöggl <c72578@yahoo.de>, 2011, 2014.
+# Wolfgang Stöggl <c72578@yahoo.de>, 2011, 2014-2015.
 # Christian Kirbach <Christian.Kirbach@gmail.com>, 2009, 2011, 2012.
 # Tobias Endrigkeit <tobiasendrigkeit@googlemail.com>, 2012.
 # Benjamin Steinwender <b@stbe.at>, 2013.
@@ -24,16 +24,16 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-15 07:26+0000\n"
-"PO-Revision-Date: 2014-09-15 23:15+0100\n"
-"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"POT-Creation-Date: 2015-03-04 08:32+0000\n"
+"PO-Revision-Date: 2015-03-05 11:56+0100\n"
+"Last-Translator: Wolfgang Stoeggl <c72578@yahoo.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.4\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
@@ -254,7 +254,7 @@ msgstr "Optionen interaktiv festlegen"
 
 #: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
-msgstr "Bidschirmfoto direkt in diese Datei einspeichern"
+msgstr "Bildschirmfoto direkt in diese Datei einspeichern"
 
 #: ../src/screenshot-application.c:640
 msgid "filename"
