@@ -14,7 +14,7 @@
 # Nathan-J. Hirschauer <nathanhirschauer@verfriemelt.org>, 2009.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2009, 2011-2013.
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2011, 2012.
-# Wolfgang Stöggl <c72578@yahoo.de>, 2011, 2014.
+# Wolfgang Stöggl <c72578@yahoo.de>, 2011, 2014-2015.
 # Christian Kirbach <Christian.Kirbach@gmail.com>, 2009, 2011, 2012.
 # Tobias Endrigkeit <tobiasendrigkeit@googlemail.com>, 2012.
 # Benjamin Steinwender <b@stbe.at>, 2013.
@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-12 08:21+0000\n"
-"PO-Revision-Date: 2014-03-16 11:29+0100\n"
+"POT-Creation-Date: 2015-03-04 08:32+0000\n"
+"PO-Revision-Date: 2015-03-05 12:01+0100\n"
 "Last-Translator: Wolfgang Stoeggl <c72578@yahoo.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.7.4\n"
 
 #: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:790
 msgid "Screenshot"
@@ -231,7 +231,7 @@ msgstr "Den Zeiger mit in das Bildschirmfoto aufnehmen"
 #: ../src/screenshot-application.c:651
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr ""
-"Ein Bildschirmfoto erst nach der angegebenen zeit aufnehmen [in Sekunden]"
+"Ein Bildschirmfoto erst nach der angegebenen Zeit aufnehmen [in Sekunden]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -257,7 +257,7 @@ msgstr "Optionen interaktiv festlegen"
 
 #: ../src/screenshot-application.c:654
 msgid "Save screenshot directly to this file"
-msgstr "Das Bidschirmfoto direkt in diese Datei einspeichern"
+msgstr "Das Bildschirmfoto direkt in diese Datei einspeichern"
 
 #: ../src/screenshot-application.c:654
 msgid "filename"
