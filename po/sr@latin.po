@@ -2,14 +2,14 @@
 # Courtesy of Prevod.org team (http://prevod.org/).
 # This file is distributed under the same license as the gnome-screenshot package.
 # Miloš Popović <gpopac@gmail.com>, 2011.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011—2014.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011—2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils-2.0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-22 07:26+0000\n"
-"PO-Revision-Date: 2014-09-22 12:00+0200\n"
+"POT-Creation-Date: 2015-03-04 08:32+0000\n"
+"PO-Revision-Date: 2015-03-05 22:14+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -26,6 +26,7 @@ msgid "Screenshot"
 msgstr "Snimač ekrana"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Sačuvajte slike vašeg ekrana ili pojedinačnih prozora"
@@ -41,6 +42,36 @@ msgstr "Napravite snimak celog ekrana"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Napravite snimak tekućeg prozora"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+#| msgid "Screenshot"
+msgid "GNOME Screenshot"
+msgstr "Gnomov snimač ekrana"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"Gnomov snimač ekrana je jednostavno pomagalo koje vam omogućava da napravite "
+"slike ekrana vašeg računara. Možete napraviti snimke čitavog ekrana, bilo "
+"kog programa, ili odabrane pravougaone oblasti. Možete takođe da umnožite "
+"snimak ekrana upravo u Gnomovoj ostavi i da je ubacite u druge programe."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"Gnomov snimač ekrana vam omogućava da napravite snimke ekrana čak i kada "
+"nije otvoren: samo pritisnite odgovarajuće dugme na tastaturi (PrtSc), i "
+"snimak čitavog ekrana biće sačuvan u vašoj fascikli slika. Držite Alt dok "
+"pritiskate „PrtSc“ i dobićete snimak ekrana samo trenutno izabranog prozora."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -221,7 +252,7 @@ msgstr "Snima ekran nakon navedenog vremena [u sekundama]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "sekunde"
 
@@ -278,7 +309,7 @@ msgstr "snimak-ekrana.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Snimak ekrana iz „%s.%s“"
@@ -286,7 +317,7 @@ msgstr "Snimak ekrana iz „%s.%s“"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Snimak ekrana iz „%s — %d.%s“"
@@ -308,56 +339,55 @@ msgid "Vintage"
 msgstr "Poreklo"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Uključi _pokazivač"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Uključi _ivicu prozora"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Primeni _dejstvo:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Snimi _celu radnu površ"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Snimi _trenutni prozor"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Izaberi _oblast za snimanje"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Snimi nakon _zastoja od"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Snimak ekrana"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Dejstva"
 
-#: ../src/screenshot-interactive-dialog.c:483
-#| msgid "Help"
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "Po_moć"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "_Snimi ekran"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "_Otkaži"
 
