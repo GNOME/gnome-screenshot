@@ -3,7 +3,7 @@
 #
 # update by Young-Ho, Cha <ganadist@chollian.net>, 2001
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2012.
-# Changwoo Ryu <cwryu@debian.org>, 1998, 2002-2014.
+# Changwoo Ryu <cwryu@debian.org>, 1998, 2002-2015.
 #
 #
 msgid ""
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-05 07:26+0000\n"
-"PO-Revision-Date: 2014-09-06 04:02+0900\n"
+"POT-Creation-Date: 2015-03-07 20:32+0000\n"
+"PO-Revision-Date: 2015-03-08 06:35+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: Korean\n"
@@ -27,6 +27,7 @@ msgid "Screenshot"
 msgstr "스크린샷"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "화면이나 개별 창의 이미지를 저장합니다"
@@ -37,11 +38,32 @@ msgstr "snapshot;스냅샷;capture;화면;캡쳐;print;인쇄;screenshot;스크�
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
-msgstr "전체 화면 스크린샷 찍기"
+msgstr "전체 화면의 스크린샷 찍기"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
-msgstr "현재 창에 대한 스크린샷 찍기"
+msgstr "현재 창의 스크린샷 찍기"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "그놈 스크린샷"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr "그놈 스크린샷은 컴퓨터 화면의 이미지를 저장하는 간단한 프로그램입니다. 화면 전체의 스크린샷일 수도 있고, 특정 프로그램의 스크릴샷일 수도 있고, 선택한 영역의 스크린샷일 수도 있습니다. 찍은 스크린샷을 직접 그놈 스크린샷에 복사해서 다른 프로그램에 붙여 넣을 수도 있습니다."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr "그놈 스크린샷이 열려 있지 않을 때도 스크린샷을 찍을 수 있습니다. 키보드의 PrtSc 키를 누르기만 하면 전체 화면의 스크린샷을 사진 폴더에 저장합니다. Alt 키를 누른 채로 PrtSc 키를 누르면 현재 선택한 창의 스크린샷을 찍습니다."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -219,7 +241,7 @@ msgstr "지정한 시간 이후에 화면을 찍습니다 [초 단위]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "초"
 
@@ -277,7 +299,7 @@ msgstr "스크린샷.png"
 # 주의: 이건 파일 이름임 .png로 끝나야 함
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "스크린샷, %s.%s"
@@ -286,7 +308,7 @@ msgstr "스크린샷, %s.%s"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "스크린샷, %s - %d.%s"
@@ -308,55 +330,55 @@ msgid "Vintage"
 msgstr "빈티지"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "마우스 포인터 포함(_P)"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "창 테두리 포함(_B)"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "효과 적용(_E):"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "전체 화면 찍기(_R)"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "현재 창 찍기(_W)"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "잡을 영역 선택(_A)"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
-msgstr "다음 시간이 지난 후에 찍기(_D): "
+msgstr "다음 시간이 지난 후에 찍기(_D):"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "스크린샷 찍기"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "효과"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "스크린샷 찍기(_S)"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "취소(_C)"
 
