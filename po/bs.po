@@ -1,297 +1,390 @@
-# translation of gnome-utils.HEAD.bs.po to 
-# translation of gnome-utils.HEAD.po to Bosanski
-# This file is distributed under the same license as the gnome-utils package.
-# Copyright (C) 2004 Free Software Foundation, Inc.
-# Denis Radovanovic <radovanovic@net.hr>, 2004.
-# Kemal Šanjta <gomez@lugzdk.ba>, 2004
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.HEAD.bs\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-06 14:33-0400\n"
-"PO-Revision-Date: 2004-09-10 17:39+0200\n"
-"Last-Translator: Kemal Šanjta <gomez@lugzdk.ba>\n"
-"Language-Team:  <lokal@linux.org.ba>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-02-26 20:31+0000\n"
+"PO-Revision-Date: 2015-01-22 12:23+0100\n"
+"Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
+"Language-Team: <lokal@linux.org.ba>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.0\n"
+"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-15 06:19+0000\n"
 
-#: ../src/gnome-screenshot.c:143
-#, fuzzy
-msgid "Error while saving screenshot"
-msgstr "Greška prilikom pokretanja (%s) komande: %s"
-
-#: ../src/gnome-screenshot.c:147
-#, c-format
-msgid ""
-"Impossible to save the screenshot to %s.\n"
-" Error was %s.\n"
-" Please choose another location and retry."
-msgstr ""
-
-#: ../src/gnome-screenshot.c:336
-msgid "Screenshot taken"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:495
-msgid "Unable to take a screenshot of the current window"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:662
-msgid "Send the grab directly to the clipboard"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:663
-msgid "Grab a window instead of the entire screen"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:664
-msgid "Grab an area of the screen instead of the entire screen"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:665
-msgid "Include the window border with the screenshot"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:666
-msgid "Remove the window border from the screenshot"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:667
-msgid "Take screenshot after specified delay [in seconds]"
-msgstr ""
-
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: ../src/gnome-screenshot.c:667 ../src/screenshot-interactive-dialog.c:423
-msgid "seconds"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:668
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:668
-msgid "effect"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:669
-msgid "Interactively set options"
-msgstr ""
-
-#: ../src/gnome-screenshot.c:680
-msgid "Take a picture of the screen"
-msgstr ""
-
-#: ../src/gnome-screenshot.desktop.in.h:1
-msgid "Save images of your desktop or individual windows"
-msgstr ""
-
-#: ../src/gnome-screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
+msgstr "Snimak ekrana"
+
+#: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
+msgid "Save images of your screen or individual windows"
+msgstr "Sačuvajte slike vašeg ekrana ili pojedinačnih prozora"
+
+#: ../src/org.gnome.Screenshot.desktop.in.h:3
+msgid "snapshot;capture;print;screenshot;"
+msgstr "snimi, uslikaj, ispiši, slikaj ekran;"
+
+#: ../src/org.gnome.Screenshot.desktop.in.h:4
+msgid "Take a Screenshot of the Whole Screen"
+msgstr "Uzmi snimak cijelog ekrana"
+
+#: ../src/org.gnome.Screenshot.desktop.in.h:5
+msgid "Take a Screenshot of the Current Window"
+msgstr "Uzmi snimak trenutnog prozora"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "GNOME Slikanje ekrana"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
 msgstr ""
+"GNOME Screenshot je jednostavan alat koji vam omogućuje da fotografišete "
+"zaslon računala. Slike mogu biti preko cijelog zaslona, specifične namjene, "
+"ili odabranog pravokutnog područja. Također možete kopirati snimljene "
+"screenshot snimke izravno u GNOME prijenosnik i zalijepiti ih u drugim "
+"aplikacijama."
 
-#: ../src/gnome-screenshot.desktop.in.h:3
-msgid "Take a screenshot of the current window"
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
 msgstr ""
+"GNOME Screenshot vam omogućuje  da se screenshotovi čak i kad nisu otvoreni: "
+"jednostavno pritisnite gumb PrtSc na tipkovnici, a snimku vašeg cijelog "
+"zaslona će se spremiti na vašu mapu Slike. Držite Alt dok pritišćete PrtSc, "
+"a dobiti ćete  screenshot samo trenutno odabranog prozora."
 
-#: ../src/gnome-screenshot.desktop.in.h:4
-msgid "Take a screenshot of the whole screen"
-msgstr ""
+#: ../src/screenshot-app-menu.ui.h:1
+msgid "Help"
+msgstr "Pomoć"
 
-#: ../src/gnome-screenshot.ui.h:1
-msgid "*"
-msgstr "*"
+#: ../src/screenshot-app-menu.ui.h:2
+msgid "About"
+msgstr "O sistemu"
 
-#: ../src/gnome-screenshot.ui.h:2
-msgid "C_opy to Clipboard"
-msgstr ""
+#: ../src/screenshot-app-menu.ui.h:3
+msgid "Quit"
+msgstr "Izlaz"
 
-#: ../src/gnome-screenshot.ui.h:3
+#: ../src/screenshot-dialog.ui.h:1
 msgid "Save Screenshot"
-msgstr ""
+msgstr "Čuva snimak ekrana"
 
-#: ../src/gnome-screenshot.ui.h:4
-#, fuzzy
-msgid "Save in _folder:"
-msgstr "_Potraži u direktoriju:"
+#: ../src/screenshot-dialog.ui.h:2
+msgid "C_opy to Clipboard"
+msgstr "K&opiraj u međuspremnik"
 
-#: ../src/gnome-screenshot.ui.h:5
-#, fuzzy
+#: ../src/screenshot-dialog.ui.h:3
+msgid "_Save"
+msgstr "_Snimi"
+
+#: ../src/screenshot-dialog.ui.h:4
 msgid "_Name:"
-msgstr "Ime"
+msgstr "_Ime:"
+
+#: ../src/screenshot-dialog.ui.h:5
+msgid "Save in _folder:"
+msgstr "Snimi u _direktorij:"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
-msgid "Border Effect"
-msgstr ""
+msgid "Window-specific screenshot (deprecated)"
+msgstr "Snimak određenog prozora (prevaziđeno)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
+"Snima samo tekući prozor umjesto cijele radne površi. Ovaj ključ je "
+"prevaziđen i više se ne koristi."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+msgid "Screenshot delay"
+msgstr "Čekanje na snimak"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
-msgid "Include Border"
-msgstr ""
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr "Vrijeme do uzimanja snimka ekrana."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
-msgid "Include ICC Profile"
-msgstr ""
+msgid "Screenshot directory"
+msgstr "Direktorij za snimke ekrana"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
-#, fuzzy
-msgid "Include Pointer"
-msgstr "Uključi druge datoteče sisteme"
+msgid "The directory where the screenshots will be saved by default."
+msgstr "Direktorij u kome će biti sačuvani snimci ekrana."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
-msgid "Include the ICC profile of the target in the screenshot file"
-msgstr ""
+msgid "Last save directory"
+msgstr "Posljednji direktorij čuvanja"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
-msgid "Include the pointer in the screenshot"
+msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
+"Posljednji direktorij u kome je bio sačuvan snimak ekrana u interaktivnom "
+"režimu."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
-msgid "Include the window manager border along with the screenshot"
-msgstr ""
+msgid "Include Border"
+msgstr "Uključi ivicu"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
-msgid "Screenshot delay"
-msgstr ""
+msgid "Include the window manager border along with the screenshot"
+msgstr "Uključi ivicu upravnika prozora u snimak ekrana"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
-msgid "Screenshot directory"
-msgstr ""
+msgid "Include Pointer"
+msgstr "Uključi pokazivač"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
-msgid "The directory the last screenshot was saved in."
-msgstr ""
+msgid "Include the pointer in the screenshot"
+msgstr "Uključi pokazivač u snimak ekrana"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
-msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
+msgid "Include ICC Profile"
+msgstr "Uključi ICC profil"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
-msgid "Window-specific screenshot (deprecated)"
-msgstr ""
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr "Ugrađuje ICC profil u datoteku sa snimkom ekrana"
 
-#: ../src/screenshot-config.c:78
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+msgid "Border Effect"
+msgstr "Efekat ivica"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+msgid ""
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
+msgstr ""
+"Efekat koji se dodaje sa spoljne strane ivice. Moguće je izabrati \"sjenka"
+"\", \"ništa\", i \"ivica\"."
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+msgid "Default file type extension"
+msgstr "Podrazumijevana ekstenzija tipa datoteke"
+
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+msgid "The default file type extension for screenshots."
+msgstr "Podrazumijevana ekstenzija tipa datoteke za slike ekrana."
+
+#: ../src/screenshot-application.c:145
+#, c-format
+msgid "A file named \"%s\" already exists in \"%s\""
+msgstr "Datoteka pod nazivom „%s\" već postoji u „%s“"
+
+#: ../src/screenshot-application.c:152
+msgid "Overwrite existing file?"
+msgstr "Prebrisati postojeću datoteku?"
+
+#: ../src/screenshot-application.c:174 ../src/screenshot-application.c:183
+#: ../src/screenshot-application.c:463 ../src/screenshot-application.c:467
+#: ../src/screenshot-application.c:507 ../src/screenshot-application.c:510
+msgid "Unable to capture a screenshot"
+msgstr "Nisam mogao da napravim snimak ekrana"
+
+#: ../src/screenshot-application.c:175
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+"Greška pri stvaranju datoteke. Molim izaberite neko drugo mjesto i pokušajte "
+"ponovo."
+
+#: ../src/screenshot-application.c:464
+msgid "Error creating file"
+msgstr "Greška pri stvaranju datoteke"
+
+#: ../src/screenshot-application.c:475 ../src/screenshot-application.c:543
+msgid "Screenshot taken"
+msgstr "Snimak je uhvaćen"
+
+#: ../src/screenshot-application.c:508
+msgid "All possible methods failed"
+msgstr "Nije uspio nijedan od mogućih načina"
+
+#: ../src/screenshot-application.c:631
+msgid "Send the grab directly to the clipboard"
+msgstr "Prebaci dohvat direktno u međuspremnik"
+
+#: ../src/screenshot-application.c:632
+msgid "Grab a window instead of the entire screen"
+msgstr "Snimite prozor umjesto čitavog ekrana"
+
+#: ../src/screenshot-application.c:633
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Uhvati oblast ekrana umjesto prozor umjesto čitavog ekrana"
+
+#: ../src/screenshot-application.c:634
+msgid "Include the window border with the screenshot"
+msgstr "Uključi ivice prozora u snimak ekrana"
+
+#: ../src/screenshot-application.c:635
+msgid "Remove the window border from the screenshot"
+msgstr "Ukloni ivice prozora iz snimka ekrana"
+
+#: ../src/screenshot-application.c:636
+msgid "Include the pointer with the screenshot"
+msgstr "Uključi pokazivač u snimak ekrana"
+
+#: ../src/screenshot-application.c:637
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr "Snimi ekran nakon navedenog vremena (u sekundama)"
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: ../src/screenshot-application.c:637
+#: ../src/screenshot-interactive-dialog.c:413
+msgid "seconds"
+msgstr "sekundi"
+
+#: ../src/screenshot-application.c:638
+msgid "Effect to add to the border (shadow, border, vintage or none)"
+msgstr "Efekti za dodavanje ograničenja (sjena, okvira, vintage )"
+
+#: ../src/screenshot-application.c:638
+msgid "effect"
+msgstr "efekat"
+
+#: ../src/screenshot-application.c:639
+msgid "Interactively set options"
+msgstr "Interaktivno postavlja opcije"
+
+#: ../src/screenshot-application.c:640
+msgid "Save screenshot directly to this file"
+msgstr "Čuvaj snimak u ovu datoteku"
+
+#: ../src/screenshot-application.c:640
+msgid "filename"
+msgstr "ime datoteke"
+
+#: ../src/screenshot-application.c:641
+msgid "Print version information and exit"
+msgstr "Ispiši podatke o izdanju i izađi"
+
+#: ../src/screenshot-application.c:770
+msgid "translator-credits"
+msgstr ""
+"   Dženana https://launchpad.net/~dkapetanov1\n"
+"  Samir Ribić https://launchpad.net/~megaribi"
+
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
+"Opcije ne mogu zajedno: --window i --area se ne mogu koristiti u isto "
+"vrijeme.\n"
 
-#: ../src/screenshot-config.c:85
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
+"Sukob opcija: „--area“ i „--delay“ ne mogu biti korišćene u isto vrijeme.\n"
 
-#: ../src/screenshot-dialog.c:193
-msgid ""
-"UI definition file for the screenshot program is missing.\n"
-"Please check your installation of gnome-utils"
-msgstr ""
-
-#: ../src/screenshot-dialog.c:214
-#, fuzzy
-msgid "Select a folder"
-msgstr "_Potraži u direktoriju:"
-
-#: ../src/screenshot-dialog.c:323
+#: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
-msgstr ""
+msgstr "Screenshot.png"
 
-#. translators: this is the name of the file that gets made up
+#. translators: this is the nami of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:119
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-msgid "Screenshot at %s.png"
-msgstr ""
+msgid "Screenshot from %s.%s"
+msgstr "Slika iz %s.%s"
 
-#. translators: this is the name of the file that gets
+#. translators: this is the nami of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:126
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-msgid "Screenshot at %s - %d.png"
-msgstr ""
+msgid "Screenshot from %s - %d.%s"
+msgstr "Slika iz %s - %d.%s"
 
-#: ../src/screenshot-interactive-dialog.c:165
+#: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
-msgstr ""
+msgstr "Nijedan"
 
-#: ../src/screenshot-interactive-dialog.c:166
+#: ../src/screenshot-interactive-dialog.c:157
 msgid "Drop shadow"
-msgstr ""
+msgstr "Iscrtaj sjenku"
 
-#: ../src/screenshot-interactive-dialog.c:167
+#: ../src/screenshot-interactive-dialog.c:158
 msgid "Border"
-msgstr ""
+msgstr "Ivica"
+
+#: ../src/screenshot-interactive-dialog.c:159
+msgid "Vintage"
+msgstr "Staro"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:271
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
-msgstr ""
+msgstr "Uključi _pokazivač"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:281
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
-msgstr ""
+msgstr "Uključi ivicu prozora"
 
-#: ../src/screenshot-interactive-dialog.c:298
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
-msgstr ""
+msgstr "Primijeni efekat:"
+
+#: ../src/screenshot-interactive-dialog.c:346
+msgid "Grab the whole sc_reen"
+msgstr "Snimi _cijelu radnu površ"
 
 #: ../src/screenshot-interactive-dialog.c:360
-msgid "Grab the whole _desktop"
-msgstr ""
-
-#: ../src/screenshot-interactive-dialog.c:374
 msgid "Grab the current _window"
-msgstr ""
+msgstr "Zgrabi trenutni prozor"
 
-#: ../src/screenshot-interactive-dialog.c:386
-#, fuzzy
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
-msgstr "Pokaži više osobina"
+msgstr "Izaberi _oblast za hvatanje"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:403
-msgid "Grab _after a delay of"
-msgstr ""
+#: ../src/screenshot-interactive-dialog.c:392
+msgid "Grab after a _delay of"
+msgstr "Snimi nakon _zastoja od"
 
-#: ../src/screenshot-interactive-dialog.c:441
-#: ../src/screenshot-interactive-dialog.c:449
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Snimak ekrana"
 
-#: ../src/screenshot-interactive-dialog.c:450
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
-msgstr ""
+msgstr "Efekti"
 
-#: ../src/screenshot-interactive-dialog.c:455
+#: ../src/screenshot-interactive-dialog.c:477
+msgid "_Help"
+msgstr "_Pomoć"
+
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
-msgstr ""
+msgstr "Slikaj ekran"
 
-#: ../src/screenshot-utils.c:702
-#, fuzzy
+#: ../src/screenshot-interactive-dialog.c:503
+msgid "_Cancel"
+msgstr "_Obustavi"
+
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
-msgstr "Greška prilikom zatvaranja uređaja %s"
+msgstr "Greška u učitavanju strane sa pomoći"
