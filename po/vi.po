@@ -1,17 +1,18 @@
 # Vietnamese Translation for gnome-screenshot.
-# Copyright © 2014 GNOME i18n Project for Vietnamese.
+# Bản dịch tiếng Việt dành cho gnome-screenshot.
+# Copyright © 2015 GNOME i18n Project for Vietnamese.
 # This file is distributed under the same license as the gnome-screenshot package.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2002,2007,2011-2012.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2009.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2014.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-11-28 20:17+0000\n"
-"PO-Revision-Date: 2014-11-29 08:57+0700\n"
+"POT-Creation-Date: 2015-03-15 20:26+0000\n"
+"PO-Revision-Date: 2015-03-16 09:11+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -19,7 +20,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.8\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
@@ -114,7 +114,7 @@ msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
-"Lấy chỉ cửa sổ hiện thời, thay cho toàn màn hình. Khoá này đã lỗi thời và "
+"Lấy chỉ cửa sổ hiện thời, thay cho toàn màn hình. Khóa này đã lỗi thời và "
 "sau này không dùng nữa."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
@@ -218,7 +218,7 @@ msgstr "Mọi cách đều thất bại"
 
 #: ../src/screenshot-application.c:631
 msgid "Send the grab directly to the clipboard"
-msgstr "Gửi ảnh chụp thẳng vào clipboard"
+msgstr "Gửi ảnh chụp trực tiếp vào clipboard"
 
 #: ../src/screenshot-application.c:632
 msgid "Grab a window instead of the entire screen"
@@ -248,7 +248,7 @@ msgstr "Chụp màn hình sau khi chờ một khoảng thời gian [theo giây]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "giây"
 
@@ -262,7 +262,7 @@ msgstr "hiệu ứng"
 
 #: ../src/screenshot-application.c:639
 msgid "Interactively set options"
-msgstr "Đặt tuỳ chọn tương tác"
+msgstr "Đặt tùy chọn tương tác"
 
 #: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
@@ -278,7 +278,7 @@ msgstr "Hiển thị thông tin phiên bản rồi thoát"
 
 #: ../src/screenshot-application.c:770
 msgid "translator-credits"
-msgstr "Nhóm Việt hóa GNOME (https://l10n.gnome.org/teams/vi/)"
+msgstr "Nhóm dịch GNOME <gnome-vi-list@gnome.org>"
 
 #: ../src/screenshot-config.c:116
 #, c-format
@@ -286,7 +286,7 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"Tuỳ chọn không tương thích: không thể dùng cùng lúc --window và --area\n"
+"Tùy chọn không tương thích: không thể dùng cùng lúc --window và --area\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
@@ -294,26 +294,26 @@ msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Tuỳ chọn không tương thích: không thể dùng --area và --delay cùng lúc.\n"
+"Tùy chọn không tương thích: không thể dùng --area và --delay cùng lúc.\n"
 
 #: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
-msgstr "Hình-chụp.png"
+msgstr "Hình_chụp.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
-msgid "Screenshot-from-%s.%s"
-msgstr "Hình-chụp-từ-%s.%s"
+msgid "Screenshot from %s.%s"
+msgstr "Hình chụp từ %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
-msgid "Screenshot-from-%s-%d.%s"
-msgstr "Hình-chụp-từ-%s-%d.%s"
+msgid "Screenshot from %s - %d.%s"
+msgstr "Hình chụp từ %s - %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -332,55 +332,55 @@ msgid "Vintage"
 msgstr "Vintage"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Lấy cả con t_rỏ"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Lấy _viền cửa sổ"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Áp dụng _hiệu ứng:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Chụp _toàn bộ màn hình"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
-msgstr "Chụp cửa sổ _hiện thời"
+msgstr "Chụp cửa sổ h_iện thời"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Chọn _vùng cần chụp"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Chụp _sau khi chờ"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Chụp màn hình"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Hiệu ứng"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "Trợ _giúp"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "_Chụp màn hình"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "T_hôi"
 
