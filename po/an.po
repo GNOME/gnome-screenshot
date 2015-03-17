@@ -318,7 +318,7 @@ msgstr "Captura de pantalla de %s.%s"
 #, c-format
 #| msgid "Screenshot-from-%s-%d.%s"
 msgid "Screenshot from %s - %d.%s"
-msgstr "Captura de pantalla de %s - %d.%"
+msgstr "Captura de pantalla de %s - %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
