@@ -1,4 +1,4 @@
-<schemalist gettext-domain="gnome-utils-2.0">
+<schemalist gettext-domain="gnome-screenshot">
  <enum id="org.gnome.gnome-screenshot.file-types">
     <value nick="bmp" value="0"/>
     <value nick="jpg" value="1"/>
