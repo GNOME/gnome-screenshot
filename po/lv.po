@@ -7,14 +7,14 @@
 # Raivis Dejus <orvils@gmail.com>, 2006, 2007, 2009.
 # Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2010, 2011.
 # Rudolfs <rudolfs.mazurs@gmail.com>, 2011.
-# Rūdofls Mazurs <rudolfs.mazurs@gmail.com>, 2011, 2012, 2013, 2014.
+# Rūdofls Mazurs <rudolfs.mazurs@gmail.com>, 2011, 2012, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-07 07:23+0000\n"
-"PO-Revision-Date: 2014-09-07 18:01+0300\n"
+"POT-Creation-Date: 2015-04-03 07:45+0000\n"
+"PO-Revision-Date: 2015-04-03 20:05+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -31,6 +31,7 @@ msgid "Screenshot"
 msgstr "Ekrānattēls"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Saglabā darbvirsmas vai logu attēlus"
@@ -46,6 +47,36 @@ msgstr "Uzņem visa ekrāna attēlu"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Uzņem aktīvā loga attēlu"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+#| msgid "Screenshot"
+msgid "GNOME Screenshot"
+msgstr "GNOME ekrānattēls"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"GNOME ekrānattēls ir vienkārša utilīta, kas ļauj uzņemt datora ekrāna attēlu. "
+"Ekrānattēls var būt viss ekrāns, kāda noteikta lietotne vai izvēlēts "
+"taisnstūra apgabals. Jūs varat iekopēt uzņemto ekrānattēlu GNOME starpliktuvē "
+"un ielīmēt to citās lietotnēs."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"GNOME ekrānattēls ļauj jums uzņemt ekrānattēlus pat tad, kad tas nav atvērts: "
+"spiediet PrtSc pogu uz tastatūras un tiks uzņemts visa ekrāna attēls, kas "
+"tiks saglabāts Attēlu mapē. Turiet piespiestu Alt taustiņa PrtSc spiešanas "
+"laikā, lai uzņemtu tikai pašlaik izvēlētā loga attēlu."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -224,7 +255,7 @@ msgstr "Uzņemt ekrānattēlu ar norādīto aizturi [sekundēs]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "sekundes"
 
@@ -278,7 +309,7 @@ msgstr "Ekrānattēls.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Ekrānattēls %s.%s"
@@ -286,7 +317,7 @@ msgstr "Ekrānattēls %s.%s"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Ekrānattēls %s – %d.%s"
@@ -308,57 +339,56 @@ msgid "Vintage"
 msgstr "Vecmodīgs"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "Iekļaut _rādītāju"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "Iekļaut loga _rāmi"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "Pielietot _efektu:"
 
 # mini-utils/idetool/idetool.c:41
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "Uzņemt visu ek_rānu"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "Uzņemt aktīvo _logu"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "Izvēlēties _apgabalu, ko uzņemt"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "Uzņemt ar _aizturi"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "Uzņemt ekrānattēlu"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "Efekti"
 
-#: ../src/screenshot-interactive-dialog.c:483
-#| msgid "Help"
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "_Palīdzība"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "Uzņemt _ekrānattēlu"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "At_celt"
 
@@ -367,24 +397,3 @@ msgstr "At_celt"
 msgid "Error loading the help page"
 msgstr "Kļūda, ielādējot palīdzības lapu"
 
-#~ msgid "Take a picture of the screen"
-#~ msgstr "Uzņemt ekrāna attēlu"
-
-#~ msgid "About Screenshot"
-#~ msgstr "Par ekrānattēlu"
-
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgid "Select a folder"
-#~ msgstr "Izvēlieties mapi"
-
-#~ msgid ""
-#~ "UI definition file for the screenshot program is missing.\n"
-#~ "Please check your installation of gnome-utils"
-#~ msgstr ""
-#~ "UI definīciju fails ekrānattēlu programmai nav atrodams.\n"
-#~ "Lūdzu, pārbaudiet gnome-utils instalāciju"
-
-#~ msgid "Error while saving screenshot"
-#~ msgstr "Kļūda, saglabājot ekrānuzņēmumu"
