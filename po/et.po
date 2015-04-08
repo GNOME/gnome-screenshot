@@ -10,15 +10,15 @@
 # Tõivo Leedjärv <toivo linux ee>, 2002.
 # Ivar Smolin <okul linux ee>, 2005–2011.
 # Priit Laes <amd store20 com>, 2005.
-# Mattias Põldaru <mahfiaz@gmail.com>, 2012, 2013.
+# Mattias Põldaru <mahfiaz@gmail.com>, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-10 10:48+0000\n"
-"PO-Revision-Date: 2013-09-11 23:06+0300\n"
+"POT-Creation-Date: 2014-04-15 19:42+0000\n"
+"PO-Revision-Date: 2014-04-16 01:42+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <>\n"
 "Language: et\n"
@@ -189,6 +189,9 @@ msgstr "Ekraanipilt salvestatakse otse sellesse faili"
 
 msgid "filename"
 msgstr "failinimi"
+
+msgid "Print version information and exit"
+msgstr "Versiooniinfo printimine ja väljumine"
 
 msgid "Take a picture of the screen"
 msgstr "Ekraanist pildi tegemine"
