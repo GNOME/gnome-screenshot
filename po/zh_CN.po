@@ -17,24 +17,25 @@ msgstr ""
 "Project-Id-Version: gnome-utils master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-02 07:23+0000\n"
-"PO-Revision-Date: 2014-08-02 21:44+0800\n"
-"Last-Translator: irisgyq <gouyingqiyanxuan321@gmail.com>\n"
+"POT-Creation-Date: 2015-01-28 12:42+0000\n"
+"PO-Revision-Date: 2015-01-12 13:53+0800\n"
+"Last-Translator: Icenowy Zheng <icenowy@outlook.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.1\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:757
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "截图"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
-#: ../src/screenshot-application.c:758
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "将您的屏幕或单个窗口保存为图像"
 
@@ -49,6 +50,33 @@ msgstr "截取整个屏幕"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "截取当前窗口"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "GNOME 截图"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"“GNOME 截图”是一个以图片格式保存屏幕内容的简单工具。它可以截取你的整个屏幕，"
+"一个制定的程序，也可以截取一个划定的矩形区域。你还可以把截图内容直接拷贝到剪"
+"贴板然后复制到其他应用程序当中。"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"“GNOME 截图”工具甚至允许你在不打开它的情况下截取屏幕：轻按您键盘上"
+"的“PrtSc”键，然后在你的图片文件夹里面就会出现一张现在屏幕内容的快照。如果在按"
+"PrtSc的时候另外按住Alt键，你就可以获得当前窗口的截图。"
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -221,7 +249,7 @@ msgstr "在指定延迟后截图[以秒计]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-interactive-dialog.c:413
 msgid "seconds"
 msgstr "秒"
 
@@ -249,7 +277,7 @@ msgstr "文件名"
 msgid "Print version information and exit"
 msgstr "打印版本信息并退出"
 
-#: ../src/screenshot-application.c:760
+#: ../src/screenshot-application.c:770
 msgid "translator-credits"
 msgstr ""
 "Sun G11n <gnome_int_l10n@ireland.sun.com> 2002.\n"
@@ -262,7 +290,7 @@ msgstr ""
 "tuhaihe <1132321739qq@gmail.com>, 2012, 2013.\n"
 "Tong Hui <tonghuix@gmail.com>, 2013."
 
-#: ../src/screenshot-config.c:59
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
@@ -270,7 +298,7 @@ msgid ""
 msgstr "冲突的选项：--window 和 --area 不能同时使用。\n"
 
 # - -area 和 - - delay 是命令行下执行命令时的参数，不用翻译。
-#: ../src/screenshot-config.c:66
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
@@ -283,16 +311,14 @@ msgstr "屏幕截图.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
-#, c-format
+#: ../src/screenshot-filename-builder.c:143
 msgid "Screenshot from %s.%s"
 msgstr "%s屏幕截图.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
-#, c-format
+#: ../src/screenshot-filename-builder.c:150
 msgid "Screenshot from %s - %d.%s"
 msgstr "%s-%d屏幕截图.%s"
 
@@ -313,55 +339,55 @@ msgid "Vintage"
 msgstr "老照片"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:262
 msgid "Include _pointer"
 msgstr "包含指针(_P)"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:272
 msgid "Include the window _border"
 msgstr "包含窗口边框(_B)"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:289
 msgid "Apply _effect:"
 msgstr "应用特效(_E)："
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
 msgstr "截取整个屏幕(_R)"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
 msgstr "截取当前窗口(_W)"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
 msgstr "选择一个截取区域(_A)"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:392
 msgid "Grab after a _delay of"
 msgstr "截图延迟时间(_D)"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:463
 msgid "Take Screenshot"
 msgstr "截图"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Effects"
 msgstr "特效"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:477
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
 msgstr "截图(_S)"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
 msgstr "取消(_C)"
 
