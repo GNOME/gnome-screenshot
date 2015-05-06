@@ -204,6 +204,7 @@ create_effects_combo (void)
     case 'v': /* vintage */
       gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
                                 SCREENSHOT_EFFECT_VINTAGE);
+      break;
     case 'n': /* none */
       gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
                                 SCREENSHOT_EFFECT_NONE);
