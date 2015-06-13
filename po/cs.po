@@ -303,14 +303,14 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"Konfliktní možnosti: --window a --area nelze použít ve stejnou chvíli.\n"
+"Konfliktní možnosti: --window a --area nelze použít zároveň.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Konflikt přepínačů: --area a --delay nelze použít ve zároveň.\n"
+msgstr "Konflikt přepínačů: --area a --delay nelze použít zároveň.\n"
 
 #: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
@@ -363,15 +363,15 @@ msgstr "Použít _efekt:"
 
 #: ../src/screenshot-interactive-dialog.c:346
 msgid "Grab the whole sc_reen"
-msgstr "Zachytit _celou obrazovku"
+msgstr "Zachytit celou ob_razovku"
 
 #: ../src/screenshot-interactive-dialog.c:360
 msgid "Grab the current _window"
-msgstr "Zachytit _aktuální okno"
+msgstr "Zachytit akt_uální okno"
 
 #: ../src/screenshot-interactive-dialog.c:372
 msgid "Select _area to grab"
-msgstr "Zvolit _oblast zachycení"
+msgstr "Vybr_at zachytávanou oblast"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
