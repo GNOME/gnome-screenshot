@@ -9,16 +9,16 @@
 # Wadim Dziedzic <wdziedzic@aviary.pl>, 2007.
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
 # Joanna Mazgaj <jmazgaj@aviary.pl>, 2008.
-# Piotr Drąg <piotrdrag@gmail.com>, 2010-2014.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2015.
 # Paweł Żołnowski <pawel@zolnowski.name>, 2015.
 # Aviary.pl <gnomepl@aviary.pl>, 2007-2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-06 00:14+0100\n"
-"PO-Revision-Date: 2015-03-06 00:06+0100\n"
-"Last-Translator: Paweł Żołnowski <pawel@zolnowski.name>\n"
+"POT-Creation-Date: 2015-08-24 17:35+0200\n"
+"PO-Revision-Date: 2015-08-24 17:38+0200\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr "Dołącza profil ICC obiektu docelowego do zrzutu ekranu"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
-msgstr "Efekt ramki"
+msgstr "Efekt krawędzi"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid ""
@@ -187,7 +187,7 @@ msgid ""
 "\"none\", and \"border\"."
 msgstr ""
 "Efekt dodawany do zewnętrznej części krawędzi. Dopuszczalne wartości to "
-"\"shadow\" (cień), \"none\" (brak) oraz \"border\" (krawędź)."
+"„shadow” (cień), „none” (brak) oraz „border” (ramka)."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
 msgid "Default file type extension"
@@ -200,7 +200,7 @@ msgstr "Domyślne rozszerzenie typu pliku dla zrzutów ekranu."
 #: ../src/screenshot-application.c:145
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "Plik o nazwie \"%s\" już istnieje w \"%s\""
+msgstr "Plik o nazwie „%s” już istnieje w „%s”"
 
 #: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
@@ -262,13 +262,13 @@ msgstr "Pobiera zrzut ekranu po określonym opóźnieniu (w sekundach)"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "sekund"
 
 #: ../src/screenshot-application.c:638
 msgid "Effect to add to the border (shadow, border, vintage or none)"
-msgstr "Efekt dodawany do krawędzi (cień, krawędź, retro lub brak)"
+msgstr "Efekt dodawany do krawędzi (cień, ramka, retro lub brak)"
 
 #: ../src/screenshot-application.c:638
 msgid "effect"
@@ -298,7 +298,7 @@ msgstr ""
 "Wadim Dziedzic <wdziedzic@aviary.pl>, 2007\n"
 "Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009\n"
 "Joanna Mazgaj <jmazgaj@aviary.pl>, 2008\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2010-2014\n"
+"Piotr Drąg <piotrdrag@gmail.com>, 2010-2015\n"
 "Paweł Żołnowski <pawel@zolnowski.name>, 2014-2015\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2007-2015"
 
@@ -349,62 +349,62 @@ msgstr "Cień"
 
 #: ../src/screenshot-interactive-dialog.c:158
 msgid "Border"
-msgstr "Krawędź"
+msgstr "Ramka"
 
 #: ../src/screenshot-interactive-dialog.c:159
 msgid "Vintage"
 msgstr "Retro"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "Dołączanie k_ursora"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Dołączanie _krawędzi okna"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "_Efekt:"
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "P_rzechwycenie całego ekranu"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Przechwycenie _bieżącego okna"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Wybór _obszaru do przechwycenia"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "Przechwycenie po _upływie"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Pobranie zrzutu ekranu"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Efekty"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "Pomo_c"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "_Pobierz zrzut ekranu"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "_Anuluj"
 
