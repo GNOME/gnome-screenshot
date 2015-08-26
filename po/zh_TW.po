@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: gnome-utils 3.3.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-20 08:27+0000\n"
+"POT-Creation-Date: 2015-07-21 19:53+0000\n"
 "PO-Revision-Date: 2015-02-20 20:43+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (traditional)\n"
@@ -49,7 +49,6 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "拍下視窗的螢幕擷圖"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
-#| msgid "Screenshot"
 msgid "GNOME Screenshot"
 msgstr "GNOME Screenshot"
 
@@ -61,9 +60,9 @@ msgid ""
 "screenshot directly into the GNOME clipboard and paste it into other "
 "applications."
 msgstr ""
-"GNOME Screenshot 是一個簡單的公用程式，讓您可以為電腦畫面拍照。螢幕擷圖可以"
-"是您的整個螢幕、任何特定的程式，或是選擇的矩陣區域。您也可以將擷取的螢幕擷圖"
-"直接複製到 GNOME 剪貼簿並將它貼到其他的應用程式。"
+"GNOME Screenshot 是一個簡單的公用程式，讓您可以為電腦畫面拍照。螢幕擷圖可以是"
+"您的整個螢幕、任何特定的程式，或是選擇的矩陣區域。您也可以將擷取的螢幕擷圖直"
+"接複製到 GNOME 剪貼簿並將它貼到其他的應用程式。"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
@@ -73,7 +72,7 @@ msgid ""
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
 "GNOME Screenshot 允許您在沒有開啟它的狀況下拍攝螢幕擷圖：只要按下您鍵盤上的 "
-"PrtSc 按鈕，您整個畫面的擷圖就會被儲存在您的圖片資料夾。按下 PrtSc 時按住 "
+"PrtSc 按鈕，您整個畫面的擷圖就會被儲存在您的影像資料夾。按下 PrtSc 時按住 "
 "Alt 則只會取得目前選取視窗的螢幕擷圖。"
 
 #: ../src/screenshot-app-menu.ui.h:1
@@ -160,11 +159,11 @@ msgstr "螢幕擷圖包含滑鼠指標"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
 msgid "Include ICC Profile"
-msgstr "包含 ICC 設定組合"
+msgstr "包含 ICC 設定檔"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "螢幕擷圖檔案包含目標的 ICC 設定組合"
+msgstr "螢幕擷圖檔案包含目標的 ICC 設定檔"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
@@ -247,7 +246,7 @@ msgstr "在指定的時間後（秒）拍攝螢幕擷圖"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "秒後拍下螢幕擷圖"
 
@@ -329,55 +328,55 @@ msgid "Vintage"
 msgstr "舊化"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "包含滑鼠指標(_P)"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "包括視窗邊框(_B)"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "套用效果(_E)："
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "擷取整個螢幕(_R)"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "拍下目前的視窗(_W)"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "選擇要抓取的區域(_A)"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "擷取延遲時間為(_D)"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "拍下螢幕擷圖"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "效果"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "求助(_H)"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "拍下螢幕擷圖(_S)"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "取消(_C)"
 
