@@ -7,15 +7,15 @@
 # Sara Khalatbari <sara@bamdad.org>, 2005.
 # Meelad Zakaria <meelad@farsiweb.info>, 2005, 2006.
 # Sanaz shahrokni <sanaz.shahrokni@gmail.com>, 2006.
-# Arash Mousavi <mousavi.arash@gmail.com>, 2011, 2012, 2013, 2014.
+# Arash Mousavi <mousavi.arash@gmail.com>, 2011, 2012, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-10-06 19:32+0000\n"
-"PO-Revision-Date: 2014-10-10 22:23+0330\n"
+"POT-Creation-Date: 2015-09-12 08:06+0000\n"
+"PO-Revision-Date: 2015-09-13 12:07+0430\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -24,14 +24,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.8.4\n"
 
-#: ../src/org.gnome.Screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:767
+#: ../src/org.gnome.Screenshot.desktop.in.h:1 ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "عکس‌صفحه"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
 #: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "ذخیره‌ی تصاویر رومیزی یا پنجره‌های به صورت فردی"
@@ -47,6 +47,35 @@ msgstr "گرفتن عکس از کل صفحه‌ی نمایش"
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "گرفتن عکس از پنجره فعلی"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "عکس‌صفحه گنوم"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"برنامه عکس‌صفحه گنوم یک ابزار ساده است که به شما اجازه می‌دهد از تصویر رایانه خود "
+"عکس بگیرید. تصاویر می‌توانند همه‌ی صفحه باشند، یا یک برنامه خاص باشند، یا یک ناحیه "
+"انتخاب شده مشخص. شما همچنین می‌توانید تصویر گرفته شده را مستقیما در تخته‌گیره گنوم "
+"ذخیره کنید و در برنامه‌های دیگر بچسبانید."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: just "
+"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
+"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
+"will get a screenshot of only the currently selected window."
+msgstr ""
+"برنامه عکس‌صفحه گنوم به شما اجازه می‌دهد حتی در زمان بسته بودنش از صفحه عکس "
+"بگیرید: تنها دکمه PrtSc را بر روی صفحه‌کلید خود فشار دهید، و یک تصویر از تمام "
+"صفحه نمایش شما در پوشه تصاویر ذخیره می‌شود. دکمه alt را هنگام فشردن PrtSc نگه "
+"دارید تا تنها از پنجره انتخاب شده عکس بگیرید."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -86,8 +115,8 @@ msgstr "عکس‌صفحه مختص به پنجره (قبیح)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
+"Grab just the current window, rather than the whole desktop. This key has been "
+"deprecated and it is no longer in use."
 msgstr ""
 "بجای کل رومیزی، تنها پنجره فعلی را بگیر. این کلید قبیح دانسته شده است و دیگر "
 "استفاده نمی‌شود."
@@ -146,8 +175,8 @@ msgstr "جلوه‌ی کناره"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are \"shadow\", \"none"
+"\", and \"border\"."
 msgstr ""
 "اضافه کردن جلوه به بیرون یک کناره. مقادیر ممکن عبارتند از «shadow»، «none» و "
 "«border»"
@@ -222,8 +251,7 @@ msgstr "عکس گرفتن از صفحه پس از تأخیر مشخص [به ثا
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:420
+#: ../src/screenshot-application.c:637 ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "ثانیه"
 
@@ -258,15 +286,13 @@ msgstr "آرش موسوی <mousavi.arash@gmail.com>"
 #: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
+"Conflicting options: --window and --area should not be used at the same time.\n"
 msgstr "گزینه‌های مخالف: window-- و area-- نباید با هم استفاده شود.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
+"Conflicting options: --area and --delay should not be used at the same time.\n"
 msgstr "گزینه‌های مغایر: window-- و area-- نباید با هم استفاده شود.\n"
 
 #: ../src/screenshot-dialog.c:314
@@ -275,7 +301,7 @@ msgstr "Screenshot.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "عکس‌صفحه از %s.%s"
@@ -283,7 +309,7 @@ msgstr "عکس‌صفحه از %s.%s"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "عکس‌صفحه از %s - %Id.%s"
@@ -305,55 +331,55 @@ msgid "Vintage"
 msgstr "قدیمی"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "اضافه کردن _اشاره‌گر"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "گنجاندن _کناره‌های پنجره"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "اعمال _جلوه:"
 
-#: ../src/screenshot-interactive-dialog.c:354
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "گرفتن تمام _صفحه"
 
-#: ../src/screenshot-interactive-dialog.c:368
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "گرفتن _پنجره فعلی"
 
-#: ../src/screenshot-interactive-dialog.c:380
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "یک منطقه را جهت _گرفتن انتخاب کنید"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:400
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "گرفتن بعد از _مکثی به میزان"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "گرفتن عکس‌صفحه"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "جلوه‌ها"
 
-#: ../src/screenshot-interactive-dialog.c:483
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "_راهنما"
 
-#: ../src/screenshot-interactive-dialog.c:492
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "گرفتن _عکس‌صفحه"
 
-#: ../src/screenshot-interactive-dialog.c:509
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "_لغو"
 
