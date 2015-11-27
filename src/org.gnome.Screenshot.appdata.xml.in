@@ -25,5 +25,10 @@
   <screenshots>
   <screenshot type="default">https://git.gnome.org/browse/gnome-screenshot/plain/src/gnome-screenshot.png</screenshot>
   </screenshots>
+  <kudos>
+    <kudo>AppMenu</kudo>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>ModernToolkit</kudo>
+  </kudos>
   <updatecontact>richard@hughsie.com</updatecontact>
 </application>
