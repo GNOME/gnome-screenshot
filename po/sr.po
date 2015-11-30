@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: gnome-utils-2.0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-04 08:32+0000\n"
-"PO-Revision-Date: 2015-03-05 22:14+0200\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"POT-Creation-Date: 2015-11-30 09:58+0000\n"
+"PO-Revision-Date: 2015-11-30 18:47+0100\n"
+"Last-Translator: Марко М. Костић (Marko M. Kostić) <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 "
+"&& n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
+"X-Generator: Poedit 1.8.5\n"
 
-#: ../src/org.gnome.Screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:767
+#: ../src/org.gnome.Screenshot.desktop.in.h:1 ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Снимач екрана"
 
@@ -44,7 +44,6 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "Направите снимак текућег прозора"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
-#| msgid "Screenshot"
 msgid "GNOME Screenshot"
 msgstr "Гномов снимач екрана"
 
@@ -57,21 +56,21 @@ msgid ""
 "applications."
 msgstr ""
 "Гномов снимач екрана је једноставно помагало које вам омогућава да направите "
-"слике екрана вашег рачунара. Можете направити снимке читавог екрана, било "
-"ког програма, или одабране правоугаоне области. Можете такође да умножите "
-"снимак екрана управо у Гномовој остави и да је убаците у друге програме."
+"слике екрана вашег рачунара. Можете направити снимке читавог екрана, било ког "
+"програма, или одабране правоугаоне области. Можете такође да умножите снимак "
+"екрана управо у Гномовој остави и да је убаците у друге програме."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
-"just press the PrtSc button on your keyboard, and a snapshot of your whole "
-"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
-"and you will get a screenshot of only the currently selected window."
+"GNOME Screenshot allows you to take screenshots even when it's not open: just "
+"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
+"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
+"will get a screenshot of only the currently selected window."
 msgstr ""
-"Гномов снимач екрана вам омогућава да направите снимке екрана чак и када "
-"није отворен: само притисните одговарајуће дугме на тастатури (PrtSc), и "
-"снимак читавог екрана биће сачуван у вашој фасцикли слика. Држите Алт док "
-"притискате „PrtSc“ и добићете снимак екрана само тренутно изабраног прозора."
+"Гномов снимач екрана вам омогућава да направите снимке екрана чак и када није "
+"отворен: само притисните одговарајуће дугме на тастатури (PrtSc), и снимак "
+"читавог екрана биће сачуван у вашој фасцикли слика. Држите Алт док притискате "
+"„PrtSc“ и добићете снимак екрана само тренутно изабраног прозора."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -111,8 +110,8 @@ msgstr "Снимак одређеног прозора (превазиђено)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
+"Grab just the current window, rather than the whole desktop. This key has been "
+"deprecated and it is no longer in use."
 msgstr ""
 "Снима само текући прозор уместо целе радне површи. Овај кључ је превазиђен и "
 "више се не користи."
@@ -140,8 +139,7 @@ msgstr "Последња фасцикла чувања"
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
-"Последња фасцикла у којој је био сачуван снимак екрана у међудејственом "
-"режиму."
+"Последња фасцикла у којој је био сачуван снимак екрана у међудејственом режиму."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
 msgid "Include Border"
@@ -173,8 +171,8 @@ msgstr "Ефекат ивица"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are \"shadow\", \"none"
+"\", and \"border\"."
 msgstr ""
 "Ефекат који се додаје са спољне стране ивице. Могуће вредности су "
 "„shadow“ (сенка), „none“ (ништа), и „border“ (ивица)."
@@ -251,8 +249,7 @@ msgstr "Снима екран након наведеног времена [у �
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-application.c:637 ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "секунде"
 
@@ -284,24 +281,22 @@ msgstr "Исписује податке о издању и излази"
 msgid "translator-credits"
 msgstr ""
 "  Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"  Марко М. Костић <marko.m.kostic@gmail.com>\n"
 "\n"
 "http://prevod.org — превод на српски језик"
 
 #: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
+"Conflicting options: --window and --area should not be used at the same time.\n"
 msgstr ""
 "Сукоб опција: „--window“ и „--area“ не могу бити коришћене у исто време.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"Сукоб опција: „--area“ и „--delay“ не могу бити коришћене у исто време.\n"
+"Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "Сукоб опција: „--area“ и „--delay“ не могу бити коришћене у исто време.\n"
 
 #: ../src/screenshot-dialog.c:314
 msgid "Screenshot.png"
@@ -312,7 +307,7 @@ msgstr "снимак-екрана.png"
 #: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "Снимак екрана из „%s.%s“"
+msgstr "Снимак екрана од %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -320,7 +315,7 @@ msgstr "Снимак екрана из „%s.%s“"
 #: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "Снимак екрана из „%s — %d.%s“"
+msgstr "Снимак екрана од %s — %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
@@ -339,55 +334,55 @@ msgid "Vintage"
 msgstr "Порекло"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "Укључи _показивач"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Укључи _ивицу прозора"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "Примени _дејство:"
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "Сними _целу радну површ"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Сними _тренутни прозор"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Изабери _област за снимање"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "Сними након _застоја од"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Снимак екрана"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Дејства"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "По_моћ"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "_Сними екран"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "_Откажи"
 
