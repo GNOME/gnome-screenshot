@@ -226,6 +226,7 @@ emit_select_callback_in_idle (gpointer user_data)
 static void
 screenshot_select_area_x11_async (CallbackData *cb_data)
 {
+  GdkDisplay *display;
   GdkCursor *cursor;
   select_area_filter_data  data;
   GdkDeviceManager *manager;
@@ -245,8 +246,12 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   g_signal_connect (data.window, "button-release-event", G_CALLBACK (select_area_button_release), &data);
   g_signal_connect (data.window, "motion-notify-event", G_CALLBACK (select_area_motion_notify), &data);
 
-  cursor = gdk_cursor_new (GDK_CROSSHAIR);
-  manager = gdk_display_get_device_manager (gdk_display_get_default ());
+  /* The widget is realised, therefore gtk_widget_get_window always returns a GdkWindow.
+   * Use gdk_window_get_display instead of gdk_display_get_default because the latter might
+   * return NULL if there is no default display. */
+  display = gdk_window_get_display (gtk_widget_get_window (data.window));
+  cursor = gdk_cursor_new_for_display (display, GDK_CROSSHAIR);
+  manager = gdk_display_get_device_manager (display);
   pointer = gdk_device_manager_get_client_pointer (manager);
   keyboard = gdk_device_get_associated_device (pointer);
 
