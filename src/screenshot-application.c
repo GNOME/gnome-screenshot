@@ -472,8 +472,6 @@ build_filename_ready_cb (GObject *source,
       return;
     }
 
-  screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
-
   if (screenshot_config->interactive)
     {
       self->priv->dialog = screenshot_dialog_new (self->priv->screenshot,
@@ -546,6 +544,8 @@ finish_prepare_screenshot (ScreenshotApplication *self,
 
       return;
     }
+
+  screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
 
   /* FIXME: apply the ICC profile according to the preferences.
    * org.gnome.ColorManager.GetProfileForWindow() does not exist anymore,
