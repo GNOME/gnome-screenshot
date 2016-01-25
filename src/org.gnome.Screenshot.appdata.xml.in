@@ -31,4 +31,5 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <updatecontact>richard@hughsie.com</updatecontact>
+  <project_group>GNOME</project_group>
 </application>
