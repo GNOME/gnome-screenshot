@@ -9,11 +9,11 @@ msgstr ""
 "Project-Id-Version: gnome-utils HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-04-27 07:50+0000\n"
+"POT-Creation-Date: 2015-05-20 07:50+0000\n"
 "PO-Revision-Date: 2015-05-19 10:25+0200\n"
 "Last-Translator: Cédric Valmary (Tot en Òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: www.totenoc.eu\n"
-"Language: fr\n"
+"Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,7 +57,7 @@ msgid ""
 "screenshot directly into the GNOME clipboard and paste it into other "
 "applications."
 msgstr ""
-"Captura d'ecran de GNOME es un utilitari per vos permetre de préner de "
+"Captura d'ecran de GNOME es un utilitari per vos permetre de prene de "
 "capturas d'ecran aisidament. Aquelas capturas pòdon concernir vòstre ecran "
 "entièr, una aplicacion en particular o una zòna que definissètz. Podètz "
 "tanben copiar la captura dirèctament dins lo quichapapiers de GNOME e la "
@@ -70,7 +70,7 @@ msgid ""
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
-"Captura d'ecran vos permet de préner de capturas d'ecran quitament se es pas "
+"Captura d'ecran vos permet de prene de capturas d'ecran quitament se es pas "
 "aviada : quichatz simplament sul boton Impr. ecran sus vòstre clavièr e "
 "l'integralitat de vòstre ecran serà salvat dins vòstre dorsièr Imatges. "
 "Mantenètz la tòca Alt en meteis temps que Impr. ecran e sola la fenèstra en "
@@ -152,7 +152,8 @@ msgstr "Inclure la bordadura"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
 msgid "Include the window manager border along with the screenshot"
-msgstr "Inclure la bordadura del gestionari de fenèstra dins la captura d'ecran"
+msgstr ""
+"Inclure la bordadura del gestionari de fenèstra dins la captura d'ecran"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
 msgid "Include Pointer"
@@ -168,7 +169,8 @@ msgstr "Inclure lo perfil ICC"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Inclure lo perfil ICC de la cibla dins lo fichièr de la captura d'ecran"
+msgstr ""
+"Inclure lo perfil ICC de la cibla dins lo fichièr de la captura d'ecran"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
 msgid "Border Effect"
@@ -203,7 +205,7 @@ msgstr "Espotir lo fichièr existent ?"
 #: ../src/screenshot-application.c:463 ../src/screenshot-application.c:467
 #: ../src/screenshot-application.c:507 ../src/screenshot-application.c:510
 msgid "Unable to capture a screenshot"
-msgstr "Impossible de préner una captura d'ecran"
+msgstr "Impossible de prene una captura d'ecran"
 
 #: ../src/screenshot-application.c:175
 msgid "Error creating file. Please choose another location and retry."
@@ -292,7 +294,8 @@ msgstr "Cédric Valmary <cvalmary@yahoo.fr>, 2015"
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr "Aquelas opcions son incompatiblas : --window e --area pòdon pas èsser "
+msgstr ""
+"Aquelas opcions son incompatiblas : --window e --area pòdon pas èsser "
 "utilizadas en meteis temps.\n"
 
 #: ../src/screenshot-config.c:123
@@ -300,7 +303,8 @@ msgstr "Aquelas opcions son incompatiblas : --window e --area pòdon pas èsser 
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
-msgstr "Aquelas opcions son incompatiblas : --area e --delay pòdon pas èsser "
+msgstr ""
+"Aquelas opcions son incompatiblas : --area e --delay pòdon pas èsser "
 "utilizadas en meteis temps.\n"
 
 #: ../src/screenshot-dialog.c:314
@@ -385,7 +389,7 @@ msgstr "_Ajuda"
 
 #: ../src/screenshot-interactive-dialog.c:486
 msgid "Take _Screenshot"
-msgstr "Préner una _captura d'ecran"
+msgstr "Prene una _captura d'ecran"
 
 #: ../src/screenshot-interactive-dialog.c:503
 msgid "_Cancel"
