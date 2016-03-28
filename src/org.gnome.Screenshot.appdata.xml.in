@@ -32,5 +32,6 @@
   </kudos>
   <updatecontact>richard@hughsie.com</updatecontact>
   <project_group>GNOME</project_group>
+  <compulsory_for_desktop>GNOME</compulsory_for_desktop>
   <translation type="gettext">gnome-screenshot</translation>
 </application>
