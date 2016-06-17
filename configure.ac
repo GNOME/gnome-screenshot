@@ -5,7 +5,7 @@ AC_INIT([gnome-screenshot],[3.20.0],[],[gnome-screenshot])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.14 dist-xz no-dist-gzip foreign])
+AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip foreign])
 AM_SILENT_RULES([yes])
 
 GETTEXT_PACKAGE=AC_PACKAGE_NAME
@@ -14,6 +14,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[The name of the gettext d
 IT_PROG_INTLTOOL(0.50.2)
 
 AC_PROG_CC
+AM_PROG_CC_C_O
 
 GLIB_GSETTINGS
 
