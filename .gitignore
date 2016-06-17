@@ -35,5 +35,4 @@ src/screenshot-resources.*
 Makefile
 Makefile.in*
 
-*.gschema.xml
 *.gschema.valid

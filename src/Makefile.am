@@ -66,9 +66,6 @@ appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = org.gnome.Screenshot.appdata.xml.in
 @INTLTOOL_XML_RULE@
 
-%.gschema.xml: %.gschema.xml.in
-	$(AM_V_GEN) $(INTLTOOL_MERGE) -x -u --no-translations $< $@
-
 dbusservicedir = $(datadir)/dbus-1/services
 dbusservice_DATA = org.gnome.Screenshot.service
 
@@ -80,9 +77,7 @@ org.gnome.Screenshot.service: Makefile
 
 man_MANS = gnome-screenshot.1
 
-gsettingsschema_in_files = org.gnome.gnome-screenshot.gschema.xml.in
-gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
-.PRECIOUS: $(gsettings_SCHEMAS)
+gsettings_SCHEMAS = org.gnome.gnome-screenshot.gschema.xml
 
 convertdir = $(datadir)/GConf/gsettings
 convert_DATA = gnome-screenshot.convert
@@ -91,7 +86,7 @@ convert_DATA = gnome-screenshot.convert
 
 EXTRA_DIST =					\
 	$(appdata_in_files)			\
-	$(gsettingsschema_in_files)		\
+	$(gsettings_SCHEMAS)			\
 	$(gnome_screenshot_in_files)		\
 	$(man_MANS)				\
 	$(convert_DATA)				\
@@ -102,7 +97,6 @@ EXTRA_DIST =					\
 CLEANFILES = \
 	$(BUILT_SOURCES)			\
 	$(appdata_DATA)				\
-	$(gsettings_SCHEMAS)			\
 	$(gnome_screenshot_DATA)		\
 	$(dbusservice_DATA)			\
 	$(NULL)

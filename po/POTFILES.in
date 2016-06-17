@@ -5,7 +5,7 @@ src/org.gnome.Screenshot.desktop.in
 src/org.gnome.Screenshot.appdata.xml.in
 [type: gettext/glade]src/screenshot-app-menu.ui
 [type: gettext/glade]src/screenshot-dialog.ui
-src/org.gnome.gnome-screenshot.gschema.xml.in
+src/org.gnome.gnome-screenshot.gschema.xml
 src/screenshot-application.c
 src/screenshot-config.c
 src/screenshot-dialog.c
