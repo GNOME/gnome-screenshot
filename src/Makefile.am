@@ -1,10 +1,10 @@
 NULL =
 
-AM_CPPFLAGS =							\
-	-I.							\
-	-I$(srcdir)						\
-	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DUIDIR=\""$(uidir)"\"					\
+AM_CPPFLAGS =						\
+	-I.						\
+	-I$(srcdir)					\
+	-DLOCALEDIR=\"$(localedir)\"			\
+	-DUIDIR=\"$(uidir)\"				\
 	$(NULL)
 
 bin_PROGRAMS = \
