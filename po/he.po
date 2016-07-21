@@ -4,11 +4,6 @@
 # translation of gnome-utils.gnome-2-2.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
 # Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2003, 2005.
 # Yuval Tanny, 2005.
