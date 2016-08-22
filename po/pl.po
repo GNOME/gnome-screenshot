@@ -1,33 +1,29 @@
-# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Aviary.pl
-# Jeśli masz jakiekolwiek uwagi odnoszące się do tłumaczenia lub chcesz
-# pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
-# gnomepl@aviary.pl
-# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Polish translation for gnome-screenshot.
+# Copyright © 1999-2016 the gnome-screenshot authors.
+# This file is distributed under the same license as the gnome-screenshot package.
 # Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 1999-2003.
 # Artur Flinta <aflinta@at.kernel.pl>, 2003-2005.
 # Wadim Dziedzic <wdziedzic@aviary.pl>, 2007.
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
 # Joanna Mazgaj <jmazgaj@aviary.pl>, 2008.
-# Piotr Drąg <piotrdrag@gmail.com>, 2010-2015.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2016.
 # Paweł Żołnowski <pawel@zolnowski.name>, 2015.
-# Aviary.pl <gnomepl@aviary.pl>, 2007-2015.
+# Aviary.pl <community-poland@mozilla.org>, 2007-2016.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-08 05:40+0100\n"
-"PO-Revision-Date: 2015-11-08 05:42+0100\n"
+"POT-Creation-Date: 2016-08-23 00:47+0200\n"
+"PO-Revision-Date: 2016-08-23 00:48+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-Language: Polish\n"
-"X-Poedit-Country: Poland\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
@@ -69,7 +65,7 @@ msgstr ""
 "Zrzut ekranu GNOME to proste narzędzie umożliwiające wykonanie zdjęcia "
 "ekranu komputera. Mogą to być zrzuty całego ekranu, dowolnego programu lub "
 "zaznaczonego prostokątnego obszaru. Przechwycony zrzut ekranu można "
-"skopiować bezpośrednio do schowka środowiska GNOME i wkleić w innym "
+"skopiować bezpośrednio do schowka środowiska GNOME i wkleić w innym "
 "programie."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
@@ -80,9 +76,9 @@ msgid ""
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
 "Zrzut ekranu GNOME umożliwia wykonanie zdjęcia ekranu nawet gdy nie jest "
-"otwarty: wystarczy nacisnąć klawisz PrtSc na klawiaturze, a obraz całego "
-"ekranu zostanie zapisany w katalogu Obrazy. Przytrzymując klawisz Alt i "
-"naciskając PrtSc, można wykonać zrzut wyłącznie aktywnego okna."
+"otwarty: wystarczy nacisnąć klawisz PrtSc na klawiaturze, a obraz całego "
+"ekranu zostanie zapisany w katalogu Obrazy. Przytrzymując klawisz Alt "
+"i naciskając PrtSc, można wykonać zrzut wyłącznie aktywnego okna."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -90,7 +86,7 @@ msgstr "Pomoc"
 
 #: ../src/screenshot-app-menu.ui.h:2
 msgid "About"
-msgstr "O programie"
+msgstr "O programie"
 
 #: ../src/screenshot-app-menu.ui.h:3
 msgid "Quit"
@@ -114,74 +110,74 @@ msgstr "_Nazwa:"
 
 #: ../src/screenshot-dialog.ui.h:5
 msgid "Save in _folder:"
-msgstr "Zapi_s w katalogu:"
+msgstr "Zapi_s w katalogu:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Zrzut ekranu dla okna (przestarzałe)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
 "Przechwycenie bieżącego okna zamiast całego ekranu. Ten klucz jest "
-"przestarzały i nie jest już używany."
+"przestarzały i nie jest już używany."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Opóźnienie wykonania zrzutu ekranu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Opóźnienie wykonania zrzutu ekranu w sekundach."
+msgstr "Opóźnienie wykonania zrzutu ekranu w sekundach."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Katalog zrzutów ekranu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
-msgstr "Katalog, w którym zrzuty ekranu są domyślnie zapisywane."
+msgstr "Katalog, w którym zrzuty ekranu są domyślnie zapisywane."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Katalog ostatniego zapisu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
-"Ostatni katalog, w którym zapisano zrzut ekranu w trybie interaktywnym."
+"Ostatni katalog, w którym zapisano zrzut ekranu w trybie interaktywnym."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Dołączanie krawędzi"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Dołączanie do zrzutu ekranu krawędzi menedżera okien"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Dołączanie kursora"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Dołącza kursor do zrzutu ekranu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Dołączanie profilu ICC"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Dołącza profil ICC obiektu docelowego do zrzutu ekranu"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Efekt krawędzi"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
@@ -189,18 +185,18 @@ msgstr ""
 "Efekt dodawany do zewnętrznej części krawędzi. Dopuszczalne wartości to "
 "„shadow” (cień), „none” (brak) oraz „border” (ramka)."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Domyślne rozszerzenie typu pliku"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Domyślne rozszerzenie typu pliku dla zrzutów ekranu."
 
 #: ../src/screenshot-application.c:145
 #, c-format
 msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "Plik o nazwie „%s” już istnieje w „%s”"
+msgstr "Plik o nazwie „%s” już istnieje w „%s”"
 
 #: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
@@ -215,7 +211,7 @@ msgstr "Nie można wykonać zrzutu ekranu"
 #: ../src/screenshot-application.c:175
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
-"Błąd podczas tworzenia pliku. Proszę wybrać inne położenie i spróbować "
+"Błąd podczas tworzenia pliku. Proszę wybrać inne położenie i spróbować "
 "ponownie."
 
 #: ../src/screenshot-application.c:464
@@ -288,7 +284,7 @@ msgstr "nazwa pliku"
 
 #: ../src/screenshot-application.c:641
 msgid "Print version information and exit"
-msgstr "Wyświetla informację o wersji i kończy działanie"
+msgstr "Wyświetla informację o wersji i kończy działanie"
 
 #: ../src/screenshot-application.c:770
 msgid "translator-credits"
@@ -298,9 +294,9 @@ msgstr ""
 "Wadim Dziedzic <wdziedzic@aviary.pl>, 2007\n"
 "Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009\n"
 "Joanna Mazgaj <jmazgaj@aviary.pl>, 2008\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2010-2015\n"
+"Piotr Drąg <piotrdrag@gmail.com>, 2010-2016\n"
 "Paweł Żołnowski <pawel@zolnowski.name>, 2014-2015\n"
-"Aviary.pl <gnomepl@aviary.pl>, 2007-2015"
+"Aviary.pl <community-poland@mozilla.org>, 2007-2016"
 
 #: ../src/screenshot-config.c:116
 #, c-format
@@ -308,7 +304,7 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"Sprzeczne opcje: --window oraz --area nie mogą być używane w tym samym "
+"Sprzeczne opcje: --window oraz --area nie mogą być używane w tym samym "
 "czasie.\n"
 
 #: ../src/screenshot-config.c:123
@@ -317,10 +313,10 @@ msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Sprzeczne opcje: --area oraz --delay nie mogą być używane w tym samym "
+"Sprzeczne opcje: --area oraz --delay nie mogą być używane w tym samym "
 "czasie.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Zrzut ekranu.png"
 
