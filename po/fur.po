@@ -8,17 +8,18 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot gnome-3-6\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-04-10 09:22+0000\n"
-"PO-Revision-Date: 2016-04-10 19:54+0200\n"
+"POT-Creation-Date: 2016-05-05 09:38+0000\n"
+"PO-Revision-Date: 2016-10-17 16:21+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.8\n"
 
-#: ../src/org.gnome.Screenshot.desktop.in.h:1 ../src/screenshot-application.c:767
+#: ../src/org.gnome.Screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Cature de schermade"
 
@@ -53,23 +54,23 @@ msgid ""
 "applications."
 msgstr ""
 "Cature de schermade GNOME al è un sempliç program che al permet di scatâ "
-"imagjins dal visôr dal computer. Lis imagjins caturadis a puedin jessi di dut "
-"il visôr, une specifiche aplicazion o une aree retangolâr selezionade. Al è "
-"pussibil ancje copiâ la schermade apene caturade intes notis e incolâle in "
-"altris aplicazions."
+"imagjins dal visôr dal computer. Lis imagjins caturadis a puedin jessi di "
+"dut il visôr, une specifiche aplicazion o une aree retangolâr selezionade. "
+"Al è pussibil ancje copiâ la schermade apene caturade intes notis e incolâle "
+"in altris aplicazions."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: just "
-"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
-"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
-"will get a screenshot of only the currently selected window."
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
 msgstr ""
 "Cature de schermade GNOME al permet di caturâ imagjins ancje cuant che la "
 "aplicazion no je in esecuzion: scliçâ il tast Stamp (o PrtScr) par salvâ une "
-"istantanie dal visôr che a vegnarà salvade te cartele Imagjins. Tignî scliçât "
-"il tast Alt adun cun Stamp par salvâ une schermade dal barcon atualmentri "
-"selezionât."
+"istantanie dal visôr che a vegnarà salvade te cartele Imagjins. Tignî "
+"scliçât il tast Alt adun cun Stamp par salvâ une schermade dal barcon "
+"atualmentri selezionât."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -109,11 +110,11 @@ msgstr "Cature di schermade di un barcon specific (deprecade)"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
 msgid ""
-"Grab just the current window, rather than the whole desktop. This key has been "
-"deprecated and it is no longer in use."
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
 msgstr ""
-"Cjol juste il barcon atuâl, invezit di dute le scrivanie. Cheste funzion a je "
-"stade deprecade e a no je plui doprade."
+"Cjol juste il barcon atuâl, invezit di dute le scrivanie. Cheste funzion a "
+"je stade deprecade e a no je plui doprade."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
 msgid "Screenshot delay"
@@ -173,11 +174,11 @@ msgstr "Efiet da l'orladure"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", \"none"
-"\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are \"shadow\", "
+"\"none\", and \"border\"."
 msgstr ""
-"Efiet di zontâ difûr de orladure. I valôrs pussibii a son \"shadow\", \"none\", "
-"e \"border\"."
+"Efiet di zontâ difûr de orladure. I valôrs pussibii a son \"shadow\", \"none"
+"\", e \"border\"."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
 msgid "Default file type extension"
@@ -250,7 +251,8 @@ msgstr "Fâs une cature de schermade dopo un ritart specificât [in seconts]"
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:637 ../src/screenshot-interactive-dialog.c:414
+#: ../src/screenshot-application.c:637
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "seconts"
 
@@ -285,17 +287,19 @@ msgstr "Fabio Tomat <f.t.public@gmail.com>"
 #: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
-"Conflicting options: --window and --area should not be used at the same time.\n"
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
 msgstr ""
-"Opzions in conflit: --window e --area no varessin di sedi dopradis tal istès "
-"timp.\n"
+"Opzions in conflit: --window e --area no varessin di jessi dopradis tal "
+"istès timp.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
-"Conflicting options: --area and --delay should not be used at the same time.\n"
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
 msgstr ""
-"Opzions in conflit: --area e --delay no varessin di sedi dopradis tal istès "
+"Opzions in conflit: --area e --delay no varessin di jessi dopradis tal istès "
 "timp.\n"
 
 #: ../src/screenshot-dialog.c:314
