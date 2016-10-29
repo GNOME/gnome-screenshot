@@ -396,6 +396,12 @@ screenshot_save_to_file (ScreenshotApplication *self)
 static void
 screenshot_save_to_clipboard (ScreenshotApplication *self)
 {
+    screenshot_show_interactive_dialog(self);
+}
+
+    static void
+screenshot_save_to_clipboard (ScreenshotApplication *self)
+{
   GtkClipboard *clipboard;
 
   clipboard = gtk_clipboard_get_for_display (gdk_display_get_default (),
@@ -418,6 +424,8 @@ screenshot_dialog_response_cb (ScreenshotResponse response,
     case SCREENSHOT_RESPONSE_COPY:
       screenshot_save_to_clipboard (self);
       break;
+    case SCREENSHOT_RESPONSE_BACK:
+      screenshot_back(self);
     default:
       g_assert_not_reached ();
       break;
