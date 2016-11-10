@@ -142,7 +142,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           gchar *folder_uri = g_path_get_basename (folder);
           gchar *folder_name = g_uri_unescape_string (folder_uri, NULL);
           gchar *file_name = screenshot_dialog_get_filename (dialog);
-          gchar *detail = g_strdup_printf (_("A file named \"%s\" already exists in \"%s\""),
+          gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                            file_name, folder_name);
           gint response;
                                              

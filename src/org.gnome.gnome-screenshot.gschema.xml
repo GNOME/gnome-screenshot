@@ -44,7 +44,7 @@
     <key name="border-effect" type="s">
       <default>'none'</default>
       <summary>Border Effect</summary>
-      <description>Effect to add to the outside of a border.  Possible values are "shadow", "none", and "border".</description>
+      <description>Effect to add to the outside of a border.  Possible values are “shadow”, “none”, and “border”.</description>
     </key>
     <key name="default-file-type" enum="org.gnome.gnome-screenshot.file-types">
       <default>'png'</default>
