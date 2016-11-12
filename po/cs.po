@@ -16,15 +16,15 @@
 # Lucas Lommer <llommer@svn.gnome.org>, 2009 (just a small fix).
 # Adrian Guniš <andygun696@gmail.com>, 2008, 2009, 2010.
 # Jan Turoň <turon.honza@gmail.com>, 2011.
-# Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011, 2012, 2013, 2014, 2015.
+# Marek Černocký <marek@manet.cz>, 2010 (just a small fixes), 2011, 2012, 2013, 2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-03 08:31+0000\n"
-"PO-Revision-Date: 2015-02-03 19:38+0100\n"
+"POT-Creation-Date: 2016-11-10 18:39+0000\n"
+"PO-Revision-Date: 2016-11-12 11:17+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -76,7 +76,7 @@ msgstr ""
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
@@ -118,11 +118,11 @@ msgstr "Náz_ev:"
 msgid "Save in _folder:"
 msgstr "Uložit do _složky:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Snímek obrazovky podle specifického nastavení okna (zastaralé)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -130,78 +130,78 @@ msgstr ""
 "Zachytit pouze aktuální okno, nikoliv celou pracovní plochu. Tento klíč je "
 "zastaralý a už se nepoužívá."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Zpoždění snímku obrazovky"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Doba čekání v sekundách před zachycením snímku obrazovky."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Složka se snímky obrazovky"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Složka, do které jsou snímky obrazovky ukládány jako výchozí."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Poslední složka pro ukládání"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
 "Poslední složka, do které byl uložen snímek obrazovky v interaktivním režimu."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Zahrnout rámeček"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Zahrnout do snímku obrazovky rámeček správce oken"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Zahrnout kurzor myši"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Zahrnout do snímku obrazovky kurzor myši"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Zahrnout profil ICC"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Zahrnout do souboru se snímkem obrazovky profil ICC cíle"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Efekt rámečku"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr ""
 "Efekt přidaný k vnější části okraje. Možné hodnoty jsou „shadow“ (stín), "
 "„none“ (nic) a „border“ (rámeček)."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Výchozí přípona souboru"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Výchozí připona podle typu souboru pro snímky obrazovky."
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
+msgid "A file named “%s” already exists in “%s”"
 msgstr "Soubor pojmenovaný „%s“ již existuje v „%s“"
 
 #: ../src/screenshot-application.c:152
@@ -263,7 +263,7 @@ msgstr "Zachytit snímek obrazovky po zadaném zpoždění [v sekundách]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "sekund"
 
@@ -302,8 +302,7 @@ msgstr "Marek Černocký <marek@manet.cz>"
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
-msgstr ""
-"Konfliktní možnosti: --window a --area nelze použít zároveň.\n"
+msgstr "Konfliktní možnosti: --window a --area nelze použít zároveň.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
@@ -312,7 +311,7 @@ msgid ""
 "time.\n"
 msgstr "Konflikt přepínačů: --area a --delay nelze použít zároveň.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Snímek obrazovky.png"
 
@@ -348,58 +347,59 @@ msgid "Vintage"
 msgstr "Patina"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "Zahrnout _kurzor myši"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Zahrnout _rámeček okna"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "Použít _efekt:"
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "Zachytit celou ob_razovku"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Zachytit akt_uální okno"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Vybr_at zachytávanou oblast"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "Zachytit po pro_dlevě"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Zachytit snímek obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Efekty"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "Nápo_věda"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "Zachytit _snímek obrazovky"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "_Zrušit"
 
 #: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Chyba při načítání nápovědy"
+
