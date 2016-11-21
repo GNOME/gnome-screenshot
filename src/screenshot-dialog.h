@@ -25,7 +25,8 @@
 typedef enum {
   SCREENSHOT_RESPONSE_SAVE,
   SCREENSHOT_RESPONSE_COPY,
-  SCREENSHOT_RESPOSE_BACK
+  SCREENSHOT_RESPONSE_BACK
+
 } ScreenshotResponse;
 
 typedef void (*SaveScreenshotCallback) (ScreenshotResponse response, gpointer *user_data);
