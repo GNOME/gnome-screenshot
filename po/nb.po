@@ -1,15 +1,15 @@
 # Norwegian bokmål translation of gnome-screenshot.
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
 #
-# Kjartan Maraas <kmaraas@gnome.org>, 1999-2014.
+# Kjartan Maraas <kmaraas@gnome.org>, 1999-2016.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 # Torstein Adolf Winterseth <kvikende@fsfe.org>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-screenshot 3.15.x\n"
+"Project-Id-Version: gnome-screenshot 3.23.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-09 18:22+0100\n"
-"PO-Revision-Date: 2015-02-09 08:12+0100\n"
+"POT-Creation-Date: 2016-11-21 08:14+0100\n"
+"PO-Revision-Date: 2016-11-21 08:15+0100\n"
 "Last-Translator: Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -61,7 +61,7 @@ msgstr ""
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
@@ -102,11 +102,11 @@ msgstr "_Navn:"
 msgid "Save in _folder:"
 msgstr "Lagre i _mappe:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Vindusspesifikt skjermbilde (utgått)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -114,77 +114,77 @@ msgstr ""
 "Bare ta bilde av aktivt vindu i stedet for hele skrivebordet. Denne nøkkelen "
 "er utgått og er ikke lenger i bruk."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Skjermbilde-forsineksle"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Antall sekunders pause før skjermbildet tas."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Mappe for skjermbilder"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Mappe hvor skjermbiler blir lagret som standard."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Mappe for siste lagring"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "Mappe hvor forrige skjermbilde ble lagret i interaktiv modus."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Ta med kant"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Ta med vindushåndtererens kant på skjermbildet"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Ta med peker"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Ta med peker på skjermbildet"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Ta med ICC-profil"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Ta med ICC-profil for mål i skjermbildefil"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Effekt for kant"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr ""
 "Effekt som skal legges til på utsiden av kanten. Mulige verdier er «shadow», "
 "«none» og «border»."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Forvalgt tiltype"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Forvalgt filtype for skjermbilder."
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
+msgid "A file named “%s” already exists in “%s”"
 msgstr "Det finnes allerede en fil med navnet«%s» i «%s»"
 
 #: ../src/screenshot-application.c:152
@@ -246,7 +246,7 @@ msgstr "Ta skjermbilde etter valgt forsinkelse (i sekunder)"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "sekunder"
 
@@ -293,7 +293,7 @@ msgid ""
 "time.\n"
 msgstr "Du kan ikke bruke valgene «--area» og «--delay» samtidig.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Skjermbilde.png"
 
@@ -329,55 +329,55 @@ msgid "Vintage"
 msgstr "Gammel"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "Ta med _peker"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Ta med vin_dukant"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "Bruk _effekt:"
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "Ta bilde av hele skje_rmen"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Ta bilde av aktivt _vindu"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Velg _område som skal tas bilde av"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "T_a skjermbilde etter"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Ta skjermbilde"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Effekter"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "Ta _skjermbilde"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "A_vbryt"
 
