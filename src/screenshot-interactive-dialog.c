@@ -147,12 +147,12 @@ typedef struct {
   const gchar *nick;
 } ScreenshotEffect;
 
-/* Translators:
- * these are the names of the effects available which will be
- * displayed inside a combo box in interactive mode for the user
- * to chooser.
- */
 static const ScreenshotEffect effects[] = {
+  /* Translators:
+   * these are the names of the effects available which will be
+   * displayed inside a combo box in interactive mode for the user
+   * to chooser.
+   */
   { SCREENSHOT_EFFECT_NONE, N_("None"), "none" },
   { SCREENSHOT_EFFECT_SHADOW, N_("Drop shadow"), "shadow" },
   { SCREENSHOT_EFFECT_BORDER, N_("Border"), "border" },
