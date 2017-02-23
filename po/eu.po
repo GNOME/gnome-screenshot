@@ -275,7 +275,7 @@ msgstr "Pantaila-argazkia.png"
 #: ../src/screenshot-filename-builder.c:145
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "Pantaila-argazkia %s.%s"
+msgstr "Pantaila-argazkia_%s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -283,7 +283,7 @@ msgstr "Pantaila-argazkia %s.%s"
 #: ../src/screenshot-filename-builder.c:152
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "Pantaila-argazkia %s - %d.%s"
+msgstr "Pantaila-argazkia_%s_%d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:154
 msgid "None"
