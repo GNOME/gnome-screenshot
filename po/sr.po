@@ -2,26 +2,26 @@
 # Courtesy of Prevod.org team (http://prevod.org/).
 # This file is distributed under the same license as the gnome-screenshot package.
 # Милош Поповић <gpopac@gmail.com>, 2011.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011—2015.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011—2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils-2.0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-11-30 09:58+0000\n"
-"PO-Revision-Date: 2015-11-30 18:47+0100\n"
-"Last-Translator: Марко М. Костић (Marko M. Kostić) <marko.m.kostic@gmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
+"POT-Creation-Date: 2016-11-16 07:59+0000\n"
+"PO-Revision-Date: 2017-02-21 06:59+0200\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 "
-"&& n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
-"X-Generator: Poedit 1.8.5\n"
 
-#: ../src/org.gnome.Screenshot.desktop.in.h:1 ../src/screenshot-application.c:767
+#: ../src/org.gnome.Screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Снимач екрана"
 
@@ -56,21 +56,27 @@ msgid ""
 "applications."
 msgstr ""
 "Гномов снимач екрана је једноставно помагало које вам омогућава да направите "
-"слике екрана вашег рачунара. Можете направити снимке читавог екрана, било ког "
-"програма, или одабране правоугаоне области. Можете такође да умножите снимак "
-"екрана управо у Гномовој остави и да је убаците у друге програме."
+"слике екрана вашег рачунара. Можете направити снимке читавог екрана, било "
+"ког програма, или одабране правоугаоне области. Можете такође да умножите "
+"снимак екрана управо у Гномовој остави и да је убаците у друге програме."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+#| msgid ""
+#| "GNOME Screenshot allows you to take screenshots even when it's not open: "
+#| "just press the PrtSc button on your keyboard, and a snapshot of your "
+#| "whole screen will be saved to your Pictures folder. Hold Alt while "
+#| "pressing PrtSc and you will get a screenshot of only the currently "
+#| "selected window."
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: just "
-"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
-"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
-"will get a screenshot of only the currently selected window."
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
 msgstr ""
-"Гномов снимач екрана вам омогућава да направите снимке екрана чак и када није "
-"отворен: само притисните одговарајуће дугме на тастатури (PrtSc), и снимак "
-"читавог екрана биће сачуван у вашој фасцикли слика. Држите Алт док притискате "
-"„PrtSc“ и добићете снимак екрана само тренутно изабраног прозора."
+"Гномов снимач екрана вам омогућава да направите снимке екрана чак и када "
+"није отворен: само притисните одговарајуће дугме на тастатури (PrtSc), и "
+"снимак читавог екрана биће сачуван у вашој фасцикли слика. Држите Алт док "
+"притискате „PrtSc“ и добићете снимак екрана само тренутно изабраног прозора."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -104,90 +110,95 @@ msgstr "_Назив:"
 msgid "Save in _folder:"
 msgstr "Сачувај у _фасцикли:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Снимак одређеног прозора (превазиђено)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
-"Grab just the current window, rather than the whole desktop. This key has been "
-"deprecated and it is no longer in use."
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
 msgstr ""
 "Снима само текући прозор уместо целе радне површи. Овај кључ је превазиђен и "
 "више се не користи."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Застој пре снимања"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Време у секундама након кога ће бити направљен снимак екрана."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Фасцикла за снимке"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Фасцикла у којој ће бити сачувани снимци екрана."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Последња фасцикла чувања"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
-"Последња фасцикла у којој је био сачуван снимак екрана у међудејственом режиму."
+"Последња фасцикла у којој је био сачуван снимак екрана у међудејственом "
+"режиму."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Обухвата ивицу"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Укључује ивицу управника прозора у снимак екрана"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Обухвата показивач"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Укључује показивач у снимак екрана"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Укључује ИЦЦ профил"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Уграђује ИЦЦ профил у датотеку са снимком екрана"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Ефекат ивица"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
+#| msgid ""
+#| "Effect to add to the outside of a border. Possible values are \"shadow\", "
+#| "\"none\", and \"border\"."
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", \"none"
-"\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr ""
-"Ефекат који се додаје са спољне стране ивице. Могуће вредности су "
-"„shadow“ (сенка), „none“ (ништа), и „border“ (ивица)."
+"Ефекат који се додаје са спољне стране ивице. Могуће вредности су „shadow“ "
+"(сенка), „none“ (ништа), и „border“ (ивица)."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Основно проширење врсте датотеке"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Основно проширење врсте датотеке за снимке екана."
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
+#| msgid "A file named \"%s\" already exists in \"%s\""
+msgid "A file named “%s” already exists in “%s”"
 msgstr "Датотека под називом „%s\" већ постоји у „%s“"
 
 #: ../src/screenshot-application.c:152
@@ -249,7 +260,8 @@ msgstr "Снима екран након наведеног времена [у �
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:637 ../src/screenshot-interactive-dialog.c:414
+#: ../src/screenshot-application.c:637
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "секунде"
 
@@ -288,17 +300,20 @@ msgstr ""
 #: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
-"Conflicting options: --window and --area should not be used at the same time.\n"
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
 msgstr ""
 "Сукоб опција: „--window“ и „--area“ не могу бити коришћене у исто време.\n"
 
 #: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
-"Conflicting options: --area and --delay should not be used at the same time.\n"
-msgstr "Сукоб опција: „--area“ и „--delay“ не могу бити коришћене у исто време.\n"
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
+msgstr ""
+"Сукоб опција: „--area“ и „--delay“ не могу бити коришћене у исто време.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "снимак-екрана.png"
 
