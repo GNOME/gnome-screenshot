@@ -12,10 +12,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils 3.3.1\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-21 19:53+0000\n"
-"PO-Revision-Date: 2015-02-20 20:43+0800\n"
+"POT-Creation-Date: 2017-02-23 22:57+0000\n"
+"PO-Revision-Date: 2017-03-01 08:48+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (traditional)\n"
 "Language: zh_TW\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
@@ -66,13 +66,13 @@ msgstr ""
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
 "GNOME Screenshot 允許您在沒有開啟它的狀況下拍攝螢幕擷圖：只要按下您鍵盤上的 "
-"PrtSc 按鈕，您整個畫面的擷圖就會被儲存在您的影像資料夾。按下 PrtSc 時按住 "
+"PrtSc 按鈕，您整個畫面的擷圖就會被儲存在您的圖片資料夾。按下 PrtSc 時按住 "
 "Alt 則只會取得目前選取視窗的螢幕擷圖。"
 
 #: ../src/screenshot-app-menu.ui.h:1
@@ -107,86 +107,86 @@ msgstr "名稱(_N):"
 msgid "Save in _folder:"
 msgstr "儲存於資料夾(_F):"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "指定視窗的螢幕擷圖 (已廢棄)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr "只抓取目前的視窗，而非整個桌面。這個設定鍵已廢棄，因此不再使用了。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "螢幕擷圖延遲"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "在照下螢幕擷圖前等待的秒數。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "螢幕擷圖目錄"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "螢幕擷圖預設儲存的目錄。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "上次儲存的目錄"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "上次在互動模式中儲存螢幕擷圖的目錄。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "包含邊框"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "螢幕擷圖包含視窗管理員邊框"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "包含滑鼠指標"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "螢幕擷圖包含滑鼠指標"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "包含 ICC 設定檔"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "螢幕擷圖檔案包含目標的 ICC 設定檔"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "邊框效果"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr "加到邊框外的效果。可用的數值有：“shadow”，“none”及“border”。"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "預設檔案類型延伸檔名"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "螢幕擷圖的預設檔案類型延伸檔名。"
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "「%s」中已存在名為「%s」的檔案"
+msgid "A file named “%s” already exists in “%s”"
+msgstr "名為「%s」的檔案已存在「%s」中"
 
 #: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
@@ -292,7 +292,7 @@ msgid ""
 "time.\n"
 msgstr "衝突的選項：--area 和 --delay 不應同時使用。\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
@@ -311,6 +311,11 @@ msgstr "%s 的螢幕擷圖.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "%s 的螢幕擷圖 - %d.%s"
 
+#. Translators:
+#. * these are the names of the effects available which will be
+#. * displayed inside a combo box in interactive mode for the user
+#. * to chooser.
+#.
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
 msgstr "沒有"
