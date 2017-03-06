@@ -832,6 +832,7 @@ screenshot_application_startup (GApplication *app)
 
   screenshot_load_config ();
 
+  g_set_application_name (_("Screenshot"));
   gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
