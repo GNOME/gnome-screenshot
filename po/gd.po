@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the gnome-screenshot package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 # alasdair caimbeul <alexd@garrit.freeserve.co.uk>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014, 2016.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-08 10:04+0000\n"
-"PO-Revision-Date: 2016-03-08 19:49+0100\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product"
+"=gnome-screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-02-22 20:27+0000\n"
+"PO-Revision-Date: 2017-03-07 09:19+0100\n"
 "Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "Language: gd\n"
@@ -47,7 +47,6 @@ msgid "Take a Screenshot of the Current Window"
 msgstr "Tog glacadh-sgrìn dhen uinneag làithreach"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
-#| msgid "Screenshot"
 msgid "GNOME Screenshot"
 msgstr "Glacadh-sgrìn GNOME"
 
@@ -62,8 +61,8 @@ msgstr ""
 "'S e goireas simplidh a th' ann an glacadh-sgrìn GNOME a leigeas leat "
 "dealbhan a thogail de sgrìn a' choimpiutair agad. Togaidh tu glacadh-sgrìn "
 "dhen sgrìn air fad, de dh'aplacaid shònraichte no de raon ceart-cheàrnach a "
-"thagh thu. 'S urrainn dhut lethbhreac dhen ghlacadh-sgrìn a chur ann an "
-"stòr-bhòrd GNOME sa bhad 's a chur ann an aplacaidean eile."
+"thagh thu. 'S urrainn dhut lethbhreac dhen ghlacadh-sgrìn a chur ann an stòr-"
+"bhòrd GNOME sa bhad 's a chur ann an aplacaidean eile."
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
@@ -110,12 +109,12 @@ msgstr "Ai_nm:"
 msgid "Save in _folder:"
 msgstr "Sàbhail sa _phasgan:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr ""
 "Glacadh-sgrìn a tha gu sònraichte do dh'uinneag (cha mholar seo tuilleadh)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -124,63 +123,63 @@ msgstr ""
 "cleachdadh na h-iuchrach seo tuilleadh is chan eilear 'ga chleachdadh "
 "tuilleadh."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "An dàil air a' ghlacadh-sgrìn"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr ""
 "Uiread a dhiogan a nithear feitheamh mus dèid an glacadh-sgrìn a dhèanamh."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Pasgan nan glacaidhean-sgrìn"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Am pasgan san dèid na glacaidhean-sgrìn a shàbhaladh a ghnàth."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Am pasgan sàbhalaidh mu dheireadh"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
 "Am pasgan mu dheireadh a chaidh glacadh-sgrìn a shàbhaladh ann nuair a bha "
 "thu sa mhodh eadar-ghnìomhach."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Gabh a-steach an t-iomall"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Gabh a-steach iomall manaidsear na h-uinneige sa ghlacadh-sgrìn"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Gabh a-steach an tomhaire"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Gabh a-steach an tomhaire sa ghlacadh-sgrìn"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Gabh a-steach a' phròifil ICC"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr ""
 "Gabh a-steach pròifil ICC na targaide ann am faidhle a' ghlacaidh-sgrìn"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Èifeachd an iomaill"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
@@ -188,11 +187,11 @@ msgstr ""
 "An èifeachd a thèid a chur ri taobh a-muigh an iomaill. Tha \"shadow\", "
 "\"none\" agus \"border\" 'nan luachan ceadaichte."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Leudachan bunaiteach an t-seòrsa faidhle "
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Leudachan bunaiteach an t-seòrsa faidhle airson glacaidhean-sgrìn."
 
@@ -315,7 +314,7 @@ msgstr ""
 "Roghainnean ann an còmhstri: Cha bu chòir dhut --area agus --delay a "
 "chleachdadh aig an aon àm.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Glacadh-sgrìn.png"
 
@@ -324,7 +323,7 @@ msgstr "Glacadh-sgrìn.png"
 #: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "Glacadh-sgrìn de %s.%s"
+msgstr "Glacadh-sgrìn o %s.%s"
 
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
@@ -332,7 +331,7 @@ msgstr "Glacadh-sgrìn de %s.%s"
 #: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "Glacadh-sgrìn de %s - %d.%s"
+msgstr "Glacadh-sgrìn o %s - %d.%s"
 
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
