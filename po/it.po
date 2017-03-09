@@ -1,20 +1,20 @@
 # Italian traslation of gnome-screenshot
-# Copyright (C) 1998-2011, 2012, 2013, 2014, 2015 Free Software Foundation, Inc.
+# Copyright (C) 1998-2011, 2012, 2013, 2014, 2015, 2017 Free Software Foundation, Inc.
 # This file is released under the same license as the gnome-screenshot package.
 # Alessio Frusciante <algol@firenze.linux.it>, 2003, 2005.
 # Lapo Calamandrei <lapo@it.gnome.org>, 2003.
 # Luca Ferretti <elle.uca@infinito.it>, 2004.
 # Fabio Marzocca <thesaltydog@gmail.com>, 2007.
 # Andrea Zagli <azagli@libero.it>, 2005, 2006, 2007, 2008, 2009, 2010, 2011.
-# Milo Casagrande <milo@milo.name>, 2012, 2013, 2014, 2015.
+# Milo Casagrande <milo@milo.name>, 2012, 2013, 2014, 2015, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-02 20:43+0000\n"
-"PO-Revision-Date: 2015-03-03 09:07+0100\n"
+"POT-Creation-Date: 2017-02-23 22:57+0000\n"
+"PO-Revision-Date: 2017-03-09 23:59+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 2.0beta3\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
@@ -68,7 +68,7 @@ msgstr ""
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
@@ -111,11 +111,11 @@ msgstr "_Nome:"
 msgid "Save in _folder:"
 msgstr "Salva nella _cartella:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Schermata di una finestra specifica (deprecata)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -123,78 +123,78 @@ msgstr ""
 "Cattura solo la finestra corrente, invece dell'intera scrivania. Questa "
 "chiave è stata deprecata e non è più in uso."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Ritardo schermata"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Numero di secondi da aspettare prima di catturare la schermata."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Directory per la schermata"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "La directory predefinita dove salvare le schermate."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Ultima directory di salvataggio"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
 "La directory dove è stata salvata l'ultima schermata in modalità interattiva."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Include il bordo"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Include il bordo del gestore di finestre nella schermata catturata"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Include il puntatore"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Include il puntatore nella schermata catturata"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Include il profilo ICC"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Include il profilo ICC nella schermata catturata"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Effetto del bordo"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr ""
 "Effetto da aggiungere all'esterno di un bordo. I valori possibili sono "
 "\"shadow\", \"none\" e \"border\"."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Estensione file predefinita"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "L'estensione predefinita dei file delle schermate."
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
+msgid "A file named “%s” already exists in “%s”"
 msgstr "Un file di nome «%s» esiste già in «%s»"
 
 #: ../src/screenshot-application.c:152
@@ -255,7 +255,7 @@ msgstr "Cattura una schermata dopo il ritardo specificato (in secondi)"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "secondi"
 
@@ -309,7 +309,7 @@ msgstr ""
 "Opzioni in conflitto: --area e --delay non possono essere utilizzate allo "
 "stesso tempo.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Schermata.png"
 
@@ -328,6 +328,11 @@ msgstr "Schermata del %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Schermata del %s - %d.%s"
 
+#. Translators:
+#. * these are the names of the effects available which will be
+#. * displayed inside a combo box in interactive mode for the user
+#. * to chooser.
+#.
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
 msgstr "Nessuno"
@@ -345,55 +350,55 @@ msgid "Vintage"
 msgstr "Vintage"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "Includi _puntatore"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Includi il _bordo finestra"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "Applica _effetto:"
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "Cattura l'intero schermo"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Cattura la _finestra corrente"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Seleziona l'_area da catturare"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "C_attura dopo un ritardo di"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Cattura schermata"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Effetti"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "A_iuto"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "Cattura _schermata"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "A_nnulla"
 
