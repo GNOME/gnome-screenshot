@@ -4,17 +4,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils 0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 22:51+0000\n"
-"PO-Revision-Date: 2016-09-21 00:35+0000\n"
-"Last-Translator: Launchpad Translations Administrators <Unknown>\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"screenshot&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-02-23 22:57+0000\n"
+"PO-Revision-Date: 2017-03-15 20:51+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2016-09-22 11:30+0000\n"
-"X-Generator: Launchpad (build 18204)\n"
-"Language: hr\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
 #: ../src/screenshot-application.c:767
@@ -39,10 +40,6 @@ msgstr "Uslikajte cijeli zaslon"
 msgid "Take a Screenshot of the Current Window"
 msgstr "Uslikajte trenutni prozor"
 
-#: ../src/org.gnome.Screenshot.desktop.in.h:6
-msgid "Take a Screenshot of a Selected Area"
-msgstr "Uslikajte odabrano područje"
-
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
 msgid "GNOME Screenshot"
 msgstr "GNOME Slika zaslona"
@@ -62,7 +59,7 @@ msgstr ""
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
@@ -88,11 +85,11 @@ msgstr "Zatvori"
 msgid "Save Screenshot"
 msgstr "Spremi sliku zaslona"
 
-#: ../src/screenshot-dialog.ui.h:2 ../src/screenshot-dialog.c:239
+#: ../src/screenshot-dialog.ui.h:2
 msgid "C_opy to Clipboard"
 msgstr "K_opiraj u međuspremnik"
 
-#: ../src/screenshot-dialog.ui.h:3 ../src/screenshot-dialog.c:244
+#: ../src/screenshot-dialog.ui.h:3
 msgid "_Save"
 msgstr "_Spremi"
 
@@ -138,8 +135,7 @@ msgstr "Posljednji direktorij spremanja"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr ""
-"Posljednji direktorij gdje je spremljena slika u interaktivnom načinu."
+msgstr "Posljednji direktorij gdje je spremljena slika u interaktivnom načinu."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
@@ -171,11 +167,11 @@ msgstr "Efekt okvira"
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr ""
-"Efekt koji će se dodati vanjskom rubu. Moguće vrijednosti su \"sjena\", "
-"\"ništa\" i \"rub\"."
+"Efekt koji će se dodati vanjskom rubu. Moguće vrijednosti su “shadow”, "
+"“none”, i “border”."
 
 #: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
@@ -187,7 +183,7 @@ msgstr "Zadana vrsta datoteke za slike zaslona."
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
+msgid "A file named “%s” already exists in “%s”"
 msgstr "Datoteka naziva \"%s\" već postoji u \"%s\""
 
 #: ../src/screenshot-application.c:152
@@ -247,7 +243,7 @@ msgstr "Uslikaj sliku zaslona nakon određene odgode [u sekundama]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
-#. 
+#.
 #: ../src/screenshot-application.c:637
 #: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
@@ -304,7 +300,7 @@ msgstr ""
 "Mogućnosti su u sukobu: --window i --delay se ne bi trebale upotrebljavati "
 "istodobno.\n"
 
-#: ../src/screenshot-dialog.c:339
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Slika zaslona.png"
 
@@ -323,6 +319,11 @@ msgstr "Slika zaslona %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Slika zaslona %s - %d.%s"
 
+#. Translators:
+#. * these are the names of the effects available which will be
+#. * displayed inside a combo box in interactive mode for the user
+#. * to chooser.
+#.
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
 msgstr "Ništa"
@@ -367,31 +368,34 @@ msgstr "Uslikaj odabrano _područje zaslona"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
-#. 
+#.
 #: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "Uslikaj nakon _odgode od"
 
-#: ../src/screenshot-interactive-dialog.c:468
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Uslikaj prikaz zaslona"
 
-#: ../src/screenshot-interactive-dialog.c:469
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Efekti"
 
-#: ../src/screenshot-interactive-dialog.c:482
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "_Pomoć"
 
-#: ../src/screenshot-interactive-dialog.c:491
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "_Uslikaj sliku zaslona"
 
-#: ../src/screenshot-interactive-dialog.c:512
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "_Odustani"
 
-#: ../src/screenshot-utils.c:728
+#: ../src/screenshot-utils.c:724
 msgid "Error loading the help page"
 msgstr "Greška pri učitavanju stranice pomoći"
+
+#~ msgid "Take a Screenshot of a Selected Area"
+#~ msgstr "Uslikajte odabrano područje"
