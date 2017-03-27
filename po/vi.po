@@ -4,15 +4,15 @@
 # This file is distributed under the same license as the gnome-screenshot package.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2002,2007,2011-2012.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2009.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2014, 2015.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2014, 2015, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-15 20:26+0000\n"
-"PO-Revision-Date: 2015-03-16 09:11+0700\n"
+"POT-Creation-Date: 2017-03-20 10:22+0000\n"
+"PO-Revision-Date: 2017-03-27 15:24+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -20,9 +20,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:1
-#: ../src/screenshot-application.c:767
+#: ../src/screenshot-application.c:767 ../src/screenshot-application.c:835
 msgid "Screenshot"
 msgstr "Chụp màn hình"
 
@@ -42,7 +43,7 @@ msgstr "Chụp toàn màn hình"
 
 #: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
-msgstr "Chụp cửa sổ hiện thời"
+msgstr "Chụp cửa sổ hiện tại"
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
 msgid "GNOME Screenshot"
@@ -63,7 +64,7 @@ msgstr ""
 
 #: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
 "screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
 "and you will get a screenshot of only the currently selected window."
@@ -105,11 +106,11 @@ msgstr "Tê_n:"
 msgid "Save in _folder:"
 msgstr "Lưu vào thư _mục:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Ảnh chụp màn hình cửa sổ cụ thể (đã lạc hậu)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -117,78 +118,78 @@ msgstr ""
 "Lấy chỉ cửa sổ hiện thời, thay cho toàn màn hình. Khóa này đã lỗi thời và "
 "sau này không dùng nữa."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Khoảng chờ chụp hình"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Số giây cần chờ trước khi chụp màn hình."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Thư mục lưu hình chụp"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Thư mục mặc định nơi ứng dụng chụp màn hình sẽ lưu."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Thư mục lưu lần cuối"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "Thư mục nơi ứng dụng chụp màn hình đã lưu lần cuối."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Lấy đường viền"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Lấy cả đường viền của trình quản lý cửa sổ, trong chụp màn hình"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Lấy con trỏ"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Lấy cả con trỏ khi chụp màn hình"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Bao gồm hồ sơ ICC"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Bao gồm hồ sơ ICC của đích trong tập tin chụp màn hình"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Hiệu ứng viền"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
 msgstr ""
-"Hiệu ứng cần thêm vào cạnh ở ngoại viền. Giá trị có thể là \"shadow"
-"\" (bóng), \"none\" (không), và \"border\" (viền)."
+"Hiệu ứng cần thêm vào cạnh ở ngoại viền. Giá trị có thể là “shadow” (bóng), "
+"“none” (không), và “border” (viền)."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Phần đuôi tập tin mặc định"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Phần đuôi tập tin mặc định dùng khi chụp màn hình"
 
 #: ../src/screenshot-application.c:145
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "Đã có tập tin tên \"%s\" trong \"%s\""
+msgid "A file named “%s” already exists in “%s”"
+msgstr "Đã có tập tin tên “%s” trong “%s”"
 
 #: ../src/screenshot-application.c:152
 msgid "Overwrite existing file?"
@@ -248,7 +249,7 @@ msgstr "Chụp màn hình sau khi chờ một khoảng thời gian [theo giây]"
 #. * delay of <spin button> seconds".
 #.
 #: ../src/screenshot-application.c:637
-#: ../src/screenshot-interactive-dialog.c:413
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "giây"
 
@@ -278,7 +279,7 @@ msgstr "Hiển thị thông tin phiên bản rồi thoát"
 
 #: ../src/screenshot-application.c:770
 msgid "translator-credits"
-msgstr "Nhóm dịch GNOME <gnome-vi-list@gnome.org>"
+msgstr "Nhóm Việt hóa GNOME <gnome-vi-list@gnome.org>"
 
 #: ../src/screenshot-config.c:116
 #, c-format
@@ -296,9 +297,9 @@ msgid ""
 msgstr ""
 "Tùy chọn không tương thích: không thể dùng --area và --delay cùng lúc.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
-msgstr "Hình_chụp.png"
+msgstr "Hình chụp.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
@@ -315,6 +316,11 @@ msgstr "Hình chụp từ %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Hình chụp từ %s - %d.%s"
 
+#. Translators:
+#. * these are the names of the effects available which will be
+#. * displayed inside a combo box in interactive mode for the user
+#. * to chooser.
+#.
 #: ../src/screenshot-interactive-dialog.c:156
 msgid "None"
 msgstr "Không"
@@ -332,55 +338,55 @@ msgid "Vintage"
 msgstr "Vintage"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:262
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "Lấy cả con t_rỏ"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:272
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Lấy _viền cửa sổ"
 
-#: ../src/screenshot-interactive-dialog.c:289
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "Áp dụng _hiệu ứng:"
 
-#: ../src/screenshot-interactive-dialog.c:346
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "Chụp _toàn bộ màn hình"
 
-#: ../src/screenshot-interactive-dialog.c:360
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Chụp cửa sổ h_iện thời"
 
-#: ../src/screenshot-interactive-dialog.c:372
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Chọn _vùng cần chụp"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:392
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "Chụp _sau khi chờ"
 
-#: ../src/screenshot-interactive-dialog.c:463
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Chụp màn hình"
 
-#: ../src/screenshot-interactive-dialog.c:464
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Hiệu ứng"
 
-#: ../src/screenshot-interactive-dialog.c:477
+#: ../src/screenshot-interactive-dialog.c:478
 msgid "_Help"
 msgstr "Trợ _giúp"
 
-#: ../src/screenshot-interactive-dialog.c:486
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "_Chụp màn hình"
 
-#: ../src/screenshot-interactive-dialog.c:503
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "T_hôi"
 
