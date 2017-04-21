@@ -1,15 +1,16 @@
 # Vital Khilko <dojlid@mova.org>, 2003.
 # Ales Nyakhaychyk <nab@mail.by>, 2003, 2004.
 # Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2011, 2013, 2014.
+# Yuras Shumovich <shumovichy@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-04 07:19+0000\n"
-"PO-Revision-Date: 2012-09-07 18:07+0300\n"
-"Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
+"POT-Creation-Date: 2017-03-07 09:21+0000\n"
+"PO-Revision-Date: 2017-04-21 22:55+0300\n"
+"Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -17,26 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:790
+#: ../src/org.gnome.Screenshot.desktop.in.h:1
+#: ../src/screenshot-application.c:767
 msgid "Screenshot"
 msgstr "Экранны здымак"
 
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:791
+#: ../src/org.gnome.Screenshot.desktop.in.h:2
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:2
+#: ../src/screenshot-application.c:768
 msgid "Save images of your screen or individual windows"
 msgstr "Захаванне здымкаў экрана ці асобных вокнаў"
 
-#: ../src/gnome-screenshot.desktop.in.h:3
+#: ../src/org.gnome.Screenshot.desktop.in.h:3
 msgid "snapshot;capture;print;screenshot;"
 msgstr "здымак экрана;запіс;друк;экран;"
 
-#: ../src/gnome-screenshot.desktop.in.h:4
+#: ../src/org.gnome.Screenshot.desktop.in.h:4
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Здымак усяго экрана"
 
-#: ../src/gnome-screenshot.desktop.in.h:5
+#: ../src/org.gnome.Screenshot.desktop.in.h:5
 msgid "Take a Screenshot of the Current Window"
 msgstr "Здымак актыўнага акна"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:1
+msgid "GNOME Screenshot"
+msgstr "Экранны здымак GNOME"
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:3
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+"Экранны здымак GNOME - гэта простая прыстасаванне, я дапамогай якога можна "
+"рабіць здымкі экрана камп'ютара. Гэта можа быць здымак экрана цалкам, нейкай "
+"праграмы або вылучанай прамакутнай прасторы. Таксама можна капіраваць "
+"зроблены здымак у буфер абмену GNOME, каб выкарыстаць яго ў іншых праграмах."
+
+#: ../src/org.gnome.Screenshot.appdata.xml.in.h:4
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it's not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+"Экранны здымак GNOME можа рабіць здымкі нават калі не адкрыты: націсніце "
+"кнопку PrtSc на клавіятуры, і здымак усяго экрана будзе захаваны ў папцы "
+"Малюнкі. Калі пры гэтым трымаць кнопку Alt, то будзе зроблены здымак толькі "
+"вылучанага акна."
 
 #: ../src/screenshot-app-menu.ui.h:1
 msgid "Help"
@@ -70,11 +104,11 @@ msgstr "_Назва:"
 msgid "Save in _folder:"
 msgstr "_Захаваць у папцы:"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:1
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Экранны здымак акна (састарэлы ключ)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:2
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
@@ -82,59 +116,59 @@ msgstr ""
 "Здымаць актыўнае акно, а не ўвесь экран. Гэты ключ састарэў і ўжо насамрэч "
 "не выкарыстоўваецца."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:3
 msgid "Screenshot delay"
 msgstr "Затрымка здымкі"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:4
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Затрымка ў секундах да ўтварэння экраннага здымка."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:5
 msgid "Screenshot directory"
 msgstr "Каталог для экранных здымкаў"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:6
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Прадвызначаны каталог для захавання экранных здымкаў."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:7
 msgid "Last save directory"
 msgstr "Апошні каталог для захавання"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:8
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "Апошні каталог, у якім быў захаваны здымак у інтэрактыўным рэжыме."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:9
 msgid "Include Border"
 msgstr "Улучыць аблямоўку"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:10
 msgid "Include the window manager border along with the screenshot"
 msgstr "Улучыць у здымак аблямоўку акна"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:11
 msgid "Include Pointer"
 msgstr "Улучыць паказальнік мышы"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:12
 msgid "Include the pointer in the screenshot"
 msgstr "Улучыць у здымак паказальнік мышы"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:13
 msgid "Include ICC Profile"
 msgstr "Улучыць профіль ICC"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:14
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Улучыць профіль ICC мэтавага прыстасавання ў файл здымка"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:15
 msgid "Border Effect"
 msgstr "Эфект для аблямоўкі"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:16
 msgid ""
 "Effect to add to the outside of a border. Possible values are \"shadow\", "
 "\"none\", and \"border\"."
@@ -142,11 +176,11 @@ msgstr ""
 "Эфект для аблямоўкі. Магчымыя значэнні: \"shadow\" (цень), \"none\" (нічога) "
 "і \"border\" (асадка)."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:17
 msgid "Default file type extension"
 msgstr "Прадвызначанае пашырэнне файлаў"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: ../src/org.gnome.gnome-screenshot.gschema.xml.h:18
 msgid "The default file type extension for screenshots."
 msgstr "Прадвызначанае пашырэнне файлаў з экраннымі здымкамі."
 
@@ -182,95 +216,93 @@ msgstr "Экранны здымак зроблены"
 msgid "All possible methods failed"
 msgstr "Няўдача для ўсіх магчымых спосабаў"
 
-#: ../src/screenshot-application.c:645
+#: ../src/screenshot-application.c:631
 msgid "Send the grab directly to the clipboard"
 msgstr "Скапіраваць здымак у буфер абмену"
 
-#: ../src/screenshot-application.c:646
+#: ../src/screenshot-application.c:632
 msgid "Grab a window instead of the entire screen"
 msgstr "Зняць акно замест усяго экрана"
 
-#: ../src/screenshot-application.c:647
+#: ../src/screenshot-application.c:633
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Зняць пэўны абшар замест усяго экрана"
 
-#: ../src/screenshot-application.c:648
+#: ../src/screenshot-application.c:634
 msgid "Include the window border with the screenshot"
 msgstr "Улучыць у здымак аблямоўку акна"
 
-#: ../src/screenshot-application.c:649
+#: ../src/screenshot-application.c:635
 msgid "Remove the window border from the screenshot"
 msgstr "Выдаліць са здымка аблямоўку акна"
 
-#: ../src/screenshot-application.c:650
+#: ../src/screenshot-application.c:636
 msgid "Include the pointer with the screenshot"
 msgstr "Улучыць у здымак паказальнік мышы"
 
-#: ../src/screenshot-application.c:651
+#: ../src/screenshot-application.c:637
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Зрабіць экранны здымак пасля затрымкі [у секундах]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:651
-#: ../src/screenshot-interactive-dialog.c:421
+#: ../src/screenshot-application.c:637
+#: ../src/screenshot-interactive-dialog.c:414
 msgid "seconds"
 msgstr "секунд"
 
-#: ../src/screenshot-application.c:652
+#: ../src/screenshot-application.c:638
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr "Спецыяльны эфект для аблямоўкі (shadow, border, vintage або none)"
 
-#: ../src/screenshot-application.c:652
+#: ../src/screenshot-application.c:638
 msgid "effect"
 msgstr "спецэфект"
 
-#: ../src/screenshot-application.c:653
+#: ../src/screenshot-application.c:639
 msgid "Interactively set options"
 msgstr "Інтэрактыўная настройка опцый"
 
-#: ../src/screenshot-application.c:654
+#: ../src/screenshot-application.c:640
 msgid "Save screenshot directly to this file"
 msgstr "Захаваць здымак у гэтым каталогу"
 
-#: ../src/screenshot-application.c:654
+#: ../src/screenshot-application.c:640
 msgid "filename"
 msgstr "назва_файла"
 
-#: ../src/screenshot-application.c:655
+#: ../src/screenshot-application.c:641
 msgid "Print version information and exit"
 msgstr "Вывесці інфармацыю аб версіі і выйсці"
 
-#: ../src/screenshot-application.c:669
-msgid "Take a picture of the screen"
-msgstr "Экранныя здымкі"
-
-#: ../src/screenshot-application.c:793
+#: ../src/screenshot-application.c:770
 msgid "translator-credits"
-msgstr "Ігар Грачышка <ihar.hrachyshka@gmail.com>"
+msgstr ""
+"Ігар Грачышка <ihar.hrachyshka@gmail.com>\n"
+"Юрась Шумовіч <shumovichy@gmail.com>"
 
-#: ../src/screenshot-config.c:59
+#: ../src/screenshot-config.c:116
 #, c-format
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "Канфліктныя опцыі: нельга адначасова ўжыць --window і --area.\n"
 
-#: ../src/screenshot-config.c:66
+#: ../src/screenshot-config.c:123
 #, c-format
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr "Канфліктныя опцыі: нельга адначасова ўжыць --area і --delay.\n"
 
-#: ../src/screenshot-dialog.c:314
+#: ../src/screenshot-dialog.c:312
 msgid "Screenshot.png"
 msgstr "Экранны_здымак.png"
 
 #. translators: this is the name of the file that gets made up
 #. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
+#: ../src/screenshot-filename-builder.c:143
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Экранны здымак з %s.%s"
@@ -278,7 +310,7 @@ msgstr "Экранны здымак з %s.%s"
 #. translators: this is the name of the file that gets
 #. * made up with the screenshot if the entire screen is
 #. * taken
-#: ../src/screenshot-filename-builder.c:152
+#: ../src/screenshot-filename-builder.c:150
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Экранны здымак з %s - %d.%s"
@@ -300,51 +332,55 @@ msgid "Vintage"
 msgstr "Вінтаж"
 
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:266
+#: ../src/screenshot-interactive-dialog.c:263
 msgid "Include _pointer"
 msgstr "_Улучыць паказальнік мышы"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:276
+#: ../src/screenshot-interactive-dialog.c:273
 msgid "Include the window _border"
 msgstr "Улучыць _аблямоўку акна"
 
-#: ../src/screenshot-interactive-dialog.c:293
+#: ../src/screenshot-interactive-dialog.c:290
 msgid "Apply _effect:"
 msgstr "Ужыць спецыяльны _эфект:"
 
-#: ../src/screenshot-interactive-dialog.c:355
+#: ../src/screenshot-interactive-dialog.c:347
 msgid "Grab the whole sc_reen"
 msgstr "Зняць увесь _экран"
 
-#: ../src/screenshot-interactive-dialog.c:369
+#: ../src/screenshot-interactive-dialog.c:361
 msgid "Grab the current _window"
 msgstr "Зняць актыўнае _акно"
 
-#: ../src/screenshot-interactive-dialog.c:381
+#: ../src/screenshot-interactive-dialog.c:373
 msgid "Select _area to grab"
 msgstr "Вылучыць _абшар для здымка"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:401
+#: ../src/screenshot-interactive-dialog.c:393
 msgid "Grab after a _delay of"
 msgstr "_Зняць з затрымкай у"
 
-#: ../src/screenshot-interactive-dialog.c:470
+#: ../src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Экранны здымак"
 
-#: ../src/screenshot-interactive-dialog.c:471
+#: ../src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Спецыяльныя эфекты"
 
-#: ../src/screenshot-interactive-dialog.c:493
+#: ../src/screenshot-interactive-dialog.c:478
+msgid "_Help"
+msgstr "_Дапамога"
+
+#: ../src/screenshot-interactive-dialog.c:487
 msgid "Take _Screenshot"
 msgstr "Зрабіць _экранны здымак"
 
-#: ../src/screenshot-interactive-dialog.c:510
+#: ../src/screenshot-interactive-dialog.c:504
 msgid "_Cancel"
 msgstr "_Скасаваць"
 
@@ -352,3 +388,5 @@ msgstr "_Скасаваць"
 msgid "Error loading the help page"
 msgstr "Памылка адкрыцця даведніка"
 
+#~ msgid "Take a picture of the screen"
+#~ msgstr "Экранныя здымкі"
