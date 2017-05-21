@@ -138,15 +138,21 @@ build_path (AsyncExistenceJob *job)
 
   if (job->iteration == 0)
     {
-      /* translators: this is the name of the file that gets made up
-       * with the screenshot if the entire screen is taken */
+      /* translators: this is the name of the file that gets made up with the
+       * screenshot if the entire screen is taken. The first placeholder is a
+       * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
+       * file format (e.g. "png").
+       */
       file_name = g_strdup_printf (_("Screenshot from %s.%s"), origin, file_type);
     }
   else
     {
-      /* translators: this is the name of the file that gets
-       * made up with the screenshot if the entire screen is
-       * taken */
+      /* translators: this is the name of the file that gets made up with the
+       * screenshot if the entire screen is taken and the simpler filename
+       * already exists. The first and second placeholders are a timestamp and
+       * a counter to make it unique (e.g. "2017-05-21 12-24-03 - 2"); the third
+       * placeholder is the file format (e.g. "png").
+       */
       file_name = g_strdup_printf (_("Screenshot from %s - %d.%s"), origin, job->iteration, file_type);
     }
 
