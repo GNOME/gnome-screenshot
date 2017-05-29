@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.gnome.Screenshot
+Exec=@bindir@/gnome-screenshot --gapplication-service

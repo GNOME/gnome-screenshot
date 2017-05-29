@@ -1,26 +1,40 @@
-NULL =
+EXTRA_DIST =
+CLEANFILES =
+DISTCLEANFILES =
 
 AM_CPPFLAGS =						\
-	-I.						\
-	-I$(srcdir)					\
+	-I$(top_builddir)/src				\
+	-I$(top_srcdir)/src				\
 	-DLOCALEDIR=\"$(localedir)\"			\
-	-DUIDIR=\"$(uidir)\"				\
-	$(NULL)
+	-DGLIB_DISABLE_DEPRECATION_WARNINGS		\
+	-DGDK_DISABLE_DEPRECATION_WARNINGS		\
+	$()
 
-bin_PROGRAMS = \
-	gnome-screenshot		\
-	$(NULL)
-
-resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gnome-screenshot.gresource.xml)
-screenshot-resources.c: gnome-screenshot.gresource.xml $(resource_files)
-	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
-screenshot-resources.h: gnome-screenshot.gresource.xml $(resource_files)
-	$(AM_V_GEN)glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name screenshot $(srcdir)/gnome-screenshot.gresource.xml
+bin_PROGRAMS = gnome-screenshot
 
 BUILT_SOURCES = \
 	screenshot-resources.c		\
 	screenshot-resources.h		\
-	$(NULL)
+	$()
+
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gnome-screenshot.gresource.xml)
+screenshot-resources.c: gnome-screenshot.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources \
+		--target=$@ \
+		--sourcedir=$(srcdir) \
+		--generate-source \
+		--c-name screenshot \
+		$(srcdir)/gnome-screenshot.gresource.xml
+screenshot-resources.h: gnome-screenshot.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources \
+		--target=$@ \
+		--sourcedir=$(srcdir) \
+		--generate-header \
+		--c-name screenshot \
+		$(srcdir)/gnome-screenshot.gresource.xml
+
+EXTRA_DIST += gnome-screenshot.gresource.xml
+CLEANFILES += screenshot-resources.c screenshot-resources.h
 
 gnome_screenshot_SOURCES = \
 	$(BUILT_SOURCES)		\
@@ -43,63 +57,48 @@ gnome_screenshot_SOURCES = \
 	screenshot-shadow.h		\
 	screenshot-utils.c		\
 	screenshot-utils.h		\
-	$(NULL)
+	$()
 
 gnome_screenshot_CFLAGS =		\
 	$(SCREENSHOT_CFLAGS)		\
 	$(XSHAPE_CFLAGS)		\
-	$(NULL)
+	$()
 
 gnome_screenshot_LDADD =		\
 	$(SCREENSHOT_LIBS)		\
 	$(XSHAPE_LIBS)			\
 	-lm				\
-	$(NULL)
+	$()
 
 gnome_screenshotdir = $(datadir)/applications
 gnome_screenshot_in_files = org.gnome.Screenshot.desktop.in
 gnome_screenshot_DATA = $(gnome_screenshot_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
+org.gnome.Screenshot.desktop: $(gnome_screenshot_in_files)
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
+CLEANFILES += $(gnome_screenshot_DATA)
+EXTRA_DIST += $(gnome_screenshot_in_files)
 
-appdatadir = $(datadir)/appdata
+appdatadir = $(datadir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-appdata_in_files = org.gnome.Screenshot.appdata.xml.in
-@INTLTOOL_XML_RULE@
+appdata_in_files = org.gnome.Screenshot.metainfo.xml.in
+org.gnome.Screenshot.metainfo.xml: $(appdata_in_files)
+	$(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@
+CLEANFILES += $(appdata_DATA)
+EXTRA_DIST += $(appdata_in_files)
 
 dbusservicedir = $(datadir)/dbus-1/services
-dbusservice_DATA = org.gnome.Screenshot.service
-
-org.gnome.Screenshot.service: Makefile
-	$(AM_V_GEN) (echo '[D-BUS Service]'; \
-		     echo 'Name=org.gnome.Screenshot'; \
-		     echo 'Exec=${bindir}/gnome-screenshot --gapplication-service') > $@.tmp && \
-		     mv $@.tmp $@
-
-man_MANS = gnome-screenshot.1
+dbusservice_in_files = org.gnome.Screenshot.service.in
+dbusservice_DATA = $(dbusservice_in_files:.service.in=.service)
+org.gnome.Screenshot.service: $(dbusservice_in_files)
+	$(AM_V_GEN) $(SED) -e 's|\@bindir\@|@bindir@|' $< > $@
+CLEANFILES += $(dbusservice_DATA)
+EXTRA_DIST += $(dbusservice_in_files)
 
 gsettings_SCHEMAS = org.gnome.gnome-screenshot.gschema.xml
+EXTRA_DIST += $(gsettings_SCHEMAS)
+@GSETTINGS_RULES@
 
 convertdir = $(datadir)/GConf/gsettings
 convert_DATA = gnome-screenshot.convert
 
-@GSETTINGS_RULES@
-
-EXTRA_DIST =					\
-	$(appdata_in_files)			\
-	$(gsettings_SCHEMAS)			\
-	$(gnome_screenshot_in_files)		\
-	$(man_MANS)				\
-	$(convert_DATA)				\
-	$(resource_files)			\
-	gnome-screenshot.gresource.xml		\
-	$(NULL)
-
-CLEANFILES = \
-	$(BUILT_SOURCES)			\
-	$(appdata_DATA)				\
-	$(gnome_screenshot_DATA)		\
-	$(dbusservice_DATA)			\
-	$(NULL)
-
-dist-hook:
-	cd $(distdir) ; rm -f $(CLEANFILES)
+man_MANS = gnome-screenshot.1
