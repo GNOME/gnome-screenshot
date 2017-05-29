@@ -18,7 +18,8 @@
  * USA
  */
 
-#include <config.h>
+#include "config.h"
+
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <pwd.h>

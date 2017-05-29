@@ -18,7 +18,8 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  */
 
-#include <config.h>
+#include "config.h"
+
 #include <gtk/gtk.h>
 
 #include "screenshot-area-selection.h"

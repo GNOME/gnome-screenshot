@@ -17,14 +17,15 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  */
 
-#include <config.h>
-#include <string.h>
-#include <stdlib.h>
+#include "config.h"
 
 #include "screenshot-config.h"
 #include "screenshot-dialog.h"
+#include "screenshot-utils.h"
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <string.h>
+#include <stdlib.h>
 
 enum {
   TYPE_IMAGE_PNG,
