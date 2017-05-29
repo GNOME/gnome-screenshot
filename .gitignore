@@ -5,22 +5,9 @@ org.gnome.Screenshot.service
 gnome-screenshot.schemas
 *.o
 
-.deps
-.libs
-ABOUT-NLS
-aclocal.m4
-autom4te.cache
-compile
-config*
-depcomp
-install-sh
-missing
-m4
-stamp-h1
 *.tar.xz
 
 po/*.gmo
-po/.intltool-merge-cache
 po/stamp-it
 po/Rules-quot
 po/POTFILES
