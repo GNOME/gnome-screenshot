@@ -284,19 +284,6 @@ save_with_description (ScreenshotApplication *self,
 }
 
 static void
-save_with_profile (ScreenshotApplication *self,
-                   GFileOutputStream     *os,
-                   gchar                 *format)
-{
-  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
-                                   G_OUTPUT_STREAM (os),
-                                   format, NULL,
-                                   save_pixbuf_ready_cb, self,
-                                   "icc-profile", self->priv->icc_profile_base64,
-                                   NULL);
-}
-
-static void
 save_with_no_profile_or_description (ScreenshotApplication *self,
                                      GFileOutputStream     *os,
                                      gchar                 *format)
