@@ -89,7 +89,7 @@ set_recent_entry (ScreenshotApplication *self)
   }
 
   recent = gtk_recent_manager_get_default ();
-  
+
   exec_name = g_app_info_get_executable (app);
   app_exec = g_strjoin (" ", exec_name, "%u", NULL);
 
@@ -146,7 +146,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                            file_name, folder_name);
           gint response;
-                                             
+
           response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
                                              GTK_MESSAGE_WARNING,
                                              GTK_BUTTONS_YES_NO,
@@ -169,11 +169,22 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
       else
         {
-          screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
-                                  GTK_MESSAGE_ERROR,
+
+	  gchar *detail = _("Error creating file. Please choose another location and retry.");
+
+	  gchar *file_name = screenshot_dialog_get_filename (dialog);
+	  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED) &&
+	      strchr(file_name, '/')) {
+	    detail = _("Error creating file. Filenames should not contain /.");
+	  }
+
+	  g_free(file_name);
+
+	  screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
+				  GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
-                                  _("Error creating file. Please choose another location and retry."));
+                                  detail);
         }
 
       gtk_widget_grab_focus (dialog->filename_entry);
@@ -366,7 +377,7 @@ screenshot_save_to_file (ScreenshotApplication *self)
                             NULL, FALSE,
                             G_FILE_CREATE_NONE,
                             G_PRIORITY_DEFAULT,
-                            NULL, 
+                            NULL,
                             save_file_create_ready_cb, self);
     }
   else
@@ -599,7 +610,7 @@ screenshot_start (ScreenshotApplication *self)
     delay = 0;
 
   /* HACK: give time to the dialog to actually disappear.
-   * We don't have any way to tell when the compositor has finished 
+   * We don't have any way to tell when the compositor has finished
    * re-drawing.
    */
   if (delay == 0 && screenshot_config->interactive)
