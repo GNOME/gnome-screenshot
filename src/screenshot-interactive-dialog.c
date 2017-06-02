@@ -436,6 +436,10 @@ capture_button_clicked_cb (GtkButton *button, CaptureData *data)
 GtkWidget *
 screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 {
+
+  FILE *log;
+  log = fopen("/tmp/gslog","a");
+
   GtkWidget *dialog;
   GtkWidget *main_vbox;
   GtkWidget *header_bar;
@@ -511,7 +515,10 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 
   g_object_unref (size_group);
 
+
   gtk_widget_show_all (dialog);
 
+  fprintf(log,"made interactive dialog\n");
+  fclose(log);
   return dialog;
 }

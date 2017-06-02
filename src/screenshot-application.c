@@ -46,8 +46,11 @@
 
 G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION);
 
+static void screenshot_application_startup (GApplication *app);
+static void screenshot_back (ScreenshotApplication *self);
 static void screenshot_save_to_file (ScreenshotApplication *self);
 static void screenshot_show_interactive_dialog (ScreenshotApplication *self);
+static void screenshot_start (ScreenshotApplication *self);
 
 struct _ScreenshotApplicationPriv {
   gchar *icc_profile_base64;
@@ -381,6 +384,17 @@ screenshot_save_to_file (ScreenshotApplication *self)
   g_object_unref (target_file);
 }
 
+
+static void
+screenshot_back (ScreenshotApplication *self)
+{
+  ScreenshotDialog *dialog = self->priv->dialog;
+  save_folder_to_settings (self);
+  gtk_widget_destroy (dialog->dialog);
+  g_free (dialog);
+  screenshot_show_interactive_dialog (self);
+}
+
 static void
 screenshot_save_to_clipboard (ScreenshotApplication *self)
 {
@@ -405,6 +419,9 @@ screenshot_dialog_response_cb (ScreenshotResponse response,
       break;
     case SCREENSHOT_RESPONSE_COPY:
       screenshot_save_to_clipboard (self);
+      break;
+    case SCREENSHOT_RESPONSE_BACK:
+      screenshot_back(self);
       break;
     default:
       g_assert_not_reached ();

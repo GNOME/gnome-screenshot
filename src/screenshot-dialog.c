@@ -143,8 +143,13 @@ button_clicked (GtkWidget *button, ScreenshotDialog *dialog)
 {
   ScreenshotResponse res;
 
-  res = (button == dialog->save_button) ? SCREENSHOT_RESPONSE_SAVE
-                                        : SCREENSHOT_RESPONSE_COPY;
+  if (button == dialog->save_button) 
+      res = SCREENSHOT_RESPONSE_SAVE;
+  else if (button == dialog->copy_button)
+      res = SCREENSHOT_RESPONSE_COPY;
+  else
+      res = SCREENSHOT_RESPONSE_BACK;
+      
 
   dialog->callback (res, dialog->user_data);
 }
@@ -241,6 +246,9 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   g_signal_connect (dialog->save_button, "clicked", G_CALLBACK (button_clicked), dialog);
   dialog->copy_button = GTK_WIDGET (gtk_builder_get_object (ui, "copy_button"));
   g_signal_connect (dialog->copy_button, "clicked", G_CALLBACK (button_clicked), dialog);
+  
+  dialog->back_button = GTK_WIDGET (gtk_builder_get_object (ui, "back_button"));
+  g_signal_connect (dialog->back_button, "clicked", G_CALLBACK (button_clicked), dialog);
 
   setup_drawing_area (dialog, ui);
 

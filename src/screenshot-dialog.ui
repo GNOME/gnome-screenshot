@@ -25,6 +25,18 @@
           </packing>
         </child>
         <child>
+          <object class="GtkButton" id="back_button">
+            <property name="label" translatable="yes">_Back</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_underline">True</property>
+          </object>
+          <packing>
+            <property name="pack-type">start</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkButton" id="save_button">
             <property name="label" translatable="yes">_Save</property>
             <property name="visible">True</property>
