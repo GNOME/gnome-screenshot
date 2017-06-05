@@ -8,7 +8,7 @@ project('gnome-screenshot', 'c',
           'c_std=c99',
         ])
 
-add_project_arguments([ '-D_POSIX_C_SOURCE', '-D_DEFAULT_SOURCE' ], language: 'c')
+add_project_arguments([ '-D_POSIX_C_SOURCE=200809L', '-D_XOPEN_SOURCE=700', '-D_DEFAULT_SOURCE' ], language: 'c')
 
 cc = meson.get_compiler('c')
 
