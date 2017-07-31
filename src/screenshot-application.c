@@ -108,17 +108,22 @@ set_recent_entry (ScreenshotApplication *self)
 }
 
 static void
+screenshot_close_interactive_dialog (ScreenshotApplication *self)
+{
+  ScreenshotDialog *dialog = self->priv->dialog;
+  save_folder_to_settings (self);
+  gtk_widget_destroy (dialog->dialog);
+  g_free (dialog);
+}
+
+static void
 save_pixbuf_handle_success (ScreenshotApplication *self)
 {
   set_recent_entry (self);
 
   if (screenshot_config->interactive)
     {
-      ScreenshotDialog *dialog = self->priv->dialog;
-
-      save_folder_to_settings (self);
-      gtk_widget_destroy (dialog->dialog);
-      g_free (dialog);
+      screenshot_close_interactive_dialog (self);
     }
   else
     {
@@ -382,6 +387,13 @@ screenshot_save_to_file (ScreenshotApplication *self)
 }
 
 static void
+screenshot_back (ScreenshotApplication *self)
+{
+  screenshot_close_interactive_dialog (self);
+  screenshot_show_interactive_dialog (self);
+}
+
+static void
 screenshot_save_to_clipboard (ScreenshotApplication *self)
 {
   GtkClipboard *clipboard;
@@ -405,6 +417,9 @@ screenshot_dialog_response_cb (ScreenshotResponse response,
       break;
     case SCREENSHOT_RESPONSE_COPY:
       screenshot_save_to_clipboard (self);
+      break;
+    case SCREENSHOT_RESPONSE_BACK:
+      screenshot_back (self);
       break;
     default:
       g_assert_not_reached ();

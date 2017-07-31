@@ -13,6 +13,27 @@
         <property name="can_focus">False</property>
         <property name="show_close_button">True</property>
         <child>
+          <object class="GtkButton" id="back_button">
+            <property name="tooltip_text" translatable="yes">Back</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_underline">True</property>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">go-previous-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack-type">start</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkButton" id="copy_button">
             <property name="label" translatable="yes">C_opy to Clipboard</property>
             <property name="visible">True</property>
