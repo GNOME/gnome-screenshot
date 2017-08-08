@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot gnome-3-6\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-05-29 16:31+0000\n"
-"PO-Revision-Date: 2017-06-02 14:18+0200\n"
+"POT-Creation-Date: 2017-07-31 10:14+0000\n"
+"PO-Revision-Date: 2017-08-08 20:48+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
@@ -102,13 +102,13 @@ msgstr "Estension file predefinide"
 msgid "The default file type extension for screenshots."
 msgstr "La estension predefinide dai file par lis caturis des schermadis."
 
-#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:755
-#: src/screenshot-application.c:823
+#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:770
+#: src/screenshot-application.c:838
 msgid "Screenshot"
 msgstr "Cature de schermade"
 
 #: src/org.gnome.Screenshot.desktop.in:4
-#: src/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:756
+#: src/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:771
 msgid "Save images of your screen or individual windows"
 msgstr "Salve imagjins dal to visôr o di ugnui barcons"
 
@@ -119,7 +119,6 @@ msgstr "schermade;schermadis;cature;stampe;screenshot;snapshot;"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
-#| msgid "Save Screenshot"
 msgid "applets-screenshooter"
 msgstr "applets-screenshooter"
 
@@ -174,98 +173,98 @@ msgstr "Informazions"
 msgid "Quit"
 msgstr "Jes"
 
-#: src/screenshot-application.c:146
+#: src/screenshot-application.c:151
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
 msgstr "Un file clamât “%s” al esist za in “%s”"
 
-#: src/screenshot-application.c:153
+#: src/screenshot-application.c:158
 msgid "Overwrite existing file?"
 msgstr "Sorescrîvi il file esistint?"
 
-#: src/screenshot-application.c:175 src/screenshot-application.c:184
-#: src/screenshot-application.c:451 src/screenshot-application.c:455
-#: src/screenshot-application.c:495 src/screenshot-application.c:498
+#: src/screenshot-application.c:180 src/screenshot-application.c:189
+#: src/screenshot-application.c:466 src/screenshot-application.c:470
+#: src/screenshot-application.c:510 src/screenshot-application.c:513
 msgid "Unable to capture a screenshot"
 msgstr "Impussibil cjapà une cature di schermade"
 
-#: src/screenshot-application.c:176
+#: src/screenshot-application.c:181
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
 "Erôr tal creâ il file. Par plasê selezione une altre locazion e torne prove."
 
-#: src/screenshot-application.c:452
+#: src/screenshot-application.c:467
 msgid "Error creating file"
 msgstr "Erôr tal creâ il file"
 
-#: src/screenshot-application.c:463 src/screenshot-application.c:531
+#: src/screenshot-application.c:478 src/screenshot-application.c:546
 msgid "Screenshot taken"
 msgstr "Cature di schermade fate"
 
-#: src/screenshot-application.c:496
+#: src/screenshot-application.c:511
 msgid "All possible methods failed"
 msgstr "Dutis lis manieris pussibilis a son falidis"
 
-#: src/screenshot-application.c:619
+#: src/screenshot-application.c:634
 msgid "Send the grab directly to the clipboard"
 msgstr "Invie ce che tu âs cjolt diretementri intes notis"
 
-#: src/screenshot-application.c:620
+#: src/screenshot-application.c:635
 msgid "Grab a window instead of the entire screen"
 msgstr "Cjol un barcon invezit che il visôr intîr"
 
-#: src/screenshot-application.c:621
+#: src/screenshot-application.c:636
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Cjol une aree dal visôr invezit che l'intîr visôr"
 
-#: src/screenshot-application.c:622
+#: src/screenshot-application.c:637
 msgid "Include the window border with the screenshot"
 msgstr "Inclût la orladure dal barcon te cature"
 
-#: src/screenshot-application.c:623
+#: src/screenshot-application.c:638
 msgid "Remove the window border from the screenshot"
 msgstr "Rimôf la orladure dal barcon te cature"
 
-#: src/screenshot-application.c:624
+#: src/screenshot-application.c:639
 msgid "Include the pointer with the screenshot"
 msgstr "Inclût il cursôr te cature de schermade"
 
-#: src/screenshot-application.c:625
+#: src/screenshot-application.c:640
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Fâs une cature de schermade dopo un ritart specificât [in seconts]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: src/screenshot-application.c:625 src/screenshot-interactive-dialog.c:415
+#: src/screenshot-application.c:640 src/screenshot-interactive-dialog.c:415
 msgid "seconds"
 msgstr "seconts"
 
-#: src/screenshot-application.c:626
+#: src/screenshot-application.c:641
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr "Efiet di zontâ te orladure (ombrene, ôr, vintage o nissun)"
 
-#: src/screenshot-application.c:626
+#: src/screenshot-application.c:641
 msgid "effect"
 msgstr "efiet"
 
-#: src/screenshot-application.c:627
+#: src/screenshot-application.c:642
 msgid "Interactively set options"
 msgstr "Opzions di impostazion interative"
 
-#: src/screenshot-application.c:628
+#: src/screenshot-application.c:643
 msgid "Save screenshot directly to this file"
 msgstr "Salve la cature de schermade diretementri in chest file"
 
-#: src/screenshot-application.c:628
+#: src/screenshot-application.c:643
 msgid "filename"
 msgstr "non dal file"
 
-#: src/screenshot-application.c:629
+#: src/screenshot-application.c:644
 msgid "Print version information and exit"
 msgstr "Stampe la version e jes"
 
-#: src/screenshot-application.c:758
+#: src/screenshot-application.c:773
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>"
 
@@ -285,7 +284,7 @@ msgstr ""
 "Opzions in conflit: --area e --delay no varessin di jessi dopradis tal istès "
 "timp.\n"
 
-#: src/screenshot-dialog.c:313
+#: src/screenshot-dialog.c:319
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
@@ -294,18 +293,22 @@ msgid "Save Screenshot"
 msgstr "Salve la cature"
 
 #: src/screenshot-dialog.ui:17
+msgid "Back"
+msgstr "Indaûr"
+
+#: src/screenshot-dialog.ui:38
 msgid "C_opy to Clipboard"
 msgstr "C_opie tes notis"
 
-#: src/screenshot-dialog.ui:29
+#: src/screenshot-dialog.ui:50
 msgid "_Save"
 msgstr "_Salve"
 
-#: src/screenshot-dialog.ui:89
+#: src/screenshot-dialog.ui:110
 msgid "_Name:"
 msgstr "_Non:"
 
-#: src/screenshot-dialog.ui:106
+#: src/screenshot-dialog.ui:127
 msgid "Save in _folder:"
 msgstr "Salve inte _cartele:"
 
