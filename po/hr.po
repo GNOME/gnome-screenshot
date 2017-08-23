@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils 0\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-31 10:14+0000\n"
-"PO-Revision-Date: 2017-08-03 21:59+0200\n"
+"POT-Creation-Date: 2017-08-03 20:00+0000\n"
+"PO-Revision-Date: 2017-08-23 17:52+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -115,7 +115,7 @@ msgstr "snimak;snimi;ispiši;slika zaslona;"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
 msgid "applets-screenshooter"
-msgstr ""
+msgstr "applets-screenshooter"
 
 #: src/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
