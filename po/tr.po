@@ -8,20 +8,20 @@
 # Baris Cicek <baris@teamforce.name.tr>, 2004, 2005, 2008, 2009.
 # İlker DAĞLI <ilker@ilkerdagli.info>, 2011.
 # Osman Karagöz <osmank3@gmail.com>, 2012.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2013.
 # Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2014.
 # Muhammet Kara <muhammetk@gmail.com>, 2011, 2013, 2014, 2015.
 # Furkan Tokaç <developmentft@gmail.com>, 2017.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2013, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-31 10:14+0000\n"
-"PO-Revision-Date: 2017-08-13 12:30-0400\n"
-"Last-Translator: Furkan Tokaç <developmentft@gmail.com>\n"
-"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2017-08-13 16:39+0000\n"
+"PO-Revision-Date: 2017-08-28 14:17+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
-"Tüm masaüstü yerine sadece mevcut pencereyi yakala. Bu anahtar artık "
+"Tüm masaüstü yerine yalnızca geçerli pencereyi yakala. Bu anahtar artık "
 "kullanılmıyor."
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:16
@@ -71,7 +71,7 @@ msgstr "Kenarlıkları Kapsa"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the window manager border along with the screenshot"
-msgstr "Ekran görüntüsüyle birlikte pencere yöneticisi kenalıklarını da kapsa"
+msgstr "Ekran görüntüsüyle birlikte pencere yöneticisi kenalıklarını da içer"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include Pointer"
@@ -87,7 +87,7 @@ msgstr "ICC Profilini İçer"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:42
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Hedefin ICC profilini ekran görüntüsü dosyasına dahil et"
+msgstr "Ekran görüntüsü dosyasında, hedefin ICC profilini de içer"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:46
 msgid "Border Effect"
@@ -98,7 +98,7 @@ msgid ""
 "Effect to add to the outside of a border. Possible values are “shadow”, "
 "“none”, and “border”."
 msgstr ""
-"Kenarlıkların dışına uygulanacak efekt. Geçerli değerler “shadow” (gölge), "
+"Kenarlıkların dışına uygulanacak etki. Geçerli değerler “shadow” (gölge), "
 "“none” (etki yok), “border” (kenarlık)."
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:51
@@ -163,9 +163,9 @@ msgid ""
 "and you will get a screenshot of only the currently selected window."
 msgstr ""
 "GNOME Ekran Görüntüsü açık olmasa dahi ekran görüntüsü yakalamanıza izin "
-"verir: sadece klavyenizdeki Prt Scr tuşuna basın ve tüm ekranınızın bir "
-"görüntüsü Resimler klasörüne kaydedilsin. Alt tuşunu basılı tutup Prt Scr'ye "
-"basarak sadece şu an seçili olan pencerenin ekran görüntüsünü de "
+"verir: yalnızca klavyenizdeki Prt Scr tuşuna basın ve tüm ekranınızın bir "
+"görüntüsü Resimler klasörüne kaydedilsin. Alt tuşunu basılı tutup Prt Scr’ye "
+"basarak yalnızca şu an seçili olan pencerenin ekran görüntüsünü de "
 "alabilirsiniz."
 
 #: src/screenshot-app-menu.ui:6
@@ -183,11 +183,11 @@ msgstr "Çıkış"
 #: src/screenshot-application.c:151
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
-msgstr "“%s” adında bir dosya “%s” dizininde zaten mevcut"
+msgstr "“%2$s” dizininde “%1$s” adında bir dosya zaten var"
 
 #: src/screenshot-application.c:158
 msgid "Overwrite existing file?"
-msgstr "Varolan dosyanın üzerine yazılsın mı?"
+msgstr "Var olan dosyanın üzerine yazılsın mı?"
 
 #: src/screenshot-application.c:180 src/screenshot-application.c:189
 #: src/screenshot-application.c:466 src/screenshot-application.c:470
@@ -197,7 +197,8 @@ msgstr "Ekran görüntüsü alınamadı"
 
 #: src/screenshot-application.c:181
 msgid "Error creating file. Please choose another location and retry."
-msgstr "Dosya oluşturulamıyor. Lütfen başka bir konum seçin ve tekrar deneyin."
+msgstr ""
+"Dosya oluşturulamıyor. Lütfen başka bir konum seçin ve yeniden deneyin."
 
 #: src/screenshot-application.c:467
 msgid "Error creating file"
@@ -233,7 +234,7 @@ msgstr "Ekran görüntüsünden pencere kenarlıklarını çıkar"
 
 #: src/screenshot-application.c:639
 msgid "Include the pointer with the screenshot"
-msgstr "Ekran görüntüsüne işaretçiyi dahil et"
+msgstr "Ekran görüntüsünde işaretçiyi içer"
 
 #: src/screenshot-application.c:640
 msgid "Take screenshot after specified delay [in seconds]"
@@ -248,11 +249,11 @@ msgstr "saniye"
 
 #: src/screenshot-application.c:641
 msgid "Effect to add to the border (shadow, border, vintage or none)"
-msgstr "Çerçeveye eklenecek efekt (gölge, kenarlık, eski ya da hiçbiri)"
+msgstr "Çerçeveye eklenecek etki (gölge, kenarlık, eski ya da hiçbiri)"
 
 #: src/screenshot-application.c:641
 msgid "effect"
-msgstr "efekt"
+msgstr "etki"
 
 #: src/screenshot-application.c:642
 msgid "Interactively set options"
@@ -310,7 +311,7 @@ msgstr "_Kaydet"
 
 #: src/screenshot-dialog.ui:110
 msgid "_Name:"
-msgstr "İ_sim:"
+msgstr "_Ad:"
 
 #: src/screenshot-dialog.ui:127
 msgid "Save in _folder:"
@@ -370,7 +371,7 @@ msgstr "Pencere _kenarlığı içer"
 
 #: src/screenshot-interactive-dialog.c:291
 msgid "Apply _effect:"
-msgstr "Efekt _uygula:"
+msgstr "Etki _uygula:"
 
 #: src/screenshot-interactive-dialog.c:348
 msgid "Grab the whole sc_reen"
@@ -378,11 +379,11 @@ msgstr "Tüm _masaüstünü yakala"
 
 #: src/screenshot-interactive-dialog.c:362
 msgid "Grab the current _window"
-msgstr "Mevcut _pencereyi yakala"
+msgstr "Geçerli _pencereyi yakala"
 
 #: src/screenshot-interactive-dialog.c:374
 msgid "Select _area to grab"
-msgstr "Yakalamak için _alan seçin"
+msgstr "Yakalanacak _alan seç"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -397,7 +398,7 @@ msgstr "Ekran Görüntüsü Al"
 
 #: src/screenshot-interactive-dialog.c:466
 msgid "Effects"
-msgstr "Efektler"
+msgstr "Etkiler"
 
 #: src/screenshot-interactive-dialog.c:479
 msgid "_Help"
