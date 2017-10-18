@@ -114,7 +114,7 @@ msgstr "स्न्यापशट;क्याप्चर;प्रिन्�
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
 msgid "applets-screenshooter"
-msgstr "एप्लेटहरू-स्क्रिनशूटकर्ता"
+msgstr "applets-screenshooter"
 
 #: src/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
