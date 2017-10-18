@@ -7,65 +7,54 @@
 # Nabin Gautam <nabin@mpp.org.np>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-utils.gnome-2-20.ne\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"screenshot&keywords=I18N+L10N&component=general\n"
+"Project-Id-Version: Gnome Nepali Translation Project\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot&keywords=I18N"
+"+L10N&component=general\n"
 "POT-Creation-Date: 2017-08-15 17:14+0000\n"
-"PO-Revision-Date: 2017-08-20 11:46+0545\n"
+"PO-Revision-Date: 2017-10-18 14:44+0545\n"
 "Last-Translator: Pawan Chitrakar <chautari@gmail.com>\n"
-"Language-Team: Nepali <info@mpp.org.np>\n"
+"Language-Team: Nepali Translation Team <chautari@gmail.com>\n"
 "Language: ne\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n !=1;\n"
 "First-Translator: Pawan Chitrakar <pawan@nplinux.org>\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:11
-#, fuzzy
 msgid "Window-specific screenshot (deprecated)"
-msgstr "फलब्याक विन्डो म्यानेजर (हटाइएको)"
+msgstr "सञ्झ्याल-विशिष्ट स्क्रिनसट (हटाइएको)"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:12
-#, fuzzy
 msgid ""
-"Grab just the current window, rather than the whole desktop. This key has been deprecated "
-"and it is no longer in use."
-msgstr ""
-"जडान गरिने पोर्ट नम्बर । पूर्वनिर्धारित पोर्ट २६२८ हो । यस कुञ्जीलाई अस्वीकार गरिन्छ र धेरै समय प्रयोग "
-"गरिदैन ।"
+"Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no "
+"longer in use."
+msgstr "सम्पूर्ण डेस्कटपको सट्टा हालको सञ्झ्याल लिनुहोस्। यो कुञ्जी बिच्छेद गरिएको छ र यो अब प्रयोगमा छैन।"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:16
-#, fuzzy
 msgid "Screenshot delay"
-msgstr "विलम्ब पछि, स्क्रिनसट लिइनेछ ।"
+msgstr "स्क्रिनसट लिन विलम्ब"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:17
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
+msgstr "स्क्रीनसट लिनु अघि प्रतीक्षा गर्न सेकेन्डको सङ्ख्या।"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:21
 msgid "Screenshot directory"
-msgstr "स्क्रिनसट डाइरेक्टरी"
+msgstr "स्क्रिनसट निर्देशिका"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:22
-#, fuzzy
-#| msgid "The directory the last screenshot was saved in."
 msgid "The directory where the screenshots will be saved by default."
-msgstr "अन्तिम स्क्रिनसट बचत गरिएको डाइरेक्टरी ।"
+msgstr "पूर्वनिर्धारित निर्देशिका जहाँ स्क्रिनसट बचत गरिनेछ।"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:26
-#, fuzzy
-#| msgid "Screenshot directory"
 msgid "Last save directory"
-msgstr "डाइरेक्टरी वचत गर्नुहोस्"
+msgstr "अन्तिम बचत निर्देशिका"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:27
-#, fuzzy
-#| msgid "The directory the last screenshot was saved in."
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "अन्तिम स्क्रिनसट बचत गरिएको डाइरेक्टरी ।"
+msgstr "अन्तरक्रियात्मक मोडमा स्किनसट बचत गरिएको अन्तिम निर्देशिका"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Border"
@@ -76,51 +65,36 @@ msgid "Include the window manager border along with the screenshot"
 msgstr "सक्रिनसट सँग सञ्झ्याल प्रबन्धक किनारा समावेश गर्नुहोस्"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:36
-#, fuzzy
 msgid "Include Pointer"
-msgstr "सम्मिलित गर्नुहोस्:"
+msgstr "सूचक सम्मिलित गर्नुहोस्"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:37
-#, fuzzy
 msgid "Include the pointer in the screenshot"
-msgstr "सक्रिन सट सँग सञ्झ्याल किनारा समावेश गर्नुहोस्"
+msgstr "सक्रिनसट सँग सूचक समावेश गर्नुहोस्"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:41
-#, fuzzy
 msgid "Include ICC Profile"
-msgstr "आईसीसी प्रोफाइल फाइल चयन गर्नुहोस्"
+msgstr "आईसीसी प्रोफाइल समावेश गर्नुहोस्"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:42
-#, fuzzy
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "सक्रिन सट सँग सञ्झ्याल किनारा समावेश गर्नुहोस्"
+msgstr "लक्ष्यित स्क्रीनसट फाइलमा आईसीसी प्रोफाइल समावेश गर्नुहोस्"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:46
 msgid "Border Effect"
 msgstr "किनारा प्रभाव"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:47
-#, fuzzy
-#| msgid ""
-#| "Effect to add to the outside of a border. Possible values are \"shadow\", \"none\", and "
-#| "\"border\"."
-msgid ""
-"Effect to add to the outside of a border. Possible values are “shadow”, “none”, and "
-"“border”."
-msgstr ""
-"किनाराको बाहिरपट्टी थपिने प्रभाव । सम्भावित मान \"छायाँ\", \"कुनै पनि होइन\", र \"किनारा\" हुन् ।"
+msgid "Effect to add to the outside of a border. Possible values are “shadow”, “none”, and “border”."
+msgstr "किनाराको बाहिर पट्टी थपिने प्रभाव । सम्भावित मान \"छाया\", \"कुनै पनि होइन\", र \"किनारा\" हुन् ।"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:51
-#, fuzzy
 msgid "Default file type extension"
-msgstr "समर्थन नगर्ने फाइल विस्तार दिइयो।"
+msgstr "पूर्वनिर्धारित फाइल प्रकार विस्तार"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:52
-#, fuzzy
 msgid "The default file type extension for screenshots."
-msgstr ""
-"फाइल नाम प्रविष्ट गर्नुहोस् ।\n"
-"विस्तार प्रकारका रूपमा थपिन्छ ।"
+msgstr "सक्रिनसटको लागि पूर्वनिर्धारित फाइल प्रकार विस्तार"
 
 #: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:770
 #: src/screenshot-application.c:838
@@ -129,93 +103,82 @@ msgstr "स्क्रिनसट"
 
 #: src/org.gnome.Screenshot.desktop.in:4 src/org.gnome.Screenshot.metainfo.xml.in:8
 #: src/screenshot-application.c:771
-#, fuzzy
-#| msgid "Save images of your desktop or individual windows"
 msgid "Save images of your screen or individual windows"
-msgstr "तपाईँको डेस्कटपको वा व्यक्तिगत सञ्झ्यालका छविहरू बचत गर्नुहोस्"
+msgstr "तपाईंको पर्दा वा व्यक्तिगत सन्झ्यालको छविहरू बचत गर्नुहोस्"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: src/org.gnome.Screenshot.desktop.in:6
-#, fuzzy
 msgid "snapshot;capture;print;screenshot;"
-msgstr "माफ गर्नुहोस् स्क्रिनसट लिन सकिएन"
+msgstr "स्न्यापशट;क्याप्चर;प्रिन्ट;स्क्रीनशट;"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
-#, fuzzy
-#| msgid "Save Screenshot"
 msgid "applets-screenshooter"
-msgstr "स्क्रिनसट बचत गर्नुहोस् ।"
+msgstr "एप्लेटहरू-स्क्रिनशूटकर्ता"
 
 #: src/org.gnome.Screenshot.desktop.in:22
-#, fuzzy
 msgid "Take a Screenshot of the Whole Screen"
-msgstr "पूरा स्क्रिनको एउटा स्क्रिनसट लिनुहोस्"
+msgstr "पूरा पर्दाको एउटा स्क्रिनसट लिनुहोस्"
 
 #: src/org.gnome.Screenshot.desktop.in:26
-#, fuzzy
 msgid "Take a Screenshot of the Current Window"
-msgstr "हालको विन्डोको स्क्रिनसट लिनुहोस्।"
+msgstr "हालको सञ्झ्यालको स्क्रिनसट लिनुहोस्।"
 
 #: src/org.gnome.Screenshot.metainfo.xml.in:7
-#, fuzzy
 msgid "GNOME Screenshot"
-msgstr "स्क्रिनसट..."
+msgstr "जिनोम स्क्रिनसट"
 
 #: src/org.gnome.Screenshot.metainfo.xml.in:10
 msgid ""
-"GNOME Screenshot is a simple utility that lets you take pictures of your computer screen. "
-"Screenshots can be of your whole screen, any specific application, or a selected "
-"rectangular area. You can also copy the captured screenshot directly into the GNOME "
-"clipboard and paste it into other applications."
+"GNOME Screenshot is a simple utility that lets you take pictures of your computer screen. Screenshots "
+"can be of your whole screen, any specific application, or a selected rectangular area. You can also "
+"copy the captured screenshot directly into the GNOME clipboard and paste it into other applications."
 msgstr ""
+"जिनोम स्क्रिनसट एक सरल उपयोगिता हो जसले तपाईंलाई आफ्नो कम्प्युटर स्क्रिनको तस्वीरहरू लिन दिन्छ। स्क्रिनसटहरू तपाईंको "
+"सम्पूर्ण स्क्रिन, कुनै पनि विशिष्ट अनुप्रयोग वा चयन आयताकार क्षेत्रमा हुन सक्छ। तपाईं ले लिएको तस्वीरहरू सिधै जिनोम "
+"क्लिपबोर्डमा पनि प्रतिलिपि गर्न सक्नुहुन्छ र अन्य अनुप्रयोगहरूमा टाँस्न सक्नुहुन्छ।"
 
 #: src/org.gnome.Screenshot.metainfo.xml.in:17
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it’s not open: just press the "
-"PrtSc button on your keyboard, and a snapshot of your whole screen will be saved to your "
-"Pictures folder. Hold Alt while pressing PrtSc and you will get a screenshot of only the "
-"currently selected window."
+"GNOME Screenshot allows you to take screenshots even when it’s not open: just press the PrtSc button "
+"on your keyboard, and a snapshot of your whole screen will be saved to your Pictures folder. Hold Alt "
+"while pressing PrtSc and you will get a screenshot of only the currently selected window."
 msgstr ""
+"जिनोम स्क्रिनसट नचलेको बेला पनि तपाईंलाई स्क्रिनसट लिन अनुमति दिन्छ: तपाईंको किबोर्डमा PrtSc बटन थिच्नुहोस्, र "
+"तपाईंको सम्पूर्ण स्क्रिनको स्न्यापसट तपाईंको तस्बिर फोल्डरमा सुरक्षित हुनेछ। Alt र PrtSc थिच्दा चयन गरिएको सञ्झ्यालको "
+"स्क्रिनसट पाउनुहुनेछ।"
 
 #: src/screenshot-app-menu.ui:6
 msgid "Help"
 msgstr "सहायता"
 
 #: src/screenshot-app-menu.ui:10
-#, fuzzy
 msgid "About"
-msgstr "_बारेमा"
+msgstr "बारेमा"
 
 #: src/screenshot-app-menu.ui:14
 msgid "Quit"
 msgstr "_बन्द गर्नुहोस्"
 
 #: src/screenshot-application.c:151
-#, fuzzy, c-format
+#, c-format
 msgid "A file named “%s” already exists in “%s”"
-msgstr ""
-"\"%s\" नाम गरेको एउटा फोलडर पहिल्यै अवस्थित छ ।\n"
-"\n"
-"%s"
+msgstr "\"%s\" नाम गरेको फाइल पहिल्यै अवस्थित छ %s"
 
 #: src/screenshot-application.c:158
-#, fuzzy
 msgid "Overwrite existing file?"
-msgstr "तपाईँले अवस्थित फाइल अधिलेखन गर्न सक्नुहुन्न, किनभने तपाईँसँग पर्याप्त पहुँच अधिकारहरू छैन ।"
+msgstr "अवस्थित फाइल अधिलेखन गर्नुहुन्छ?"
 
-#: src/screenshot-application.c:180 src/screenshot-application.c:189
-#: src/screenshot-application.c:466 src/screenshot-application.c:470
-#: src/screenshot-application.c:510 src/screenshot-application.c:513
+#: src/screenshot-application.c:180 src/screenshot-application.c:189 src/screenshot-application.c:466
+#: src/screenshot-application.c:470 src/screenshot-application.c:510 src/screenshot-application.c:513
 msgid "Unable to capture a screenshot"
 msgstr "माफ गर्नुहोस् स्क्रिनसट लिन सकिएन"
 
 #: src/screenshot-application.c:181
 msgid "Error creating file. Please choose another location and retry."
-msgstr ""
+msgstr "फाइल सिर्जना गर्दा त्रुटि। कृपया अर्को स्थान छान्नुहोस् र फेरि प्रयास गर्नुहोस्।"
 
 #: src/screenshot-application.c:467
-#, fuzzy
 msgid "Error creating file"
 msgstr "फाईल सिर्जना गर्दा त्रुटि"
 
@@ -224,36 +187,32 @@ msgid "Screenshot taken"
 msgstr "स्क्रिनसट लिईयो"
 
 #: src/screenshot-application.c:511
-#, fuzzy
 msgid "All possible methods failed"
-msgstr "हरफ भित्र सबै सम्भावित जोडाहरू फेला पार्नुहोस्"
+msgstr "सबै सम्भावित तरिकाहरू असफल भयो"
 
 #: src/screenshot-application.c:634
 msgid "Send the grab directly to the clipboard"
-msgstr ""
+msgstr "लिएको सिधै क्लिपबोर्डमा पठाउनुहोस्"
 
 #: src/screenshot-application.c:635
 msgid "Grab a window instead of the entire screen"
 msgstr "पूरा पर्दाको सट्टामा सञ्झ्याल लिनुहोस्"
 
 #: src/screenshot-application.c:636
-#, fuzzy
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr "पूरा पर्दाको सट्टामा सञ्झ्याल लिनुहोस्"
+msgstr "सम्पूर्ण पर्दाको सट्टामा पर्दाको केही क्षेत्र लिनुहोस्"
 
 #: src/screenshot-application.c:637
 msgid "Include the window border with the screenshot"
 msgstr "सक्रिन सट सँग सञ्झ्याल किनारा समावेश गर्नुहोस्"
 
 #: src/screenshot-application.c:638
-#, fuzzy
 msgid "Remove the window border from the screenshot"
-msgstr "सक्रिन सट सँग सञ्झ्याल किनारा समावेश गर्नुहोस्"
+msgstr "सक्रिन सट सँग सञ्झ्याल किनारा हटाउनुहोस्"
 
 #: src/screenshot-application.c:639
-#, fuzzy
 msgid "Include the pointer with the screenshot"
-msgstr "सक्रिन सट सँग सञ्झ्याल किनारा समावेश गर्नुहोस्"
+msgstr "सक्रिनसट सँग सूचक समावेश गर्नुहोस्"
 
 #: src/screenshot-application.c:640
 msgid "Take screenshot after specified delay [in seconds]"
@@ -267,11 +226,8 @@ msgid "seconds"
 msgstr "सेकेन्ड"
 
 #: src/screenshot-application.c:641
-#, fuzzy
-#| msgid "Effect to add to the border (shadow, border or none)"
 msgid "Effect to add to the border (shadow, border, vintage or none)"
-msgstr ""
-"किनाराको बाहिरपट्टी थपिने प्रभाव । सम्भावित मान \"छायाँ\", \"कुनै पनि होइन\", र \"किनारा\" हुन् ।"
+msgstr "किनारामा प्रभाव थप्न (छाया, किनारा, पुरानो वा कुनै पनि)"
 
 #: src/screenshot-application.c:641
 msgid "effect"
@@ -282,10 +238,8 @@ msgid "Interactively set options"
 msgstr "विकल्पलाई अन्तर्क्रियात्मक रूपमा सेट गर्नुहोस्"
 
 #: src/screenshot-application.c:643
-#, fuzzy
-#| msgid "Screenshot directory"
 msgid "Save screenshot directly to this file"
-msgstr "स्क्रिनसट $PICTURESमा बचत गर्नुहोस्"
+msgstr "स्क्रिनसट सिधै यो फाइलमा बचत गर्नुहोस्"
 
 #: src/screenshot-application.c:643
 msgid "filename"
@@ -297,15 +251,15 @@ msgstr "संस्करण सूचना देखाउनुहोस् 
 
 #: src/screenshot-application.c:773
 msgid "translator-credits"
-msgstr "Pawan Chitrakar < chautari@gmail.com>"
+msgstr "Pawan Chitrakar <chautari@gmail.com>"
 
 #: src/screenshot-config.c:117
 msgid "Conflicting options: --window and --area should not be used at the same time.\n"
-msgstr ""
+msgstr "विवादास्पद विकल्पहरू: --window र --area एकै समयमा प्रयोग गर्नुपर्दैन।\n"
 
 #: src/screenshot-config.c:124
 msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
-msgstr ""
+msgstr "विवादास्पद विकल्पहरू: --area र --delay एकै समयमा प्रयोग गर्नुपर्दैन।\n"
 
 #: src/screenshot-dialog.c:319
 msgid "Screenshot.png"
@@ -316,14 +270,12 @@ msgid "Save Screenshot"
 msgstr "स्क्रिनसट बचत गर्नुहोस् ।"
 
 #: src/screenshot-dialog.ui:17
-#, fuzzy
 msgid "Back"
-msgstr "पछाडि:"
+msgstr "पछाडि"
 
 #: src/screenshot-dialog.ui:38
-#, fuzzy
 msgid "C_opy to Clipboard"
-msgstr "प्रयोगकर्ता नाम प्रतिलिपि बनाउनुहोस्"
+msgstr "क्लिपबोर्डमा प्रतिलिपि गर्नुहोस्"
 
 #: src/screenshot-dialog.ui:50
 msgid "_Save"
@@ -343,9 +295,9 @@ msgstr "फोल्डरमा बचत गर्नुहोस्:"
 #. * file format (e.g. "png").
 #.
 #: src/screenshot-filename-builder.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Screenshot from %s.%s"
-msgstr "स्क्रिनसट %s - %d.png"
+msgstr "स्क्रिनसट %s.%s"
 
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken and the simpler filename
@@ -354,9 +306,9 @@ msgstr "स्क्रिनसट %s - %d.png"
 #. * placeholder is the file format (e.g. "png").
 #.
 #: src/screenshot-filename-builder.c:157
-#, fuzzy, c-format
+#, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "स्क्रिनसट %s - %d.png"
+msgstr "स्क्रिनसट %s - %d.%s"
 
 #. Translators:
 #. * these are the names of the effects available which will be
@@ -377,13 +329,12 @@ msgstr "किनारा"
 
 #: src/screenshot-interactive-dialog.c:160
 msgid "Vintage"
-msgstr ""
+msgstr "पुरानो"
 
 #. * Include pointer *
 #: src/screenshot-interactive-dialog.c:264
-#, fuzzy
 msgid "Include _pointer"
-msgstr "सम्मिलित गर्नुहोस्:"
+msgstr "सूचक सम्मिलित गर्नुहोस्"
 
 #. * Include window border *
 #: src/screenshot-interactive-dialog.c:274
@@ -395,28 +346,23 @@ msgid "Apply _effect:"
 msgstr "प्रभाव लागू गर्नुहोस्:"
 
 #: src/screenshot-interactive-dialog.c:348
-#, fuzzy
-#| msgid "Grab the whole _desktop"
 msgid "Grab the whole sc_reen"
-msgstr "पूरै पर्दा खोस्नुहोस्"
+msgstr "पूरै पर्दा लिनुहोस्"
 
 #: src/screenshot-interactive-dialog.c:362
 msgid "Grab the current _window"
 msgstr "हालको सञ्झ्याल प्राप्त गर्नुहोस्"
 
 #: src/screenshot-interactive-dialog.c:374
-#, fuzzy
 msgid "Select _area to grab"
-msgstr "खोस्न एउटा क्षेत्र चयन गर्नुहोस्"
+msgstr "लिनको लागि क्षेत्र चयन गर्नुहोस्"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
 #: src/screenshot-interactive-dialog.c:394
-#, fuzzy
-#| msgid "Grab _after a delay of"
 msgid "Grab after a _delay of"
-msgstr "सानो ढिलाइ पछि बन्द हुनेछ"
+msgstr "केहि ढिलाइ पछि लिनुहोस्"
 
 #: src/screenshot-interactive-dialog.c:465
 msgid "Take Screenshot"
