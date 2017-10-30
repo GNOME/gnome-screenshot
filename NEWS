@@ -1,3 +1,19 @@
+GNOME Screenshot 3.26.0 - 30th October 2017
+===========================================
+
+- #787214 - App menu placed below header bar when Application Menu on the
+  top panel of GNOME Shell is disabled [Cosimo Cecchi]
+- #765941 - Add backbutton after screenshot [Daniel Byrne]
+- #783442 - Cannot build gnome-screenshot with meson on FreeBSD
+  because of -D_POSIX_C_SOURCE [Ting-Wei Lan]
+- Translation updates:
+  Friulan, Indonesian, German, Esperanto, Kazakh, Spanish, Slovenian,
+  Croatian, Czech, Hungarian, Swedish, Polish, Galician, Turkish,
+  Serbian, Finnish, Nepali, French, Lithuanian, Danish, Chinese (Taiwan),
+  Latvian, Italian, Belarusian, Bulgarian, Slovak, Korean, Brazilian
+  Portuguese, Basque, Dutch, Greek, Catalan, Icelandic, Persian,
+  Catalan (Valencian), Chinese
+
 GNOME Screenshot 3.25.0 - 29th May 2017
 =======================================
 
