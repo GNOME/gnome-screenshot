@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: gnome-utils HEAD\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-09-05 21:19+0000\n"
+"POT-Creation-Date: 2017-09-08 09:43+0000\n"
 "PO-Revision-Date: 2017-09-08 16:20+0200\n"
 "Last-Translator: Charles Monzat <superboa@hotmail.fr>\n"
 "Language-Team: français <gnomefr@traduc.org>\n"
@@ -356,7 +356,7 @@ msgstr "Enregistrer dans le _dossier :"
 #: src/screenshot-filename-builder.c:147
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "Capture du %s.%s"
+msgstr "Capture d’écran du %s.%s"
 
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken and the simpler filename
@@ -367,7 +367,7 @@ msgstr "Capture du %s.%s"
 #: src/screenshot-filename-builder.c:157
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "Capture du %s - %d.%s"
+msgstr "Capture d’écran du %s - %d.%s"
 
 #. Translators:
 #. * these are the names of the effects available which will be
