@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils 0\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-03 20:00+0000\n"
-"PO-Revision-Date: 2017-08-23 17:52+0200\n"
+"POT-Creation-Date: 2018-02-20 23:00+0000\n"
+"PO-Revision-Date: 2018-03-07 15:15+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2016-09-22 11:30+0000\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
@@ -156,7 +156,7 @@ msgstr ""
 
 #: src/screenshot-app-menu.ui:6
 msgid "Help"
-msgstr "Pomoć"
+msgstr "Priručnik"
 
 #: src/screenshot-app-menu.ui:10
 msgid "About"
@@ -385,29 +385,28 @@ msgstr "Uslikaj odabrano _područje zaslona"
 msgid "Grab after a _delay of"
 msgstr "Uslikaj nakon _odgode od"
 
-#: src/screenshot-interactive-dialog.c:465
+#: src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "Uslikaj prikaz zaslona"
 
-#: src/screenshot-interactive-dialog.c:466
+#: src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "Efekti"
 
-#: src/screenshot-interactive-dialog.c:479
-msgid "_Help"
-msgstr "_Pomoć"
-
-#: src/screenshot-interactive-dialog.c:488
+#: src/screenshot-interactive-dialog.c:469
 msgid "Take _Screenshot"
 msgstr "_Uslikaj sliku zaslona"
 
-#: src/screenshot-interactive-dialog.c:505
+#: src/screenshot-interactive-dialog.c:486
 msgid "_Cancel"
 msgstr "_Odustani"
 
 #: src/screenshot-utils.c:725
 msgid "Error loading the help page"
 msgstr "Greška pri učitavanju stranice pomoći"
+
+#~ msgid "_Help"
+#~ msgstr "_Pomoć"
 
 #~ msgid "Take a Screenshot of a Selected Area"
 #~ msgstr "Uslikajte odabrano područje"
