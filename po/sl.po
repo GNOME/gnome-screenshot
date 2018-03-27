@@ -2,7 +2,7 @@
 # Copyright (C) 2000-2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-screenshot package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2011–2017.
+# Matej Urbančič <mateju@svn.gnome.org>, 2011–2018.
 #
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2017-07-31 16:35+0200\n"
-"PO-Revision-Date: 2017-07-31 16:35+0200\n"
+"PO-Revision-Date: 2018-03-26 22:35+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
@@ -56,7 +56,7 @@ msgstr "Zadnja mapa za shranjevanje"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:27
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "Mapa v katero je bila shranjena slika ob zadnjem shranjevanju."
+msgstr "Mapa, v katero je bila shranjena slika ob zadnjem shranjevanju."
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Border"
@@ -68,7 +68,7 @@ msgstr "Vključi robove okenskega upravljalnika skupaj z zaslonsko sliko"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include Pointer"
-msgstr "Vključi kazalnik"
+msgstr "Vključi kazalko"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the pointer in the screenshot"
@@ -115,7 +115,7 @@ msgstr "Zajemanje slik zaslona ali posameznih oken"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: src/org.gnome.Screenshot.desktop.in:6
 msgid "snapshot;capture;print;screenshot;"
-msgstr "zajemanje;zajeto;zajem;natisni;zaslonska slika;"
+msgstr "zajemanje;zajeto;zajem;natisni;zaslonska slika;screenshot;"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
@@ -143,7 +143,7 @@ msgid ""
 "applications."
 msgstr ""
 "Program Zajemalnik slik za GNOME je enostavno orodje za zajemanje zaslonskih "
-"slik. Omogoča zajemanje celotnega  zaslona, dejavnih oken ali poljubno "
+"slik. Omogoča zajemanje celotnega zaslona, dejavnih oken ali poljubno "
 "pravokotno ploskev na zaslonu. Sliko je mogoče zajeti v odložišče ali pa "
 "shraniti na disk."
 
@@ -156,8 +156,8 @@ msgid ""
 msgstr ""
 "Program GNOME Zajemalnik zaslonskih slik omogoča zajemanje vsebine zaslona "
 "tudi, če ni zagnan. Pritisniti je treba zgolj tipko PrtSc na tipkovnici in "
-"slica celotnega zaslona bo shranjena v mapo Slik. Če pritisnete tudi tipko "
-"Alt, bo shranjeno le trenutno dejavno okno."
+"slika celotnega zaslona bo shranjena v mapo s slikami. Če pritisnete tudi "
+"tipko Alt, bo shranjeno le trenutno dejavno okno."
 
 #: src/screenshot-app-menu.ui:6
 msgid "Help"
@@ -174,7 +174,7 @@ msgstr "Končaj"
 #: src/screenshot-application.c:151
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
-msgstr "Datoteka z imenom »%s« že obstaja v mapi »%s«"
+msgstr "Datoteka z imenom »%s« v mapi »%s« že obstaja."
 
 #: src/screenshot-application.c:158
 msgid "Overwrite existing file?"
@@ -205,15 +205,15 @@ msgstr "Vsi podprti načni so spodleteli."
 
 #: src/screenshot-application.c:634
 msgid "Send the grab directly to the clipboard"
-msgstr "Pošlji zajete podatke neposredno v odložišče"
+msgstr "Pošiljanje zajete podatke neposredno v odložišče"
 
 #: src/screenshot-application.c:635
 msgid "Grab a window instead of the entire screen"
-msgstr "Zajemi okno namesto celotnega zaslona"
+msgstr "Zajem okna namesto celotnega zaslona"
 
 #: src/screenshot-application.c:636
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr "Zajemi območje zaslona namesto celotnega zaslona"
+msgstr "Zajem določenega območja zaslona namesto celotnega zaslona"
 
 #: src/screenshot-application.c:637
 msgid "Include the window border with the screenshot"
@@ -221,15 +221,15 @@ msgstr "V zaslonsko sliko vključi tudi robove okna"
 
 #: src/screenshot-application.c:638
 msgid "Remove the window border from the screenshot"
-msgstr "Iz zaslonske slike odstrani robove okna"
+msgstr "Na zaslonski sliki obreži robove okna"
 
 #: src/screenshot-application.c:639
 msgid "Include the pointer with the screenshot"
-msgstr "V zaslonsko sliko vključi tudi kazalnik"
+msgstr "V zaslonsko sliko vključi tudi kazalko"
 
 #: src/screenshot-application.c:640
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Zajemi zaslonsko sliko po navedenem zamiku [v sekundah]"
+msgstr "Zajem zaslonske slike po navedenem zamiku [v sekundah]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
@@ -240,7 +240,7 @@ msgstr "sekund"
 
 #: src/screenshot-application.c:641
 msgid "Effect to add to the border (shadow, border, vintage or none)"
-msgstr "Učinki za dodajanje robovom (senca, rob, staranje in brez)"
+msgstr "Učinek za dodajanje (senca, dodatni rob, postaranje in brez učinka)"
 
 #: src/screenshot-application.c:641
 msgid "effect"
@@ -248,7 +248,7 @@ msgstr "učinek"
 
 #: src/screenshot-application.c:642
 msgid "Interactively set options"
-msgstr "Interaktivna določanje možnosti"
+msgstr "Interaktivno določanje možnosti"
 
 #: src/screenshot-application.c:643
 msgid "Save screenshot directly to this file"
@@ -271,15 +271,14 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
-"Možnosti v sporu: zastavic --window in --area ni mogoče uporabljati "
-"sočasno.\n"
+"Možnosti v sporu: zastavic --window in --area ni mogoče uporabiti sočasno.\n"
 
 #: src/screenshot-config.c:124
 msgid ""
 "Conflicting options: --area and --delay should not be used at the same "
 "time.\n"
 msgstr ""
-"Možnosti v sporu: zastavic --area in --delay ni mogoče uporabljati sočasno.\n"
+"Možnosti v sporu: zastavic --area in --delay ni mogoče uporabiti sočasno.\n"
 
 #: src/screenshot-dialog.c:319
 msgid "Screenshot.png"
@@ -328,7 +327,7 @@ msgstr "Zaslonska slika %s.%s"
 #: src/screenshot-filename-builder.c:157
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "Zaslonska slika %s - %d.%s"
+msgstr "Zaslonska slika %s – %d.%s"
 
 #. Translators:
 #. * these are the names of the effects available which will be
@@ -345,16 +344,16 @@ msgstr "Senčenje"
 
 #: src/screenshot-interactive-dialog.c:159
 msgid "Border"
-msgstr "Obroba"
+msgstr "Obroba slike"
 
 #: src/screenshot-interactive-dialog.c:160
 msgid "Vintage"
-msgstr "Staranje"
+msgstr "Postaran videz"
 
 #. * Include pointer *
 #: src/screenshot-interactive-dialog.c:264
 msgid "Include _pointer"
-msgstr "Vključi _kazalnik"
+msgstr "Vključi _kazalko"
 
 #. * Include window border *
 #: src/screenshot-interactive-dialog.c:274
@@ -367,7 +366,7 @@ msgstr "Uporabi _učinek:"
 
 #: src/screenshot-interactive-dialog.c:348
 msgid "Grab the whole sc_reen"
-msgstr "Zajemi celotni _zaslon"
+msgstr "Zajemi celoten _zaslon"
 
 #: src/screenshot-interactive-dialog.c:362
 msgid "Grab the current _window"
