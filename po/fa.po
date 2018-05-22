@@ -124,7 +124,7 @@ msgstr "snapshot;capture;print;گرفتن;چاپ;عکس‌صفحه;"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
 msgid "applets-screenshooter"
-msgstr "ذخیرهٔ عکس‌صفحه"
+msgstr "applets-screenshooter"
 
 #: src/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
