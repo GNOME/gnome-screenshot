@@ -63,7 +63,6 @@ screenshot_window_is_desktop (GdkWindow *window)
     return TRUE;
 
   return FALSE;
-      
 }
 
 static Window
@@ -81,13 +80,13 @@ find_wm_window (GdkWindow *window)
     {
       if (XQueryTree (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                       xid, &root, &parent, &children, &nchildren) == 0)
-	{
-	  g_warning ("Couldn't find window manager window");
-	  return None;
-	}
+        {
+          g_warning ("Couldn't find window manager window");
+          return None;
+        }
 
       if (root == parent)
-	return xid;
+        return xid;
 
       xid = parent;
     }
@@ -128,7 +127,7 @@ blank_rectangle_in_pixbuf (GdkPixbuf *pixbuf, GdkRectangle *rect)
   gboolean has_alpha;
 
   g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
-  
+
   x2 = rect->x + rect->width;
   y2 = rect->y + rect->height;
 
@@ -145,14 +144,14 @@ blank_rectangle_in_pixbuf (GdkPixbuf *pixbuf, GdkRectangle *rect)
       p = row + rect->x * n_channels;
 
       for (x = rect->x; x < x2; x++)
-	{
-	  *p++ = 0;
-	  *p++ = 0;
-	  *p++ = 0;
+        {
+          *p++ = 0;
+          *p++ = 0;
+          *p++ = 0;
 
-	  if (has_alpha)
-	    *p++ = 255; /* opaque black */
-	}
+          if (has_alpha)
+            *p++ = 255; /* opaque black */
+        }
     }
 }
 
@@ -169,8 +168,8 @@ blank_region_in_pixbuf (GdkPixbuf *pixbuf, cairo_region_t *region)
   width = gdk_pixbuf_get_width (pixbuf);
   height = gdk_pixbuf_get_height (pixbuf);
 
-  pixbuf_rect.x	     = 0;
-  pixbuf_rect.y	     = 0;
+  pixbuf_rect.x      = 0;
+  pixbuf_rect.y      = 0;
   pixbuf_rect.width  = width;
   pixbuf_rect.height = height;
 
@@ -180,7 +179,7 @@ blank_region_in_pixbuf (GdkPixbuf *pixbuf, cairo_region_t *region)
 
       cairo_region_get_rectangle (region, i, &rect);
       if (gdk_rectangle_intersect (&rect, &pixbuf_rect, &dest))
-	blank_rectangle_in_pixbuf (pixbuf, &dest);
+        blank_rectangle_in_pixbuf (pixbuf, &dest);
     }
 }
 
@@ -234,7 +233,7 @@ screenshot_fallback_get_window_rect_coords (GdkWindow *window,
     {
       real_coordinates.width = gdk_window_get_width (window);
       real_coordinates.height = gdk_window_get_height (window);
-      
+
       gdk_window_get_origin (window, &real_coordinates.x, &real_coordinates.y);
     }
 
@@ -304,7 +303,6 @@ screenshot_play_sound_effect (const gchar *event_id,
  done:
   if (p != NULL)
     ca_proplist_destroy (p);
-
 }
 
 static void
@@ -338,7 +336,7 @@ do_find_current_window (void)
   current_window = screenshot_find_active_window ();
   manager = gdk_display_get_device_manager (gdk_display_get_default ());
   device = gdk_device_manager_get_client_pointer (manager);
-  
+
   /* If there's no active window, we fall back to returning the
    * window that the cursor is in.
    */
@@ -348,8 +346,8 @@ do_find_current_window (void)
   if (current_window)
     {
       if (screenshot_window_is_desktop (current_window))
-	/* if the current window is the desktop (e.g. nautilus), we
-	 * return NULL, as getting the whole screen makes more sense.
+        /* if the current window is the desktop (e.g. nautilus), we
+         * return NULL, as getting the whole screen makes more sense.
          */
         return NULL;
 
@@ -391,7 +389,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
 
   window = screenshot_fallback_find_current_window ();
 
-  screenshot_fallback_get_window_rect_coords (window, 
+  screenshot_fallback_get_window_rect_coords (window,
                                               screenshot_config->include_border,
                                               &real_coords,
                                               &screenshot_coords);
@@ -401,7 +399,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
     {
       GdkRectangle wm_real_coords;
 
-      wm_window = gdk_x11_window_foreign_new_for_display 
+      wm_window = gdk_x11_window_foreign_new_for_display
         (gdk_window_get_display (window), wm);
 
       screenshot_fallback_get_window_rect_coords (wm_window,
@@ -450,11 +448,11 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
       if (rectangles && rectangle_count > 0)
         {
           gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
-          
+
           tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
                                 screenshot_coords.width, screenshot_coords.height);
           gdk_pixbuf_fill (tmp, 0);
-          
+
           for (i = 0; i < rectangle_count; i++)
             {
               gint rec_x, rec_y;
@@ -528,7 +526,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
 
   /* if we have a selected area, there were by definition no cursor in the
    * screenshot */
-  if (screenshot_config->include_pointer && !rectangle) 
+  if (screenshot_config->include_pointer && !rectangle)
     {
       GdkCursor *cursor;
       GdkPixbuf *cursor_pixbuf;
@@ -536,7 +534,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_LEFT_PTR);
       cursor_pixbuf = gdk_cursor_get_image (cursor);
 
-      if (cursor_pixbuf != NULL) 
+      if (cursor_pixbuf != NULL)
         {
           GdkDeviceManager *manager;
           GdkDevice *device;
@@ -563,7 +561,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
           rect.height = gdk_pixbuf_get_height (cursor_pixbuf);
 
           /* see if the pointer is inside the window */
-          if (gdk_rectangle_intersect (&real_coords, &rect, &rect)) 
+          if (gdk_rectangle_intersect (&real_coords, &rect, &rect))
             {
               gint cursor_x, cursor_y;
 
@@ -573,7 +571,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
                                     cursor_x, cursor_y,
                                     rect.width, rect.height,
                                     cursor_x, cursor_y,
-                                    1.0, 1.0, 
+                                    1.0, 1.0,
                                     GDK_INTERP_BILINEAR,
                                     255);
             }
@@ -682,17 +680,17 @@ screenshot_show_dialog (GtkWindow   *parent,
   g_return_val_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)),
                         GTK_RESPONSE_NONE);
   g_return_val_if_fail (message != NULL, GTK_RESPONSE_NONE);
-  
+
   dialog = gtk_message_dialog_new (parent,
-  				   GTK_DIALOG_DESTROY_WITH_PARENT,
-  				   message_type,
-  				   buttons_type,
-  				   "%s", message);
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   message_type,
+                                   buttons_type,
+                                   "%s", message);
   gtk_window_set_title (GTK_WINDOW (dialog), "");
-  
+
   if (detail)
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-  					      "%s", detail);
+                                              "%s", detail);
 
   if (parent)
     {
@@ -702,7 +700,7 @@ screenshot_show_dialog (GtkWindow   *parent,
     }
 
   response = gtk_dialog_run (GTK_DIALOG (dialog));
-  
+
   gtk_widget_destroy (dialog);
 
   return response;
@@ -714,15 +712,15 @@ screenshot_display_help (GtkWindow *parent)
   GError *error = NULL;
 
   gtk_show_uri (gtk_window_get_screen (parent),
-		"help:gnome-help/screen-shot-record",
-		gtk_get_current_event_time (), &error);
+                "help:gnome-help/screen-shot-record",
+                gtk_get_current_event_time (), &error);
 
   if (error)
     {
-      screenshot_show_dialog (parent, 
+      screenshot_show_dialog (parent,
                               GTK_MESSAGE_ERROR,
                               GTK_BUTTONS_OK,
-                              _("Error loading the help page"), 
+                              _("Error loading the help page"),
                               error->message);
       g_error_free (error);
     }

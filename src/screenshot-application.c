@@ -89,7 +89,7 @@ set_recent_entry (ScreenshotApplication *self)
   }
 
   recent = gtk_recent_manager_get_default ();
-  
+
   exec_name = g_app_info_get_executable (app);
   app_exec = g_strjoin (" ", exec_name, "%u", NULL);
 
@@ -151,7 +151,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                            file_name, folder_name);
           gint response;
-                                             
+
           response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
                                              GTK_MESSAGE_WARNING,
                                              GTK_BUTTONS_YES_NO,
@@ -215,7 +215,7 @@ save_pixbuf_ready_cb (GObject *source,
 
 static void
 find_out_writable_format_by_extension (gpointer data,
-                                      gpointer user_data)
+                                       gpointer user_data)
 {
   GdkPixbufFormat *format     = (GdkPixbufFormat*) data;
   gchar          **name       = (gchar **) user_data;
@@ -229,7 +229,7 @@ find_out_writable_format_by_extension (gpointer data,
           gdk_pixbuf_format_is_writable (format) == TRUE)
         {
           *name = gdk_pixbuf_format_get_name (format);
-	  found = TRUE;
+          found = TRUE;
           break;
         }
       ptr++;
@@ -371,7 +371,7 @@ screenshot_save_to_file (ScreenshotApplication *self)
                             NULL, FALSE,
                             G_FILE_CREATE_NONE,
                             G_PRIORITY_DEFAULT,
-                            NULL, 
+                            NULL,
                             save_file_create_ready_cb, self);
     }
   else
@@ -614,7 +614,7 @@ screenshot_start (ScreenshotApplication *self)
     delay = 0;
 
   /* HACK: give time to the dialog to actually disappear.
-   * We don't have any way to tell when the compositor has finished 
+   * We don't have any way to tell when the compositor has finished
    * re-drawing.
    */
   if (delay == 0 && screenshot_config->interactive)

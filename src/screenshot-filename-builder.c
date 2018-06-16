@@ -36,7 +36,7 @@ typedef enum
   NUM_TESTS
 } TestType;
 
-typedef struct 
+typedef struct
 {
   char *base_paths[NUM_TESTS];
   char *screenshot_origin;
@@ -54,7 +54,7 @@ expand_initial_tilde (const char *path)
   if (path[1] == '/' || path[1] == '\0') {
     return g_build_filename (g_get_home_dir (), &path[1], NULL);
   }
-  
+
   slash_after_user_name = strchr (&path[1], '/');
   if (slash_after_user_name == NULL) {
     user_name = g_strdup (&path[1]);
@@ -64,11 +64,11 @@ expand_initial_tilde (const char *path)
   }
   passwd_file_entry = getpwnam (user_name);
   g_free (user_name);
-  
+
   if (passwd_file_entry == NULL || passwd_file_entry->pw_dir == NULL) {
     return g_strdup (path);
   }
-  
+
   return g_strconcat (passwd_file_entry->pw_dir,
                       slash_after_user_name,
                       NULL);
@@ -217,7 +217,7 @@ retry:
 
   file = g_file_new_for_path (path);
   info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
-			    G_FILE_QUERY_INFO_NONE, cancellable, &error);
+                            G_FILE_QUERY_INFO_NONE, cancellable, &error);
   if (info != NULL)
     {
       /* file already exists, iterate again */
@@ -302,7 +302,7 @@ out:
 
 void
 screenshot_build_filename_async (const char *save_dir,
-				 const char *screenshot_origin,
+                                 const char *screenshot_origin,
                                  GAsyncReadyCallback callback,
                                  gpointer user_data)
 {
