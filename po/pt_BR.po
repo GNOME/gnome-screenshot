@@ -20,14 +20,14 @@
 # André Gondim <In memoriam>, 2011.
 # Enrico Nicoletto <liverig@gmail.com>, 2012, 2014.
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2014.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2013, 2014, 2016, 2017.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2013, 2014, 2016, 2017, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-31 10:14+0000\n"
-"PO-Revision-Date: 2017-09-03 13:13-0200\n"
+"POT-Creation-Date: 2017-09-05 21:19+0000\n"
+"PO-Revision-Date: 2018-07-13 16:14-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -135,7 +135,6 @@ msgstr "captura de tela;captura;capturar;screenshot;"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: src/org.gnome.Screenshot.desktop.in:11
-#| msgid "Save Screenshot"
 msgid "applets-screenshooter"
 msgstr "applets-screenshooter"
 
@@ -259,7 +258,7 @@ msgstr "segundos"
 
 #: src/screenshot-application.c:641
 msgid "Effect to add to the border (shadow, border, vintage or none)"
-msgstr "Efeito para adicionar à borda (sombra, bordar, retrô ou nenhum)"
+msgstr "Efeito para adicionar à borda (sombra, borda, retrô ou nenhum)"
 
 #: src/screenshot-application.c:641
 msgid "effect"
@@ -382,7 +381,7 @@ msgstr "Sombra projetada"
 
 #: src/screenshot-interactive-dialog.c:159
 msgid "Border"
-msgstr "Bordar"
+msgstr "Borda"
 
 # Adotei a tradução de Retrô pois o efeito do "vintage filter" é o de tornar algo atual (a captura de tela) em uma coloração que parece antiga, o que coincide com a definição de retrô (imitação de estilo antigo). --Enrico
 #: src/screenshot-interactive-dialog.c:160
