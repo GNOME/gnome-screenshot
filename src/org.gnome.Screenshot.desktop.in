@@ -7,7 +7,7 @@ Exec=gnome-screenshot --interactive
 Terminal=false
 Type=Application
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-Icon=applets-screenshooter
+Icon=org.gnome.Screenshot
 StartupNotify=true
 Categories=GTK;GNOME;Utility;X-GNOME-Utilities;
 NotShowIn=KDE;
