@@ -21,6 +21,7 @@ gnome_screenshot_appsdir = join_paths(gnome_screenshot_datadir, 'applications')
 gnome_screenshot_appdatadir = join_paths(gnome_screenshot_datadir, 'metainfo')
 gnome_screenshot_servicesdir = join_paths(gnome_screenshot_datadir, 'dbus-1', 'services')
 gnome_screenshot_schemadir = join_paths(gnome_screenshot_datadir, 'glib-2.0', 'schemas')
+gnome_screenshot_datadir = join_paths(gnome_screenshot_prefix, get_option('datadir'))
 
 glib_req_version = '>= 2.35.1'
 gtk_req_version = '>= 3.0.0'
@@ -45,6 +46,7 @@ root_inc = include_directories('.')
 
 i18n = import('i18n')
 
+subdir('data')
 subdir('src')
 subdir('po')
 
