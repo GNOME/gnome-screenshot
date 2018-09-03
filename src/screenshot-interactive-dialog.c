@@ -29,8 +29,6 @@
 #include "screenshot-interactive-dialog.h"
 #include "screenshot-utils.h"
 
-#define SCREENSHOOTER_ICON "applets-screenshooter"
-
 static GtkWidget *border_check = NULL;
 static GtkWidget *effect_combo = NULL;
 static GtkWidget *effect_label = NULL;
@@ -334,7 +332,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
-  image = gtk_image_new_from_icon_name (SCREENSHOOTER_ICON, GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new_from_icon_name (SCREENSHOT_ICON_NAME, GTK_ICON_SIZE_DIALOG);
   gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
   gtk_widget_show (image);
 

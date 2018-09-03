@@ -25,6 +25,8 @@
 
 G_BEGIN_DECLS
 
+#define SCREENSHOT_ICON_NAME "org.gnome.Screenshot"
+
 GdkPixbuf *screenshot_get_pixbuf          (GdkRectangle *rectangle);
 
 gint       screenshot_show_dialog   (GtkWindow   *parent,

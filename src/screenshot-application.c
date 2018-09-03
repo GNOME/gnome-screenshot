@@ -40,8 +40,6 @@
 #include "screenshot-utils.h"
 #include "screenshot-dialog.h"
 
-#define SCREENSHOOTER_ICON "applets-screenshooter"
-
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
 
 G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION);
@@ -769,7 +767,7 @@ action_about (GSimpleAction *action,
                          "authors", authors,
                          "program-name", _("Screenshot"),
                          "comments", _("Save images of your screen or individual windows"),
-                         "logo-icon-name", "applets-screenshooter",
+                         "logo-icon-name", SCREENSHOT_ICON_NAME,
                          "translator-credits", _("translator-credits"),
                          "license-type", GTK_LICENSE_GPL_2_0,
                          "wrap-license", TRUE,
@@ -836,7 +834,7 @@ screenshot_application_startup (GApplication *app)
   screenshot_load_config ();
 
   g_set_application_name (_("Screenshot"));
-  gtk_window_set_default_icon_name (SCREENSHOOTER_ICON);
+  gtk_window_set_default_icon_name (SCREENSHOT_ICON_NAME);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
                                    G_N_ELEMENTS (action_entries), self);
