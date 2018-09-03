@@ -50,18 +50,18 @@ typedef struct {
 
 extern ScreenshotConfig *screenshot_config;
 
-void		screenshot_load_config			(void);
-void		screenshot_save_config			(void);
-gboolean	screenshot_config_parse_command_line	(gboolean clipboard_arg,
-							 gboolean window_arg,
-							 gboolean area_arg,
-							 gboolean include_border_arg,
-							 gboolean disable_border_arg,
-							 gboolean include_pointer_arg,
-							 const gchar *border_effect_arg,
-							 guint delay_arg,
-							 gboolean interactive_arg,
-							 const gchar *file_arg);
+void        screenshot_load_config                (void);
+void        screenshot_save_config                (void);
+gboolean    screenshot_config_parse_command_line  (gboolean clipboard_arg,
+                                                   gboolean window_arg,
+                                                   gboolean area_arg,
+                                                   gboolean include_border_arg,
+                                                   gboolean disable_border_arg,
+                                                   gboolean include_pointer_arg,
+                                                   const gchar *border_effect_arg,
+                                                   guint delay_arg,
+                                                   gboolean interactive_arg,
+                                                   const gchar *file_arg);
 
 G_END_DECLS
 

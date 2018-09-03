@@ -140,7 +140,7 @@ select_area_key_press (GtkWidget               *window,
 
       gtk_main_quit ();
     }
- 
+
   return TRUE;
 }
 
@@ -197,7 +197,7 @@ create_select_window (void)
   gtk_window_move (GTK_WINDOW (window), -100, -100);
   gtk_window_resize (GTK_WINDOW (window), 10, 10);
   gtk_widget_show (window);
-  
+
   return window;
 }
 
@@ -253,7 +253,7 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   res = gdk_device_grab (pointer, gtk_widget_get_window (data.window),
                          GDK_OWNERSHIP_NONE, FALSE,
                          GDK_POINTER_MOTION_MASK |
-                         GDK_BUTTON_PRESS_MASK | 
+                         GDK_BUTTON_PRESS_MASK |
                          GDK_BUTTON_RELEASE_MASK,
                          cursor, GDK_CURRENT_TIME);
 

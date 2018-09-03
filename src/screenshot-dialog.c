@@ -71,8 +71,8 @@ on_preview_draw (GtkWidget      *drawing_area,
 
 static gboolean
 on_preview_button_press_event (GtkWidget      *drawing_area,
-			       GdkEventButton *event,
-			       gpointer        data)
+                               GdkEventButton *event,
+                               gpointer        data)
 {
   ScreenshotDialog *dialog = data;
 
@@ -84,8 +84,8 @@ on_preview_button_press_event (GtkWidget      *drawing_area,
 
 static gboolean
 on_preview_button_release_event (GtkWidget      *drawing_area,
-				 GdkEventButton *event,
-				 gpointer        data)
+                                 GdkEventButton *event,
+                                 gpointer        data)
 {
   ScreenshotDialog *dialog = data;
 
@@ -97,11 +97,11 @@ on_preview_button_release_event (GtkWidget      *drawing_area,
 
 static void
 drag_data_get (GtkWidget          *widget,
-	       GdkDragContext     *context,
-	       GtkSelectionData   *selection_data,
-	       guint               info,
-	       guint               time,
-	       ScreenshotDialog   *dialog)
+               GdkDragContext     *context,
+               GtkSelectionData   *selection_data,
+               guint               info,
+               guint               time,
+               ScreenshotDialog   *dialog)
 {
   if (info == TYPE_IMAGE_PNG)
     gtk_selection_data_set_pixbuf (selection_data, dialog->screenshot);
@@ -111,11 +111,11 @@ drag_data_get (GtkWidget          *widget,
 
 static void
 drag_begin (GtkWidget        *widget,
-	    GdkDragContext   *context,
-	    ScreenshotDialog *dialog)
+            GdkDragContext   *context,
+            ScreenshotDialog *dialog)
 {
   gtk_drag_set_icon_pixbuf (context, dialog->preview_image,
-			    dialog->drag_x, dialog->drag_y);
+                            dialog->drag_x, dialog->drag_y);
 }
 
 static gboolean
@@ -172,8 +172,8 @@ setup_drawing_area (ScreenshotDialog *dialog, GtkBuilder *ui)
 
   gtk_widget_set_size_request (preview_darea, width, height);
   gtk_aspect_frame_set (GTK_ASPECT_FRAME (aspect_frame), 0.0, 0.5,
-			(gfloat) width / (gfloat) height,
-			FALSE);
+                        (gfloat) width / (gfloat) height,
+                        FALSE);
 
   if (screenshot_config->take_window_shot)
     gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_NONE);
@@ -186,21 +186,21 @@ setup_drawing_area (ScreenshotDialog *dialog, GtkBuilder *ui)
 
   /* setup dnd */
   gtk_drag_source_set (preview_darea,
-		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
-		       drag_types, G_N_ELEMENTS (drag_types),
-		       GDK_ACTION_COPY);
+                       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
+                       drag_types, G_N_ELEMENTS (drag_types),
+                       GDK_ACTION_COPY);
 
   g_signal_connect (G_OBJECT (preview_darea), "drag_begin",
-		    G_CALLBACK (drag_begin), dialog);
+                    G_CALLBACK (drag_begin), dialog);
   g_signal_connect (G_OBJECT (preview_darea), "drag_data_get",
-		    G_CALLBACK (drag_data_get), dialog);
+                    G_CALLBACK (drag_data_get), dialog);
 }
 
 ScreenshotDialog *
 screenshot_dialog_new (GdkPixbuf              *screenshot,
-		       char                   *initial_uri,
-		       SaveScreenshotCallback f,
-		       gpointer               user_data)
+                       char                   *initial_uri,
+                       SaveScreenshotCallback f,
+                       gpointer               user_data)
 {
   ScreenshotDialog *dialog;
   GtkBuilder *ui;
@@ -263,9 +263,9 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
 
   gtk_widget_grab_focus (dialog->filename_entry);
   gtk_editable_select_region (GTK_EDITABLE (dialog->filename_entry),
-			      0,
-			      pos);
-  
+                              0,
+                              pos);
+
   g_free (current_name);
   g_free (current_folder);
   g_object_unref (ui);
@@ -324,7 +324,7 @@ screenshot_dialog_get_filename (ScreenshotDialog *dialog)
 
 void
 screenshot_dialog_set_busy (ScreenshotDialog *dialog,
-			    gboolean          busy)
+                            gboolean          busy)
 {
   GdkWindow *window;
 

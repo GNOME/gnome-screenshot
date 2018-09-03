@@ -40,12 +40,12 @@
 typedef struct _ScreenshotApplicationPriv ScreenshotApplicationPriv;
 
 typedef struct {
-	GtkApplication parent;
-	ScreenshotApplicationPriv *priv;
+  GtkApplication parent;
+  ScreenshotApplicationPriv *priv;
 } ScreenshotApplication;
 
 typedef struct {
-	GtkApplicationClass parent_class;
+  GtkApplicationClass parent_class;
 } ScreenshotApplicationClass;
 
 GType screenshot_application_get_type (void);

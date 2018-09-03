@@ -176,7 +176,7 @@ cheese_flash_start_fade (gpointer data)
     return FALSE;
   }
 
-  flash_priv->fade_timeout_tag = 
+  flash_priv->fade_timeout_tag =
     g_timeout_add_full (G_PRIORITY_DEFAULT,
                         1000.0 / FLASH_ANIMATION_RATE,
                         cheese_flash_opacity_fade,
@@ -201,7 +201,7 @@ cheese_flash_fire (CheeseFlash  *flash,
 
   gtk_widget_set_opacity (GTK_WIDGET (flash_window), 0.99);
   gtk_widget_show_all (GTK_WIDGET (flash_window));
-  flash_priv->flash_timeout_tag = 
+  flash_priv->flash_timeout_tag =
     g_timeout_add_full (G_PRIORITY_DEFAULT,
                         FLASH_DURATION,
                         cheese_flash_start_fade,

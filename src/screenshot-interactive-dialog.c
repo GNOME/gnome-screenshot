@@ -68,7 +68,7 @@ target_toggled_cb (GtkToggleButton *button,
     {
       take_window_shot = (target_toggle == TARGET_TOGGLE_WINDOW);
       take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
-      
+
       gtk_widget_set_sensitive (border_check, take_window_shot);
       gtk_widget_set_sensitive (effect_combo, take_window_shot);
       gtk_widget_set_sensitive (effect_label, take_window_shot);
@@ -122,10 +122,10 @@ effect_combo_changed_cb (GtkComboBox *combo,
     }
 }
 
-static gint 
-interactive_dialog_key_press_cb (GtkWidget *widget, 
+static gint
+interactive_dialog_key_press_cb (GtkWidget   *widget,
                                  GdkEventKey *event,
-                                 gpointer user_data)
+                                 gpointer    user_data)
 {
   if (event->keyval == GDK_KEY_F1)
     {
@@ -174,7 +174,7 @@ create_effects_combo (void)
                               G_TYPE_STRING,
                               G_TYPE_STRING,
                               G_TYPE_UINT);
-  
+
   for (i = 0; i < n_effects; i++)
     {
       GtkTreeIter iter;
@@ -213,7 +213,7 @@ create_effects_combo (void)
     default:
       break;
     }
-  
+
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (retval), renderer, TRUE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (retval), renderer,
@@ -480,7 +480,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   gtk_widget_set_can_default (button, TRUE);
   gtk_widget_grab_default (button);
   g_signal_connect (dialog, "key-press-event",
-                    G_CALLBACK (interactive_dialog_key_press_cb), 
+                    G_CALLBACK (interactive_dialog_key_press_cb),
                     NULL);
 
   button = gtk_button_new_with_mnemonic (_("_Cancel"));

@@ -50,14 +50,14 @@ typedef struct {
 }  ScreenshotDialog;
 
 ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf              *screenshot,
-						  char                   *initial_uri,
-						  SaveScreenshotCallback f,
-						  gpointer               user_data);
+                                                  char                   *initial_uri,
+                                                  SaveScreenshotCallback f,
+                                                  gpointer               user_data);
 
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_filename (ScreenshotDialog *dialog);
 void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
-						  gboolean          busy);
+                                                  gboolean          busy);
 
 #endif /* __SCREENSHOT_DIALOG_H__ */
