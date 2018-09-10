@@ -184,7 +184,6 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
   else
     {
       g_critical ("Unable to save the screenshot: %s", error->message);
-      screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
       g_application_release (G_APPLICATION (self));
       if (screenshot_config->file != NULL)
         exit (EXIT_FAILURE);
@@ -465,15 +464,12 @@ build_filename_ready_cb (GObject *source,
                                 _("Error creating file"));
       else
         {
-          screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
           if (screenshot_config->file != NULL)
             exit (EXIT_FAILURE);
         }
 
       return;
     }
-
-  screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
 
   if (screenshot_config->interactive)
     {
@@ -507,8 +503,6 @@ finish_prepare_screenshot (ScreenshotApplication *self,
                                 GTK_BUTTONS_OK,
                                 _("Unable to capture a screenshot"),
                                 _("All possible methods failed"));
-      else
-        screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
 
       g_application_release (G_APPLICATION (self));
       if (screenshot_config->file != NULL)
@@ -541,7 +535,6 @@ finish_prepare_screenshot (ScreenshotApplication *self,
   if (screenshot_config->copy_to_clipboard)
     {
       screenshot_save_to_clipboard (self);
-      screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
 
       g_application_release (G_APPLICATION (self));
 

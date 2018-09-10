@@ -29,7 +29,6 @@ mathlib_dep = cc.find_library('m', required: false)
 x11_dep = [ dependency('x11'), dependency('xext') ]
 glib_dep = dependency('glib-2.0', version: glib_req_version)
 gtk_dep = dependency('gtk+-3.0', version: gtk_req_version)
-canberra_dep = dependency('libcanberra-gtk3')
 
 config_h = configuration_data()
 config_h.set_quoted('VERSION', meson.project_version())

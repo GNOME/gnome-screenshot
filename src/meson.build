@@ -22,7 +22,7 @@ resources = gnome.compile_resources('screenshot-resources',
 
 executable('gnome-screenshot', sources + resources,
            include_directories: [ root_inc, include_directories('.') ],
-           dependencies: [ mathlib_dep, x11_dep, glib_dep, gtk_dep, canberra_dep ],
+           dependencies: [ mathlib_dep, x11_dep, glib_dep, gtk_dep ],
            c_args: [
              '-DLOCALEDIR="@0@"'.format(gnome_screenshot_localedir),
              '-DGLIB_DISABLE_DEPRECATION_WARNINGS',
