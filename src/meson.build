@@ -38,7 +38,7 @@ i18n.merge_file('desktop',
                 install: true,
                 install_dir: gnome_screenshot_appsdir)
 
-i18n.merge_file('desktop',
+i18n.merge_file('appdata',
                 input: 'org.gnome.Screenshot.metainfo.xml.in',
                 output: 'org.gnome.Screenshot.metainfo.xml',
                 po_dir: join_paths(meson.current_source_dir(), '../po'),
