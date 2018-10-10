@@ -21,6 +21,7 @@
 #include "config.h"
 
 #include <gtk/gtk.h>
+#include <time.h>
 
 #include "screenshot-area-selection.h"
 
@@ -232,6 +233,8 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   GdkDeviceManager *manager;
   GdkDevice *pointer, *keyboard;
   GdkGrabStatus res;
+  gint try_count;
+  struct timespec tim, tim2;
 
   data.rect.x = 0;
   data.rect.y = 0;
@@ -252,6 +255,14 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   pointer = gdk_device_manager_get_client_pointer (manager);
   keyboard = gdk_device_get_associated_device (pointer);
 
+  tim.tv_sec = 0;
+  tim.tv_nsec = 200 * 1000000; /* 200ms */
+
+  try_count = 0;
+
+do_pointer_grab:
+  try_count++;
+
   res = gdk_device_grab (pointer, gtk_widget_get_window (data.window),
                          GDK_OWNERSHIP_NONE, FALSE,
                          GDK_POINTER_MOTION_MASK |
@@ -261,17 +272,37 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
 
   if (res != GDK_GRAB_SUCCESS)
     {
+      if (try_count < 3)
+        {
+          nanosleep (&tim, &tim2);
+
+          goto do_pointer_grab;
+        }
+
       g_object_unref (cursor);
       goto out;
     }
+
+  try_count = 0;
+
+do_keyboard_grab:
+  try_count++;
 
   res = gdk_device_grab (keyboard, gtk_widget_get_window (data.window),
                          GDK_OWNERSHIP_NONE, FALSE,
                          GDK_KEY_PRESS_MASK |
                          GDK_KEY_RELEASE_MASK,
                          NULL, GDK_CURRENT_TIME);
+
   if (res != GDK_GRAB_SUCCESS)
     {
+      if (try_count < 3)
+        {
+          nanosleep (&tim, &tim2);
+
+          goto do_keyboard_grab;
+        }
+
       gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
       g_object_unref (cursor);
       goto out;
