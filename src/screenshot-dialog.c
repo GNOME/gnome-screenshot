@@ -335,7 +335,7 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
       GdkDisplay *display;
       GdkCursor *cursor;
       /* Change cursor to busy */
-      display = gtk_widget_get_window (GTK_WIDGET (dialog));
+      display = gtk_widget_get_display (GTK_WIDGET (dialog));
       cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
       g_object_unref (cursor);
