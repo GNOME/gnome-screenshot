@@ -11,10 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils.master.ml\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"screenshot&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-18 11:24+0000\n"
-"PO-Revision-Date: 2013-04-29 17:44+0530\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/issues\n"
+"POT-Creation-Date: 2018-09-03 23:13+0000\n"
+"PO-Revision-Date: 2018-11-05 23:18+0800\n"
 "Last-Translator: Balasankar C <c.balasankar@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
 "Language: ml\n"
@@ -22,332 +21,389 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Project-Style: gnome\n"
 
-#: ../src/gnome-screenshot.desktop.in.h:1 ../src/screenshot-application.c:777
-msgid "Screenshot"
-msgstr "തിരച്ചിത്രം"
-
-#: ../src/gnome-screenshot.desktop.in.h:2 ../src/screenshot-application.c:778
-msgid "Save images of your screen or individual windows"
-msgstr "നിങ്ങളുടെ സ്ക്രീനിന്റെ അല്ലെങ്കില്‍ ഓരോ ജാലകങ്ങളുടെ ചിത്രങ്ങള്‍ സൂക്ഷിക്കുക"
-
-#: ../src/gnome-screenshot.desktop.in.h:3
-msgid "snapshot;capture;print;"
-msgstr "snapshot;capture;print;"
-
-#: ../src/gnome-screenshot.desktop.in.h:4
-msgid "Take a Screenshot of the Whole Screen"
-msgstr "സ്ക്രീന്‍ മുഴുവനും കാണുന്ന ഒരു ചിത്രം എടുക്കുക"
-
-#: ../src/gnome-screenshot.desktop.in.h:5
-msgid "Take a Screenshot of the Current Window"
-msgstr "നിലവിലുളള ജാലകത്തിന്റെ ചിത്രം എടുക്കുക"
-
-#: ../src/screenshot-app-menu.ui.h:1
-msgid "About Screenshot"
-msgstr "തിരചിത്രം സംബന്ധിച്ചു്"
-
-#: ../src/screenshot-app-menu.ui.h:2
-msgid "Help"
-msgstr "സഹായം"
-
-#: ../src/screenshot-app-menu.ui.h:3
-msgid "Quit"
-msgstr "പുറത്തു് കടക്കുക"
-
-#: ../src/screenshot-dialog.ui.h:1
-msgid "Save Screenshot"
-msgstr "തിരച്ചിത്രം സംരക്ഷിക്കുക"
-
-#: ../src/screenshot-dialog.ui.h:2
-msgid "_Name:"
-msgstr "_പേരു്:"
-
-#: ../src/screenshot-dialog.ui.h:3
-msgid "Save in _folder:"
-msgstr "ഏത് _അറയില്‍ സൂക്ഷിക്കണം:"
-
-#: ../src/screenshot-dialog.ui.h:4
-msgid "C_opy to Clipboard"
-msgstr "ഓര്‍മ്മച്ചെപ്പിലേയ്ക്കു് പ_കര്‍ത്തുക"
-
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:1
+#: src/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
-msgstr "ജാലകമനുസരിച്ചുള്ള തിരച്ചിത്രം (നിലവില്‍ ലഭ്യമല്ല)"
+msgstr "ജാലകമനുസരിച്ചുള്ള സ്ക്രീന്‍ഷോട്ട് (നിലവില്‍ ലഭ്യമല്ല)"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:2
+#: src/org.gnome.gnome-screenshot.gschema.xml:12
 msgid ""
-"Grab just the current window, rather than the whole desktop. This key has "
-"been deprecated and it is no longer in use."
+"Grab just the current window, rather than the whole desktop. This key has been deprecated and it is no "
+"longer in use."
 msgstr ""
-"മുഴുവന്‍ പണിയിടവും എടുക്കുന്നതിനു് പകരം സജീവമായ ജാലകം മാത്രം എടുക്കുക. ഈ കീ "
-"നിരുത്സാഹപ്പെടുത്തിയതും ഇപ്പോള്‍ ഉപയോഗത്തിലില്ലാത്തതുമാണു്. "
+"മുഴുവന്‍ പണിയിടവും എടുക്കുന്നതിന് പകരം സജീവമായ ജാലകം മാത്രം എടുക്കുക. ഈ കീ നിരുത്സാഹപ്പെടുത്തിയതും ഇപ്പോള്‍ "
+"ഉപയോഗത്തിലില്ലാത്തതുമാണ് ."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:3
+#: src/org.gnome.gnome-screenshot.gschema.xml:16
 msgid "Screenshot delay"
-msgstr "തിരച്ചിത്രം എടുക്കുന്നതിനു മുമ്പുള്ള ഇടവേള"
+msgstr "സ്ക്രീന്‍ഷോട്ട് എടുക്കുന്നതിനു മുമ്പുള്ള ഇടവേള"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:4
+#: src/org.gnome.gnome-screenshot.gschema.xml:17
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "തിരച്ചിത്രം എടുക്കുന്നതിനു് മുമ്പായി കാത്തിരിക്കേണ്ട സമയം സെക്കന്റുകളില്‍."
+msgstr "സ്ക്രീന്‍ഷോട്ട് എടുക്കുന്നതിനു് മുമ്പായി കാത്തിരിക്കേണ്ട സമയം സെക്കന്റുകളില്‍."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:5
+#: src/org.gnome.gnome-screenshot.gschema.xml:21
 msgid "Screenshot directory"
-msgstr "തിരച്ചിത്ര അറ"
+msgstr "സ്ക്രീന്‍ഷോട്ട് ഡയറക്ടറി"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:6
+#: src/org.gnome.gnome-screenshot.gschema.xml:22
 msgid "The directory where the screenshots will be saved by default."
-msgstr "തിരച്ചിത്രങ്ങള്‍ വയ്ക്കുന്ന സഹജ അറ."
+msgstr "സ്ക്രീന്‍ഷോട്ട് വയ്ക്കുന്ന സ്വതവേയുള്ള ഡയറക്ടറി."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:7
+#: src/org.gnome.gnome-screenshot.gschema.xml:26
 msgid "Last save directory"
-msgstr "അവസാനം സൂക്ഷിച്ച അറ"
+msgstr "അവസാനം സൂക്ഷിച്ച ഡയറക്ടറി"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:8
+#: src/org.gnome.gnome-screenshot.gschema.xml:27
 msgid "The last directory a screenshot was saved in interactive mode."
-msgstr "പരസ്പര വിനിമയ ദശയില്‍ അവസാനമായി തിരച്ചിത്രം സൂക്ഷിച്ച അറ."
+msgstr "ഇന്റെറാക്ടീവ് രീതിയില്‍ അവസാനമായി സ്ക്രീന്‍ഷോട്ട് സൂക്ഷിച്ച ഡയറക്ടറി."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:9
+#: src/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Border"
 msgstr "അതിര് ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:10
+#: src/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the window manager border along with the screenshot"
-msgstr "തിരച്ചിത്രത്തിനൊപ്പം ജാലക നടത്തിപ്പുകാരന്റെ അതിരും  ഉള്‍പ്പെടുത്തുക"
+msgstr "സ്ക്രീന്‍ഷോട്ടിനൊപ്പം ജാലക നടത്തിപ്പുകാരന്റെ അതിരും ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:11
+#: src/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include Pointer"
 msgstr "സൂചിക ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:12
+#: src/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the pointer in the screenshot"
-msgstr "തിരച്ചിത്രത്തിനൊപ്പം സൂചികയും ഉള്‍പ്പെടുത്തുക"
+msgstr "സ്ക്രീന്‍ഷോട്ടിനൊപ്പം സൂചികയും ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:13
+#: src/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Include ICC Profile"
 msgstr "ഐസിസി പ്രൊഫൈല്‍ ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:14
+#: src/org.gnome.gnome-screenshot.gschema.xml:42
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "തിരച്ചിത്ര ഫയലിനൊപ്പം ലക്ഷ്യത്തിന്റെ ഐസിസി പ്രൊഫൈലും ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:15
+#: src/org.gnome.gnome-screenshot.gschema.xml:46
 msgid "Border Effect"
 msgstr "അതിര്‍ പ്രഭാവം"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:16
-msgid ""
-"Effect to add to the outside of a border. Possible values are \"shadow\", "
-"\"none\", and \"border\"."
-msgstr ""
-"അതിരിന്റെ പുറത്തു് ചേര്‍ക്കുവാനുള്ള പ്രഭാവം. സാധ്യമായ മൂല്ല്യങ്ങള്‍: \"shadow\", \"none\", "
-"\"border\"."
+#: src/org.gnome.gnome-screenshot.gschema.xml:47
+msgid "Effect to add to the outside of a border. Possible values are “shadow”, “none”, and “border”."
+msgstr "അതിരിന്റെ പുറത്തു് ചേര്‍ക്കുവാനുള്ള പ്രഭാവം. സാധ്യമായ മൂല്ല്യങ്ങള്‍: \"shadow\", \"none\", \"border\"."
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:17
+#: src/org.gnome.gnome-screenshot.gschema.xml:51
 msgid "Default file type extension"
-msgstr ""
+msgstr "സ്വതേയുള്ള ഫയല്‍ടൈപ്പ് എക്സ്റ്റന്‍ഷന്‍"
 
-#: ../src/org.gnome.gnome-screenshot.gschema.xml.in.h:18
+#: src/org.gnome.gnome-screenshot.gschema.xml:52
 msgid "The default file type extension for screenshots."
+msgstr "തിരച്ചിത്രങ്ങളുടെ സ്വതേയുള്ള ഫയല്‍ടൈപ്പ് എക്സ്റ്റെന്‍ഷന്‍."
+
+#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:770
+#: src/screenshot-application.c:838
+msgid "Screenshot"
+msgstr "സ്ക്രീന്‍ഷോട്ട്"
+
+#: src/org.gnome.Screenshot.desktop.in:4 src/org.gnome.Screenshot.metainfo.xml.in:8
+#: src/screenshot-application.c:771
+msgid "Save images of your screen or individual windows"
+msgstr "നിങ്ങളുടെ സ്ക്രീനിന്റെ അല്ലെങ്കില്‍ ഓരോ ജാലകങ്ങളുടെ ചിത്രങ്ങള്‍ സൂക്ഷിക്കുക"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: src/org.gnome.Screenshot.desktop.in:6
+msgid "snapshot;capture;print;screenshot;"
+msgstr "snapshot;capture;print;screenshot;"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: src/org.gnome.Screenshot.desktop.in:11
+msgid "applets-screenshooter"
+msgstr "applets-screenshooter"
+
+#: src/org.gnome.Screenshot.desktop.in:22
+msgid "Take a Screenshot of the Whole Screen"
+msgstr "സ്ക്രീന്‍ മുഴുവനും കാണുന്ന ഒരു ചിത്രം എടുക്കുക"
+
+#: src/org.gnome.Screenshot.desktop.in:26
+msgid "Take a Screenshot of the Current Window"
+msgstr "നിലവിലുളള ജാലകത്തിന്റെ ചിത്രം എടുക്കുക"
+
+#: src/org.gnome.Screenshot.metainfo.xml.in:7
+msgid "GNOME Screenshot"
+msgstr "ഗ്നോം സ്ക്രീന്‍ഷോട്ട്"
+
+#: src/org.gnome.Screenshot.metainfo.xml.in:10
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your computer screen. Screenshots "
+"can be of your whole screen, any specific application, or a selected rectangular area. You can also "
+"copy the captured screenshot directly into the GNOME clipboard and paste it into other applications."
 msgstr ""
+"നിങ്ങളുടെ കമ്പ്യൂട്ടര്‍ ജാലകത്തിന്റെ തത്സമയ ചിത്രങ്ങളെടുക്കാന്‍ സഹായിക്കുന്ന പ്രയോഗമാണ് ഗ്നോം സ്ക്രീന്‍ഷോട്ട്. ഇത്തരത്തിലെടുക്കുന്ന "
+"ചിത്രങ്ങള്‍ ജാലകം മുഴുവനുമോ , സൂചിപ്പിച്ച പ്രയോഗങ്ങളുടെ ചിത്രങ്ങളോ, അല്ലെങ്കില്‍ കൃത്യമായ ഭാഗങ്ങളുടെയോ ചിത്രം ആവാം. നിങ്ങള്‍ക്ക് ഈ "
+"ചിത്രങ്ങള്‍ ഗ്നോം ക്ലിപ്പ്ബോഡില്‍ പകര്‍ത്തി മറ്റ് പ്രയോഗങ്ങളില്‍ ഉപയോഗിക്കാം."
 
-#: ../src/screenshot-application.c:144
+#: src/org.gnome.Screenshot.metainfo.xml.in:17
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it’s not open: just press the PrtSc button "
+"on your keyboard, and a snapshot of your whole screen will be saved to your Pictures folder. Hold Alt "
+"while pressing PrtSc and you will get a screenshot of only the currently selected window."
+msgstr ""
+"തിരച്ചിത്രം എടുക്കാന്‍ ഈ പ്രയോഗം തുറക്കണമെന്നില്ല. നിങ്ങളുടെ കീബോഡിലെ PrtSc ബട്ടണ്‍ അമര്‍ത്തിയാല്‍ നിങ്ങളുടെ കമ്പ്യൂട്ടര്‍ "
+"ജാലകത്തിന്റെ ചിത്രം ചിത്രങ്ങള്‍ക്കായുള്ള അറയില്‍ ശേഖരിക്കപ്പെടും. PrtSc അമര്‍ത്തുമ്പോള്‍ Alt കീയും അമര്‍ത്തിയാല്‍ ഒരു പ്രത്യേക "
+"ഭാഗത്തിന്റെ മാത്രം തിരച്ചിത്രം എടുക്കാം."
+
+#: src/screenshot-app-menu.ui:6
+msgid "Help"
+msgstr "സഹായം"
+
+#: src/screenshot-app-menu.ui:10
+msgid "About"
+msgstr "കുറിച്ച്"
+
+#: src/screenshot-app-menu.ui:14
+msgid "Quit"
+msgstr "പുറത്തു് കടക്കുക"
+
+#: src/screenshot-application.c:151
 #, c-format
-msgid "A file named \"%s\" already exists in \"%s\""
-msgstr "\"%s\" എന്ന പേരില്‍ ഒരു ഫയല്‍ \"%s\" എന്ന അറയില്‍ ഉണ്ടു്"
+msgid "A file named “%s” already exists in “%s”"
+msgstr "\"%s\" എന്ന പേരില്‍ മറ്റൊരു ഫയല്‍ ഇപ്പോളേ \"%s\" അറയില്‍ ഉണ്ട് "
 
-#: ../src/screenshot-application.c:151
+#: src/screenshot-application.c:158
 msgid "Overwrite existing file?"
 msgstr "ഇപ്പോഴുള്ള ഫയലിനെ മാറ്റിയെഴുതട്ടെ?"
 
-#: ../src/screenshot-application.c:172 ../src/screenshot-application.c:181
-#: ../src/screenshot-application.c:461 ../src/screenshot-application.c:465
-#: ../src/screenshot-application.c:505 ../src/screenshot-application.c:508
+#: src/screenshot-application.c:180 src/screenshot-application.c:189 src/screenshot-application.c:466
+#: src/screenshot-application.c:470 src/screenshot-application.c:510 src/screenshot-application.c:513
 msgid "Unable to capture a screenshot"
-msgstr "തിരച്ചിത്രം എടുക്കുവാന്‍ സാധ്യമല്ല"
+msgstr "സ്ക്രീന്‍ഷോട്ട് എടുക്കുവാന്‍ സാധ്യമല്ല"
 
-#: ../src/screenshot-application.c:173
+#: src/screenshot-application.c:181
 msgid "Error creating file. Please choose another location and retry."
 msgstr "ഫയല്‍ ഉണ്ടാക്കാന്‍ സാധിച്ചില്ല. ദയവായി മറ്റൊരു സ്ഥലം കണ്ടുപിടിച്ചു് വീണ്ടും ശ്രമിക്കുക."
 
-#: ../src/screenshot-application.c:462
+#: src/screenshot-application.c:467
 msgid "Error creating file"
 msgstr "ഫയല്‍ ഉണ്ടാക്കുന്നതില്‍ പിശകു്"
 
-#: ../src/screenshot-application.c:473 ../src/screenshot-application.c:538
+#: src/screenshot-application.c:478 src/screenshot-application.c:546
 msgid "Screenshot taken"
-msgstr "തിരച്ചിത്രം എടുത്തു"
+msgstr "സ്ക്രീന്‍ഷോട്ട് എടുത്തു"
 
-#: ../src/screenshot-application.c:506
+#: src/screenshot-application.c:511
 msgid "All possible methods failed"
 msgstr "എല്ലാ വഴിയും പരാജയപ്പെട്ടു"
 
-#: ../src/screenshot-application.c:639
+#: src/screenshot-application.c:634
 msgid "Send the grab directly to the clipboard"
 msgstr "പിടിച്ചെടുത്ത ചിത്രം നേരെ ഓര്‍മ്മച്ചെപ്പിലേയ്ക്കു അയയ്ക്കൂ"
 
-#: ../src/screenshot-application.c:640
+#: src/screenshot-application.c:635
 msgid "Grab a window instead of the entire screen"
 msgstr "പൂര്‍ണ്ണമായ സ്ക്രീനിന് പകരം ഒരു ജാലകം തിരഞ്ഞെടുക്കുക"
 
-#: ../src/screenshot-application.c:641
+#: src/screenshot-application.c:636
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "പൂര്‍ണ്ണമായ സ്ക്രീനിനു് പകരം സ്ക്രീനിന്റെ ഒരു ഭാഗം തിരഞ്ഞെടുക്കുക"
 
-#: ../src/screenshot-application.c:642
+#: src/screenshot-application.c:637
 msgid "Include the window border with the screenshot"
 msgstr "തിരച്ചിത്രത്തിനൊപ്പം ജാലകത്തിന്റെ അതിരും ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/screenshot-application.c:643
+#: src/screenshot-application.c:638
 msgid "Remove the window border from the screenshot"
 msgstr "തിരച്ചിത്രത്തില്‍ നിന്നും ജാലകത്തിന്റെ അതിരു് നീക്കം ചെയ്യുക"
 
-#: ../src/screenshot-application.c:644
+#: src/screenshot-application.c:639
 msgid "Include the pointer with the screenshot"
 msgstr "തിരച്ചിത്രത്തിനൊപ്പം സൂചികയും ഉള്‍പ്പെടുത്തുക"
 
-#: ../src/screenshot-application.c:645
+#: src/screenshot-application.c:640
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr "നല്‍കിയിരിക്കുന്ന സമയത്തിന് [സെക്കന്‍ഡുകള്‍] ശേഷം തിരച്ചിത്രം എടുക്കുക "
+msgstr "നല്‍കിയിരിക്കുന്ന സമയത്തിന് [സെക്കന്‍ഡുകള്‍] ശേഷം തിരച്ചിത്രം എടുക്കുക"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-application.c:645
-#: ../src/screenshot-interactive-dialog.c:415
+#: src/screenshot-application.c:640 src/screenshot-interactive-dialog.c:415
 msgid "seconds"
 msgstr "സെക്കന്‍ഡുകള്‍"
 
-#: ../src/screenshot-application.c:646
-msgid "Effect to add to the border (shadow, border or none)"
-msgstr "അതിരിലേക്ക് ചേര്‍ക്കുവാനുള്ള പ്രഭാവം (shadow, border അല്ലെങ്കില്‍ none)"
+#: src/screenshot-application.c:641
+msgid "Effect to add to the border (shadow, border, vintage or none)"
+msgstr "അതിരിലേക്ക് ചേര്‍ക്കുവാനുള്ള പ്രഭാവം (shadow, border,vintage അല്ലെങ്കില്‍ none)"
 
-#: ../src/screenshot-application.c:646
+#: src/screenshot-application.c:641
 msgid "effect"
 msgstr "പ്രഭാവം"
 
-#: ../src/screenshot-application.c:647
+#: src/screenshot-application.c:642
 msgid "Interactively set options"
 msgstr "പരസ്പര സംവാദത്തിലൂടെ ഐച്ഛികങ്ങള്‍ സജ്ജീകരിയ്ക്കുക"
 
-#: ../src/screenshot-application.c:648
+#: src/screenshot-application.c:643
 msgid "Save screenshot directly to this file"
 msgstr "ഈ ഫയലിലേക്കു് തിരച്ചിത്രം സൂക്ഷിയ്ക്കുക"
 
-#: ../src/screenshot-application.c:648
+#: src/screenshot-application.c:643
 msgid "filename"
 msgstr "ഫയല്‍നാമം"
 
-#: ../src/screenshot-application.c:662
-msgid "Take a picture of the screen"
-msgstr "സ്ക്രീനിന്റെ ഒരു ചിത്രം എടുക്കുക"
+#: src/screenshot-application.c:644
+msgid "Print version information and exit"
+msgstr "പതിപ്പ് വിവരങ്ങള്‍ കാണിച്ച് പുറത്തു കടക്കുക"
 
-#: ../src/screenshot-application.c:780
+#: src/screenshot-application.c:773
 msgid "translator-credits"
 msgstr ""
-"അനി പീറ്റര്‍ <peter.ani@gmail.com>, സന്തോഷ് തോട്ടിങ്കല്‍ <santhosh.thottingal@gmail."
-"com>, പ്രവീണ്‍ എ <pravi.a@gmail.com>, മണിലാല്‍ കെ എം <libregeek@gmail.com>"
+"അനി പീറ്റര്‍ <peter.ani@gmail.com>, സന്തോഷ് തോട്ടിങ്കല്‍ <santhosh.thottingal@gmail.com>, പ്രവീണ്‍ എ <pravi."
+"a@gmail.com>, മണിലാല്‍ കെ എം <libregeek@gmail.com>, Nidarsh Raj <nidarshraj@autistici.org>, അനീഷ് ഷീല "
+"<aneesh.nl@gmail.com>"
 
-#: ../src/screenshot-config.c:59
-#, c-format
-msgid ""
-"Conflicting options: --window and --area should not be used at the same "
-"time.\n"
-msgstr ""
-"പൊരുത്തപ്പെടാത്ത ഉപാധികള്‍: --window യും --area യും ഒരേ സമയത്തുപയോഗിക്കുവാന്‍ പാടില്ല.\n"
+#: src/screenshot-config.c:117
+msgid "Conflicting options: --window and --area should not be used at the same time.\n"
+msgstr "പൊരുത്തപ്പെടാത്ത ഉപാധികള്‍: --window യും --area യും ഒരേ സമയത്തുപയോഗിക്കുവാന്‍ പാടില്ല.\n"
 
-#: ../src/screenshot-config.c:66
-#, c-format
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr ""
-"പൊരുത്തപ്പെടാത്ത ഉപാധികള്‍: --delay യും --area യും ഒരേ സമയത്തുപയോഗിക്കുവാന്‍ പാടില്ല.\n"
+#: src/screenshot-config.c:124
+msgid "Conflicting options: --area and --delay should not be used at the same time.\n"
+msgstr "പൊരുത്തപ്പെടാത്ത ഉപാധികള്‍: --delay യും --area യും ഒരേ സമയത്തുപയോഗിക്കുവാന്‍ പാടില്ല.\n"
 
-#: ../src/screenshot-dialog.c:309
+#: src/screenshot-dialog.c:319
 msgid "Screenshot.png"
-msgstr "തിരച്ചിത്രം.png"
+msgstr "Screenshot.png"
 
-#. translators: this is the name of the file that gets made up
-#. * with the screenshot if the entire screen is taken
-#: ../src/screenshot-filename-builder.c:145
-#, fuzzy, c-format
-#| msgid "Screenshot from %s.png"
+#: src/screenshot-dialog.ui:7
+msgid "Save Screenshot"
+msgstr "സ്ക്രീന്‍ഷോട്ട് സംരക്ഷിക്കുക"
+
+#: src/screenshot-dialog.ui:17
+msgid "Back"
+msgstr "പിറകോട്ട് പോകുക"
+
+#: src/screenshot-dialog.ui:38
+msgid "C_opy to Clipboard"
+msgstr "ഓര്‍മ്മച്ചെപ്പിലേയ്ക്കു് പകര്‍ത്തുക (_o)"
+
+#: src/screenshot-dialog.ui:50
+msgid "_Save"
+msgstr "സൂക്ഷിക്കുക (_S)"
+
+#: src/screenshot-dialog.ui:110
+msgid "_Name:"
+msgstr "പേര് (_N):"
+
+#: src/screenshot-dialog.ui:127
+msgid "Save in _folder:"
+msgstr "ഏത് അറയില്‍ സൂക്ഷിക്കണം (_f):"
+
+#. translators: this is the name of the file that gets made up with the
+#. * screenshot if the entire screen is taken. The first placeholder is a
+#. * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
+#. * file format (e.g. "png").
+#.
+#: src/screenshot-filename-builder.c:147
+#, c-format
 msgid "Screenshot from %s.%s"
-msgstr "%s മുതലുള്ള തിരച്ചിത്രം.png "
+msgstr "%s.%s മുതലുള്ള സ്ക്രീന്‍ഷോട്ട്"
 
-#. translators: this is the name of the file that gets
-#. * made up with the screenshot if the entire screen is
-#. * taken
-#: ../src/screenshot-filename-builder.c:152
-#, fuzzy, c-format
-#| msgid "Screenshot from %s - %d.png"
+#. translators: this is the name of the file that gets made up with the
+#. * screenshot if the entire screen is taken and the simpler filename
+#. * already exists. The first and second placeholders are a timestamp and
+#. * a counter to make it unique (e.g. "2017-05-21 12-24-03 - 2"); the third
+#. * placeholder is the file format (e.g. "png").
+#.
+#: src/screenshot-filename-builder.c:157
+#, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "%s-%d മുതലുള്ള തിരച്ചിത്രം.png"
+msgstr "%s-%d.%s മുതലുള്ള സ്ക്രീന്‍ഷോട്ട്"
 
-#: ../src/screenshot-interactive-dialog.c:154
+#. Translators:
+#. * these are the names of the effects available which will be
+#. * displayed inside a combo box in interactive mode for the user
+#. * to chooser.
+#.
+#: src/screenshot-interactive-dialog.c:157
 msgid "None"
 msgstr "ശൂന്യം"
 
-#: ../src/screenshot-interactive-dialog.c:155
+#: src/screenshot-interactive-dialog.c:158
 msgid "Drop shadow"
 msgstr "നിഴല്‍ ഒഴിവാക്കുക"
 
-#: ../src/screenshot-interactive-dialog.c:156
+#: src/screenshot-interactive-dialog.c:159
 msgid "Border"
 msgstr "അതിര്"
 
+#: src/screenshot-interactive-dialog.c:160
+msgid "Vintage"
+msgstr "വിന്റേജ്"
+
 #. * Include pointer *
-#: ../src/screenshot-interactive-dialog.c:260
+#: src/screenshot-interactive-dialog.c:264
 msgid "Include _pointer"
-msgstr "_സൂചിക ഉള്‍പ്പെടുത്തുക"
+msgstr "സൂചിക ഉള്‍പ്പെടുത്തുക (_p)"
 
 #. * Include window border *
-#: ../src/screenshot-interactive-dialog.c:270
+#: src/screenshot-interactive-dialog.c:274
 msgid "Include the window _border"
-msgstr "ജാലകത്തിന്റെ _അതിര് ഉള്‍പ്പെടുത്തുക"
+msgstr "ജാലകത്തിന്റെ അതിര് ഉള്‍പ്പെടുത്തുക (_b)"
 
-#: ../src/screenshot-interactive-dialog.c:287
+#: src/screenshot-interactive-dialog.c:291
 msgid "Apply _effect:"
-msgstr "_പ്രഭാവം നിലവില്‍ വരുത്തുക:"
+msgstr "പ്രഭാവം നിലവില്‍ വരുത്തുക (_e):"
 
-#: ../src/screenshot-interactive-dialog.c:349
+#: src/screenshot-interactive-dialog.c:348
 msgid "Grab the whole sc_reen"
-msgstr "_സ്ക്രീന്‍ മുഴുവന്‍ എടുക്കുക"
+msgstr "സ്ക്രീന്‍ മുഴുവന്‍ എടുക്കുക (_r)"
 
-#: ../src/screenshot-interactive-dialog.c:363
+#: src/screenshot-interactive-dialog.c:362
 msgid "Grab the current _window"
-msgstr "നിലവിലുള്ള _ജാലകം എടുക്കുക"
+msgstr "നിലവിലുള്ള ജാലകം എടുക്കുക (_w)"
 
-#: ../src/screenshot-interactive-dialog.c:375
+#: src/screenshot-interactive-dialog.c:374
 msgid "Select _area to grab"
-msgstr "തിരച്ചിത്രം എടുക്കുവാനുള്ള _സ്ഥലം തിരഞ്ഞെടുക്കുക"
+msgstr "സ്ക്രീന്‍ഷോട്ട് എടുക്കുവാനുള്ള സ്ഥലം തിരഞ്ഞെടുക്കുക (_a)"
 
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: ../src/screenshot-interactive-dialog.c:395
+#: src/screenshot-interactive-dialog.c:394
 msgid "Grab after a _delay of"
-msgstr "പറഞ്ഞിരിക്കുന്ന സമയത്തിന് _ശേഷം എടുക്കുക"
+msgstr "പറഞ്ഞിരിക്കുന്ന സമയത്തിന് ശേഷം എടുക്കുക (_d)"
 
-#: ../src/screenshot-interactive-dialog.c:448
-#: ../src/screenshot-interactive-dialog.c:458
+#: src/screenshot-interactive-dialog.c:464
 msgid "Take Screenshot"
 msgstr "തിരച്ചിത്രം എടുക്കുക"
 
-#: ../src/screenshot-interactive-dialog.c:459
+#: src/screenshot-interactive-dialog.c:465
 msgid "Effects"
 msgstr "പ്രഭാവങ്ങള്‍"
 
-#: ../src/screenshot-interactive-dialog.c:479
+#: src/screenshot-interactive-dialog.c:469
 msgid "Take _Screenshot"
-msgstr "_തിരച്ചിത്രം എടുക്കുക"
+msgstr "സ്ക്രീന്‍ഷോട്ട് എടുക്കുക (_S)"
 
-#: ../src/screenshot-utils.c:724
+#: src/screenshot-interactive-dialog.c:486
+msgid "_Cancel"
+msgstr "റദ്ദാക്കുക (_C)"
+
+#: src/screenshot-utils.c:725
 msgid "Error loading the help page"
 msgstr "സഹായത്തിനുള്ള പേജ് ലഭ്യമാക്കുന്നതിനില്‍ പിശക്"
+
+#, fuzzy
+#~| msgid "Screenshot"
+#~ msgid "org.gnome.Screenshot"
+#~ msgstr "തിരച്ചിത്രം"
+
+#~ msgid "_Help"
+#~ msgstr "_സഹായം"
+
+#~ msgid "About Screenshot"
+#~ msgstr "തിരചിത്രം സംബന്ധിച്ചു്"
+
+#~ msgid "Take a picture of the screen"
+#~ msgstr "സ്ക്രീനിന്റെ ഒരു ചിത്രം എടുക്കുക"
 
 #~ msgid "*"
 #~ msgstr "*"
