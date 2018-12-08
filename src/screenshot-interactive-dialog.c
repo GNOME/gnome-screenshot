@@ -25,6 +25,7 @@
 
 #include <glib/gi18n.h>
 
+#include "screenshot-application.h"
 #include "screenshot-config.h"
 #include "screenshot-interactive-dialog.h"
 #include "screenshot-utils.h"
@@ -86,38 +87,19 @@ delay_spin_value_changed_cb (GtkSpinButton *button)
 }
 
 static void
-include_border_toggled_cb (GtkToggleButton *button,
-                           gpointer         data)
-{
-  screenshot_config->include_border = gtk_toggle_button_get_active (button);
-}
-
-static void
-include_pointer_toggled_cb (GtkToggleButton *button,
+include_pointer_toggled_cb (GtkSwitch *toggle,
                             gpointer         data)
 {
-  screenshot_config->include_pointer = gtk_toggle_button_get_active (button);
+  screenshot_config->include_pointer = gtk_switch_get_active (toggle);
+  gtk_switch_set_state (toggle, gtk_switch_get_active (toggle));
 }
 
 static void
-effect_combo_changed_cb (GtkComboBox *combo,
+use_shadow_toggled_cb (GtkSwitch *toggle,
                          gpointer     user_data)
 {
-  GtkTreeIter iter;
-
-  if (gtk_combo_box_get_active_iter (combo, &iter))
-    {
-      GtkTreeModel *model;
-      gchar *effect;
-
-      model = gtk_combo_box_get_model (combo);
-      gtk_tree_model_get (model, &iter, COLUMN_NICK, &effect, -1);
-
-      g_assert (effect != NULL);
-
-      g_free (screenshot_config->border_effect);
-      screenshot_config->border_effect = effect; /* gets free'd later */
-    }
+  screenshot_config->use_shadow = gtk_switch_get_active (toggle);
+  gtk_switch_set_state (toggle, gtk_switch_get_active (toggle));
 }
 
 static gint
@@ -140,281 +122,82 @@ interactive_dialog_key_press_cb (GtkWidget   *widget,
   return FALSE;
 }
 
-typedef struct {
-  ScreenshotEffectType id;
-  const gchar *label;
-  const gchar *nick;
-} ScreenshotEffect;
-
-static const ScreenshotEffect effects[] = {
-  /* Translators:
-   * these are the names of the effects available which will be
-   * displayed inside a combo box in interactive mode for the user
-   * to chooser.
-   */
-  { SCREENSHOT_EFFECT_NONE, N_("None"), "none" },
-  { SCREENSHOT_EFFECT_SHADOW, N_("Drop shadow"), "shadow" },
-  { SCREENSHOT_EFFECT_BORDER, N_("Border"), "border" },
-  { SCREENSHOT_EFFECT_VINTAGE, N_("Vintage"), "vintage" }
-};
-
-static guint n_effects = G_N_ELEMENTS (effects);
-
-static GtkWidget *
-create_effects_combo (void)
-{
-  GtkWidget *retval;
-  GtkListStore *model;
-  GtkCellRenderer *renderer;
-  gint i;
-
-  model = gtk_list_store_new (N_COLUMNS,
-                              G_TYPE_STRING,
-                              G_TYPE_STRING,
-                              G_TYPE_UINT);
-
-  for (i = 0; i < n_effects; i++)
-    {
-      GtkTreeIter iter;
-
-      gtk_list_store_insert (model, &iter, i);
-      gtk_list_store_set (model, &iter,
-                          COLUMN_ID, effects[i].id,
-                          COLUMN_LABEL, gettext (effects[i].label),
-                          COLUMN_NICK, effects[i].nick,
-                          -1);
-    }
-
-  retval = gtk_combo_box_new ();
-  gtk_combo_box_set_model (GTK_COMBO_BOX (retval),
-                           GTK_TREE_MODEL (model));
-  g_object_unref (model);
-
-  switch (screenshot_config->border_effect[0])
-    {
-    case 's': /* shadow */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_SHADOW);
-      break;
-    case 'b': /* border */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_BORDER);
-      break;
-    case 'v': /* vintage */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_VINTAGE);
-      break;
-    case 'n': /* none */
-      gtk_combo_box_set_active (GTK_COMBO_BOX (retval),
-                                SCREENSHOT_EFFECT_NONE);
-      break;
-    default:
-      break;
-    }
-
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (retval), renderer, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (retval), renderer,
-                                  "text", COLUMN_LABEL,
-                                  NULL);
-
-  g_signal_connect (retval, "changed",
-                    G_CALLBACK (effect_combo_changed_cb),
-                    NULL);
-
-  return retval;
-}
-
 static void
-create_effects_frame (GtkWidget   *outer_vbox,
-                      const gchar *frame_title)
+connect_effects_frame (GtkBuilder *ui)
 {
-  GtkWidget *main_vbox, *vbox, *hbox;
-  GtkWidget *label;
-  GtkWidget *check;
-  GtkWidget *combo;
-  gchar *title;
-
-  main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-  gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
-  gtk_widget_show (main_vbox);
-  effects_vbox = main_vbox;
-
-  title = g_strconcat ("<b>", frame_title, "</b>", NULL);
-  label = gtk_label_new (title);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  g_free (title);
-
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
-  gtk_widget_set_margin_start (vbox, 12);
-  gtk_widget_show (vbox);
+  GtkWidget *pointer;
+  GtkWidget *shadow;
 
   /** Include pointer **/
-  check = gtk_check_button_new_with_mnemonic (_("Include _pointer"));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
-                                screenshot_config->include_pointer);
-  g_signal_connect (check, "toggled",
+  pointer = GTK_WIDGET (gtk_builder_get_object (ui, "pointer"));
+  gtk_switch_set_active (GTK_SWITCH (pointer), screenshot_config->include_pointer);
+  g_signal_connect (pointer, "state-set",
                     G_CALLBACK (include_pointer_toggled_cb),
                     NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), check, FALSE, FALSE, 0);
-  gtk_widget_show (check);
 
-  /** Include window border **/
-  check = gtk_check_button_new_with_mnemonic (_("Include the window _border"));
-  gtk_widget_set_sensitive (check,
-                            screenshot_config->take_window_shot);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
-                                screenshot_config->include_border);
-  g_signal_connect (check, "toggled",
-                    G_CALLBACK (include_border_toggled_cb),
+  /** Use shadow **/
+  shadow = GTK_WIDGET (gtk_builder_get_object (ui, "shadow"));
+  gtk_switch_set_active (GTK_SWITCH (shadow), screenshot_config->use_shadow);
+  g_signal_connect (shadow, "state-set",
+                    G_CALLBACK (use_shadow_toggled_cb),
                     NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), check, FALSE, FALSE, 0);
-  gtk_widget_show (check);
-  border_check = check;
-
-  /** Effects **/
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new_with_mnemonic (_("Apply _effect:"));
-  gtk_widget_set_sensitive (label, screenshot_config->take_window_shot);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  effect_label = label;
-
-  combo = create_effects_combo ();
-  gtk_widget_set_sensitive (combo, screenshot_config->take_window_shot);
-  gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
-  gtk_widget_show (combo);
-  effect_combo = combo;
 }
 
 static void
-create_screenshot_frame (GtkWidget   *outer_vbox,
-                         const gchar *frame_title)
+connect_screenshot_frame (GtkBuilder *ui)
 {
-  GtkWidget *main_vbox, *vbox, *hbox;
-  GtkWidget *radio;
-  GtkWidget *image;
-  GtkWidget *spin;
-  GtkWidget *label;
   GtkAdjustment *adjust;
+  GtkWidget *screen;
+  GtkWidget *selection;
+  GtkWidget *window;
+  GtkWidget *delay;
   GSList *group;
-  gchar *title;
-
-  main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-  gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
-  gtk_widget_show (main_vbox);
-
-  title = g_strconcat ("<b>", frame_title, "</b>", NULL);
-  label = gtk_label_new (title);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  g_free (title);
-
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  image = gtk_image_new_from_icon_name (SCREENSHOT_ICON_NAME, GTK_ICON_SIZE_DIALOG);
-  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-  gtk_widget_show (image);
-
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
-  gtk_widget_show (vbox);
 
   /** Grab whole screen **/
   group = NULL;
-  radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Grab the whole sc_reen"));
+  screen = GTK_WIDGET (gtk_builder_get_object (ui, "screen"));
+
   if (screenshot_config->take_window_shot ||
       screenshot_config->take_area_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), FALSE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (screen), FALSE);
 
-  g_signal_connect (radio, "toggled",
+  g_signal_connect (screen, "toggled",
                     G_CALLBACK (target_toggled_cb),
                     GINT_TO_POINTER (TARGET_TOGGLE_DESKTOP));
-  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
-  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
-  gtk_widget_show (radio);
+  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (screen));
 
   /** Grab current window **/
-  radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Grab the current _window"));
+  window = GTK_WIDGET (gtk_builder_get_object (ui, "window"));
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (window), group);
+
   if (screenshot_config->take_window_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-  g_signal_connect (radio, "toggled",
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (window), TRUE);
+  g_signal_connect (window, "toggled",
                     G_CALLBACK (target_toggled_cb),
                     GINT_TO_POINTER (TARGET_TOGGLE_WINDOW));
-  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
-  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
-  gtk_widget_show (radio);
+  group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (window));
 
   /** Grab area of the desktop **/
-  radio = gtk_radio_button_new_with_mnemonic (group,
-                                              _("Select _area to grab"));
+  selection = GTK_WIDGET (gtk_builder_get_object (ui, "selection"));
+
   if (screenshot_config->take_area_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-  g_signal_connect (radio, "toggled",
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (selection), TRUE);
+  g_signal_connect (selection, "toggled",
                     G_CALLBACK (target_toggled_cb),
                     GINT_TO_POINTER (TARGET_TOGGLE_AREA));
-  gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
-  gtk_widget_show (radio);
 
   /** Grab after delay **/
-  delay_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), delay_hbox, FALSE, FALSE, 0);
-  gtk_widget_show (delay_hbox);
-
-  if (screenshot_config->take_area_shot)
-    gtk_widget_set_sensitive (delay_hbox, FALSE);
-
-  /* translators: this is the first part of the "grab after a
-   * delay of <spin button> seconds".
-   */
-  label = gtk_label_new_with_mnemonic (_("Grab after a _delay of"));
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
+  delay = GTK_WIDGET (gtk_builder_get_object (ui, "delay"));
 
   adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) screenshot_config->delay,
                                                0.0, 99.0,
                                                1.0,  1.0,
                                                0.0));
-  spin = gtk_spin_button_new (adjust, 1.0, 0);
-  g_signal_connect (spin, "value-changed",
+
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (delay), adjust);
+  g_signal_connect (delay, "value-changed",
                     G_CALLBACK (delay_spin_value_changed_cb),
                     NULL);
-  gtk_box_pack_start (GTK_BOX (delay_hbox), spin, FALSE, FALSE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
-  gtk_widget_show (spin);
-
-  /* translators: this is the last part of the "grab after a
-   * delay of <spin button> seconds".
-   */
-  label = gtk_label_new (_("seconds"));
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_box_pack_end (GTK_BOX (delay_hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
 }
 
 typedef struct {
@@ -431,66 +214,94 @@ capture_button_clicked_cb (GtkButton *button, CaptureData *data)
   g_free (data);
 }
 
+static void
+screenshot_listbox_update_header_func (GtkListBoxRow *row,
+                                       GtkListBoxRow *before,
+                                       gpointer user_data)
+{
+  GtkWidget *current;
+
+  if (before == NULL)
+    {
+      gtk_list_box_row_set_header (row, NULL);
+      return;
+    }
+
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
+    {
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show(current);
+      gtk_list_box_row_set_header (row, current);
+    }
+}
+
 GtkWidget *
 screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
 {
+  ScreenshotApplication *self = user_data;
   GtkWidget *dialog;
-  GtkWidget *main_vbox;
-  GtkWidget *header_bar;
-  GtkWidget *button;
-  GtkStyleContext *context;
-  GtkSizeGroup *size_group;
+  GtkWidget *capture_button;
+  GtkWidget *menu;
+  GtkWidget *screen_img;
+  GtkWidget *selection_img;
+  GtkWidget *window_img;
+  GtkWidget *listbox;
+  GMenuModel *app_menu;
+  GtkBuilder *ui;
   CaptureData *data;
+  guint res;
 
-  dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
+  ui = gtk_builder_new_from_resource ("/org/gnome/screenshot/screenshot-interactive.ui");
+  res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/screenshot-app-menu.ui", NULL);
+  g_assert (res != 0);
 
-  header_bar = gtk_header_bar_new ();
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header_bar), TRUE);
-  gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (header_bar), "menu");
-  gtk_window_set_titlebar (GTK_WINDOW (dialog), header_bar);
+  dialog = GTK_WIDGET (gtk_builder_get_object (ui, "screenshot_window"));
+  gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (self));
 
-  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+  capture_button = GTK_WIDGET (gtk_builder_get_object (ui, "capture_button"));
+
+  menu = GTK_WIDGET (gtk_builder_get_object (ui, "menu"));
+  app_menu = G_MENU_MODEL (gtk_builder_get_object (ui, "app-menu"));
+
+  gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (menu), app_menu);
+
+  screen_img = GTK_WIDGET (gtk_builder_get_object (ui, "screen_img"));
+  selection_img = GTK_WIDGET (gtk_builder_get_object (ui, "selection_img"));
+  window_img = GTK_WIDGET (gtk_builder_get_object (ui, "window_img"));
+
+  /* Replace placeholder icons */
+  GdkPixbuf *d = gdk_pixbuf_new_from_resource_at_scale ("/org/gnome/screenshot/display-symbolic.svg", 32, 32, TRUE, NULL);
+  GdkPixbuf *s = gdk_pixbuf_new_from_resource_at_scale ("/org/gnome/screenshot/selection-symbolic.svg", 32, 32, TRUE, NULL);
+  GdkPixbuf *w = gdk_pixbuf_new_from_resource_at_scale ("/org/gnome/screenshot/window-symbolic.svg", 32, 32, TRUE, NULL);
+
+  gtk_image_set_from_pixbuf (GTK_IMAGE (screen_img), d);
+  gtk_image_set_from_pixbuf (GTK_IMAGE (selection_img), s);
+  gtk_image_set_from_pixbuf (GTK_IMAGE (window_img), w);
+
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
-  gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+  listbox = GTK_WIDGET (gtk_builder_get_object (ui, "listbox"));
+  gtk_list_box_set_header_func (GTK_LIST_BOX (listbox),
+                                screenshot_listbox_update_header_func,
+                                user_data,
+                                NULL);
 
-  /* main container */
-  main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 18);
-  gtk_container_set_border_width (GTK_CONTAINER (main_vbox), 5);
-  gtk_container_add (GTK_CONTAINER (dialog), main_vbox);
-
-  create_screenshot_frame (main_vbox, _("Take Screenshot"));
-  create_effects_frame (main_vbox, _("Effects"));
-
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-  button = gtk_button_new_with_mnemonic (_("Take _Screenshot"));
-  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-  context = gtk_widget_get_style_context (button);
-  gtk_style_context_add_class (context, "suggested-action");
   data = g_new (CaptureData, 1);
   data->widget = dialog;
   data->callback = f;
   data->user_data = user_data;
-  g_signal_connect (button, "clicked", G_CALLBACK (capture_button_clicked_cb), data);
-  gtk_size_group_add_widget (size_group, button);
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (header_bar), button);
-  gtk_widget_set_can_default (button, TRUE);
-  gtk_widget_grab_default (button);
+  g_signal_connect (capture_button, "clicked", G_CALLBACK (capture_button_clicked_cb), data);
+  gtk_widget_set_can_default (capture_button, TRUE);
+  gtk_widget_grab_default (capture_button);
   g_signal_connect (dialog, "key-press-event",
                     G_CALLBACK (interactive_dialog_key_press_cb),
                     NULL);
 
-  button = gtk_button_new_with_mnemonic (_("_Cancel"));
-  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-  gtk_size_group_add_widget (size_group, button);
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (header_bar), button);
-  g_signal_connect_swapped (button, "clicked",
-                            G_CALLBACK (gtk_widget_destroy), dialog);
-
-  g_object_unref (size_group);
-
   gtk_widget_show_all (dialog);
+
+  connect_screenshot_frame (ui);
+  connect_effects_frame (ui);
 
   return dialog;
 }
