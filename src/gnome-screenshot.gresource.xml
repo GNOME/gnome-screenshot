@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/screenshot">
+    <file>display-symbolic.svg</file>
+    <file>selection-symbolic.svg</file>
+    <file>window-symbolic.svg</file>
     <file preprocess="xml-stripblanks">screenshot-app-menu.ui</file>
+    <file preprocess="xml-stripblanks">screenshot-interactive.ui</file>
     <file preprocess="xml-stripblanks">screenshot-dialog.ui</file>
   </gresource>
 </gresources>
