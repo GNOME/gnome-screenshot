@@ -9,3 +9,11 @@ flatpak:
     RUNTIME_REPO: 'https://sdk.gnome.org/gnome-nightly.flatpakrepo'
     APP_ID: 'org.gnome.Screenshot'
     BUNDLE: 'org.gnome.Screenshot.Devel.flatpak'
+
+review:
+  dependencies:
+    - 'flatpak'
+  extends: '.review'
+
+stop_review:
+  extends: '.stop_review'
