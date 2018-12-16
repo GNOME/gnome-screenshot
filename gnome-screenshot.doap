@@ -6,6 +6,8 @@
 
   <name xml:lang="en">gnome-screenshot</name>
   <shortdesc xml:lang="en">Take pictures of your screen</shortdesc>
+  <description>Takes a screenshot of the whole desktop, the currently
+  focused window, or an area of the screen.</description>
 
   <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
 
