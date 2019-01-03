@@ -23,7 +23,7 @@ gnome_screenshot_servicesdir = join_paths(gnome_screenshot_datadir, 'dbus-1', 's
 gnome_screenshot_schemadir = join_paths(gnome_screenshot_datadir, 'glib-2.0', 'schemas')
 
 glib_req_version = '>= 2.35.1'
-gtk_req_version = '>= 3.0.0'
+gtk_req_version = '>= 3.12.0'
 
 mathlib_dep = cc.find_library('m', required: false)
 x11_dep = [ dependency('x11'), dependency('xext') ]
