@@ -33,7 +33,7 @@ typedef void (*SaveScreenshotCallback) (ScreenshotResponse response, gpointer *u
 
 typedef struct {
   GdkPixbuf *screenshot;
-  GdkPixbuf *preview_image;
+  GtkImage *preview_image;
 
   GtkWidget *dialog;
   GtkWidget *save_widget;
