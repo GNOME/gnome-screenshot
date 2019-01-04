@@ -75,7 +75,9 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">end</property>
-                            <property name="label" translatable="yes">Screen</property>
+                            <property name="label" translatable="yes">_Screen</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">screen</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -126,7 +128,9 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">end</property>
-                            <property name="label" translatable="yes">Window</property>
+                            <property name="label" translatable="yes">_Window</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">window</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -176,7 +180,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">end</property>
-                            <property name="label" translatable="yes">Selection</property>
+                            <property name="label" translatable="yes">Se_lection</property>
+                            <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -243,7 +248,9 @@
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Show Pointer</property>
+                                <property name="label" translatable="yes">Show _Pointer</property>
+                                <property name="use_underline">True</property>
+                                <property name="mnemonic_widget">pointer</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -281,7 +288,9 @@
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Window Shadow</property>
+                                <property name="label" translatable="yes">Window S_hadow</property>
+                                <property name="use_underline">True</property>
+                                <property name="mnemonic_widget">shadow</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -322,7 +331,9 @@
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Delay in Seconds</property>
+                                <property name="label" translatable="yes">_Delay in Seconds</property>
+                                <property name="use_underline">True</property>
+                                <property name="mnemonic_widget">delay</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -376,11 +387,12 @@
         <property name="show_close_button">True</property>
         <child>
           <object class="GtkButton" id="capture_button">
-            <property name="label" translatable="yes">Take Screenshot</property>
+            <property name="label" translatable="yes">_Take Screenshot</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="action_name">app.screen-shot</property>
+            <property name="use_underline">True</property>
             <style>
               <class name="suggested-action"/>
             </style>
