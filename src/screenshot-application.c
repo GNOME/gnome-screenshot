@@ -786,7 +786,6 @@ static GActionEntry action_entries[] = {
 static void
 screenshot_application_startup (GApplication *app)
 {
-  const gchar *quit_accels[2] = { "<Primary>q", NULL };
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
@@ -798,6 +797,11 @@ screenshot_application_startup (GApplication *app)
 
   g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
                                    G_N_ELEMENTS (action_entries), self);
+
+  const gchar *help_accels[2] = { "F1", NULL };
+  const gchar *quit_accels[2] = { "<Primary>q", NULL };
+
+  gtk_application_set_accels_for_action (GTK_APPLICATION (self), "app.help", help_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (self), "app.quit", quit_accels);
 }
 
