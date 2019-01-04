@@ -113,12 +113,6 @@ interactive_dialog_key_press_cb (GtkWidget   *widget,
       return TRUE;
     }
 
-  if (event->keyval == GDK_KEY_Escape)
-    {
-      gtk_widget_destroy (widget);
-      return TRUE;
-    }
-
   return FALSE;
 }
 
