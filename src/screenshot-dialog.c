@@ -37,38 +37,6 @@ static GtkTargetEntry drag_types[] =
   { "image/png", 0, TYPE_IMAGE_PNG },
 };
 
-static void
-on_preview_draw (GtkWidget      *drawing_area,
-                 cairo_t        *cr,
-                 gpointer        data)
-{
-  ScreenshotDialog *dialog = data;
-  GtkStyleContext *context;
-  int width, height;
-
-  width = gtk_widget_get_allocated_width (drawing_area);
-  height = gtk_widget_get_allocated_height (drawing_area);
-
-  if (!dialog->preview_image ||
-      gdk_pixbuf_get_width (dialog->preview_image) != width ||
-      gdk_pixbuf_get_height (dialog->preview_image) != height)
-    {
-      g_clear_object (&dialog->preview_image);
-      dialog->preview_image = gdk_pixbuf_scale_simple (dialog->screenshot,
-                                                       width,
-                                                       height,
-                                                       GDK_INTERP_BILINEAR);
-    }
-
-  context = gtk_widget_get_style_context (drawing_area);
-  gtk_style_context_save (context);
-
-  gtk_style_context_set_state (context, gtk_widget_get_state_flags (drawing_area));
-  gtk_render_icon (context, cr, dialog->preview_image, 0, 0);
-
-  gtk_style_context_restore (context);
-}
-
 static gboolean
 on_preview_button_press_event (GtkWidget      *drawing_area,
                                GdkEventButton *event,
@@ -114,7 +82,7 @@ drag_begin (GtkWidget        *widget,
             GdkDragContext   *context,
             ScreenshotDialog *dialog)
 {
-  gtk_drag_set_icon_pixbuf (context, dialog->preview_image,
+  gtk_drag_set_icon_pixbuf (context, dialog->screenshot,
                             dialog->drag_x, dialog->drag_y);
 }
 
@@ -154,45 +122,36 @@ button_clicked (GtkWidget *button, ScreenshotDialog *dialog)
 }
 
 static void
-setup_drawing_area (ScreenshotDialog *dialog, GtkBuilder *ui)
+setup_preview_img (ScreenshotDialog *dialog, GtkBuilder *ui)
 {
-  GtkWidget *preview_darea;
-  GtkWidget *aspect_frame;
-  gint width, height, scale_factor;
+  GtkWidget *preview_img;
+  GdkPixbuf *preview_buf;
+  GdkInterpType mode;
+  gint width, height, ratio;
 
-  aspect_frame = GTK_WIDGET (gtk_builder_get_object (ui, "aspect_frame"));
-  preview_darea = GTK_WIDGET (gtk_builder_get_object (ui, "preview_darea"));
+  preview_img = GTK_WIDGET (gtk_builder_get_object (ui, "preview_img"));
 
-  width = gdk_pixbuf_get_width (dialog->screenshot);
+  mode = GDK_INTERP_BILINEAR;
   height = gdk_pixbuf_get_height (dialog->screenshot);
-  scale_factor = gtk_widget_get_scale_factor (dialog->dialog);
+  width = gdk_pixbuf_get_width (dialog->screenshot);
+  ratio = width / 400;
 
-  width /= 5 * scale_factor;
-  height /= 5 * scale_factor;
+  preview_buf = gdk_pixbuf_scale_simple (dialog->screenshot, 400, height / ratio, mode);
+  gtk_image_set_from_pixbuf (GTK_IMAGE (preview_img),  preview_buf);
+  dialog->preview_image = GTK_IMAGE (preview_img);
 
-  gtk_widget_set_size_request (preview_darea, width, height);
-  gtk_aspect_frame_set (GTK_ASPECT_FRAME (aspect_frame), 0.0, 0.5,
-                        (gfloat) width / (gfloat) height,
-                        FALSE);
-
-  if (screenshot_config->take_window_shot)
-    gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_NONE);
-  else
-    gtk_frame_set_shadow_type (GTK_FRAME (aspect_frame), GTK_SHADOW_IN);
-
-  g_signal_connect (preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
-  g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
-  g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
+  g_signal_connect (preview_img, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
+  g_signal_connect (preview_img, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
 
   /* setup dnd */
-  gtk_drag_source_set (preview_darea,
+  gtk_drag_source_set (preview_img,
                        GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
                        drag_types, G_N_ELEMENTS (drag_types),
                        GDK_ACTION_COPY);
 
-  g_signal_connect (G_OBJECT (preview_darea), "drag_begin",
+  g_signal_connect (G_OBJECT (preview_img), "drag_begin",
                     G_CALLBACK (drag_begin), dialog);
-  g_signal_connect (G_OBJECT (preview_darea), "drag_data_get",
+  g_signal_connect (G_OBJECT (preview_img), "drag_data_get",
                     G_CALLBACK (drag_data_get), dialog);
 }
 
@@ -244,7 +203,7 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   dialog->back_button = GTK_WIDGET (gtk_builder_get_object (ui, "back_button"));
   g_signal_connect (dialog->back_button, "clicked", G_CALLBACK (button_clicked), dialog);
 
-  setup_drawing_area (dialog, ui);
+  setup_preview_img (dialog, ui);
 
   gtk_widget_show_all (dialog->dialog);
 
