@@ -98,20 +98,6 @@ use_shadow_toggled_cb (GtkSwitch *toggle,
   gtk_switch_set_state (toggle, gtk_switch_get_active (toggle));
 }
 
-static gint
-interactive_dialog_key_press_cb (GtkWidget   *widget,
-                                 GdkEventKey *event,
-                                 gpointer    user_data)
-{
-  if (event->keyval == GDK_KEY_F1)
-    {
-      screenshot_display_help (GTK_WINDOW (widget));
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
 static void
 connect_effects_frame (GtkBuilder *ui)
 {
@@ -275,9 +261,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   g_signal_connect (capture_button, "clicked", G_CALLBACK (capture_button_clicked_cb), data);
   gtk_widget_set_can_default (capture_button, TRUE);
   gtk_widget_grab_default (capture_button);
-  g_signal_connect (dialog, "key-press-event",
-                    G_CALLBACK (interactive_dialog_key_press_cb),
-                    NULL);
 
   gtk_widget_show_all (dialog);
 
