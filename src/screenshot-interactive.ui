@@ -61,8 +61,8 @@
                           <object class="GtkImage" id="screen_img">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="icon_name">video-display-symbolic</property>
-                            <property name="icon_size">3</property>
+                            <property name="icon_name">display-symbolic</property>
+                            <property name="pixel_size">32</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -114,8 +114,8 @@
                           <object class="GtkImage" id="window_img">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="icon_name">window-maximize-symbolic</property>
-                            <property name="icon_size">3</property>
+                            <property name="icon_name">window-symbolic</property>
+                            <property name="pixel_size">32</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -166,8 +166,8 @@
                           <object class="GtkImage" id="selection_img">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="icon_name">input-tablet-symbolic</property>
-                            <property name="icon_size">3</property>
+                            <property name="icon_name">selection-symbolic</property>
+                            <property name="pixel_size">32</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>

@@ -223,9 +223,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   GtkWidget *dialog;
   GtkWidget *capture_button;
   GtkWidget *menu;
-  GtkWidget *screen_img;
-  GtkWidget *selection_img;
-  GtkWidget *window_img;
   GtkWidget *listbox;
   GMenuModel *app_menu;
   GtkBuilder *ui;
@@ -245,19 +242,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   app_menu = G_MENU_MODEL (gtk_builder_get_object (ui, "app-menu"));
 
   gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (menu), app_menu);
-
-  screen_img = GTK_WIDGET (gtk_builder_get_object (ui, "screen_img"));
-  selection_img = GTK_WIDGET (gtk_builder_get_object (ui, "selection_img"));
-  window_img = GTK_WIDGET (gtk_builder_get_object (ui, "window_img"));
-
-  /* Replace placeholder icons */
-  GdkPixbuf *d = gdk_pixbuf_new_from_resource_at_scale ("/org/gnome/screenshot/display-symbolic.svg", 32, 32, TRUE, NULL);
-  GdkPixbuf *s = gdk_pixbuf_new_from_resource_at_scale ("/org/gnome/screenshot/selection-symbolic.svg", 32, 32, TRUE, NULL);
-  GdkPixbuf *w = gdk_pixbuf_new_from_resource_at_scale ("/org/gnome/screenshot/window-symbolic.svg", 32, 32, TRUE, NULL);
-
-  gtk_image_set_from_pixbuf (GTK_IMAGE (screen_img), d);
-  gtk_image_set_from_pixbuf (GTK_IMAGE (selection_img), s);
-  gtk_image_set_from_pixbuf (GTK_IMAGE (window_img), w);
 
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
