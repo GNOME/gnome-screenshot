@@ -30,11 +30,9 @@
 #include "screenshot-interactive-dialog.h"
 #include "screenshot-utils.h"
 
-static GtkWidget *border_check = NULL;
-static GtkWidget *effect_combo = NULL;
-static GtkWidget *effect_label = NULL;
-static GtkWidget *effects_vbox = NULL;
-static GtkWidget *delay_hbox = NULL;
+static GtkWidget *pointer_row = NULL;
+static GtkWidget *shadow_row = NULL;
+static GtkWidget *delay_row = NULL;
 
 enum
 {
@@ -68,12 +66,10 @@ target_toggled_cb (GtkToggleButton *button,
       take_window_shot = (target_toggle == TARGET_TOGGLE_WINDOW);
       take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
 
-      gtk_widget_set_sensitive (border_check, take_window_shot);
-      gtk_widget_set_sensitive (effect_combo, take_window_shot);
-      gtk_widget_set_sensitive (effect_label, take_window_shot);
+      gtk_widget_set_sensitive (shadow_row, take_window_shot);
 
-      gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
-      gtk_widget_set_sensitive (effects_vbox, !take_area_shot);
+      gtk_widget_set_sensitive (pointer_row, !take_area_shot);
+      gtk_widget_set_sensitive (delay_row, !take_area_shot);
 
       screenshot_config->take_window_shot = take_window_shot;
       screenshot_config->take_area_shot = take_area_shot;
@@ -157,6 +153,9 @@ connect_screenshot_frame (GtkBuilder *ui)
                     GINT_TO_POINTER (TARGET_TOGGLE_WINDOW));
   group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (window));
 
+  shadow_row = GTK_WIDGET (gtk_builder_get_object (ui, "shadowrow"));
+  gtk_widget_set_sensitive (shadow_row, screenshot_config->take_area_shot);
+
   /** Grab area of the desktop **/
   selection = GTK_WIDGET (gtk_builder_get_object (ui, "selection"));
 
@@ -165,9 +164,13 @@ connect_screenshot_frame (GtkBuilder *ui)
   g_signal_connect (selection, "toggled",
                     G_CALLBACK (target_toggled_cb),
                     GINT_TO_POINTER (TARGET_TOGGLE_AREA));
+  pointer_row = GTK_WIDGET (gtk_builder_get_object (ui, "pointerrow"));
+  gtk_widget_set_sensitive (pointer_row, !screenshot_config->take_window_shot);
 
   /** Grab after delay **/
   delay = GTK_WIDGET (gtk_builder_get_object (ui, "delay"));
+  delay_row = GTK_WIDGET (gtk_builder_get_object (ui, "delayrow"));
+  gtk_widget_set_sensitive (delay_row, !screenshot_config->take_area_shot);
 
   adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) screenshot_config->delay,
                                                0.0, 99.0,
