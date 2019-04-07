@@ -21,9 +21,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
-"issues\n"
-"POT-Creation-Date: 2018-09-03 23:43+0000\n"
+"Report-Msgid-Bugs-To: "
+"https://gitlab.gnome.org/GNOME/gnome-screenshot/issues\n"
+"POT-Creation-Date: 2019-03-26 17:09+0000\n"
 "PO-Revision-Date: 2019-02-13 11:50+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -129,12 +129,6 @@ msgstr "Gem billeder af din skærm eller individuelle vinduer"
 #: src/org.gnome.Screenshot.desktop.in:6
 msgid "snapshot;capture;print;screenshot;"
 msgstr "billede;øjebliksbillede;indfang;print;skærmbillede;"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: src/org.gnome.Screenshot.desktop.in:11
-#| msgid "Screenshot"
-msgid "org.gnome.Screenshot"
-msgstr "org.gnome.Screenshot"
 
 #: src/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
@@ -290,8 +284,9 @@ msgstr ""
 "Joe Hansen\n"
 "Ask Hjorth Larsen\n"
 "\n"
-"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
-"Mere info: http://www.dansk-gruppen.dk"
+"Dansk-gruppen\n"
+"Websted <http://dansk-gruppen.dk>\n"
+"E-mail <dansk@dansk-gruppen.dk>"
 
 #: src/screenshot-config.c:117
 msgid ""
@@ -429,7 +424,9 @@ msgstr "_Annullér"
 msgid "Error loading the help page"
 msgstr "Fejl ved indlæsning af hjælpesiden"
 
-#~| msgid "Save Screenshot"
+#~ msgid "org.gnome.Screenshot"
+#~ msgstr "org.gnome.Screenshot"
+
 #~ msgid "applets-screenshooter"
 #~ msgstr "applets-screenshooter"
 
@@ -457,3 +454,4 @@ msgstr "Fejl ved indlæsning af hjælpesiden"
 
 #~ msgid "Error while saving screenshot"
 #~ msgstr "Fejl under gemning af skærmbillede"
+
