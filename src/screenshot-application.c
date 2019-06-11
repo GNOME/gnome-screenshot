@@ -542,10 +542,6 @@ finish_prepare_screenshot (ScreenshotApplication *self,
     {
       screenshot_save_to_clipboard (self);
       screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
-
-      g_application_release (G_APPLICATION (self));
-
-      return;
     }
 
   /* FIXME: apply the ICC profile according to the preferences.
@@ -563,6 +559,13 @@ finish_prepare_screenshot (ScreenshotApplication *self,
     }
   else
     screenshot_build_filename_async (screenshot_config->save_dir, NULL, build_filename_ready_cb, self);
+
+  if (screenshot_config->copy_to_clipboard)
+    {
+      g_application_release (G_APPLICATION (self));
+
+      return;
+    }
 }
 
 static void
