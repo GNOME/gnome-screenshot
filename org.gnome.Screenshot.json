@@ -4,6 +4,7 @@
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-screenshot",
+    "x-run-args": ["--interactive"],
     "finish-args": [
 	"--share=ipc",
 	"--socket=x11",
