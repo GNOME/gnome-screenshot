@@ -557,10 +557,10 @@ finish_prepare_screenshot (ScreenshotApplication *self,
       self->priv->should_overwrite = TRUE;
       screenshot_save_to_file (self);
     }
-  else
+  else if (!screenshot_config->copy_to_clipboard)
     screenshot_build_filename_async (screenshot_config->save_dir, NULL, build_filename_ready_cb, self);
 
-  if (screenshot_config->copy_to_clipboard)
+  if (screenshot_config->copy_to_clipboard && screenshot_config->file == NULL)
     {
       g_application_release (G_APPLICATION (self));
 
