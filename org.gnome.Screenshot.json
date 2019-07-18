@@ -12,6 +12,7 @@
 	"--talk-name=org.gnome.Shell.Screenshot",
 	"--filesystem=xdg-run/dconf",
 	"--filesystem=~/.config/dconf:ro",
+	"--filesystem=home",
 	"--talk-name=ca.desrt.dconf",
 	"--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
