@@ -48,7 +48,8 @@ typedef struct
 static char *
 expand_initial_tilde (const char *path)
 {
-  char *slash_after_user_name, *user_name;
+  g_autofree gchar *user_name = NULL;
+  char *slash_after_user_name;
   struct passwd *passwd_file_entry;
 
   if (path[1] == '/' || path[1] == '\0') {
@@ -63,7 +64,6 @@ expand_initial_tilde (const char *path)
                            slash_after_user_name - &path[1]);
   }
   passwd_file_entry = getpwnam (user_name);
-  g_free (user_name);
 
   if (passwd_file_entry == NULL || passwd_file_entry->pw_dir == NULL) {
     return g_strdup (path);
@@ -89,35 +89,26 @@ get_default_screenshot_dir (void)
 static gchar *
 sanitize_save_directory (const gchar *save_dir)
 {
-  gchar *retval = g_strdup (save_dir);
-
   if (save_dir == NULL)
     return NULL;
 
   if (save_dir[0] == '~')
-    {
-      char *tmp = expand_initial_tilde (save_dir);
-      g_free (retval);
-      retval = tmp;
-    }
-  else if (strstr (save_dir, "://") != NULL)
-    {
-      GFile *file;
+    return expand_initial_tilde (save_dir);
 
-      g_free (retval);
-      file = g_file_new_for_uri (save_dir);
-      retval = g_file_get_path (file);
-      g_object_unref (file);
+  if (strstr (save_dir, "://") != NULL)
+    {
+      g_autoptr(GFile) file = g_file_new_for_uri (save_dir);
+      return g_file_get_path (file);
     }
 
-  return retval;
+  return g_strdup (save_dir);
 }
 
 static char *
 build_path (AsyncExistenceJob *job)
 {
+  g_autofree gchar *file_name = NULL, *origin = NULL;
   const gchar *base_path, *file_type;
-  char *retval, *file_name, *origin;
 
   base_path = job->base_paths[job->type];
   file_type = screenshot_config->file_type;
@@ -128,11 +119,8 @@ build_path (AsyncExistenceJob *job)
 
   if (job->screenshot_origin == NULL)
     {
-      GDateTime *d;
-
-      d = g_date_time_new_now_local ();
+      g_autoptr(GDateTime) d = g_date_time_new_now_local ();
       origin = g_date_time_format (d, "%Y-%m-%d %H-%M-%S");
-      g_date_time_unref (d);
     }
   else
     origin = g_strdup (job->screenshot_origin);
@@ -157,11 +145,7 @@ build_path (AsyncExistenceJob *job)
       file_name = g_strdup_printf (_("Screenshot from %s - %d.%s"), origin, job->iteration, file_type);
     }
 
-  retval = g_build_filename (base_path, file_name, NULL);
-  g_free (file_name);
-  g_free (origin);
-
-  return retval;
+  return g_build_filename (base_path, file_name, NULL);
 }
 
 static void
@@ -200,104 +184,56 @@ try_check_file (GTask *task,
                 GCancellable *cancellable)
 {
   AsyncExistenceJob *job = data;
-  GFile *file;
-  GFileInfo *info;
-  GError *error;
-  char *path, *retval;
 
-retry:
-  error = NULL;
-  path = build_path (job);
-
-  if (path == NULL)
+  while (TRUE)
     {
-      (job->type)++;
-      goto retry;
-    }
+      g_autoptr(GError) error = NULL;
+      g_autoptr(GFile) file = NULL;
+      g_autoptr(GFileInfo) info = NULL;
+      g_autofree gchar *path = build_path (job);
 
-  file = g_file_new_for_path (path);
-  info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
-                            G_FILE_QUERY_INFO_NONE, cancellable, &error);
-  if (info != NULL)
-    {
-      /* file already exists, iterate again */
-      g_object_unref (info);
-      g_object_unref (file);
-      g_free (path);
+      if (path == NULL)
+        {
+          (job->type)++;
+          continue;
+        }
 
-      (job->iteration)++;
+      file = g_file_new_for_path (path);
+      info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_TYPE,
+                                G_FILE_QUERY_INFO_NONE, cancellable, &error);
+      if (info != NULL)
+        {
+          /* file already exists, iterate again */
+          (job->iteration)++;
+          continue;
+        }
 
-      goto retry;
-    }
-  else
-    {
       /* see the error to check whether the location is not accessible
        * or the file does not exist.
        */
-      if (error->code == G_IO_ERROR_NOT_FOUND)
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
         {
-          GFile *parent;
+          g_autoptr(GFile) parent = g_file_get_parent (file);
 
-          /* if the parent directory doesn't exist as well, forget the saved
+          /* if the parent directory doesn't exist as well, we'll forget the saved
            * directory and treat this as a generic error.
            */
-
-          parent = g_file_get_parent (file);
-
-          if (!g_file_query_exists (parent, NULL))
+          if (g_file_query_exists (parent, NULL))
             {
-              if (!prepare_next_cycle (job))
-                {
-                  retval = NULL;
-
-                  g_object_unref (parent);
-                  goto out;
-                }
-
-              g_object_unref (file);
-              g_object_unref (parent);
-              goto retry;
-            }
-          else
-            {
-              retval = path;
-
-              g_object_unref (parent);
-              goto out;
+              g_task_return_pointer (task, g_steal_pointer (&path), NULL);
+              return;
             }
         }
-      else
-        {
-          /* another kind of error, assume this location is not
-           * accessible.
-           */
-          g_free (path);
 
-          if (prepare_next_cycle (job))
-            {
-              g_error_free (error);
-              g_object_unref (file);
-              goto retry;
-            }
-          else
-            {
-              retval = NULL;
-              goto out;
-            }
+      if (!prepare_next_cycle (job))
+        {
+          g_task_return_new_error (task,
+                                   G_IO_ERROR,
+                                   G_IO_ERROR_FAILED,
+                                   "%s", "Failed to find a valid place to save");
+          return;
         }
     }
-
-out:
-  g_error_free (error);
-  g_object_unref (file);
-
-  if (retval == NULL)
-    g_task_return_new_error (task,
-                             G_IO_ERROR,
-                             G_IO_ERROR_FAILED,
-                             "%s", "Failed to find a valid place to save");
-
-  g_task_return_pointer (task, retval, NULL);
 }
 
 void
@@ -307,7 +243,7 @@ screenshot_build_filename_async (const char *save_dir,
                                  gpointer user_data)
 {
   AsyncExistenceJob *job;
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   job = g_slice_new0 (AsyncExistenceJob);
 
@@ -323,7 +259,6 @@ screenshot_build_filename_async (const char *save_dir,
   g_task_set_task_data (task, job, (GDestroyNotify) async_existence_job_free);
 
   g_task_run_in_thread (task, try_check_file);
-  g_object_unref (task);
 }
 
 gchar *

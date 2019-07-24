@@ -163,8 +163,8 @@ static guint n_effects = G_N_ELEMENTS (effects);
 static GtkWidget *
 create_effects_combo (void)
 {
+  g_autoptr(GtkListStore) model = NULL;
   GtkWidget *retval;
-  GtkListStore *model;
   GtkCellRenderer *renderer;
   gint i;
 
@@ -188,7 +188,6 @@ create_effects_combo (void)
   retval = gtk_combo_box_new ();
   gtk_combo_box_set_model (GTK_COMBO_BOX (retval),
                            GTK_TREE_MODEL (model));
-  g_object_unref (model);
 
   switch (screenshot_config->border_effect[0])
     {
@@ -233,7 +232,7 @@ create_effects_frame (GtkWidget   *outer_vbox,
   GtkWidget *label;
   GtkWidget *check;
   GtkWidget *combo;
-  gchar *title;
+  g_autofree gchar *title = NULL;
 
   main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
@@ -247,7 +246,6 @@ create_effects_frame (GtkWidget   *outer_vbox,
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
-  g_free (title);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
@@ -313,7 +311,7 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   GtkWidget *label;
   GtkAdjustment *adjust;
   GSList *group;
-  gchar *title;
+  g_autofree gchar *title = NULL;
 
   main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (outer_vbox), main_vbox, FALSE, FALSE, 0);
@@ -326,7 +324,6 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
-  g_free (title);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);
@@ -439,7 +436,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   GtkWidget *header_bar;
   GtkWidget *button;
   GtkStyleContext *context;
-  GtkSizeGroup *size_group;
+  g_autoptr(GtkSizeGroup) size_group = NULL;
   CaptureData *data;
 
   dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
@@ -487,8 +484,6 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   gtk_header_bar_pack_start (GTK_HEADER_BAR (header_bar), button);
   g_signal_connect_swapped (button, "clicked",
                             G_CALLBACK (gtk_widget_destroy), dialog);
-
-  g_object_unref (size_group);
 
   gtk_widget_show_all (dialog);
 

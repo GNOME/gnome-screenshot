@@ -208,8 +208,7 @@ screenshot_add_shadow (GdkPixbuf **src)
                         gdk_pixbuf_get_height (*src),
                         BLUR_RADIUS, BLUR_RADIUS, 1.0, 1.0,
                         GDK_INTERP_BILINEAR, 255);
-  g_object_unref (*src);
-  *src = dest;
+  g_set_object (src, dest);
 }
 
 void
@@ -234,8 +233,7 @@ screenshot_add_border (GdkPixbuf **src)
                         gdk_pixbuf_get_height (*src),
                         OUTLINE_RADIUS, OUTLINE_RADIUS, 1.0, 1.0,
                         GDK_INTERP_BILINEAR, 255);
-  g_object_unref (*src);
-  *src = dest;
+  g_set_object (src, dest);
 }
 
 void
@@ -261,8 +259,7 @@ screenshot_add_vintage (GdkPixbuf **src)
                         gdk_pixbuf_get_height (*src),
                         VINTAGE_OUTLINE_RADIUS, VINTAGE_OUTLINE_RADIUS, 1.0, 1.0,
                         GDK_INTERP_HYPER, 255);
-  g_object_unref (*src);
-  *src = dest;
+  g_set_object (src, dest);
 
   gdk_pixbuf_saturate_and_pixelate (*src, *src,
                                     VINTAGE_SATURATION, FALSE);
@@ -276,6 +273,5 @@ screenshot_add_vintage (GdkPixbuf **src)
   if (dest == NULL)
     return;
 
-  g_object_unref (*src);
-  *src = dest;
+  g_set_object (src, dest);
 }

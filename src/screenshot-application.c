@@ -60,22 +60,18 @@ struct _ScreenshotApplicationPriv {
 static void
 save_folder_to_settings (ScreenshotApplication *self)
 {
-  char *folder;
-
-  folder = screenshot_dialog_get_folder (self->priv->dialog);
+  g_autofree gchar *folder = screenshot_dialog_get_folder (self->priv->dialog);
   g_settings_set_string (screenshot_config->settings,
                          LAST_SAVE_DIRECTORY_KEY, folder);
-
-  g_free (folder);
 }
 
 static void
 set_recent_entry (ScreenshotApplication *self)
 {
-  char *app_exec = NULL;
+  g_autofree gchar *app_exec = NULL;
+  g_autoptr(GAppInfo) app = NULL;
   GtkRecentManager *recent;
   GtkRecentData recent_data;
-  GAppInfo *app;
   const char *exec_name = NULL;
   static char * groups[2] = { "Graphics", NULL };
 
@@ -100,9 +96,6 @@ set_recent_entry (ScreenshotApplication *self)
   recent_data.is_private = FALSE;
 
   gtk_recent_manager_add_full (recent, self->priv->save_uri, &recent_data);
-
-  g_object_unref (app);
-  g_free (app_exec);
 }
 
 static void
@@ -142,25 +135,18 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS) &&
           !self->priv->should_overwrite)
         {
-          gchar *folder = screenshot_dialog_get_folder (dialog);
-          gchar *folder_uri = g_path_get_basename (folder);
-          gchar *folder_name = g_uri_unescape_string (folder_uri, NULL);
-          gchar *file_name = screenshot_dialog_get_filename (dialog);
-          gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
-                                           file_name, folder_name);
-          gint response;
+          g_autofree gchar *folder = screenshot_dialog_get_folder (dialog);
+          g_autofree gchar *folder_uri = g_path_get_basename (folder);
+          g_autofree gchar *folder_name = g_uri_unescape_string (folder_uri, NULL);
+          g_autofree gchar *file_name = screenshot_dialog_get_filename (dialog);
+          g_autofree gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
+                                                      file_name, folder_name);
 
-          response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
-                                             GTK_MESSAGE_WARNING,
-                                             GTK_BUTTONS_YES_NO,
-                                             _("Overwrite existing file?"),
-                                             detail);
-
-          g_free (folder);
-          g_free (folder_uri);
-          g_free (folder_name);
-          g_free (file_name);
-          g_free (detail);
+          gint response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
+                                                  GTK_MESSAGE_WARNING,
+                                                  GTK_BUTTONS_YES_NO,
+                                                  _("Overwrite existing file?"),
+                                                  detail);
 
           if (response == GTK_RESPONSE_YES)
             {
@@ -196,7 +182,7 @@ save_pixbuf_ready_cb (GObject *source,
                       GAsyncResult *res,
                       gpointer user_data)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   ScreenshotApplication *self = user_data;
 
   gdk_pixbuf_save_to_stream_finish (res, &error);
@@ -204,7 +190,6 @@ save_pixbuf_ready_cb (GObject *source,
   if (error != NULL)
     {
       save_pixbuf_handle_error (self, error);
-      g_error_free (error);
       return;
     }
 
@@ -217,29 +202,20 @@ find_out_writable_format_by_extension (gpointer data,
 {
   GdkPixbufFormat *format     = (GdkPixbufFormat*) data;
   gchar          **name       = (gchar **) user_data;
-  gchar          **extensions = gdk_pixbuf_format_get_extensions (format);
+  g_auto(GStrv)    extensions = gdk_pixbuf_format_get_extensions (format);
   gchar          **ptr        = extensions;
-  gboolean         found      = FALSE;
 
   while (*ptr != NULL)
     {
       if (g_strcmp0 (*ptr, *name) == 0 &&
           gdk_pixbuf_format_is_writable (format) == TRUE)
         {
+          g_free (*name);
           *name = gdk_pixbuf_format_get_name (format);
-          found = TRUE;
           break;
         }
       ptr++;
     }
-
-  g_strfreev (extensions);
-
-  /* Needing to duplicate string here because
-   * gdk_pixbuf_format_get_name will return a duplicated string.
-   */
-  if (!found)
-    *name = g_strdup (*name);
 }
 
 static gboolean
@@ -304,11 +280,11 @@ save_file_create_ready_cb (GObject *source,
                            gpointer user_data)
 {
   ScreenshotApplication *self = user_data;
-  GFileOutputStream *os;
-  GError *error = NULL;
-  gchar *basename = g_file_get_basename (G_FILE (source));
+  g_autoptr(GFileOutputStream) os = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *basename = g_file_get_basename (G_FILE (source));
+  g_autofree gchar *format = NULL;
   gchar *extension = g_strrstr (basename, ".");
-  gchar *format = NULL;
   GSList *formats = NULL;
 
   if (extension == NULL)
@@ -316,14 +292,13 @@ save_file_create_ready_cb (GObject *source,
   else
     extension++;
 
-  format = extension;
+  format = g_strdup (extension);
 
   formats = gdk_pixbuf_get_formats();
   g_slist_foreach (formats,
                    find_out_writable_format_by_extension,
                    (gpointer) &format);
   g_slist_free (formats);
-  g_free (basename);
 
   if (self->priv->should_overwrite)
     os = g_file_replace_finish (G_FILE (source), res, &error);
@@ -333,7 +308,6 @@ save_file_create_ready_cb (GObject *source,
   if (error != NULL)
     {
       save_pixbuf_handle_error (self, error);
-      g_error_free (error);
       return;
     }
 
@@ -348,15 +322,12 @@ save_file_create_ready_cb (GObject *source,
     {
       save_with_no_profile_or_description (self, os, format);
     }
-
-  g_object_unref (os);
-  g_free (format);
 }
 
 static void
 screenshot_save_to_file (ScreenshotApplication *self)
 {
-  GFile *target_file;
+  g_autoptr(GFile) target_file = NULL;
 
   if (self->priv->dialog != NULL)
     screenshot_dialog_set_busy (self->priv->dialog, TRUE);
@@ -380,8 +351,6 @@ screenshot_save_to_file (ScreenshotApplication *self)
                            NULL,
                            save_file_create_ready_cb, self);
     }
-
-  g_object_unref (target_file);
 }
 
 static void
@@ -431,19 +400,13 @@ build_filename_ready_cb (GObject *source,
                          gpointer user_data)
 {
   ScreenshotApplication *self = user_data;
-  GError *error = NULL;
-  char *save_path;
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *save_path = screenshot_build_filename_finish (res, &error);
 
-  save_path = screenshot_build_filename_finish (res, &error);
   if (save_path != NULL)
     {
-      GFile *file;
-
-      file = g_file_new_for_path (save_path);
-      g_free (save_path);
-
+      g_autoptr(GFile) file = g_file_new_for_path (save_path);
       self->priv->save_uri = g_file_get_uri (file);
-      g_object_unref (file);
     }
   else
     self->priv->save_uri = NULL;
@@ -455,7 +418,6 @@ build_filename_ready_cb (GObject *source,
     {
       g_critical ("Impossible to find a valid location to save the screenshot: %s",
                   error->message);
-      g_error_free (error);
 
       if (screenshot_config->interactive)
         screenshot_show_dialog (NULL,
@@ -828,8 +790,8 @@ static GActionEntry action_entries[] = {
 static void
 screenshot_application_startup (GApplication *app)
 {
-  GMenuModel *menu;
-  GtkBuilder *builder;
+  g_autoptr(GMenuModel) menu = NULL;
+  g_autoptr(GtkBuilder) builder = NULL;
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
@@ -846,9 +808,6 @@ screenshot_application_startup (GApplication *app)
   gtk_builder_add_from_resource (builder, "/org/gnome/screenshot/screenshot-app-menu.ui", NULL);
   menu = G_MENU_MODEL (gtk_builder_get_object (builder, "app-menu"));
   gtk_application_set_app_menu (GTK_APPLICATION (app), menu);
-
-  g_object_unref (builder);
-  g_object_unref (menu);
 }
 
 static void
@@ -904,7 +863,7 @@ screenshot_application_init (ScreenshotApplication *self)
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
 }
 
-ScreenshotApplication *
+GApplication *
 screenshot_application_new (void)
 {
   return g_object_new (SCREENSHOT_TYPE_APPLICATION,

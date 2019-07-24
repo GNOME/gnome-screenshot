@@ -49,6 +49,6 @@ typedef struct {
 } ScreenshotApplicationClass;
 
 GType screenshot_application_get_type (void);
-ScreenshotApplication * screenshot_application_new (void);
+GApplication * screenshot_application_new (void);
 
 #endif /* __SCREENSHOT_APPLICATION_H__ */

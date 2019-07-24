@@ -381,7 +381,7 @@ static GdkPixbuf *
 screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
 {
   GdkWindow *root, *wm_window = NULL;
-  GdkPixbuf *screenshot;
+  GdkPixbuf *screenshot = NULL;
   GdkRectangle real_coords, screenshot_coords;
   Window wm;
   GtkBorder frame_offset = { 0, 0, 0, 0 };
@@ -434,7 +434,6 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
   if (screenshot_config->include_border && (wm != None))
     {
       XRectangle *rectangles;
-      GdkPixbuf *tmp;
       int rectangle_count, rectangle_order, i;
 
       /* we must use XShape to avoid showing what's under the rounder corners
@@ -448,9 +447,8 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
       if (rectangles && rectangle_count > 0)
         {
           gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
-
-          tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
-                                screenshot_coords.width, screenshot_coords.height);
+          GdkPixbuf *tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
+                                           screenshot_coords.width, screenshot_coords.height);
           gdk_pixbuf_fill (tmp, 0);
 
           for (i = 0; i < rectangle_count; i++)
@@ -516,8 +514,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
                 }
             }
 
-          g_object_unref (screenshot);
-          screenshot = tmp;
+          g_set_object (&screenshot, tmp);
 
           XFree (rectangles);
         }
@@ -528,8 +525,8 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
    * screenshot */
   if (screenshot_config->include_pointer && !rectangle)
     {
-      GdkCursor *cursor;
-      GdkPixbuf *cursor_pixbuf;
+      g_autoptr(GdkCursor) cursor = NULL;
+      g_autoptr(GdkPixbuf) cursor_pixbuf = NULL;
 
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_LEFT_PTR);
       cursor_pixbuf = gdk_cursor_get_image (cursor);
@@ -575,9 +572,6 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
                                     GDK_INTERP_BILINEAR,
                                     255);
             }
-
-          g_object_unref (cursor_pixbuf);
-          g_object_unref (cursor);
         }
     }
 
@@ -589,11 +583,11 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
 GdkPixbuf *
 screenshot_get_pixbuf (GdkRectangle *rectangle)
 {
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *path = NULL, *filename = NULL, *tmpname = NULL;
   GdkPixbuf *screenshot = NULL;
-  gchar *path, *filename, *tmpname;
   const gchar *method_name;
   GVariant *method_params;
-  GError *error = NULL;
   GDBusConnection *connection;
 
   path = g_build_filename (g_get_user_cache_dir (), "gnome-screenshot", NULL);
@@ -654,14 +648,9 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
     {
       g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
                  "resorting to fallback X11.");
-      g_error_free (error);
 
       screenshot = screenshot_fallback_get_pixbuf (rectangle);
     }
-
-  g_free (path);
-  g_free (tmpname);
-  g_free (filename);
 
   return screenshot;
 }
@@ -709,19 +698,16 @@ screenshot_show_dialog (GtkWindow   *parent,
 void
 screenshot_display_help (GtkWindow *parent)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   gtk_show_uri (gtk_window_get_screen (parent),
                 "help:gnome-help/screen-shot-record",
                 gtk_get_current_event_time (), &error);
 
   if (error)
-    {
-      screenshot_show_dialog (parent,
-                              GTK_MESSAGE_ERROR,
-                              GTK_BUTTONS_OK,
-                              _("Error loading the help page"),
-                              error->message);
-      g_error_free (error);
-    }
+    screenshot_show_dialog (parent,
+                            GTK_MESSAGE_ERROR,
+                            GTK_BUTTONS_OK,
+                            _("Error loading the help page"),
+                            error->message);
 }

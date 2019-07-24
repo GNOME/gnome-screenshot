@@ -202,14 +202,12 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
                        SaveScreenshotCallback f,
                        gpointer               user_data)
 {
+  g_autoptr(GFile) tmp_file = NULL, parent_file = NULL;
+  g_autoptr(GtkBuilder) ui = NULL;
+  g_autofree gchar *current_folder = NULL, *current_name = NULL;
   ScreenshotDialog *dialog;
-  GtkBuilder *ui;
-  char *current_folder;
-  char *current_name;
   char *ext;
   gint pos;
-  GFile *tmp_file;
-  GFile *parent_file;
   guint res;
 
   tmp_file = g_file_new_for_uri (initial_uri);
@@ -217,8 +215,6 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
 
   current_name = g_file_get_basename (tmp_file);
   current_folder = g_file_get_uri (parent_file);
-  g_object_unref (tmp_file);
-  g_object_unref (parent_file);
 
   dialog = g_new0 (ScreenshotDialog, 1);
   dialog->screenshot = screenshot;
@@ -266,30 +262,19 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
                               0,
                               pos);
 
-  g_free (current_name);
-  g_free (current_folder);
-  g_object_unref (ui);
-
   return dialog;
 }
 
 char *
 screenshot_dialog_get_uri (ScreenshotDialog *dialog)
 {
-  gchar *folder, *file;
-  gchar *uri;
-  gchar *tmp;
+  g_autofree gchar *folder = NULL, *file = NULL, *tmp = NULL;
 
   folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
   tmp = screenshot_dialog_get_filename (dialog);
   file = g_uri_escape_string (tmp, NULL, FALSE);
-  g_free (tmp);
-  uri = g_build_filename (folder, file, NULL);
 
-  g_free (folder);
-  g_free (file);
-
-  return uri;
+  return g_build_filename (folder, file, NULL);
 }
 
 char *
@@ -301,21 +286,19 @@ screenshot_dialog_get_folder (ScreenshotDialog *dialog)
 char *
 screenshot_dialog_get_filename (ScreenshotDialog *dialog)
 {
+  g_autoptr(GError) error = NULL;
   const gchar *file_name;
   gchar *tmp;
-  GError *error;
 
   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
-
-  error = NULL;
   tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, &error);
-  if (error)
+
+  if (error != NULL)
     {
       g_warning ("Unable to convert `%s' to valid UTF-8: %s\n"
                  "Falling back to default file.",
                  file_name,
                  error->message);
-      g_error_free (error);
       tmp = g_strdup (_("Screenshot.png"));
     }
 
@@ -332,13 +315,12 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 
   if (busy)
     {
+      g_autoptr(GdkCursor) cursor = NULL;
       GdkDisplay *display;
-      GdkCursor *cursor;
       /* Change cursor to busy */
       display = gtk_widget_get_display (GTK_WIDGET (dialog));
       cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
-      g_object_unref (cursor);
     }
   else
     {

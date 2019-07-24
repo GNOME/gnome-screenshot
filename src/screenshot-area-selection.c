@@ -226,8 +226,8 @@ emit_select_callback_in_idle (gpointer user_data)
 static void
 screenshot_select_area_x11_async (CallbackData *cb_data)
 {
+  g_autoptr(GdkCursor) cursor = NULL;
   GdkDisplay *display;
-  GdkCursor *cursor;
   select_area_filter_data  data;
   GdkDeviceManager *manager;
   GdkDevice *pointer, *keyboard;
@@ -260,10 +260,7 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
                          cursor, GDK_CURRENT_TIME);
 
   if (res != GDK_GRAB_SUCCESS)
-    {
-      g_object_unref (cursor);
-      goto out;
-    }
+    goto out;
 
   res = gdk_device_grab (keyboard, gtk_widget_get_window (data.window),
                          GDK_OWNERSHIP_NONE, FALSE,
@@ -273,7 +270,6 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   if (res != GDK_GRAB_SUCCESS)
     {
       gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
-      g_object_unref (cursor);
       goto out;
     }
 
@@ -283,8 +279,6 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   gdk_device_ungrab (keyboard, GDK_CURRENT_TIME);
 
   gtk_widget_destroy (data.window);
-  g_object_unref (cursor);
-
   gdk_flush ();
 
  out:
@@ -304,15 +298,14 @@ select_area_done (GObject *source_object,
                   gpointer user_data)
 {
   CallbackData *cb_data = user_data;
-  GError *error = NULL;
-  GVariant *ret;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) ret = NULL;
 
   ret = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object), res, &error);
   if (error != NULL)
     {
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
-          g_error_free (error);
           cb_data->aborted = TRUE;
           g_idle_add (emit_select_callback_in_idle, cb_data);
           return;
@@ -320,7 +313,6 @@ select_area_done (GObject *source_object,
 
       g_message ("Unable to select area using GNOME Shell's builtin screenshot "
                  "interface, resorting to fallback X11.");
-      g_error_free (error);
 
       screenshot_select_area_x11_async (cb_data);
       return;
@@ -331,7 +323,6 @@ select_area_done (GObject *source_object,
                  &cb_data->rectangle.y,
                  &cb_data->rectangle.width,
                  &cb_data->rectangle.height);
-  g_variant_unref (ret);
 
   g_idle_add (emit_select_callback_in_idle, cb_data);
 }
