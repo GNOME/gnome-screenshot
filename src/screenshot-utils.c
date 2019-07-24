@@ -444,6 +444,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
                                         &rectangle_order);
       if (rectangles && rectangle_count > 0)
         {
+          int scale_factor = gdk_window_get_scale_factor (wm_window);
           gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
           GdkPixbuf *tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
                                            gdk_pixbuf_get_width (screenshot),
@@ -461,11 +462,15 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
                * areas for the invisible borders themselves.
                * In that case, trim every rectangle we get by the offset between the
                * WM window size and the frame extents.
+               *
+               * Note that the XShape values are in actual pixels, whereas the GDK
+               * ones are in display pixels (i.e. scaled), so we need to apply the
+               * scale factor to the former to use display pixels for all our math.
                */
-              rec_x = rectangles[i].x;
-              rec_y = rectangles[i].y;
-              rec_width = rectangles[i].width - (frame_offset.left + frame_offset.right);
-              rec_height = rectangles[i].height - (frame_offset.top + frame_offset.bottom);
+              rec_x = rectangles[i].x / scale_factor;
+              rec_y = rectangles[i].y / scale_factor;
+              rec_width = rectangles[i].width / scale_factor - (frame_offset.left + frame_offset.right);
+              rec_height = rectangles[i].height / scale_factor - (frame_offset.top + frame_offset.bottom);
 
               if (real_coords.x < 0)
                 {
@@ -487,19 +492,20 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
               if (screenshot_coords.y + rec_y + rec_height > gdk_screen_height ())
                 rec_height = gdk_screen_height () - screenshot_coords.y - rec_y;
 
-              for (y = rec_y; y < rec_y + rec_height; y++)
+              /* Undo the scale factor in order to copy the pixbuf data pixel-wise */
+              for (y = rec_y * scale_factor; y < (rec_y + rec_height) * scale_factor; y++)
                 {
                   guchar *src_pixels, *dest_pixels;
                   gint x;
 
                   src_pixels = gdk_pixbuf_get_pixels (screenshot)
                              + y * gdk_pixbuf_get_rowstride(screenshot)
-                             + rec_x * (has_alpha ? 4 : 3);
+                             + rec_x * scale_factor * (has_alpha ? 4 : 3);
                   dest_pixels = gdk_pixbuf_get_pixels (tmp)
                               + y * gdk_pixbuf_get_rowstride (tmp)
-                              + rec_x * 4;
+                              + rec_x * scale_factor * 4;
 
-                  for (x = 0; x < rec_width; x++)
+                  for (x = 0; x < rec_width * scale_factor; x++)
                     {
                       *dest_pixels++ = *src_pixels++;
                       *dest_pixels++ = *src_pixels++;
