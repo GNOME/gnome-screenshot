@@ -448,7 +448,8 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
         {
           gboolean has_alpha = gdk_pixbuf_get_has_alpha (screenshot);
           GdkPixbuf *tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
-                                           screenshot_coords.width, screenshot_coords.height);
+                                           gdk_pixbuf_get_width (screenshot),
+                                           gdk_pixbuf_get_height (screenshot));
           gdk_pixbuf_fill (tmp, 0);
 
           for (i = 0; i < rectangle_count; i++)
