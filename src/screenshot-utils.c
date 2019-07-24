@@ -580,8 +580,8 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
   return screenshot;
 }
 
-GdkPixbuf *
-screenshot_get_pixbuf (GdkRectangle *rectangle)
+static GdkPixbuf *
+screenshot_shell_get_pixbuf (GdkRectangle *rectangle)
 {
   g_autoptr(GError) error = NULL;
   g_autofree gchar *path = NULL, *filename = NULL, *tmpname = NULL;
@@ -644,13 +644,28 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
       g_unlink (filename);
     }
 
-  if (error != NULL)
-    {
-      g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
-                 "resorting to fallback X11.");
+  return screenshot;
+}
 
-      screenshot = screenshot_fallback_get_pixbuf (rectangle);
+GdkPixbuf *
+screenshot_get_pixbuf (GdkRectangle *rectangle)
+{
+  GdkPixbuf *screenshot = NULL;
+  gboolean force_fallback;
+
+  force_fallback = g_getenv ("GNOME_SCREENSHOT_FORCE_FALLBACK") != NULL;
+  if (!force_fallback)
+    {
+      screenshot = screenshot_shell_get_pixbuf (rectangle);
+      if (!screenshot)
+        g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
+                   "resorting to fallback X11.");
     }
+  else
+    g_message ("Using fallback X11 as requested");
+
+  if (!screenshot)
+    screenshot = screenshot_fallback_get_pixbuf (rectangle);
 
   return screenshot;
 }
