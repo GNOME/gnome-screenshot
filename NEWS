@@ -1,3 +1,19 @@
+GNOME Screenshot 3.33.90 - 6th August 2019
+==========================================
+
+- Add a flatpak-based CI job [!8, Jordan Petridis]
+- Relax sandboxing options in flatpak manifest [!13, alex285]
+- Run flatpak in interactive mode by default [!12, Bilal Elmoussaoui]
+- Support saving both to disk and clipboard from CLI [#39, SoftTeam AB]
+- Fix alignment of labels in save dialog [#724384, Edwin Pujols]
+- Make file chooser dialog modal [#595864]
+- Fix crash when using the fallback X11 code path on HiDpi
+- Fix window screenshot size when using the fallback X11 code path on HiDpi
+- Fix area selection flash when using the fallback X11 code path
+- Translation updates:
+  Croatian, Danish, Karbi, Basque, Spanish, Indonesian, Friulan, Greek,
+  Romanian, Swedish
+
 GNOME Screenshot 3.32.0 - 15th March 2019
 =========================================
 

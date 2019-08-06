@@ -1,5 +1,5 @@
 project('gnome-screenshot', 'c',
-        version: '3.32.0',
+        version: '3.33.90',
         license: 'GPLv2+',
         meson_version: '>= 0.50.0',
         default_options: [
