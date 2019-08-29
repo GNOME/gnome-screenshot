@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 
 #include "screenshot-area-selection.h"
+#include "screenshot-config.h"
 
 typedef struct {
   GdkRectangle  rect;
@@ -324,7 +325,12 @@ select_area_done (GObject *source_object,
                  &cb_data->rectangle.width,
                  &cb_data->rectangle.height);
 
-  g_idle_add (emit_select_callback_in_idle, cb_data);
+  /* Check for delay on area selection after area is captured */
+  guint delay = screenshot_config->delay * 1000;
+  if(delay > 0)
+    g_timeout_add (delay, emit_select_callback_in_idle, cb_data);
+  else
+    g_idle_add (emit_select_callback_in_idle, cb_data);
 }
 
 void

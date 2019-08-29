@@ -573,6 +573,9 @@ screenshot_start (ScreenshotApplication *self)
   /* hold the GApplication while doing the async screenshot op */
   g_application_hold (G_APPLICATION (self));
 
+  /* delay for area shots needs to be counted down after area is grabbed
+   * so now just set it to zero and later check it again
+   */
   if (screenshot_config->take_area_shot)
     delay = 0;
 
