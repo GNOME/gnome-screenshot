@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils.master.nl\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2018-09-03 23:43+0000\n"
-"PO-Revision-Date: 2019-02-24 17:10+0100\n"
+"POT-Creation-Date: 2019-07-25 09:43+0000\n"
+"PO-Revision-Date: 2019-09-25 12:05+0200\n"
 "Last-Translator: Nathan Follens <nthn@unseen.is>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Project-Style: gnome\n"
 
 #: src/org.gnome.gnome-screenshot.gschema.xml:11
@@ -108,13 +108,13 @@ msgstr "Standaard bestandsextensie"
 msgid "The default file type extension for screenshots."
 msgstr "De standaard bestandsextensie voor schermafdrukken."
 
-#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:768
-#: src/screenshot-application.c:836
+#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:733
+#: src/screenshot-application.c:801
 msgid "Screenshot"
 msgstr "Schermafdruk"
 
 #: src/org.gnome.Screenshot.desktop.in:4
-#: src/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:769
+#: src/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:734
 msgid "Save images of your screen or individual windows"
 msgstr "Afbeeldingen van uw bureaublad of vensters maken"
 
@@ -122,12 +122,6 @@ msgstr "Afbeeldingen van uw bureaublad of vensters maken"
 #: src/org.gnome.Screenshot.desktop.in:6
 msgid "snapshot;capture;print;screenshot;"
 msgstr "momentopname;vastleggen;afdrukken;schermafdruk;"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: src/org.gnome.Screenshot.desktop.in:11
-#| msgid "Screenshot"
-msgid "org.gnome.Screenshot"
-msgstr "org.gnome.Screenshot"
 
 #: src/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
@@ -180,103 +174,103 @@ msgstr "Over"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/screenshot-application.c:149
+#: src/screenshot-application.c:142
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
 msgstr "Er bestaat al een bestand ‘%s’ in ‘%s’"
 
-#: src/screenshot-application.c:156
+#: src/screenshot-application.c:148
 msgid "Overwrite existing file?"
 msgstr "Bestaand bestand overschrijven?"
 
-#: src/screenshot-application.c:178 src/screenshot-application.c:187
-#: src/screenshot-application.c:464 src/screenshot-application.c:468
-#: src/screenshot-application.c:508 src/screenshot-application.c:511
+#: src/screenshot-application.c:164 src/screenshot-application.c:173
+#: src/screenshot-application.c:426 src/screenshot-application.c:430
+#: src/screenshot-application.c:470 src/screenshot-application.c:473
 msgid "Unable to capture a screenshot"
 msgstr "Schermafdruk maken is mislukt"
 
-#: src/screenshot-application.c:179
+#: src/screenshot-application.c:165
 msgid "Error creating file. Please choose another location and retry."
 msgstr ""
 "Fout bij aanmaken van het bestand. Kies een andere locatie en probeer het "
 "opnieuw."
 
-#: src/screenshot-application.c:465
+#: src/screenshot-application.c:427
 msgid "Error creating file"
 msgstr "Fout bij aanmaken van bestand"
 
-#: src/screenshot-application.c:476 src/screenshot-application.c:544
+#: src/screenshot-application.c:438 src/screenshot-application.c:506
 msgid "Screenshot taken"
 msgstr "Schermafdruk gemaakt"
 
-#: src/screenshot-application.c:509
+#: src/screenshot-application.c:471
 msgid "All possible methods failed"
 msgstr "Alle mogelijke methoden zijn mislukt"
 
-#: src/screenshot-application.c:632
+#: src/screenshot-application.c:597
 msgid "Send the grab directly to the clipboard"
 msgstr "Afdruk direct naar het klembord sturen"
 
 # Vrij vertaald (Wouter Bolsterlee)
-#: src/screenshot-application.c:633
+#: src/screenshot-application.c:598
 msgid "Grab a window instead of the entire screen"
 msgstr "Een afdruk maken van een enkel venster"
 
 # Vrij vertaald (Wouter Bolsterlee)
-#: src/screenshot-application.c:634
+#: src/screenshot-application.c:599
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Een afdruk maken van een gedeelte van het scherm"
 
-#: src/screenshot-application.c:635
+#: src/screenshot-application.c:600
 msgid "Include the window border with the screenshot"
 msgstr "De vensterrand in de schermafdruk opnemen"
 
-#: src/screenshot-application.c:636
+#: src/screenshot-application.c:601
 msgid "Remove the window border from the screenshot"
 msgstr "De vensterrand van de schermafdruk verwijderen"
 
-#: src/screenshot-application.c:637
+#: src/screenshot-application.c:602
 msgid "Include the pointer with the screenshot"
 msgstr "De muisaanwijzer in de schermafdruk opnemen"
 
-#: src/screenshot-application.c:638
+#: src/screenshot-application.c:603
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Schermafdruk maken na opgegeven vertraging [in seconden]"
 
 #. translators: this is the last part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: src/screenshot-application.c:638 src/screenshot-interactive-dialog.c:413
+#: src/screenshot-application.c:603 src/screenshot-interactive-dialog.c:410
 msgid "seconds"
 msgstr "seconden"
 
-#: src/screenshot-application.c:639
+#: src/screenshot-application.c:604
 msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgstr ""
 "Effect om aan de vensterrand toe te voegen (schaduw, rand, vintage of geen)"
 
 # Vensterrand-effect?
-#: src/screenshot-application.c:639
+#: src/screenshot-application.c:604
 msgid "effect"
 msgstr "effect"
 
-#: src/screenshot-application.c:640
+#: src/screenshot-application.c:605
 msgid "Interactively set options"
 msgstr "Interactief opties instellen"
 
-#: src/screenshot-application.c:641
+#: src/screenshot-application.c:606
 msgid "Save screenshot directly to this file"
 msgstr "Schermafdruk direct in dit bestand opslaan"
 
-#: src/screenshot-application.c:641
+#: src/screenshot-application.c:606
 msgid "filename"
 msgstr "bestandsnaam"
 
-#: src/screenshot-application.c:642
+#: src/screenshot-application.c:607
 msgid "Print version information and exit"
 msgstr "Versie-informatie tonen en afsluiten"
 
-#: src/screenshot-application.c:771
+#: src/screenshot-application.c:736
 msgid "translator-credits"
 msgstr ""
 "Tino Meinen \n"
@@ -304,7 +298,7 @@ msgstr ""
 "Tegenstrijdige opties: ‘--area’ en ‘--delay’ kunnen niet tegelijk opgegeven "
 "worden.\n"
 
-#: src/screenshot-dialog.c:319
+#: src/screenshot-dialog.c:302
 msgid "Screenshot.png"
 msgstr "Schermafdruk.png"
 
@@ -312,32 +306,32 @@ msgstr "Schermafdruk.png"
 msgid "Save Screenshot"
 msgstr "Schermafdruk opslaan"
 
-#: src/screenshot-dialog.ui:17
+#: src/screenshot-dialog.ui:18
 msgid "Back"
 msgstr "Terug"
 
-#: src/screenshot-dialog.ui:38
+#: src/screenshot-dialog.ui:39
 msgid "C_opy to Clipboard"
 msgstr "Naar klembord k_opiëren"
 
-#: src/screenshot-dialog.ui:50
+#: src/screenshot-dialog.ui:51
 msgid "_Save"
 msgstr "_Opslaan"
 
-#: src/screenshot-dialog.ui:110
-msgid "_Name:"
-msgstr "_Naam:"
+#: src/screenshot-dialog.ui:118
+msgid "_Name"
+msgstr "_Naam"
 
-#: src/screenshot-dialog.ui:127
-msgid "Save in _folder:"
-msgstr "Opslaan in _map:"
+#: src/screenshot-dialog.ui:138
+msgid "Save in _folder"
+msgstr "Opslaan in _map"
 
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken. The first placeholder is a
 #. * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
 #. * file format (e.g. "png").
 #.
-#: src/screenshot-filename-builder.c:147
+#: src/screenshot-filename-builder.c:135
 #, c-format
 msgid "Screenshot from %s.%s"
 msgstr "Schermafdruk van %s.%s"
@@ -348,7 +342,7 @@ msgstr "Schermafdruk van %s.%s"
 #. * a counter to make it unique (e.g. "2017-05-21 12-24-03 - 2"); the third
 #. * placeholder is the file format (e.g. "png").
 #.
-#: src/screenshot-filename-builder.c:157
+#: src/screenshot-filename-builder.c:145
 #, c-format
 msgid "Screenshot from %s - %d.%s"
 msgstr "Schermafdruk van %s - %d.%s"
@@ -378,29 +372,29 @@ msgid "Vintage"
 msgstr "Vintage"
 
 #. * Include pointer *
-#: src/screenshot-interactive-dialog.c:262
+#: src/screenshot-interactive-dialog.c:260
 msgid "Include _pointer"
 msgstr "_Muisaanwijzer opnemen"
 
 # het gaat hier om de vensterdecoratie
 #. * Include window border *
-#: src/screenshot-interactive-dialog.c:272
+#: src/screenshot-interactive-dialog.c:270
 msgid "Include the window _border"
 msgstr "De _vensterrand in de schermafdruk opnemen"
 
-#: src/screenshot-interactive-dialog.c:289
+#: src/screenshot-interactive-dialog.c:287
 msgid "Apply _effect:"
 msgstr "_Effect toepassen:"
 
-#: src/screenshot-interactive-dialog.c:346
+#: src/screenshot-interactive-dialog.c:343
 msgid "Grab the whole sc_reen"
 msgstr "Hele _scherm"
 
-#: src/screenshot-interactive-dialog.c:360
+#: src/screenshot-interactive-dialog.c:357
 msgid "Grab the current _window"
 msgstr "Huidige _venster"
 
-#: src/screenshot-interactive-dialog.c:372
+#: src/screenshot-interactive-dialog.c:369
 msgid "Select _area to grab"
 msgstr "_Gebied selecteren"
 
@@ -408,30 +402,34 @@ msgstr "_Gebied selecteren"
 #. translators: this is the first part of the "grab after a
 #. * delay of <spin button> seconds".
 #.
-#: src/screenshot-interactive-dialog.c:392
+#: src/screenshot-interactive-dialog.c:389
 msgid "Grab after a _delay of"
 msgstr "Met een _vertraging van"
 
-#: src/screenshot-interactive-dialog.c:462
+#: src/screenshot-interactive-dialog.c:459
 msgid "Take Screenshot"
 msgstr "Schermafdruk maken"
 
 # Vensterrand-effect?
-#: src/screenshot-interactive-dialog.c:463
+#: src/screenshot-interactive-dialog.c:460
 msgid "Effects"
 msgstr "Effecten"
 
-#: src/screenshot-interactive-dialog.c:467
+#: src/screenshot-interactive-dialog.c:464
 msgid "Take _Screenshot"
 msgstr "_Schermafdruk maken"
 
-#: src/screenshot-interactive-dialog.c:484
+#: src/screenshot-interactive-dialog.c:481
 msgid "_Cancel"
 msgstr "_Annuleren"
 
-#: src/screenshot-utils.c:723
+#: src/screenshot-utils.c:731
 msgid "Error loading the help page"
 msgstr "Fout bij laden van hulptekst"
+
+#~| msgid "Screenshot"
+#~ msgid "org.gnome.Screenshot"
+#~ msgstr "org.gnome.Screenshot"
 
 #~ msgid "applets-screenshooter"
 #~ msgstr "applets-screenshooter"
