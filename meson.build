@@ -39,7 +39,6 @@ xext_dep = dependency('xext', required: get_option ('x11'))
 glib_dep = dependency('glib-2.0', version: glib_req_version)
 gtk_dep = dependency('gtk+-3.0', version: gtk_req_version)
 libhandy_dep = dependency('libhandy-1', version: libhandy_req_version)
-canberra_dep = dependency('libcanberra-gtk3')
 
 config_h = configuration_data()
 config_h.set_quoted('VERSION', meson.project_version())

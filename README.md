@@ -8,5 +8,4 @@ desktop; the currently focused window; or an area of the screen.
 
  - GLib 2.36
  - GTK+ 3.12
- - libcanberra-gtk3
  - X11

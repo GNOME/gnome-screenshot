@@ -25,46 +25,12 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <canberra-gtk.h>
 
 #include "screenshot-backend-shell.h"
 
 #ifdef HAVE_X11
 #include "screenshot-backend-x11.h"
 #endif
-
-void
-screenshot_play_sound_effect (const gchar *event_id,
-                              const gchar *event_desc)
-{
-  ca_context *c;
-  ca_proplist *p = NULL;
-  int res;
-
-  c = ca_gtk_context_get ();
-
-  res = ca_proplist_create (&p);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, event_id);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, event_desc);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_CANBERRA_CACHE_CONTROL, "permanent");
-  if (res < 0)
-    goto done;
-
-  ca_context_play_full (c, 0, p, NULL, NULL);
-
- done:
-  if (p != NULL)
-    ca_proplist_destroy (p);
-}
 
 GdkPixbuf *
 screenshot_get_pixbuf (GdkRectangle *rectangle)

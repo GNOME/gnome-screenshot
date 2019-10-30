@@ -29,28 +29,6 @@
     ],
     "modules" : [
         {
-            "name" : "libcanberra-gtk3",
-            "cleanup" : [
-                "/bin",
-                "/lib/gnome-settings-daemon-3.0",
-                "/share/doc",
-                "/share/gdm",
-                "/share/gnome"
-            ],
-            "config-opts" : [
-                "--disable-alsa",
-                "--disable-null",
-                "--disable-oss"
-            ],
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
-                    "sha256" : "c2b671e67e0c288a69fc33dc1b6f1b534d07882c2aceed37004bf48c601afa72"
-                }
-            ]
-        },
-        {
             "name" : "libhandy",
             "buildsystem" : "meson",
             "config-opts" : [

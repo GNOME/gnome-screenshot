@@ -26,8 +26,7 @@ dependencies = [
   xext_dep,
   glib_dep,
   gtk_dep,
-  libhandy_dep,
-  canberra_dep
+  libhandy_dep
 ]
 
 c_args = [
