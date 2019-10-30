@@ -25,7 +25,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <canberra-gtk.h>
 #include <stdlib.h>
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
@@ -270,39 +269,6 @@ screenshot_fallback_get_window_rect_coords (GdkWindow *window,
       screenshot_coordinates_out->width = width;
       screenshot_coordinates_out->height = height;
     }
-}
-
-void
-screenshot_play_sound_effect (const gchar *event_id,
-                              const gchar *event_desc)
-{
-  ca_context *c;
-  ca_proplist *p = NULL;
-  int res;
-
-  c = ca_gtk_context_get ();
-
-  res = ca_proplist_create (&p);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, event_id);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, event_desc);
-  if (res < 0)
-    goto done;
-
-  res = ca_proplist_sets (p, CA_PROP_CANBERRA_CACHE_CONTROL, "permanent");
-  if (res < 0)
-    goto done;
-
-  ca_context_play_full (c, 0, p, NULL, NULL);
-
- done:
-  if (p != NULL)
-    ca_proplist_destroy (p);
 }
 
 static void
