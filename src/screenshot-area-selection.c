@@ -24,25 +24,34 @@
 
 #include "screenshot-area-selection.h"
 
-typedef struct {
-  GdkRectangle  rect;
-  gboolean      button_pressed;
-  GtkWidget    *window;
+#define GRAB_RETRY_DELAY 200 /* ms */
+#define MAX_GRAB_ATTEMPTS 3
 
+typedef struct {
+  GdkRectangle rectangle;
+  SelectAreaCallback callback;
+  gpointer callback_data;
+
+  GtkWidget    *window;
+  GdkCursor    *cursor;
+
+  gint          try_count;
+
+  gboolean      button_pressed;
   gboolean      aborted;
-} select_area_filter_data;
+} CallbackData;
 
 static gboolean
 select_area_button_press (GtkWidget               *window,
                           GdkEventButton          *event,
-                          select_area_filter_data *data)
+                          CallbackData            *data)
 {
   if (data->button_pressed)
     return TRUE;
 
   data->button_pressed = TRUE;
-  data->rect.x = event->x_root;
-  data->rect.y = event->y_root;
+  data->rectangle.x = event->x_root;
+  data->rectangle.y = event->y_root;
 
   return TRUE;
 }
@@ -50,17 +59,17 @@ select_area_button_press (GtkWidget               *window,
 static gboolean
 select_area_motion_notify (GtkWidget               *window,
                            GdkEventMotion          *event,
-                           select_area_filter_data *data)
+                           CallbackData            *data)
 {
   GdkRectangle draw_rect;
 
   if (!data->button_pressed)
     return TRUE;
 
-  draw_rect.width = ABS (data->rect.x - event->x_root);
-  draw_rect.height = ABS (data->rect.y - event->y_root);
-  draw_rect.x = MIN (data->rect.x, event->x_root);
-  draw_rect.y = MIN (data->rect.y, event->y_root);
+  draw_rect.width = ABS (data->rectangle.x - event->x_root);
+  draw_rect.height = ABS (data->rectangle.y - event->y_root);
+  draw_rect.x = MIN (data->rectangle.x, event->x_root);
+  draw_rect.y = MIN (data->rectangle.y, event->y_root);
 
   if (draw_rect.width <= 0 || draw_rect.height <= 0)
     {
@@ -107,17 +116,17 @@ select_area_motion_notify (GtkWidget               *window,
 static gboolean
 select_area_button_release (GtkWidget               *window,
                             GdkEventButton          *event,
-                            select_area_filter_data *data)
+                            CallbackData            *data)
 {
   if (!data->button_pressed)
     return TRUE;
 
-  data->rect.width  = ABS (data->rect.x - event->x_root);
-  data->rect.height = ABS (data->rect.y - event->y_root);
-  data->rect.x = MIN (data->rect.x, event->x_root);
-  data->rect.y = MIN (data->rect.y, event->y_root);
+  data->rectangle.width  = ABS (data->rectangle.x - event->x_root);
+  data->rectangle.height = ABS (data->rectangle.y - event->y_root);
+  data->rectangle.x = MIN (data->rectangle.x, event->x_root);
+  data->rectangle.y = MIN (data->rectangle.y, event->y_root);
 
-  if (data->rect.width == 0 || data->rect.height == 0)
+  if (data->rectangle.width == 0 || data->rectangle.height == 0)
     data->aborted = TRUE;
 
   gtk_main_quit ();
@@ -128,14 +137,14 @@ select_area_button_release (GtkWidget               *window,
 static gboolean
 select_area_key_press (GtkWidget               *window,
                        GdkEventKey             *event,
-                       select_area_filter_data *data)
+                       CallbackData            *data)
 {
   if (event->keyval == GDK_KEY_Escape)
     {
-      data->rect.x = 0;
-      data->rect.y = 0;
-      data->rect.width  = 0;
-      data->rect.height = 0;
+      data->rectangle.x = 0;
+      data->rectangle.y = 0;
+      data->rectangle.width  = 0;
+      data->rectangle.height = 0;
       data->aborted = TRUE;
 
       gtk_main_quit ();
@@ -201,13 +210,6 @@ create_select_window (void)
   return window;
 }
 
-typedef struct {
-  GdkRectangle rectangle;
-  SelectAreaCallback callback;
-  gpointer callback_data;
-  gboolean aborted;
-} CallbackData;
-
 static gboolean
 emit_select_callback_in_idle (gpointer user_data)
 {
@@ -223,73 +225,73 @@ emit_select_callback_in_idle (gpointer user_data)
   return FALSE;
 }
 
-static void
-screenshot_select_area_x11_async (CallbackData *cb_data)
+static gboolean
+try_select_area (CallbackData *data)
 {
-  g_autoptr(GdkCursor) cursor = NULL;
   GdkDisplay *display;
-  select_area_filter_data  data;
-  GdkDeviceManager *manager;
-  GdkDevice *pointer, *keyboard;
+  GdkSeat *seat;
   GdkGrabStatus res;
 
-  data.rect.x = 0;
-  data.rect.y = 0;
-  data.rect.width  = 0;
-  data.rect.height = 0;
-  data.button_pressed = FALSE;
-  data.aborted = FALSE;
-  data.window = create_select_window();
+  data->try_count++;
 
-  g_signal_connect (data.window, "key-press-event", G_CALLBACK (select_area_key_press), &data);
-  g_signal_connect (data.window, "button-press-event", G_CALLBACK (select_area_button_press), &data);
-  g_signal_connect (data.window, "button-release-event", G_CALLBACK (select_area_button_release), &data);
-  g_signal_connect (data.window, "motion-notify-event", G_CALLBACK (select_area_motion_notify), &data);
-
-  display = gtk_widget_get_display (data.window);
-  cursor = gdk_cursor_new_for_display (display, GDK_CROSSHAIR);
-  manager = gdk_display_get_device_manager (display);
-  pointer = gdk_device_manager_get_client_pointer (manager);
-  keyboard = gdk_device_get_associated_device (pointer);
-
-  res = gdk_device_grab (pointer, gtk_widget_get_window (data.window),
-                         GDK_OWNERSHIP_NONE, FALSE,
-                         GDK_POINTER_MOTION_MASK |
-                         GDK_BUTTON_PRESS_MASK |
-                         GDK_BUTTON_RELEASE_MASK,
-                         cursor, GDK_CURRENT_TIME);
-
-  if (res != GDK_GRAB_SUCCESS)
-    goto out;
-
-  res = gdk_device_grab (keyboard, gtk_widget_get_window (data.window),
-                         GDK_OWNERSHIP_NONE, FALSE,
-                         GDK_KEY_PRESS_MASK |
-                         GDK_KEY_RELEASE_MASK,
-                         NULL, GDK_CURRENT_TIME);
-  if (res != GDK_GRAB_SUCCESS)
+  if (!data->window)
     {
-      gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
-      goto out;
+      data->window = create_select_window();
+
+      g_signal_connect (data->window, "key-press-event", G_CALLBACK (select_area_key_press), data);
+      g_signal_connect (data->window, "button-press-event", G_CALLBACK (select_area_button_press), data);
+      g_signal_connect (data->window, "button-release-event", G_CALLBACK (select_area_button_release), data);
+      g_signal_connect (data->window, "motion-notify-event", G_CALLBACK (select_area_motion_notify), data);
     }
 
-  gtk_main ();
+  display = gtk_widget_get_display (data->window);
+  seat = gdk_display_get_default_seat (display);
 
-  gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
-  gdk_device_ungrab (keyboard, GDK_CURRENT_TIME);
+  if (!data->cursor)
+    {
+      data->cursor = gdk_cursor_new_for_display (display, GDK_CROSSHAIR);
+    }
 
-  gtk_widget_destroy (data.window);
+  res = gdk_seat_grab (seat, gtk_widget_get_window (data->window),
+                       GDK_SEAT_CAPABILITY_ALL, TRUE,
+                       data->cursor,
+                       NULL, NULL, NULL);
+
+  if (res != GDK_GRAB_SUCCESS)
+    {
+      if (data->try_count < MAX_GRAB_ATTEMPTS)
+        {
+          return G_SOURCE_CONTINUE;
+        }
+
+      data->aborted = TRUE;
+    }
+
+  if (!data->aborted)
+    {
+      gtk_main ();
+
+      gdk_seat_ungrab (seat);
+    }
+
+  gtk_widget_destroy (data->window);
+  g_object_unref (data->cursor);
+
   gdk_flush ();
-
- out:
-  cb_data->aborted = data.aborted;
-  cb_data->rectangle = data.rect;
 
   /* FIXME: we should actually be emitting the callback When
    * the compositor has finished re-drawing, but there seems to be no easy
    * way to know that.
    */
-  g_timeout_add (200, emit_select_callback_in_idle, cb_data);
+  g_timeout_add (200, emit_select_callback_in_idle, data);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+screenshot_select_area_x11_async (CallbackData *data)
+{
+  g_timeout_add (GRAB_RETRY_DELAY, (GSourceFunc) try_select_area, data);
 }
 
 static void
