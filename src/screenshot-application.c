@@ -110,7 +110,10 @@ screenshot_close_interactive_dialog (ScreenshotApplication *self)
 static void
 save_pixbuf_handle_success (ScreenshotApplication *self)
 {
-  set_recent_entry (self);
+  if (!screenshot_config->norecent)
+    {
+      set_recent_entry (self);
+    }
 
   if (screenshot_config->interactive)
     {
@@ -435,7 +438,9 @@ build_filename_ready_cb (GObject *source,
       return;
     }
 
-  screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
+  if (!screenshot_config->nosound) {
+    screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
+  }
 
   if (screenshot_config->interactive)
     {
@@ -595,6 +600,9 @@ static gboolean version_arg = FALSE;
 
 static const GOptionEntry entries[] = {
   { "clipboard", 'c', 0, G_OPTION_ARG_NONE, NULL, N_("Send the grab directly to the clipboard"), NULL },
+  { "noflash", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Do not show a visual flash effect when taking the screenshot"), NULL },
+  { "nosound", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Do not play a shutter sound when taking the screenshot"), NULL },
+  { "norecent", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Do not add the screenshot to the list of recently opened files"), NULL },
   { "window", 'w', 0, G_OPTION_ARG_NONE, NULL, N_("Grab a window instead of the entire screen"), NULL },
   { "area", 'a', 0, G_OPTION_ARG_NONE, NULL, N_("Grab an area of the screen instead of the entire screen"), NULL },
   { "include-border", 'b', 0, G_OPTION_ARG_NONE, NULL, N_("Include the window border with the screenshot"), NULL },
@@ -639,6 +647,9 @@ screenshot_application_command_line (GApplication            *app,
 {
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
   gboolean clipboard_arg = FALSE;
+  gboolean noflash_arg = FALSE;
+  gboolean nosound_arg = FALSE;
+  gboolean norecent_arg = FALSE;
   gboolean window_arg = FALSE;
   gboolean area_arg = FALSE;
   gboolean include_border_arg = FALSE;
@@ -654,6 +665,9 @@ screenshot_application_command_line (GApplication            *app,
 
   options = g_application_command_line_get_options_dict (command_line);
   g_variant_dict_lookup (options, "clipboard", "b", &clipboard_arg);
+  g_variant_dict_lookup (options, "noflash", "b", &noflash_arg);
+  g_variant_dict_lookup (options, "nosound", "b", &nosound_arg);
+  g_variant_dict_lookup (options, "norecent", "b", &norecent_arg);
   g_variant_dict_lookup (options, "window", "b", &window_arg);
   g_variant_dict_lookup (options, "area", "b", &area_arg);
   g_variant_dict_lookup (options, "include-border", "b", &include_border_arg);
@@ -665,6 +679,9 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
 
   res = screenshot_config_parse_command_line (clipboard_arg,
+		                              noflash_arg,
+					      nosound_arg,
+					      norecent_arg,
                                               window_arg,
                                               area_arg,
                                               include_border_arg,
@@ -723,6 +740,7 @@ action_about (GSimpleAction *action,
     "Emmanuele Bassi",
     "Jonathan Blandford",
     "Cosimo Cecchi",
+    "Timo Schneider",
     NULL
   };
 
@@ -747,7 +765,10 @@ action_screen_shot (GSimpleAction *action,
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (user_data);
 
   screenshot_config_parse_command_line (FALSE, /* clipboard */
-                                        FALSE,  /* window */
+					FALSE, /* noflash */
+                                        FALSE, /* nosound */
+					FALSE, /* norecent */
+                                        FALSE, /* window */
                                         FALSE, /* area */
                                         FALSE, /* include border */
                                         FALSE, /* disable border */
@@ -767,6 +788,9 @@ action_window_shot (GSimpleAction *action,
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (user_data);
 
   screenshot_config_parse_command_line (FALSE, /* clipboard */
+                                        FALSE, /* noflash */
+                                        FALSE, /* nosound */
+                                        FALSE, /* norecent */
                                         TRUE,  /* window */
                                         FALSE, /* area */
                                         FALSE, /* include border */

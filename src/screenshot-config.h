@@ -33,10 +33,12 @@ typedef struct {
   GFile *file;
 
   gboolean copy_to_clipboard;
+  gboolean noflash;
+  gboolean nosound;
+  gboolean norecent;
 
   gboolean take_window_shot;
   gboolean take_area_shot;
-
   gboolean include_pointer;
   gboolean include_icc_profile;
 
@@ -53,6 +55,9 @@ extern ScreenshotConfig *screenshot_config;
 void        screenshot_load_config                (void);
 void        screenshot_save_config                (void);
 gboolean    screenshot_config_parse_command_line  (gboolean clipboard_arg,
+		                                   gboolean noflash_arg,
+						   gboolean nosound_arg,
+						   gboolean norecent_arg,
                                                    gboolean window_arg,
                                                    gboolean area_arg,
                                                    gboolean include_border_arg,

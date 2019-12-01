@@ -580,8 +580,10 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
         }
     }
 
-  screenshot_fallback_fire_flash (window, rectangle);
-
+  if (!screenshot_config->noflash) 
+    {
+      screenshot_fallback_fire_flash (window, rectangle);
+    }
   return screenshot;
 }
 
@@ -607,7 +609,7 @@ screenshot_shell_get_pixbuf (GdkRectangle *rectangle)
       method_params = g_variant_new ("(bbbs)",
                                      screenshot_config->include_border,
                                      screenshot_config->include_pointer,
-                                     TRUE, /* flash */
+                                     !screenshot_config->noflash, /* flash */
                                      filename);
     }
   else if (rectangle != NULL)
@@ -616,7 +618,7 @@ screenshot_shell_get_pixbuf (GdkRectangle *rectangle)
       method_params = g_variant_new ("(iiiibs)",
                                      rectangle->x, rectangle->y,
                                      rectangle->width, rectangle->height,
-                                     TRUE, /* flash */
+                                     !screenshot_config->noflash, /* flash */
                                      filename);
     }
   else
@@ -624,7 +626,7 @@ screenshot_shell_get_pixbuf (GdkRectangle *rectangle)
       method_name = "Screenshot";
       method_params = g_variant_new ("(bbs)",
                                      screenshot_config->include_pointer,
-                                     TRUE, /* flash */
+                                     !screenshot_config->noflash, /* flash */
                                      filename);
     }
 

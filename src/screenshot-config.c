@@ -102,6 +102,9 @@ screenshot_save_config (void)
 
 gboolean
 screenshot_config_parse_command_line (gboolean clipboard_arg,
+                                      gboolean noflash_arg,
+			              gboolean nosound_arg,
+				      gboolean norecent_arg,
                                       gboolean window_arg,
                                       gboolean area_arg,
                                       gboolean include_border_arg,
@@ -168,6 +171,10 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
 
   screenshot_config->take_window_shot = window_arg;
   screenshot_config->take_area_shot = area_arg;
+
+  screenshot_config->noflash = noflash_arg;
+  screenshot_config->nosound = nosound_arg;
+  screenshot_config->norecent = norecent_arg;
 
   return TRUE;
 }
