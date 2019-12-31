@@ -71,7 +71,6 @@ target_toggled_cb (GtkToggleButton *button,
       gtk_widget_set_sensitive (effect_combo, take_window_shot);
       gtk_widget_set_sensitive (effect_label, take_window_shot);
 
-      gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
       gtk_widget_set_sensitive (effects_vbox, !take_area_shot);
 
       screenshot_config->take_window_shot = take_window_shot;
