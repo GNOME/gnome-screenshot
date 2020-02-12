@@ -1,5 +1,5 @@
 # gnome-screenshot ja.po.
-# Copyright (C) 1998-2019 gnome-screenshot's COPYRIGHT HOLDER
+# Copyright (C) 1998-2015, 2019-2020 gnome-screenshot's COPYRIGHT HOLDER
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1998.
 # Yuusuke Tahara <tahara@gnome.gr.jp>, 2000.
 # Yukihiro Nakai <nakai@gnome.gr.jp>, 2000.
@@ -14,15 +14,15 @@
 # Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2012-2013, 2015.
 # Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014.
-# sicklylife <translation@sicklylife.jp>, 2019.
+# sicklylife <translation@sicklylife.jp>, 2019-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2019-09-25 10:06+0000\n"
-"PO-Revision-Date: 2019-10-04 23:31+0900\n"
+"POT-Creation-Date: 2020-01-21 14:18+0000\n"
+"PO-Revision-Date: 2020-02-12 12:45+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -182,7 +182,7 @@ msgstr "終了"
 #: src/screenshot-application.c:142
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
-msgstr "ファイル“%s”はすでに“%s”にあります"
+msgstr "ファイル“%s”はすでに“%s”に存在します"
 
 #: src/screenshot-application.c:148
 msgid "Overwrite existing file?"
@@ -196,7 +196,7 @@ msgstr "スクリーンショットを取得できません"
 
 #: src/screenshot-application.c:165
 msgid "Error creating file. Please choose another location and retry."
-msgstr "ファイルの作成エラー。他の場所を選択するか、もう一度試してください。"
+msgstr "ファイル作成エラーです。他の場所を選択するか、もう一度試してください。"
 
 #: src/screenshot-application.c:427
 msgid "Error creating file"
@@ -308,7 +308,7 @@ msgstr ""
 
 #: src/screenshot-dialog.c:302
 msgid "Screenshot.png"
-msgstr "Screenshot.png"
+msgstr "スクリーンショット.png"
 
 #: src/screenshot-dialog.ui:7
 msgid "Save Screenshot"
@@ -342,7 +342,7 @@ msgstr "保存フォルダー(_F)"
 #: src/screenshot-filename-builder.c:135
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "Screenshot from %s.%s"
+msgstr "スクリーンショット %s.%s"
 
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken and the simpler filename
@@ -353,7 +353,7 @@ msgstr "Screenshot from %s.%s"
 #: src/screenshot-filename-builder.c:145
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "Screenshot from %s - %d.%s"
+msgstr "スクリーンショット %s - %d.%s"
 
 #. Translators:
 #. * these are the names of the effects available which will be
@@ -427,7 +427,7 @@ msgstr "キャンセル(_C)"
 
 #: src/screenshot-utils.c:731
 msgid "Error loading the help page"
-msgstr "ヘルプを読み込む際にエラー"
+msgstr "ヘルプの読み込み中にエラーが発生しました"
 
 #~ msgid "_Help"
 #~ msgstr "ヘルプ(_H)"
