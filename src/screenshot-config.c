@@ -119,13 +119,6 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
       return FALSE;
     }
 
-  if (delay_arg && area_arg)
-    {
-      g_printerr (_("Conflicting options: --area and --delay should not be "
-                    "used at the same time.\n"));
-      return FALSE;
-    }
-
   screenshot_config->interactive = interactive_arg;
 
   if (screenshot_config->interactive)

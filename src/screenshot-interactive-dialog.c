@@ -32,7 +32,6 @@
 
 static GtkWidget *pointer_row = NULL;
 static GtkWidget *shadow_row = NULL;
-static GtkWidget *delay_row = NULL;
 
 enum
 {
@@ -67,9 +66,7 @@ target_toggled_cb (GtkToggleButton *button,
       take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
 
       gtk_widget_set_sensitive (shadow_row, take_window_shot);
-
       gtk_widget_set_sensitive (pointer_row, !take_area_shot);
-      gtk_widget_set_sensitive (delay_row, !take_area_shot);
 
       screenshot_config->take_window_shot = take_window_shot;
       screenshot_config->take_area_shot = take_area_shot;
@@ -174,8 +171,6 @@ connect_screenshot_frame (GtkBuilder *ui)
 
   /** Grab after delay **/
   delay = GTK_WIDGET (gtk_builder_get_object (ui, "delay"));
-  delay_row = GTK_WIDGET (gtk_builder_get_object (ui, "delayrow"));
-  gtk_widget_set_sensitive (delay_row, !screenshot_config->take_area_shot);
 
   adjust = GTK_ADJUSTMENT (gtk_adjustment_new ((gdouble) screenshot_config->delay,
                                                0.0, 99.0,
