@@ -71,7 +71,6 @@ target_toggled_cb (GtkToggleButton *button,
       gtk_widget_set_sensitive (effect_combo, take_window_shot);
       gtk_widget_set_sensitive (effect_label, take_window_shot);
 
-      gtk_widget_set_sensitive (delay_hbox, !take_area_shot);
       gtk_widget_set_sensitive (effects_vbox, !take_area_shot);
 
       screenshot_config->take_window_shot = take_window_shot;
@@ -379,9 +378,6 @@ create_screenshot_frame (GtkWidget   *outer_vbox,
   delay_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_box_pack_start (GTK_BOX (vbox), delay_hbox, FALSE, FALSE, 0);
   gtk_widget_show (delay_hbox);
-
-  if (screenshot_config->take_area_shot)
-    gtk_widget_set_sensitive (delay_hbox, FALSE);
 
   /* translators: this is the first part of the "grab after a
    * delay of <spin button> seconds".
