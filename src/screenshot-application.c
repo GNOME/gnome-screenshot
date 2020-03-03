@@ -3,6 +3,7 @@
  * Copyright (C) 2001 Jonathan Blandford <jrb@alum.mit.edu>
  * Copyright (C) 2006 Emmanuele Bassi <ebassi@gnome.org>
  * Copyright (C) 2008-2012 Cosimo Cecchi <cosimoc@gnome.org>
+ * Copyright (C) 2020 Philipp Wolfer <ph.wolfer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -53,6 +54,8 @@ struct _ScreenshotApplicationPriv {
 
   gchar *save_uri;
   gboolean should_overwrite;
+
+  GdkRectangle rectangle;
 
   ScreenshotDialog *dialog;
 };
@@ -452,10 +455,13 @@ build_filename_ready_cb (GObject *source,
 }
 
 static void
-finish_prepare_screenshot (ScreenshotApplication *self,
-                           GdkRectangle *rectangle)
+finish_take_screenshot (ScreenshotApplication *self)
 {
   GdkPixbuf *screenshot;
+  GdkRectangle *rectangle = NULL;
+
+  if (self->priv->rectangle.width > 0 && self->priv->rectangle.height > 0)
+    rectangle = &self->priv->rectangle;
 
   screenshot = screenshot_get_pixbuf (rectangle);
 
@@ -530,6 +536,39 @@ finish_prepare_screenshot (ScreenshotApplication *self,
     screenshot_build_filename_async (screenshot_config->save_dir, NULL, build_filename_ready_cb, self);
 }
 
+static gboolean
+take_screenshot_timeout (gpointer user_data)
+{
+  ScreenshotApplication *self = user_data;
+  finish_take_screenshot (self);
+
+  return FALSE;
+}
+
+static void
+start_screenshot_timeout (ScreenshotApplication *self)
+{
+  guint delay = screenshot_config->delay * 1000;
+
+  if (!screenshot_config->take_area_shot)
+    /* hold the GApplication while doing the async screenshot op */
+    g_application_hold (G_APPLICATION (self));
+
+  /* HACK: give time to the dialog to actually disappear.
+   * We don't have any way to tell when the compositor has finished
+   * re-drawing.
+   */
+  if (delay == 0 && screenshot_config->interactive)
+    delay = 200;
+
+  if (delay > 0)
+    g_timeout_add (delay,
+                   take_screenshot_timeout,
+                   self);
+  else
+    g_idle_add (take_screenshot_timeout, self);
+}
+
 static void
 rectangle_found_cb (GdkRectangle *rectangle,
                     gpointer user_data)
@@ -538,7 +577,11 @@ rectangle_found_cb (GdkRectangle *rectangle,
 
   if (rectangle != NULL)
     {
-      finish_prepare_screenshot (self, rectangle);
+      self->priv->rectangle.x = rectangle->x;
+      self->priv->rectangle.y = rectangle->y;
+      self->priv->rectangle.width = rectangle->width;
+      self->priv->rectangle.height = rectangle->height;
+      start_screenshot_timeout (self);
     }
   else
     {
@@ -550,45 +593,21 @@ rectangle_found_cb (GdkRectangle *rectangle,
     }
 }
 
-static gboolean
-prepare_screenshot_timeout (gpointer user_data)
-{
-  ScreenshotApplication *self = user_data;
-
-  if (screenshot_config->take_area_shot)
-    screenshot_select_area_async (rectangle_found_cb, self);
-  else
-    finish_prepare_screenshot (self, NULL);
-
-  screenshot_save_config ();
-
-  return FALSE;
-}
-
 static void
 screenshot_start (ScreenshotApplication *self)
 {
-  guint delay = screenshot_config->delay * 1000;
-
-  /* hold the GApplication while doing the async screenshot op */
-  g_application_hold (G_APPLICATION (self));
-
   if (screenshot_config->take_area_shot)
-    delay = 0;
-
-  /* HACK: give time to the dialog to actually disappear.
-   * We don't have any way to tell when the compositor has finished
-   * re-drawing.
-   */
-  if (delay == 0 && screenshot_config->interactive)
-    delay = 200;
-
-  if (delay > 0)
-    g_timeout_add (delay,
-                   prepare_screenshot_timeout,
-                   self);
+    {
+      /* hold the GApplication while selecting the screen area */
+      g_application_hold (G_APPLICATION (self));
+      screenshot_select_area_async (rectangle_found_cb, self);
+    }
   else
-    g_idle_add (prepare_screenshot_timeout, self);
+    {
+      start_screenshot_timeout (self);
+    }
+
+  screenshot_save_config ();
 }
 
 static gboolean version_arg = FALSE;
