@@ -1,5 +1,8 @@
 include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
 
+stages:
+  - build
+
 variables:
   BUNDLE: 'org.gnome.Screenshot.Devel.flatpak'
 
