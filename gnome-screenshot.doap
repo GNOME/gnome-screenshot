@@ -40,4 +40,12 @@
     </foaf:Person>
   </maintainer>
 
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Alexander Mikhaylenko</foaf:name>
+      <foaf:mbox rdf:resource="mailto:alexm@gnome.org" />
+      <gnome:userid>alexm</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+
 </Project>
