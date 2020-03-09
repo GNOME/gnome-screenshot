@@ -53,6 +53,7 @@
         {
             "name" : "gnome-screenshot",
             "buildsystem" : "meson",
+            "builddir" : true,
             "sources" : [
                 {
                     "type" : "git",
