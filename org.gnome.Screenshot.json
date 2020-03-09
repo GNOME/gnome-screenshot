@@ -40,6 +40,11 @@
                 "/share/gdm",
                 "/share/gnome"
             ],
+            "config-opts" : [
+                "--disable-alsa",
+                "--disable-null",
+                "--disable-oss"
+            ],
             "sources" : [
                 {
                     "type" : "archive",
