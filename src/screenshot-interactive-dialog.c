@@ -229,7 +229,7 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   GtkBuilder *ui;
   CaptureData *data;
 
-  ui = gtk_builder_new_from_resource ("/org/gnome/Screenshot/ui/screenshot-interactive.ui");
+  ui = gtk_builder_new_from_resource ("/org/gnome/Screenshot/ui/screenshot-interactive-dialog.ui");
 
   dialog = GTK_WIDGET (gtk_builder_get_object (ui, "screenshot_window"));
   gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (self));
