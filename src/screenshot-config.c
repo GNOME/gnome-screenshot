@@ -26,7 +26,7 @@
 
 #include "screenshot-config.h"
 
-#define USE_SHADOW_KEY          "use-shadow"
+#define BORDER_EFFECT_KEY       "border-effect"
 #define DELAY_KEY               "delay"
 #define INCLUDE_BORDER_KEY      "include-border"
 #define INCLUDE_POINTER_KEY     "include-pointer"
@@ -57,15 +57,18 @@ screenshot_load_config (void)
   config->include_pointer =
     g_settings_get_boolean (config->settings,
                             INCLUDE_POINTER_KEY);
-  config->use_shadow =
-    g_settings_get_boolean (config->settings,
-                           USE_SHADOW_KEY);
+  config->border_effect =
+    g_settings_get_string (config->settings,
+                           BORDER_EFFECT_KEY);
   config->file_type =
     g_settings_get_string (config->settings,
                            DEFAULT_FILE_TYPE_KEY);
   config->include_icc_profile =
     g_settings_get_boolean (config->settings,
                             INCLUDE_ICC_PROFILE);
+
+  if (config->border_effect == NULL)
+    config->border_effect = g_strdup ("none");
 
   config->take_window_shot = FALSE;
   config->take_area_shot = FALSE;
@@ -90,8 +93,8 @@ screenshot_save_config (void)
                           INCLUDE_BORDER_KEY, c->include_border);
   g_settings_set_boolean (c->settings,
                           INCLUDE_POINTER_KEY, c->include_pointer);
-  g_settings_set_boolean (c->settings,
-                         USE_SHADOW_KEY, c->use_shadow);
+  g_settings_set_string (c->settings,
+                         BORDER_EFFECT_KEY, c->border_effect);
 
   if (!c->take_area_shot)
     g_settings_set_int (c->settings, DELAY_KEY, c->delay);
@@ -104,7 +107,7 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
                                       gboolean include_border_arg,
                                       gboolean disable_border_arg,
                                       gboolean include_pointer_arg,
-                                      gboolean use_shadow_arg,
+                                      const gchar *border_effect_arg,
                                       guint delay_arg,
                                       gboolean interactive_arg,
                                       const gchar *file_arg)
@@ -153,9 +156,14 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
       screenshot_config->include_border = !disable_border_arg;
       screenshot_config->include_pointer = include_pointer_arg;
       screenshot_config->copy_to_clipboard = clipboard_arg;
-      screenshot_config->use_shadow = use_shadow_arg;
       if (file_arg != NULL)
         screenshot_config->file = g_file_new_for_commandline_arg (file_arg);
+    }
+
+  if (border_effect_arg != NULL)
+    {
+      g_free (screenshot_config->border_effect);
+      screenshot_config->border_effect = g_strdup (border_effect_arg);
     }
 
   screenshot_config->take_window_shot = window_arg;

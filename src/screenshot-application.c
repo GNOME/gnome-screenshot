@@ -481,9 +481,20 @@ finish_prepare_screenshot (ScreenshotApplication *self,
 
   if (screenshot_config->take_window_shot)
     {
-      if (screenshot_config->use_shadow)
-        {
+      switch (screenshot_config->border_effect[0])
+         {
+        case 's': /* shadow */
           screenshot_add_shadow (&screenshot);
+          break;
+        case 'b': /* border */
+          screenshot_add_border (&screenshot);
+          break;
+        case 'v': /* vintage */
+          screenshot_add_vintage (&screenshot);
+          break;
+        case 'n': /* none */
+        default:
+          break;
         }
     }
 
@@ -590,7 +601,7 @@ static const GOptionEntry entries[] = {
   { "remove-border", 'B', 0, G_OPTION_ARG_NONE, NULL, N_("Remove the window border from the screenshot"), NULL },
   { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, NULL, N_("Include the pointer with the screenshot"), NULL },
   { "delay", 'd', 0, G_OPTION_ARG_INT, NULL, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-  { "use-shadow", 'b', 0, G_OPTION_ARG_NONE, NULL, N_("Apply a window shadow to the screenshot"), NULL },
+  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
   { "interactive", 'i', 0, G_OPTION_ARG_NONE, NULL, N_("Interactively set options"), NULL },
   { "file", 'f', 0, G_OPTION_ARG_FILENAME, NULL, N_("Save screenshot directly to this file"), N_("filename") },
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
@@ -634,6 +645,7 @@ screenshot_application_command_line (GApplication            *app,
   gboolean disable_border_arg = FALSE;
   gboolean include_pointer_arg = FALSE;
   gboolean interactive_arg = FALSE;
+  gchar *border_effect_arg = NULL;
   gboolean use_shadow_arg = FALSE;
   guint delay_arg = 0;
   gchar *file_arg = NULL;
@@ -649,6 +661,7 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "remove-border", "b", &disable_border_arg);
   g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
   g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
+  g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
   g_variant_dict_lookup (options, "use-shadow", "b", &use_shadow_arg);
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
   g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
@@ -659,7 +672,7 @@ screenshot_application_command_line (GApplication            *app,
                                               include_border_arg,
                                               disable_border_arg,
                                               include_pointer_arg,
-                                              use_shadow_arg,
+                                              border_effect_arg,
                                               delay_arg,
                                               interactive_arg,
                                               file_arg);
@@ -748,7 +761,7 @@ action_screen_shot (GSimpleAction *action,
                                         FALSE, /* include border */
                                         FALSE, /* disable border */
                                         FALSE, /* include pointer */
-                                        FALSE,  /* use shadow */
+                                        NULL,  /* border effect */
                                         0,     /* delay */
                                         FALSE, /* interactive */
                                         NULL); /* file */
@@ -768,7 +781,7 @@ action_window_shot (GSimpleAction *action,
                                         FALSE, /* include border */
                                         FALSE, /* disable border */
                                         FALSE, /* include pointer */
-                                        FALSE,  /* use shadow */
+                                        NULL,  /* border effect */
                                         0,     /* delay */
                                         FALSE, /* interactive */
                                         NULL); /* file */
