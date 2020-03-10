@@ -34,8 +34,16 @@
     <kudo>HiDpiIcon</kudo>
     <kudo>ModernToolkit</kudo>
   </kudos>
+  <releases>
+    <release version="3.36.0" type="stable" date="2020-03-10" urgency="medium">
+      <description>
+        <p>Translation updates.</p>
+      </description>
+    </release>
+  </releases>
   <update_contact>ebassi@gnome.org</update_contact>
   <project_group>GNOME</project_group>
   <compulsory_for_desktop>GNOME</compulsory_for_desktop>
   <translation type="gettext">gnome-screenshot</translation>
+  <content_rating type="oars-1.0" />
 </component>
