@@ -1,9 +1,9 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
+data/org.gnome.gnome-screenshot.gschema.xml
+data/org.gnome.Screenshot.desktop.in
+data/org.gnome.Screenshot.metainfo.xml.in
 src/gnome-screenshot.c
-src/org.gnome.gnome-screenshot.gschema.xml
-src/org.gnome.Screenshot.desktop.in
-src/org.gnome.Screenshot.metainfo.xml.in
 src/screenshot-app-menu.ui
 src/screenshot-application.c
 src/screenshot-config.c
