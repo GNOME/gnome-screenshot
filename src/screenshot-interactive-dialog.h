@@ -20,13 +20,10 @@
  * USA
  */
 
-#ifndef __SCREENSHOT_INTERACTIVE_DIALOG_H__
-#define __SCREENSHOT_INTERACTIVE_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
 typedef void (*CaptureClickedCallback) (gpointer *user_data);
 
 GtkWidget *screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data);
-
-#endif /* __SCREENSHOT_INTERACTIVE_DIALOG_H__ */

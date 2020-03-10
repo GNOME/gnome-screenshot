@@ -17,8 +17,7 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  */
 
-#ifndef __SCREENSHOT_UTILS_H__
-#define __SCREENSHOT_UTILS_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -39,5 +38,3 @@ void       screenshot_play_sound_effect (const gchar *event_id,
 void       screenshot_display_help        (GtkWindow *parent);
 
 G_END_DECLS
-
-#endif /* __SCREENSHOT_UTILS_H__ */
