@@ -1,5 +1,3 @@
-gnome = import('gnome')
-
 sources = [
   'gnome-screenshot.c',
 
@@ -14,11 +12,6 @@ sources = [
   'screenshot-shadow.c',
   'screenshot-utils.c',
 ]
-
-resources = gnome.compile_resources('screenshot-resources',
-                                    'gnome-screenshot.gresource.xml',
-                                    source_dir: '.',
-                                    c_name: 'screenshot')
 
 executable('gnome-screenshot', sources + resources,
            include_directories: [ root_inc, include_directories('.') ],
