@@ -136,6 +136,9 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
         screenshot_config->include_border = TRUE;
       if (disable_border_arg)
         screenshot_config->include_border = FALSE;
+
+      g_free (screenshot_config->border_effect);
+      screenshot_config->border_effect = g_strdup ("none");
     }
   else
     {
@@ -151,12 +154,12 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
       screenshot_config->copy_to_clipboard = clipboard_arg;
       if (file_arg != NULL)
         screenshot_config->file = g_file_new_for_commandline_arg (file_arg);
-    }
 
-  if (border_effect_arg != NULL)
-    {
-      g_free (screenshot_config->border_effect);
-      screenshot_config->border_effect = g_strdup (border_effect_arg);
+      if (border_effect_arg != NULL)
+        {
+          g_free (screenshot_config->border_effect);
+          screenshot_config->border_effect = g_strdup (border_effect_arg);
+        }
     }
 
   screenshot_config->take_window_shot = window_arg;
