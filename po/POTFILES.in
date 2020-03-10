@@ -3,12 +3,12 @@
 data/org.gnome.gnome-screenshot.gschema.xml
 data/org.gnome.Screenshot.desktop.in
 data/org.gnome.Screenshot.metainfo.xml.in
+data/ui/screenshot-dialog.ui
+data/ui/screenshot-interactive-dialog.ui
 src/gnome-screenshot.c
-src/screenshot-app-menu.ui
 src/screenshot-application.c
 src/screenshot-config.c
 src/screenshot-dialog.c
-src/screenshot-dialog.ui
 src/screenshot-filename-builder.c
 src/screenshot-interactive-dialog.c
 src/screenshot-shadow.c
