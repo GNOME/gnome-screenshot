@@ -83,10 +83,10 @@ screenshot_save_config (void)
 
   g_assert (c != NULL);
 
-  /* if we were not started up in interactive mode, avoid
+  /* if we were started up in quickshot mode, avoid
    * overwriting these settings.
    */
-  if (!c->interactive)
+  if (c->quickshot)
     return;
 
   g_settings_set_boolean (c->settings,
@@ -109,7 +109,7 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
                                       gboolean include_pointer_arg,
                                       const gchar *border_effect_arg,
                                       guint delay_arg,
-                                      gboolean interactive_arg,
+                                      gboolean quickshot_arg,
                                       const gchar *file_arg)
 {
   if (window_arg && area_arg)
@@ -119,28 +119,9 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
       return FALSE;
     }
 
-  screenshot_config->interactive = interactive_arg;
+  screenshot_config->quickshot = quickshot_arg;
 
-  if (screenshot_config->interactive)
-    {
-      if (clipboard_arg)
-        g_warning ("Option --clipboard is ignored in interactive mode.");
-      if (include_pointer_arg)
-        g_warning ("Option --include-pointer is ignored in interactive mode.");
-      if (file_arg)
-        g_warning ("Option --file is ignored in interactive mode.");
-
-      if (delay_arg > 0)
-        screenshot_config->delay = delay_arg;
-      if (include_border_arg)
-        screenshot_config->include_border = TRUE;
-      if (disable_border_arg)
-        screenshot_config->include_border = FALSE;
-
-      g_free (screenshot_config->border_effect);
-      screenshot_config->border_effect = g_strdup ("none");
-    }
-  else
+  if (screenshot_config->quickshot)
     {
       g_free (screenshot_config->save_dir);
       screenshot_config->save_dir =
@@ -160,6 +141,25 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
           g_free (screenshot_config->border_effect);
           screenshot_config->border_effect = g_strdup (border_effect_arg);
         }
+    }
+  else
+    {
+      if (clipboard_arg)
+        g_warning ("Option --clipboard is ignored in interactive mode.");
+      if (include_pointer_arg)
+        g_warning ("Option --include-pointer is ignored in interactive mode.");
+      if (file_arg)
+        g_warning ("Option --file is ignored in interactive mode.");
+
+      if (delay_arg > 0)
+        screenshot_config->delay = delay_arg;
+      if (include_border_arg)
+        screenshot_config->include_border = TRUE;
+      if (disable_border_arg)
+        screenshot_config->include_border = FALSE;
+
+      g_free (screenshot_config->border_effect);
+      screenshot_config->border_effect = g_strdup ("none");
     }
 
   screenshot_config->take_window_shot = window_arg;
