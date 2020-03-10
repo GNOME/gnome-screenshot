@@ -4,7 +4,6 @@
     <file preprocess="xml-stripblanks">icons/display-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/selection-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/window-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">ui/screenshot-app-menu.ui</file>
     <file preprocess="xml-stripblanks">ui/screenshot-interactive.ui</file>
     <file preprocess="xml-stripblanks">ui/screenshot-dialog.ui</file>
   </gresource>
