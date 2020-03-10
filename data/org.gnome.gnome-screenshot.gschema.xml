@@ -41,10 +41,10 @@
       <summary>Include ICC Profile</summary>
       <description>Include the ICC profile of the target in the screenshot file</description>
     </key>
-    <key name="use-shadow" type="b">
-      <default>false</default>
-      <summary>Use Shadow</summary>
-      <description>Apply a window shadow to the screenshot</description>
+    <key name="border-effect" type="s">
+      <default>'none'</default>
+      <summary>Border Effect</summary>
+      <description>Effect to add to the outside of a border.  Possible values are “shadow”, “none”, and “border”.</description>
     </key>
     <key name="default-file-type" enum="org.gnome.gnome-screenshot.file-types">
       <default>'png'</default>
