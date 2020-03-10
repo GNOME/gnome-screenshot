@@ -24,7 +24,7 @@
     <key name="last-save-directory" type="s">
       <default>''</default>
       <summary>Last save directory</summary>
-      <description>The last directory a screenshot was saved in interactive mode.</description>
+      <description>The last directory a screenshot was saved in quickshot mode.</description>
     </key>
     <key name="include-border" type="b">
       <default>true</default>

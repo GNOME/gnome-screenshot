@@ -44,7 +44,7 @@ typedef struct {
 
   guint delay;
 
-  gboolean interactive;
+  gboolean quickshot;
 } ScreenshotConfig;
 
 extern ScreenshotConfig *screenshot_config;
@@ -59,7 +59,7 @@ gboolean    screenshot_config_parse_command_line  (gboolean clipboard_arg,
                                                    gboolean include_pointer_arg,
                                                    const gchar *border_effect_arg,
                                                    guint delay_arg,
-                                                   gboolean interactive_arg,
+                                                   gboolean quickshot_arg,
                                                    const gchar *file_arg);
 
 G_END_DECLS
