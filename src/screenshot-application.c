@@ -115,13 +115,13 @@ save_pixbuf_handle_success (ScreenshotApplication *self)
 {
   set_recent_entry (self);
 
-  if (screenshot_config->interactive)
+  if (screenshot_config->quickshot)
     {
-      screenshot_close_interactive_dialog (self);
+      g_application_release (G_APPLICATION (self));
     }
   else
     {
-      g_application_release (G_APPLICATION (self));
+      screenshot_close_interactive_dialog (self);
     }
 }
 
@@ -129,7 +129,15 @@ static void
 save_pixbuf_handle_error (ScreenshotApplication *self,
                           GError *error)
 {
-  if (screenshot_config->interactive)
+  if (screenshot_config->quickshot)
+    {
+      g_critical ("Unable to save the screenshot: %s", error->message);
+      screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
+      g_application_release (G_APPLICATION (self));
+      if (screenshot_config->file != NULL)
+        exit (EXIT_FAILURE);
+    }
+  else
     {
       ScreenshotDialog *dialog = self->priv->dialog;
 
@@ -169,14 +177,6 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
 
       gtk_widget_grab_focus (dialog->filename_entry);
-    }
-  else
-    {
-      g_critical ("Unable to save the screenshot: %s", error->message);
-      screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
-      g_application_release (G_APPLICATION (self));
-      if (screenshot_config->file != NULL)
-        exit (EXIT_FAILURE);
     }
 }
 
@@ -422,35 +422,35 @@ build_filename_ready_cb (GObject *source,
       g_critical ("Impossible to find a valid location to save the screenshot: %s",
                   error->message);
 
-      if (screenshot_config->interactive)
-        screenshot_show_dialog (NULL,
-                                GTK_MESSAGE_ERROR,
-                                GTK_BUTTONS_OK,
-                                _("Unable to capture a screenshot"),
-                                _("Error creating file"));
-      else
+      if (screenshot_config->quickshot)
         {
           screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
           if (screenshot_config->file != NULL)
             exit (EXIT_FAILURE);
         }
+      else
+        screenshot_show_dialog (NULL,
+                                GTK_MESSAGE_ERROR,
+                                GTK_BUTTONS_OK,
+                                _("Unable to capture a screenshot"),
+                                _("Error creating file"));
 
       return;
     }
 
   screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
 
-  if (screenshot_config->interactive)
+  if (screenshot_config->quickshot)
+    {
+      g_application_hold (G_APPLICATION (self));
+      screenshot_save_to_file (self);
+    }
+  else
     {
       self->priv->dialog = screenshot_dialog_new (self->priv->screenshot,
                                                   self->priv->save_uri,
                                                   (SaveScreenshotCallback)screenshot_dialog_response_cb,
                                                   self);
-    }
-  else
-    {
-      g_application_hold (G_APPLICATION (self));
-      screenshot_save_to_file (self);
     }
 }
 
@@ -466,14 +466,14 @@ finish_take_screenshot (ScreenshotApplication *self)
     {
       g_critical ("Unable to capture a screenshot of any window");
 
-      if (screenshot_config->interactive)
+      if (screenshot_config->quickshot)
+        screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
+      else
         screenshot_show_dialog (NULL,
                                 GTK_MESSAGE_ERROR,
                                 GTK_BUTTONS_OK,
                                 _("Unable to capture a screenshot"),
                                 _("All possible methods failed"));
-      else
-        screenshot_play_sound_effect ("dialog-error", _("Unable to capture a screenshot"));
 
       g_application_release (G_APPLICATION (self));
       if (screenshot_config->file != NULL)
@@ -555,7 +555,7 @@ start_screenshot_timeout (ScreenshotApplication *self)
    * We don't have any way to tell when the compositor has finished
    * re-drawing.
    */
-  if (delay == 0 && screenshot_config->interactive)
+  if (delay == 0 && !screenshot_config->quickshot)
     delay = 200;
 
   if (delay > 0)
@@ -582,7 +582,7 @@ rectangle_found_cb (GdkRectangle *rectangle,
       /* user dismissed the area selection, possibly show the dialog again */
       g_application_release (G_APPLICATION (self));
 
-      if (screenshot_config->interactive)
+      if (!screenshot_config->quickshot)
         screenshot_show_interactive_dialog (self);
     }
 }
@@ -615,7 +615,7 @@ static const GOptionEntry entries[] = {
   { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, NULL, N_("Include the pointer with the screenshot"), NULL },
   { "delay", 'd', 0, G_OPTION_ARG_INT, NULL, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
   { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
-  { "interactive", 'i', 0, G_OPTION_ARG_NONE, NULL, N_("Interactively set options"), NULL },
+  { "quickshot", 'q', 0, G_OPTION_ARG_NONE, NULL, N_("Take a quick screenshoot"), NULL },
   { "file", 'f', 0, G_OPTION_ARG_FILENAME, NULL, N_("Save screenshot directly to this file"), N_("filename") },
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
   { NULL },
@@ -632,7 +632,7 @@ screenshot_application_handle_local_options (GApplication *app,
     }
 
   /* Start headless instances in non-unique mode */
-  if (!g_variant_dict_contains (options, "interactive"))
+  if (!g_variant_dict_contains (options, "quickshot"))
     {
       GApplicationFlags old_flags;
 
@@ -657,7 +657,7 @@ screenshot_application_command_line (GApplication            *app,
   gboolean include_border_arg = FALSE;
   gboolean disable_border_arg = FALSE;
   gboolean include_pointer_arg = FALSE;
-  gboolean interactive_arg = FALSE;
+  gboolean quickshot_arg = FALSE;
   gchar *border_effect_arg = NULL;
   gboolean use_shadow_arg = FALSE;
   guint delay_arg = 0;
@@ -673,7 +673,7 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "include-border", "b", &include_border_arg);
   g_variant_dict_lookup (options, "remove-border", "b", &disable_border_arg);
   g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
-  g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
+  g_variant_dict_lookup (options, "quickshot", "b", &quickshot_arg);
   g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
   g_variant_dict_lookup (options, "use-shadow", "b", &use_shadow_arg);
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
@@ -687,7 +687,7 @@ screenshot_application_command_line (GApplication            *app,
                                               include_pointer_arg,
                                               border_effect_arg,
                                               delay_arg,
-                                              interactive_arg,
+                                              quickshot_arg,
                                               file_arg);
   if (!res)
     {
@@ -695,11 +695,12 @@ screenshot_application_command_line (GApplication            *app,
       goto out;
     }
 
-  /* interactive mode: trigger the dialog and wait for the response */
-  if (screenshot_config->interactive)
-    g_application_activate (app);
-  else
+  /* quickshot mode: take a screenshot without the interactive dialog */
+  if (screenshot_config->quickshot)
     screenshot_start (self);
+  /* interactive mode: trigger the dialog and wait for the response */
+  else
+    g_application_activate (app);
 
  out:
   return exit_status;
@@ -776,7 +777,7 @@ action_screen_shot (GSimpleAction *action,
                                         FALSE, /* include pointer */
                                         NULL,  /* border effect */
                                         0,     /* delay */
-                                        FALSE, /* interactive */
+                                        FALSE, /* quickshot */
                                         NULL); /* file */
   screenshot_start (self);
 }
@@ -796,7 +797,7 @@ action_window_shot (GSimpleAction *action,
                                         FALSE, /* include pointer */
                                         NULL,  /* border effect */
                                         0,     /* delay */
-                                        FALSE, /* interactive */
+                                        FALSE, /* quickshot */
                                         NULL); /* file */
   screenshot_start (self);
 }
@@ -842,7 +843,7 @@ screenshot_application_activate (GApplication *app)
       return;
     }
 
-  screenshot_config->interactive = TRUE;
+  screenshot_config->quickshot = FALSE;
   screenshot_show_interactive_dialog (SCREENSHOT_APPLICATION (app));
 }
 
