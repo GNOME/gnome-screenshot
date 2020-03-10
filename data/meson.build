@@ -64,7 +64,7 @@ endif
 
 
 resources = gnome.compile_resources('screenshot-resources',
-                                    'gnome-screenshot.gresource.xml',
+                                    'org.gnome.Screenshot.gresource.xml',
                                     source_dir: '.',
                                     c_name: 'screenshot')
 
