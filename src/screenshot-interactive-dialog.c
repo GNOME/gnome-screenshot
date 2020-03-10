@@ -225,26 +225,16 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   ScreenshotApplication *self = user_data;
   GtkWidget *dialog;
   GtkWidget *capture_button;
-  GtkWidget *menu;
   GtkWidget *listbox;
-  GMenuModel *app_menu;
   GtkBuilder *ui;
   CaptureData *data;
-  guint res;
 
-  ui = gtk_builder_new_from_resource ("/org/gnome/screenshot/screenshot-interactive.ui");
-  res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/screenshot-app-menu.ui", NULL);
-  g_assert (res != 0);
+  ui = gtk_builder_new_from_resource ("/org/gnome/Screenshot/ui/screenshot-interactive-dialog.ui");
 
   dialog = GTK_WIDGET (gtk_builder_get_object (ui, "screenshot_window"));
   gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (self));
 
   capture_button = GTK_WIDGET (gtk_builder_get_object (ui, "capture_button"));
-
-  menu = GTK_WIDGET (gtk_builder_get_object (ui, "menu"));
-  app_menu = G_MENU_MODEL (gtk_builder_get_object (ui, "app-menu"));
-
-  gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (menu), app_menu);
 
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 

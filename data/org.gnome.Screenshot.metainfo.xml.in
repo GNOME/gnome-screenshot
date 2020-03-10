@@ -22,7 +22,7 @@
       selected window.
     </p>
   </description>
-  <url type="homepage">https://git.gnome.org/browse/gnome-screenshot/</url>
+  <url type="homepage">https://gitlab.gnome.org/GNOME/gnome-screenshot</url>
   <url type="bugtracker">https://gitlab.gnome.org/GNOME/gnome-screenshot/issues</url>
   <url type="donation">http://www.gnome.org/friends/</url>
   <screenshots>

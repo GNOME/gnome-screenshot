@@ -17,8 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHEESE_FLASH_H_
-#define CHEESE_FLASH_H_
+#pragma once
 
 #include <gtk/gtk.h>
 #include <glib-object.h>
@@ -45,5 +44,3 @@ void cheese_flash_fire (CheeseFlash *flash,
                         GdkRectangle *rect);
 
 G_END_DECLS
-
-#endif /* CHEESE_FLASH_H_ */

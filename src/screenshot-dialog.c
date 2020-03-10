@@ -215,7 +215,7 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   dialog->user_data = user_data;
 
   ui = gtk_builder_new ();
-  res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/screenshot-dialog.ui", NULL);
+  res = gtk_builder_add_from_resource (ui, "/org/gnome/Screenshot/ui/screenshot-dialog.ui", NULL);
   g_assert (res != 0);
 
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "toplevel"));

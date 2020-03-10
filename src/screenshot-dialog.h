@@ -17,8 +17,7 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  */
 
-#ifndef __SCREENSHOT_DIALOG_H__
-#define __SCREENSHOT_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -59,5 +58,3 @@ char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_filename (ScreenshotDialog *dialog);
 void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
                                                   gboolean          busy);
-
-#endif /* __SCREENSHOT_DIALOG_H__ */

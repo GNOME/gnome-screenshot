@@ -1,3 +1,5 @@
+gnome = import('gnome')
+
 desktop_file = i18n.merge_file('desktop',
                 type: 'desktop',
                 input: 'org.gnome.Screenshot.desktop.in',
@@ -59,6 +61,13 @@ if glib_compile_schemas.found()
     ]
   )
 endif
+
+
+resources = gnome.compile_resources('screenshot-resources',
+                                    'org.gnome.Screenshot.gresource.xml',
+                                    source_dir: '.',
+                                    c_name: 'screenshot')
+
 
 install_data('gnome-screenshot.1',
              install_dir: join_paths(get_option('mandir'), 'man1'))

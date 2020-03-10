@@ -18,8 +18,7 @@
  * USA
  */
 
-#ifndef __SCREENSHOT_FILENAME_BUILDER_H__
-#define __SCREENSHOT_FILENAME_BUILDER_H__
+#pragma once
 
 #include <gio/gio.h>
 
@@ -29,5 +28,3 @@ void screenshot_build_filename_async (const char *save_dir,
                                       gpointer user_data);
 gchar *screenshot_build_filename_finish (GAsyncResult *result,
                                          GError **error);
-
-#endif /* __SCREENSHOT_FILENAME_BUILDER_H__ */

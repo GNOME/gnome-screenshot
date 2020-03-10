@@ -18,8 +18,7 @@
  * USA
  */
 
-#ifndef __SCREENSHOT_CONFIG_H__
-#define __SCREENSHOT_CONFIG_H__
+#pragma once
 
 #include <gio/gio.h>
 
@@ -65,5 +64,3 @@ gboolean    screenshot_config_parse_command_line  (gboolean clipboard_arg,
                                                    const gchar *file_arg);
 
 G_END_DECLS
-
-#endif /* __SCREENSHOT_CONFIG_H__ */
