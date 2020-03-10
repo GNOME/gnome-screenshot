@@ -29,6 +29,3 @@ executable('gnome-screenshot', sources + resources,
              '-DGDK_DISABLE_DEPRECATION_WARNINGS',
            ],
            install: true)
-
-install_data('gnome-screenshot.convert',
-             install_dir: join_paths(gnome_screenshot_datadir, 'GConf', 'gsettings'))
