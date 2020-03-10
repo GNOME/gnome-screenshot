@@ -29,16 +29,6 @@
 #define SHADOW_OFFSET  (BLUR_RADIUS * 4 / 5)
 #define SHADOW_OPACITY 0.5
 
-#define OUTLINE_RADIUS  1
-#define OUTLINE_OFFSET  0
-#define OUTLINE_OPACITY 1.0
-
-#define VINTAGE_SATURATION 0.8
-#define VINTAGE_OVERLAY_COLOR 0xFFFBF2A3
-#define VINTAGE_SOURCE_ALPHA 192
-#define VINTAGE_OUTLINE_COLOR 0xFFEEEEEE
-#define VINTAGE_OUTLINE_RADIUS 24
-
 #define dist(x0, y0, x1, y1) sqrt(((x0) - (x1))*((x0) - (x1)) + ((y0) - (y1))*((y0) - (y1)))
 
 typedef struct {
@@ -82,26 +72,6 @@ create_blur_filter (int radius)
       {
         filter->data[y * filter->size + x] /= sum;
       }
-    }
-
-  return filter;
-}
-
-static ConvFilter *
-create_outline_filter (int radius)
-{
-  ConvFilter *filter;
-  double *iter;
-
-  filter = g_new0 (ConvFilter, 1);
-  filter->size = radius * 2 + 1;
-  filter->data = g_new (double, filter->size * filter->size);
-
-  for (iter = filter->data;
-       iter < filter->data + (filter->size * filter->size);
-       iter++)
-    {
-      *iter = 1.0;
     }
 
   return filter;
@@ -208,70 +178,5 @@ screenshot_add_shadow (GdkPixbuf **src)
                         gdk_pixbuf_get_height (*src),
                         BLUR_RADIUS, BLUR_RADIUS, 1.0, 1.0,
                         GDK_INTERP_BILINEAR, 255);
-  g_set_object (src, dest);
-}
-
-void
-screenshot_add_border (GdkPixbuf **src)
-{
-  GdkPixbuf *dest;
-  static ConvFilter *filter = NULL;
-
-  if (!filter)
-    filter = create_outline_filter (OUTLINE_RADIUS);
-
-  dest = create_effect (*src, filter,
-                        OUTLINE_RADIUS,
-                        OUTLINE_OFFSET, OUTLINE_OPACITY);
-
-  if (dest == NULL)
-    return;
-
-  gdk_pixbuf_composite (*src, dest,
-                        OUTLINE_RADIUS, OUTLINE_RADIUS,
-                        gdk_pixbuf_get_width (*src),
-                        gdk_pixbuf_get_height (*src),
-                        OUTLINE_RADIUS, OUTLINE_RADIUS, 1.0, 1.0,
-                        GDK_INTERP_BILINEAR, 255);
-  g_set_object (src, dest);
-}
-
-void
-screenshot_add_vintage (GdkPixbuf **src)
-{
-  GdkPixbuf *dest;
-  static ConvFilter *filter = NULL;
-
-  if (!filter)
-    filter = create_outline_filter (VINTAGE_OUTLINE_RADIUS);
-
-  dest = create_effect (*src, filter,
-                        VINTAGE_OUTLINE_RADIUS,
-                        OUTLINE_OFFSET, OUTLINE_OPACITY);
-
-  if (dest == NULL)
-    return;
-
-  gdk_pixbuf_fill (dest, VINTAGE_OUTLINE_COLOR);
-  gdk_pixbuf_composite (*src, dest,
-                        VINTAGE_OUTLINE_RADIUS, VINTAGE_OUTLINE_RADIUS,
-                        gdk_pixbuf_get_width (*src),
-                        gdk_pixbuf_get_height (*src),
-                        VINTAGE_OUTLINE_RADIUS, VINTAGE_OUTLINE_RADIUS, 1.0, 1.0,
-                        GDK_INTERP_HYPER, 255);
-  g_set_object (src, dest);
-
-  gdk_pixbuf_saturate_and_pixelate (*src, *src,
-                                    VINTAGE_SATURATION, FALSE);
-  dest = gdk_pixbuf_composite_color_simple (*src,
-                                            gdk_pixbuf_get_width(*src),
-                                            gdk_pixbuf_get_height(*src),
-                                            GDK_INTERP_BILINEAR,
-                                            VINTAGE_SOURCE_ALPHA, 64,
-                                            VINTAGE_OVERLAY_COLOR, VINTAGE_OVERLAY_COLOR);
-
-  if (dest == NULL)
-    return;
-
   g_set_object (src, dest);
 }
