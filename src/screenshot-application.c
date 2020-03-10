@@ -789,7 +789,6 @@ screenshot_application_startup (GApplication *app)
   const gchar *help_accels[2] = { "F1", NULL };
   const gchar *quit_accels[2] = { "<Primary>q", NULL };
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
-  g_application_set_resource_base_path (app, "/org/gnome/screenshot");
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
 

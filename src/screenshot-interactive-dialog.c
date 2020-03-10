@@ -232,8 +232,8 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
   CaptureData *data;
   guint res;
 
-  ui = gtk_builder_new_from_resource ("/org/gnome/screenshot/ui/screenshot-interactive.ui");
-  res = gtk_builder_add_from_resource (ui, "/org/gnome/screenshot/ui/screenshot-app-menu.ui", NULL);
+  ui = gtk_builder_new_from_resource ("/org/gnome/Screenshot/ui/screenshot-interactive.ui");
+  res = gtk_builder_add_from_resource (ui, "/org/gnome/Screenshot/ui/screenshot-app-menu.ui", NULL);
   g_assert (res != 0);
 
   dialog = GTK_WIDGET (gtk_builder_get_object (ui, "screenshot_window"));
