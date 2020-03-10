@@ -406,6 +406,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="menu-model">primary_menu</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
@@ -422,4 +423,16 @@
       </object>
     </child>
   </object>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="action">app.help</attribute>
+        <attribute name="label" translatable="yes">Help</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">About Screenshot</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
