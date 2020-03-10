@@ -481,20 +481,9 @@ finish_prepare_screenshot (ScreenshotApplication *self,
 
   if (screenshot_config->take_window_shot)
     {
-      switch (screenshot_config->border_effect[0])
+      if (screenshot_config->use_shadow)
         {
-        case 's': /* shadow */
           screenshot_add_shadow (&screenshot);
-          break;
-        case 'b': /* border */
-          screenshot_add_border (&screenshot);
-          break;
-        case 'v': /* vintage */
-          screenshot_add_vintage (&screenshot);
-          break;
-        case 'n': /* none */
-        default:
-          break;
         }
     }
 
@@ -601,7 +590,7 @@ static const GOptionEntry entries[] = {
   { "remove-border", 'B', 0, G_OPTION_ARG_NONE, NULL, N_("Remove the window border from the screenshot"), NULL },
   { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, NULL, N_("Include the pointer with the screenshot"), NULL },
   { "delay", 'd', 0, G_OPTION_ARG_INT, NULL, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
+  { "use-shadow", 'b', 0, G_OPTION_ARG_NONE, NULL, N_("Apply a window shadow to the screenshot"), NULL },
   { "interactive", 'i', 0, G_OPTION_ARG_NONE, NULL, N_("Interactively set options"), NULL },
   { "file", 'f', 0, G_OPTION_ARG_FILENAME, NULL, N_("Save screenshot directly to this file"), N_("filename") },
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
@@ -645,7 +634,7 @@ screenshot_application_command_line (GApplication            *app,
   gboolean disable_border_arg = FALSE;
   gboolean include_pointer_arg = FALSE;
   gboolean interactive_arg = FALSE;
-  gchar *border_effect_arg = NULL;
+  gboolean use_shadow_arg = FALSE;
   guint delay_arg = 0;
   gchar *file_arg = NULL;
   GVariantDict *options;
@@ -660,7 +649,7 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "remove-border", "b", &disable_border_arg);
   g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
   g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
-  g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
+  g_variant_dict_lookup (options, "use-shadow", "b", &use_shadow_arg);
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
   g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
 
@@ -670,7 +659,7 @@ screenshot_application_command_line (GApplication            *app,
                                               include_border_arg,
                                               disable_border_arg,
                                               include_pointer_arg,
-                                              border_effect_arg,
+                                              use_shadow_arg,
                                               delay_arg,
                                               interactive_arg,
                                               file_arg);
@@ -726,10 +715,17 @@ action_about (GSimpleAction *action,
     NULL
   };
 
+  const gchar *artists[] = {
+    "Tobias Bernard",
+    "Jakub Steiner",
+    NULL
+  };
+
   GList *windows = gtk_application_get_windows (GTK_APPLICATION (user_data));
   gtk_show_about_dialog (GTK_WINDOW (g_list_nth_data (windows, 0)),
                          "version", VERSION,
                          "authors", authors,
+                         "artists", artists,
                          "program-name", _("Screenshot"),
                          "comments", _("Save images of your screen or individual windows"),
                          "logo-icon-name", SCREENSHOT_ICON_NAME,
@@ -752,7 +748,7 @@ action_screen_shot (GSimpleAction *action,
                                         FALSE, /* include border */
                                         FALSE, /* disable border */
                                         FALSE, /* include pointer */
-                                        NULL,  /* border effect */
+                                        FALSE,  /* use shadow */
                                         0,     /* delay */
                                         FALSE, /* interactive */
                                         NULL); /* file */
@@ -772,7 +768,7 @@ action_window_shot (GSimpleAction *action,
                                         FALSE, /* include border */
                                         FALSE, /* disable border */
                                         FALSE, /* include pointer */
-                                        NULL,  /* border effect */
+                                        FALSE,  /* use shadow */
                                         0,     /* delay */
                                         FALSE, /* interactive */
                                         NULL); /* file */
@@ -790,9 +786,10 @@ static GActionEntry action_entries[] = {
 static void
 screenshot_application_startup (GApplication *app)
 {
-  g_autoptr(GMenuModel) menu = NULL;
-  g_autoptr(GtkBuilder) builder = NULL;
+  const gchar *help_accels[2] = { "F1", NULL };
+  const gchar *quit_accels[2] = { "<Primary>q", NULL };
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
+  g_application_set_resource_base_path (app, "/org/gnome/screenshot");
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
 
@@ -804,10 +801,8 @@ screenshot_application_startup (GApplication *app)
   g_action_map_add_action_entries (G_ACTION_MAP (self), action_entries,
                                    G_N_ELEMENTS (action_entries), self);
 
-  builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (builder, "/org/gnome/screenshot/screenshot-app-menu.ui", NULL);
-  menu = G_MENU_MODEL (gtk_builder_get_object (builder, "app-menu"));
-  gtk_application_set_app_menu (GTK_APPLICATION (app), menu);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (self), "app.help", help_accels);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (self), "app.quit", quit_accels);
 }
 
 static void
