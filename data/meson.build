@@ -1,4 +1,4 @@
-i18n.merge_file('desktop',
+desktop_file = i18n.merge_file('desktop',
                 type: 'desktop',
                 input: 'org.gnome.Screenshot.desktop.in',
                 output: 'org.gnome.Screenshot.desktop',
@@ -6,12 +6,37 @@ i18n.merge_file('desktop',
                 install: true,
                 install_dir: gnome_screenshot_appsdir)
 
-i18n.merge_file('appdata',
+# Validate Desktop file
+desktop_file_validate = find_program('desktop-file-validate', required: false)
+if desktop_file_validate.found()
+  test(
+    'validate-desktop',
+    desktop_file_validate,
+    args: [
+      desktop_file.full_path()
+    ]
+  )
+endif
+
+
+metainfo_file = i18n.merge_file('appdata',
                 input: 'org.gnome.Screenshot.metainfo.xml.in',
                 output: 'org.gnome.Screenshot.metainfo.xml',
                 po_dir: join_paths(meson.current_source_dir(), '../po'),
                 install: true,
                 install_dir: gnome_screenshot_appdatadir)
+
+# Validate metainfo
+appstream_util = find_program('appstream-util', required: false)
+if appstream_util.found()
+  test(
+    'validate-metainfo', appstream_util,
+    args: [
+      'validate', '--nonet', metainfo_file.full_path()
+    ]
+  )
+endif
+
 
 service_conf = configuration_data ()
 service_conf.set('bindir', gnome_screenshot_bindir)
@@ -23,6 +48,17 @@ configure_file(input: 'org.gnome.Screenshot.service.in',
 
 install_data('org.gnome.gnome-screenshot.gschema.xml',
              install_dir: gnome_screenshot_schemadir)
+
+glib_compile_schemas = find_program('glib-compile-schemas', required: false)
+# Validata GSchema
+if glib_compile_schemas.found()
+  test(
+    'validate-gschema', glib_compile_schemas,
+    args: [
+      '--strict', '--dry-run', meson.current_source_dir()
+    ]
+  )
+endif
 
 install_data('gnome-screenshot.1',
              install_dir: join_paths(get_option('mandir'), 'man1'))
