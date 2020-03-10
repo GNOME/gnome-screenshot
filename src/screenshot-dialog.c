@@ -133,7 +133,7 @@ drag_begin (GtkWidget        *widget,
             GdkDragContext   *context,
             ScreenshotDialog *dialog)
 {
-  gtk_drag_set_icon_pixbuf (context, dialog->screenshot,
+  gtk_drag_set_icon_pixbuf (context, dialog->preview_image,
                             dialog->drag_x, dialog->drag_y);
 }
 
