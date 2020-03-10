@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
-<component type="desktop">
+<component type="desktop-application">
   <id>org.gnome.Screenshot.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
@@ -23,7 +23,7 @@
     </p>
   </description>
   <url type="homepage">https://git.gnome.org/browse/gnome-screenshot/</url>
-  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-screenshot</url>
+  <url type="bugtracker">https://gitlab.gnome.org/GNOME/gnome-screenshot/issues</url>
   <url type="donation">http://www.gnome.org/friends/</url>
   <screenshots>
     <screenshot type="default">
@@ -31,11 +31,10 @@
     </screenshot>
   </screenshots>
   <kudos>
-    <kudo>AppMenu</kudo>
     <kudo>HiDpiIcon</kudo>
     <kudo>ModernToolkit</kudo>
   </kudos>
-  <updatecontact>ebassi@gnome.org</updatecontact>
+  <update_contact>ebassi@gnome.org</update_contact>
   <project_group>GNOME</project_group>
   <compulsory_for_desktop>GNOME</compulsory_for_desktop>
   <translation type="gettext">gnome-screenshot</translation>
