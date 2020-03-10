@@ -1,14 +1,10 @@
 include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
 
-stages:
-  - build
-
 variables:
   BUNDLE: 'org.gnome.Screenshot.Devel.flatpak'
 
 flatpak:
   extends: '.flatpak'
-  stage: build
   variables:
     MANIFEST_PATH: 'org.gnome.Screenshot.json'
     MESON_ARGS: ''
