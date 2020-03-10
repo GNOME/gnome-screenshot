@@ -30,6 +30,13 @@
       <image>https://git.gnome.org/browse/gnome-screenshot/plain/src/gnome-screenshot.png</image>
     </screenshot>
   </screenshots>
+  <releases>
+    <release version="3.36.0" type="stable" date="2020-03-10" urgency="medium">
+      <description>
+        <p>Translation updates.</p>
+      </description>
+    </release>
+  </releases>
   <kudos>
     <kudo>AppMenu</kudo>
     <kudo>HiDpiIcon</kudo>
