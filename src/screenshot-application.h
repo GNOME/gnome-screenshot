@@ -20,8 +20,7 @@
  * USA
  */
 
-#ifndef __SCREENSHOT_APPLICATION_H__
-#define __SCREENSHOT_APPLICATION_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -50,5 +49,3 @@ typedef struct {
 
 GType screenshot_application_get_type (void);
 GApplication * screenshot_application_new (void);
-
-#endif /* __SCREENSHOT_APPLICATION_H__ */

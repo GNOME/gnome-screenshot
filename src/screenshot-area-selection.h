@@ -18,8 +18,7 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  */
 
-#ifndef __SCREENSHOT_AREA_SELECTION_H__
-#define __SCREENSHOT_AREA_SELECTION_H__
+#pragma once
 
 #include <gdk/gdk.h>
 
@@ -32,5 +31,3 @@ void       screenshot_select_area_async   (SelectAreaCallback callback,
                                            gpointer callback_data);
 
 G_END_DECLS
-
-#endif /* __SCREENSHOT_AREA_SELECTION_H__ */
