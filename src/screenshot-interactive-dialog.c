@@ -94,7 +94,10 @@ static void
 use_shadow_toggled_cb (GtkSwitch *toggle,
                          gpointer     user_data)
 {
-  screenshot_config->use_shadow = gtk_switch_get_active (toggle);
+  if (gtk_switch_get_active (toggle))
+    screenshot_config->border_effect = "shadow";
+  else
+    screenshot_config->border_effect = "none";
   gtk_switch_set_state (toggle, gtk_switch_get_active (toggle));
 }
 
@@ -103,6 +106,7 @@ connect_effects_frame (GtkBuilder *ui)
 {
   GtkWidget *pointer;
   GtkWidget *shadow;
+  gboolean use_shadow;
 
   /** Include pointer **/
   pointer = GTK_WIDGET (gtk_builder_get_object (ui, "pointer"));
@@ -112,8 +116,9 @@ connect_effects_frame (GtkBuilder *ui)
                     NULL);
 
   /** Use shadow **/
+  use_shadow = !g_strcmp0 (screenshot_config->border_effect, "shadow");
   shadow = GTK_WIDGET (gtk_builder_get_object (ui, "shadow"));
-  gtk_switch_set_active (GTK_SWITCH (shadow), screenshot_config->use_shadow);
+  gtk_switch_set_active (GTK_SWITCH (shadow), use_shadow);
   g_signal_connect (shadow, "state-set",
                     G_CALLBACK (use_shadow_toggled_cb),
                     NULL);
