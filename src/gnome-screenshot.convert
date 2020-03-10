@@ -1,7 +1,0 @@
-[org.gnome.gnome-screenshot]
-take-window-shot = /apps/gnome-screenshot/take_window_shot
-delay = /apps/gnome-screenshot/delay
-last-save-directory = /apps/gnome-screenshot/last_save_directory
-include-border = /apps/gnome-screenshot/include_border
-include-pointer = /apps/gnome-screenshot/include_pointer
-border-effect = /apps/gnome-screenshot/border_effect
