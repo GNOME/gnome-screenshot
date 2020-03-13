@@ -55,7 +55,7 @@ struct _ScreenshotApplicationPriv {
   gchar *save_uri;
   gboolean should_overwrite;
 
-  GdkRectangle rectangle;
+  GdkRectangle *rectangle;
 
   ScreenshotDialog *dialog;
 };
@@ -458,12 +458,8 @@ static void
 finish_take_screenshot (ScreenshotApplication *self)
 {
   GdkPixbuf *screenshot;
-  GdkRectangle *rectangle = NULL;
 
-  if (self->priv->rectangle.width > 0 && self->priv->rectangle.height > 0)
-    rectangle = &self->priv->rectangle;
-
-  screenshot = screenshot_get_pixbuf (rectangle);
+  screenshot = screenshot_get_pixbuf (self->priv->rectangle);
 
   if (screenshot == NULL)
     {
@@ -510,11 +506,11 @@ finish_take_screenshot (ScreenshotApplication *self)
     {
       screenshot_save_to_clipboard (self);
       screenshot_play_sound_effect ("screen-capture", _("Screenshot taken"));
-      
+
       if (screenshot_config->file == NULL)
         {
           g_application_release (G_APPLICATION (self));
-          
+
           return;
         }
     }
@@ -577,10 +573,7 @@ rectangle_found_cb (GdkRectangle *rectangle,
 
   if (rectangle != NULL)
     {
-      self->priv->rectangle.x = rectangle->x;
-      self->priv->rectangle.y = rectangle->y;
-      self->priv->rectangle.width = rectangle->width;
-      self->priv->rectangle.height = rectangle->height;
+      self->priv->rectangle = g_memdup (rectangle, sizeof *rectangle);
       start_screenshot_timeout (self);
     }
   else
