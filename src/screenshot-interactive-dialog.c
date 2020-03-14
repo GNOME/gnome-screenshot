@@ -31,23 +31,6 @@
 #include "screenshot-utils.h"
 
 static GtkWidget *pointer_row = NULL;
-static GtkWidget *shadow_row = NULL;
-
-enum
-{
-  COLUMN_NICK,
-  COLUMN_LABEL,
-  COLUMN_ID,
-
-  N_COLUMNS
-};
-
-typedef enum {
-  SCREENSHOT_EFFECT_NONE,
-  SCREENSHOT_EFFECT_SHADOW,
-  SCREENSHOT_EFFECT_BORDER,
-  SCREENSHOT_EFFECT_VINTAGE
-} ScreenshotEffectType;
 
 #define TARGET_TOGGLE_DESKTOP 0
 #define TARGET_TOGGLE_WINDOW  1
@@ -65,7 +48,6 @@ target_toggled_cb (GtkToggleButton *button,
       take_window_shot = (target_toggle == TARGET_TOGGLE_WINDOW);
       take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
 
-      gtk_widget_set_sensitive (shadow_row, take_window_shot);
       gtk_widget_set_sensitive (pointer_row, !take_area_shot);
 
       screenshot_config->take_window_shot = take_window_shot;
@@ -88,36 +70,15 @@ include_pointer_toggled_cb (GtkSwitch *toggle,
 }
 
 static void
-use_shadow_toggled_cb (GtkSwitch *toggle,
-                         gpointer     user_data)
-{
-  if (gtk_switch_get_active (toggle))
-    screenshot_config->border_effect = "shadow";
-  else
-    screenshot_config->border_effect = "none";
-  gtk_switch_set_state (toggle, gtk_switch_get_active (toggle));
-}
-
-static void
 connect_effects_frame (GtkBuilder *ui)
 {
   GtkWidget *pointer;
-  GtkWidget *shadow;
-  gboolean use_shadow;
 
   /** Include pointer **/
   pointer = GTK_WIDGET (gtk_builder_get_object (ui, "pointer"));
   gtk_switch_set_active (GTK_SWITCH (pointer), screenshot_config->include_pointer);
   g_signal_connect (pointer, "state-set",
                     G_CALLBACK (include_pointer_toggled_cb),
-                    NULL);
-
-  /** Use shadow **/
-  use_shadow = !g_strcmp0 (screenshot_config->border_effect, "shadow");
-  shadow = GTK_WIDGET (gtk_builder_get_object (ui, "shadow"));
-  gtk_switch_set_active (GTK_SWITCH (shadow), use_shadow);
-  g_signal_connect (shadow, "state-set",
-                    G_CALLBACK (use_shadow_toggled_cb),
                     NULL);
 }
 
@@ -154,9 +115,6 @@ connect_screenshot_frame (GtkBuilder *ui)
                     G_CALLBACK (target_toggled_cb),
                     GINT_TO_POINTER (TARGET_TOGGLE_WINDOW));
   group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (window));
-
-  shadow_row = GTK_WIDGET (gtk_builder_get_object (ui, "shadowrow"));
-  gtk_widget_set_sensitive (shadow_row, screenshot_config->take_window_shot);
 
   /** Grab area of the desktop **/
   selection = GTK_WIDGET (gtk_builder_get_object (ui, "selection"));
