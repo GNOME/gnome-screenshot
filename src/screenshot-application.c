@@ -23,7 +23,6 @@
 
 #include "config.h"
 
-#include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
 #include <fcntl.h>
 #include <unistd.h>

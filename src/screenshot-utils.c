@@ -21,6 +21,11 @@
 #include "config.h"
 
 #include <gdk/gdkkeysyms.h>
+
+#if HAVE_X11
+#include <gdk/gdkx.h>
+#endif
+
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -33,10 +38,12 @@
 #endif
 
 #include "cheese-flash.h"
+
 #include "screenshot-application.h"
 #include "screenshot-config.h"
 #include "screenshot-utils.h"
 
+#ifdef HAVE_X11
 static GdkWindow *
 screenshot_find_active_window (void)
 {
@@ -271,6 +278,7 @@ screenshot_fallback_get_window_rect_coords (GdkWindow *window,
       screenshot_coordinates_out->height = height;
     }
 }
+#endif /* HAVE_X11 */
 
 void
 screenshot_play_sound_effect (const gchar *event_id,
@@ -305,6 +313,7 @@ screenshot_play_sound_effect (const gchar *event_id,
     ca_proplist_destroy (p);
 }
 
+#ifdef HAVE_X11
 static void
 screenshot_fallback_fire_flash (GdkWindow *window,
                                 GdkRectangle *rectangle)
@@ -584,6 +593,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
 
   return screenshot;
 }
+#endif /* HAVE_X11 */
 
 static GdkPixbuf *
 screenshot_shell_get_pixbuf (GdkRectangle *rectangle)
@@ -656,21 +666,29 @@ GdkPixbuf *
 screenshot_get_pixbuf (GdkRectangle *rectangle)
 {
   GdkPixbuf *screenshot = NULL;
-  gboolean force_fallback;
+  gboolean force_fallback = FALSE;
 
+#ifdef HAVE_X11
   force_fallback = g_getenv ("GNOME_SCREENSHOT_FORCE_FALLBACK") != NULL;
+#endif
   if (!force_fallback)
     {
       screenshot = screenshot_shell_get_pixbuf (rectangle);
       if (!screenshot)
+#ifdef HAVE_X11
         g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
                    "resorting to fallback X11.");
-    }
+#else
+        g_message ("Unable to use GNOME Shell's builtin screenshot interface.");
+#endif
+  }
   else
     g_message ("Using fallback X11 as requested");
 
+#ifdef HAVE_X11
   if (!screenshot)
     screenshot = screenshot_fallback_get_pixbuf (rectangle);
+#endif /* HAVE_X11 */
 
   return screenshot;
 }

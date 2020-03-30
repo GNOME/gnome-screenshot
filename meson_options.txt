@@ -1,0 +1,6 @@
+option (
+  'x11',
+  type: 'feature',
+  description: 'Enable fallback X11 backend',
+  value: 'auto'
+)
