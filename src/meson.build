@@ -13,12 +13,31 @@ sources = [
   'screenshot-utils.c',
 ]
 
-executable('gnome-screenshot', sources + resources,
-           include_directories: [ root_inc, include_directories('.') ],
-           dependencies: [ mathlib_dep, x11_dep, glib_dep, gtk_dep, canberra_dep ],
-           c_args: [
-             '-DLOCALEDIR="@0@"'.format(gnome_screenshot_localedir),
-             '-DGLIB_DISABLE_DEPRECATION_WARNINGS',
-             '-DGDK_DISABLE_DEPRECATION_WARNINGS',
-           ],
-           install: true)
+include_directories = [
+  root_inc,
+  include_directories('.')
+]
+
+dependencies = [
+  mathlib_dep,
+  x11_dep,
+  xext_dep,
+  glib_dep,
+  gtk_dep,
+  canberra_dep
+]
+
+c_args = [
+  '-DLOCALEDIR="@0@"'.format(gnome_screenshot_localedir),
+  '-DGLIB_DISABLE_DEPRECATION_WARNINGS',
+  '-DGDK_DISABLE_DEPRECATION_WARNINGS',
+]
+
+executable(
+  'gnome-screenshot',
+  sources + resources,
+  include_directories: include_directories,
+  dependencies: dependencies,
+  c_args: c_args,
+  install: true
+)

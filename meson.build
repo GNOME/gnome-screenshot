@@ -1,14 +1,21 @@
-project('gnome-screenshot', 'c',
-        version: '3.34.0',
-        license: 'GPLv2+',
-        meson_version: '>= 0.50.0',
-        default_options: [
-          'buildtype=debugoptimized',
-          'warning_level=1',
-          'c_std=c99',
-        ])
+project(
+  'gnome-screenshot',
+  'c',
+  version: '3.34.0',
+  license: 'GPLv2+',
+  meson_version: '>= 0.50.0',
+  default_options: [
+    'buildtype=debugoptimized',
+    'warning_level=1',
+    'c_std=c99',
+  ]
+)
 
-add_project_arguments([ '-D_POSIX_C_SOURCE=200809L', '-D_XOPEN_SOURCE=700', '-D_DEFAULT_SOURCE' ], language: 'c')
+add_project_arguments([
+  '-D_POSIX_C_SOURCE=200809L',
+  '-D_XOPEN_SOURCE=700',
+  '-D_DEFAULT_SOURCE'
+], language: 'c')
 
 cc = meson.get_compiler('c')
 
@@ -26,7 +33,8 @@ glib_req_version = '>= 2.35.1'
 gtk_req_version = '>= 3.12.0'
 
 mathlib_dep = cc.find_library('m', required: false)
-x11_dep = [ dependency('x11'), dependency('xext') ]
+x11_dep = dependency('x11')
+xext_dep = dependency('xext')
 glib_dep = dependency('glib-2.0', version: glib_req_version)
 gtk_dep = dependency('gtk+-3.0', version: gtk_req_version)
 canberra_dep = dependency('libcanberra-gtk3')
