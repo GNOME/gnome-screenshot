@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.22.0 -->
 <interface>
   <requires lib="gtk+" version="3.22"/>
-  <object class="GtkApplicationWindow" id="toplevel">
+  <template class="ScreenshotDialog" parent="GtkApplicationWindow">
     <property name="window_position">center</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
@@ -119,5 +119,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
