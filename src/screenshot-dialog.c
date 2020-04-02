@@ -27,12 +27,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-enum {
-  TYPE_IMAGE_PNG,
-  LAST_TYPE
-};
+struct _ScreenshotDialog
+{
+  GObject parent_instance;
 
-struct _ScreenshotDialog {
   GdkPixbuf *screenshot;
   GdkPixbuf *preview_image;
 
@@ -48,6 +46,13 @@ struct _ScreenshotDialog {
 
   SaveScreenshotCallback callback;
   gpointer user_data;
+};
+
+G_DEFINE_TYPE (ScreenshotDialog, screenshot_dialog, G_TYPE_OBJECT)
+
+enum {
+  TYPE_IMAGE_PNG,
+  LAST_TYPE
 };
 
 static GtkTargetEntry drag_types[] =
@@ -207,6 +212,29 @@ setup_drawing_area (ScreenshotDialog *dialog, GtkBuilder *ui)
                     G_CALLBACK (drag_data_get), dialog);
 }
 
+static void
+screenshot_dialog_finalize (GObject *object)
+{
+  ScreenshotDialog *self = (ScreenshotDialog *)object;
+
+  gtk_widget_destroy (self->dialog);
+
+  G_OBJECT_CLASS (screenshot_dialog_parent_class)->finalize (object);
+}
+
+static void
+screenshot_dialog_class_init (ScreenshotDialogClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->finalize = screenshot_dialog_finalize;
+}
+
+static void
+screenshot_dialog_init (ScreenshotDialog *self)
+{
+}
+
 ScreenshotDialog *
 screenshot_dialog_new (GdkPixbuf              *screenshot,
                        char                   *initial_uri,
@@ -227,7 +255,7 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   current_name = g_file_get_basename (tmp_file);
   current_folder = g_file_get_uri (parent_file);
 
-  dialog = g_new0 (ScreenshotDialog, 1);
+  dialog = g_object_new (SCREENSHOT_TYPE_DIALOG, NULL);
   dialog->screenshot = screenshot;
   dialog->callback = f;
   dialog->user_data = user_data;
@@ -354,3 +382,4 @@ screenshot_dialog_get_filename_entry (ScreenshotDialog *dialog)
 {
   return dialog->filename_entry;
 }
+

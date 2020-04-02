@@ -21,6 +21,12 @@
 
 #include <gtk/gtk.h>
 
+G_BEGIN_DECLS
+
+#define SCREENSHOT_TYPE_DIALOG (screenshot_dialog_get_type())
+
+G_DECLARE_FINAL_TYPE (ScreenshotDialog, screenshot_dialog, SCREENSHOT, DIALOG, GObject)
+
 typedef enum {
   SCREENSHOT_RESPONSE_SAVE,
   SCREENSHOT_RESPONSE_COPY,
@@ -29,8 +35,6 @@ typedef enum {
 } ScreenshotResponse;
 
 typedef void (*SaveScreenshotCallback) (ScreenshotResponse response, gpointer *user_data);
-
-typedef struct _ScreenshotDialog ScreenshotDialog;
 
 ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf              *screenshot,
                                                   char                   *initial_uri,
@@ -44,3 +48,5 @@ void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
                                                   gboolean          busy);
 GtkWidget        *screenshot_dialog_get_dialog   (ScreenshotDialog *dialog);
 GtkWidget        *screenshot_dialog_get_filename_entry (ScreenshotDialog *dialog);
+
+G_END_DECLS

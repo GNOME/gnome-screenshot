@@ -104,8 +104,7 @@ screenshot_close_interactive_dialog (ScreenshotApplication *self)
 {
   ScreenshotDialog *dialog = self->priv->dialog;
   save_folder_to_settings (self);
-  gtk_widget_destroy (screenshot_dialog_get_dialog (dialog));
-  g_free (dialog);
+  g_object_unref (dialog);
 }
 
 static void
