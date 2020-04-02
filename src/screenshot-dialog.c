@@ -32,6 +32,24 @@ enum {
   LAST_TYPE
 };
 
+struct _ScreenshotDialog {
+  GdkPixbuf *screenshot;
+  GdkPixbuf *preview_image;
+
+  GtkWidget *dialog;
+  GtkWidget *save_widget;
+  GtkWidget *filename_entry;
+  GtkWidget *save_button;
+  GtkWidget *copy_button;
+  GtkWidget *back_button;
+
+  gint drag_x;
+  gint drag_y;
+
+  SaveScreenshotCallback callback;
+  gpointer user_data;
+};
+
 static GtkTargetEntry drag_types[] =
 {
   { "image/png", 0, TYPE_IMAGE_PNG },

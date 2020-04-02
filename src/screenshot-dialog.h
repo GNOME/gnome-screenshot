@@ -30,23 +30,7 @@ typedef enum {
 
 typedef void (*SaveScreenshotCallback) (ScreenshotResponse response, gpointer *user_data);
 
-typedef struct {
-  GdkPixbuf *screenshot;
-  GdkPixbuf *preview_image;
-
-  GtkWidget *dialog;
-  GtkWidget *save_widget;
-  GtkWidget *filename_entry;
-  GtkWidget *save_button;
-  GtkWidget *copy_button;
-  GtkWidget *back_button;
-
-  gint drag_x;
-  gint drag_y;
-
-  SaveScreenshotCallback callback;
-  gpointer user_data;
-}  ScreenshotDialog;
+typedef struct _ScreenshotDialog ScreenshotDialog;
 
 ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf              *screenshot,
                                                   char                   *initial_uri,
