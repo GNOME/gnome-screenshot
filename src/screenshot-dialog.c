@@ -29,17 +29,17 @@
 
 struct _ScreenshotDialog
 {
-  GObject parent_instance;
+  GtkApplicationWindow parent_instance;
 
   GdkPixbuf *screenshot;
   GdkPixbuf *preview_image;
 
-  GtkWidget *dialog;
   GtkWidget *save_widget;
   GtkWidget *filename_entry;
   GtkWidget *save_button;
   GtkWidget *copy_button;
   GtkWidget *back_button;
+  GtkWidget *preview_darea;
 
   gint drag_x;
   gint drag_y;
@@ -48,7 +48,7 @@ struct _ScreenshotDialog
   gpointer user_data;
 };
 
-G_DEFINE_TYPE (ScreenshotDialog, screenshot_dialog, G_TYPE_OBJECT)
+G_DEFINE_TYPE (ScreenshotDialog, screenshot_dialog, GTK_TYPE_APPLICATION_WINDOW)
 
 enum {
   TYPE_IMAGE_PNG,
@@ -190,49 +190,43 @@ button_clicked (GtkWidget *button, ScreenshotDialog *dialog)
 }
 
 static void
-setup_drawing_area (ScreenshotDialog *dialog, GtkBuilder *ui)
+setup_drawing_area (ScreenshotDialog *dialog)
 {
-  GtkWidget *preview_darea;
-
-  preview_darea = GTK_WIDGET (gtk_builder_get_object (ui, "preview_darea"));
-
-  g_signal_connect (preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
-  g_signal_connect (preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
-  g_signal_connect (preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
+  g_signal_connect (dialog->preview_darea, "draw", G_CALLBACK (on_preview_draw), dialog);
+  g_signal_connect (dialog->preview_darea, "button_press_event", G_CALLBACK (on_preview_button_press_event), dialog);
+  g_signal_connect (dialog->preview_darea, "button_release_event", G_CALLBACK (on_preview_button_release_event), dialog);
 
   /* setup dnd */
-  gtk_drag_source_set (preview_darea,
+  gtk_drag_source_set (dialog->preview_darea,
                        GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
                        drag_types, G_N_ELEMENTS (drag_types),
                        GDK_ACTION_COPY);
 
-  g_signal_connect (G_OBJECT (preview_darea), "drag_begin",
+  g_signal_connect (G_OBJECT (dialog->preview_darea), "drag_begin",
                     G_CALLBACK (drag_begin), dialog);
-  g_signal_connect (G_OBJECT (preview_darea), "drag_data_get",
+  g_signal_connect (G_OBJECT (dialog->preview_darea), "drag_data_get",
                     G_CALLBACK (drag_data_get), dialog);
-}
-
-static void
-screenshot_dialog_finalize (GObject *object)
-{
-  ScreenshotDialog *self = (ScreenshotDialog *)object;
-
-  gtk_widget_destroy (self->dialog);
-
-  G_OBJECT_CLASS (screenshot_dialog_parent_class)->finalize (object);
 }
 
 static void
 screenshot_dialog_class_init (ScreenshotDialogClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = screenshot_dialog_finalize;
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/Screenshot/ui/screenshot-dialog.ui");
+  gtk_widget_class_bind_template_child (widget_class, ScreenshotDialog, filename_entry);
+  gtk_widget_class_bind_template_child (widget_class, ScreenshotDialog, save_widget);
+  gtk_widget_class_bind_template_child (widget_class, ScreenshotDialog, save_button);
+  gtk_widget_class_bind_template_child (widget_class, ScreenshotDialog, copy_button);
+  gtk_widget_class_bind_template_child (widget_class, ScreenshotDialog, back_button);
+  gtk_widget_class_bind_template_child (widget_class, ScreenshotDialog, preview_darea);
 }
 
 static void
 screenshot_dialog_init (ScreenshotDialog *self)
 {
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 ScreenshotDialog *
@@ -242,12 +236,10 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
                        gpointer               user_data)
 {
   g_autoptr(GFile) tmp_file = NULL, parent_file = NULL;
-  g_autoptr(GtkBuilder) ui = NULL;
   g_autofree gchar *current_folder = NULL, *current_name = NULL;
   ScreenshotDialog *dialog;
   char *ext;
   gint pos;
-  guint res;
 
   tmp_file = g_file_new_for_uri (initial_uri);
   parent_file = g_file_get_parent (tmp_file);
@@ -260,32 +252,22 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   dialog->callback = f;
   dialog->user_data = user_data;
 
-  ui = gtk_builder_new ();
-  res = gtk_builder_add_from_resource (ui, "/org/gnome/Screenshot/ui/screenshot-dialog.ui", NULL);
-  g_assert (res != 0);
-
-  dialog->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "toplevel"));
-  gtk_window_set_application (GTK_WINDOW (dialog->dialog), GTK_APPLICATION (g_application_get_default ()));
-  gtk_widget_realize (dialog->dialog);
-  g_signal_connect (dialog->dialog, "key-press-event",
+  gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (g_application_get_default ()));
+  gtk_widget_realize (GTK_WIDGET (dialog));
+  g_signal_connect (dialog, "key-press-event",
                     G_CALLBACK (dialog_key_press_cb),
                     NULL);
 
-  dialog->filename_entry = GTK_WIDGET (gtk_builder_get_object (ui, "filename_entry"));
-  dialog->save_widget = GTK_WIDGET (gtk_builder_get_object (ui, "save_widget"));
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
   gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
 
-  dialog->save_button = GTK_WIDGET (gtk_builder_get_object (ui, "save_button"));
   g_signal_connect (dialog->save_button, "clicked", G_CALLBACK (button_clicked), dialog);
-  dialog->copy_button = GTK_WIDGET (gtk_builder_get_object (ui, "copy_button"));
   g_signal_connect (dialog->copy_button, "clicked", G_CALLBACK (button_clicked), dialog);
-  dialog->back_button = GTK_WIDGET (gtk_builder_get_object (ui, "back_button"));
   g_signal_connect (dialog->back_button, "clicked", G_CALLBACK (button_clicked), dialog);
 
-  setup_drawing_area (dialog, ui);
+  setup_drawing_area (dialog);
 
-  gtk_widget_show_all (dialog->dialog);
+  gtk_widget_show_all (GTK_WIDGET (dialog));
 
   /* select the name of the file but leave out the extension if there's any;
    * the dialog must be realized for select_region to work
@@ -350,14 +332,14 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 {
   GdkWindow *window;
 
-  window = gtk_widget_get_window (dialog->dialog);
+  window = gtk_widget_get_window (GTK_WIDGET (dialog));
 
   if (busy)
     {
       g_autoptr(GdkCursor) cursor = NULL;
       GdkDisplay *display;
       /* Change cursor to busy */
-      display = gtk_widget_get_display (GTK_WIDGET (dialog->dialog));
+      display = gtk_widget_get_display (GTK_WIDGET (dialog));
       cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
     }
@@ -366,7 +348,7 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
       gdk_window_set_cursor (window, NULL);
     }
 
-  gtk_widget_set_sensitive (dialog->dialog, ! busy);
+  gtk_widget_set_sensitive (GTK_WIDGET (dialog), ! busy);
 
   gdk_flush ();
 }
@@ -374,7 +356,7 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 GtkWidget *
 screenshot_dialog_get_dialog (ScreenshotDialog *dialog)
 {
-  return dialog->dialog;
+  return GTK_WIDGET (dialog);
 }
 
 GtkWidget *

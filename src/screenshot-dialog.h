@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 
 #define SCREENSHOT_TYPE_DIALOG (screenshot_dialog_get_type())
 
-G_DECLARE_FINAL_TYPE (ScreenshotDialog, screenshot_dialog, SCREENSHOT, DIALOG, GObject)
+G_DECLARE_FINAL_TYPE (ScreenshotDialog, screenshot_dialog, SCREENSHOT, DIALOG, GtkApplicationWindow)
 
 typedef enum {
   SCREENSHOT_RESPONSE_SAVE,
