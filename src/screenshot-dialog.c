@@ -354,12 +354,6 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
 }
 
 GtkWidget *
-screenshot_dialog_get_dialog (ScreenshotDialog *dialog)
-{
-  return GTK_WIDGET (dialog);
-}
-
-GtkWidget *
 screenshot_dialog_get_filename_entry (ScreenshotDialog *dialog)
 {
   return dialog->filename_entry;
