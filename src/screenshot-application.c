@@ -104,7 +104,7 @@ screenshot_close_interactive_dialog (ScreenshotApplication *self)
 {
   ScreenshotDialog *dialog = self->priv->dialog;
   save_folder_to_settings (self);
-  gtk_widget_destroy (dialog->dialog);
+  gtk_widget_destroy (screenshot_dialog_get_dialog (dialog));
   g_free (dialog);
 }
 
@@ -143,7 +143,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           g_autofree gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                                       file_name, folder_name);
 
-          gint response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
+          gint response = screenshot_show_dialog (GTK_WINDOW (screenshot_dialog_get_dialog (dialog)),
                                                   GTK_MESSAGE_WARNING,
                                                   GTK_BUTTONS_YES_NO,
                                                   _("Overwrite existing file?"),
@@ -159,14 +159,14 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
       else
         {
-          screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
+          screenshot_show_dialog (GTK_WINDOW (screenshot_dialog_get_dialog (dialog)),
                                   GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
                                   _("Error creating file. Please choose another location and retry."));
         }
 
-      gtk_widget_grab_focus (dialog->filename_entry);
+      gtk_widget_grab_focus (screenshot_dialog_get_filename_entry (dialog));
     }
   else
     {
