@@ -9,7 +9,6 @@ sources = [
   'screenshot-dialog.c',
   'screenshot-filename-builder.c',
   'screenshot-interactive-dialog.c',
-  'screenshot-shadow.c',
   'screenshot-utils.c',
 ]
 

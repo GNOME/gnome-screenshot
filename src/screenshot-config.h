@@ -39,8 +39,6 @@ typedef struct {
   gboolean include_pointer;
   gboolean include_icc_profile;
 
-  gchar *border_effect;
-
   guint delay;
 
   gboolean interactive;
