@@ -142,7 +142,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           g_autofree gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                                       file_name, folder_name);
 
-          gint response = screenshot_show_dialog (GTK_WINDOW (screenshot_dialog_get_dialog (dialog)),
+          gint response = screenshot_show_dialog (GTK_WINDOW (dialog),
                                                   GTK_MESSAGE_WARNING,
                                                   GTK_BUTTONS_YES_NO,
                                                   _("Overwrite existing file?"),
@@ -158,7 +158,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
       else
         {
-          screenshot_show_dialog (GTK_WINDOW (screenshot_dialog_get_dialog (dialog)),
+          screenshot_show_dialog (GTK_WINDOW (dialog),
                                   GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
