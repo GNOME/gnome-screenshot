@@ -28,7 +28,6 @@
 
 #define BORDER_EFFECT_KEY       "border-effect"
 #define DELAY_KEY               "delay"
-#define INCLUDE_BORDER_KEY      "include-border"
 #define INCLUDE_POINTER_KEY     "include-pointer"
 #define INCLUDE_ICC_PROFILE     "include-icc-profile"
 #define AUTO_SAVE_DIRECTORY_KEY "auto-save-directory"
@@ -51,9 +50,6 @@ screenshot_load_config (void)
   config->delay =
     g_settings_get_int (config->settings,
                         DELAY_KEY);
-  config->include_border =
-    g_settings_get_boolean (config->settings,
-                            INCLUDE_BORDER_KEY);
   config->include_pointer =
     g_settings_get_boolean (config->settings,
                             INCLUDE_POINTER_KEY);
@@ -90,8 +86,6 @@ screenshot_save_config (void)
     return;
 
   g_settings_set_boolean (c->settings,
-                          INCLUDE_BORDER_KEY, c->include_border);
-  g_settings_set_boolean (c->settings,
                           INCLUDE_POINTER_KEY, c->include_pointer);
   g_settings_set_string (c->settings,
                          BORDER_EFFECT_KEY, c->border_effect);
@@ -121,6 +115,13 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
 
   screenshot_config->interactive = interactive_arg;
 
+  if (include_border_arg)
+    g_warning ("Option --include-border is deprecated and will be removed in "
+               "gnome-screenshot 3.38.0. Window border is always included.");
+  if (disable_border_arg)
+    g_warning ("Option --remove-border is deprecated and will be removed in "
+               "gnome-screenshot 3.38.0. Window border is always included.");
+
   if (screenshot_config->interactive)
     {
       if (clipboard_arg)
@@ -132,10 +133,6 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
 
       if (delay_arg > 0)
         screenshot_config->delay = delay_arg;
-      if (include_border_arg)
-        screenshot_config->include_border = TRUE;
-      if (disable_border_arg)
-        screenshot_config->include_border = FALSE;
 
       g_free (screenshot_config->border_effect);
       screenshot_config->border_effect = g_strdup ("none");
@@ -148,8 +145,6 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
                                AUTO_SAVE_DIRECTORY_KEY);
 
       screenshot_config->delay = delay_arg;
-      screenshot_config->include_border = include_border_arg;
-      screenshot_config->include_border = !disable_border_arg;
       screenshot_config->include_pointer = include_pointer_arg;
       screenshot_config->copy_to_clipboard = clipboard_arg;
       if (file_arg != NULL)

@@ -26,11 +26,6 @@
       <summary>Last save directory</summary>
       <description>The last directory a screenshot was saved in interactive mode.</description>
     </key>
-    <key name="include-border" type="b">
-      <default>true</default>
-      <summary>Include Border</summary>
-      <description>Include the window manager border along with the screenshot</description>
-    </key>
     <key name="include-pointer" type="b">
       <default>false</default>
       <summary>Include Pointer</summary>
