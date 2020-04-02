@@ -223,8 +223,7 @@ mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
 }
 
 static void
-screenshot_fallback_get_window_rect_coords (GdkWindow *window,
-                                            gboolean include_border,
+screenshot_fallback_get_window_rect_coords (GdkWindow    *window,
                                             GdkRectangle *real_coordinates_out,
                                             GdkRectangle *screenshot_coordinates_out)
 {
@@ -232,17 +231,7 @@ screenshot_fallback_get_window_rect_coords (GdkWindow *window,
   gint width, height;
   GdkRectangle real_coordinates;
 
-  if (include_border)
-    {
-      gdk_window_get_frame_extents (window, &real_coordinates);
-    }
-  else
-    {
-      real_coordinates.width = gdk_window_get_width (window);
-      real_coordinates.height = gdk_window_get_height (window);
-
-      gdk_window_get_origin (window, &real_coordinates.x, &real_coordinates.y);
-    }
+  gdk_window_get_frame_extents (window, &real_coordinates);
 
   x_orig = real_coordinates.x;
   y_orig = real_coordinates.y;
@@ -324,10 +313,7 @@ screenshot_fallback_fire_flash (GdkWindow *window,
   if (rectangle != NULL)
     rect = *rectangle;
   else
-    screenshot_fallback_get_window_rect_coords (window,
-                                                screenshot_config->include_border,
-                                                NULL,
-                                                &rect);
+    screenshot_fallback_get_window_rect_coords (window, NULL, &rect);
 
   flash = cheese_flash_new ();
   cheese_flash_fire (flash, &rect);
@@ -397,7 +383,6 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
   window = screenshot_fallback_find_current_window ();
 
   screenshot_fallback_get_window_rect_coords (window,
-                                              screenshot_config->include_border,
                                               &real_coords,
                                               &screenshot_coords);
 
@@ -410,7 +395,6 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
         (gdk_window_get_display (window), wm);
 
       screenshot_fallback_get_window_rect_coords (wm_window,
-                                                  FALSE,
                                                   &wm_real_coords,
                                                   NULL);
 
@@ -438,7 +422,7 @@ screenshot_fallback_get_pixbuf (GdkRectangle *rectangle)
     mask_monitors (screenshot, root);
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
-  if (screenshot_config->include_border && (wm != None))
+  if (wm != None)
     {
       XRectangle *rectangles;
       int rectangle_count, rectangle_order, i;
@@ -615,7 +599,7 @@ screenshot_shell_get_pixbuf (GdkRectangle *rectangle)
     {
       method_name = "ScreenshotWindow";
       method_params = g_variant_new ("(bbbs)",
-                                     screenshot_config->include_border,
+                                     TRUE,
                                      screenshot_config->include_pointer,
                                      TRUE, /* flash */
                                      filename);
