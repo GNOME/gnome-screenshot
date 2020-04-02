@@ -26,9 +26,7 @@
 
 #include "screenshot-config.h"
 
-#define BORDER_EFFECT_KEY       "border-effect"
 #define DELAY_KEY               "delay"
-#define INCLUDE_BORDER_KEY      "include-border"
 #define INCLUDE_POINTER_KEY     "include-pointer"
 #define INCLUDE_ICC_PROFILE     "include-icc-profile"
 #define AUTO_SAVE_DIRECTORY_KEY "auto-save-directory"
@@ -51,24 +49,15 @@ screenshot_load_config (void)
   config->delay =
     g_settings_get_int (config->settings,
                         DELAY_KEY);
-  config->include_border =
-    g_settings_get_boolean (config->settings,
-                            INCLUDE_BORDER_KEY);
   config->include_pointer =
     g_settings_get_boolean (config->settings,
                             INCLUDE_POINTER_KEY);
-  config->border_effect =
-    g_settings_get_string (config->settings,
-                           BORDER_EFFECT_KEY);
   config->file_type =
     g_settings_get_string (config->settings,
                            DEFAULT_FILE_TYPE_KEY);
   config->include_icc_profile =
     g_settings_get_boolean (config->settings,
                             INCLUDE_ICC_PROFILE);
-
-  if (config->border_effect == NULL)
-    config->border_effect = g_strdup ("none");
 
   config->take_window_shot = FALSE;
   config->take_area_shot = FALSE;
@@ -90,11 +79,7 @@ screenshot_save_config (void)
     return;
 
   g_settings_set_boolean (c->settings,
-                          INCLUDE_BORDER_KEY, c->include_border);
-  g_settings_set_boolean (c->settings,
                           INCLUDE_POINTER_KEY, c->include_pointer);
-  g_settings_set_string (c->settings,
-                         BORDER_EFFECT_KEY, c->border_effect);
 
   if (!c->take_area_shot)
     g_settings_set_int (c->settings, DELAY_KEY, c->delay);
@@ -121,6 +106,16 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
 
   screenshot_config->interactive = interactive_arg;
 
+  if (include_border_arg)
+    g_warning ("Option --include-border is deprecated and will be removed in "
+               "gnome-screenshot 3.38.0. Window border is always included.");
+  if (disable_border_arg)
+    g_warning ("Option --remove-border is deprecated and will be removed in "
+               "gnome-screenshot 3.38.0. Window border is always included.");
+  if (border_effect_arg != NULL)
+    g_warning ("Option --border-effect is deprecated and will be removed in "
+               "gnome-screenshot 3.38.0. No effect will be used.");
+
   if (screenshot_config->interactive)
     {
       if (clipboard_arg)
@@ -132,13 +127,6 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
 
       if (delay_arg > 0)
         screenshot_config->delay = delay_arg;
-      if (include_border_arg)
-        screenshot_config->include_border = TRUE;
-      if (disable_border_arg)
-        screenshot_config->include_border = FALSE;
-
-      g_free (screenshot_config->border_effect);
-      screenshot_config->border_effect = g_strdup ("none");
     }
   else
     {
@@ -148,18 +136,10 @@ screenshot_config_parse_command_line (gboolean clipboard_arg,
                                AUTO_SAVE_DIRECTORY_KEY);
 
       screenshot_config->delay = delay_arg;
-      screenshot_config->include_border = include_border_arg;
-      screenshot_config->include_border = !disable_border_arg;
       screenshot_config->include_pointer = include_pointer_arg;
       screenshot_config->copy_to_clipboard = clipboard_arg;
       if (file_arg != NULL)
         screenshot_config->file = g_file_new_for_commandline_arg (file_arg);
-
-      if (border_effect_arg != NULL)
-        {
-          g_free (screenshot_config->border_effect);
-          screenshot_config->border_effect = g_strdup (border_effect_arg);
-        }
     }
 
   screenshot_config->take_window_shot = window_arg;

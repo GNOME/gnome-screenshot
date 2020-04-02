@@ -7,8 +7,7 @@ gnome-screenshot \- capture the screen, a window, or an user-defined area and sa
 .SH "DESCRIPTION"
 .PP
 \fBgnome-screenshot\fR is a GNOME utility for taking
-screenshots of the entire screen, a window or a user-defined area of the screen, with optional beautifying
-border effects.
+screenshots of the entire screen, a window or a user-defined area of the screen.
 .SH "OPTIONS"
 .TP
 \fB-c, --clipboard\fR
@@ -22,10 +21,12 @@ screen.
 Grab an area of the screen instead of the entire screen.
 .TP
 \fB-b, --include-border\fR
-Include the window border within the screenshot.
+Include the window border within the screenshot. Note: This option is deprecated
+and window border is always included.
 .TP
 \fB-B, --remove-border\fR
-Remove the window border from the screenshot.
+Remove the window border from the screenshot. Note: This option is deprecated
+and window border is always included.
 .TP
 \fB-p, --include-pointer\fR
 Include the pointer with the screenshot.
@@ -40,7 +41,8 @@ Add an effect to the outside of the screenshot border.
 space around the screenshot), ``vintage'' (desaturating
 the screenshot slightly, tinting it and adding
 rectangular space around it) or ``none'' (no effect).
-Default is ``none''.
+Default is ``none''. Note: This option is deprecated
+and is assumed to be ``none''.
 .TP
 \fB-i, --interactive\fR
 Interactively set options in a dialog.

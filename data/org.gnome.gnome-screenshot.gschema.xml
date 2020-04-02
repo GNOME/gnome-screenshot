@@ -26,11 +26,6 @@
       <summary>Last save directory</summary>
       <description>The last directory a screenshot was saved in interactive mode.</description>
     </key>
-    <key name="include-border" type="b">
-      <default>true</default>
-      <summary>Include Border</summary>
-      <description>Include the window manager border along with the screenshot</description>
-    </key>
     <key name="include-pointer" type="b">
       <default>false</default>
       <summary>Include Pointer</summary>
@@ -40,11 +35,6 @@
       <default>true</default>
       <summary>Include ICC Profile</summary>
       <description>Include the ICC profile of the target in the screenshot file</description>
-    </key>
-    <key name="border-effect" type="s">
-      <default>'none'</default>
-      <summary>Border Effect</summary>
-      <description>Effect to add to the outside of a border.  Possible values are “shadow”, “none”, and “border”.</description>
     </key>
     <key name="default-file-type" enum="org.gnome.gnome-screenshot.file-types">
       <default>'png'</default>

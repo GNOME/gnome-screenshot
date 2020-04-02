@@ -36,7 +36,6 @@
 #include "screenshot-config.h"
 #include "screenshot-filename-builder.h"
 #include "screenshot-interactive-dialog.h"
-#include "screenshot-shadow.h"
 #include "screenshot-utils.h"
 #include "screenshot-dialog.h"
 
@@ -481,25 +480,6 @@ finish_take_screenshot (ScreenshotApplication *self)
       return;
     }
 
-  if (screenshot_config->take_window_shot)
-    {
-      switch (screenshot_config->border_effect[0])
-         {
-        case 's': /* shadow */
-          screenshot_add_shadow (&screenshot);
-          break;
-        case 'b': /* border */
-          screenshot_add_border (&screenshot);
-          break;
-        case 'v': /* vintage */
-          screenshot_add_vintage (&screenshot);
-          break;
-        case 'n': /* none */
-        default:
-          break;
-        }
-    }
-
   self->priv->screenshot = screenshot;
 
   if (screenshot_config->copy_to_clipboard)
@@ -609,11 +589,11 @@ static const GOptionEntry entries[] = {
   { "clipboard", 'c', 0, G_OPTION_ARG_NONE, NULL, N_("Send the grab directly to the clipboard"), NULL },
   { "window", 'w', 0, G_OPTION_ARG_NONE, NULL, N_("Grab a window instead of the entire screen"), NULL },
   { "area", 'a', 0, G_OPTION_ARG_NONE, NULL, N_("Grab an area of the screen instead of the entire screen"), NULL },
-  { "include-border", 'b', 0, G_OPTION_ARG_NONE, NULL, N_("Include the window border with the screenshot"), NULL },
-  { "remove-border", 'B', 0, G_OPTION_ARG_NONE, NULL, N_("Remove the window border from the screenshot"), NULL },
+  { "include-border", 'b', 0, G_OPTION_ARG_NONE, NULL, N_("Include the window border with the screenshot. This option is deprecated and window border is always included"), NULL },
+  { "remove-border", 'B', 0, G_OPTION_ARG_NONE, NULL, N_("Remove the window border from the screenshot. This option is deprecated and window border is always included"), NULL },
   { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, NULL, N_("Include the pointer with the screenshot"), NULL },
   { "delay", 'd', 0, G_OPTION_ARG_INT, NULL, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none)"), N_("effect") },
+  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none). Note: This option is deprecated and is assumed to be none"), N_("effect") },
   { "interactive", 'i', 0, G_OPTION_ARG_NONE, NULL, N_("Interactively set options"), NULL },
   { "file", 'f', 0, G_OPTION_ARG_FILENAME, NULL, N_("Save screenshot directly to this file"), N_("filename") },
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
@@ -658,7 +638,6 @@ screenshot_application_command_line (GApplication            *app,
   gboolean include_pointer_arg = FALSE;
   gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
-  gboolean use_shadow_arg = FALSE;
   guint delay_arg = 0;
   gchar *file_arg = NULL;
   GVariantDict *options;
@@ -674,7 +653,6 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
   g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
   g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
-  g_variant_dict_lookup (options, "use-shadow", "b", &use_shadow_arg);
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
   g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
 
