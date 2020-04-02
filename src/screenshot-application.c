@@ -658,7 +658,6 @@ screenshot_application_command_line (GApplication            *app,
   gboolean include_pointer_arg = FALSE;
   gboolean interactive_arg = FALSE;
   gchar *border_effect_arg = NULL;
-  gboolean use_shadow_arg = FALSE;
   guint delay_arg = 0;
   gchar *file_arg = NULL;
   GVariantDict *options;
@@ -674,7 +673,6 @@ screenshot_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "include-pointer", "b", &include_pointer_arg);
   g_variant_dict_lookup (options, "interactive", "b", &interactive_arg);
   g_variant_dict_lookup (options, "border-effect", "&s", &border_effect_arg);
-  g_variant_dict_lookup (options, "use-shadow", "b", &use_shadow_arg);
   g_variant_dict_lookup (options, "delay", "i", &delay_arg);
   g_variant_dict_lookup (options, "file", "^&ay", &file_arg);
 
