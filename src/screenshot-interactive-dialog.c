@@ -188,7 +188,7 @@ screenshot_interactive_dialog_init (ScreenshotInteractiveDialog *self)
   gtk_adjustment_set_value (self->delay_adjustment, (gdouble) screenshot_config->delay);
 }
 
-GtkWidget *
+ScreenshotInteractiveDialog *
 screenshot_interactive_dialog_new (GtkApplication *app)
 {
   g_return_val_if_fail (GTK_IS_APPLICATION (app), NULL);

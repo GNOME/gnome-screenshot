@@ -692,7 +692,7 @@ capture_clicked_cb (ScreenshotInteractiveDialog *dialog,
 static void
 screenshot_show_interactive_dialog (ScreenshotApplication *self)
 {
-  GtkWidget *dialog;
+  ScreenshotInteractiveDialog *dialog;
 
   dialog = screenshot_interactive_dialog_new (GTK_APPLICATION (self));
 
