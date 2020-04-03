@@ -40,14 +40,10 @@ struct _ScreenshotInteractiveDialog
 {
   GtkApplicationWindow parent_instance;
 
-  GtkWidget *capture_button;
   GtkWidget *listbox;
   GtkWidget *pointer;
   GtkWidget *pointer_row;
-  GtkWidget *delay;
   GtkAdjustment *delay_adjustment;
-
-  GtkWidget *screen;
   GtkWidget *window;
   GtkWidget *selection;
 };
@@ -158,13 +154,10 @@ screenshot_interactive_dialog_class_init (ScreenshotInteractiveDialogClass *klas
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Screenshot/ui/screenshot-interactive-dialog.ui");
-  gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, capture_button);
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, listbox);
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, pointer);
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, pointer_row);
-  gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, delay);
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, delay_adjustment);
-  gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, screen);
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, window);
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, selection);
   gtk_widget_class_bind_template_callback (widget_class, screen_toggled_cb);
