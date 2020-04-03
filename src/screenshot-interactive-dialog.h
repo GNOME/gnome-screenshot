@@ -30,8 +30,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (ScreenshotInteractiveDialog, screenshot_interactive_dialog, SCREENSHOT, INTERACTIVE_DIALOG, GtkApplicationWindow)
 
-typedef void (*CaptureClickedCallback) (gpointer *user_data);
-
-GtkWidget *screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data);
+GtkWidget *screenshot_interactive_dialog_new (GtkApplication *app);
 
 G_END_DECLS

@@ -50,12 +50,16 @@ struct _ScreenshotInteractiveDialog
   GtkWidget *screen;
   GtkWidget *window;
   GtkWidget *selection;
-
-  CaptureClickedCallback callback;
-  gpointer user_data;
 };
 
 G_DEFINE_TYPE (ScreenshotInteractiveDialog, screenshot_interactive_dialog, GTK_TYPE_APPLICATION_WINDOW)
+
+enum {
+  SIGNAL_CAPTURE,
+  N_SIGNALS,
+};
+
+static guint signals[N_SIGNALS];
 
 static void
 set_mode (ScreenshotInteractiveDialog *self,
@@ -113,11 +117,7 @@ static void
 capture_button_clicked_cb (GtkButton                   *button,
                            ScreenshotInteractiveDialog *self)
 {
-  CaptureClickedCallback callback = self->callback;
-  gpointer user_data = self->user_data;
-
-  gtk_widget_destroy (GTK_WIDGET (self));
-  callback (user_data);
+  g_signal_emit (self, signals[SIGNAL_CAPTURE], 0);
 }
 
 static void
@@ -147,6 +147,15 @@ screenshot_interactive_dialog_class_init (ScreenshotInteractiveDialogClass *klas
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  signals[SIGNAL_CAPTURE] =
+    g_signal_new ("capture",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE,
+                  0);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Screenshot/ui/screenshot-interactive-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, ScreenshotInteractiveDialog, capture_button);
@@ -175,23 +184,6 @@ screenshot_interactive_dialog_init (ScreenshotInteractiveDialog *self)
                                 (GtkListBoxUpdateHeaderFunc) header_func,
                                 self,
                                 NULL);
-}
-
-GtkWidget *
-screenshot_interactive_dialog_new (CaptureClickedCallback f,
-                                   gpointer               user_data)
-{
-  ScreenshotApplication *app = user_data;
-  ScreenshotInteractiveDialog *self;
-
-  self = g_object_new (SCREENSHOT_TYPE_INTERACTIVE_DIALOG,
-                       "application", app,
-                       NULL);
-
-  self->callback = f;
-  self->user_data = user_data;
-
-  gtk_widget_show_all (GTK_WIDGET (self));
 
   if (screenshot_config->take_window_shot)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->window), TRUE);
@@ -203,6 +195,14 @@ screenshot_interactive_dialog_new (CaptureClickedCallback f,
   gtk_switch_set_active (GTK_SWITCH (self->pointer), screenshot_config->include_pointer);
 
   gtk_adjustment_set_value (self->delay_adjustment, (gdouble) screenshot_config->delay);
+}
 
-  return GTK_WIDGET (self);
+GtkWidget *
+screenshot_interactive_dialog_new (GtkApplication *app)
+{
+  g_return_val_if_fail (GTK_IS_APPLICATION (app), NULL);
+
+  return g_object_new (SCREENSHOT_TYPE_INTERACTIVE_DIALOG,
+                       "application", app,
+                       NULL);
 }
