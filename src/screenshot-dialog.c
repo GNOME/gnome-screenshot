@@ -40,12 +40,18 @@ struct _ScreenshotDialog
 
   gint drag_x;
   gint drag_y;
-
-  SaveScreenshotCallback callback;
-  gpointer user_data;
 };
 
 G_DEFINE_TYPE (ScreenshotDialog, screenshot_dialog, GTK_TYPE_APPLICATION_WINDOW)
+
+enum {
+  SIGNAL_SAVE,
+  SIGNAL_COPY,
+  SIGNAL_BACK,
+  N_SIGNALS,
+};
+
+static guint signals[N_SIGNALS];
 
 enum {
   TYPE_IMAGE_PNG,
@@ -170,27 +176,54 @@ static void
 back_clicked_cb (GtkButton        *button,
                  ScreenshotDialog *self)
 {
-  self->callback (SCREENSHOT_RESPONSE_BACK, self->user_data);
+  g_signal_emit (self, signals[SIGNAL_BACK], 0);
 }
 
 static void
 save_clicked_cb (GtkButton        *button,
                  ScreenshotDialog *self)
 {
-  self->callback (SCREENSHOT_RESPONSE_SAVE, self->user_data);
+  g_signal_emit (self, signals[SIGNAL_SAVE], 0);
 }
 
 static void
 copy_clicked_cb (GtkButton        *button,
                  ScreenshotDialog *self)
 {
-  self->callback (SCREENSHOT_RESPONSE_COPY, self->user_data);
+  g_signal_emit (self, signals[SIGNAL_COPY], 0);
 }
 
 static void
 screenshot_dialog_class_init (ScreenshotDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  signals[SIGNAL_SAVE] =
+    g_signal_new ("save",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE,
+                  0);
+
+  signals[SIGNAL_COPY] =
+    g_signal_new ("copy",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE,
+                  0);
+
+  signals[SIGNAL_BACK] =
+    g_signal_new ("back",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE,
+                  0);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Screenshot/ui/screenshot-dialog.ui");
@@ -215,10 +248,8 @@ screenshot_dialog_init (ScreenshotDialog *self)
 }
 
 ScreenshotDialog *
-screenshot_dialog_new (GdkPixbuf              *screenshot,
-                       char                   *initial_uri,
-                       SaveScreenshotCallback f,
-                       gpointer               user_data)
+screenshot_dialog_new (GdkPixbuf *screenshot,
+                       char      *initial_uri)
 {
   g_autoptr(GFile) tmp_file = NULL, parent_file = NULL;
   g_autofree gchar *current_folder = NULL, *current_name = NULL;
@@ -233,9 +264,8 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   current_folder = g_file_get_uri (parent_file);
 
   self = g_object_new (SCREENSHOT_TYPE_DIALOG, NULL);
+
   self->screenshot = screenshot;
-  self->callback = f;
-  self->user_data = user_data;
 
   gtk_window_set_application (GTK_WINDOW (self), GTK_APPLICATION (g_application_get_default ()));
   gtk_widget_realize (GTK_WIDGET (self));

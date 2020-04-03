@@ -371,27 +371,27 @@ screenshot_save_to_clipboard (ScreenshotApplication *self)
 }
 
 static void
-screenshot_dialog_response_cb (ScreenshotResponse response,
-                               ScreenshotApplication *self)
+save_clicked_cb (ScreenshotDialog      *dialog,
+                 ScreenshotApplication *self)
 {
-  switch (response)
-    {
-    case SCREENSHOT_RESPONSE_SAVE:
-      /* update to the new URI */
-      g_free (self->priv->save_uri);
-      self->priv->save_uri = screenshot_dialog_get_uri (self->priv->dialog);
-      screenshot_save_to_file (self);
-      break;
-    case SCREENSHOT_RESPONSE_COPY:
-      screenshot_save_to_clipboard (self);
-      break;
-    case SCREENSHOT_RESPONSE_BACK:
-      screenshot_back (self);
-      break;
-    default:
-      g_assert_not_reached ();
-      break;
-    }
+  /* update to the new URI */
+  g_free (self->priv->save_uri);
+  self->priv->save_uri = screenshot_dialog_get_uri (self->priv->dialog);
+  screenshot_save_to_file (self);
+}
+
+static void
+copy_clicked_cb (ScreenshotDialog      *dialog,
+                 ScreenshotApplication *self)
+{
+  screenshot_save_to_clipboard (self);
+}
+
+static void
+back_clicked_cb (ScreenshotDialog      *dialog,
+                 ScreenshotApplication *self)
+{
+  screenshot_back (self);
 }
 
 static void
@@ -440,9 +440,10 @@ build_filename_ready_cb (GObject *source,
   if (screenshot_config->interactive)
     {
       self->priv->dialog = screenshot_dialog_new (self->priv->screenshot,
-                                                  self->priv->save_uri,
-                                                  (SaveScreenshotCallback)screenshot_dialog_response_cb,
-                                                  self);
+                                                  self->priv->save_uri);
+      g_signal_connect_object (self->priv->dialog, "save", G_CALLBACK (save_clicked_cb), self, 0);
+      g_signal_connect_object (self->priv->dialog, "copy", G_CALLBACK (copy_clicked_cb), self, 0);
+      g_signal_connect_object (self->priv->dialog, "back", G_CALLBACK (back_clicked_cb), self, 0);
     }
   else
     {
