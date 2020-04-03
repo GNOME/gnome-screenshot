@@ -439,7 +439,8 @@ build_filename_ready_cb (GObject *source,
 
   if (screenshot_config->interactive)
     {
-      self->priv->dialog = screenshot_dialog_new (self->priv->screenshot,
+      self->priv->dialog = screenshot_dialog_new (GTK_APPLICATION (self),
+                                                  self->priv->screenshot,
                                                   self->priv->save_uri);
       g_signal_connect_object (self->priv->dialog, "save", G_CALLBACK (save_clicked_cb), self, 0);
       g_signal_connect_object (self->priv->dialog, "copy", G_CALLBACK (copy_clicked_cb), self, 0);

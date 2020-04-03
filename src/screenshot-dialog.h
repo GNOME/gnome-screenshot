@@ -27,8 +27,9 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (ScreenshotDialog, screenshot_dialog, SCREENSHOT, DIALOG, GtkApplicationWindow)
 
-ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf *screenshot,
-                                                  char      *initial_uri);
+ScreenshotDialog *screenshot_dialog_new          (GtkApplication *app,
+                                                  GdkPixbuf      *screenshot,
+                                                  char           *initial_uri);
 
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
