@@ -25,10 +25,8 @@
 
 #include <glib/gi18n.h>
 
-#include "screenshot-application.h"
 #include "screenshot-config.h"
 #include "screenshot-interactive-dialog.h"
-#include "screenshot-utils.h"
 
 typedef enum {
   SCREENSHOT_MODE_SCREEN,
