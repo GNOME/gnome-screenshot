@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
 "POT-Creation-Date: 2020-03-30 13:08+0000\n"
-"PO-Revision-Date: 2020-02-12 12:45+0900\n"
+"PO-Revision-Date: 2020-04-03 18:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -177,63 +177,55 @@ msgstr "保存(_S)"
 
 #: data/ui/screenshot-dialog.ui:36
 msgid "C_opy to Clipboard"
-msgstr "クリップボードにコピーする(_O)"
+msgstr "クリップボードにコピー(_O)"
 
 #: data/ui/screenshot-dialog.ui:74
-#, fuzzy
-#| msgid "_Name"
 msgid "_Name:"
-msgstr "名前(_N)"
+msgstr "名前(_N):"
 
 #: data/ui/screenshot-dialog.ui:97
 msgid "_Folder:"
-msgstr ""
+msgstr "フォルダー(_F):"
 
 #: data/ui/screenshot-interactive-dialog.ui:25
 msgid "Capture Area"
-msgstr ""
+msgstr "撮影領域"
 
 #: data/ui/screenshot-interactive-dialog.ui:58
-#, fuzzy
-#| msgid "Screenshot"
 msgid "_Screen"
-msgstr "スクリーンショット"
+msgstr "画面(_S)"
 
 #: data/ui/screenshot-interactive-dialog.ui:91
 msgid "_Window"
-msgstr ""
+msgstr "ウィンドウ(_W)"
 
 #: data/ui/screenshot-interactive-dialog.ui:123
 msgid "Se_lection"
-msgstr ""
+msgstr "選択領域(_L)"
 
 #: data/ui/screenshot-interactive-dialog.ui:159
 msgid "Show _Pointer"
-msgstr ""
+msgstr "ポインターを表示する(_P)"
 
 #: data/ui/screenshot-interactive-dialog.ui:189
 msgid "_Delay in Seconds"
-msgstr ""
+msgstr "待機時間 (秒単位)(_D)"
 
 #: data/ui/screenshot-interactive-dialog.ui:197
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: data/ui/screenshot-interactive-dialog.ui:219
-#, fuzzy
-#| msgid "Take Screenshot"
 msgid "_Take Screenshot"
-msgstr "スクリーンショットの取得"
+msgstr "スクリーンショットを撮る(_T)"
 
 #: data/ui/screenshot-interactive-dialog.ui:257
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
 #: data/ui/screenshot-interactive-dialog.ui:261
-#, fuzzy
-#| msgid "Screenshot"
 msgid "_About Screenshot"
-msgstr "スクリーンショット"
+msgstr "“スクリーンショット”について(_A)"
 
 #: src/screenshot-application.c:145
 #, c-format
@@ -351,10 +343,12 @@ msgstr ""
 "オプションの競合: --window オプションと --area オプションは同時に指定できませ"
 "ん\n"
 
+# ここは英語のままの方がいいようなので元に戻しました (sicklylife)
 #: src/screenshot-dialog.c:295
 msgid "Screenshot.png"
-msgstr "スクリーンショット.png"
+msgstr "Screenshot.png"
 
+# ここは英語のままの方がいいようなので「スクリーンショット」から「Screenshot from」に戻しました (sicklylife)
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken. The first placeholder is a
 #. * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
@@ -363,8 +357,9 @@ msgstr "スクリーンショット.png"
 #: src/screenshot-filename-builder.c:135
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "スクリーンショット %s.%s"
+msgstr "Screenshot from %s.%s"
 
+# ここは英語のままの方がいいようなので「スクリーンショット」から「Screenshot from」に戻しました (sicklylife)
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken and the simpler filename
 #. * already exists. The first and second placeholders are a timestamp and
@@ -374,7 +369,7 @@ msgstr "スクリーンショット %s.%s"
 #: src/screenshot-filename-builder.c:145
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "スクリーンショット %s - %d.%s"
+msgstr "Screenshot from %s - %d.%s"
 
 #: src/screenshot-utils.c:731
 msgid "Error loading the help page"
