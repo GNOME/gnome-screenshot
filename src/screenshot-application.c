@@ -41,12 +41,13 @@
 
 #define LAST_SAVE_DIRECTORY_KEY "last-save-directory"
 
-G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION);
-
 static void screenshot_save_to_file (ScreenshotApplication *self);
 static void screenshot_show_interactive_dialog (ScreenshotApplication *self);
 
-struct _ScreenshotApplicationPriv {
+struct _ScreenshotApplication
+{
+  GtkApplication parent_instance;
+
   gchar *icc_profile_base64;
   GdkPixbuf *screenshot;
 
@@ -58,10 +59,12 @@ struct _ScreenshotApplicationPriv {
   ScreenshotDialog *dialog;
 };
 
+G_DEFINE_TYPE (ScreenshotApplication, screenshot_application, GTK_TYPE_APPLICATION)
+
 static void
 save_folder_to_settings (ScreenshotApplication *self)
 {
-  g_autofree gchar *folder = screenshot_dialog_get_folder (self->priv->dialog);
+  g_autofree gchar *folder = screenshot_dialog_get_folder (self->dialog);
   g_settings_set_string (screenshot_config->settings,
                          LAST_SAVE_DIRECTORY_KEY, folder);
 }
@@ -96,16 +99,15 @@ set_recent_entry (ScreenshotApplication *self)
   recent_data.groups = groups;
   recent_data.is_private = FALSE;
 
-  gtk_recent_manager_add_full (recent, self->priv->save_uri, &recent_data);
+  gtk_recent_manager_add_full (recent, self->save_uri, &recent_data);
 }
 
 static void
 screenshot_close_interactive_dialog (ScreenshotApplication *self)
 {
-  ScreenshotDialog *dialog = self->priv->dialog;
+  ScreenshotDialog *dialog = self->dialog;
   save_folder_to_settings (self);
-  gtk_widget_destroy (dialog->dialog);
-  g_free (dialog);
+  gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -129,12 +131,12 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
 {
   if (screenshot_config->interactive)
     {
-      ScreenshotDialog *dialog = self->priv->dialog;
+      ScreenshotDialog *dialog = self->dialog;
 
       screenshot_dialog_set_busy (dialog, FALSE);
 
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS) &&
-          !self->priv->should_overwrite)
+          !self->should_overwrite)
         {
           g_autofree gchar *folder = screenshot_dialog_get_folder (dialog);
           g_autofree gchar *folder_uri = g_path_get_basename (folder);
@@ -143,7 +145,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           g_autofree gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                                       file_name, folder_name);
 
-          gint response = screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
+          gint response = screenshot_show_dialog (GTK_WINDOW (dialog),
                                                   GTK_MESSAGE_WARNING,
                                                   GTK_BUTTONS_YES_NO,
                                                   _("Overwrite existing file?"),
@@ -151,7 +153,7 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
 
           if (response == GTK_RESPONSE_YES)
             {
-              self->priv->should_overwrite = TRUE;
+              self->should_overwrite = TRUE;
               screenshot_save_to_file (self);
 
               return;
@@ -159,14 +161,14 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
         }
       else
         {
-          screenshot_show_dialog (GTK_WINDOW (dialog->dialog),
+          screenshot_show_dialog (GTK_WINDOW (dialog),
                                   GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
                                   _("Error creating file. Please choose another location and retry."));
         }
 
-      gtk_widget_grab_focus (dialog->filename_entry);
+      gtk_widget_grab_focus (screenshot_dialog_get_filename_entry (dialog));
     }
   else
     {
@@ -231,10 +233,7 @@ is_png (gchar *format)
 static gboolean
 has_profile (ScreenshotApplication *self)
 {
-  if (self->priv->icc_profile_base64 != NULL)
-    return TRUE;
-  else
-    return FALSE;
+  return (self->icc_profile_base64 != NULL);
 }
 
 static void
@@ -242,11 +241,11 @@ save_with_description_and_profile (ScreenshotApplication *self,
                                    GFileOutputStream     *os,
                                    gchar                 *format)
 {
-  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+  gdk_pixbuf_save_to_stream_async (self->screenshot,
                                    G_OUTPUT_STREAM (os),
                                    format, NULL,
                                    save_pixbuf_ready_cb, self,
-                                   "icc-profile", self->priv->icc_profile_base64,
+                                   "icc-profile", self->icc_profile_base64,
                                    "tEXt::Software", "gnome-screenshot",
                                    NULL);
 }
@@ -255,7 +254,7 @@ save_with_description (ScreenshotApplication *self,
                        GFileOutputStream     *os,
                        gchar                 *format)
 {
-  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+  gdk_pixbuf_save_to_stream_async (self->screenshot,
                                    G_OUTPUT_STREAM (os),
                                    format, NULL,
                                    save_pixbuf_ready_cb, self,
@@ -268,7 +267,7 @@ save_with_no_profile_or_description (ScreenshotApplication *self,
                                      GFileOutputStream     *os,
                                      gchar                 *format)
 {
-  gdk_pixbuf_save_to_stream_async (self->priv->screenshot,
+  gdk_pixbuf_save_to_stream_async (self->screenshot,
                                    G_OUTPUT_STREAM (os),
                                    format, NULL,
                                    save_pixbuf_ready_cb, self,
@@ -301,7 +300,7 @@ save_file_create_ready_cb (GObject *source,
                    (gpointer) &format);
   g_slist_free (formats);
 
-  if (self->priv->should_overwrite)
+  if (self->should_overwrite)
     os = g_file_replace_finish (G_FILE (source), res, &error);
   else
     os = g_file_create_finish (G_FILE (source), res, &error);
@@ -330,12 +329,12 @@ screenshot_save_to_file (ScreenshotApplication *self)
 {
   g_autoptr(GFile) target_file = NULL;
 
-  if (self->priv->dialog != NULL)
-    screenshot_dialog_set_busy (self->priv->dialog, TRUE);
+  if (self->dialog != NULL)
+    screenshot_dialog_set_busy (self->dialog, TRUE);
 
-  target_file = g_file_new_for_uri (self->priv->save_uri);
+  target_file = g_file_new_for_uri (self->save_uri);
 
-  if (self->priv->should_overwrite)
+  if (self->should_overwrite)
     {
       g_file_replace_async (target_file,
                             NULL, FALSE,
@@ -368,31 +367,31 @@ screenshot_save_to_clipboard (ScreenshotApplication *self)
 
   clipboard = gtk_clipboard_get_for_display (gdk_display_get_default (),
                                              GDK_SELECTION_CLIPBOARD);
-  gtk_clipboard_set_image (clipboard, self->priv->screenshot);
+  gtk_clipboard_set_image (clipboard, self->screenshot);
 }
 
 static void
-screenshot_dialog_response_cb (ScreenshotResponse response,
-                               ScreenshotApplication *self)
+save_clicked_cb (ScreenshotDialog      *dialog,
+                 ScreenshotApplication *self)
 {
-  switch (response)
-    {
-    case SCREENSHOT_RESPONSE_SAVE:
-      /* update to the new URI */
-      g_free (self->priv->save_uri);
-      self->priv->save_uri = screenshot_dialog_get_uri (self->priv->dialog);
-      screenshot_save_to_file (self);
-      break;
-    case SCREENSHOT_RESPONSE_COPY:
-      screenshot_save_to_clipboard (self);
-      break;
-    case SCREENSHOT_RESPONSE_BACK:
-      screenshot_back (self);
-      break;
-    default:
-      g_assert_not_reached ();
-      break;
-    }
+  /* update to the new URI */
+  g_free (self->save_uri);
+  self->save_uri = screenshot_dialog_get_uri (self->dialog);
+  screenshot_save_to_file (self);
+}
+
+static void
+copy_clicked_cb (ScreenshotDialog      *dialog,
+                 ScreenshotApplication *self)
+{
+  screenshot_save_to_clipboard (self);
+}
+
+static void
+back_clicked_cb (ScreenshotDialog      *dialog,
+                 ScreenshotApplication *self)
+{
+  screenshot_back (self);
 }
 
 static void
@@ -407,10 +406,10 @@ build_filename_ready_cb (GObject *source,
   if (save_path != NULL)
     {
       g_autoptr(GFile) file = g_file_new_for_path (save_path);
-      self->priv->save_uri = g_file_get_uri (file);
+      self->save_uri = g_file_get_uri (file);
     }
   else
-    self->priv->save_uri = NULL;
+    self->save_uri = NULL;
 
   /* now release the application */
   g_application_release (G_APPLICATION (self));
@@ -440,10 +439,12 @@ build_filename_ready_cb (GObject *source,
 
   if (screenshot_config->interactive)
     {
-      self->priv->dialog = screenshot_dialog_new (self->priv->screenshot,
-                                                  self->priv->save_uri,
-                                                  (SaveScreenshotCallback)screenshot_dialog_response_cb,
-                                                  self);
+      self->dialog = screenshot_dialog_new (GTK_APPLICATION (self),
+                                            self->screenshot,
+                                            self->save_uri);
+      g_signal_connect_object (self->dialog, "save", G_CALLBACK (save_clicked_cb), self, 0);
+      g_signal_connect_object (self->dialog, "copy", G_CALLBACK (copy_clicked_cb), self, 0);
+      g_signal_connect_object (self->dialog, "back", G_CALLBACK (back_clicked_cb), self, 0);
     }
   else
     {
@@ -457,8 +458,8 @@ finish_take_screenshot (ScreenshotApplication *self)
 {
   GdkPixbuf *screenshot;
 
-  screenshot = screenshot_get_pixbuf (self->priv->rectangle);
-  g_clear_pointer (&self->priv->rectangle, g_free);
+  screenshot = screenshot_get_pixbuf (self->rectangle);
+  g_clear_pointer (&self->rectangle, g_free);
 
   if (screenshot == NULL)
     {
@@ -480,7 +481,7 @@ finish_take_screenshot (ScreenshotApplication *self)
       return;
     }
 
-  self->priv->screenshot = screenshot;
+  self->screenshot = screenshot;
 
   if (screenshot_config->copy_to_clipboard)
     {
@@ -504,8 +505,8 @@ finish_take_screenshot (ScreenshotApplication *self)
    */
   if (screenshot_config->file != NULL)
     {
-      self->priv->save_uri = g_file_get_uri (screenshot_config->file);
-      self->priv->should_overwrite = TRUE;
+      self->save_uri = g_file_get_uri (screenshot_config->file);
+      self->should_overwrite = TRUE;
       screenshot_save_to_file (self);
     }
   else
@@ -553,7 +554,7 @@ rectangle_found_cb (GdkRectangle *rectangle,
 
   if (rectangle != NULL)
     {
-      self->priv->rectangle = g_memdup (rectangle, sizeof *rectangle);
+      self->rectangle = g_memdup (rectangle, sizeof *rectangle);
       start_screenshot_timeout (self);
     }
   else
@@ -683,9 +684,23 @@ screenshot_application_command_line (GApplication            *app,
 }
 
 static void
+capture_clicked_cb (ScreenshotInteractiveDialog *dialog,
+                    ScreenshotApplication       *self)
+{
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+  screenshot_start (self);
+}
+
+static void
 screenshot_show_interactive_dialog (ScreenshotApplication *self)
 {
-  screenshot_interactive_dialog_new ((CaptureClickedCallback) screenshot_start, self);
+  ScreenshotInteractiveDialog *dialog;
+
+  dialog = screenshot_interactive_dialog_new (GTK_APPLICATION (self));
+
+  g_signal_connect_object (dialog, "capture", G_CALLBACK (capture_clicked_cb), self, 0);
+
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 static void
@@ -828,10 +843,10 @@ screenshot_application_finalize (GObject *object)
 {
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (object);
 
-  g_clear_object (&self->priv->screenshot);
-  g_free (self->priv->icc_profile_base64);
-  g_free (self->priv->save_uri);
-  g_clear_pointer (&self->priv->rectangle, g_free);
+  g_clear_object (&self->screenshot);
+  g_free (self->icc_profile_base64);
+  g_free (self->save_uri);
+  g_clear_pointer (&self->rectangle, g_free);
 
   G_OBJECT_CLASS (screenshot_application_parent_class)->finalize (object);
 }
@@ -839,29 +854,24 @@ screenshot_application_finalize (GObject *object)
 static void
 screenshot_application_class_init (ScreenshotApplicationClass *klass)
 {
-  GObjectClass *oclass = G_OBJECT_CLASS (klass);
-  GApplicationClass *aclass = G_APPLICATION_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
-  oclass->finalize = screenshot_application_finalize;
+  object_class->finalize = screenshot_application_finalize;
 
-  aclass->handle_local_options = screenshot_application_handle_local_options;
-  aclass->command_line = screenshot_application_command_line;
-  aclass->startup = screenshot_application_startup;
-  aclass->activate = screenshot_application_activate;
-
-  g_type_class_add_private (klass, sizeof (ScreenshotApplicationPriv));
+  application_class->handle_local_options = screenshot_application_handle_local_options;
+  application_class->command_line = screenshot_application_command_line;
+  application_class->startup = screenshot_application_startup;
+  application_class->activate = screenshot_application_activate;
 }
 
 static void
 screenshot_application_init (ScreenshotApplication *self)
 {
-  self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, SCREENSHOT_TYPE_APPLICATION,
-                                            ScreenshotApplicationPriv);
-
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
 }
 
-GApplication *
+ScreenshotApplication *
 screenshot_application_new (void)
 {
   return g_object_new (SCREENSHOT_TYPE_APPLICATION,

@@ -36,7 +36,7 @@
 int
 main (int argc, char *argv[])
 {
-  g_autoptr(GApplication) app;
+  g_autoptr(ScreenshotApplication) app;
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
@@ -44,5 +44,5 @@ main (int argc, char *argv[])
   textdomain (GETTEXT_PACKAGE);
 
   app = screenshot_application_new ();
-  return g_application_run (app, argc, argv);
+  return g_application_run (G_APPLICATION (app), argc, argv);
 }

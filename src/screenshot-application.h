@@ -24,28 +24,12 @@
 
 #include <gtk/gtk.h>
 
-#define SCREENSHOT_TYPE_APPLICATION screenshot_application_get_type()
-#define SCREENSHOT_APPLICATION(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), SCREENSHOT_TYPE_APPLICATION, ScreenshotApplication))
-#define SCREENSHOT_APPLICATION_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), SCREENSHOT_TYPE_APPLICATION, ScreenshotApplicationClass))
-#define SCREENSHOT_IS_APPLICATION(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SCREENSHOT_TYPE_APPLICATION))
-#define SCREENSHOT_IS_APPLICATION_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), SCREENSHOT_TYPE_APPLICATION))
-#define SCREENSHOT_APPLICATION_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), SCREENSHOT_TYPE_APPLICATION, ScreenshotApplicationClass))
+G_BEGIN_DECLS
 
-typedef struct _ScreenshotApplicationPriv ScreenshotApplicationPriv;
+#define SCREENSHOT_TYPE_APPLICATION (screenshot_application_get_type())
 
-typedef struct {
-  GtkApplication parent;
-  ScreenshotApplicationPriv *priv;
-} ScreenshotApplication;
+G_DECLARE_FINAL_TYPE (ScreenshotApplication, screenshot_application, SCREENSHOT, APPLICATION, GtkApplication)
 
-typedef struct {
-  GtkApplicationClass parent_class;
-} ScreenshotApplicationClass;
+ScreenshotApplication *screenshot_application_new (void);
 
-GType screenshot_application_get_type (void);
-GApplication * screenshot_application_new (void);
+G_END_DECLS

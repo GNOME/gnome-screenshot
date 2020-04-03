@@ -21,40 +21,21 @@
 
 #include <gtk/gtk.h>
 
-typedef enum {
-  SCREENSHOT_RESPONSE_SAVE,
-  SCREENSHOT_RESPONSE_COPY,
-  SCREENSHOT_RESPONSE_BACK
+G_BEGIN_DECLS
 
-} ScreenshotResponse;
+#define SCREENSHOT_TYPE_DIALOG (screenshot_dialog_get_type())
 
-typedef void (*SaveScreenshotCallback) (ScreenshotResponse response, gpointer *user_data);
+G_DECLARE_FINAL_TYPE (ScreenshotDialog, screenshot_dialog, SCREENSHOT, DIALOG, GtkApplicationWindow)
 
-typedef struct {
-  GdkPixbuf *screenshot;
-  GdkPixbuf *preview_image;
-
-  GtkWidget *dialog;
-  GtkWidget *save_widget;
-  GtkWidget *filename_entry;
-  GtkWidget *save_button;
-  GtkWidget *copy_button;
-  GtkWidget *back_button;
-
-  gint drag_x;
-  gint drag_y;
-
-  SaveScreenshotCallback callback;
-  gpointer user_data;
-}  ScreenshotDialog;
-
-ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf              *screenshot,
-                                                  char                   *initial_uri,
-                                                  SaveScreenshotCallback f,
-                                                  gpointer               user_data);
+ScreenshotDialog *screenshot_dialog_new          (GtkApplication *app,
+                                                  GdkPixbuf      *screenshot,
+                                                  char           *initial_uri);
 
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_filename (ScreenshotDialog *dialog);
 void              screenshot_dialog_set_busy     (ScreenshotDialog *dialog,
                                                   gboolean          busy);
+GtkWidget        *screenshot_dialog_get_filename_entry (ScreenshotDialog *dialog);
+
+G_END_DECLS
