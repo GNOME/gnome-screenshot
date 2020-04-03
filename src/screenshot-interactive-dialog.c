@@ -30,9 +30,11 @@
 #include "screenshot-interactive-dialog.h"
 #include "screenshot-utils.h"
 
-#define TARGET_TOGGLE_DESKTOP 0
-#define TARGET_TOGGLE_WINDOW  1
-#define TARGET_TOGGLE_AREA    2
+typedef enum {
+  SCREENSHOT_MODE_SCREEN,
+  SCREENSHOT_MODE_WINDOW,
+  SCREENSHOT_MODE_SELECTION,
+} ScreenshotMode;
 
 struct _ScreenshotInteractiveDialog
 {
@@ -57,10 +59,10 @@ G_DEFINE_TYPE (ScreenshotInteractiveDialog, screenshot_interactive_dialog, GTK_T
 
 static void
 set_mode (ScreenshotInteractiveDialog *self,
-          gint                         mode)
+          ScreenshotMode               mode)
 {
-  gboolean take_window_shot = (mode == TARGET_TOGGLE_WINDOW);
-  gboolean take_area_shot = (mode == TARGET_TOGGLE_AREA);
+  gboolean take_window_shot = (mode == SCREENSHOT_MODE_WINDOW);
+  gboolean take_area_shot = (mode == SCREENSHOT_MODE_SELECTION);
 
   gtk_widget_set_sensitive (self->pointer_row, !take_area_shot);
 
@@ -73,7 +75,7 @@ screen_toggled_cb (GtkToggleButton             *button,
                    ScreenshotInteractiveDialog *self)
 {
   if (gtk_toggle_button_get_active (button))
-    set_mode (self, TARGET_TOGGLE_DESKTOP);
+    set_mode (self, SCREENSHOT_MODE_SCREEN);
 }
 
 static void
@@ -81,7 +83,7 @@ window_toggled_cb (GtkToggleButton             *button,
                    ScreenshotInteractiveDialog *self)
 {
   if (gtk_toggle_button_get_active (button))
-    set_mode (self, TARGET_TOGGLE_WINDOW);
+    set_mode (self, SCREENSHOT_MODE_WINDOW);
 }
 
 static void
@@ -89,7 +91,7 @@ selection_toggled_cb (GtkToggleButton             *button,
                       ScreenshotInteractiveDialog *self)
 {
   if (gtk_toggle_button_get_active (button))
-    set_mode (self, TARGET_TOGGLE_AREA);
+    set_mode (self, SCREENSHOT_MODE_SELECTION);
 }
 
 static void
