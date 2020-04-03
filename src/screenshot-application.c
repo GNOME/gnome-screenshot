@@ -696,7 +696,7 @@ screenshot_show_interactive_dialog (ScreenshotApplication *self)
 
   dialog = screenshot_interactive_dialog_new (GTK_APPLICATION (self));
 
-  g_signal_connect (dialog, "capture", G_CALLBACK (capture_clicked_cb), self);
+  g_signal_connect_object (dialog, "capture", G_CALLBACK (capture_clicked_cb), self, 0);
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
