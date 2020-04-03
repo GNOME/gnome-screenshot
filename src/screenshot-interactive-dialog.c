@@ -95,14 +95,15 @@ selection_toggled_cb (GtkToggleButton             *button,
 }
 
 static void
-delay_spin_value_changed_cb (GtkSpinButton *button)
+delay_spin_value_changed_cb (GtkSpinButton               *button,
+                             ScreenshotInteractiveDialog *self)
 {
   screenshot_config->delay = gtk_spin_button_get_value_as_int (button);
 }
 
 static void
-include_pointer_toggled_cb (GtkSwitch *toggle,
-                            gpointer         data)
+include_pointer_toggled_cb (GtkSwitch                   *toggle,
+                            ScreenshotInteractiveDialog *self)
 {
   screenshot_config->include_pointer = gtk_switch_get_active (toggle);
   gtk_switch_set_state (toggle, gtk_switch_get_active (toggle));
@@ -177,7 +178,8 @@ screenshot_interactive_dialog_init (ScreenshotInteractiveDialog *self)
 }
 
 GtkWidget *
-screenshot_interactive_dialog_new (CaptureClickedCallback f, gpointer user_data)
+screenshot_interactive_dialog_new (CaptureClickedCallback f,
+                                   gpointer               user_data)
 {
   ScreenshotApplication *self = user_data;
   ScreenshotInteractiveDialog *dialog;
