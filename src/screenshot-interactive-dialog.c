@@ -181,27 +181,28 @@ GtkWidget *
 screenshot_interactive_dialog_new (CaptureClickedCallback f,
                                    gpointer               user_data)
 {
-  ScreenshotApplication *self = user_data;
-  ScreenshotInteractiveDialog *dialog;
+  ScreenshotApplication *app = user_data;
+  ScreenshotInteractiveDialog *self;
 
-  dialog = g_object_new (SCREENSHOT_TYPE_INTERACTIVE_DIALOG, NULL);
-  gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (self));
+  self = g_object_new (SCREENSHOT_TYPE_INTERACTIVE_DIALOG,
+                       "application", app,
+                       NULL);
 
-  dialog->callback = f;
-  dialog->user_data = user_data;
+  self->callback = f;
+  self->user_data = user_data;
 
-  gtk_widget_show_all (GTK_WIDGET (dialog));
+  gtk_widget_show_all (GTK_WIDGET (self));
 
   if (screenshot_config->take_window_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->window), TRUE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->window), TRUE);
 
   if (screenshot_config->take_area_shot)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->selection), TRUE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->selection), TRUE);
 
-  gtk_widget_set_sensitive (dialog->pointer_row, !screenshot_config->take_area_shot);
-  gtk_switch_set_active (GTK_SWITCH (dialog->pointer), screenshot_config->include_pointer);
+  gtk_widget_set_sensitive (self->pointer_row, !screenshot_config->take_area_shot);
+  gtk_switch_set_active (GTK_SWITCH (self->pointer), screenshot_config->include_pointer);
 
-  gtk_adjustment_set_value (dialog->delay_adjustment, (gdouble) screenshot_config->delay);
+  gtk_adjustment_set_value (self->delay_adjustment, (gdouble) screenshot_config->delay);
 
-  return GTK_WIDGET (dialog);
+  return GTK_WIDGET (self);
 }
