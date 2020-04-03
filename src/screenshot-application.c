@@ -682,9 +682,23 @@ screenshot_application_command_line (GApplication            *app,
 }
 
 static void
+capture_clicked_cb (ScreenshotInteractiveDialog *dialog,
+                    ScreenshotApplication       *self)
+{
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+  screenshot_start (self);
+}
+
+static void
 screenshot_show_interactive_dialog (ScreenshotApplication *self)
 {
-  screenshot_interactive_dialog_new ((CaptureClickedCallback) screenshot_start, self);
+  GtkWidget *dialog;
+
+  dialog = screenshot_interactive_dialog_new (GTK_APPLICATION (self));
+
+  g_signal_connect_object (dialog, "capture", G_CALLBACK (capture_clicked_cb), self, 0);
+
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 static void
