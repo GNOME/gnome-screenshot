@@ -2,8 +2,9 @@
 <!-- Generated with glade 3.22.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkApplicationWindow" id="screenshot_window">
+  <template class="ScreenshotInteractiveDialog" parent="GtkApplicationWindow">
     <property name="resizable">False</property>
+    <property name="window-position">center</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -38,7 +39,7 @@
                     <property name="receives_default">True</property>
                     <property name="draw_indicator">False</property>
                     <property name="group">selection</property>
-                    <signal name="toggled" handler="on_screen" swapped="no"/>
+                    <signal name="toggled" handler="screen_toggled_cb"/>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -71,7 +72,7 @@
                     <property name="active">True</property>
                     <property name="draw_indicator">False</property>
                     <property name="group">screen</property>
-                    <signal name="toggled" handler="on_window" swapped="no"/>
+                    <signal name="toggled" handler="window_toggled_cb"/>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -103,7 +104,7 @@
                     <property name="receives_default">True</property>
                     <property name="draw_indicator">False</property>
                     <property name="group">screen</property>
-                    <signal name="toggled" handler="on_selection" swapped="no"/>
+                    <signal name="toggled" handler="selection_toggled_cb"/>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -142,7 +143,7 @@
               <class name="frame"/>
             </style>
             <child>
-              <object class="GtkListBoxRow" id="pointerrow">
+              <object class="GtkListBoxRow" id="pointer_row">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <child>
@@ -164,6 +165,7 @@
                     <child>
                       <object class="GtkSwitch" id="pointer">
                         <property name="visible">True</property>
+                        <signal name="state-set" handler="include_pointer_toggled_cb"/>
                       </object>
                     </child>
                   </object>
@@ -200,6 +202,7 @@
                         <property name="climb_rate">1</property>
                         <property name="snap_to_ticks">True</property>
                         <property name="numeric">True</property>
+                        <signal name= "value-changed" handler="delay_spin_value_changed_cb"/>
                       </object>
                     </child>
                   </object>
@@ -221,6 +224,8 @@
             <property name="receives_default">True</property>
             <property name="action_name">app.screen-shot</property>
             <property name="use_underline">True</property>
+            <property name="can-default">True</property>
+            <signal name="clicked" handler="capture_button_clicked_cb"/>
             <style>
               <class name="suggested-action"/>
             </style>
@@ -244,11 +249,12 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
   <object class="GtkAdjustment" id="delay_adjustment">
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
+    <property name="lower">0</property>
+    <property name="upper">99</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">1</property>
   </object>
   <menu id="primary_menu">
     <section>
