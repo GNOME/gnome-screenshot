@@ -37,22 +37,25 @@ static GtkWidget *pointer_row = NULL;
 #define TARGET_TOGGLE_AREA    2
 
 static void
+set_mode (gint mode)
+{
+  gboolean take_window_shot = (mode == TARGET_TOGGLE_WINDOW);
+  gboolean take_area_shot = (mode == TARGET_TOGGLE_AREA);
+
+  gtk_widget_set_sensitive (pointer_row, !take_area_shot);
+
+  screenshot_config->take_window_shot = take_window_shot;
+  screenshot_config->take_area_shot = take_area_shot;
+}
+
+static void
 target_toggled_cb (GtkToggleButton *button,
                    gpointer         data)
 {
   int target_toggle = GPOINTER_TO_INT (data);
-  gboolean take_area_shot, take_window_shot;
 
   if (gtk_toggle_button_get_active (button))
-    {
-      take_window_shot = (target_toggle == TARGET_TOGGLE_WINDOW);
-      take_area_shot = (target_toggle == TARGET_TOGGLE_AREA);
-
-      gtk_widget_set_sensitive (pointer_row, !take_area_shot);
-
-      screenshot_config->take_window_shot = take_window_shot;
-      screenshot_config->take_area_shot = take_area_shot;
-    }
+    set_mode (target_toggle);
 }
 
 static void
