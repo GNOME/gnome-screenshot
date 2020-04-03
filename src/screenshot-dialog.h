@@ -27,19 +27,8 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (ScreenshotDialog, screenshot_dialog, SCREENSHOT, DIALOG, GtkApplicationWindow)
 
-typedef enum {
-  SCREENSHOT_RESPONSE_SAVE,
-  SCREENSHOT_RESPONSE_COPY,
-  SCREENSHOT_RESPONSE_BACK
-
-} ScreenshotResponse;
-
-typedef void (*SaveScreenshotCallback) (ScreenshotResponse response, gpointer *user_data);
-
-ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf              *screenshot,
-                                                  char                   *initial_uri,
-                                                  SaveScreenshotCallback f,
-                                                  gpointer               user_data);
+ScreenshotDialog *screenshot_dialog_new          (GdkPixbuf *screenshot,
+                                                  char      *initial_uri);
 
 char             *screenshot_dialog_get_uri      (ScreenshotDialog *dialog);
 char             *screenshot_dialog_get_folder   (ScreenshotDialog *dialog);
