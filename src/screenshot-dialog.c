@@ -222,7 +222,7 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
 {
   g_autoptr(GFile) tmp_file = NULL, parent_file = NULL;
   g_autofree gchar *current_folder = NULL, *current_name = NULL;
-  ScreenshotDialog *dialog;
+  ScreenshotDialog *self;
   char *ext;
   gint pos;
 
@@ -232,24 +232,24 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   current_name = g_file_get_basename (tmp_file);
   current_folder = g_file_get_uri (parent_file);
 
-  dialog = g_object_new (SCREENSHOT_TYPE_DIALOG, NULL);
-  dialog->screenshot = screenshot;
-  dialog->callback = f;
-  dialog->user_data = user_data;
+  self = g_object_new (SCREENSHOT_TYPE_DIALOG, NULL);
+  self->screenshot = screenshot;
+  self->callback = f;
+  self->user_data = user_data;
 
-  gtk_window_set_application (GTK_WINDOW (dialog), GTK_APPLICATION (g_application_get_default ()));
-  gtk_widget_realize (GTK_WIDGET (dialog));
+  gtk_window_set_application (GTK_WINDOW (self), GTK_APPLICATION (g_application_get_default ()));
+  gtk_widget_realize (GTK_WIDGET (self));
 
-  gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget), current_folder);
-  gtk_entry_set_text (GTK_ENTRY (dialog->filename_entry), current_name);
+  gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (self->save_widget), current_folder);
+  gtk_entry_set_text (GTK_ENTRY (self->filename_entry), current_name);
 
   /* setup dnd */
-  gtk_drag_source_set (dialog->preview_darea,
+  gtk_drag_source_set (self->preview_darea,
                        GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
                        drag_types, G_N_ELEMENTS (drag_types),
                        GDK_ACTION_COPY);
 
-  gtk_widget_show_all (GTK_WIDGET (dialog));
+  gtk_widget_show_all (GTK_WIDGET (self));
 
   /* select the name of the file but leave out the extension if there's any;
    * the dialog must be realized for select_region to work
@@ -260,40 +260,40 @@ screenshot_dialog_new (GdkPixbuf              *screenshot,
   else
     pos = -1;
 
-  gtk_widget_grab_focus (dialog->filename_entry);
-  gtk_editable_select_region (GTK_EDITABLE (dialog->filename_entry),
+  gtk_widget_grab_focus (self->filename_entry);
+  gtk_editable_select_region (GTK_EDITABLE (self->filename_entry),
                               0,
                               pos);
 
-  return dialog;
+  return self;
 }
 
 char *
-screenshot_dialog_get_uri (ScreenshotDialog *dialog)
+screenshot_dialog_get_uri (ScreenshotDialog *self)
 {
   g_autofree gchar *folder = NULL, *file = NULL, *tmp = NULL;
 
-  folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
-  tmp = screenshot_dialog_get_filename (dialog);
+  folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (self->save_widget));
+  tmp = screenshot_dialog_get_filename (self);
   file = g_uri_escape_string (tmp, NULL, FALSE);
 
   return g_build_filename (folder, file, NULL);
 }
 
 char *
-screenshot_dialog_get_folder (ScreenshotDialog *dialog)
+screenshot_dialog_get_folder (ScreenshotDialog *self)
 {
-  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (self->save_widget));
 }
 
 char *
-screenshot_dialog_get_filename (ScreenshotDialog *dialog)
+screenshot_dialog_get_filename (ScreenshotDialog *self)
 {
   g_autoptr(GError) error = NULL;
   const gchar *file_name;
   gchar *tmp;
 
-  file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
+  file_name = gtk_entry_get_text (GTK_ENTRY (self->filename_entry));
   tmp = g_filename_from_utf8 (file_name, -1, NULL, NULL, &error);
 
   if (error != NULL)
@@ -309,19 +309,19 @@ screenshot_dialog_get_filename (ScreenshotDialog *dialog)
 }
 
 void
-screenshot_dialog_set_busy (ScreenshotDialog *dialog,
+screenshot_dialog_set_busy (ScreenshotDialog *self,
                             gboolean          busy)
 {
   GdkWindow *window;
 
-  window = gtk_widget_get_window (GTK_WIDGET (dialog));
+  window = gtk_widget_get_window (GTK_WIDGET (self));
 
   if (busy)
     {
       g_autoptr(GdkCursor) cursor = NULL;
       GdkDisplay *display;
       /* Change cursor to busy */
-      display = gtk_widget_get_display (GTK_WIDGET (dialog));
+      display = gtk_widget_get_display (GTK_WIDGET (self));
       cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
     }
@@ -330,13 +330,13 @@ screenshot_dialog_set_busy (ScreenshotDialog *dialog,
       gdk_window_set_cursor (window, NULL);
     }
 
-  gtk_widget_set_sensitive (GTK_WIDGET (dialog), ! busy);
+  gtk_widget_set_sensitive (GTK_WIDGET (self), !busy);
 
   gdk_flush ();
 }
 
 GtkWidget *
-screenshot_dialog_get_filename_entry (ScreenshotDialog *dialog)
+screenshot_dialog_get_filename_entry (ScreenshotDialog *self)
 {
-  return dialog->filename_entry;
+  return self->filename_entry;
 }
