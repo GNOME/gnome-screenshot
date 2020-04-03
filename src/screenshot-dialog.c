@@ -248,8 +248,9 @@ screenshot_dialog_init (ScreenshotDialog *self)
 }
 
 ScreenshotDialog *
-screenshot_dialog_new (GdkPixbuf *screenshot,
-                       char      *initial_uri)
+screenshot_dialog_new (GtkApplication *app,
+                       GdkPixbuf      *screenshot,
+                       char           *initial_uri)
 {
   g_autoptr(GFile) tmp_file = NULL, parent_file = NULL;
   g_autofree gchar *current_folder = NULL, *current_name = NULL;
@@ -263,11 +264,12 @@ screenshot_dialog_new (GdkPixbuf *screenshot,
   current_name = g_file_get_basename (tmp_file);
   current_folder = g_file_get_uri (parent_file);
 
-  self = g_object_new (SCREENSHOT_TYPE_DIALOG, NULL);
+  self = g_object_new (SCREENSHOT_TYPE_DIALOG,
+                       "application", app,
+                       NULL);
 
   self->screenshot = screenshot;
 
-  gtk_window_set_application (GTK_WINDOW (self), GTK_APPLICATION (g_application_get_default ()));
   gtk_widget_realize (GTK_WIDGET (self));
 
   gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (self->save_widget), current_folder);
