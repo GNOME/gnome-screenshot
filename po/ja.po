@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-01-21 14:18+0000\n"
-"PO-Revision-Date: 2020-02-12 12:45+0900\n"
+"POT-Creation-Date: 2020-03-30 14:57+0000\n"
+"PO-Revision-Date: 2020-04-03 18:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -306,9 +306,10 @@ msgstr ""
 "オプションの競合: --area オプションと --delay オプションは同時に指定できませ"
 "ん\n"
 
+# ここは英語のままの方がいいようなので元に戻しました (sicklylife)
 #: src/screenshot-dialog.c:302
 msgid "Screenshot.png"
-msgstr "スクリーンショット.png"
+msgstr "Screenshot.png"
 
 #: src/screenshot-dialog.ui:7
 msgid "Save Screenshot"
@@ -334,6 +335,7 @@ msgstr "名前(_N)"
 msgid "Save in _folder"
 msgstr "保存フォルダー(_F)"
 
+# ここは英語のままの方がいいようなので「スクリーンショット」から「Screenshot from」に戻しました (sicklylife)
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken. The first placeholder is a
 #. * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
@@ -342,8 +344,9 @@ msgstr "保存フォルダー(_F)"
 #: src/screenshot-filename-builder.c:135
 #, c-format
 msgid "Screenshot from %s.%s"
-msgstr "スクリーンショット %s.%s"
+msgstr "Screenshot from %s.%s"
 
+# ここは英語のままの方がいいようなので「スクリーンショット」から「Screenshot from」に戻しました (sicklylife)
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken and the simpler filename
 #. * already exists. The first and second placeholders are a timestamp and
@@ -353,7 +356,7 @@ msgstr "スクリーンショット %s.%s"
 #: src/screenshot-filename-builder.c:145
 #, c-format
 msgid "Screenshot from %s - %d.%s"
-msgstr "スクリーンショット %s - %d.%s"
+msgstr "Screenshot from %s - %d.%s"
 
 #. Translators:
 #. * these are the names of the effects available which will be
