@@ -149,9 +149,10 @@ screenshot_display_help (GtkWindow *parent)
 {
   g_autoptr(GError) error = NULL;
 
-  gtk_show_uri (gtk_window_get_screen (parent),
-                "help:gnome-help/screen-shot-record",
-                gtk_get_current_event_time (), &error);
+  gtk_show_uri_on_window (parent,
+                          "help:gnome-help/screen-shot-record",
+                          gtk_get_current_event_time (),
+                          &error);
 
   if (error)
     screenshot_show_dialog (parent,
