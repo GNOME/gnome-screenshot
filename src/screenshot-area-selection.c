@@ -229,9 +229,7 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
   g_autoptr(GdkCursor) cursor = NULL;
   GdkDisplay *display;
   select_area_filter_data  data;
-  GdkDeviceManager *manager;
-  GdkDevice *pointer, *keyboard;
-  GdkGrabStatus res;
+  GdkSeat *seat;
 
   data.rect.x = 0;
   data.rect.y = 0;
@@ -248,40 +246,23 @@ screenshot_select_area_x11_async (CallbackData *cb_data)
 
   display = gtk_widget_get_display (data.window);
   cursor = gdk_cursor_new_for_display (display, GDK_CROSSHAIR);
-  manager = gdk_display_get_device_manager (display);
-  pointer = gdk_device_manager_get_client_pointer (manager);
-  keyboard = gdk_device_get_associated_device (pointer);
+  seat = gdk_display_get_default_seat (display);
 
-  res = gdk_device_grab (pointer, gtk_widget_get_window (data.window),
-                         GDK_OWNERSHIP_NONE, FALSE,
-                         GDK_POINTER_MOTION_MASK |
-                         GDK_BUTTON_PRESS_MASK |
-                         GDK_BUTTON_RELEASE_MASK,
-                         cursor, GDK_CURRENT_TIME);
-
-  if (res != GDK_GRAB_SUCCESS)
-    goto out;
-
-  res = gdk_device_grab (keyboard, gtk_widget_get_window (data.window),
-                         GDK_OWNERSHIP_NONE, FALSE,
-                         GDK_KEY_PRESS_MASK |
-                         GDK_KEY_RELEASE_MASK,
-                         NULL, GDK_CURRENT_TIME);
-  if (res != GDK_GRAB_SUCCESS)
-    {
-      gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
-      goto out;
-    }
+  gdk_seat_grab (seat,
+                 gtk_widget_get_window (data.window),
+                 GDK_SEAT_CAPABILITY_ALL,
+                 FALSE,
+                 cursor,
+                 NULL,
+                 NULL,
+                 NULL);
 
   gtk_main ();
 
-  gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
-  gdk_device_ungrab (keyboard, GDK_CURRENT_TIME);
+  gdk_seat_ungrab (seat);
 
   gtk_widget_destroy (data.window);
-  gdk_flush ();
 
- out:
   cb_data->aborted = data.aborted;
   cb_data->rectangle = data.rect;
 
