@@ -363,8 +363,6 @@ screenshot_dialog_set_busy (ScreenshotDialog *self,
     }
 
   gtk_widget_set_sensitive (GTK_WIDGET (self), !busy);
-
-  gdk_flush ();
 }
 
 GtkWidget *
