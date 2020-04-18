@@ -6,6 +6,8 @@ sources = [
   'screenshot-application.c',
   'screenshot-area-selection.c',
   'screenshot-backend.c',
+  'screenshot-backend-shell.c',
+  'screenshot-backend-x11.c',
   'screenshot-config.c',
   'screenshot-dialog.c',
   'screenshot-filename-builder.c',
