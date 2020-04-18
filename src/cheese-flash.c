@@ -19,6 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
+#ifdef HAVE_X11
+
 #include <gtk/gtk.h>
 
 #include "cheese-flash.h"
@@ -218,3 +222,5 @@ cheese_flash_new (void)
 		       "type", GTK_WINDOW_POPUP,
                        NULL);
 }
+
+#endif
