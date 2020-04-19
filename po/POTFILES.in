@@ -11,5 +11,4 @@ src/screenshot-config.c
 src/screenshot-dialog.c
 src/screenshot-filename-builder.c
 src/screenshot-interactive-dialog.c
-src/screenshot-shadow.c
 src/screenshot-utils.c
