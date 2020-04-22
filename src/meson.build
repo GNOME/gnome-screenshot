@@ -5,6 +5,9 @@ sources = [
 
   'screenshot-application.c',
   'screenshot-area-selection.c',
+  'screenshot-backend.c',
+  'screenshot-backend-shell.c',
+  'screenshot-backend-x11.c',
   'screenshot-config.c',
   'screenshot-dialog.c',
   'screenshot-filename-builder.c',
@@ -28,8 +31,6 @@ dependencies = [
 
 c_args = [
   '-DLOCALEDIR="@0@"'.format(gnome_screenshot_localedir),
-  '-DGLIB_DISABLE_DEPRECATION_WARNINGS',
-  '-DGDK_DISABLE_DEPRECATION_WARNINGS',
 ]
 
 executable(
