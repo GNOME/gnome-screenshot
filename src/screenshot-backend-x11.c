@@ -51,8 +51,10 @@ screenshot_find_active_window (void)
   GdkWindow *window;
   GdkScreen *default_screen;
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   default_screen = gdk_screen_get_default ();
   window = gdk_screen_get_active_window (default_screen);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   return window;
 }
@@ -257,11 +259,13 @@ screenshot_fallback_get_window_rect_coords (GdkWindow    *window,
       y_orig = 0;
     }
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   if (x_orig + width > gdk_screen_width ())
     width = gdk_screen_width () - x_orig;
 
   if (y_orig + height > gdk_screen_height ())
     height = gdk_screen_height () - y_orig;
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   if (screenshot_coordinates_out != NULL)
     {
@@ -449,11 +453,13 @@ screenshot_backend_x11_get_pixbuf (ScreenshotBackend *backend,
                   rec_height += real_coords.y;
                 }
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
               if (screenshot_coords.x + rec_x + rec_width > gdk_screen_width ())
                 rec_width = gdk_screen_width () - screenshot_coords.x - rec_x;
 
               if (screenshot_coords.y + rec_y + rec_height > gdk_screen_height ())
                 rec_height = gdk_screen_height () - screenshot_coords.y - rec_y;
+G_GNUC_END_IGNORE_DEPRECATIONS
 
               /* Undo the scale factor in order to copy the pixbuf data pixel-wise */
               for (y = rec_y * scale_factor; y < (rec_y + rec_height) * scale_factor; y++)
