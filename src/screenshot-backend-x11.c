@@ -102,21 +102,23 @@ find_wm_window (GdkWindow *window)
 }
 
 static cairo_region_t *
-make_region_with_monitors (GdkScreen *screen)
+make_region_with_monitors (GdkDisplay *display)
 {
   cairo_region_t *region;
   int num_monitors;
   int i;
 
-  num_monitors = gdk_screen_get_n_monitors (screen);
+  num_monitors = gdk_display_get_n_monitors (display);
 
   region = cairo_region_create ();
 
   for (i = 0; i < num_monitors; i++)
     {
+      GdkMonitor *monitor;
       GdkRectangle rect;
 
-      gdk_screen_get_monitor_geometry (screen, i, &rect);
+      monitor = gdk_display_get_monitor (display, i);
+      gdk_monitor_get_geometry (monitor, &rect);
       cairo_region_union_rectangle (region, &rect);
     }
 
@@ -198,16 +200,19 @@ blank_region_in_pixbuf (GdkPixbuf *pixbuf, cairo_region_t *region)
  * that the user won't ever see.
  */
 static void
-mask_monitors (GdkPixbuf *pixbuf, GdkWindow *root_window)
+mask_monitors (GdkPixbuf *pixbuf,
+               GdkWindow *root_window)
 {
+  GdkDisplay *display;
   GdkScreen *screen;
   cairo_region_t *region_with_monitors;
   cairo_region_t *invisible_region;
   cairo_rectangle_int_t rect;
 
-  screen = gdk_window_get_screen (root_window);
+  display = gdk_window_get_display (root_window);
+  screen = gdk_display_get_default_screen (display);
 
-  region_with_monitors = make_region_with_monitors (screen);
+  region_with_monitors = make_region_with_monitors (display);
 
   rect.x = 0;
   rect.y = 0;
