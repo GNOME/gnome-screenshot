@@ -31,7 +31,6 @@ dependencies = [
 
 c_args = [
   '-DLOCALEDIR="@0@"'.format(gnome_screenshot_localedir),
-  '-DGDK_DISABLE_DEPRECATION_WARNINGS',
 ]
 
 executable(
