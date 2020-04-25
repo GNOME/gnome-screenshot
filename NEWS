@@ -1,3 +1,16 @@
+GNOME Screenshot 3.37.1 - 25th April 2020
+===========================================
+
+- Completely redesign the UI [!7, Christopher Davis]
+- Allow taking area screenshots with timeout [!17, Philipp Wolfer]
+- Deprecate --include-border and --remove-border options
+- Deprecate --border-effect option
+- Add -Dx11 build option to allow building without X11 [!27]
+- Cleanups and deprecation fixes [!18, !20, !21, !23, !29, !30]
+- Translation updates:
+  British English, French, Galician, Hebrew, Japanese, Malay, Slovak,
+  Ukrainian
+
 GNOME Screenshot 3.34.0 - 14th October 2019
 ===========================================
 - Translation updates
