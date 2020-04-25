@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/issues\n"
-"POT-Creation-Date: 2020-03-14 10:15+0000\n"
-"PO-Revision-Date: 2020-03-14 17:43+0200\n"
+"POT-Creation-Date: 2020-04-19 07:43+0000\n"
+"PO-Revision-Date: 2020-04-25 11:10+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 20.03.70\n"
+"X-Generator: Lokalize 20.07.70\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
@@ -62,56 +62,36 @@ msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "Останній каталог, у якому знімки зберігались у інтерактивному режимі."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:31
-msgid "Include Border"
-msgstr "Увімкнути рамку"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:32
-msgid "Include the window manager border along with the screenshot"
-msgstr "Внести рамку віконного менеджера у знімок екрана"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include Pointer"
 msgstr "Увімкнути вказівник"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:37
+#: data/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the pointer in the screenshot"
 msgstr "Внести вказівник миші у знімок екрана"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:41
+#: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include ICC Profile"
 msgstr "Внести профіль ICC"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:42
+#: data/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Внести профіль ICC цілі в файл знімка екрана"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:46
-msgid "Border Effect"
-msgstr "Ефекти рамки"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:47
-msgid ""
-"Effect to add to the outside of a border. Possible values are “shadow”, "
-"“none”, and “border”."
-msgstr ""
-"Ефект, що додається навколо рамки. Можливі варіанти: «shadow», «none», та "
-"«border»."
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:51
+#: data/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Default file type extension"
 msgstr "Типове розширення типу файла"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:52
+#: data/org.gnome.gnome-screenshot.gschema.xml:42
 msgid "The default file type extension for screenshots."
 msgstr "Типове розширення типу файла для знімків."
 
-#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:755
-#: src/screenshot-application.c:823
+#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:747
+#: src/screenshot-application.c:815
 msgid "Screenshot"
 msgstr "Знімок екрана"
 
 #: data/org.gnome.Screenshot.desktop.in:4
-#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:756
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:748
 msgid "Save images of your screen or individual windows"
 msgstr "Зберегти зображення екрана або окремого вікна"
 
@@ -157,66 +137,63 @@ msgstr ""
 "збережено у теці Малюнки. Утримуйте Alt і натисніть PrtSc, щоб одержати "
 "знімок тільки вибраного вікна."
 
-#: data/ui/screenshot-dialog.ui:12
+#: data/ui/screenshot-dialog.ui:13
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: data/ui/screenshot-dialog.ui:20
+#: data/ui/screenshot-dialog.ui:22
 msgid "_Save"
 msgstr "З_берегти"
 
-#: data/ui/screenshot-dialog.ui:36
+#: data/ui/screenshot-dialog.ui:39
 msgid "C_opy to Clipboard"
 msgstr "К_опіювати у буфер обміну"
 
-#: data/ui/screenshot-dialog.ui:74
+#: data/ui/screenshot-dialog.ui:83
 msgid "_Name:"
 msgstr "_Назва:"
 
-#: data/ui/screenshot-dialog.ui:97
+#: data/ui/screenshot-dialog.ui:106
 msgid "_Folder:"
 msgstr "_Тека:"
 
-#: data/ui/screenshot-interactive-dialog.ui:25
+#: data/ui/screenshot-interactive-dialog.ui:26
 msgid "Capture Area"
 msgstr "Захопити область"
 
-#: data/ui/screenshot-interactive-dialog.ui:58
-#| msgid "Screenshot"
+#: data/ui/screenshot-interactive-dialog.ui:59
 msgid "_Screen"
 msgstr "_Екран"
 
-#: data/ui/screenshot-interactive-dialog.ui:91
+#: data/ui/screenshot-interactive-dialog.ui:92
 msgid "_Window"
 msgstr "В_ікно"
 
-#: data/ui/screenshot-interactive-dialog.ui:123
+#: data/ui/screenshot-interactive-dialog.ui:124
 msgid "Se_lection"
 msgstr "_Вибір"
 
-#: data/ui/screenshot-interactive-dialog.ui:159
+#: data/ui/screenshot-interactive-dialog.ui:160
 msgid "Show _Pointer"
 msgstr "Показати в_казівник"
 
-#: data/ui/screenshot-interactive-dialog.ui:189
+#: data/ui/screenshot-interactive-dialog.ui:191
 msgid "_Delay in Seconds"
 msgstr "З_атримка у секундах"
 
-#: data/ui/screenshot-interactive-dialog.ui:197
+#: data/ui/screenshot-interactive-dialog.ui:199
 msgid "0"
 msgstr "0"
 
-#: data/ui/screenshot-interactive-dialog.ui:219
-#| msgid "Take Screenshot"
+#: data/ui/screenshot-interactive-dialog.ui:222
 msgid "_Take Screenshot"
 msgstr "З_робити знімок"
 
-#: data/ui/screenshot-interactive-dialog.ui:257
+#: data/ui/screenshot-interactive-dialog.ui:263
 msgid "_Help"
 msgstr "_Довідка"
 
-#: data/ui/screenshot-interactive-dialog.ui:261
-#| msgid "About Screenshot"
+#: data/ui/screenshot-interactive-dialog.ui:267
 msgid "_About Screenshot"
 msgstr "_Про «Знімок екрана»"
 
@@ -230,8 +207,8 @@ msgid "Overwrite existing file?"
 msgstr "Перезаписати наявний файл?"
 
 #: src/screenshot-application.c:167 src/screenshot-application.c:176
-#: src/screenshot-application.c:429 src/screenshot-application.c:433
-#: src/screenshot-application.c:473 src/screenshot-application.c:476
+#: src/screenshot-application.c:426 src/screenshot-application.c:430
+#: src/screenshot-application.c:472 src/screenshot-application.c:475
 msgid "Unable to capture a screenshot"
 msgstr "Не вдалось захопити знімок екрана"
 
@@ -239,82 +216,95 @@ msgstr "Не вдалось захопити знімок екрана"
 msgid "Error creating file. Please choose another location and retry."
 msgstr "Помилка створення файла. Виберіть інакшу адресу і спробуйте знову."
 
-#: src/screenshot-application.c:430
+#: src/screenshot-application.c:427
 msgid "Error creating file"
 msgstr "Помилка створення файла"
 
-#: src/screenshot-application.c:441 src/screenshot-application.c:509
+#: src/screenshot-application.c:438 src/screenshot-application.c:489
 msgid "Screenshot taken"
 msgstr "Знімок отримано"
 
-#: src/screenshot-application.c:474
+#: src/screenshot-application.c:473
 msgid "All possible methods failed"
 msgstr "Усі можливі способи безуспішні"
 
-#: src/screenshot-application.c:610
+#: src/screenshot-application.c:590
 msgid "Send the grab directly to the clipboard"
 msgstr "Надіслати шматок прямо у буфер"
 
-#: src/screenshot-application.c:611
+#: src/screenshot-application.c:591
 msgid "Grab a window instead of the entire screen"
 msgstr "Зробити знімок вікна, а не всього екрана"
 
-#: src/screenshot-application.c:612
+#: src/screenshot-application.c:592
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Захопити лише частину екрана"
 
-#: src/screenshot-application.c:613
-msgid "Include the window border with the screenshot"
-msgstr "Захопити рамку вікна у знімку"
+#: src/screenshot-application.c:593
+msgid ""
+"Include the window border with the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
+"Включити до знімка обрамлення вікна. Цей параметр є застарілим — обрамлення"
+" вікна завжди включається до знімка."
 
-#: src/screenshot-application.c:614
-msgid "Remove the window border from the screenshot"
-msgstr "Вилучити рамку вікна із знімку"
+#: src/screenshot-application.c:594
+msgid ""
+"Remove the window border from the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
+"Вилучити зі знімка обрамлення вікна. Цей параметр є застарілим — обрамлення"
+" вікна завжди включається до знімка."
 
-#: src/screenshot-application.c:615
+#: src/screenshot-application.c:595
 msgid "Include the pointer with the screenshot"
 msgstr "Захопити вказівник миші в знімок екрана"
 
-#: src/screenshot-application.c:616
+#: src/screenshot-application.c:596
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Зробити знімок через вказаний час [у секундах]"
 
-#: src/screenshot-application.c:616
+#: src/screenshot-application.c:596
 msgid "seconds"
 msgstr "секунд"
 
-#: src/screenshot-application.c:617
-msgid "Effect to add to the border (shadow, border, vintage or none)"
+#: src/screenshot-application.c:597
+#| msgid "Effect to add to the border (shadow, border, vintage or none)"
+msgid ""
+"Effect to add to the border (shadow, border, vintage or none). Note: This "
+"option is deprecated and is assumed to be none"
 msgstr ""
-"Ефект, що додається до рамки вікна (тінь, рамка, старомодний або ніякого)"
+"Ефект, що додається до рамки вікна (тінь, рамка, старомодний або ніякого)."
+" Зауваження: цей параметр є застарілим — завжди використовується значення"
+" «немає»."
 
-#: src/screenshot-application.c:617
+#: src/screenshot-application.c:597
 msgid "effect"
 msgstr "ефекти рамки"
 
-#: src/screenshot-application.c:618
+#: src/screenshot-application.c:598
 msgid "Interactively set options"
 msgstr "Встановити параметри інтерактивно"
 
-#: src/screenshot-application.c:619
+#: src/screenshot-application.c:599
 msgid "Save screenshot directly to this file"
 msgstr "Зберегти знімок напряму в цей файл"
 
-#: src/screenshot-application.c:619
+#: src/screenshot-application.c:599
 msgid "filename"
 msgstr "назва файла"
 
-#: src/screenshot-application.c:620
+#: src/screenshot-application.c:600
 msgid "Print version information and exit"
 msgstr "Показати інформацію про версію та вийти"
 
-#: src/screenshot-application.c:758
+#: src/screenshot-application.c:750
 msgid "translator-credits"
 msgstr ""
 "Daniel Korostil <ted.korostiled@gmail.com>.\n"
 "Mykola Tkach <Stuartlittle1970@gmail.com>."
 
-#: src/screenshot-config.c:117
+#: src/screenshot-config.c:102
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
@@ -322,7 +312,7 @@ msgstr ""
 "Конфлікт параметрів: --window та --area не можуть використовуватися "
 "одночасно.\n"
 
-#: src/screenshot-dialog.c:295
+#: src/screenshot-dialog.c:337
 msgid "Screenshot.png"
 msgstr "Екран.png"
 
@@ -347,6 +337,28 @@ msgstr "Знімок екрана з %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Знімок екрана з %s — %d.%s"
 
-#: src/screenshot-utils.c:731
+#: src/screenshot-utils.c:733
 msgid "Error loading the help page"
 msgstr "Помилка завантаження сторінки довідки"
+
+#~ msgid "Include Border"
+#~ msgstr "Увімкнути рамку"
+
+#~ msgid "Include the window manager border along with the screenshot"
+#~ msgstr "Внести рамку віконного менеджера у знімок екрана"
+
+#~ msgid "Border Effect"
+#~ msgstr "Ефекти рамки"
+
+#~ msgid ""
+#~ "Effect to add to the outside of a border. Possible values are “shadow”, "
+#~ "“none”, and “border”."
+#~ msgstr ""
+#~ "Ефект, що додається навколо рамки. Можливі варіанти: «shadow», «none», та "
+#~ "«border»."
+
+#~ msgid "Include the window border with the screenshot"
+#~ msgstr "Захопити рамку вікна у знімку"
+
+#~ msgid "Remove the window border from the screenshot"
+#~ msgstr "Вилучити рамку вікна із знімку"
