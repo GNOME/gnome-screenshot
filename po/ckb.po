@@ -1,0 +1,399 @@
+# Kurdish (Sorani) translation for gnome-screenshot
+# Copyright (c) 2020 Rosetta Contributors and Canonical Ltd 2020
+# This file is distributed under the same license as the gnome-screenshot package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-screenshot\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-04-04 16:53+0000\n"
+"PO-Revision-Date: 2020-05-04 17:35+0300\n"
+"Last-Translator: Jwtiyar Nariman <jwtiyar@gmail.com>\n"
+"Language-Team: Kurdish (Sorani) <ckb@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2020-05-04 14:32+0000\n"
+"X-Generator: Poedit 2.3\n"
+"Language: ckb\n"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:11
+msgid "Window-specific screenshot (deprecated)"
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:12
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:16
+msgid "Screenshot delay"
+msgstr "دواخستنی وێنەی شاشە"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:17
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr "ژمارەی چرکەکان بۆ دواخستنیاین پێش گرتنی وێنەی شاشە."
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:21
+msgid "Screenshot directory"
+msgstr "ڕێڕەوی وێنەی شاشە"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:22
+msgid "The directory where the screenshots will be saved by default."
+msgstr "ئەو ڕێڕەوەی کە وێنەکەی تێدا هەڵدەگیرێت بە بنەڕەتی."
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:26
+msgid "Last save directory"
+msgstr "کۆتا ڕێڕەوی پاشەکەوتکردن"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:27
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:31
+msgid "Include Border"
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:32
+msgid "Include the window manager border along with the screenshot"
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:36
+msgid "Include Pointer"
+msgstr "لەگەڵ نیشاندەر"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:37
+msgid "Include the pointer in the screenshot"
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:41
+msgid "Include ICC Profile"
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:42
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:46
+msgid "Border Effect"
+msgstr "کاریگەری لێوار"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:47
+msgid ""
+"Effect to add to the outside of a border. Possible values are “shadow”, "
+"“none”, and “border”."
+msgstr ""
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:51
+msgid "Default file type extension"
+msgstr "زۆر پەڕگەی زیادکراوی بنەڕەتی"
+
+#: src/org.gnome.gnome-screenshot.gschema.xml:52
+msgid "The default file type extension for screenshots."
+msgstr "زۆر پەڕگەی زیادکراوی بنەڕەتی بۆ وێنەی شاشە.‬"
+
+#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:733
+#: src/screenshot-application.c:801
+msgid "Screenshot"
+msgstr "وێنەی شاشە"
+
+#: src/org.gnome.Screenshot.desktop.in:4
+#: src/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:734
+msgid "Save images of your screen or individual windows"
+msgstr ""
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: src/org.gnome.Screenshot.desktop.in:6
+msgid "snapshot;capture;print;screenshot;"
+msgstr "snapshot;capture;print;screenshot;"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: src/org.gnome.Screenshot.desktop.in:11
+msgid "org.gnome.Screenshot"
+msgstr "org.gnome.Screenshot"
+
+#: src/org.gnome.Screenshot.desktop.in:24
+msgid "Take a Screenshot of the Whole Screen"
+msgstr "وێنەی هەموو شاشەکە بگرە"
+
+#: src/org.gnome.Screenshot.desktop.in:28
+msgid "Take a Screenshot of the Current Window"
+msgstr "وێنەی پەنەرەی ئێستا بگرە"
+
+#: src/org.gnome.Screenshot.desktop.in:32
+msgid "Take a Screenshot of a Selected Area"
+msgstr "وێنەی ناوچەی دیاریکراو بگرە"
+
+#: src/org.gnome.Screenshot.metainfo.xml.in:7
+msgid "GNOME Screenshot"
+msgstr "GNOME Screenshot"
+
+#: src/org.gnome.Screenshot.metainfo.xml.in:10
+msgid ""
+"GNOME Screenshot is a simple utility that lets you take pictures of your "
+"computer screen. Screenshots can be of your whole screen, any specific "
+"application, or a selected rectangular area. You can also copy the captured "
+"screenshot directly into the GNOME clipboard and paste it into other "
+"applications."
+msgstr ""
+
+#: src/org.gnome.Screenshot.metainfo.xml.in:17
+msgid ""
+"GNOME Screenshot allows you to take screenshots even when it’s not open: "
+"just press the PrtSc button on your keyboard, and a snapshot of your whole "
+"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
+"and you will get a screenshot of only the currently selected window."
+msgstr ""
+
+#: src/org.gnome.Screenshot.metainfo.xml.in:36
+msgid "Translation updates."
+msgstr "نوێکارییەکانی وەرگێڕان."
+
+#: src/screenshot-app-menu.ui:6
+msgid "Help"
+msgstr "یارمەتی"
+
+#: src/screenshot-app-menu.ui:10
+msgid "About"
+msgstr "دەربارە"
+
+#: src/screenshot-app-menu.ui:14
+msgid "Quit"
+msgstr ""
+
+#: src/screenshot-application.c:142
+#, c-format
+msgid "A file named “%s” already exists in “%s”"
+msgstr ""
+
+#: src/screenshot-application.c:148
+msgid "Overwrite existing file?"
+msgstr "چوونەجێی هەمان پەڕگە؟"
+
+#: src/screenshot-application.c:164 src/screenshot-application.c:173
+#: src/screenshot-application.c:426 src/screenshot-application.c:430
+#: src/screenshot-application.c:470 src/screenshot-application.c:473
+msgid "Unable to capture a screenshot"
+msgstr "نەتوانرا وێنەی شاشە بگیرێت"
+
+#: src/screenshot-application.c:165
+msgid "Error creating file. Please choose another location and retry."
+msgstr "نەتوانرا پەڕگە درووست بکرێت. تکایە لە شوێنێکی تر هەوڵ بدەرەوە."
+
+#: src/screenshot-application.c:427
+msgid "Error creating file"
+msgstr "هەڵە لە درووستکردنی پەڕگە"
+
+#: src/screenshot-application.c:438 src/screenshot-application.c:506
+msgid "Screenshot taken"
+msgstr "وێنەی شاشە گیرا"
+
+#: src/screenshot-application.c:471
+msgid "All possible methods failed"
+msgstr "هەموو ڕێگە گونجاوەکان سەرکەوتوو نەبوون"
+
+#: src/screenshot-application.c:597
+msgid "Send the grab directly to the clipboard"
+msgstr "هێنراو ڕاستەوخۆ بهێنە بۆ clipboard"
+
+#: src/screenshot-application.c:598
+msgid "Grab a window instead of the entire screen"
+msgstr "پەنجەرە بهێنە لە جیاتی ئەوەی هەموو شاشەکە بهێنیت"
+
+#: src/screenshot-application.c:599
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "ڕووبەرێکی دیاریکراو شاشە بهێنە لە جیاتی ئەوەی هەموو شاشەکە بهێنیت"
+
+#: src/screenshot-application.c:600
+msgid "Include the window border with the screenshot"
+msgstr "لێواری پەنجەرە بخەناو وێنەکە لەگەڵ وێنەی شاشەکە"
+
+#: src/screenshot-application.c:601
+msgid "Remove the window border from the screenshot"
+msgstr "لێواری پەنجەرە مەخەرەناو  وێنەکە لەگەڵ وێنەی شاشەکە"
+
+#: src/screenshot-application.c:602
+msgid "Include the pointer with the screenshot"
+msgstr "دیاریکەر بخەناو وێنەکە لەگەڵ وێنەی شاشەکە"
+
+#: src/screenshot-application.c:603
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr ""
+
+#. translators: this is the last part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: src/screenshot-application.c:603 src/screenshot-interactive-dialog.c:410
+msgid "seconds"
+msgstr "چرکه‌"
+
+#: src/screenshot-application.c:604
+msgid "Effect to add to the border (shadow, border, vintage or none)"
+msgstr ""
+
+#: src/screenshot-application.c:604
+msgid "effect"
+msgstr "کاریگەری وێنەیی"
+
+#: src/screenshot-application.c:605
+msgid "Interactively set options"
+msgstr ""
+
+#: src/screenshot-application.c:606
+msgid "Save screenshot directly to this file"
+msgstr "وێنەی پەردەکە بگرە و لەم بەڕگەیەدا دایبنێ"
+
+#: src/screenshot-application.c:606
+msgid "filename"
+msgstr "ناوی پەڕگە"
+
+#: src/screenshot-application.c:607
+msgid "Print version information and exit"
+msgstr "زانیارییەکانی وەشان چاپ بکە و دەربچۆ"
+
+#: src/screenshot-application.c:736
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Aras https://launchpad.net/~aras-noori\n"
+"  Brwa Salam https://launchpad.net/~brwasalam\n"
+"  Jwtiyar Nariman https://launchpad.net/~jwtiyar"
+
+#: src/screenshot-config.c:117
+#, c-format
+msgid ""
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
+msgstr ""
+
+#: src/screenshot-config.c:124
+#, c-format
+msgid ""
+"Conflicting options: --area and --delay should not be used at the same "
+"time.\n"
+msgstr ""
+
+#: src/screenshot-dialog.c:302
+msgid "Screenshot.png"
+msgstr "Screenshot.png"
+
+#: src/screenshot-dialog.ui:7
+msgid "Save Screenshot"
+msgstr "وێنەی شاشە پاشەکەوت بکە"
+
+#: src/screenshot-dialog.ui:18
+msgid "Back"
+msgstr "بڕۆدواوە"
+
+#: src/screenshot-dialog.ui:39
+msgid "C_opy to Clipboard"
+msgstr ""
+
+#: src/screenshot-dialog.ui:51
+msgid "_Save"
+msgstr "_پاشەکەوتکردن"
+
+#: src/screenshot-dialog.ui:118
+msgid "_Name"
+msgstr "_ناو"
+
+#: src/screenshot-dialog.ui:138
+msgid "Save in _folder"
+msgstr "پاشەکەوتی بکە_ لەناو بوخچە"
+
+#. translators: this is the name of the file that gets made up with the
+#. * screenshot if the entire screen is taken. The first placeholder is a
+#. * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
+#. * file format (e.g. "png").
+#.
+#: src/screenshot-filename-builder.c:135
+#, c-format
+msgid "Screenshot from %s.%s"
+msgstr "وێنەی شاشە لە %s.%s"
+
+#. translators: this is the name of the file that gets made up with the
+#. * screenshot if the entire screen is taken and the simpler filename
+#. * already exists. The first and second placeholders are a timestamp and
+#. * a counter to make it unique (e.g. "2017-05-21 12-24-03 - 2"); the third
+#. * placeholder is the file format (e.g. "png").
+#.
+#: src/screenshot-filename-builder.c:145
+#, c-format
+msgid "Screenshot from %s - %d.%s"
+msgstr "وێنەی شاشە لە %s - %d.%s"
+
+#. Translators:
+#. * these are the names of the effects available which will be
+#. * displayed inside a combo box in interactive mode for the user
+#. * to chooser.
+#.
+#: src/screenshot-interactive-dialog.c:155
+msgid "None"
+msgstr "هیچ"
+
+#: src/screenshot-interactive-dialog.c:156
+msgid "Drop shadow"
+msgstr "سێبەر لابەرە"
+
+#: src/screenshot-interactive-dialog.c:157
+msgid "Border"
+msgstr "په‌راوێز"
+
+#: src/screenshot-interactive-dialog.c:158
+msgid "Vintage"
+msgstr ""
+
+#. * Include pointer *
+#: src/screenshot-interactive-dialog.c:260
+msgid "Include _pointer"
+msgstr "دیاریکەری _تێبخە"
+
+#. * Include window border *
+#: src/screenshot-interactive-dialog.c:270
+msgid "Include the window _border"
+msgstr "لێواری _پەنجەرەی تێبخە"
+
+#: src/screenshot-interactive-dialog.c:287
+msgid "Apply _effect:"
+msgstr "کاریگەریی _جێبەجێبکە:"
+
+#: src/screenshot-interactive-dialog.c:343
+msgid "Grab the whole sc_reen"
+msgstr "هەموو شا_شە بهێنە"
+
+#: src/screenshot-interactive-dialog.c:357
+msgid "Grab the current _window"
+msgstr "پەنجەرەی _ئێستا بهێنە"
+
+#: src/screenshot-interactive-dialog.c:369
+msgid "Select _area to grab"
+msgstr "_ڕووبەری دیاریکراو بهێنە"
+
+#. translators: this is the first part of the "grab after a
+#. * delay of <spin button> seconds".
+#.
+#: src/screenshot-interactive-dialog.c:389
+msgid "Grab after a _delay of"
+msgstr "بهێنە دووای _ماوەی"
+
+#: src/screenshot-interactive-dialog.c:459
+msgid "Take Screenshot"
+msgstr "وێنەی شاشە بگرە"
+
+#: src/screenshot-interactive-dialog.c:460
+msgid "Effects"
+msgstr "کاریگەرییەکان"
+
+#: src/screenshot-interactive-dialog.c:464
+msgid "Take _Screenshot"
+msgstr "_وێنەی پەردە بگرە"
+
+#: src/screenshot-interactive-dialog.c:481
+msgid "_Cancel"
+msgstr "_پاشگەزبوونەوە"
+
+#: src/screenshot-utils.c:735
+msgid "Error loading the help page"
+msgstr "هەڵە ڕویدا لە بارکردنی پەڕەی یارمەتی"
