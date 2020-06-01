@@ -5,14 +5,14 @@
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003-2005.
 # Andika Triwidada <andika@gmail.com>, 2010, 2011, 2013, 2014, 2015.
 # Dirgita <dirgitadevina@yahoo.co.id>, 2011, 2012.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2019.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2019-07-25 09:43+0000\n"
-"PO-Revision-Date: 2019-07-26 18:16+0700\n"
+"POT-Creation-Date: 2020-05-04 14:37+0000\n"
+"PO-Revision-Date: 2020-05-31 13:20+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -21,115 +21,95 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural= n!=1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:11
+#: data/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
 msgstr "Cuplikan layar spesifik jendela (tak dipakai lagi)"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:12
+#: data/org.gnome.gnome-screenshot.gschema.xml:12
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
 "Ambil hanya jendela kini, bukan seluruh desktop. Kunci ini tak dipakai lagi."
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:16
+#: data/org.gnome.gnome-screenshot.gschema.xml:16
 msgid "Screenshot delay"
 msgstr "Tundaan cuplikan layar"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:17
+#: data/org.gnome.gnome-screenshot.gschema.xml:17
 msgid "The number of seconds to wait before taking the screenshot."
 msgstr "Berapa detik mesti menunggu sebelum mengambil cuplikan layar."
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:21
+#: data/org.gnome.gnome-screenshot.gschema.xml:21
 msgid "Screenshot directory"
 msgstr "Direktori cuplikan layar"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:22
+#: data/org.gnome.gnome-screenshot.gschema.xml:22
 msgid "The directory where the screenshots will be saved by default."
 msgstr "Direktori tempat cuplikan layar akan disimpan."
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:26
+#: data/org.gnome.gnome-screenshot.gschema.xml:26
 msgid "Last save directory"
 msgstr "Direktori simpan terakhir"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:27
+#: data/org.gnome.gnome-screenshot.gschema.xml:27
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "Direktori tempat cuplikan layar terakhir kali disimpan."
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:31
-msgid "Include Border"
-msgstr "Sertakan Bingkai"
-
-#: src/org.gnome.gnome-screenshot.gschema.xml:32
-msgid "Include the window manager border along with the screenshot"
-msgstr "Menyertakan bingkai jendela pada cuplikan layar"
-
-#: src/org.gnome.gnome-screenshot.gschema.xml:36
+#: data/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Pointer"
 msgstr "Sertakan Penunjuk"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:37
+#: data/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the pointer in the screenshot"
 msgstr "Menyertakan penunjuk pada cuplikan layar"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:41
+#: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include ICC Profile"
 msgstr "Sertakan Profil ICC"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:42
+#: data/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "Menyertakan profil ICC dari target pada berkas cuplikan layar"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:46
-msgid "Border Effect"
-msgstr "Efek Bingkai"
-
-#: src/org.gnome.gnome-screenshot.gschema.xml:47
-msgid ""
-"Effect to add to the outside of a border. Possible values are “shadow”, "
-"“none”, and “border”."
-msgstr ""
-"Efek yang ditambahkan di luar bingkai. Nilai yang mungkin adalah \"bayangan"
-"\", \"nihil\", dan \"bingkai\"."
-
-#: src/org.gnome.gnome-screenshot.gschema.xml:51
+#: data/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Default file type extension"
 msgstr "Ekstensi tipe berkas baku"
 
-#: src/org.gnome.gnome-screenshot.gschema.xml:52
+#: data/org.gnome.gnome-screenshot.gschema.xml:42
 msgid "The default file type extension for screenshots."
 msgstr "Ekstensi tipe berkas baku bagi cuplikan layar."
 
-#: src/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:733
-#: src/screenshot-application.c:801
+#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:747
+#: src/screenshot-application.c:815
 msgid "Screenshot"
 msgstr "Cuplikan layar"
 
-#: src/org.gnome.Screenshot.desktop.in:4
-#: src/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:734
+#: data/org.gnome.Screenshot.desktop.in:4
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:748
 msgid "Save images of your screen or individual windows"
 msgstr "Menyimpan gambar layar atau jendela tertentu"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: src/org.gnome.Screenshot.desktop.in:6
+#: data/org.gnome.Screenshot.desktop.in:6
 msgid "snapshot;capture;print;screenshot;"
 msgstr "snapshot;tangkapan;cetak;cuplikan layar;"
 
-#: src/org.gnome.Screenshot.desktop.in:22
+#: data/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
 msgstr "Mengambil Cuplikan Seluruh Layar"
 
-#: src/org.gnome.Screenshot.desktop.in:26
+#: data/org.gnome.Screenshot.desktop.in:26
 msgid "Take a Screenshot of the Current Window"
 msgstr "Mengambil Cuplikan Layar Tertentu"
 
-#: src/org.gnome.Screenshot.metainfo.xml.in:7
+#: data/org.gnome.Screenshot.metainfo.xml.in:7
 msgid "GNOME Screenshot"
 msgstr "GNOME Cuplikan layar"
 
-#: src/org.gnome.Screenshot.metainfo.xml.in:10
+#: data/org.gnome.Screenshot.metainfo.xml.in:10
 msgid ""
 "GNOME Screenshot is a simple utility that lets you take pictures of your "
 "computer screen. Screenshots can be of your whole screen, any specific "
@@ -143,7 +123,7 @@ msgstr ""
 "menyalin cuplikan layar yang ditangkap langsung ke papan klip GNOME dan "
 "menempelkannya ke aplikasi lain."
 
-#: src/org.gnome.Screenshot.metainfo.xml.in:17
+#: data/org.gnome.Screenshot.metainfo.xml.in:17
 msgid ""
 "GNOME Screenshot allows you to take screenshots even when it’s not open: "
 "just press the PrtSc button on your keyboard, and a snapshot of your whole "
@@ -156,34 +136,82 @@ msgstr ""
 "Tahan Alt sambil menekan PrtSc dan Anda akan mendapatkan cuplikan layar "
 "hanya dari jendela yang sedang dipilih."
 
-#: src/screenshot-app-menu.ui:6
-msgid "Help"
-msgstr "Bantuan"
+#: data/ui/screenshot-dialog.ui:13
+msgid "_Cancel"
+msgstr "_Batal"
 
-#: src/screenshot-app-menu.ui:10
-msgid "About"
-msgstr "Tentang"
+#: data/ui/screenshot-dialog.ui:22
+msgid "_Save"
+msgstr "_Simpan"
 
-#: src/screenshot-app-menu.ui:14
-msgid "Quit"
-msgstr "Keluar"
+#: data/ui/screenshot-dialog.ui:39
+msgid "C_opy to Clipboard"
+msgstr "Salin ke _Papan Klip"
 
-#: src/screenshot-application.c:142
+#: data/ui/screenshot-dialog.ui:83
+msgid "_Name:"
+msgstr "_Nama:"
+
+#: data/ui/screenshot-dialog.ui:106
+msgid "_Folder:"
+msgstr "_Folder:"
+
+#: data/ui/screenshot-interactive-dialog.ui:26
+msgid "Capture Area"
+msgstr "Menangkap Area"
+
+#: data/ui/screenshot-interactive-dialog.ui:59
+msgid "_Screen"
+msgstr "La_yar"
+
+#: data/ui/screenshot-interactive-dialog.ui:92
+msgid "_Window"
+msgstr "_Jendela"
+
+#: data/ui/screenshot-interactive-dialog.ui:124
+msgid "Se_lection"
+msgstr "Se_leksi"
+
+#: data/ui/screenshot-interactive-dialog.ui:160
+msgid "Show _Pointer"
+msgstr "Tampilkan _Penunjuk"
+
+#: data/ui/screenshot-interactive-dialog.ui:191
+msgid "_Delay in Seconds"
+msgstr "Je_da dalam Detik"
+
+#: data/ui/screenshot-interactive-dialog.ui:199
+msgid "0"
+msgstr "0"
+
+#: data/ui/screenshot-interactive-dialog.ui:222
+msgid "_Take Screenshot"
+msgstr "Ambil _Cuplikan Layar"
+
+#: data/ui/screenshot-interactive-dialog.ui:263
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: data/ui/screenshot-interactive-dialog.ui:267
+msgid "_About Screenshot"
+msgstr "Tent_ang Cuplikan Layar"
+
+#: src/screenshot-application.c:145
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
 msgstr "Berkas \"%s\" sudah ada di \"%s\""
 
-#: src/screenshot-application.c:148
+#: src/screenshot-application.c:151
 msgid "Overwrite existing file?"
 msgstr "Timpa berkas yang sudah ada?"
 
-#: src/screenshot-application.c:164 src/screenshot-application.c:173
+#: src/screenshot-application.c:167 src/screenshot-application.c:176
 #: src/screenshot-application.c:426 src/screenshot-application.c:430
-#: src/screenshot-application.c:470 src/screenshot-application.c:473
+#: src/screenshot-application.c:472 src/screenshot-application.c:475
 msgid "Unable to capture a screenshot"
 msgstr "Tak dapat mengambil cuplikan layar"
 
-#: src/screenshot-application.c:165
+#: src/screenshot-application.c:168
 msgid "Error creating file. Please choose another location and retry."
 msgstr "Galat membuat berkas. Pilihlah lokasi lain dan coba lagi."
 
@@ -191,122 +219,99 @@ msgstr "Galat membuat berkas. Pilihlah lokasi lain dan coba lagi."
 msgid "Error creating file"
 msgstr "Galat membuat berkas"
 
-#: src/screenshot-application.c:438 src/screenshot-application.c:506
+#: src/screenshot-application.c:438 src/screenshot-application.c:489
 msgid "Screenshot taken"
 msgstr "Cuplikan layar telah diambil"
 
-#: src/screenshot-application.c:471
+#: src/screenshot-application.c:473
 msgid "All possible methods failed"
 msgstr "Semua cara telah berakhir gagal"
 
-#: src/screenshot-application.c:597
+#: src/screenshot-application.c:590
 msgid "Send the grab directly to the clipboard"
 msgstr "Kirim cuplikan langsung ke papan klip"
 
-#: src/screenshot-application.c:598
+#: src/screenshot-application.c:591
 msgid "Grab a window instead of the entire screen"
 msgstr "Ambil cuplikan jendela saja (bukan keseluruhan layar)"
 
-#: src/screenshot-application.c:599
+#: src/screenshot-application.c:592
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Ambil cuplikan wilayah tertentu (bukan seluruh layar)"
 
-#: src/screenshot-application.c:600
-msgid "Include the window border with the screenshot"
-msgstr "Sertakan bingkai jendela pada cuplikan"
+#: src/screenshot-application.c:593
+msgid ""
+"Include the window border with the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
+"Sertakan batas jendela dengan cuplikan layar. Opsi ini sudah usang dan batas "
+"jendela selalu disertakan"
 
-#: src/screenshot-application.c:601
-msgid "Remove the window border from the screenshot"
-msgstr "Hapus bingkai jendela dari cuplikan"
+#: src/screenshot-application.c:594
+msgid ""
+"Remove the window border from the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
+"Hapus batas jendela dari cuplikan layar. Opsi ini sudah usang dan batas "
+"jendela selalu disertakan"
 
-#: src/screenshot-application.c:602
+#: src/screenshot-application.c:595
 msgid "Include the pointer with the screenshot"
 msgstr "Menyertakan pointer pada cuplikan layar"
 
-#: src/screenshot-application.c:603
+#: src/screenshot-application.c:596
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Mulai ambil cuplikan setelah jeda waktu (dalam detik)"
 
-#. translators: this is the last part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: src/screenshot-application.c:603 src/screenshot-interactive-dialog.c:410
+#: src/screenshot-application.c:596
 msgid "seconds"
 msgstr "detik"
 
-#: src/screenshot-application.c:604
-msgid "Effect to add to the border (shadow, border, vintage or none)"
+#: src/screenshot-application.c:597
+msgid ""
+"Effect to add to the border (shadow, border, vintage or none). Note: This "
+"option is deprecated and is assumed to be none"
 msgstr ""
 "Efek yang ditambahkan pada bingkai (bayangan, bingkai, antik/kuno, atau "
-"nihil)"
+"nihil). Catatan: Opsi ini sudah usang dan diasumsikan tidak ada"
 
-#: src/screenshot-application.c:604
+#: src/screenshot-application.c:597
 msgid "effect"
 msgstr "efek"
 
-#: src/screenshot-application.c:605
+#: src/screenshot-application.c:598
 msgid "Interactively set options"
 msgstr "Menata opsi secara interaktif"
 
-#: src/screenshot-application.c:606
+#: src/screenshot-application.c:599
 msgid "Save screenshot directly to this file"
 msgstr "Simpan cuplikan langsung pada berkas ini"
 
-#: src/screenshot-application.c:606
+#: src/screenshot-application.c:599
 msgid "filename"
 msgstr "namaberkas"
 
-#: src/screenshot-application.c:607
+#: src/screenshot-application.c:600
 msgid "Print version information and exit"
 msgstr "Cetak informasi versi dan keluar"
 
-#: src/screenshot-application.c:736
+#: src/screenshot-application.c:750
 msgid "translator-credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>, 2003-2005.\n"
 "Andika Triwidada <andika@gmail.com>, 2010, 2011, 2013, 2014, 2015.\n"
 "Dirgita <dirgitadevina@yahoo.co.id>, 2011, 2012.\n"
-"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2019."
+"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2019, 2020."
 
-#: src/screenshot-config.c:117
+#: src/screenshot-config.c:102
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr "Opsi bertentangan: --window dan --area tak boleh dipakai bersama.\n"
 
-#: src/screenshot-config.c:124
-msgid ""
-"Conflicting options: --area and --delay should not be used at the same "
-"time.\n"
-msgstr "Opsi bertentangan: --area dan --delay tak boleh dipakai bersama.\n"
-
-#: src/screenshot-dialog.c:302
+#: src/screenshot-dialog.c:337
 msgid "Screenshot.png"
 msgstr "Cuplikan.png"
-
-#: src/screenshot-dialog.ui:7
-msgid "Save Screenshot"
-msgstr "Simpan Cuplikan"
-
-#: src/screenshot-dialog.ui:18
-msgid "Back"
-msgstr "Kembali"
-
-#: src/screenshot-dialog.ui:39
-msgid "C_opy to Clipboard"
-msgstr "Salin ke _Papan Klip"
-
-#: src/screenshot-dialog.ui:51
-msgid "_Save"
-msgstr "_Simpan"
-
-#: src/screenshot-dialog.ui:118
-msgid "_Name"
-msgstr "_Nama"
-
-#: src/screenshot-dialog.ui:138
-msgid "Save in _folder"
-msgstr "Simpan dalam _folder"
 
 #. translators: this is the name of the file that gets made up with the
 #. * screenshot if the entire screen is taken. The first placeholder is a
@@ -329,85 +334,96 @@ msgstr "Cuplikan layar dari %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Cuplikan layar dari %s - %d.%s"
 
-#. Translators:
-#. * these are the names of the effects available which will be
-#. * displayed inside a combo box in interactive mode for the user
-#. * to chooser.
-#.
-#: src/screenshot-interactive-dialog.c:155
-msgid "None"
-msgstr "Nihil"
-
-#: src/screenshot-interactive-dialog.c:156
-msgid "Drop shadow"
-msgstr "Bayangan"
-
-#: src/screenshot-interactive-dialog.c:157
-msgid "Border"
-msgstr "Bingkai"
-
-#: src/screenshot-interactive-dialog.c:158
-msgid "Vintage"
-msgstr "Antik"
-
-#. * Include pointer *
-#: src/screenshot-interactive-dialog.c:260
-msgid "Include _pointer"
-msgstr "Sertakan _penunjuk"
-
-#. * Include window border *
-#: src/screenshot-interactive-dialog.c:270
-msgid "Include the window _border"
-msgstr "Sertakan _bingkai jendela"
-
-#: src/screenshot-interactive-dialog.c:287
-msgid "Apply _effect:"
-msgstr "Terapkan _efek:"
-
-#: src/screenshot-interactive-dialog.c:343
-msgid "Grab the whole sc_reen"
-msgstr "Cuplik seluruh laya_r"
-
-#: src/screenshot-interactive-dialog.c:357
-msgid "Grab the current _window"
-msgstr "_Cuplik jendela yang aktif"
-
-#: src/screenshot-interactive-dialog.c:369
-msgid "Select _area to grab"
-msgstr "Pilih wil_ayah tertentu"
-
-#. translators: this is the first part of the "grab after a
-#. * delay of <spin button> seconds".
-#.
-#: src/screenshot-interactive-dialog.c:389
-msgid "Grab after a _delay of"
-msgstr "Ambil setelah tun_daan"
-
-#: src/screenshot-interactive-dialog.c:459
-msgid "Take Screenshot"
-msgstr "Ambil Cuplikan"
-
-#: src/screenshot-interactive-dialog.c:460
-msgid "Effects"
-msgstr "Efek"
-
-#: src/screenshot-interactive-dialog.c:464
-msgid "Take _Screenshot"
-msgstr "Ambil _Cuplikan Layar"
-
-#: src/screenshot-interactive-dialog.c:481
-msgid "_Cancel"
-msgstr "_Batal"
-
-#: src/screenshot-utils.c:731
+#: src/screenshot-utils.c:161
 msgid "Error loading the help page"
 msgstr "Galat ketika membuka bantuan"
+
+#~ msgid "Include Border"
+#~ msgstr "Sertakan Bingkai"
+
+#~ msgid "Include the window manager border along with the screenshot"
+#~ msgstr "Menyertakan bingkai jendela pada cuplikan layar"
+
+#~ msgid "Border Effect"
+#~ msgstr "Efek Bingkai"
+
+#~ msgid ""
+#~ "Effect to add to the outside of a border. Possible values are “shadow”, "
+#~ "“none”, and “border”."
+#~ msgstr ""
+#~ "Efek yang ditambahkan di luar bingkai. Nilai yang mungkin adalah "
+#~ "\"bayangan\", \"nihil\", dan \"bingkai\"."
+
+#~ msgid "Help"
+#~ msgstr "Bantuan"
+
+#~ msgid "About"
+#~ msgstr "Tentang"
+
+#~ msgid "Quit"
+#~ msgstr "Keluar"
+
+#~ msgid "Include the window border with the screenshot"
+#~ msgstr "Sertakan bingkai jendela pada cuplikan"
+
+#~ msgid "Remove the window border from the screenshot"
+#~ msgstr "Hapus bingkai jendela dari cuplikan"
+
+#~ msgid ""
+#~ "Conflicting options: --area and --delay should not be used at the same "
+#~ "time.\n"
+#~ msgstr "Opsi bertentangan: --area dan --delay tak boleh dipakai bersama.\n"
+
+#~ msgid "Save Screenshot"
+#~ msgstr "Simpan Cuplikan"
+
+#~ msgid "Back"
+#~ msgstr "Kembali"
+
+#~ msgid "Save in _folder"
+#~ msgstr "Simpan dalam _folder"
+
+#~ msgid "None"
+#~ msgstr "Nihil"
+
+#~ msgid "Drop shadow"
+#~ msgstr "Bayangan"
+
+#~ msgid "Border"
+#~ msgstr "Bingkai"
+
+#~ msgid "Vintage"
+#~ msgstr "Antik"
+
+#~ msgid "Include _pointer"
+#~ msgstr "Sertakan _penunjuk"
+
+#~ msgid "Include the window _border"
+#~ msgstr "Sertakan _bingkai jendela"
+
+#~ msgid "Apply _effect:"
+#~ msgstr "Terapkan _efek:"
+
+#~ msgid "Grab the whole sc_reen"
+#~ msgstr "Cuplik seluruh laya_r"
+
+#~ msgid "Grab the current _window"
+#~ msgstr "_Cuplik jendela yang aktif"
+
+#~ msgid "Select _area to grab"
+#~ msgstr "Pilih wil_ayah tertentu"
+
+#~ msgid "Grab after a _delay of"
+#~ msgstr "Ambil setelah tun_daan"
+
+#~ msgid "Effects"
+#~ msgstr "Efek"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "Ambil _Cuplikan Layar"
 
 #~ msgid "org.gnome.Screenshot"
 #~ msgstr "org.gnome.Screenshot"
 
 #~ msgid "applets-screenshooter"
 #~ msgstr "applets-screenshooter"
-
-#~ msgid "_Help"
-#~ msgstr "_Bantuan"
