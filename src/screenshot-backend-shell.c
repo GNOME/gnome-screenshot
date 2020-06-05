@@ -27,6 +27,7 @@
 
 #include <glib/gstdio.h>
 
+
 struct _ScreenshotBackendShell
 {
   GObject parent_instance;
@@ -100,7 +101,7 @@ screenshot_backend_shell_get_pixbuf (ScreenshotBackend *backend,
 
       /* remove the temporary file created by the shell */
       g_unlink (filename);
-    }
+   }
 
   return screenshot;
 }
@@ -126,3 +127,4 @@ screenshot_backend_shell_new (void)
 {
   return g_object_new (SCREENSHOT_TYPE_BACKEND_SHELL, NULL);
 }
+

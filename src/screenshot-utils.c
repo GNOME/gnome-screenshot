@@ -23,11 +23,14 @@
 #include "screenshot-utils.h"
 
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <canberra-gtk.h>
 
 #include "screenshot-backend-shell.h"
+
+#include "screenshot-config.h"
 
 #ifdef HAVE_X11
 #include "screenshot-backend-x11.h"
@@ -69,6 +72,7 @@ screenshot_play_sound_effect (const gchar *event_id,
 GdkPixbuf *
 screenshot_get_pixbuf (GdkRectangle *rectangle)
 {
+  gboolean is_x11_session = GDK_IS_X11_DISPLAY (gdk_display_get_default ());
   GdkPixbuf *screenshot = NULL;
   gboolean force_fallback = FALSE;
   g_autoptr (ScreenshotBackend) backend = NULL;
@@ -83,8 +87,11 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
       screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
       if (!screenshot)
 #ifdef HAVE_X11
-        g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
-                   "resorting to fallback X11.");
+      if(is_x11_session)
+        {
+          g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
+                     "resorting to fallback X11.");
+        }
 #else
         g_message ("Unable to use GNOME Shell's builtin screenshot interface.");
 #endif
@@ -95,12 +102,24 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
 #ifdef HAVE_X11
   if (!screenshot)
     {
-      g_clear_object (&backend);
-      backend = screenshot_backend_x11_new ();
-      screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
+      if (is_x11_session)
+        {
+          g_clear_object (&backend);
+          backend = screenshot_backend_x11_new ();
+          screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
+        }
+      /* If there is no fallback to X and taking a screenshot of a window
+       * failed it means that there was no window, so we need to take a
+       * screenshot of the whole screen instead.
+       */
+      else if (screenshot_config->take_window_shot)
+        {
+          screenshot_config->take_window_shot = FALSE;
+          screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
+          screenshot_config->take_window_shot = TRUE;
+        }
     }
 #endif
-
   return screenshot;
 }
 
