@@ -27,8 +27,8 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-06-01 13:29+0000\n"
-"PO-Revision-Date: 2020-07-09 16:36-0300\n"
+"POT-Creation-Date: 2020-07-09 19:37+0000\n"
+"PO-Revision-Date: 2020-07-09 16:41-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -166,7 +166,6 @@ msgid "C_opy to Clipboard"
 msgstr "C_opiar para a área de transferência"
 
 #: data/ui/screenshot-dialog.ui:83
-#| msgid "_Name"
 msgid "_Name:"
 msgstr "_Nome:"
 
@@ -179,7 +178,6 @@ msgid "Capture Area"
 msgstr "Área de captura"
 
 #: data/ui/screenshot-interactive-dialog.ui:59
-#| msgid "Screenshot"
 msgid "_Screen"
 msgstr "T_ela"
 
@@ -193,7 +191,7 @@ msgstr "Se_leção"
 
 #: data/ui/screenshot-interactive-dialog.ui:160
 msgid "Show _Pointer"
-msgstr "Mostra _ponteiro"
+msgstr "Mostrar c_ursor"
 
 #: data/ui/screenshot-interactive-dialog.ui:191
 msgid "_Delay in Seconds"
@@ -204,7 +202,6 @@ msgid "0"
 msgstr "0"
 
 #: data/ui/screenshot-interactive-dialog.ui:222
-#| msgid "Take Screenshot"
 msgid "_Take Screenshot"
 msgstr "Capturar _tela"
 
@@ -213,7 +210,6 @@ msgid "_Help"
 msgstr "_Ajuda"
 
 #: data/ui/screenshot-interactive-dialog.ui:267
-#| msgid "About Screenshot"
 msgid "_About Screenshot"
 msgstr "_Sobre o Captura de tela"
 
@@ -290,7 +286,6 @@ msgid "seconds"
 msgstr "segundos"
 
 #: src/screenshot-application.c:597
-#| msgid "Effect to add to the border (shadow, border, vintage or none)"
 msgid ""
 "Effect to add to the border (shadow, border, vintage or none). Note: This "
 "option is deprecated and is assumed to be none"
