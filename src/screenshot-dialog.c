@@ -29,7 +29,7 @@
 
 struct _ScreenshotDialog
 {
-  GtkApplicationWindow parent_instance;
+  HdyApplicationWindow parent_instance;
 
   GdkPixbuf *screenshot;
   GdkPixbuf *preview_image;
@@ -42,7 +42,7 @@ struct _ScreenshotDialog
   gint drag_y;
 };
 
-G_DEFINE_TYPE (ScreenshotDialog, screenshot_dialog, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE (ScreenshotDialog, screenshot_dialog, HDY_TYPE_APPLICATION_WINDOW)
 
 enum {
   SIGNAL_SAVE,
