@@ -31,6 +31,9 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 #include "screenshot-application.h"
 #include "screenshot-area-selection.h"
 #include "screenshot-config.h"
@@ -809,6 +812,8 @@ screenshot_application_startup (GApplication *app)
   ScreenshotApplication *self = SCREENSHOT_APPLICATION (app);
 
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
+
+  hdy_init ();
 
   screenshot_load_config ();
 
