@@ -36,7 +36,7 @@ typedef enum {
 
 struct _ScreenshotInteractiveDialog
 {
-  GtkApplicationWindow parent_instance;
+  HdyApplicationWindow parent_instance;
 
   GtkWidget *listbox;
   GtkWidget *pointer;
@@ -46,7 +46,7 @@ struct _ScreenshotInteractiveDialog
   GtkWidget *selection;
 };
 
-G_DEFINE_TYPE (ScreenshotInteractiveDialog, screenshot_interactive_dialog, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE (ScreenshotInteractiveDialog, screenshot_interactive_dialog, HDY_TYPE_APPLICATION_WINDOW)
 
 enum {
   SIGNAL_CAPTURE,
@@ -115,28 +115,6 @@ capture_button_clicked_cb (GtkButton                   *button,
 }
 
 static void
-header_func (GtkListBoxRow               *row,
-             GtkListBoxRow               *before,
-             ScreenshotInteractiveDialog *self)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    {
-      gtk_list_box_row_set_header (row, NULL);
-      return;
-    }
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 screenshot_interactive_dialog_class_init (ScreenshotInteractiveDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -170,11 +148,6 @@ static void
 screenshot_interactive_dialog_init (ScreenshotInteractiveDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->listbox),
-                                (GtkListBoxUpdateHeaderFunc) header_func,
-                                self,
-                                NULL);
 
   if (screenshot_config->take_window_shot)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->window), TRUE);
