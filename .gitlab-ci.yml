@@ -11,3 +11,8 @@ flatpak:
     FLATPAK_MODULE: 'gnome-screenshot'
     RUNTIME_REPO: 'https://sdk.gnome.org/gnome-nightly.flatpakrepo'
     APP_ID: 'org.gnome.Screenshot'
+
+nightly:
+    extends: '.publish_nightly'
+    dependencies: ['flatpak']
+    needs: ['flatpak']
