@@ -31,7 +31,6 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
-#define HANDY_USE_UNSTABLE_API
 #include <handy.h>
 
 #include "screenshot-application.h"
