@@ -27,7 +27,10 @@
   <url type="donation">http://www.gnome.org/friends/</url>
   <screenshots>
     <screenshot type="default">
-      <image>https://gitlab.gnome.org/GNOME/gnome-screenshot/-/raw/master/data/screenshots/gnome-screenshot.png</image>
+      <image>https://gitlab.gnome.org/GNOME/gnome-screenshot/-/raw/master/data/screenshots/gnome-screenshot-3.38-1.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://gitlab.gnome.org/GNOME/gnome-screenshot/-/raw/master/data/screenshots/gnome-screenshot-3.38-2.png</image>
     </screenshot>
   </screenshots>
   <kudos>
