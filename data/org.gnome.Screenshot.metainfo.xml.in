@@ -38,6 +38,15 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
+    <release version="3.37.90" type="stable" date="2020-08-07" urgency="medium">
+      <description>
+        <p>Changes:</p>
+        <ul>
+          <li>Port to libhandy</li>
+          <li>Translation updates</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.37.1" type="stable" date="2020-04-25" urgency="medium">
       <description>
         <p>Changes:</p>

@@ -1,3 +1,16 @@
+==========================================
+GNOME Screenshot 3.37.90 - 7th August 2020
+==========================================
+
+- Port to libhandy
+- CI updates [Jordan Petridis]
+- Update screenshots in appdata
+- Translation updates:
+  Brazilian Portuguese, Catalan, Chinese (China), Chinese (Taiwan), Friulian,
+  German, Greek, Indonesian, Kazakh, Kurdish Sorani, Lithuanian, Romanian,
+  Spanish, Swedish, Turkish
+
+===========================================
 GNOME Screenshot 3.37.1 - 25th April 2020
 ===========================================
 
