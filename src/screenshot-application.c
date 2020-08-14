@@ -596,7 +596,7 @@ static const GOptionEntry entries[] = {
   { "remove-border", 'B', 0, G_OPTION_ARG_NONE, NULL, N_("Remove the window border from the screenshot. This option is deprecated and window border is always included"), NULL },
   { "include-pointer", 'p', 0, G_OPTION_ARG_NONE, NULL, N_("Include the pointer with the screenshot"), NULL },
   { "delay", 'd', 0, G_OPTION_ARG_INT, NULL, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
-  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (shadow, border, vintage or none). Note: This option is deprecated and is assumed to be none"), N_("effect") },
+  { "border-effect", 'e', 0, G_OPTION_ARG_STRING, NULL, N_("Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: This option is deprecated and is assumed to be ‘none’"), N_("effect") },
   { "interactive", 'i', 0, G_OPTION_ARG_NONE, NULL, N_("Interactively set options"), NULL },
   { "file", 'f', 0, G_OPTION_ARG_FILENAME, NULL, N_("Save screenshot directly to this file"), N_("filename") },
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },

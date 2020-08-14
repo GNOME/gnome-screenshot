@@ -64,7 +64,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="halign">start</property>
-                    <property name="label" translatable="yes">Capture Area</property>
+                    <property name="label" translatable="yes" comments="Translators: This is a noun. This label is displayed above three buttons where users can chose the type of screenshot they want to make">Capture Area</property>
                   </object>
                 </child>
                 <child>
