@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-06-25 07:20+0000\n"
-"PO-Revision-Date: 2020-07-01 20:04+0500\n"
+"POT-Creation-Date: 2020-08-14 10:39+0000\n"
+"PO-Revision-Date: 2020-08-17 15:35+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk@li.org>\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
@@ -78,13 +78,13 @@ msgstr "Файлдардың үнсіз келісім кеңейтуі"
 msgid "The default file type extension for screenshots."
 msgstr "Скриншоттар файлдары үшін кеңейту."
 
-#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:747
-#: src/screenshot-application.c:815
+#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:749
+#: src/screenshot-application.c:819
 msgid "Screenshot"
 msgstr "Скриншот"
 
 #: data/org.gnome.Screenshot.desktop.in:4
-#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:748
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:750
 msgid "Save images of your screen or individual windows"
 msgstr "Толық экран немесе бөлек терезелер скриншоттарын сақтау"
 
@@ -131,110 +131,111 @@ msgstr ""
 "бумасына сақталатын болады. PrtSc басу кезінде Alt басулы ұстасаңыз, "
 "ағымдағы белсенді терезесінің скриншоты түсірілетін болады."
 
-#: data/ui/screenshot-dialog.ui:13
+#: data/ui/screenshot-dialog.ui:17
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
-#: data/ui/screenshot-dialog.ui:22
+#: data/ui/screenshot-dialog.ui:26
 msgid "_Save"
 msgstr "_Сақтау"
 
-#: data/ui/screenshot-dialog.ui:39
+#: data/ui/screenshot-dialog.ui:43
 msgid "C_opy to Clipboard"
 msgstr "_Алмасу буферіне көшіріп алу"
 
-#: data/ui/screenshot-dialog.ui:83
+#: data/ui/screenshot-dialog.ui:87
 msgid "_Name:"
 msgstr "_Аты:"
 
-#: data/ui/screenshot-dialog.ui:106
+#: data/ui/screenshot-dialog.ui:110
 msgid "_Folder:"
 msgstr "_Бума:"
 
-#: data/ui/screenshot-interactive-dialog.ui:26
-msgid "Capture Area"
-msgstr "Аймақты түсіру"
-
-#: data/ui/screenshot-interactive-dialog.ui:59
-msgid "_Screen"
-msgstr "_Экран"
-
-#: data/ui/screenshot-interactive-dialog.ui:92
-msgid "_Window"
-msgstr "_Терезе"
-
-#: data/ui/screenshot-interactive-dialog.ui:124
-msgid "Se_lection"
-msgstr "Таң_далған"
-
-#: data/ui/screenshot-interactive-dialog.ui:160
-msgid "Show _Pointer"
-msgstr "_Курсорды көрсету"
-
-#: data/ui/screenshot-interactive-dialog.ui:191
-msgid "_Delay in Seconds"
-msgstr "Секундтағы кі_діріс"
-
-#: data/ui/screenshot-interactive-dialog.ui:199
-msgid "0"
-msgstr "0"
-
-#: data/ui/screenshot-interactive-dialog.ui:222
+#: data/ui/screenshot-interactive-dialog.ui:19
 msgid "_Take Screenshot"
 msgstr "Скриншотты _түсіру"
 
-#: data/ui/screenshot-interactive-dialog.ui:263
+#. Translators: This is a noun. This label is displayed above three buttons where users can chose the type of screenshot they want to make
+#: data/ui/screenshot-interactive-dialog.ui:67
+msgid "Capture Area"
+msgstr "Аймақты түсіру"
+
+#: data/ui/screenshot-interactive-dialog.ui:100
+msgid "_Screen"
+msgstr "_Экран"
+
+#: data/ui/screenshot-interactive-dialog.ui:133
+msgid "_Window"
+msgstr "_Терезе"
+
+#: data/ui/screenshot-interactive-dialog.ui:165
+msgid "Se_lection"
+msgstr "Таң_далған"
+
+#: data/ui/screenshot-interactive-dialog.ui:188
+msgid "Show _Pointer"
+msgstr "_Курсорды көрсету"
+
+#: data/ui/screenshot-interactive-dialog.ui:203
+msgid "_Delay in Seconds"
+msgstr "Секундтағы кі_діріс"
+
+#: data/ui/screenshot-interactive-dialog.ui:208
+msgid "0"
+msgstr "0"
+
+#: data/ui/screenshot-interactive-dialog.ui:237
 msgid "_Help"
 msgstr "Кө_мек"
 
-#: data/ui/screenshot-interactive-dialog.ui:267
+#: data/ui/screenshot-interactive-dialog.ui:241
 msgid "_About Screenshot"
 msgstr "Скриншоттар туралы"
 
-#: src/screenshot-application.c:145
+#: src/screenshot-application.c:147
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
 msgstr "\"%s\" деп аталатын файл \"%s\" ішінде бар болып тұр"
 
-#: src/screenshot-application.c:151
+#: src/screenshot-application.c:153
 msgid "Overwrite existing file?"
 msgstr "Бар болып тұрған файлды үстінен жазу керек пе?"
 
-#: src/screenshot-application.c:167 src/screenshot-application.c:176
-#: src/screenshot-application.c:426 src/screenshot-application.c:430
-#: src/screenshot-application.c:472 src/screenshot-application.c:475
+#: src/screenshot-application.c:169 src/screenshot-application.c:178
+#: src/screenshot-application.c:428 src/screenshot-application.c:432
+#: src/screenshot-application.c:474 src/screenshot-application.c:477
 msgid "Unable to capture a screenshot"
 msgstr "Скриншотты түсіріп алу мүмкін емес"
 
-#: src/screenshot-application.c:168
+#: src/screenshot-application.c:170
 msgid "Error creating file. Please choose another location and retry."
 msgstr "Файлды жасау қатесі. Басқа буманы таңдап, қайталап көріңіз."
 
-#: src/screenshot-application.c:427
+#: src/screenshot-application.c:429
 msgid "Error creating file"
 msgstr "Файлды жасау қатесі"
 
-#: src/screenshot-application.c:438 src/screenshot-application.c:489
+#: src/screenshot-application.c:440 src/screenshot-application.c:491
 msgid "Screenshot taken"
 msgstr "Скриншот түсірілді"
 
-#: src/screenshot-application.c:473
+#: src/screenshot-application.c:475
 msgid "All possible methods failed"
 msgstr "Барлық мүмкін тәсілдер сәтсіз аяқталды"
 
-#: src/screenshot-application.c:590
+#: src/screenshot-application.c:592
 msgid "Send the grab directly to the clipboard"
 msgstr "Түсірілген суретті тура алмасу буферіне жіберу"
 
-#: src/screenshot-application.c:591
+#: src/screenshot-application.c:593
 msgid "Grab a window instead of the entire screen"
 msgstr "Толық экран орнына тек терезе скриншотын түсіру"
 
-#: src/screenshot-application.c:592
+#: src/screenshot-application.c:594
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Толық экран орнына тек экранның бір бөлігін түсіріп алу"
 
-#: src/screenshot-application.c:593
+#: src/screenshot-application.c:595
 msgid ""
 "Include the window border with the screenshot. This option is deprecated and "
 "window border is always included"
@@ -242,7 +243,7 @@ msgstr ""
 "Скриншотқа терезе шекарасын қосу. Бұл параметр ескірген және терезе шекарасы "
 "әрқашан қосылады"
 
-#: src/screenshot-application.c:594
+#: src/screenshot-application.c:596
 msgid ""
 "Remove the window border from the screenshot. This option is deprecated and "
 "window border is always included"
@@ -250,47 +251,47 @@ msgstr ""
 "Скриншотқа терезе шекарасын қоспау. Бұл параметр ескірген және терезе "
 "шекарасы әрқашан қосылады"
 
-#: src/screenshot-application.c:595
+#: src/screenshot-application.c:597
 msgid "Include the pointer with the screenshot"
 msgstr "Скриншотты курсорды қоса түсіріп отыру"
 
-#: src/screenshot-application.c:596
+#: src/screenshot-application.c:598
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "Скриншотты көрсетілген кідірістен кейін түсіріп алу (секундпен)"
 
-#: src/screenshot-application.c:596
+#: src/screenshot-application.c:598
 msgid "seconds"
 msgstr "секунд"
 
-#: src/screenshot-application.c:597
+#: src/screenshot-application.c:599
 msgid ""
-"Effect to add to the border (shadow, border, vintage or none). Note: This "
-"option is deprecated and is assumed to be none"
+"Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
+"This option is deprecated and is assumed to be ‘none’"
 msgstr ""
-"Шекараға қосылатын эффект (көлеңке, шекара, ескілету немесе ешнәрсе). "
-"Ескерту: Бұл опция ескірген және ешнәрсе деп алынатын болады"
+"Шекараға қосылатын эффект (\"shadow\", \"border\", \"vintage\" немесе \"none"
+"\"). Ескерту: Бұл опция ескірген және ешнәрсе деп алынатын болады"
 
-#: src/screenshot-application.c:597
+#: src/screenshot-application.c:599
 msgid "effect"
 msgstr "эффект"
 
-#: src/screenshot-application.c:598
+#: src/screenshot-application.c:600
 msgid "Interactively set options"
 msgstr "Опцияларды интерактивті түрде орнату"
 
-#: src/screenshot-application.c:599
+#: src/screenshot-application.c:601
 msgid "Save screenshot directly to this file"
 msgstr "Скриншотты тура бұл файлға сақтау"
 
-#: src/screenshot-application.c:599
+#: src/screenshot-application.c:601
 msgid "filename"
 msgstr "файл аты"
 
-#: src/screenshot-application.c:600
+#: src/screenshot-application.c:602
 msgid "Print version information and exit"
 msgstr "Нұсқа ақпаратын шығару және шығу"
 
-#: src/screenshot-application.c:750
+#: src/screenshot-application.c:752
 msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
