@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
 "POT-Creation-Date: 2020-08-14 10:39+0000\n"
-"PO-Revision-Date: 2020-08-23 17:08+0200\n"
+"PO-Revision-Date: 2020-08-23 17:10+0200\n"
 "Last-Translator: gogo <linux.hr@protonmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -151,7 +151,7 @@ msgstr "_Mapa:"
 
 #: data/ui/screenshot-interactive-dialog.ui:19
 msgid "_Take Screenshot"
-msgstr "_Uslikaj prikaz zaslona"
+msgstr "_Uslikaj sliku zaslona"
 
 #. Translators: This is a noun. This label is displayed above three buttons where users can chose the type of screenshot they want to make
 #: data/ui/screenshot-interactive-dialog.ui:67
