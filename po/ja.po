@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
 "POT-Creation-Date: 2020-08-14 10:39+0000\n"
-"PO-Revision-Date: 2020-04-03 18:00+0900\n"
+"PO-Revision-Date: 2020-08-23 23:30+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -211,7 +211,7 @@ msgstr "“スクリーンショット”について(_A)"
 #: src/screenshot-application.c:147
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
-msgstr "ファイル“%s”はすでに“%s”に存在します"
+msgstr "“%s”はすでに“%s”に存在します"
 
 #: src/screenshot-application.c:153
 msgid "Overwrite existing file?"
@@ -221,7 +221,7 @@ msgstr "既存のファイルを上書きしますか?"
 #: src/screenshot-application.c:428 src/screenshot-application.c:432
 #: src/screenshot-application.c:474 src/screenshot-application.c:477
 msgid "Unable to capture a screenshot"
-msgstr "スクリーンショットを取得できません"
+msgstr "スクリーンショットを撮影できません"
 
 #: src/screenshot-application.c:170
 msgid "Error creating file. Please choose another location and retry."
@@ -241,27 +241,31 @@ msgstr "すべての方法で失敗しました"
 
 #: src/screenshot-application.c:592
 msgid "Send the grab directly to the clipboard"
-msgstr "取得したスクリーンショットをクリップボードへ直接送信する"
+msgstr "撮影したスクリーンショットをクリップボードへ直接送信する"
 
 #: src/screenshot-application.c:593
 msgid "Grab a window instead of the entire screen"
-msgstr "画面全体ではなくウィンドウ単体を取得する"
+msgstr "画面全体ではなくウィンドウ単体を撮影する"
 
 #: src/screenshot-application.c:594
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr "画面全体ではなく一部を取得する"
+msgstr "画面全体ではなく一部を撮影する"
 
 #: src/screenshot-application.c:595
 msgid ""
 "Include the window border with the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
+"スクリーンショットにウィンドウの境界を含める (このオプションは廃止されたため、"
+"ウィンドウの境界は常に含まれます)"
 
 #: src/screenshot-application.c:596
 msgid ""
 "Remove the window border from the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
+"スクリーンショットからウィンドウの境界を取り除く (このオプションは廃止されたた"
+"め、ウィンドウの境界は常に含まれます)"
 
 #: src/screenshot-application.c:597
 msgid "Include the pointer with the screenshot"
@@ -280,6 +284,8 @@ msgid ""
 "Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
 "This option is deprecated and is assumed to be ‘none’"
 msgstr ""
+"境界の縁に適用するエフェクトを指定する (‘shadow’, ‘border’, ‘vintage’ or "
+"‘none’) (このオプションは廃止されたため、‘none’が指定されたとみなされます)"
 
 #: src/screenshot-application.c:599
 msgid "effect"
@@ -388,24 +394,12 @@ msgstr "ヘルプの読み込み中にエラーが発生しました"
 #~ "境界の縁に適用するエフェクトを指定する (shadow、border、vintage、または "
 #~ "none)"
 
-#~ msgid "Help"
-#~ msgstr "ヘルプ"
-
-#~ msgid "About"
-#~ msgstr "このアプリケーションについて"
-
-#~ msgid "Quit"
-#~ msgstr "終了"
-
 #~ msgid ""
 #~ "Conflicting options: --area and --delay should not be used at the same "
 #~ "time.\n"
 #~ msgstr ""
 #~ "オプションの競合: --area オプションと --delay オプションは同時に指定できま"
 #~ "せん\n"
-
-#~ msgid "Save Screenshot"
-#~ msgstr "スクリーンショットの保存"
 
 #~ msgid "Back"
 #~ msgstr "戻る"
@@ -441,13 +435,10 @@ msgstr "ヘルプの読み込み中にエラーが発生しました"
 #~ msgstr "現在のウィンドウ(_W)"
 
 #~ msgid "Select _area to grab"
-#~ msgstr "取得する領域の選択(_A)"
+#~ msgstr "撮影する領域の選択(_A)"
 
 #~ msgid "Grab after a _delay of"
-#~ msgstr "取得するまでの待ち時間(_D): "
+#~ msgstr "撮影するまでの待ち時間(_D): "
 
 #~ msgid "Effects"
 #~ msgstr "エフェクト"
-
-#~ msgid "Take _Screenshot"
-#~ msgstr "スクリーンショットの取得(_S)"
