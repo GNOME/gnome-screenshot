@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-03-31 10:53+0000\n"
+"POT-Creation-Date: 2020-08-14 10:39+0000\n"
 "PO-Revision-Date: 2020-04-03 18:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -69,56 +69,36 @@ msgid "The last directory a screenshot was saved in interactive mode."
 msgstr "インタラクティブモードでスクリーンショットを保存したディレクトリです。"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:31
-msgid "Include Border"
-msgstr "ウィンドウの境界を含める"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:32
-msgid "Include the window manager border along with the screenshot"
-msgstr "スクリーンショットにウィンドウの境界を含める"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include Pointer"
 msgstr "マウスのポインターを含める"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:37
+#: data/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the pointer in the screenshot"
 msgstr "スクリーンショットにマウスのポインターを含める"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:41
+#: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include ICC Profile"
 msgstr "ICC プロファイルを含める"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:42
+#: data/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the ICC profile of the target in the screenshot file"
 msgstr "スクリーンショットにターゲットの ICC プロファイルを含める"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:46
-msgid "Border Effect"
-msgstr "追加するエフェクト"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:47
-msgid ""
-"Effect to add to the outside of a border. Possible values are “shadow”, "
-"“none”, and “border”."
-msgstr ""
-"画像の境界の縁に適用するエフェクトです。選択可能な値: "
-"“shadow”、“none”、“border”"
-
-#: data/org.gnome.gnome-screenshot.gschema.xml:51
+#: data/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Default file type extension"
 msgstr "デフォルトのファイルタイプの拡張子"
 
-#: data/org.gnome.gnome-screenshot.gschema.xml:52
+#: data/org.gnome.gnome-screenshot.gschema.xml:42
 msgid "The default file type extension for screenshots."
 msgstr "スクリーンショットのデフォルトのファイルタイプの拡張子です。"
 
-#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:754
-#: src/screenshot-application.c:822
+#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:749
+#: src/screenshot-application.c:819
 msgid "Screenshot"
 msgstr "スクリーンショット"
 
 #: data/org.gnome.Screenshot.desktop.in:4
-#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:755
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:750
 msgid "Save images of your screen or individual windows"
 msgstr "画面またはウィンドウの画像を保存します"
 
@@ -167,82 +147,83 @@ msgstr ""
 "て画像フォルダーに保存できます。Alt キーを押しながら PrtSc キーを押せば、現在"
 "選択しているウィンドウだけを撮影できます。"
 
-#: data/ui/screenshot-dialog.ui:12
+#: data/ui/screenshot-dialog.ui:17
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
-#: data/ui/screenshot-dialog.ui:20
+#: data/ui/screenshot-dialog.ui:26
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: data/ui/screenshot-dialog.ui:36
+#: data/ui/screenshot-dialog.ui:43
 msgid "C_opy to Clipboard"
 msgstr "クリップボードにコピー(_O)"
 
-#: data/ui/screenshot-dialog.ui:74
+#: data/ui/screenshot-dialog.ui:87
 msgid "_Name:"
 msgstr "名前(_N):"
 
-#: data/ui/screenshot-dialog.ui:97
+#: data/ui/screenshot-dialog.ui:110
 msgid "_Folder:"
 msgstr "フォルダー(_F):"
 
-#: data/ui/screenshot-interactive-dialog.ui:25
-msgid "Capture Area"
-msgstr "撮影領域"
-
-#: data/ui/screenshot-interactive-dialog.ui:58
-msgid "_Screen"
-msgstr "画面(_S)"
-
-#: data/ui/screenshot-interactive-dialog.ui:91
-msgid "_Window"
-msgstr "ウィンドウ(_W)"
-
-#: data/ui/screenshot-interactive-dialog.ui:123
-msgid "Se_lection"
-msgstr "選択範囲(_L)"
-
-#: data/ui/screenshot-interactive-dialog.ui:159
-msgid "Show _Pointer"
-msgstr "ポインターを表示する(_P)"
-
-#: data/ui/screenshot-interactive-dialog.ui:189
-msgid "_Delay in Seconds"
-msgstr "待機時間 (秒単位)(_D)"
-
-#: data/ui/screenshot-interactive-dialog.ui:197
-msgid "0"
-msgstr "0"
-
-#: data/ui/screenshot-interactive-dialog.ui:219
+#: data/ui/screenshot-interactive-dialog.ui:19
 msgid "_Take Screenshot"
 msgstr "スクリーンショットを撮る(_T)"
 
-#: data/ui/screenshot-interactive-dialog.ui:257
+#. Translators: This is a noun. This label is displayed above three buttons where users can chose the type of screenshot they want to make
+#: data/ui/screenshot-interactive-dialog.ui:67
+msgid "Capture Area"
+msgstr "撮影領域"
+
+#: data/ui/screenshot-interactive-dialog.ui:100
+msgid "_Screen"
+msgstr "画面(_S)"
+
+#: data/ui/screenshot-interactive-dialog.ui:133
+msgid "_Window"
+msgstr "ウィンドウ(_W)"
+
+#: data/ui/screenshot-interactive-dialog.ui:165
+msgid "Se_lection"
+msgstr "選択範囲(_L)"
+
+#: data/ui/screenshot-interactive-dialog.ui:188
+msgid "Show _Pointer"
+msgstr "ポインターを表示する(_P)"
+
+#: data/ui/screenshot-interactive-dialog.ui:203
+msgid "_Delay in Seconds"
+msgstr "待機時間 (秒単位)(_D)"
+
+#: data/ui/screenshot-interactive-dialog.ui:208
+msgid "0"
+msgstr "0"
+
+#: data/ui/screenshot-interactive-dialog.ui:237
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: data/ui/screenshot-interactive-dialog.ui:261
+#: data/ui/screenshot-interactive-dialog.ui:241
 msgid "_About Screenshot"
 msgstr "“スクリーンショット”について(_A)"
 
-#: src/screenshot-application.c:144
+#: src/screenshot-application.c:147
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
 msgstr "ファイル“%s”はすでに“%s”に存在します"
 
-#: src/screenshot-application.c:150
+#: src/screenshot-application.c:153
 msgid "Overwrite existing file?"
 msgstr "既存のファイルを上書きしますか?"
 
-#: src/screenshot-application.c:166 src/screenshot-application.c:175
+#: src/screenshot-application.c:169 src/screenshot-application.c:178
 #: src/screenshot-application.c:428 src/screenshot-application.c:432
-#: src/screenshot-application.c:472 src/screenshot-application.c:475
+#: src/screenshot-application.c:474 src/screenshot-application.c:477
 msgid "Unable to capture a screenshot"
 msgstr "スクリーンショットを取得できません"
 
-#: src/screenshot-application.c:167
+#: src/screenshot-application.c:170
 msgid "Error creating file. Please choose another location and retry."
 msgstr "ファイル作成エラーです。他の場所を選択するか、もう一度試してください。"
 
@@ -250,72 +231,77 @@ msgstr "ファイル作成エラーです。他の場所を選択するか、も
 msgid "Error creating file"
 msgstr "ファイル作成エラー"
 
-#: src/screenshot-application.c:440 src/screenshot-application.c:508
+#: src/screenshot-application.c:440 src/screenshot-application.c:491
 msgid "Screenshot taken"
 msgstr "スクリーンショットを撮影しました"
 
-#: src/screenshot-application.c:473
+#: src/screenshot-application.c:475
 msgid "All possible methods failed"
 msgstr "すべての方法で失敗しました"
 
-#: src/screenshot-application.c:609
+#: src/screenshot-application.c:592
 msgid "Send the grab directly to the clipboard"
 msgstr "取得したスクリーンショットをクリップボードへ直接送信する"
 
-#: src/screenshot-application.c:610
+#: src/screenshot-application.c:593
 msgid "Grab a window instead of the entire screen"
 msgstr "画面全体ではなくウィンドウ単体を取得する"
 
-#: src/screenshot-application.c:611
+#: src/screenshot-application.c:594
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "画面全体ではなく一部を取得する"
 
-#: src/screenshot-application.c:612
-msgid "Include the window border with the screenshot"
-msgstr "スクリーンショットにウィンドウの境界を含める"
+#: src/screenshot-application.c:595
+msgid ""
+"Include the window border with the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
 
-#: src/screenshot-application.c:613
-msgid "Remove the window border from the screenshot"
-msgstr "スクリーンショットからウィンドウの境界を取り除く"
+#: src/screenshot-application.c:596
+msgid ""
+"Remove the window border from the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
 
-#: src/screenshot-application.c:614
+#: src/screenshot-application.c:597
 msgid "Include the pointer with the screenshot"
 msgstr "スクリーンショットにマウスのポインターを含める"
 
-#: src/screenshot-application.c:615
+#: src/screenshot-application.c:598
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr "指定した時間を経過してからスクリーンショットを撮る [秒単位]"
 
-#: src/screenshot-application.c:615
+#: src/screenshot-application.c:598
 msgid "seconds"
 msgstr "秒"
 
-#: src/screenshot-application.c:616
-msgid "Effect to add to the border (shadow, border, vintage or none)"
+#: src/screenshot-application.c:599
+msgid ""
+"Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
+"This option is deprecated and is assumed to be ‘none’"
 msgstr ""
-"境界の縁に適用するエフェクトを指定する (shadow、border、vintage、または none)"
 
-#: src/screenshot-application.c:616
+#: src/screenshot-application.c:599
 msgid "effect"
 msgstr "エフェクト"
 
-#: src/screenshot-application.c:617
+#: src/screenshot-application.c:600
 msgid "Interactively set options"
 msgstr "設定ダイアログを表示する"
 
-#: src/screenshot-application.c:618
+#: src/screenshot-application.c:601
 msgid "Save screenshot directly to this file"
 msgstr "スクリーンショットを指定のファイルに保存する"
 
-#: src/screenshot-application.c:618
+#: src/screenshot-application.c:601
 msgid "filename"
 msgstr "ファイル名"
 
-#: src/screenshot-application.c:619
+#: src/screenshot-application.c:602
 msgid "Print version information and exit"
 msgstr "バージョン情報を表示して終了する"
 
-#: src/screenshot-application.c:757
+#: src/screenshot-application.c:752
 msgid "translator-credits"
 msgstr ""
 "日本 GNOME ユーザー会 <http://www.gnome.gr.jp/>\n"
@@ -335,7 +321,7 @@ msgstr ""
 "Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Yuusuke Tahara <tahara@gnome.gr.jp>"
 
-#: src/screenshot-config.c:117
+#: src/screenshot-config.c:102
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
@@ -344,7 +330,7 @@ msgstr ""
 "ん\n"
 
 # ここは英語のままの方がいいようなので元に戻しました (sicklylife)
-#: src/screenshot-dialog.c:295
+#: src/screenshot-dialog.c:337
 msgid "Screenshot.png"
 msgstr "Screenshot.png"
 
@@ -371,9 +357,36 @@ msgstr "Screenshot from %s.%s"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Screenshot from %s - %d.%s"
 
-#: src/screenshot-utils.c:749
+#: src/screenshot-utils.c:161
 msgid "Error loading the help page"
 msgstr "ヘルプの読み込み中にエラーが発生しました"
+
+#~ msgid "Include Border"
+#~ msgstr "ウィンドウの境界を含める"
+
+#~ msgid "Include the window manager border along with the screenshot"
+#~ msgstr "スクリーンショットにウィンドウの境界を含める"
+
+#~ msgid "Border Effect"
+#~ msgstr "追加するエフェクト"
+
+#~ msgid ""
+#~ "Effect to add to the outside of a border. Possible values are “shadow”, "
+#~ "“none”, and “border”."
+#~ msgstr ""
+#~ "画像の境界の縁に適用するエフェクトです。選択可能な値: "
+#~ "“shadow”、“none”、“border”"
+
+#~ msgid "Include the window border with the screenshot"
+#~ msgstr "スクリーンショットにウィンドウの境界を含める"
+
+#~ msgid "Remove the window border from the screenshot"
+#~ msgstr "スクリーンショットからウィンドウの境界を取り除く"
+
+#~ msgid "Effect to add to the border (shadow, border, vintage or none)"
+#~ msgstr ""
+#~ "境界の縁に適用するエフェクトを指定する (shadow、border、vintage、または "
+#~ "none)"
 
 #~ msgid "Help"
 #~ msgstr "ヘルプ"
