@@ -38,6 +38,11 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
+    <release version="3.38.0" type="stable" date="2020-09-10" urgency="medium">
+      <description>
+        <p>Translation updates.</p>
+      </description>
+    </release>
     <release version="3.37.90" type="stable" date="2020-08-07" urgency="medium">
       <description>
         <p>Changes:</p>
