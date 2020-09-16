@@ -97,6 +97,7 @@
                   <object class="GtkEntry" id="filename_entry">
                     <property name="visible">True</property>
                     <property name="width_chars">35</property>
+                    <property name="activates-default">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
