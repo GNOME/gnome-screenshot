@@ -81,8 +81,7 @@ screenshot_save_config (void)
   g_settings_set_boolean (c->settings,
                           INCLUDE_POINTER_KEY, c->include_pointer);
 
-  if (!c->take_area_shot)
-    g_settings_set_int (c->settings, DELAY_KEY, c->delay);
+  g_settings_set_int (c->settings, DELAY_KEY, c->delay);
 }
 
 gboolean
