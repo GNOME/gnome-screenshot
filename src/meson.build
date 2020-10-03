@@ -1,13 +1,10 @@
 sources = [
   'gnome-screenshot.c',
 
-  'cheese-flash.c',
-
   'screenshot-application.c',
   'screenshot-area-selection.c',
   'screenshot-backend.c',
   'screenshot-backend-shell.c',
-  'screenshot-backend-x11.c',
   'screenshot-config.c',
   'screenshot-dialog.c',
   'screenshot-filename-builder.c',
@@ -22,8 +19,6 @@ include_directories = [
 
 dependencies = [
   mathlib_dep,
-  x11_dep,
-  xext_dep,
   glib_dep,
   gtk_dep,
   libhandy_dep,

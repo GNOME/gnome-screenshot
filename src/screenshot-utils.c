@@ -29,10 +29,6 @@
 
 #include "screenshot-backend-shell.h"
 
-#ifdef HAVE_X11
-#include "screenshot-backend-x11.h"
-#endif
-
 void
 screenshot_play_sound_effect (const gchar *event_id,
                               const gchar *event_desc)
@@ -69,36 +65,13 @@ GdkPixbuf *
 screenshot_get_pixbuf (GdkRectangle *rectangle)
 {
   GdkPixbuf *screenshot = NULL;
-  gboolean force_fallback = FALSE;
   g_autoptr (ScreenshotBackend) backend = NULL;
 
-#ifdef HAVE_X11
-  force_fallback = g_getenv ("GNOME_SCREENSHOT_FORCE_FALLBACK") != NULL;
-#endif
+  backend = screenshot_backend_shell_new ();
+  screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
 
-  if (!force_fallback)
-    {
-      backend = screenshot_backend_shell_new ();
-      screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
-      if (!screenshot)
-#ifdef HAVE_X11
-        g_message ("Unable to use GNOME Shell's builtin screenshot interface, "
-                   "resorting to fallback X11.");
-#else
-        g_message ("Unable to use GNOME Shell's builtin screenshot interface.");
-#endif
-  }
-  else
-    g_message ("Using fallback X11 as requested");
-
-#ifdef HAVE_X11
   if (!screenshot)
-    {
-      g_clear_object (&backend);
-      backend = screenshot_backend_x11_new ();
-      screenshot = screenshot_backend_get_pixbuf (backend, rectangle);
-    }
-#endif
+    g_message ("Unable to use GNOME Shell's builtin screenshot interface.");
 
   return screenshot;
 }
