@@ -9,22 +9,23 @@
 # Sérgio Cardeira <cardeira dot sergio at gmail dot com>, 2016.
 # José Vieira <jvieira33@sapo.pt>, 2020.
 # Juliano Camargo <julianosc@pm.me>, 2020.
+# Juliano de Souza Camargo <julianosc@pm.me>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-08-14 10:39+0000\n"
-"PO-Revision-Date: 2020-09-08 14:36+0100\n"
-"Last-Translator: Juliano Camargo <julianosc@pm.me>\n"
-"Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
+"POT-Creation-Date: 2020-09-08 13:37+0000\n"
+"PO-Revision-Date: 2020-10-07 13:33+0100\n"
+"Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
+"Language-Team: Portuguese <>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
@@ -35,7 +36,7 @@ msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
-"Capturar só a janela atual, em vez de toda a área de trabalho. Esta tecla é "
+"Capturar só a janela atual, em vez de toda a área de trabalho. Esta chave é "
 "obsoleta e já não é utilizada."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:16
@@ -44,15 +45,15 @@ msgstr "Atraso na captura"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:17
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr "Número de segundos de espera antes da captura realizada."
+msgstr "Número de segundos do compasso de espera para realizar a captura."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:21
 msgid "Screenshot directory"
-msgstr "Pasta de capturas de ecrã"
+msgstr "Diretório de capturas de ecrã"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:22
 msgid "The directory where the screenshots will be saved by default."
-msgstr "A pasta predefinida onde as capturas de ecrã são gravadas."
+msgstr "O diretório predefinido onde as capturas de ecrã são gravadas."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:26
 msgid "Last save directory"
@@ -61,7 +62,7 @@ msgstr "Pasta da última gravação"
 #: data/org.gnome.gnome-screenshot.gschema.xml:27
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
-"A última pasta onde foi gravada uma captura de ecrã em modo interativo."
+"O último diretório onde foi gravada uma captura de ecrã em modo interativo."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Pointer"
@@ -161,9 +162,8 @@ msgid "_Folder:"
 msgstr "_Pasta"
 
 #: data/ui/screenshot-interactive-dialog.ui:19
-#| msgid "Take Screenshot"
 msgid "_Take Screenshot"
-msgstr "_Efectuar captura de ecrã"
+msgstr "_Efetuar captura"
 
 #. Translators: This is a noun. This label is displayed above three buttons where users can chose the type of screenshot they want to make
 #: data/ui/screenshot-interactive-dialog.ui:67
@@ -171,7 +171,6 @@ msgid "Capture Area"
 msgstr "Área a capturar"
 
 #: data/ui/screenshot-interactive-dialog.ui:100
-#| msgid "Screenshot"
 msgid "_Screen"
 msgstr "_Ecrã"
 
@@ -200,9 +199,8 @@ msgid "_Help"
 msgstr "A_juda"
 
 #: data/ui/screenshot-interactive-dialog.ui:241
-#| msgid "About Screenshot"
 msgid "_About Screenshot"
-msgstr "Sobre o Captura de Ecrã"
+msgstr "Acerca do Captura de Ecrã"
 
 #: src/screenshot-application.c:147
 #, c-format
@@ -229,7 +227,7 @@ msgstr "Erro ao criar o ficheiro"
 
 #: src/screenshot-application.c:440 src/screenshot-application.c:491
 msgid "Screenshot taken"
-msgstr "Captura de ecrã realizada"
+msgstr "Captura de ecrã efetuada"
 
 #: src/screenshot-application.c:475
 msgid "All possible methods failed"
@@ -252,16 +250,16 @@ msgid ""
 "Include the window border with the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
-"Incluir o bordo da janela na captura. Esta opção está obsoleta - o bordo da "
-"janela é sempre incluído"
+"Incluir o bordo da janela na captura. Esta opção está obsoleta pois o bordo "
+"da janela é sempre incluído"
 
 #: src/screenshot-application.c:596
 msgid ""
 "Remove the window border from the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
-"Remover o bordo da janela da captura. Esta opção está obsoleta - o bordo da "
-"janela é sempre incluído"
+"Remover o bordo da janela da captura. Esta opção está obsoleta pois o bordo "
+"da janela é sempre incluído"
 
 #: src/screenshot-application.c:597
 msgid "Include the pointer with the screenshot"
@@ -269,7 +267,7 @@ msgstr "Incluir o ponteiro na captura de ecrã"
 
 #: src/screenshot-application.c:598
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr "Obter a captura de ecrã após um atraso específico [em segundos]"
+msgstr "Obter a captura de ecrã após um compasso de espera [em segundos]"
 
 #: src/screenshot-application.c:598
 msgid "seconds"
@@ -280,8 +278,8 @@ msgid ""
 "Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
 "This option is deprecated and is assumed to be ‘none’"
 msgstr ""
-"Efeito a adicionar ao bordo ('sombreado', 'bordo', 'antigo' ou 'nenhum'). "
-"Nota: Esta opção está obsoleta - é assumido 'nenhum'"
+"Efeito a adicionar ao bordo (“sombreado”, “bordo”, “antigo” ou “nenhum”). "
+"Nota: Esta opção está obsoleta pois é assumido “nenhum”"
 
 #: src/screenshot-application.c:599
 msgid "effect"
@@ -309,7 +307,8 @@ msgstr ""
 "Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Sérgio Cardeira <cardeira.sergio@gmail.com>\n"
-"Tiago Santos <tiagofsantos81@sapo.pt>"
+"Tiago Santos <tiagofsantos81@sapo.pt>\n"
+"Juliano de Souza Camargo <julianosc@pm.me>"
 
 #: src/screenshot-config.c:102
 msgid ""
