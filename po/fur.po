@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-screenshot gnome-3-6\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-08-14 10:39+0000\n"
-"PO-Revision-Date: 2020-08-28 13:15+0200\n"
+"POT-Creation-Date: 2020-08-28 11:16+0000\n"
+"PO-Revision-Date: 2020-10-18 16:24+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -41,12 +41,12 @@ msgstr ""
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:21
 msgid "Screenshot directory"
-msgstr "Cartele des caturis di schermade"
+msgstr "Cartele des videadis caturadis"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:22
 msgid "The directory where the screenshots will be saved by default."
 msgstr ""
-"Le cartele predefinide dulà che lis caturis di schermade a vegnaran salvâdis."
+"Le cartele predefinide dulà che lis videadis caturadis a vignaran salvadis."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:26
 msgid "Last save directory"
@@ -80,7 +80,7 @@ msgstr "Estension file predefinide"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:42
 msgid "The default file type extension for screenshots."
-msgstr "La estension predefinide dai file par lis caturis des schermadis."
+msgstr "La estension predefinide dai files pes videadis caturadis."
 
 #: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:749
 #: src/screenshot-application.c:819
@@ -99,11 +99,11 @@ msgstr "schermade;schermadis;cature;stampe;screenshot;snapshot;"
 
 #: data/org.gnome.Screenshot.desktop.in:22
 msgid "Take a Screenshot of the Whole Screen"
-msgstr "Fâs une cature di dut il visôr"
+msgstr "Cature une videade di dut il visôr"
 
 #: data/org.gnome.Screenshot.desktop.in:26
 msgid "Take a Screenshot of the Current Window"
-msgstr "Fâs une cature di chest barcon"
+msgstr "Cature une videade di chest barcon"
 
 #: data/org.gnome.Screenshot.metainfo.xml.in:7
 msgid "GNOME Screenshot"
@@ -132,7 +132,7 @@ msgid ""
 msgstr ""
 "Cature de schermade GNOME al permet di caturâ imagjins ancje cuant che la "
 "aplicazion no je in esecuzion: frache il tast Stamp (o PrtScr) par salvâ une "
-"istantanie dal visôr che e vegnarà salvade te cartele Imagjins. Tignint "
+"istantanie dal visôr che e vignarà salvade te cartele Imagjins. Tignint "
 "fracât il tast Alt adun cun Stamp tu varâs une schermade nome dal barcon "
 "atualmentri selezionât."
 
@@ -210,7 +210,7 @@ msgstr "Sorescrîvi il file esistint?"
 #: src/screenshot-application.c:428 src/screenshot-application.c:432
 #: src/screenshot-application.c:474 src/screenshot-application.c:477
 msgid "Unable to capture a screenshot"
-msgstr "Impussibil cjapà une cature di schermade"
+msgstr "Impussibil caturâ une videade"
 
 #: src/screenshot-application.c:170
 msgid "Error creating file. Please choose another location and retry."
@@ -223,7 +223,7 @@ msgstr "Erôr tal creâ il file"
 
 #: src/screenshot-application.c:440 src/screenshot-application.c:491
 msgid "Screenshot taken"
-msgstr "Cature di schermade fate"
+msgstr "Videade caturade"
 
 #: src/screenshot-application.c:475
 msgid "All possible methods failed"
