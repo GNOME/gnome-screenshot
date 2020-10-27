@@ -27,7 +27,7 @@ dependencies = [
   glib_dep,
   gtk_dep,
   libhandy_dep,
-  canberra_dep
+  gsound_dep
 ]
 
 c_args = [

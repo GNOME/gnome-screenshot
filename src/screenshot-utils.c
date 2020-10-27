@@ -25,7 +25,7 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <canberra-gtk.h>
+#include <gsound.h>
 
 #include "screenshot-backend-shell.h"
 
@@ -37,33 +37,32 @@ void
 screenshot_play_sound_effect (const gchar *event_id,
                               const gchar *event_desc)
 {
-  ca_context *c;
-  ca_proplist *p = NULL;
-  int res;
+  GSoundContext *context;
+  GError *error = NULL;
 
-  c = ca_gtk_context_get ();
+  context = gsound_context_new (NULL, &error);
 
-  res = ca_proplist_create (&p);
-  if (res < 0)
-    goto done;
+  if (G_UNLIKELY (error)) {
+    g_critical ("Couldn't initialize GSound: %s", error->message);
+    g_clear_error (&error);
 
-  res = ca_proplist_sets (p, CA_PROP_EVENT_ID, event_id);
-  if (res < 0)
-    goto done;
+    return;
+  }
 
-  res = ca_proplist_sets (p, CA_PROP_EVENT_DESCRIPTION, event_desc);
-  if (res < 0)
-    goto done;
+  gsound_context_play_simple (context,
+                              NULL,
+                              &error,
+                              GSOUND_ATTR_EVENT_ID, event_id,
+                              GSOUND_ATTR_EVENT_DESCRIPTION, event_desc,
+                              GSOUND_ATTR_CANBERRA_CACHE_CONTROL, "permanent",
+                              NULL);
 
-  res = ca_proplist_sets (p, CA_PROP_CANBERRA_CACHE_CONTROL, "permanent");
-  if (res < 0)
-    goto done;
+  if (G_UNLIKELY (error)) {
+    g_critical ("Couldn't play sound: %s", error->message);
+    g_clear_error (&error);
+  }
 
-  ca_context_play_full (c, 0, p, NULL, NULL);
-
- done:
-  if (p != NULL)
-    ca_proplist_destroy (p);
+  g_object_unref (context);
 }
 
 GdkPixbuf *
