@@ -72,7 +72,6 @@
   </releases>
   <update_contact>ebassi@gnome.org</update_contact>
   <project_group>GNOME</project_group>
-  <compulsory_for_desktop>GNOME</compulsory_for_desktop>
   <translation type="gettext">gnome-screenshot</translation>
   <content_rating type="oars-1.0" />
 </component>
