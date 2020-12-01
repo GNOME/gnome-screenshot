@@ -42,14 +42,13 @@ screenshot_backend_shell_get_pixbuf (ScreenshotBackend *backend,
                                      GdkRectangle      *rectangle)
 {
   g_autoptr(GError) error = NULL;
-  g_autofree gchar *tmp_dirname = NULL, *path = NULL, *filename = NULL, *tmpname = NULL;
+  g_autofree gchar *path = NULL, *filename = NULL, *tmpname = NULL;
   GdkPixbuf *screenshot = NULL;
   const gchar *method_name;
   GVariant *method_params;
   GDBusConnection *connection;
 
-  tmp_dirname = g_strdup_printf ("gnome-screenshot-%s", g_get_user_name ());
-  path = g_build_filename (g_get_tmp_dir (), tmp_dirname, NULL);
+  path = g_build_filename (g_get_user_cache_dir (), "gnome-screenshot", NULL);
   g_mkdir_with_parents (path, 0700);
 
   tmpname = g_strdup_printf ("scr-%d.png", g_random_int ());
