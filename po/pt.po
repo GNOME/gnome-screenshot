@@ -16,16 +16,16 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2020-09-08 13:37+0000\n"
-"PO-Revision-Date: 2020-10-07 13:33+0100\n"
-"Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
+"POT-Creation-Date: 2020-11-23 15:55+0000\n"
+"PO-Revision-Date: 2021-02-11 16:11+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
@@ -66,11 +66,11 @@ msgstr ""
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Pointer"
-msgstr "Incluir o ponteiro do rato"
+msgstr "Incluir o cursor do rato"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the pointer in the screenshot"
-msgstr "Incluir o ponteiro do rato na captura"
+msgstr "Incluir o cursor do rato na captura"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include ICC Profile"
@@ -157,9 +157,9 @@ msgstr "C_opiar para a área de transferência"
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: data/ui/screenshot-dialog.ui:110
+#: data/ui/screenshot-dialog.ui:111
 msgid "_Folder:"
-msgstr "_Pasta"
+msgstr "_Pasta:"
 
 #: data/ui/screenshot-interactive-dialog.ui:19
 msgid "_Take Screenshot"
@@ -184,11 +184,11 @@ msgstr "Se_leção"
 
 #: data/ui/screenshot-interactive-dialog.ui:188
 msgid "Show _Pointer"
-msgstr "Mostrar _ponteiro"
+msgstr "Mostrar _cursor"
 
 #: data/ui/screenshot-interactive-dialog.ui:203
 msgid "_Delay in Seconds"
-msgstr "_Atraso, em segundos"
+msgstr "Atraso em segun_dos"
 
 #: data/ui/screenshot-interactive-dialog.ui:208
 msgid "0"
@@ -200,7 +200,7 @@ msgstr "A_juda"
 
 #: data/ui/screenshot-interactive-dialog.ui:241
 msgid "_About Screenshot"
-msgstr "Acerca do Captura de Ecrã"
+msgstr "Acerca do Captura de ecrã"
 
 #: src/screenshot-application.c:147
 #, c-format
@@ -263,7 +263,7 @@ msgstr ""
 
 #: src/screenshot-application.c:597
 msgid "Include the pointer with the screenshot"
-msgstr "Incluir o ponteiro na captura de ecrã"
+msgstr "Incluir o cursor na captura de ecrã"
 
 #: src/screenshot-application.c:598
 msgid "Take screenshot after specified delay [in seconds]"
@@ -308,9 +308,10 @@ msgstr ""
 "Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Sérgio Cardeira <cardeira.sergio@gmail.com>\n"
 "Tiago Santos <tiagofsantos81@sapo.pt>\n"
-"Juliano de Souza Camargo <julianosc@pm.me>"
+"Juliano de Souza Camargo <julianosc@pm.me>\n"
+"Hugo Carvalho <hugokarvalho@hotmail.com>"
 
-#: src/screenshot-config.c:102
+#: src/screenshot-config.c:101
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
