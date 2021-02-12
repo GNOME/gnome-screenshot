@@ -1,4 +1,16 @@
 =============================================
+GNOME Screenshot 40.beta - 12th February 2021
+=============================================
+
+- Move sound effects to gnome-shell [Brion Vibber, Jonas Dreßler]
+- Focus the filename entry by default
+- Remember delay for area screenshots
+- Remove compulsory_for_desktop [Michael Catanzaro]
+- Translation updates:
+  Chinese (Taiwan), Croatian, Danish, Friulian, Hebrew, Latvian,
+  Norwegian Bokmål, Portuguese
+
+=============================================
 GNOME Screenshot 3.38.0 - 10th September 2020
 =============================================
 
