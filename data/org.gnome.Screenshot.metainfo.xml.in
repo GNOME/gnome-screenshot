@@ -2,6 +2,7 @@
 <!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
 <component type="desktop-application">
   <id>org.gnome.Screenshot.desktop</id>
+  <launchable type="desktop-id">org.gnome.Screenshot.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>GNOME Screenshot</name>
