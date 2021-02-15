@@ -3,10 +3,7 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "command" : "gnome-screenshot",
-    "x-run-args" : [
-        "--interactive"
-    ],
+    "command" : "gnome-screenshot-interactive",
     "finish-args" : [
         "--share=ipc",
         "--socket=x11",
@@ -42,6 +39,23 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/libhandy.git"
+                }
+            ]
+        },
+        {
+            "name" : "gnome-screenshot-interactive",
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "mkdir -p /app/bin/",
+                "install -m755 -pD gnome-screenshot-interactive /app/bin/gnome-screenshot-interactive"
+            ],
+            "sources" : [
+                {
+                    "type" : "script",
+                    "commands" : [
+                        "gnome-screenshot -i"
+                    ],
+                    "dest-filename" : "gnome-screenshot-interactive"
                 }
             ]
         },
