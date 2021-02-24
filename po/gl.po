@@ -3,6 +3,7 @@
 # Copyright (C) 1999 Ruben Lopez Gomez.
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://www.trasno.net
+#
 # Ruben Lopez Gomez <ryu@mundivia.es>, 1999. (logview from gnome-admin).
 # Jesús Bravo Álvarez <jba@pobox.com>, 2000-2001.
 # Ignacio Casal Quinteiro <adorador_del_heavy@hotmail.com>, 2004.
@@ -13,23 +14,21 @@
 # Antón Méixome <meixome@mancomun.org>, 2009.
 # Fran Diéguez <frandieguez@gnome.org>, 2009, 2010, 2011, 2012.
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2012.
-# Fran Dieguez <frandieguez@gnome.org>, 2012-2020.
-#
+# Fran Dieguez <frandieguez@gnome.org>, 2012-2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils-master-po-gl-14799\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
-"issues\n"
-"POT-Creation-Date: 2020-08-14 10:39+0000\n"
-"PO-Revision-Date: 2020-08-17 18:04+0200\n"
-"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/issues\n"
+"POT-Creation-Date: 2021-02-11 18:55+0000\n"
+"PO-Revision-Date: 2021-02-24 20:45+0100\n"
+"Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
+"Language-Team: Proxecto Trasno <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
@@ -82,11 +81,11 @@ msgstr "Incluír o punteiro na captura de pantalla"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include ICC Profile"
-msgstr "Incluír perfíl ICC"
+msgstr "Incluír perfil ICC"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr "Incluír o perfíl ICC do destino no ficheiro de captura de pantalla"
+msgstr "Incluír o perfil ICC do destino no ficheiro de captura de pantalla"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Default file type extension"
@@ -97,13 +96,13 @@ msgid "The default file type extension for screenshots."
 msgstr ""
 "A extensión do tipo de ficheiro predeterminado para as capturas de pantalla."
 
-#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:749
-#: src/screenshot-application.c:819
+#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:741
+#: src/screenshot-application.c:811
 msgid "Screenshot"
 msgstr "Captura de pantalla"
 
 #: data/org.gnome.Screenshot.desktop.in:4
-#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:750
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:742
 msgid "Save images of your screen or individual windows"
 msgstr "Gardar imaxes da súa pantalla ou de xanelas individuais"
 
@@ -132,7 +131,7 @@ msgid ""
 "screenshot directly into the GNOME clipboard and paste it into other "
 "applications."
 msgstr ""
-"Captura de pantalla de NGOME é unha utilidade sinxela que lle permite sacar "
+"Captura de pantalla de GNOME é unha utilidade sinxela que lle permite sacar "
 "imaxes da pantalla do seu computador. As capturar poden ser de toda a "
 "pantalla, dunha aplicación específica ou un área rectangular seleccionada. "
 "Tamén pode copiar as capturas feitas directamente no portapapeis de GNOME e "
@@ -167,7 +166,7 @@ msgstr "C_opiar no portapapeis"
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: data/ui/screenshot-dialog.ui:110
+#: data/ui/screenshot-dialog.ui:111
 msgid "_Folder:"
 msgstr "_Cartafol:"
 
@@ -221,9 +220,8 @@ msgstr "Xa existe un ficheiro chamado «%s» en «%s»"
 msgid "Overwrite existing file?"
 msgstr "Sobrescribir o ficheiro existente?"
 
-#: src/screenshot-application.c:169 src/screenshot-application.c:178
-#: src/screenshot-application.c:428 src/screenshot-application.c:432
-#: src/screenshot-application.c:474 src/screenshot-application.c:477
+#: src/screenshot-application.c:169 src/screenshot-application.c:427
+#: src/screenshot-application.c:470
 msgid "Unable to capture a screenshot"
 msgstr "Non foi posíbel tomar unha captura de pantalla"
 
@@ -233,31 +231,27 @@ msgstr ""
 "Produciuse un erro ao crear o ficheiro. Seleccione outra localización e "
 "ténteo de novo."
 
-#: src/screenshot-application.c:429
+#: src/screenshot-application.c:428
 msgid "Error creating file"
 msgstr "Produciuse un erro ao crear o ficheiro"
 
-#: src/screenshot-application.c:440 src/screenshot-application.c:491
-msgid "Screenshot taken"
-msgstr "Captura de pantalla feita"
-
-#: src/screenshot-application.c:475
+#: src/screenshot-application.c:471
 msgid "All possible methods failed"
 msgstr "Fallaron todos os métodos posíbeis"
 
-#: src/screenshot-application.c:592
+#: src/screenshot-application.c:584
 msgid "Send the grab directly to the clipboard"
 msgstr "Enviar directamente o obtido ao portapapeis"
 
-#: src/screenshot-application.c:593
+#: src/screenshot-application.c:585
 msgid "Grab a window instead of the entire screen"
 msgstr "Capturar unha xanela en vez de toda a pantalla"
 
-#: src/screenshot-application.c:594
+#: src/screenshot-application.c:586
 msgid "Grab an area of the screen instead of the entire screen"
 msgstr "Capturar unha área da pantalla en vez de toda a pantalla"
 
-#: src/screenshot-application.c:595
+#: src/screenshot-application.c:587
 msgid ""
 "Include the window border with the screenshot. This option is deprecated and "
 "window border is always included"
@@ -265,7 +259,7 @@ msgstr ""
 "Incluír o borde da xanela nas capturas. Esta opción está obsoleta e o borde "
 "de xanela inclúese sempre"
 
-#: src/screenshot-application.c:596
+#: src/screenshot-application.c:588
 msgid ""
 "Remove the window border from the screenshot. This option is deprecated and "
 "window border is always included"
@@ -273,23 +267,20 @@ msgstr ""
 "Quitar o borde da xanela nas capturas. Esta opción está obsoleta e o borde "
 "de xanela inclúese sempre"
 
-#: src/screenshot-application.c:597
+#: src/screenshot-application.c:589
 msgid "Include the pointer with the screenshot"
 msgstr "Incluír o punteiro na captura de pantalla"
 
-#: src/screenshot-application.c:598
+#: src/screenshot-application.c:590
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr ""
 "Facer a captura de pantalla despois do atraso especificado [en segundos]"
 
-#: src/screenshot-application.c:598
+#: src/screenshot-application.c:590
 msgid "seconds"
 msgstr "segundos"
 
-#: src/screenshot-application.c:599
-#| msgid ""
-#| "Effect to add to the border (shadow, border, vintage or none). Note: This "
-#| "option is deprecated and is assumed to be none"
+#: src/screenshot-application.c:591
 msgid ""
 "Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
 "This option is deprecated and is assumed to be ‘none’"
@@ -297,27 +288,27 @@ msgstr ""
 "Efecto a engadir ao bordo («sombra», «bordo», «antigo» ou «ningún»). Nota: "
 "Esta opción está obsoleta e asúmese como «ningún»."
 
-#: src/screenshot-application.c:599
+#: src/screenshot-application.c:591
 msgid "effect"
 msgstr "efecto"
 
-#: src/screenshot-application.c:600
+#: src/screenshot-application.c:592
 msgid "Interactively set options"
 msgstr "Definir as opcións interactivamente"
 
-#: src/screenshot-application.c:601
+#: src/screenshot-application.c:593
 msgid "Save screenshot directly to this file"
 msgstr "Gardar a captura de pantalla directamente neste ficheiro"
 
-#: src/screenshot-application.c:601
+#: src/screenshot-application.c:593
 msgid "filename"
 msgstr "nome-de-ficheiro"
 
-#: src/screenshot-application.c:602
+#: src/screenshot-application.c:594
 msgid "Print version information and exit"
 msgstr "Mostrar información da versión e saír"
 
-#: src/screenshot-application.c:752
+#: src/screenshot-application.c:744
 msgid "translator-credits"
 msgstr ""
 "Fran Diéguez <frandieguez@gnome.org>, 2009-2020 \n"
@@ -332,7 +323,7 @@ msgstr ""
 "Proxecto Trasno - Tradución de software libre ao galego <proxecto@trasno."
 "net>, 1999-2012"
 
-#: src/screenshot-config.c:102
+#: src/screenshot-config.c:101
 msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
@@ -364,9 +355,12 @@ msgstr "Captura de pantalla de %s.%s.png"
 msgid "Screenshot from %s - %d.%s"
 msgstr "Captura de pantalla de %s - %d.%s.png"
 
-#: src/screenshot-utils.c:161
+#: src/screenshot-utils.c:127
 msgid "Error loading the help page"
 msgstr "Produciuse un erro ao cargar a páxina de axuda"
+
+#~ msgid "Screenshot taken"
+#~ msgstr "Captura de pantalla feita"
 
 #~ msgid "Include Border"
 #~ msgstr "Incluír bordo"
