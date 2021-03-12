@@ -724,6 +724,7 @@ action_about (GSimpleAction *action,
     "Emmanuele Bassi",
     "Jonathan Blandford",
     "Cosimo Cecchi",
+    "Alexander Mikhaylenko",
     NULL
   };
 
