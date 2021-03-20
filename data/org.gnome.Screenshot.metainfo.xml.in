@@ -41,38 +41,20 @@
   <releases>
     <release version="40.rc" type="development" date="2021-03-12" urgency="medium">
       <description>
-        <p>metainfo: add a launchable tag</p>
-        <p>Translation updates</p>
-      </description>
-    </release>
-    <release version="40.beta" type="development" date="2021-02-12" urgency="medium">
-      <description>
         <p>Move sound effects to gnome-shell</p>
         <p>Focus the filename entry by default</p>
         <p>Remember delay for area screenshots</p>
         <p>Remove compulsory_for_desktop</p>
+        <p>metainfo: add a launchable tag</p>
         <p>Translation updates</p>
       </description>
     </release>
     <release version="3.38.0" type="stable" date="2020-09-10" urgency="medium">
       <description>
-        <p>Translation updates.</p>
-      </description>
-    </release>
-    <release version="3.37.90" type="stable" date="2020-08-07" urgency="medium">
-      <description>
-        <p>Changes:</p>
-        <ul>
-          <li>Port to libhandy</li>
-          <li>Translation updates</li>
-        </ul>
-      </description>
-    </release>
-    <release version="3.37.1" type="stable" date="2020-04-25" urgency="medium">
-      <description>
         <p>Changes:</p>
         <ul>
           <li>Completely redesign the UI</li>
+          <li>Port to libhandy</li>
           <li>Allow taking area screenshots with timeout</li>
           <li>Deprecate --include-border and --remove-border options</li>
           <li>Deprecate --border-effect option</li>
