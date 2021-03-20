@@ -39,7 +39,7 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
-    <release version="40.rc" type="development" date="2021-03-12" urgency="medium">
+    <release version="40.0" type="stable" date="2021-03-20" urgency="medium">
       <description>
         <p>Move sound effects to gnome-shell</p>
         <p>Focus the filename entry by default</p>
