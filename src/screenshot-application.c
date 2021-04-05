@@ -128,6 +128,28 @@ save_pixbuf_handle_success (ScreenshotApplication *self)
 }
 
 static void
+screenshot_dialog_focus_cb (gint                   response,
+                            ScreenshotApplication *self)
+{
+  gtk_widget_grab_focus (screenshot_dialog_get_filename_entry (self->dialog));
+}
+
+static void
+screenshot_dialog_override_cb (gint                   response,
+                               ScreenshotApplication *self)
+{
+  if (response == GTK_RESPONSE_YES)
+    {
+      self->should_overwrite = TRUE;
+      screenshot_save_to_file (self);
+
+      return;
+    }
+
+  screenshot_dialog_focus_cb (response, self);
+}
+
+static void
 save_pixbuf_handle_error (ScreenshotApplication *self,
                           GError *error)
 {
@@ -147,19 +169,13 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
           g_autofree gchar *detail = g_strdup_printf (_("A file named “%s” already exists in “%s”"),
                                                       file_name, folder_name);
 
-          gint response = screenshot_show_dialog (GTK_WINDOW (dialog),
-                                                  GTK_MESSAGE_WARNING,
-                                                  GTK_BUTTONS_YES_NO,
-                                                  _("Overwrite existing file?"),
-                                                  detail);
-
-          if (response == GTK_RESPONSE_YES)
-            {
-              self->should_overwrite = TRUE;
-              screenshot_save_to_file (self);
-
-              return;
-            }
+          screenshot_show_dialog (GTK_WINDOW (dialog),
+                                  GTK_MESSAGE_WARNING,
+                                  GTK_BUTTONS_YES_NO,
+                                  _("Overwrite existing file?"),
+                                  detail,
+                                  (ScreenshotResponseFunc) screenshot_dialog_override_cb,
+                                  self);
         }
       else
         {
@@ -167,10 +183,10 @@ save_pixbuf_handle_error (ScreenshotApplication *self,
                                   GTK_MESSAGE_ERROR,
                                   GTK_BUTTONS_OK,
                                   _("Unable to capture a screenshot"),
-                                  _("Error creating file. Please choose another location and retry."));
+                                  _("Error creating file. Please choose another location and retry."),
+                                  (ScreenshotResponseFunc) screenshot_dialog_focus_cb,
+                                  dialog);
         }
-
-      gtk_widget_grab_focus (screenshot_dialog_get_filename_entry (dialog));
     }
   else
     {
@@ -425,7 +441,9 @@ build_filename_ready_cb (GObject *source,
                                 GTK_MESSAGE_ERROR,
                                 GTK_BUTTONS_OK,
                                 _("Unable to capture a screenshot"),
-                                _("Error creating file"));
+                                _("Error creating file"),
+                                NULL,
+                                NULL);
       else
         {
           if (screenshot_config->file != NULL)
@@ -452,6 +470,15 @@ build_filename_ready_cb (GObject *source,
 }
 
 static void
+screenshot_release_cb (gint                   response,
+                       ScreenshotApplication *self)
+{
+  g_application_release (G_APPLICATION (self));
+  if (screenshot_config->file != NULL)
+    exit (EXIT_FAILURE);
+}
+
+static void
 finish_take_screenshot (ScreenshotApplication *self)
 {
   GdkPixbuf *screenshot;
@@ -468,11 +495,9 @@ finish_take_screenshot (ScreenshotApplication *self)
                                 GTK_MESSAGE_ERROR,
                                 GTK_BUTTONS_OK,
                                 _("Unable to capture a screenshot"),
-                                _("All possible methods failed"));
-
-      g_application_release (G_APPLICATION (self));
-      if (screenshot_config->file != NULL)
-        exit (EXIT_FAILURE);
+                                _("All possible methods failed"),
+                                (ScreenshotResponseFunc) screenshot_release_cb,
+                                self);
 
       return;
     }

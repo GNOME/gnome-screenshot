@@ -25,13 +25,18 @@ G_BEGIN_DECLS
 
 #define SCREENSHOT_ICON_NAME "org.gnome.Screenshot"
 
+typedef void (*ScreenshotResponseFunc) (gint     response,
+                                        gpointer user_data);
+
 GdkPixbuf *screenshot_get_pixbuf          (GdkRectangle *rectangle);
 
-gint       screenshot_show_dialog   (GtkWindow   *parent,
-                                     GtkMessageType message_type,
-                                     GtkButtonsType buttons_type,
-                                     const gchar *message,
-                                     const gchar *detail);
+void       screenshot_show_dialog         (GtkWindow              *parent,
+                                           GtkMessageType          message_type,
+                                           GtkButtonsType          buttons_type,
+                                           const gchar            *message,
+                                           const gchar            *detail,
+                                           ScreenshotResponseFunc  callback,
+                                           gpointer                user_data);
 void       screenshot_display_help        (GtkWindow *parent);
 
 G_END_DECLS

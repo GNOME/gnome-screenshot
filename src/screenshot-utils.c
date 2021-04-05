@@ -70,27 +70,47 @@ screenshot_get_pixbuf (GdkRectangle *rectangle)
   return screenshot;
 }
 
-gint
-screenshot_show_dialog (GtkWindow   *parent,
-                        GtkMessageType message_type,
-                        GtkButtonsType buttons_type,
-                        const gchar *message,
-                        const gchar *detail)
+typedef struct
 {
+  ScreenshotResponseFunc callback;
+  gpointer user_data;
+} DialogData;
+
+static void
+response_cb (GtkDialog  *dialog,
+             gint        response_id,
+             DialogData *data)
+{
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+
+  if (data->callback)
+    data->callback (response_id, data->user_data);
+
+  g_free (data);
+}
+
+void
+screenshot_show_dialog (GtkWindow              *parent,
+                        GtkMessageType          message_type,
+                        GtkButtonsType          buttons_type,
+                        const gchar            *message,
+                        const gchar            *detail,
+                        ScreenshotResponseFunc  callback,
+                        gpointer                user_data)
+{
+  DialogData *data;
   GtkWidget *dialog;
   GtkWindowGroup *group;
-  gint response;
 
-  g_return_val_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)),
-                        GTK_RESPONSE_NONE);
-  g_return_val_if_fail (message != NULL, GTK_RESPONSE_NONE);
+  g_return_if_fail ((parent == NULL) || (GTK_IS_WINDOW (parent)));
+  g_return_if_fail (message != NULL);
 
+  data = g_new0 (DialogData, 1);
   dialog = gtk_message_dialog_new (parent,
                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                    message_type,
                                    buttons_type,
                                    "%s", message);
-  gtk_window_set_title (GTK_WINDOW (dialog), "");
 
   if (detail)
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
@@ -103,11 +123,13 @@ screenshot_show_dialog (GtkWindow   *parent,
         gtk_window_group_add_window (group, GTK_WINDOW (dialog));
     }
 
-  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  data->callback = callback;
+  data->user_data = user_data;
 
-  gtk_widget_destroy (dialog);
+  if (callback)
+    g_signal_connect (dialog, "response", G_CALLBACK (response_cb), data);
 
-  return response;
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 void
@@ -125,5 +147,7 @@ screenshot_display_help (GtkWindow *parent)
                             GTK_MESSAGE_ERROR,
                             GTK_BUTTONS_OK,
                             _("Error loading the help page"),
-                            error->message);
+                            error->message,
+                            NULL,
+                            NULL);
 }
