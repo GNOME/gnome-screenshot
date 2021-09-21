@@ -96,7 +96,7 @@ msgstr "Captura"
 #: data/org.gnome.Screenshot.metainfo.xml.in:8
 #: src/screenshot-application.c:750
 msgid "Save images of your screen or individual windows"
-msgstr "Desa imatges de la pantalla o de finestres individuals"
+msgstr "Deseu imatges de la pantalla o de finestres individuals"
 
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
@@ -346,91 +346,3 @@ msgstr "Captura de %s - %d.%s"
 msgid "Error loading the help page"
 msgstr "S'ha produït un error en carregar la pàgina d'ajuda"
 
-#~ msgid "Include Border"
-#~ msgstr "Inclou la vora"
-
-#~ msgid "Include the window manager border along with the screenshot"
-#~ msgstr "Inclou la vora del gestor de finestres en la captura"
-
-#~ msgid "Border Effect"
-#~ msgstr "Efecte de la vora"
-
-#~ msgid ""
-#~ "Effect to add to the outside of a border. Possible values are “shadow”, "
-#~ "“none”, and “border”."
-#~ msgstr ""
-#~ "Efecte que s'afegirà a fora de la vora. Els valors possibles són «shadow» "
-#~ "(ombra), «none» (cap), i «border» (vora)."
-
-#~ msgid "Help"
-#~ msgstr "Ajuda"
-
-#~ msgid "About"
-#~ msgstr "Quant a"
-
-#~ msgid "Quit"
-#~ msgstr "Surt"
-
-#~ msgid "Include the window border with the screenshot"
-#~ msgstr "Inclou la vora de la finestra en la captura"
-
-#~ msgid "Remove the window border from the screenshot"
-#~ msgstr "Suprimeix la vora de la finestra en la captura de pantalla"
-
-#~ msgid ""
-#~ "Conflicting options: --area and --delay should not be used at the same "
-#~ "time.\n"
-#~ msgstr ""
-#~ "Conflicte d'opcions: no es poden utilitzar al mateix temps «--delay» i "
-#~ "«--area».\n"
-
-#~ msgid "Save Screenshot"
-#~ msgstr "Desa la captura"
-
-#~ msgid "Back"
-#~ msgstr "Enrere"
-
-#~ msgid "Save in _folder"
-#~ msgstr "Desa en la _carpeta"
-
-#~ msgid "None"
-#~ msgstr "Sense"
-
-#~ msgid "Drop shadow"
-#~ msgstr "Ombra"
-
-#~ msgid "Border"
-#~ msgstr "Vora"
-
-#~ msgid "Vintage"
-#~ msgstr "Vintage"
-
-#~ msgid "Include _pointer"
-#~ msgstr "Inclou el _punter"
-
-#~ msgid "Include the window _border"
-#~ msgstr "Inclou la _vora de la finestra"
-
-#~ msgid "Apply _effect:"
-#~ msgstr "Aplica l'_efecte:"
-
-#~ msgid "Grab the whole sc_reen"
-#~ msgstr "Captura tota la _pantalla"
-
-#~ msgid "Grab the current _window"
-#~ msgstr "Captura la _finestra actual"
-
-#~ msgid "Select _area to grab"
-#~ msgstr "_Seleccioneu una àrea a capturar"
-
-#~ msgid "Grab after a _delay of"
-#~ msgstr "Captura després d'un _retard de"
-
-#~ msgid "Effects"
-#~ msgstr "Efectes"
-
-#~ msgid "Take _Screenshot"
-#~ msgstr "Fes una _captura de pantalla"
-
-#~ msgid "applets-screenshooter"
-#~ msgstr "applets-screenshooter"
