@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-utils HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
-"POT-Creation-Date: 2021-04-25 21:45+0000\n"
-"PO-Revision-Date: 2021-05-12 21:34+0200\n"
+"POT-Creation-Date: 2021-09-25 00:55+0000\n"
+"PO-Revision-Date: 2021-11-09 11:03+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
@@ -85,7 +85,8 @@ msgstr "Extension de tipe de fichièr per defaut"
 msgid "The default file type extension for screenshots."
 msgstr "L'extension de tipe de fichièr per defaut per las capturas d'ecran."
 
-#: data/org.gnome.Screenshot.desktop.in:3 src/screenshot-application.c:767
+#: data/org.gnome.Screenshot.desktop.in:3
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:767
 #: src/screenshot-application.c:837
 msgid "Screenshot"
 msgstr "Captura d'ecran"
@@ -109,34 +110,29 @@ msgstr "Efectua una captura de tot l'ecran"
 msgid "Take a Screenshot of the Current Window"
 msgstr "Efectua una captura d'ecran de la fenèstra actuala"
 
-#: data/org.gnome.Screenshot.metainfo.xml.in:8
-msgid "GNOME Screenshot"
-msgstr "Captura d'ecran de GNOME"
-
 #: data/org.gnome.Screenshot.metainfo.xml.in:11
 msgid ""
-"GNOME Screenshot is a simple utility that lets you take pictures of your "
-"computer screen. Screenshots can be of your whole screen, any specific "
-"application, or a selected rectangular area. You can also copy the captured "
-"screenshot directly into the GNOME clipboard and paste it into other "
-"applications."
+"Screenshot is a simple utility that lets you take pictures of your computer "
+"screen. Screenshots can be of your whole screen, any specific application, "
+"or a selected rectangular area. You can also copy the captured screenshot "
+"directly into the GNOME clipboard and paste it into other applications."
 msgstr ""
-"Captura d'ecran de GNOME es un utilitari per vos permetre de prene de "
-"capturas d'ecran aisidament. Aquelas capturas pòdon concernir vòstre ecran "
-"entièr, una aplicacion en particular o una zòna que definissètz. Podètz "
-"tanben copiar la captura dirèctament dins lo quichapapiers de GNOME e la "
-"pegar dins una autra aplicacion."
+"Captura d'ecran es un utilitari per vos permetre de prene de capturas "
+"d'ecran aisidament. Aquelas capturas pòdon concernir vòstre ecran entièr, "
+"una aplicacion en particular o una zòna que definissètz. Podètz tanben "
+"copiar la captura dirèctament dins lo quichapapiers de GNOME e la pegar dins "
+"una autra aplicacion."
 
 #: data/org.gnome.Screenshot.metainfo.xml.in:18
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it’s not open: "
-"just press the PrtSc button on your keyboard, and a snapshot of your whole "
-"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
-"and you will get a screenshot of only the currently selected window."
+"Screenshot allows you to take screenshots even when it’s not open: just "
+"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
+"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
+"will get a screenshot of only the currently selected window."
 msgstr ""
 "Captura d'ecran vos permet de prene de capturas d'ecran quitament se es pas "
 "aviada : quichatz simplament sul boton Impr. ecran sus vòstre clavièr e "
-"l'integralitat de vòstre ecran serà salvat dins vòstre dorsièr Imatges. "
+"l'integralitat de vòstre ecran serà salvat al vòstre dorsièr Imatges. "
 "Mantenètz la tòca Alt en meteis temps que Impr. ecran e sola la fenèstra en "
 "cors serà enregistrada."
 
@@ -247,7 +243,7 @@ msgid ""
 "window border is always included"
 msgstr ""
 "Inclure la bordadura de fenèstra dins aquesta captura d’ecran. Aquesta "
-"opcion es obsolèta, la bordadura es totjorn compresa."
+"opcion es obsolèta, la bordadura es totjorn compresa"
 
 #: src/screenshot-application.c:613
 msgid ""
@@ -255,7 +251,7 @@ msgid ""
 "window border is always included"
 msgstr ""
 "Suprimir la bordadura de fenèstra dins aquesta captura d’ecran. Aquesta "
-"opcion es obsolèta, la bordadura es totjorn compresa."
+"opcion es obsolèta, la bordadura es totjorn compresa"
 
 #: src/screenshot-application.c:614
 msgid "Include the pointer with the screenshot"
@@ -300,7 +296,9 @@ msgstr "Imprimir las informacions de version e quitar"
 
 #: src/screenshot-application.c:770
 msgid "translator-credits"
-msgstr "Cédric Valmary <cvalmary@yahoo.fr>, 2015"
+msgstr ""
+"Cédric Valmary <cvalmary@yahoo.fr>, 2015\n"
+"Quentin PAGÈS"
 
 #: src/screenshot-config.c:101
 msgid ""
@@ -338,6 +336,9 @@ msgstr "Captura del %s - %d.%s"
 #: src/screenshot-utils.c:149
 msgid "Error loading the help page"
 msgstr "Error al moment del cargament de la pagina d'ajuda"
+
+#~ msgid "GNOME Screenshot"
+#~ msgstr "Captura d'ecran de GNOME"
 
 #~ msgid "Include Border"
 #~ msgstr "Inclure la bordadura"
