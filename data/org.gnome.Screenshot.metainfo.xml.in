@@ -39,6 +39,13 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
+    <release version="41.0" type="stable" date="2021-11-13" urgency="medium">
+      <description>
+        <p>Drop support for non-unique mode in headless instance</p>
+        <p>metainfo: Align app name with .desktop name</p>
+        <p>Translation updates</p>
+      </description>
+    </release>
     <release version="40.0" type="stable" date="2021-03-20" urgency="medium">
       <description>
         <p>Move sound effects to gnome-shell</p>

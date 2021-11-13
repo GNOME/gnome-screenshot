@@ -1,3 +1,13 @@
+==========================================
+GNOME Screenshot 41.0 - 13th November 2021
+==========================================
+
+- Drop support for non-unique mode in headless instance [Sebastian Keller]
+- metainfo: Align app name with .desktop name [Sophie Herold]
+- Translation updates: British English, Bulgarian, Catalan, Croatian, Friulian,
+  Hebrew, Icelandic, Nepali, Occitan, Persian, Portuguese, Russian, Swedish,
+  Ukrainian, Vietnamese,
+
 =======================================
 GNOME Screenshot 40.0 - 20th March 2021
 =======================================
