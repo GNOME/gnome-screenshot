@@ -819,6 +819,8 @@ screenshot_application_startup (GApplication *app)
   G_APPLICATION_CLASS (screenshot_application_parent_class)->startup (app);
 
   hdy_init ();
+  hdy_style_manager_set_color_scheme (hdy_style_manager_get_default (),
+                                      HDY_COLOR_SCHEME_PREFER_LIGHT);
 
   screenshot_load_config ();
 
