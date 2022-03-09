@@ -1,5 +1,5 @@
 # gnome-screenshot ja.po.
-# Copyright (C) 1998-2015, 2019-2020 gnome-screenshot's COPYRIGHT HOLDER
+# Copyright (C) 1998, 2000-2015, 2019-2020, 2022 gnome-screenshot's COPYRIGHT HOLDER
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1998.
 # Yuusuke Tahara <tahara@gnome.gr.jp>, 2000.
 # Yukihiro Nakai <nakai@gnome.gr.jp>, 2000.
@@ -14,7 +14,7 @@
 # Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2012-2013, 2015.
 # Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014.
-# sicklylife <translation@sicklylife.jp>, 2019-2020.
+# sicklylife <translation@sicklylife.jp>, 2019-2020, 2022.
 #
 msgid ""
 msgstr ""
@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
 "POT-Creation-Date: 2020-08-14 10:39+0000\n"
-"PO-Revision-Date: 2020-08-23 23:30+0900\n"
+"PO-Revision-Date: 2022-03-09 22:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -121,28 +121,27 @@ msgstr "現在のウィンドウのスクリーンショットを撮る"
 msgid "GNOME Screenshot"
 msgstr "GNOME スクリーンショット"
 
-#: data/org.gnome.Screenshot.metainfo.xml.in:10
+#: data/org.gnome.Screenshot.metainfo.xml.in:11
 msgid ""
-"GNOME Screenshot is a simple utility that lets you take pictures of your "
-"computer screen. Screenshots can be of your whole screen, any specific "
-"application, or a selected rectangular area. You can also copy the captured "
-"screenshot directly into the GNOME clipboard and paste it into other "
-"applications."
+"Screenshot is a simple utility that lets you take pictures of your computer "
+"screen. Screenshots can be of your whole screen, any specific application, "
+"or a selected rectangular area. You can also copy the captured screenshot "
+"directly into the GNOME clipboard and paste it into other applications."
 msgstr ""
-"GNOME スクリーンショットは、コンピューターの画面を画像データとして撮影できる"
+"“スクリーンショット”は、コンピューターの画面を画像データとして撮影できる"
 "シンプルなユーティリティです。撮影できる範囲は、画面全体、特定のアプリケー"
 "ションのみ、あるいは選択した矩形領域です。また、撮影したスクリーンショットを"
 "そのまま GNOME のクリップボードにコピーして、他のアプリケーションに貼り付ける"
 "こともできます。"
 
-#: data/org.gnome.Screenshot.metainfo.xml.in:17
+#: data/org.gnome.Screenshot.metainfo.xml.in:18
 msgid ""
-"GNOME Screenshot allows you to take screenshots even when it’s not open: "
-"just press the PrtSc button on your keyboard, and a snapshot of your whole "
-"screen will be saved to your Pictures folder. Hold Alt while pressing PrtSc "
-"and you will get a screenshot of only the currently selected window."
+"Screenshot allows you to take screenshots even when it’s not open: just "
+"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
+"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
+"will get a screenshot of only the currently selected window."
 msgstr ""
-"スクリーンショットを撮るのに、GNOME スクリーンショットを起動する必要はありま"
+"スクリーンショットを撮るのに、“スクリーンショット”を起動する必要はありま"
 "せん。キーボードの PrtSc キーを押すだけで、画面全体のスクリーンショットを撮っ"
 "て画像フォルダーに保存できます。Alt キーを押しながら PrtSc キーを押せば、現在"
 "選択しているウィンドウだけを撮影できます。"
