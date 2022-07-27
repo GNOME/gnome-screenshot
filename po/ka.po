@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues\n"
 "POT-Creation-Date: 2022-07-08 14:39+0000\n"
-"PO-Revision-Date: 2022-07-21 15:43+0200\n"
+"PO-Revision-Date: 2022-07-27 09:02+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: \n"
 "Language: ka\n"
@@ -21,13 +21,15 @@ msgstr ""
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:11
 msgid "Window-specific screenshot (deprecated)"
-msgstr ""
+msgstr "მითითებული ფანჯრის ანაბეჭდი (მოძველებული)"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:12
 msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
+"მიმდინარე ფანჯრის ანაბეჭდი მთელი ეკრანის მაგიერ. ეს მოძველებულია და აღარ "
+"გამოიყენება."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:16
 msgid "Screenshot delay"
@@ -35,7 +37,7 @@ msgstr "ეკრანის ანაბეჭდის დაყოვნე�
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:17
 msgid "The number of seconds to wait before taking the screenshot."
-msgstr ""
+msgstr "რამდენი წამი მოვიცადო ანაბეჭდის გადაღებამდე."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:21
 msgid "Screenshot directory"
@@ -43,7 +45,7 @@ msgstr "ეკრანის ანაბეჭდის საქაღად�
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:22
 msgid "The directory where the screenshots will be saved by default."
-msgstr ""
+msgstr "ბილიკი ნაგულისხმებ საქაღალდემდე, სადაც ანაბეჭდები ინახება."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:26
 msgid "Last save directory"
@@ -52,6 +54,7 @@ msgstr "ბოლოს შენახული საქაღლდე"
 #: data/org.gnome.gnome-screenshot.gschema.xml:27
 msgid "The last directory a screenshot was saved in interactive mode."
 msgstr ""
+"ინტერაქტიურ რეჟიმში გადაღებული ანაბეჭდების ჩასაწერი უკანასკნელი საქაღალდე."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Pointer"
@@ -67,7 +70,7 @@ msgstr "ICC პროფილის ჩასმა"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr ""
+msgstr "ანაბეჭდის ფაილში სამიზნის ICC პროფილის მიყოლება"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Default file type extension"
@@ -108,6 +111,11 @@ msgid ""
 "or a selected rectangular area. You can also copy the captured screenshot "
 "directly into the GNOME clipboard and paste it into other applications."
 msgstr ""
+"Screenshot არის მარტივი პროგრამა, რომელიც საშუალებას გაძლევთ გადაიღოთ "
+"სურათები თქვენი კომპიუტერის ეკრანზე. ეკრანის ანაბეჭდები შეიძლება იყოს თქვენი "
+"მთელი ეკრანი, ნებისმიერი კონკრეტული აპლიკაცია ან შერჩეული მართკუთხა არე. "
+"თქვენ ასევე შეგიძლიათ დააკოპიროთ გადაღებული ეკრანის სურათი პირდაპირ GNOME-ის "
+"ბუფერში და ჩასვათ იგი სხვა აპლიკაციებში."
 
 #: data/org.gnome.Screenshot.metainfo.xml.in:18
 msgid ""
@@ -116,6 +124,11 @@ msgid ""
 "will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
 "will get a screenshot of only the currently selected window."
 msgstr ""
+"სკრინშოტი საშუალებას გაძლევთ გადაიღოთ ეკრანის ანაბეჭდები მაშინაც კი, როცა ის "
+"არ არის გახსნილი: უბრალოდ დააჭირეთ PrtSc ღილაკს თქვენს კლავიატურაზე და "
+"თქვენი მთელი ეკრანის სნეპშოტი შეინახება თქვენს სურათების საქაღალდეში. "
+"დააჭირეთ Alt-ს PrtSc-ზე დაჭერისას და მიიღებთ მხოლოდ ამჟამად არჩეული ფანჯრის "
+"სკრინშოტს."
 
 #: data/ui/screenshot-dialog.ui:17
 msgid "_Cancel"
@@ -181,7 +194,7 @@ msgstr "Screenshot-ის შესახებ"
 #: src/screenshot-application.c:169
 #, c-format
 msgid "A file named “%s” already exists in “%s”"
-msgstr ""
+msgstr "ფაილი სახელით %s უკვე არსებობს %s-ში"
 
 #: src/screenshot-application.c:175
 msgid "Overwrite existing file?"
@@ -194,7 +207,7 @@ msgstr "ეკრანის ანაბეჭდის ჩაჭერის 
 
 #: src/screenshot-application.c:186
 msgid "Error creating file. Please choose another location and retry."
-msgstr ""
+msgstr "ფაილის შექმნის შეცდომა. აირჩიეთ სხვა მდებარეობა და თავიდან სცადეთ."
 
 #: src/screenshot-application.c:444
 msgid "Error creating file"
@@ -206,35 +219,39 @@ msgstr "ყველა შესაძლო მეთოდი ავარი
 
 #: src/screenshot-application.c:609
 msgid "Send the grab directly to the clipboard"
-msgstr ""
+msgstr "გადაჭერის პირდაპირ ბაფერში გაგზავნა"
 
 #: src/screenshot-application.c:610
 msgid "Grab a window instead of the entire screen"
-msgstr ""
+msgstr "მთელი ეკრანის მაგიერ ერთი ფანჯრის ანაბეჭდის აღება"
 
 #: src/screenshot-application.c:611
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr ""
+msgstr "მთელი ეკრანის მაგიერ მონიშნული ადგილის ანაბეჭდის აღება"
 
 #: src/screenshot-application.c:612
 msgid ""
 "Include the window border with the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
+"ჩართეთ ფანჯრის საზღვარი ეკრანის სურათთან ერთად. ეს პარამეტრი მოძველებულია და "
+"ფანჯრის საზღვრები ყოველთვის შედის"
 
 #: src/screenshot-application.c:613
 msgid ""
 "Remove the window border from the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
+"ამოიღეთ ფანჯრის საზღვარი ეკრანის ანაბეჭდიდან. ეს პარამეტრი მოძველებულია და "
+"ფანჯრის საზღვრები ყოველთვის შედის"
 
 #: src/screenshot-application.c:614
 msgid "Include the pointer with the screenshot"
-msgstr ""
+msgstr "ეკრანის ანაბეჭდზე კურსორიც გამოჩნდება"
 
 #: src/screenshot-application.c:615
 msgid "Take screenshot after specified delay [in seconds]"
-msgstr ""
+msgstr "ანაბეჭდის მითითებული დაყოვნების შემდეგ აღება [წამები]"
 
 #: src/screenshot-application.c:615
 msgid "seconds"
@@ -245,6 +262,8 @@ msgid ""
 "Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
 "This option is deprecated and is assumed to be ‘none’"
 msgstr ""
+"საზღვარზე დასამატებელი ეფექტი („ჩრდილი“, „საზღვარი“, „რთველი“ ან „არცერთი“). "
+"შენიშვნა: ეს პარამეტრი მოძველებულია და ითვლება \"არცერთი\""
 
 #: src/screenshot-application.c:616
 msgid "effect"
@@ -256,7 +275,7 @@ msgstr "პარამეტრების ინტერაქტიურ�
 
 #: src/screenshot-application.c:618
 msgid "Save screenshot directly to this file"
-msgstr ""
+msgstr "ანაბეჭდის პირდაპირ ამ ფაილში ჩაწერა"
 
 #: src/screenshot-application.c:618
 msgid "filename"
@@ -275,6 +294,8 @@ msgid ""
 "Conflicting options: --window and --area should not be used at the same "
 "time.\n"
 msgstr ""
+"ურთიერთხელშემშლელი პარამეტრები: --window და --area ერთდროულად გამოყენებული "
+"ვერ იქნება.\n"
 
 #: src/screenshot-dialog.c:337
 msgid "Screenshot.png"
