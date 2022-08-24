@@ -3,7 +3,7 @@ project(
   'c',
   version: '41.0',
   license: 'GPLv2+',
-  meson_version: '>= 0.50.0',
+  meson_version: '>= 0.59.0',
   default_options: [
     'buildtype=debugoptimized',
     'warning_level=1',
@@ -63,4 +63,8 @@ subdir('data')
 subdir('src')
 subdir('po')
 
-meson.add_install_script('build-aux/postinstall.py')
+gnome.post_install(
+  glib_compile_schemas: true,
+  gtk_update_icon_cache: true,
+  update_desktop_database: true,
+)
