@@ -1,0 +1,405 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
+"issues\n"
+"POT-Creation-Date: 2022-12-12 07:17+0700\n"
+"PO-Revision-Date: 2022-12-12 07:19+0700\n"
+"Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
+"Language-Team: \n"
+"Language: ie\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:11
+#, fuzzy
+msgid "Window-specific screenshot (deprecated)"
+msgstr "Capturar li actual fenestre"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:12
+msgid ""
+"Grab just the current window, rather than the whole desktop. This key has "
+"been deprecated and it is no longer in use."
+msgstr ""
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:16
+msgid "Screenshot delay"
+msgstr "Retarde de captura"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:17
+msgid "The number of seconds to wait before taking the screenshot."
+msgstr ""
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:21
+msgid "Screenshot directory"
+msgstr "Fólder de capturas"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:22
+msgid "The directory where the screenshots will be saved by default."
+msgstr ""
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:26
+#, fuzzy
+msgid "Last save directory"
+msgstr "Gardar in li fólder predefinit"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:27
+msgid "The last directory a screenshot was saved in interactive mode."
+msgstr ""
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:31
+#, fuzzy
+msgid "Include Pointer"
+msgstr "Includer li apuntator"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:32
+#, fuzzy
+msgid "Include the pointer in the screenshot"
+msgstr "Includer li apuntator in li captura"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:36
+#, fuzzy
+msgid "Include ICC Profile"
+msgstr "Selecter un file de profile ICC"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:37
+msgid "Include the ICC profile of the target in the screenshot file"
+msgstr ""
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:41
+#, fuzzy
+msgid "Default file type extension"
+msgstr "Selecter tipes de file (secun extension)"
+
+#: data/org.gnome.gnome-screenshot.gschema.xml:42
+#, fuzzy
+msgid "The default file type extension for screenshots."
+msgstr "Selecter tipes de file (secun extension)"
+
+#: data/org.gnome.Screenshot.desktop.in:3
+#: data/org.gnome.Screenshot.metainfo.xml.in:8 src/screenshot-application.c:755
+#: src/screenshot-application.c:827
+msgid "Screenshot"
+msgstr "Captura de ecran"
+
+#: data/org.gnome.Screenshot.desktop.in:4
+#: data/org.gnome.Screenshot.metainfo.xml.in:9 src/screenshot-application.c:756
+msgid "Save images of your screen or individual windows"
+msgstr ""
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Screenshot.desktop.in:6
+#, fuzzy
+msgid "snapshot;capture;print;screenshot;"
+msgstr "Li captura esset anullat o ne successat"
+
+#: data/org.gnome.Screenshot.desktop.in:22
+#, fuzzy
+msgid "Take a Screenshot of the Whole Screen"
+msgstr "Capter li tot ecran"
+
+#: data/org.gnome.Screenshot.desktop.in:26
+#, fuzzy
+msgid "Take a Screenshot of the Current Window"
+msgstr "Capturar li actual fenestre"
+
+#: data/org.gnome.Screenshot.metainfo.xml.in:11
+msgid ""
+"Screenshot is a simple utility that lets you take pictures of your computer "
+"screen. Screenshots can be of your whole screen, any specific application, "
+"or a selected rectangular area. You can also copy the captured screenshot "
+"directly into the GNOME clipboard and paste it into other applications."
+msgstr ""
+
+#: data/org.gnome.Screenshot.metainfo.xml.in:18
+msgid ""
+"Screenshot allows you to take screenshots even when it’s not open: just "
+"press the PrtSc button on your keyboard, and a snapshot of your whole screen "
+"will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
+"will get a screenshot of only the currently selected window."
+msgstr ""
+
+#: data/ui/screenshot-dialog.ui:17
+msgid "_Cancel"
+msgstr "_Annular"
+
+#: data/ui/screenshot-dialog.ui:26
+msgid "_Save"
+msgstr "_Gardar"
+
+#: data/ui/screenshot-dialog.ui:43
+msgid "C_opy to Clipboard"
+msgstr "C_opiar al Paperiere"
+
+#: data/ui/screenshot-dialog.ui:87
+msgid "_Name:"
+msgstr "_Nómine:"
+
+#: data/ui/screenshot-dialog.ui:111
+msgid "_Folder:"
+msgstr "Fólder"
+
+#: data/ui/screenshot-interactive-dialog.ui:19
+msgid "_Take Screenshot"
+msgstr "Cap_ter li ecran"
+
+#. Translators: This is a noun. This label is displayed above three buttons where users can chose the type of screenshot they want to make
+#: data/ui/screenshot-interactive-dialog.ui:67
+msgid "Capture Area"
+msgstr "Area de captura"
+
+#: data/ui/screenshot-interactive-dialog.ui:100
+msgid "_Screen"
+msgstr "_Ecran"
+
+#: data/ui/screenshot-interactive-dialog.ui:133
+msgid "_Window"
+msgstr "Fe_nestre"
+
+#: data/ui/screenshot-interactive-dialog.ui:165
+msgid "Se_lection"
+msgstr "Se_lection"
+
+#: data/ui/screenshot-interactive-dialog.ui:188
+msgid "Show _Pointer"
+msgstr "Monstrar li a_puntator"
+
+#: data/ui/screenshot-interactive-dialog.ui:203
+msgid "_Delay in Seconds"
+msgstr "Retar_de in secondes"
+
+#: data/ui/screenshot-interactive-dialog.ui:208
+msgid "0"
+msgstr "0"
+
+#: data/ui/screenshot-interactive-dialog.ui:237
+msgid "_Help"
+msgstr "Au_xilie"
+
+#: data/ui/screenshot-interactive-dialog.ui:241
+msgid "_About Screenshot"
+msgstr "Pri li _application"
+
+#: src/screenshot-application.c:169
+#, fuzzy, c-format
+msgid "A file named “%s” already exists in “%s”"
+msgstr ""
+"Un file nominat «%s» ja existe.\n"
+"\n"
+"%s"
+
+#: src/screenshot-application.c:175
+#, fuzzy
+msgid "Overwrite existing file?"
+msgstr ""
+"Li nómine de file vu ha selectet ja existe.\n"
+"Esque vu vole substituer li existent file?\n"
+"(Avise: li qualitá del originale posse esser perdit)"
+
+#: src/screenshot-application.c:185 src/screenshot-application.c:443
+#: src/screenshot-application.c:497
+msgid "Unable to capture a screenshot"
+msgstr "Ne posset capturar li ecran"
+
+#: src/screenshot-application.c:186
+msgid "Error creating file. Please choose another location and retry."
+msgstr ""
+
+#: src/screenshot-application.c:444
+#, fuzzy
+msgid "Error creating file"
+msgstr "Un errore evenit creante li file %B."
+
+#: src/screenshot-application.c:498
+#, fuzzy
+msgid "All possible methods failed"
+msgstr "Marcar omni possibil actualisamentes"
+
+#: src/screenshot-application.c:609
+#, fuzzy
+msgid "Send the grab directly to the clipboard"
+msgstr "Metter li capturat area in li Paperiere"
+
+#: src/screenshot-application.c:610
+#, fuzzy
+msgid "Grab a window instead of the entire screen"
+msgstr "Capturar un fenestre in vice del tot ecran"
+
+#: src/screenshot-application.c:611
+#, fuzzy
+msgid "Grab an area of the screen instead of the entire screen"
+msgstr "Capturar un area del ecran in vice del tot ecran"
+
+#: src/screenshot-application.c:612
+msgid ""
+"Include the window border with the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
+
+#: src/screenshot-application.c:613
+msgid ""
+"Remove the window border from the screenshot. This option is deprecated and "
+"window border is always included"
+msgstr ""
+
+#: src/screenshot-application.c:614
+#, fuzzy
+msgid "Include the pointer with the screenshot"
+msgstr "Includer li apuntator in li captura"
+
+#: src/screenshot-application.c:615
+msgid "Take screenshot after specified delay [in seconds]"
+msgstr ""
+
+#: src/screenshot-application.c:615
+msgid "seconds"
+msgstr "secondes"
+
+#: src/screenshot-application.c:616
+msgid ""
+"Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
+"This option is deprecated and is assumed to be ‘none’"
+msgstr ""
+
+#: src/screenshot-application.c:616
+msgid "effect"
+msgstr "efect"
+
+#: src/screenshot-application.c:617
+#, fuzzy
+msgid "Interactively set options"
+msgstr "Parametres de compilation"
+
+#: src/screenshot-application.c:618
+#, fuzzy
+msgid "Save screenshot directly to this file"
+msgstr "Gardar li captura in un file PNG"
+
+#: src/screenshot-application.c:618
+msgid "filename"
+msgstr "nómine de file"
+
+#: src/screenshot-application.c:619
+#, fuzzy
+msgid "Print version information and exit"
+msgstr "Monstra li information del version, poy salir"
+
+#: src/screenshot-application.c:758
+msgid "translator-credits"
+msgstr "OIS <mistresssilvara@hotmail.com>, 2016-22"
+
+#: src/screenshot-config.c:101
+#, fuzzy
+msgid ""
+"Conflicting options: --window and --area should not be used at the same "
+"time.\n"
+msgstr ""
+"Conflicte de optiones: --window e --area ne deve esser usat simultanmen.\n"
+
+#: src/screenshot-dialog.c:337
+msgid "Screenshot.png"
+msgstr "Captura.png"
+
+#. translators: this is the name of the file that gets made up with the
+#. * screenshot if the entire screen is taken. The first placeholder is a
+#. * timestamp (e.g. "2017-05-21 12-24-03"); the second placeholder is the
+#. * file format (e.g. "png").
+#.
+#: src/screenshot-filename-builder.c:135
+#, c-format
+msgid "Screenshot from %s.%s"
+msgstr "Captura de %s.%s"
+
+#. translators: this is the name of the file that gets made up with the
+#. * screenshot if the entire screen is taken and the simpler filename
+#. * already exists. The first and second placeholders are a timestamp and
+#. * a counter to make it unique (e.g. "2017-05-21 12-24-03 - 2"); the third
+#. * placeholder is the file format (e.g. "png").
+#.
+#: src/screenshot-filename-builder.c:145
+#, c-format
+msgid "Screenshot from %s - %d.%s"
+msgstr "Captura de %s - %d.%s"
+
+#: src/screenshot-utils.c:149
+#, fuzzy
+msgid "Error loading the help page"
+msgstr "Un errore evenit cargante págine de auxilie"
+
+#, fuzzy
+#~ msgid "Take a Screenshot of a Selected Area"
+#~ msgstr "Capturar li fenestre"
+
+#~ msgid "GNOME Screenshot"
+#~ msgstr "Captura de ecran GNOME"
+
+#~ msgid "Help"
+#~ msgstr "Auxilie"
+
+#~ msgid "About"
+#~ msgstr "Pri"
+
+#~ msgid "Quit"
+#~ msgstr "Salir"
+
+#, fuzzy
+#~ msgid "Save Screenshot"
+#~ msgstr "Captura de ecran"
+
+#~ msgid "Save in _folder:"
+#~ msgstr "Salvar in li _fólder:"
+
+#~ msgid "Include Border"
+#~ msgstr "Includer li borde"
+
+#, fuzzy
+#~ msgid "Border Effect"
+#~ msgstr "Borde"
+
+#~ msgid "Screenshot taken"
+#~ msgstr "Ecran es capturat"
+
+#, fuzzy
+#~ msgid "Include the window border with the screenshot"
+#~ msgstr "Borde de fenestre"
+
+#~ msgid "None"
+#~ msgstr "Null"
+
+#~ msgid "Border"
+#~ msgstr "Borde"
+
+#~ msgid "Include _pointer"
+#~ msgstr "Includer _indicator"
+
+#, fuzzy
+#~ msgid "Include the window _border"
+#~ msgstr "Includer li borde"
+
+#~ msgid "Apply _effect:"
+#~ msgstr "Applicar un _efecte:"
+
+#, fuzzy
+#~ msgid "Grab the current _window"
+#~ msgstr "Cluder li actual fenestre"
+
+#, fuzzy
+#~ msgid "Select _area to grab"
+#~ msgstr "Area de notificationes"
+
+#, fuzzy
+#~ msgid "Grab after a _delay of"
+#~ msgstr "pos"
+
+#~ msgid "Effects"
+#~ msgstr "Efectes"
+
+#~ msgid "Take _Screenshot"
+#~ msgstr "_Capturar li ecran"
