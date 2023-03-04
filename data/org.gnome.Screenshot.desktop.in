@@ -11,9 +11,6 @@ Icon=org.gnome.Screenshot
 StartupNotify=true
 Categories=GTK;GNOME;Utility;X-GNOME-Utilities;
 NotShowIn=KDE;
-X-GNOME-Bugzilla-Bugzilla=GNOME
-X-GNOME-Bugzilla-Product=gnome-utils
-X-GNOME-Bugzilla-Component=screenshot
 Actions=screen-shot;window-shot;
 DBusActivatable=true
 
