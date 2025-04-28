@@ -30,14 +30,15 @@ metainfo_file = i18n.merge_file(
 )
 
 # Validate metainfo
-appstream_util = find_program('appstream-util', required: false)
-if appstream_util.found()
+appstreamcli = find_program('appstreamctl', required: false)
+if appstreamcli.found()
   test(
     'validate-metainfo',
-    appstream_util,
+    appstreamcli,
     args: [
       'validate',
-      '--nonet',
+      '--no-net',
+      '--explain',
       metainfo_file.full_path()
     ]
   )
