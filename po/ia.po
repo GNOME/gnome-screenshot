@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-screenshot/"
 "issues/\n"
 "POT-Creation-Date: 2025-05-10 17:22+0000\n"
-"PO-Revision-Date: 2025-05-21 10:28-0400\n"
+"PO-Revision-Date: 2025-05-21 13:13-0400\n"
 "Last-Translator: Emilio Sepúlveda <emism.translations@gmail.com>\n"
 "Language-Team: Interlingua <softinterlingua@gmail.com>\n"
 "Language: ia\n"
@@ -34,10 +34,12 @@ msgid ""
 "Grab just the current window, rather than the whole desktop. This key has "
 "been deprecated and it is no longer in use."
 msgstr ""
+"Prende solmente le fenestra actual in vice del scriptorio plen. Iste clave "
+"ha essite declarate obsolete e jam non es in uso."
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:16
 msgid "Screenshot delay"
-msgstr ""
+msgstr "Retardo del captura de schermo"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:17
 msgid "The number of seconds to wait before taking the screenshot."
@@ -64,19 +66,19 @@ msgstr ""
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:31
 msgid "Include Pointer"
-msgstr ""
+msgstr "Includer punctator"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:32
 msgid "Include the pointer in the screenshot"
-msgstr ""
+msgstr "Include le punctator in le captura de schermo"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:36
 msgid "Include ICC Profile"
-msgstr ""
+msgstr "Includer profilo ICC"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:37
 msgid "Include the ICC profile of the target in the screenshot file"
-msgstr ""
+msgstr "Includer le profilo ICC del objectivo in le file de captura de schermo"
 
 #: data/org.gnome.gnome-screenshot.gschema.xml:41
 msgid "Default file type extension"
@@ -100,7 +102,7 @@ msgstr "Salva imagines de tu schermo o de fenestras individual"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Screenshot.desktop.in:6
 msgid "snapshot;capture;print;screenshot;"
-msgstr ""
+msgstr "imprimer;captura de schermo;captura;instantanea;"
 
 #: data/org.gnome.Screenshot.desktop.in:19
 msgid "Take a Screenshot of the Whole Screen"
@@ -117,6 +119,11 @@ msgid ""
 "or a selected rectangular area. You can also copy the captured screenshot "
 "directly into the GNOME clipboard and paste it into other applications."
 msgstr ""
+"Captura de schermo es un utensile simple que te permitte prender imagines de "
+"tu computator. Capturas de schermo pote esser del plen schermo, alicun "
+"application specific, o un area rectangular seligite. Tu anque pote copiar "
+"le schermo capturate al area de transferentia de GNOME e collar lo in altere "
+"applicationes."
 
 #: data/org.gnome.Screenshot.metainfo.xml.in:18
 msgid ""
@@ -125,6 +132,11 @@ msgid ""
 "will be saved to your Pictures folder. Hold Alt while pressing PrtSc and you "
 "will get a screenshot of only the currently selected window."
 msgstr ""
+"Captura de schermo te permitte prender capturas mesmo que il non sia aperte: "
+"justo preme le button ImpSc in tu claviero, e un captura de tu schermo plen "
+"essera salvate a tu dossier de Imagines. Mantene le Alt durante que tu preme "
+"le ImpSc e tu obtenera le captura de solmente le fenestra actualmente "
+"seligite."
 
 #: data/ui/screenshot-dialog.ui:17
 msgid "_Cancel"
@@ -169,15 +181,15 @@ msgstr "Se_lection"
 
 #: data/ui/screenshot-interactive-dialog.ui:188
 msgid "Show _Pointer"
-msgstr ""
+msgstr "Monstrar _punctator"
 
 #: data/ui/screenshot-interactive-dialog.ui:203
 msgid "_Delay in Seconds"
-msgstr ""
+msgstr "Retar_do in secundas"
 
 #: data/ui/screenshot-interactive-dialog.ui:208
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: data/ui/screenshot-interactive-dialog.ui:237
 msgid "_Help"
@@ -185,7 +197,7 @@ msgstr "_Adjuta"
 
 #: data/ui/screenshot-interactive-dialog.ui:241
 msgid "_About Screenshot"
-msgstr "_A proposito de Capturas de schermo"
+msgstr "_A proposito de Captura de schermo"
 
 #: src/screenshot-application.c:169
 #, c-format
@@ -203,7 +215,7 @@ msgstr "Non poteva facer le captura de schermo"
 
 #: src/screenshot-application.c:186
 msgid "Error creating file. Please choose another location and retry."
-msgstr ""
+msgstr "Error al crear le file. Elige altere localisation e retenta."
 
 #: src/screenshot-application.c:444
 msgid "Error creating file"
@@ -211,39 +223,44 @@ msgstr "Error in le creation del file"
 
 #: src/screenshot-application.c:498
 msgid "All possible methods failed"
-msgstr ""
+msgstr "Tote le methodos possibile ha fallite"
 
 #: src/screenshot-application.c:609
 msgid "Send the grab directly to the clipboard"
-msgstr ""
+msgstr "Invia le captura directemente al area de transferentia"
 
 #: src/screenshot-application.c:610
 msgid "Grab a window instead of the entire screen"
-msgstr ""
+msgstr "Prende un fenestra in loco del plen schermo"
 
 #: src/screenshot-application.c:611
 msgid "Grab an area of the screen instead of the entire screen"
-msgstr ""
+msgstr "Prende un area de schermo in loco del plen schermo"
 
 #: src/screenshot-application.c:612
 msgid ""
 "Include the window border with the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
+"Include le bordo de fenestra con le captura de schermo. Iste option es "
+"declarate obsolete e le bordo de fenestra es sempre includite"
 
 #: src/screenshot-application.c:613
 msgid ""
 "Remove the window border from the screenshot. This option is deprecated and "
 "window border is always included"
 msgstr ""
+"Remove le bordo de fenestra ab le captura de schermo. Iste option es "
+"declarate obsolete e le bordo de fenestra es sempre includite"
 
 #: src/screenshot-application.c:614
 msgid "Include the pointer with the screenshot"
-msgstr ""
+msgstr "Include le punctator con le captura de schermo"
 
 #: src/screenshot-application.c:615
 msgid "Take screenshot after specified delay [in seconds]"
 msgstr ""
+"Prender un captura de schermo post un retardo specificate [in secundas]"
 
 #: src/screenshot-application.c:615
 msgid "seconds"
@@ -254,10 +271,12 @@ msgid ""
 "Effect to add to the border (‘shadow’, ‘border’, ‘vintage’ or ‘none’). Note: "
 "This option is deprecated and is assumed to be ‘none’"
 msgstr ""
+"Effecto a adder al bordo (‘shadow’, ‘border’, ‘vintage’ o ‘none’). Nota: "
+"Iste option es declarate obsolete e es assumite como ‘none’"
 
 #: src/screenshot-application.c:616
 msgid "effect"
-msgstr ""
+msgstr "effecto"
 
 #: src/screenshot-application.c:617
 msgid "Interactively set options"
@@ -265,7 +284,7 @@ msgstr "Definir optiones interactivemente"
 
 #: src/screenshot-application.c:618
 msgid "Save screenshot directly to this file"
-msgstr ""
+msgstr "Salvar captura de schermo directemente a iste file"
 
 #: src/screenshot-application.c:618
 msgid "filename"
@@ -277,7 +296,7 @@ msgstr "Imprimer information de version e exir"
 
 #: src/screenshot-application.c:758
 msgid "translator-credits"
-msgstr ""
+msgstr "Emilio Sepúlveda <emism.translations@gmail.com>"
 
 #: src/screenshot-config.c:101
 msgid ""
