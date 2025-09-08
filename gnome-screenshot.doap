@@ -6,8 +6,7 @@
 
   <name xml:lang="en">gnome-screenshot</name>
   <shortdesc xml:lang="en">Take pictures of your screen</shortdesc>
-  <description>Takes a screenshot of the whole desktop, the currently
-  focused window, or an area of the screen.</description>
+  <description>Takes a screenshot of the whole desktop, the currently focused window, or an area of the screen.</description>
 
   <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
 
@@ -16,27 +15,34 @@
   <category rdf:resource="http://api.gnome.org/doap-extensions#core" />
   <programming-language>C</programming-language>
 
-  <maintainer>
+  <author>
     <foaf:Person>
       <foaf:name>Emmanuele Bassi</foaf:name>
       <foaf:mbox rdf:resource="mailto:ebassi@gmail.com" />
       <gnome:userid>ebassi</gnome:userid>
     </foaf:Person>
-  </maintainer>
+  </author>
 
-  <maintainer>
+  <author>
     <foaf:Person>
       <foaf:name>Jonathan Blandford</foaf:name>
       <foaf:mbox rdf:resource="mailto:jrb@gnome.org" />
       <gnome:userid>jrb</gnome:userid>
     </foaf:Person>
-  </maintainer>
+  </author>
 
-  <maintainer>
+  <author>
     <foaf:Person>
       <foaf:name>Cosimo Cecchi</foaf:name>
       <foaf:mbox rdf:resource="mailto:cosimoc@gnome.org" />
       <gnome:userid>cosimoc</gnome:userid>
+    </foaf:Person>
+  </author>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Nobody</foaf:name>
+      <gnome:userid>nobody</gnome:userid>
     </foaf:Person>
   </maintainer>
 </Project>
